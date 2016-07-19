@@ -1,2 +1,2 @@
-const test = lala => 'pouet'
+const test = lala => 'pouetss'
 console.log(test())
