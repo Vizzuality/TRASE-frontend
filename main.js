@@ -37,44 +37,29 @@ const sankeyURL = Object.keys(params).reduce((prev, current) => {
 }, 'http://localhost:8080?');
 
 
+let data = {};
 
-let sankeyLinks, sankeyNodes/*, municip*/;
-
-
-
-// const getNodeById = (nodes, id) => {
-//   return nodes.find(node => id === node.id);
-// };
-
-// const weighNodes = (nodes, links) => {
-//   links.forEach(link => {
-//     const value = +link.attributes.flowQuants[0].quantValue;
-//     console.log(value);
-//     link.attributes.path.forEach(nodeId => {
-//       const node = getNodeById(nodes, ''+nodeId);
-//       node.value = (node.value) ? node.value + value : value;
-//     });
-//   });
-//   return nodes;
-// };
 
 const build = () => {
   const sankey = d3.sankey()
-    .nodes(sankeyNodes)
-    .links(sankeyLinks)
+    .nodes(data.sankey.include)
+    .links(data.sankey.data)
     .layout();
 
   console.log(sankey.layers());
-  let s = ''
-  sankey.layers().forEach(l => {
-    s += '\n\n' + l.key;
-    l.values.forEach(n => {
-      s += '\n' + n.attributes.nodeName +',';
+  // let s = ''
+  // sankey.layers().forEach(l => {
+  //   s += '\n\n' + l.key;
+  //   l.values.forEach(n => {
+  //     s += '\n' + n.attributes.nodeName +',';
+  //
+  //   })
+  // })
+// console.log(s)
 
-    })
-  })
-console.log(s)
-  const layers = d3.select('svg')
+  const svg = d3.select('svg');
+
+  const layers = svg
     .append('g')
     .attr('class','layers')
     .selectAll('g')
@@ -108,7 +93,7 @@ console.log(s)
     .attr('width', sankey.layerWidth())
     .attr('height', d => d.dy);
 
-  const links = d3.select('svg')
+  const links = svg
     .append('g')
     .attr('class','links')
     .selectAll('path')
@@ -118,44 +103,37 @@ console.log(s)
     .attr('class','link')
     .attr('stroke-width', d => d.dy)
     .attr('d', sankey.link());
+
+
+  const proj = d3.geoMercator().scale(100);
+  const geoPath = d3.geoPath()
+    // .projection(d3.geoEquirectangular());
+    .projection((x,y)=>[x, Math.log(Math.tan(Math.PI / 4 + y / 2))]);
+  console.log(data.world.features);
+  svg.append('g').selectAll('path')
+    .data(data.world.features)
+    .enter()
+    .each(d => {console.log(d);})
+    .append('path')
+    .attr('d', geoPath)
+    .attr('class', 'countries');
 };
 
 
 const URLs = [
   sankeyURL,
-  'https://p2cs-sei.carto.com/api/v2/sql?format=csv&q=SELECT * FROM brazil_municip_nodes'
-  // 'https://p2cs-sei.carto.com/api/v2/sql?format=shp&q=SELECT * FROM world_borders'
+  'https://p2cs-sei.carto.com/api/v2/sql?format=geojson&q=SELECT * FROM brazil_states_nodes',
+  'https://p2cs-sei.carto.com/api/v2/sql?format=geojson&q=SELECT * FROM world_borders'
 ];
 
-const URLsPromises = URLs.map(fetch);
-console.log(URLsPromises);
+const URLsPromises = URLs.map(u => fetch(u));
 
 Promise.all(URLsPromises)
   .then(responses => Promise.all(responses.map(res => res.text())))
-  .then(data => {
-    console.log(data)
+  .then(loadedData => {
+    data.sankey = JSON.parse(loadedData[0]);
+    data.brazil_states = JSON.parse(loadedData[1]);
+    data.world = JSON.parse(loadedData[2]);
+    console.log(data);
+    build();
   });
-
-Promise.all([
-  fetch(sankeyURL),
-  fetch('https://p2cs-sei.carto.com/api/v2/sql?format=shp&q=SELECT * FROM world_borders')
-]).then(responses => {
-  return responses.map(response => response.text())
-}).then(data => {
-  console.log(data[0].PromiseValue)
-})
-//
-// d3.json(sankeyURL, sankey => {
-//   sankeyLinks = sankey.data;
-//   // console.log(sankeyLinks);
-//   sankeyNodes = sankey.include;
-//   // console.log(sankeyLinks)
-//   // sankeyNodes = weighNodes(sankey.include, sankeyLinks);
-//   // console.log(sankeyNodes)
-//
-//   d3.csv('https://p2cs-sei.carto.com/api/v2/sql?format=csv&q=SELECT * FROM brazil_municip_nodes', m => {
-//     // municip = m;
-//
-//     build();
-//   });
-// });

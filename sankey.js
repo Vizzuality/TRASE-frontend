@@ -129,7 +129,7 @@ d3.sankey = function() {
         dict[key].value += link.value;
       }
     });
-    console.log(mergedLinks.map(l => l.value))
+    // console.log(mergedLinks.map(l => l.value))
     links = mergedLinks;
   };
 
