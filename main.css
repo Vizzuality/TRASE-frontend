@@ -1,3 +1,21 @@
 body {
   color: green;
+  font-family: sans-serif;
+}
+
+.node-rect {
+  fill: none;
+  stroke: black;
+  stroke-width: .5px;
+}
+
+.node-label {
+  font-size: 10px;
+  text-transform: capitalize;
+}
+
+.link {
+  opacity: .2;
+  fill: none;
+  stroke: red;
 }

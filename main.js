@@ -5,8 +5,8 @@ const params = {
   country: 'brazil',
   raw: 'soy',
   year: '2012',
-  nNodes: '1',
-  excludeLayers: [2,3,4,5,6,7,8,9],
+  nNodes: '50',
+  excludeLayers: [],
   flowQuant: 'Volume',
   flowQual: 'Commodity'
 };
@@ -14,14 +14,14 @@ const params = {
 const layerNames = [
   'Municipality of production',
   'State of production',
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
-  ,
+  // ,
+  // ,
+  // ,
+  // ,
+  // ,
+  // ,
+  // ,
+  // ,
   'Country of import',
 ];
 
@@ -38,74 +38,124 @@ const sankeyURL = Object.keys(params).reduce((prev, current) => {
 
 
 
-let sankeyLinks, sankeyNodes, municip;
+let sankeyLinks, sankeyNodes/*, municip*/;
+
+
+
+// const getNodeById = (nodes, id) => {
+//   return nodes.find(node => id === node.id);
+// };
+
+// const weighNodes = (nodes, links) => {
+//   links.forEach(link => {
+//     const value = +link.attributes.flowQuants[0].quantValue;
+//     console.log(value);
+//     link.attributes.path.forEach(nodeId => {
+//       const node = getNodeById(nodes, ''+nodeId);
+//       node.value = (node.value) ? node.value + value : value;
+//     });
+//   });
+//   return nodes;
+// };
 
 const build = () => {
-  // console.log(window.municip);
-  // console
-  var layers = d3.nest()
-    .key(el => el.attributes.nodeType)
-    .entries(sankeyNodes);
+  const sankey = d3.sankey()
+    .nodes(sankeyNodes)
+    .links(sankeyLinks)
+    .layout();
 
-  console.log(layers);
+  console.log(sankey.layers());
+  let s = ''
+  sankey.layers().forEach(l => {
+    s += '\n\n' + l.key;
+    l.values.forEach(n => {
+      s += '\n' + n.attributes.nodeName +',';
 
-  const bars = d3.select('svg')
+    })
+  })
+console.log(s)
+  const layers = d3.select('svg')
     .append('g')
+    .attr('class','layers')
     .selectAll('g')
-    .data(layers)
+    .data(sankey.layers())
     .enter()
     // .filter(d => d.key !== 'undefined')
     .append('g')
     .attr('class','layer')
-    .attr('transform', (d,i) => `translate(${i*250},0)`);
+    .attr('transform', d => `translate(${d.x},0)`);
 
-  bars.append('text')
-    // .text(d => layerNames[d.key])
-    .text(d => d.key)
-    .attr('y', 40);
+  layers.append('text')
+      // .text(d => layerNames[d.key])
+      .text(d => d.key)
+      .attr('y', 40);
 
-  const barItems = bars.append('g')
+  const nodes = layers.append('g')
     .selectAll('rect')
     .data(d => d.values)
     .enter()
     .append('g')
-    .attr('transform', (d,i) => `translate(0,${40+i*20})`)
+    .attr('transform', d => `translate(0,${d.y})`);
 
-  barItems.append('text')
-    .text(d => d.attributes.value)
-    .attr('y', 40);
+  nodes.append('text')
+    .attr('class', 'node-label')
+    .attr('x', 10)
+    .attr('y', d => 4+d.dy/2)
+    .text(d => d.attributes.nodeName.toLowerCase());
 
+  nodes.append('rect')
+    .attr('class', 'node-rect')
+    .attr('width', sankey.layerWidth())
+    .attr('height', d => d.dy);
+
+  const links = d3.select('svg')
+    .append('g')
+    .attr('class','links')
+    .selectAll('path')
+    .data(sankey.links())
+    .enter()
+    .append('path')
+    .attr('class','link')
+    .attr('stroke-width', d => d.dy)
+    .attr('d', sankey.link());
 };
 
-const getNodeById = (nodes, id) => {
-  return nodes.find(node => id === node.id);
-};
 
-const weighNodes = (nodes, links) => {
-  links.forEach(link => {
-    const value = +link.attributes.flowQuants[0].quantValue;
-    console.log(value);
-    link.attributes.path.forEach(nodeId => {
-      const node = getNodeById(nodes, ''+nodeId);
-      node.value = (node.value) ? node.value + value : value;
-    });
+const URLs = [
+  sankeyURL,
+  'https://p2cs-sei.carto.com/api/v2/sql?format=csv&q=SELECT * FROM brazil_municip_nodes'
+  // 'https://p2cs-sei.carto.com/api/v2/sql?format=shp&q=SELECT * FROM world_borders'
+];
+
+const URLsPromises = URLs.map(fetch);
+console.log(URLsPromises);
+
+Promise.all(URLsPromises)
+  .then(responses => Promise.all(responses.map(res => res.text())))
+  .then(data => {
+    console.log(data)
   });
-  return nodes;
-};
 
-d3.json(sankeyURL, sankey => {
-  sankeyLinks = sankey.data;
-  console.log(sankeyLinks)
-  sankeyLinks.forEach(l => {
-    console.log(l.attributes.path)
-  })
-  sankeyNodes = weighNodes(sankey.include, sankeyLinks);
-  // sankeyNodes = sankey.include;
-  console.log(sankeyNodes)
-
-  d3.csv('https://p2cs-sei.carto.com/api/v2/sql?format=csv&q=SELECT * FROM brazil_municip_nodes', m => {
-    municip = m;
-
-    build();
-  });
-});
+Promise.all([
+  fetch(sankeyURL),
+  fetch('https://p2cs-sei.carto.com/api/v2/sql?format=shp&q=SELECT * FROM world_borders')
+]).then(responses => {
+  return responses.map(response => response.text())
+}).then(data => {
+  console.log(data[0].PromiseValue)
+})
+//
+// d3.json(sankeyURL, sankey => {
+//   sankeyLinks = sankey.data;
+//   // console.log(sankeyLinks);
+//   sankeyNodes = sankey.include;
+//   // console.log(sankeyLinks)
+//   // sankeyNodes = weighNodes(sankey.include, sankeyLinks);
+//   // console.log(sankeyNodes)
+//
+//   d3.csv('https://p2cs-sei.carto.com/api/v2/sql?format=csv&q=SELECT * FROM brazil_municip_nodes', m => {
+//     // municip = m;
+//
+//     build();
+//   });
+// });
