@@ -3,19 +3,40 @@ body {
   font-family: sans-serif;
 }
 
-.node-rect {
+.sankey {
+  transform: translate(350px,0);
+}
+
+.sankey-node {
+
+}
+
+.sankey-node-rect {
   fill: none;
   stroke: black;
   stroke-width: .5px;
 }
 
-.node-label {
+.sankey-node-label {
   font-size: 10px;
   text-transform: capitalize;
 }
 
-.link {
+.sankey-links {
+
+}
+
+.sankey-link {
   opacity: .2;
   fill: none;
   stroke: red;
+}
+
+.map-country {
+  fill: #fff;
+  stroke: #ccc;
+}
+
+.map-brazil.state {
+
 }

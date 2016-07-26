@@ -8,7 +8,7 @@ d3.sankey = function() {
   let layers = [];
 
   let layerWidth = 80;
-  let layerSpacing = 350;
+  let layerSpacing = 200;
   let scaleY = .00005;
 
   sankey.nodes = function(_) {
