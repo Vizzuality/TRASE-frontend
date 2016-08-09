@@ -3,11 +3,16 @@ body {
   font-family: sans-serif;
 }
 
+svg {
+  width: 6500px;
+  height: 1200px;
+}
+
 .sankey {
   transform: translate(350px,0);
 }
 
-.sankey-node {
+.sankey-nodes {
 
 }
 
@@ -32,11 +37,17 @@ body {
   stroke: red;
 }
 
-.map-country {
+.maps-country-mask-rect {
+  width: 350px;
+  height: 1200px;
+}
+
+.maps-country-border {
   fill: #fff;
   stroke: #ccc;
 }
 
-.map-brazil.state {
-
+.maps-country-state {
+  stroke: red;
+  fill: orange;
 }

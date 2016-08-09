@@ -6,7 +6,7 @@ const params = {
   raw: 'soy',
   year: '2012',
   nNodes: '50',
-  excludeLayers: [2,3,4,5,6,7,8,9],
+  excludeLayers: [2,3,4,5,6,7,9],
   flowQuant: 'Volume',
   flowQual: 'Commodity'
 };
@@ -22,7 +22,7 @@ const layerNames = [
   // ,
   // ,
   // ,
-  'Country of import',
+  'Country of import'
 ];
 
 const sankeyURL = Object.keys(params).reduce((prev, current) => {
@@ -59,9 +59,9 @@ const build = () => {
 
   const svg = d3.select('svg');
   const sankeyContainer = svg.append('g')
-    .attr('class','sankey')
+    .attr('class','sankey');
 
-
+  // layers
   const layers = sankeyContainer
     .append('g')
     .attr('class','sankey-layers')
@@ -78,8 +78,9 @@ const build = () => {
       .text(d => d.key)
       .attr('y', 40);
 
+  // nodes
   const nodes = layers.append('g')
-    .attr('class','sankey-node')
+    .attr('class','sankey-nodes ')
     .selectAll('rect')
     .data(d => d.values)
     .enter()
@@ -97,7 +98,8 @@ const build = () => {
     .attr('width', sankey.layerWidth())
     .attr('height', d => d.dy);
 
-  const links = sankeyContainer
+  // links
+  sankeyContainer
     .append('g')
     .attr('class','sankey-links')
     .selectAll('path')
@@ -108,32 +110,56 @@ const build = () => {
     .attr('stroke-width', d => d.dy)
     .attr('d', sankey.link());
 
-    // console.log(d3.geoEquirectangular().scale())
-  const proj = d3.geoEquirectangular().scale(400);
+
+  // map
+  const mapsContainer = svg.append('g')
+    .attr('class','maps');
+
+  mapsContainer.append('clipPath')
+    .attr('id','map-country-mask')
+    .append('rect')
+    .attr('class', 'maps-country-mask-rect');
+
+
+  const proj = d3.geoEquirectangular()
+    .scale(400)
+    .translate([550, 200]);
+
   const geoPath = d3.geoPath()
     .projection(proj);
-    // .projection((x,y)=>[x, Math.log(Math.tan(Math.PI / 4 + y / 2))]);
-  svg.append('g').selectAll('path')
+
+  mapsContainer.append('g')
+    .attr('class', 'maps-country')
+    .attr('clip-path', 'url(#map-country-mask)')
+    .selectAll('path')
     .data(data.world.features)
     .enter()
-    // .each(d => {console.log(d);})
+    .filter(d => {
+      // for perf do not draw far way countries
+      return d3.geoDistance(d3.geoCentroid(d), [-60, 10]) < 1;
+    })
+    .each(d => {console.log(d);})
     .append('path')
     .attr('d', geoPath)
-    .attr('class', 'map-country');
+    .attr('class', 'maps-country-border');
 
-  svg.append('g').selectAll('path')
+  mapsContainer.append('g')
+    .selectAll('path')
     .data(data.brazil_states.features)
     .enter()
     .append('path')
     .attr('d', geoPath)
-    .attr('class', 'map-brazil_state');
+    .attr('class', 'maps-country-state')
+    .on('click', d => {
+      console.log(d.properties.node_id);
+    });
 };
 
 
 const URLs = [
   sankeyURL,
   'https://p2cs-sei.carto.com/api/v2/sql?format=geojson&q=SELECT ST_Simplify(the_geom, .1) the_geom, name, node_id, lat, lng FROM brazil_states_nodes',
-  'https://p2cs-sei.carto.com/api/v2/sql?format=geojson&q=SELECT * FROM world_borders'
+  'https://p2cs-sei.carto.com/api/v2/sql?format=geojson&q=SELECT the_geom FROM world_borders' //WHERE ST_DWithin(the_geom, ST_GeomFromText(\'POINT(-60 10)\', 4326), 41)
 ];
 
 const URLsPromises = URLs.map(u => fetch(u));
