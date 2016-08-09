@@ -129,37 +129,47 @@ const build = () => {
     .projection(proj);
 
   mapsContainer.append('g')
-    .attr('class', 'maps-country')
+    .attr('class', 'maps-countries')
     .attr('clip-path', 'url(#map-country-mask)')
     .selectAll('path')
-    .data(data.world.features)
+    .data(data.countries.features)
     .enter()
     .filter(d => {
       // for perf do not draw far way countries
       return d3.geoDistance(d3.geoCentroid(d), [-60, 10]) < 1;
     })
-    .each(d => {console.log(d);})
     .append('path')
     .attr('d', geoPath)
-    .attr('class', 'maps-country-border');
+    .attr('class', 'maps-country');
 
   mapsContainer.append('g')
+    .attr('class', 'maps-states')
     .selectAll('path')
-    .data(data.brazil_states.features)
+    .data(data.states.features)
     .enter()
     .append('path')
     .attr('d', geoPath)
-    .attr('class', 'maps-country-state')
+    .attr('class', 'maps-state')
     .on('click', d => {
       console.log(d.properties.node_id);
     });
+
+  mapsContainer.append('g')
+    .attr('class', 'maps-municips')
+    .selectAll('path')
+    .data(data.municips.features)
+    .enter()
+    .append('path')
+    .attr('d', geoPath)
+    .attr('class', 'maps-municip');
 };
 
-
+const CartoURL = 'https://p2cs-sei.carto.com/api/v2/sql?format=geojson';
 const URLs = [
   sankeyURL,
-  'https://p2cs-sei.carto.com/api/v2/sql?format=geojson&q=SELECT ST_Simplify(the_geom, .1) the_geom, name, node_id, lat, lng FROM brazil_states_nodes',
-  'https://p2cs-sei.carto.com/api/v2/sql?format=geojson&q=SELECT the_geom FROM world_borders' //WHERE ST_DWithin(the_geom, ST_GeomFromText(\'POINT(-60 10)\', 4326), 41)
+  `${CartoURL}&q=SELECT the_geom FROM world_borders`, // WHERE ST_DWithin(the_geom, ST_GeomFromText('POINT(-60 10)', 4326), 41)`
+  `${CartoURL}&q=SELECT ST_Simplify(the_geom, .1) the_geom, name, node_id, lat, lng FROM brazil_states_nodes`,
+  `${CartoURL}&q=SELECT ST_Simplify(the_geom, .1) the_geom FROM brazil_final_copy`
 ];
 
 const URLsPromises = URLs.map(u => fetch(u));
@@ -168,8 +178,9 @@ Promise.all(URLsPromises)
   .then(responses => Promise.all(responses.map(res => res.text())))
   .then(loadedData => {
     data.sankey = JSON.parse(loadedData[0]);
-    data.brazil_states = JSON.parse(loadedData[1]);
-    data.world = JSON.parse(loadedData[2]);
+    data.countries = JSON.parse(loadedData[1]);
+    data.states = JSON.parse(loadedData[2]);
+    data.municips = JSON.parse(loadedData[3]);
     console.log(data);
     build();
   });

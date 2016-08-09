@@ -42,12 +42,12 @@ svg {
   height: 1200px;
 }
 
-.maps-country-border {
+.maps-country {
   fill: #fff;
   stroke: #ccc;
 }
 
-.maps-country-state {
+.maps-state {
   stroke: red;
   fill: orange;
 }
