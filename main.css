@@ -4,7 +4,7 @@ body {
 }
 
 svg {
-  width: 6500px;
+  width: 2000px;
   height: 1200px;
 }
 
@@ -32,9 +32,15 @@ svg {
 }
 
 .sankey-link {
-  opacity: .2;
+  opacity: 0.05;
   fill: none;
   stroke: red;
+}
+
+.sankey-link--selected {
+  stroke: blue;
+  opacity: .5;
+
 }
 
 .maps-country-mask-rect {

@@ -6,22 +6,25 @@ const params = {
   raw: 'soy',
   year: '2012',
   nNodes: '50',
-  excludeLayers: [2,3,4,5,6,7,9],
+  excludeLayers: [1,5,6,7,9],//378
+  excludeNodes: [2575,2576,2577,2578],//378
   flowQuant: 'Volume',
-  flowQual: 'Commodity'
+  flowQual: 'Commodity',
+  includeNodeQuals: ['Mun Id IBGE'],
+  clickedNodes: [39]
 };
 
-const layerNames = [
+window.layerNames = [
   'Municipality of production',
   'State of production',
-  // ,
-  // ,
-  // ,
-  // ,
-  // ,
-  // ,
-  // ,
-  // ,
+  'Port of export',
+  'Trader',
+  'Exporter',
+  'Carrier',
+  'Vessel',
+  'Via port',
+  'Importer',
+  'Port of import',
   'Country of import'
 ];
 
@@ -38,24 +41,16 @@ const sankeyURL = Object.keys(params).reduce((prev, current) => {
 
 
 let data = {};
-
+let sankey;
+let linksContainer;
 
 const build = () => {
-  const sankey = d3.sankey()
+  sankey = d3.sankey()
     .nodes(data.sankey.include)
     .links(data.sankey.data)
     .layout();
 
   console.log(sankey.layers());
-  // let s = ''
-  // sankey.layers().forEach(l => {
-  //   s += '\n\n' + l.key;
-  //   l.values.forEach(n => {
-  //     s += '\n' + n.attributes.nodeName +',';
-  //
-  //   })
-  // })
-// console.log(s)
 
   const svg = d3.select('svg');
   const sankeyContainer = svg.append('g')
@@ -75,7 +70,7 @@ const build = () => {
 
   layers.append('text')
       // .text(d => layerNames[d.key])
-      .text(d => d.key)
+      .text(d => `${d.key} (${layerNames.indexOf(d.key)})`)
       .attr('y', 40);
 
   // nodes
@@ -85,7 +80,10 @@ const build = () => {
     .data(d => d.values)
     .enter()
     .append('g')
-    .attr('transform', d => `translate(0,${d.y})`);
+    .attr('transform', d => `translate(0,${d.y})`)
+    .on('mouseover', d => {
+      selectNode(parseInt(d.id))
+    })
 
   nodes.append('text')
     .attr('class', 'sankey-node-label')
@@ -99,16 +97,10 @@ const build = () => {
     .attr('height', d => d.dy);
 
   // links
-  sankeyContainer
+  linksContainer = sankeyContainer
     .append('g')
-    .attr('class','sankey-links')
-    .selectAll('path')
-    .data(sankey.links())
-    .enter()
-    .append('path')
-    .attr('class','sankey-link')
-    .attr('stroke-width', d => d.dy)
-    .attr('d', sankey.link());
+    .attr('class','sankey-links');
+
 
 
   // map
@@ -162,6 +154,34 @@ const build = () => {
     .append('path')
     .attr('d', geoPath)
     .attr('class', 'maps-municip');
+
+  selectNode(2562);
+};
+
+const selectNode = nodeId => {
+  console.log(nodeId);
+
+  sankey.selectNode(nodeId);
+
+  linksContainer
+    .selectAll('path').remove()
+
+  linksContainer
+    .selectAll('path')
+    .data(sankey.mergedLinks())
+    .enter()
+    .append('path')
+    .attr('class','sankey-link')
+    .attr('stroke-width', d => d.dy)
+    .attr('d', sankey.link());
+
+  d3.selectAll('.sankey-link')
+    .classed('sankey-link--selected', d => {
+      if (d.originalPath.indexOf(nodeId) > -1) {
+        // console.log(d.originalPath, Math.round(d.value/1000))
+      }
+      return d.originalPath.indexOf(nodeId) > -1;
+    });
 };
 
 const CartoURL = 'https://p2cs-sei.carto.com/api/v2/sql?format=geojson';
