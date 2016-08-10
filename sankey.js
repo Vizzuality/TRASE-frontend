@@ -11,7 +11,8 @@ d3.sankey = function() {
 
   let layerWidth = 80;
   let layerSpacing = 200;
-  let scaleY = .00005;
+  let scaleY = .00004;
+  let minNodeHeight = 12;
 
   sankey.nodes = function(_) {
     if (!arguments.length) return nodes;
@@ -206,7 +207,7 @@ d3.sankey = function() {
       let totalHeight = 0;
       layer.values.forEach(node => {
         node.y = totalHeight;
-        node.dy = node.value * scaleY;
+        node.dy = Math.max(node.value * scaleY, minNodeHeight);
 
         let totalSourceHeight = 0;
         node.sourceLinks.forEach(link => {
