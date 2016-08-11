@@ -57,6 +57,22 @@ d3.sankey = function() {
     var curvature = 1 ;
 
     function link(d) {
+      // const r = d.sy/1000;
+      // // console.log(r);
+      //
+      // var xStart = d.x,
+      //   xEnd = d.x + d.dx,
+      //   xi = d3.interpolateNumber(xStart, xEnd),
+      //   x0 = xi(Math.min(r, 0.7)),
+      //   x1 = xi(Math.min(r+0.5,1)),
+      //   x2 = x0+70,
+      //   x3 = x1-70,
+      //   y0 = d.sy + d.dy / 2,
+      //   y1 = d.ty+ d.dy / 2;
+      // return 'M' + x0 + ',' + y0
+      //      + 'C' + x2 + ',' + y0
+      //      + ' ' + x3 + ',' + y1
+      //      + ' ' + x1 + ',' + y1;
       var x0 = d.x,
         x1 = d.x + d.dx,
         xi = d3.interpolateNumber(x0, x1),
