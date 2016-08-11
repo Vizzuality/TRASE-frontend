@@ -43,6 +43,7 @@ const sankeyURL = Object.keys(params).reduce((prev, current) => {
 let data = {};
 let sankey;
 let linksContainer;
+let nodes;
 
 const build = () => {
   sankey = d3.sankey()
@@ -70,11 +71,11 @@ const build = () => {
 
   layers.append('text')
       // .text(d => layerNames[d.key])
-      .text(d => `${d.key} (${layerNames.indexOf(d.key)})`)
+      .text(d => `${d.key} (${window.layerNames.indexOf(d.key)})`)
       .attr('y', 40);
 
   // nodes
-  const nodes = layers.append('g')
+  nodes = layers.append('g')
     .attr('class','sankey-nodes ')
     .selectAll('rect')
     .data(d => d.values)
@@ -82,8 +83,11 @@ const build = () => {
     .append('g')
     .attr('transform', d => `translate(0,${d.y})`)
     .on('mouseover', d => {
-      selectNode(parseInt(d.id))
+      showLinks(parseInt(d.id));
     })
+    .on('click', d => {
+      selectNode(parseInt(d.id));
+    });
 
   nodes.append('text')
     .attr('class', 'sankey-node-label')
@@ -154,17 +158,15 @@ const build = () => {
     .append('path')
     .attr('d', geoPath)
     .attr('class', 'maps-municip');
-
-  selectNode(2562);
 };
 
-const selectNode = nodeId => {
+const showLinks = nodeId => {
   console.log(nodeId);
 
-  sankey.selectNode(nodeId);
+  sankey.highlightLinks(nodeId);
 
   linksContainer
-    .selectAll('path').remove()
+    .selectAll('path').remove();
 
   linksContainer
     .selectAll('path')
@@ -172,16 +174,28 @@ const selectNode = nodeId => {
     .enter()
     .append('path')
     .attr('class','sankey-link')
-    .attr('stroke-width', d => d.dy)
+    .attr('stroke-width', d => Math.max(d.dy, .5))
     .attr('d', sankey.link());
 
+
+};
+
+const selectNode = nodeId => {
+  sankey.reorderNodes(nodeId);
+
+  nodes
+    .transition()
+    .duration(500)
+    .attr('transform', d => `translate(0,${d.y})`);
+
+  showLinks(nodeId);
   d3.selectAll('.sankey-link')
     .classed('sankey-link--selected', d => {
-      if (d.originalPath.indexOf(nodeId) > -1) {
-        // console.log(d.originalPath, Math.round(d.value/1000))
-      }
       return d.originalPath.indexOf(nodeId) > -1;
     });
+
+  // disable roll over, normally we should be able to display both set of links at the same time
+  nodes.on('mouseover', null);
 };
 
 const CartoURL = 'https://p2cs-sei.carto.com/api/v2/sql?format=geojson';

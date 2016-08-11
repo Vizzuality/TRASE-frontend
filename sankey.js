@@ -8,11 +8,12 @@ d3.sankey = function() {
   let links = [];
   let mergedLinks = [];
   let layers = [];
+  let selectedNodeIds;
 
   let layerWidth = 80;
   let layerSpacing = 200;
   let scaleY = .00004;
-  let minNodeHeight = 12;
+  let minNodeHeight = 10;
 
   sankey.nodes = function(_) {
     if (!arguments.length) return nodes;
@@ -130,7 +131,7 @@ d3.sankey = function() {
     });
   };
 
-  const mergeDuplicateLinks = nodeId => {
+  const mergeDuplicateLinks = () => {
     const dict = {};
     const mergedLinks = [];
     links.forEach(link => {
@@ -201,12 +202,29 @@ d3.sankey = function() {
     return (a.value < b.value) ? 1 : -1;
   };
 
+  const sortDescOtherLastSelectedFirst = (a, b) => {
+    if (a.isOther) return 1;
+    else if (b.isOther) return -1;
+    else {
+      const aSelected = selectedNodeIds.indexOf(parseInt(a.id)) > -1;
+      const bSelected = selectedNodeIds.indexOf(parseInt(b.id)) > -1;
+      if (aSelected && !bSelected) {
+        return -1;
+      } else if (!aSelected && bSelected) {
+        return 1;
+      } else {
+        return (a.value < b.value) ? 1 : -1;
+      }
+    }
+  };
+
   const computeCoords = () => {
     layers.forEach((layer, i) => {
       layer.x = i * (layerWidth + layerSpacing);
       let totalHeight = 0;
       layer.values.forEach(node => {
         node.y = totalHeight;
+        // node.y = Math.random()*1000;
         node.dy = Math.max(node.value * scaleY, minNodeHeight);
 
         let totalSourceHeight = 0;
@@ -243,29 +261,38 @@ d3.sankey = function() {
     sortNodes(sortDescOtherLast);
     sortLinksByNode(sortDesc);
 
-
     // add y pos and height values to nodes and links
     computeCoords();
     return sankey;
   };
 
-  sankey.selectNode = nodeId => {
+  sankey.reorderNodes = nodeId => {
+    selectedNodeIds = _
+      .chain(links)
+      .filter(link => link.originalPath.indexOf(nodeId) > -1)
+      .map(link => [link.sourceNodeId, link.targetNodeId])
+      .flatten()
+      .uniq()
+      .value();
+
+    sortNodes(sortDescOtherLastSelectedFirst);
+    computeCoords();
+  };
+
+  sankey.highlightLinks = nodeId => {
     // merge links that have same source and target node\
     // + collect node ids for later placement
     mergedLinks = [];
     let nodeIds = [];
     let dict = {};
 
-    var t0 = performance.now();
-
-
     for (var i = 0; i < links.length; i++) {
       var link = links[i];
       if (link.originalPath.indexOf(nodeId) === -1) continue;
 
       const key = link.sourceNodeId + '' + link.targetNodeId;
-      nodeIds.push(link.sourceNodeId);
-      nodeIds.push(link.targetNodeId);
+      // nodeIds.push(link.sourceNodeId);
+      // nodeIds.push(link.targetNodeId);
       if (!dict[key]) {
         const mergedLink = _.cloneDeep(link);
         mergedLinks.push(mergedLink);
@@ -274,10 +301,8 @@ d3.sankey = function() {
         dict[key].value += link.value;
       }
     }
-    var t1 = performance.now();
-    console.log("took " + (t1 - t0) + " milliseconds.")
 
-    nodeIds = _.uniq(nodeIds);
+    // nodeIds = _.uniq(nodeIds);
     const stackedHeightsByNodeId = {source:{},target:{}};
 
     mergedLinks.forEach(link => {
