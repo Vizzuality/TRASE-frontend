@@ -2,12 +2,9 @@
   "name": "trase-frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "http-server -s -p 9090 .",
-    "livereload": "livereload . -d",
-    "start": "npm run livereload & npm run serve"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -20,8 +17,13 @@
   },
   "homepage": "https://github.com/Vizzuality/TRASE-frontend#readme",
   "devDependencies": {
-    "eslint": "^3.1.1",
-    "http-server": "^0.9.0",
-    "livereload": "^0.5.0"
+    "eslint": "^3.1.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "pretty-error": "^2.0.0"
   }
 }
