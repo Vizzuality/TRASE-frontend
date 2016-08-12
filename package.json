@@ -20,6 +20,7 @@
     "eslint": "^3.1.1"
   },
   "dependencies": {
+    "basic-auth-connect": "^1.0.0",
     "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
