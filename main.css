@@ -24,6 +24,7 @@ svg {
 
 .sankey-node-label {
   font-size: 10px;
+  text-anchor: middle;
   text-transform: capitalize;
 }
 

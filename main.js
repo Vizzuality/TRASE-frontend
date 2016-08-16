@@ -47,10 +47,13 @@ let sankey;
 let linksContainer;
 let nodes;
 
+const layerWidth = 80;
+
 const build = () => {
   sankey = d3.sankey()
     .minNodeHeight(compactMode ? 15 : 30)
     .scaleY(compactMode ? .00004 : .00006)
+    .layerWidth(layerWidth)
     .nodes(data.sankey.include)
     .links(data.sankey.data)
     .layout();
@@ -95,7 +98,7 @@ const build = () => {
 
   nodes.append('text')
     .attr('class', 'sankey-node-label')
-    .attr('x', 10)
+    .attr('x', layerWidth/2)
     .attr('y', d => 4+d.dy/2)
     .text(d => d.attributes.nodeName.toLowerCase());
 
