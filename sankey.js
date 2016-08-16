@@ -15,6 +15,11 @@ d3.sankey = function() {
   let scaleY = .00006;
   let minNodeHeight = 30;
 
+  let maxLabelCharsWidth;
+  let maxLabelLines;
+  let _labelCharsPerLine;
+  const labelCharSize = 9;
+
   sankey.nodes = function(_) {
     if (!arguments.length) return nodes;
     nodes = _;
@@ -56,6 +61,19 @@ d3.sankey = function() {
   sankey.minNodeHeight = _ => {
     if (!_) return minNodeHeight;
     minNodeHeight = +_;
+    return sankey;
+  };
+
+  sankey.maxLabelCharsWidth = _ => {
+    if (!_) return maxLabelCharsWidth;
+    maxLabelCharsWidth = +_;
+    _labelCharsPerLine = Math.floor(maxLabelCharsWidth/labelCharSize);
+    return sankey;
+  };
+
+  sankey.maxLabelLines = _ => {
+    if (!_) return maxLabelLines;
+    maxLabelLines = +_;
     return sankey;
   };
 
@@ -184,7 +202,35 @@ d3.sankey = function() {
 
     layers.forEach((layer, i) => {
       layer.values.forEach(node => {
-        node.layer = layer;
+        node.layer = layer; // TODO potential smell here (circular reference?) - just use index?
+      });
+    });
+  };
+
+  const prepareNodesText = () => {
+    console.log(_labelCharsPerLine);
+    layers.forEach(layer => {
+      layer.values.forEach(node => {
+        var words = node.attributes.nodeName.split(' ');
+        var currentLine = '';
+        node.nodeNameLines = [];
+        words.forEach(word => {
+          var line = currentLine + ' ' + word;
+          if (line.length > _labelCharsPerLine) {
+            node.nodeNameLines.push(currentLine);
+            currentLine = word;
+          } else {
+            currentLine = line;
+          }
+        });
+        node.nodeNameLines.push(currentLine);
+        node.nodeNameLinesShown = node.nodeNameLines.slice(0, maxLabelLines);
+
+        // ellipsis
+        if (node.nodeNameLines.length > maxLabelLines) {
+          console.log('??')
+          node.nodeNameLinesShown[maxLabelLines - 1] = node.nodeNameLinesShown[maxLabelLines - 1] + '…';
+        }
       });
     });
   };
@@ -276,6 +322,8 @@ d3.sankey = function() {
     breakDownLinks();
     // group nodes by layers
     computeLayers();
+    // build node text labels
+    prepareNodesText();
     // attach original links to nodes
     computeNodeLinks();
     // compute cumulated node values

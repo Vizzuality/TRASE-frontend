@@ -1,8 +1,6 @@
 /* global d3 */
 /*eslint no-console: 0*/
 
-const compactMode = location.search.match('compactMode');
-
 const params = {
   country: 'brazil',
   raw: 'soy',
@@ -47,13 +45,18 @@ let sankey;
 let linksContainer;
 let nodes;
 
-const layerWidth = 80;
+const compactMode = location.search.match('compactMode');
+const layerWidth = 130;
+const layerSpacing = 180;
 
 const build = () => {
   sankey = d3.sankey()
     .minNodeHeight(compactMode ? 15 : 30)
-    .scaleY(compactMode ? .00004 : .00006)
+    .scaleY(compactMode ? .00007 : .00004)
     .layerWidth(layerWidth)
+    .layerSpacing(layerSpacing)
+    .maxLabelCharsWidth(layerWidth)
+    .maxLabelLines(compactMode ? 1 : 2)
     .nodes(data.sankey.include)
     .links(data.sankey.data)
     .layout();
@@ -83,7 +86,7 @@ const build = () => {
 
   // nodes
   nodes = layers.append('g')
-    .attr('class','sankey-nodes ')
+    .attr('class','sankey-nodes')
     .selectAll('rect')
     .data(d => d.values)
     .enter()
@@ -96,11 +99,21 @@ const build = () => {
       selectNode(parseInt(d.id));
     });
 
-  nodes.append('text')
+  nodes.append('g')
+    .attr('class', 'sankey-node-labels')
+    .attr('transform', d => `translate(0,${d.dy/2})`)
+    .selectAll('text')
+    .data(d => d.nodeNameLinesShown)
+    .enter()
+    .append('text')
     .attr('class', 'sankey-node-label')
     .attr('x', layerWidth/2)
-    .attr('y', d => 4+d.dy/2)
-    .text(d => d.attributes.nodeName.toLowerCase());
+    .attr('y', (d, i) => {
+      return 4+i * 12;
+    })
+    .text(d => d);
+
+
 
   nodes.append('rect')
     .attr('class', 'sankey-node-rect')
