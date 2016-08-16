@@ -4,7 +4,7 @@
 
 ### backend
 - Import Postgre database from this dump: https://github.com/sei-international/TRASE/tree/master/DB
-- Checkout [this branch](https://github.com/nerik/TRASE/tree/API-fixes) and run the API server:
+- Clone [the backend](https://github.com/sei-international/TRASE) and run the API server:
 ```
 python API/server.py
 ```
@@ -17,7 +17,7 @@ npm i
 ```
 - and run:
 ```
-npm start
+npm run dev
 ```
 - [http://localhost:9090/](http://localhost:9090/prev)
 
