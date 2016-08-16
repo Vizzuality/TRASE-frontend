@@ -12,8 +12,8 @@ d3.sankey = function() {
 
   let layerWidth = 80;
   let layerSpacing = 200;
-  let scaleY = .00004;
-  let minNodeHeight = 10;
+  let scaleY = .00006;
+  let minNodeHeight = 30;
 
   sankey.nodes = function(_) {
     if (!arguments.length) return nodes;
@@ -50,6 +50,12 @@ d3.sankey = function() {
   sankey.scaleY = _ => {
     if (!_) return scaleY;
     scaleY = +_;
+    return sankey;
+  };
+
+  sankey.minNodeHeight = _ => {
+    if (!_) return minNodeHeight;
+    minNodeHeight = +_;
     return sankey;
   };
 

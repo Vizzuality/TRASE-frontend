@@ -1,6 +1,8 @@
 /* global d3 */
 /*eslint no-console: 0*/
 
+const compactMode = location.search.match('compactMode');
+
 const params = {
   country: 'brazil',
   raw: 'soy',
@@ -28,7 +30,7 @@ window.layerNames = [
   'Country of import'
 ];
 
-const sankeyURL = (!window.location.href.match('localhost')) ? 'sample.json' : Object.keys(params).reduce((prev, current) => {
+const sankeyURL = (window.location.href.match('localhost')) ? 'sample.json' : Object.keys(params).reduce((prev, current) => {
   const value = params[current];
   if (Array.isArray(value)) {
     const arrUrl = value.reduce((arrPrev, arrCurrent) => {
@@ -47,6 +49,8 @@ let nodes;
 
 const build = () => {
   sankey = d3.sankey()
+    .minNodeHeight(compactMode ? 15 : 30)
+    .scaleY(compactMode ? .00004 : .00006)
     .nodes(data.sankey.include)
     .links(data.sankey.data)
     .layout();
