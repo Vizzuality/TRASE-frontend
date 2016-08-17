@@ -1,6 +1,7 @@
 body {
   color: green;
   font-family: sans-serif;
+  overflow-y: hidden;
 }
 
 svg {
@@ -17,7 +18,7 @@ svg {
 }
 
 .sankey-node-rect {
-  fill: none;
+  fill: white;
   stroke: black;
   stroke-width: .5px;
 }

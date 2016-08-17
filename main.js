@@ -28,7 +28,7 @@ window.layerNames = [
   'Country of import'
 ];
 
-const sankeyURL = (!window.location.href.match('localhost')) ? 'sample.json' : Object.keys(params).reduce((prev, current) => {
+const sankeyURL = (window.location.href.match('localhost')) ? 'sample.json' : Object.keys(params).reduce((prev, current) => {
   const value = params[current];
   if (Array.isArray(value)) {
     const arrUrl = value.reduce((arrPrev, arrCurrent) => {
@@ -42,8 +42,10 @@ const sankeyURL = (!window.location.href.match('localhost')) ? 'sample.json' : O
 
 let data = {};
 let sankey;
+let layers;
 let linksContainer;
 let nodes;
+let selectedNodeId;
 
 const compactMode = location.search.match('compactMode');
 const layerWidth = 130;
@@ -63,12 +65,15 @@ const build = () => {
 
   console.log(sankey.layers());
 
-  const svg = d3.select('svg');
+  const svg = d3.select('svg')
+    .style('width', '1500px')
+    .style('height', `${document.documentElement.clientHeight}px`);
+
   const sankeyContainer = svg.append('g')
     .attr('class','sankey');
 
   // layers
-  const layers = sankeyContainer
+  layers = sankeyContainer
     .append('g')
     .attr('class','sankey-layers')
     .selectAll('g')
@@ -77,7 +82,8 @@ const build = () => {
     // .filter(d => d.key !== 'undefined')
     .append('g')
     .attr('class','sankey-layer')
-    .attr('transform', d => `translate(${d.x},0)`);
+    .attr('transform', d => `translate(${d.x},0)`)
+    .on('mousewheel', offset);
 
   layers.append('text')
       // .text(d => layerNames[d.key])
@@ -93,11 +99,16 @@ const build = () => {
     .append('g')
     .attr('transform', d => `translate(0,${d.y})`)
     .on('mouseover', d => {
-      showLinks(parseInt(d.id));
+      showNodeLinks(parseInt(d.id));
     })
     .on('click', d => {
-      selectNode(parseInt(d.id));
+      selectCurrentNode();
     });
+
+  nodes.append('rect')
+    .attr('class', 'sankey-node-rect')
+    .attr('width', sankey.layerWidth())
+    .attr('height', d => d.dy);
 
   nodes.append('g')
     .attr('class', 'sankey-node-labels')
@@ -113,12 +124,6 @@ const build = () => {
     })
     .text(d => d);
 
-
-
-  nodes.append('rect')
-    .attr('class', 'sankey-node-rect')
-    .attr('width', sankey.layerWidth())
-    .attr('height', d => d.dy);
 
   // links
   linksContainer = sankeyContainer
@@ -180,42 +185,53 @@ const build = () => {
     .attr('class', 'maps-municip');
 };
 
-const showLinks = nodeId => {
-  console.log(nodeId);
-
-  sankey.highlightLinks(nodeId);
+const redrawLinks = () => {
+  linksContainer
+  .selectAll('path').remove();
 
   linksContainer
-    .selectAll('path').remove();
-
-  linksContainer
-    .selectAll('path')
-    .data(sankey.mergedLinks())
-    .enter()
-    .append('path')
-    .attr('class','sankey-link')
-    .attr('stroke-width', d => Math.max(d.dy, .5))
-    .attr('d', sankey.link());
-
-
+  .selectAll('path')
+  .data(sankey.mergedLinks())
+  .enter()
+  .append('path')
+  .attr('class','sankey-link')
+  .attr('stroke-width', d => Math.max(d.dy, .5))
+  .attr('d', sankey.link());
 };
 
-const selectNode = nodeId => {
-  sankey.reorderNodes(nodeId);
+const showNodeLinks = nodeId => {
+  selectedNodeId = nodeId;
+  sankey.prepareLinksForNodeId(selectedNodeId);
+  redrawLinks();
+};
+
+const selectCurrentNode = () => {
+  sankey.reorderNodes(selectedNodeId);
 
   nodes
     .transition()
     .duration(500)
     .attr('transform', d => `translate(0,${d.y})`);
 
-  showLinks(nodeId);
+  redrawLinks(); // TODO transition
+
   d3.selectAll('.sankey-link')
     .classed('sankey-link--selected', d => {
-      return d.originalPath.indexOf(nodeId) > -1;
+      return d.originalPath.indexOf(selectedNodeId) > -1;
     });
 
   // disable roll over, normally we should be able to display both set of links at the same time
-  nodes.on('mouseover', null);
+  // nodes.on('mouseover', null);
+};
+
+const offset = () => {
+  sankey.setLayersOffsets([0,100]);
+
+  layers.filter((d,i) => i === 1)
+    .select('.sankey-nodes')
+    .attr('transform',  'translate(0,100)');
+
+  redrawLinks();
 };
 
 const CartoURL = 'https://p2cs-sei.carto.com/api/v2/sql?format=geojson';
