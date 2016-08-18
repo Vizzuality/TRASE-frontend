@@ -29,20 +29,18 @@ svg {
   text-transform: capitalize;
 }
 
-.sankey-links {
-
-}
-
 .sankey-link {
-  opacity: 0.35;
   fill: none;
-  stroke: red;
 }
 
-.sankey-link--selected {
+.sankey-clicked-links .sankey-link {
   stroke: blue;
   opacity: .5;
 
+}
+.sankey-hover-links .sankey-link {
+  opacity: 0.2;
+  stroke: red;
 }
 
 .maps-country-mask-rect {

@@ -43,8 +43,10 @@ const sankeyURL = (window.location.href.match('localhost')) ? 'sample.json' : Ob
 let data = {};
 let sankey;
 let layers;
-let linksContainer;
+let clickedLinksContainer;
+let hoverLinksContainer;
 let nodes;
+let highlightedNodeId;
 let selectedNodeId;
 
 const compactMode = location.search.match('compactMode');
@@ -126,9 +128,13 @@ const build = () => {
 
 
   // links
-  linksContainer = sankeyContainer
+  clickedLinksContainer = sankeyContainer
     .append('g')
-    .attr('class','sankey-links');
+    .attr('class','sankey-clicked-links');
+
+  hoverLinksContainer = sankeyContainer
+    .append('g')
+    .attr('class','sankey-hover-links');
 
 
 
@@ -185,43 +191,43 @@ const build = () => {
     .attr('class', 'maps-municip');
 };
 
-const redrawLinks = () => {
+
+
+let hoverLinksData;
+// let clickedLinksData;
+
+const redrawLinks = (linksContainer, linksData) => {
   linksContainer
-  .selectAll('path').remove();
+    .selectAll('path').remove();
 
   linksContainer
-  .selectAll('path')
-  .data(sankey.mergedLinks())
-  .enter()
-  .append('path')
-  .attr('class','sankey-link')
-  .attr('stroke-width', d => Math.max(d.dy, .5))
-  .attr('d', sankey.link());
+    .selectAll('path')
+    .data(linksData)
+    .enter()
+    .append('path')
+    .attr('class','sankey-link')
+    .attr('stroke-width', d => Math.max(d.dy, .5))
+    .attr('d', sankey.link());
 };
 
 const showNodeLinks = nodeId => {
-  selectedNodeId = nodeId;
-  sankey.prepareLinksForNodeId(selectedNodeId);
-  redrawLinks();
+  if (nodeId === selectedNodeId) return;
+  highlightedNodeId = nodeId;
+  hoverLinksData = sankey.getLinksForNodeId(highlightedNodeId);
+  redrawLinks(hoverLinksContainer, hoverLinksData);
 };
 
 const selectCurrentNode = () => {
-  sankey.reorderNodes(selectedNodeId);
+  sankey.reorderNodes(hoverLinksData, highlightedNodeId);
+  selectedNodeId = highlightedNodeId;
 
   nodes
     .transition()
     .duration(500)
     .attr('transform', d => `translate(0,${d.y})`);
 
-  redrawLinks(); // TODO transition
+  redrawLinks(clickedLinksContainer, hoverLinksData); // TODO transition
 
-  d3.selectAll('.sankey-link')
-    .classed('sankey-link--selected', d => {
-      return d.originalPath.indexOf(selectedNodeId) > -1;
-    });
-
-  // disable roll over, normally we should be able to display both set of links at the same time
-  // nodes.on('mouseover', null);
 };
 
 const offset = () => {

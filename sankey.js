@@ -6,7 +6,7 @@ d3.sankey = function() {
   const sankey = {};
   let nodes = [];
   let links = [];
-  let mergedLinks = [];
+  // let mergedLinks = [];
   let layers = [];
   let selectedNodeIds;
 
@@ -27,14 +27,14 @@ d3.sankey = function() {
   };
 
   sankey.links = function(_) {
-    if (!arguments.length) return mergedLinks;
+    if (!arguments.length) return;
     links = _;
     return sankey;
   };
 
-  sankey.mergedLinks = function() {
-    return mergedLinks;
-  };
+  // sankey.mergedLinks = function() {
+  //   return mergedLinks;
+  // };
 
   sankey.layers = function() {
     return layers;
@@ -293,10 +293,10 @@ d3.sankey = function() {
     });
   };
 
-  const computeMergedLinksVerticalCoords = layerOffsets => {
+  const computeMergedLinksVerticalCoords = (links, layerOffsets) => {
     const stackedHeightsByNodeId = {source:{},target:{}};
 
-    mergedLinks.forEach(link => {
+    links.forEach(link => {
       link.dy = link.value * scaleY;
 
 
@@ -342,7 +342,7 @@ d3.sankey = function() {
     return sankey;
   };
 
-  sankey.reorderNodes = nodeId => {
+  sankey.reorderNodes = (linksData, nodeId) => {
     selectedNodeIds = _
       .chain(links)
       .filter(link => link.originalPath.indexOf(nodeId) > -1)
@@ -353,12 +353,12 @@ d3.sankey = function() {
 
     sortNodes(sortDescOtherLastSelectedFirst); // TODO uses selectedNodeIds, should be sent as an arg not used as a global var
     computeNodesVerticalCoords();
-    computeMergedLinksVerticalCoords();
+    computeMergedLinksVerticalCoords(linksData);
   };
 
-  sankey.prepareLinksForNodeId = nodeId => {
+  sankey.getLinksForNodeId = nodeId => {
     // merge links that have same source and target node
-    mergedLinks = [];
+    const mergedLinks = [];
     let dict = {};
 
     for (var i = 0; i < links.length; i++) {
@@ -375,11 +375,14 @@ d3.sankey = function() {
       }
     }
 
-    computeMergedLinksVerticalCoords();
+    computeMergedLinksVerticalCoords(mergedLinks);
+
+    return mergedLinks;
   };
 
-  sankey.setLayersOffsets = (layersOffsets) => {
-    computeMergedLinksVerticalCoords(layersOffsets);
+  sankey.setLayersOffsets = (linksData, layersOffsets) => {
+    computeMergedLinksVerticalCoords(linksData, layersOffsets);
+    return linksData;
   };
 
   return sankey;
