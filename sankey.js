@@ -166,6 +166,7 @@ d3.sankey = function() {
     layers.forEach((layer, i) => {
       layer.values.forEach(node => {
         node.shownLayerIndex = i;
+        node.id = parseInt(node.id);
       });
     });
   };
@@ -342,10 +343,10 @@ d3.sankey = function() {
     return sankey;
   };
 
-  sankey.reorderNodes = (linksData, nodeId) => {
+  sankey.reorderNodes = (selectedNodeId, linksData, layersOffsets) => {
     selectedNodeIds = _
       .chain(links)
-      .filter(link => link.originalPath.indexOf(nodeId) > -1)
+      .filter(link => link.originalPath.indexOf(selectedNodeId) > -1)
       .map(link => [link.sourceNodeId, link.targetNodeId])
       .flatten()
       .uniq()
@@ -353,10 +354,11 @@ d3.sankey = function() {
 
     sortNodes(sortDescOtherLastSelectedFirst); // TODO uses selectedNodeIds, should be sent as an arg not used as a global var
     computeNodesVerticalCoords();
-    computeMergedLinksVerticalCoords(linksData);
+    console.log(layersOffsets)
+    computeMergedLinksVerticalCoords(linksData, layersOffsets);
   };
 
-  sankey.getLinksForNodeId = nodeId => {
+  sankey.getLinksForNodeId = (nodeId, layersOffsets) => {
     // merge links that have same source and target node
     const mergedLinks = [];
     let dict = {};
@@ -375,7 +377,7 @@ d3.sankey = function() {
       }
     }
 
-    computeMergedLinksVerticalCoords(mergedLinks);
+    computeMergedLinksVerticalCoords(mergedLinks, layersOffsets);
 
     return mergedLinks;
   };

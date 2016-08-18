@@ -46,8 +46,9 @@ let layers;
 let clickedLinksContainer;
 let hoverLinksContainer;
 let nodes;
-let highlightedNodeId;
-let selectedNodeId;
+let highlightedNode;
+let selectedNode;
+let currentLayerOffsets;
 
 const compactMode = location.search.match('compactMode');
 const layerWidth = 130;
@@ -87,6 +88,8 @@ const build = () => {
     .attr('transform', d => `translate(${d.x},0)`)
     .on('mousewheel', offset);
 
+  currentLayerOffsets = sankey.layers().map(() => 0);
+
   layers.append('text')
       // .text(d => layerNames[d.key])
       .text(d => `${d.key} (${window.layerNames.indexOf(d.key)})`)
@@ -101,9 +104,9 @@ const build = () => {
     .append('g')
     .attr('transform', d => `translate(0,${d.y})`)
     .on('mouseover', d => {
-      showNodeLinks(parseInt(d.id));
+      showNodeLinks(d);
     })
-    .on('click', d => {
+    .on('click', () => {
       selectCurrentNode();
     });
 
@@ -210,16 +213,20 @@ const redrawLinks = (linksContainer, linksData) => {
     .attr('d', sankey.link());
 };
 
-const showNodeLinks = nodeId => {
-  if (nodeId === selectedNodeId) return;
-  highlightedNodeId = nodeId;
-  hoverLinksData = sankey.getLinksForNodeId(highlightedNodeId);
+const showNodeLinks = node => {
+  if (selectedNode && node.id === selectedNode.id) return;
+  highlightedNode = node;
+  hoverLinksData = sankey.getLinksForNodeId(highlightedNode.id, currentLayerOffsets);
   redrawLinks(hoverLinksContainer, hoverLinksData);
 };
 
 const selectCurrentNode = () => {
-  sankey.reorderNodes(hoverLinksData, highlightedNodeId);
-  selectedNodeId = highlightedNodeId;
+  selectedNode = highlightedNode;
+
+  currentLayerOffsets[selectedNode.shownLayerIndex] = 0;
+  offsetLayer(selectedNode.shownLayerIndex, true);
+
+  sankey.reorderNodes(highlightedNode.id, hoverLinksData, currentLayerOffsets);
 
   nodes
     .transition()
@@ -230,14 +237,23 @@ const selectCurrentNode = () => {
 
 };
 
-const offset = () => {
-  sankey.setLayersOffsets([0,100]);
+const offset = (l, li) => {
+  const e = d3.event;
+  currentLayerOffsets[li] -= e.deltaY/10;
+  offsetLayer(li);
+  sankey.setLayersOffsets(hoverLinksData, currentLayerOffsets);
 
-  layers.filter((d,i) => i === 1)
-    .select('.sankey-nodes')
-    .attr('transform',  'translate(0,100)');
+  redrawLinks(hoverLinksContainer, hoverLinksData);
+};
 
-  redrawLinks();
+const offsetLayer = (li, animate) => {
+  let layer = layers.filter((d,i) => i === li)
+    .select('.sankey-nodes');
+
+  if (animate) {
+    layer = layer.transition().duration(800);
+  }
+  layer.attr('transform',  `translate(0, ${currentLayerOffsets[li]})`);
 };
 
 const CartoURL = 'https://p2cs-sei.carto.com/api/v2/sql?format=geojson';
