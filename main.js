@@ -69,7 +69,7 @@ const build = () => {
   console.log(sankey.layers());
 
   const svg = d3.select('svg')
-    .style('width', '1500px')
+    .style('width', '2500px')
     .style('height', `${document.documentElement.clientHeight}px`);
 
   const sankeyContainer = svg.append('g')
@@ -239,8 +239,11 @@ const selectCurrentNode = () => {
 
   removeHoverLinks();
 
-  currentLayerOffsets[selectedNode.shownLayerIndex] = 0;
-  offsetLayer(selectedNode.shownLayerIndex, true);
+  // do we reset all layers, or only the one that owns the clicked node?
+  // currentLayerOffsets[selectedNode.shownLayerIndex] = 0;
+  currentLayerOffsets = currentLayerOffsets.map(() => 0);
+  // offsetLayer(selectedNode.shownLayerIndex, true);
+  offsetLayer(null, true);
 
   sankey.reorderNodes(highlightedNode.id, clickedLinksData, currentLayerOffsets);
 
@@ -261,18 +264,20 @@ const offset = (l, li) => {
   sankey.setLayersOffsets(hoverLinksData, currentLayerOffsets);
   redrawLinks(hoverLinksContainer, hoverLinksData);
 
-  sankey.setLayersOffsets(clickedLinksData, currentLayerOffsets);
-  redrawLinks(clickedLinksContainer, clickedLinksData);
+  if (clickedLinksData) {
+    sankey.setLayersOffsets(clickedLinksData, currentLayerOffsets);
+    redrawLinks(clickedLinksContainer, clickedLinksData);
+  }
 };
 
-const offsetLayer = (li, animate) => {
-  let layer = layers.filter((d,i) => i === li)
-    .select('.sankey-nodes');
+const offsetLayer = (layerIndex, animate) => {
+  let layer = (layerIndex !== null) ? layers.filter((d,i) => i === layerIndex) : layers;
+  layer = layer.select('.sankey-nodes');
 
   if (animate) {
     layer = layer.transition().duration(800);
   }
-  layer.attr('transform',  `translate(0, ${currentLayerOffsets[li]})`);
+  layer.attr('transform',  `translate(0, ${currentLayerOffsets[layerIndex]})`);
 };
 
 const CartoURL = 'https://p2cs-sei.carto.com/api/v2/sql?format=geojson';
