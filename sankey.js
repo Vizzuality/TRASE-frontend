@@ -354,7 +354,6 @@ d3.sankey = function() {
 
     sortNodes(sortDescOtherLastSelectedFirst); // TODO uses selectedNodeIds, should be sent as an arg not used as a global var
     computeNodesVerticalCoords();
-    console.log(layersOffsets)
     computeMergedLinksVerticalCoords(linksData, layersOffsets);
   };
 

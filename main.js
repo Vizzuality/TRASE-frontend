@@ -198,7 +198,7 @@ const build = () => {
 
 
 let hoverLinksData;
-// let clickedLinksData;
+let clickedLinksData;
 
 const redrawLinks = (linksContainer, linksData) => {
   removeLinks(linksContainer);
@@ -235,20 +235,21 @@ const showNodeLinks = node => {
 
 const selectCurrentNode = () => {
   selectedNode = highlightedNode;
+  clickedLinksData = hoverLinksData;
 
   removeHoverLinks();
 
   currentLayerOffsets[selectedNode.shownLayerIndex] = 0;
   offsetLayer(selectedNode.shownLayerIndex, true);
 
-  sankey.reorderNodes(highlightedNode.id, hoverLinksData, currentLayerOffsets);
+  sankey.reorderNodes(highlightedNode.id, clickedLinksData, currentLayerOffsets);
 
   nodes
     .transition()
     .duration(500)
     .attr('transform', d => `translate(0,${d.y})`);
 
-  redrawLinks(clickedLinksContainer, hoverLinksData); // TODO transition
+  redrawLinks(clickedLinksContainer, clickedLinksData); // TODO transition
 
 };
 
@@ -256,9 +257,12 @@ const offset = (l, li) => {
   const e = d3.event;
   currentLayerOffsets[li] -= e.deltaY/10;
   offsetLayer(li);
-  sankey.setLayersOffsets(hoverLinksData, currentLayerOffsets);
 
+  sankey.setLayersOffsets(hoverLinksData, currentLayerOffsets);
   redrawLinks(hoverLinksContainer, hoverLinksData);
+
+  sankey.setLayersOffsets(clickedLinksData, currentLayerOffsets);
+  redrawLinks(clickedLinksContainer, clickedLinksData);
 };
 
 const offsetLayer = (li, animate) => {
