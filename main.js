@@ -28,7 +28,7 @@ window.layerNames = [
   'Country of import'
 ];
 
-const sankeyURL = (window.location.href.match('localhost')) ? 'sample.json' : Object.keys(params).reduce((prev, current) => {
+const sankeyURL = (!window.location.href.match('localhost')) ? 'sample.json' : Object.keys(params).reduce((prev, current) => {
   const value = params[current];
   if (Array.isArray(value)) {
     const arrUrl = value.reduce((arrPrev, arrCurrent) => {
@@ -131,7 +131,7 @@ const build = () => {
       // .text(d => layerNames[d.key])
       .text(d => `${d.key} (${window.layerNames.indexOf(d.key)})`)
       .attr('y', 40);
-      
+
 
   // links
   clickedLinksContainer = sankeyContainer
