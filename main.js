@@ -50,9 +50,10 @@ let highlightedNode;
 let selectedNode;
 let currentLayerOffsets;
 
+const viewportHeight = document.documentElement.clientHeight - 10;
 const compactMode = location.search.match('compactMode');
 const layerWidth = 130;
-const layerSpacing = 180;
+const layerSpacing = 160;
 
 const build = () => {
   sankey = d3.sankey()
@@ -70,7 +71,7 @@ const build = () => {
 
   const svg = d3.select('svg')
     .style('width', '2500px')
-    .style('height', `${document.documentElement.clientHeight}px`);
+    .style('height', `${viewportHeight}px`);
 
   const sankeyContainer = svg.append('g')
     .attr('class','sankey');
@@ -90,11 +91,6 @@ const build = () => {
     .on('mouseout', removeHoverLinks);
 
   currentLayerOffsets = sankey.layers().map(() => 0);
-
-  layers.append('text')
-      // .text(d => layerNames[d.key])
-      .text(d => `${d.key} (${window.layerNames.indexOf(d.key)})`)
-      .attr('y', 40);
 
   // nodes
   nodes = layers.append('g')
@@ -130,6 +126,12 @@ const build = () => {
     })
     .text(d => d);
 
+
+  layers.append('text')
+      // .text(d => layerNames[d.key])
+      .text(d => `${d.key} (${window.layerNames.indexOf(d.key)})`)
+      .attr('y', 40);
+      
 
   // links
   clickedLinksContainer = sankeyContainer
@@ -247,6 +249,7 @@ const selectCurrentNode = () => {
 
   sankey.reorderNodes(highlightedNode.id, clickedLinksData, currentLayerOffsets);
 
+
   nodes
     .transition()
     .duration(500)
@@ -258,7 +261,10 @@ const selectCurrentNode = () => {
 
 const offset = (l, li) => {
   const e = d3.event;
-  currentLayerOffsets[li] -= e.deltaY/10;
+  const currentLayerOffset = currentLayerOffsets[li];
+  const delta =  - e.deltaY/10;
+  const layerOverflow = -(l.dy - viewportHeight);
+  currentLayerOffsets[li] = Math.min(0, Math.max(layerOverflow, currentLayerOffset + delta));
   offsetLayer(li);
 
   sankey.setLayersOffsets(hoverLinksData, currentLayerOffsets);

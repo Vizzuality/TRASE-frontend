@@ -291,6 +291,7 @@ d3.sankey = function() {
         node.dy = Math.max(node.value * scaleY, minNodeHeight);
         totalHeight += node.dy;
       });
+      layer.dy = totalHeight;
     });
   };
 
