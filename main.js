@@ -86,7 +86,8 @@ const build = () => {
     .append('g')
     .attr('class','sankey-layer')
     .attr('transform', d => `translate(${d.x},0)`)
-    .on('mousewheel', offset);
+    .on('mousewheel', offset)
+    .on('mouseout', removeHoverLinks);
 
   currentLayerOffsets = sankey.layers().map(() => 0);
 
@@ -200,8 +201,7 @@ let hoverLinksData;
 // let clickedLinksData;
 
 const redrawLinks = (linksContainer, linksData) => {
-  linksContainer
-    .selectAll('path').remove();
+  removeLinks(linksContainer);
 
   linksContainer
     .selectAll('path')
@@ -213,8 +213,21 @@ const redrawLinks = (linksContainer, linksData) => {
     .attr('d', sankey.link());
 };
 
+const removeLinks = linksContainer => {
+  linksContainer
+    .selectAll('path').remove();
+};
+
+
+const removeHoverLinks = () => {
+  removeLinks(hoverLinksContainer);
+};
+
 const showNodeLinks = node => {
-  if (selectedNode && node.id === selectedNode.id) return;
+  if (selectedNode && node.id === selectedNode.id) {
+    removeHoverLinks();
+    return;
+  }
   highlightedNode = node;
   hoverLinksData = sankey.getLinksForNodeId(highlightedNode.id, currentLayerOffsets);
   redrawLinks(hoverLinksContainer, hoverLinksData);
@@ -222,6 +235,8 @@ const showNodeLinks = node => {
 
 const selectCurrentNode = () => {
   selectedNode = highlightedNode;
+
+  removeHoverLinks();
 
   currentLayerOffsets[selectedNode.shownLayerIndex] = 0;
   offsetLayer(selectedNode.shownLayerIndex, true);
