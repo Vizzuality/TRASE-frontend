@@ -42,12 +42,18 @@ const sankeyURL = (!window.location.href.match('localhost')) ? 'sample.json' : O
 
 let data = {};
 let sankey;
-let linksContainer;
+let layers;
+let clickedLinksContainer;
+let hoverLinksContainer;
 let nodes;
+let highlightedNode;
+let selectedNode;
+let currentLayerOffsets;
 
+const viewportHeight = document.documentElement.clientHeight - 10;
 const compactMode = location.search.match('compactMode');
 const layerWidth = 130;
-const layerSpacing = 180;
+const layerSpacing = 160;
 
 const build = () => {
   sankey = d3.sankey()
@@ -63,12 +69,15 @@ const build = () => {
 
   console.log(sankey.layers());
 
-  const svg = d3.select('svg');
+  const svg = d3.select('svg')
+    .style('width', '2500px')
+    .style('height', `${viewportHeight}px`);
+
   const sankeyContainer = svg.append('g')
     .attr('class','sankey');
 
   // layers
-  const layers = sankeyContainer
+  layers = sankeyContainer
     .append('g')
     .attr('class','sankey-layers')
     .selectAll('g')
@@ -77,12 +86,11 @@ const build = () => {
     // .filter(d => d.key !== 'undefined')
     .append('g')
     .attr('class','sankey-layer')
-    .attr('transform', d => `translate(${d.x},0)`);
+    .attr('transform', d => `translate(${d.x},0)`)
+    .on('mousewheel', offset)
+    .on('mouseout', removeHoverLinks);
 
-  layers.append('text')
-      // .text(d => layerNames[d.key])
-      .text(d => `${d.key} (${window.layerNames.indexOf(d.key)})`)
-      .attr('y', 40);
+  currentLayerOffsets = sankey.layers().map(() => 0);
 
   // nodes
   nodes = layers.append('g')
@@ -93,11 +101,16 @@ const build = () => {
     .append('g')
     .attr('transform', d => `translate(0,${d.y})`)
     .on('mouseover', d => {
-      showLinks(parseInt(d.id));
+      showNodeLinks(d);
     })
-    .on('click', d => {
-      selectNode(parseInt(d.id));
+    .on('click', () => {
+      selectCurrentNode();
     });
+
+  nodes.append('rect')
+    .attr('class', 'sankey-node-rect')
+    .attr('width', sankey.layerWidth())
+    .attr('height', d => d.dy);
 
   nodes.append('g')
     .attr('class', 'sankey-node-labels')
@@ -114,16 +127,20 @@ const build = () => {
     .text(d => d);
 
 
+  layers.append('text')
+      // .text(d => layerNames[d.key])
+      .text(d => `${d.key} (${window.layerNames.indexOf(d.key)})`)
+      .attr('y', 40);
 
-  nodes.append('rect')
-    .attr('class', 'sankey-node-rect')
-    .attr('width', sankey.layerWidth())
-    .attr('height', d => d.dy);
 
   // links
-  linksContainer = sankeyContainer
+  clickedLinksContainer = sankeyContainer
     .append('g')
-    .attr('class','sankey-links');
+    .attr('class','sankey-clicked-links');
+
+  hoverLinksContainer = sankeyContainer
+    .append('g')
+    .attr('class','sankey-hover-links');
 
 
 
@@ -180,42 +197,93 @@ const build = () => {
     .attr('class', 'maps-municip');
 };
 
-const showLinks = nodeId => {
-  console.log(nodeId);
 
-  sankey.highlightLinks(nodeId);
 
-  linksContainer
-    .selectAll('path').remove();
+let hoverLinksData;
+let clickedLinksData;
+
+const redrawLinks = (linksContainer, linksData) => {
+  removeLinks(linksContainer);
 
   linksContainer
     .selectAll('path')
-    .data(sankey.mergedLinks())
+    .data(linksData)
     .enter()
     .append('path')
     .attr('class','sankey-link')
     .attr('stroke-width', d => Math.max(d.dy, .5))
     .attr('d', sankey.link());
-
-
 };
 
-const selectNode = nodeId => {
-  sankey.reorderNodes(nodeId);
+const removeLinks = linksContainer => {
+  linksContainer
+    .selectAll('path').remove();
+};
+
+
+const removeHoverLinks = () => {
+  removeLinks(hoverLinksContainer);
+};
+
+const showNodeLinks = node => {
+  if (selectedNode && node.id === selectedNode.id) {
+    removeHoverLinks();
+    return;
+  }
+  highlightedNode = node;
+  hoverLinksData = sankey.getLinksForNodeId(highlightedNode.id, currentLayerOffsets);
+  redrawLinks(hoverLinksContainer, hoverLinksData);
+};
+
+const selectCurrentNode = () => {
+  selectedNode = highlightedNode;
+  clickedLinksData = hoverLinksData;
+
+  removeHoverLinks();
+
+  // do we reset all layers, or only the one that owns the clicked node?
+  // currentLayerOffsets[selectedNode.shownLayerIndex] = 0;
+  currentLayerOffsets = currentLayerOffsets.map(() => 0);
+  // offsetLayer(selectedNode.shownLayerIndex, true);
+  offsetLayer(null, true);
+
+  sankey.reorderNodes(highlightedNode.id, clickedLinksData, currentLayerOffsets);
+
 
   nodes
     .transition()
     .duration(500)
     .attr('transform', d => `translate(0,${d.y})`);
 
-  showLinks(nodeId);
-  d3.selectAll('.sankey-link')
-    .classed('sankey-link--selected', d => {
-      return d.originalPath.indexOf(nodeId) > -1;
-    });
+  redrawLinks(clickedLinksContainer, clickedLinksData); // TODO transition
 
-  // disable roll over, normally we should be able to display both set of links at the same time
-  nodes.on('mouseover', null);
+};
+
+const offset = (l, li) => {
+  const e = d3.event;
+  const currentLayerOffset = currentLayerOffsets[li];
+  const delta =  - e.deltaY/10;
+  const layerOverflow = -(l.dy - viewportHeight);
+  currentLayerOffsets[li] = Math.min(0, Math.max(layerOverflow, currentLayerOffset + delta));
+  offsetLayer(li);
+
+  sankey.setLayersOffsets(hoverLinksData, currentLayerOffsets);
+  redrawLinks(hoverLinksContainer, hoverLinksData);
+
+  if (clickedLinksData) {
+    sankey.setLayersOffsets(clickedLinksData, currentLayerOffsets);
+    redrawLinks(clickedLinksContainer, clickedLinksData);
+  }
+};
+
+const offsetLayer = (layerIndex, animate) => {
+  let layer = (layerIndex !== null) ? layers.filter((d,i) => i === layerIndex) : layers;
+  layer = layer.select('.sankey-nodes');
+
+  if (animate) {
+    layer = layer.transition().duration(800);
+  }
+  layer.attr('transform',  `translate(0, ${currentLayerOffsets[layerIndex]})`);
 };
 
 const CartoURL = 'https://p2cs-sei.carto.com/api/v2/sql?format=geojson';

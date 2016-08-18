@@ -6,7 +6,7 @@ d3.sankey = function() {
   const sankey = {};
   let nodes = [];
   let links = [];
-  let mergedLinks = [];
+  // let mergedLinks = [];
   let layers = [];
   let selectedNodeIds;
 
@@ -27,14 +27,14 @@ d3.sankey = function() {
   };
 
   sankey.links = function(_) {
-    if (!arguments.length) return links;
+    if (!arguments.length) return;
     links = _;
     return sankey;
   };
 
-  sankey.mergedLinks = function() {
-    return mergedLinks;
-  };
+  // sankey.mergedLinks = function() {
+  //   return mergedLinks;
+  // };
 
   sankey.layers = function() {
     return layers;
@@ -153,6 +153,24 @@ d3.sankey = function() {
     links = linkTuples;
   };
 
+  const computeLayers = () => {
+    layers = d3.nest()
+    .key(el => {
+      return el.attributes.nodeType;
+    })
+    .sortKeys((a, b) => {
+      return (window.layerNames.indexOf(a) < window.layerNames.indexOf(b)) ? -1 : 1;
+    })
+    .entries(nodes);
+
+    layers.forEach((layer, i) => {
+      layer.values.forEach(node => {
+        node.shownLayerIndex = i;
+        node.id = parseInt(node.id);
+      });
+    });
+  };
+
   const computeNodeLinks = () => {
     nodes.forEach(function(node) {
       node.sourceLinks = [];
@@ -160,50 +178,14 @@ d3.sankey = function() {
     });
 
     links.forEach(link => {
-      // const source = nodes[link.sourceNodeIndex];
-      // const target = nodes[link.targetNodeIndex];
       const source = link.sourceNode;
       const target = link.targetNode;
       source.sourceLinks.push(link);
       target.targetLinks.push(link);
+      link.sourceNodeLayerIndex = source.shownLayerIndex;
+      link.targetNodeLayerIndex = target.shownLayerIndex;
       link.sourceNode = null;
       link.targetNode = null;
-    });
-  };
-
-  const mergeDuplicateLinks = () => {
-    const dict = {};
-    const mergedLinks = [];
-    links.forEach(link => {
-      const key = link.sourceNodeId + '' + link.targetNodeId;
-      if (!dict[key]) {
-        const mergedLink = _.cloneDeep(link);
-        mergedLinks.push(mergedLink);
-        dict[key] = mergedLink;
-      } else {
-        dict[key].value += link.value;
-      }
-    });
-    // console.log(mergedLinks.map(l => l.value))]
-    console.log(links.length);
-    console.log(mergedLinks.length);
-    return mergedLinks;
-  };
-
-  const computeLayers = () => {
-    layers = d3.nest()
-      .key(el => {
-        return el.attributes.nodeType;
-      })
-      .sortKeys((a, b) => {
-        return (window.layerNames.indexOf(a) < window.layerNames.indexOf(b)) ? -1 : 1;
-      })
-      .entries(nodes);
-
-    layers.forEach((layer, i) => {
-      layer.values.forEach(node => {
-        node.layer = layer; // TODO potential smell here (circular reference?) - just use index?
-      });
     });
   };
 
@@ -228,7 +210,6 @@ d3.sankey = function() {
 
         // ellipsis
         if (node.nodeNameLines.length > maxLabelLines) {
-          console.log('??')
           node.nodeNameLinesShown[maxLabelLines - 1] = node.nodeNameLinesShown[maxLabelLines - 1] + '…';
         }
       });
@@ -286,34 +267,60 @@ d3.sankey = function() {
     }
   };
 
-  const computeCoords = () => {
+  const computeHorizontalCoords = () => {
     layers.forEach((layer, i) => {
       layer.x = i * (layerWidth + layerSpacing);
-      let totalHeight = 0;
       layer.values.forEach(node => {
-        node.y = totalHeight;
-        // node.y = Math.random()*1000;
-        node.dy = Math.max(node.value * scaleY, minNodeHeight);
-
-        let totalSourceHeight = 0;
         node.sourceLinks.forEach(link => {
           link.x = -layerSpacing+layer.x;
           link.dx = layerSpacing;
-          link.sy = totalHeight + totalSourceHeight;
-          link.dy = link.value * scaleY;
-          totalSourceHeight += link.dy;
         });
-        let totalTargetHeight = 0;
         node.targetLinks.forEach(link => {
           link.x = -layerSpacing + layer.x;
           link.dx = layerSpacing;
-          link.ty = totalHeight + totalTargetHeight;
-          // link.dy = link.value * scaleY; //probably not necessary
-          totalTargetHeight += link.dy;
         });
+      });
+    });
+  };
 
+  const computeNodesVerticalCoords = () => {
+    layers.forEach(layer => {
+      let totalHeight = 0;
+      layer.values.forEach(node => {
+        node.y = totalHeight;
+        node.dy = Math.max(node.value * scaleY, minNodeHeight);
         totalHeight += node.dy;
       });
+      layer.dy = totalHeight;
+    });
+  };
+
+  const computeMergedLinksVerticalCoords = (links, layerOffsets) => {
+    const stackedHeightsByNodeId = {source:{},target:{}};
+
+    links.forEach(link => {
+      link.dy = link.value * scaleY;
+
+
+      const sId = link.sourceNodeId;
+      if (!stackedHeightsByNodeId.source[sId]) stackedHeightsByNodeId.source[sId] = getNode(sId).y;
+      link.sy = stackedHeightsByNodeId.source[sId];
+      stackedHeightsByNodeId.source[sId] = link.sy + link.dy;
+
+      const sLayerIndex = link.sourceNodeLayerIndex;
+      if (layerOffsets && layerOffsets[sLayerIndex]) {
+        link.sy += layerOffsets[sLayerIndex];
+      }
+
+      const tId = link.targetNodeId;
+      if (!stackedHeightsByNodeId.target[tId]) stackedHeightsByNodeId.target[tId] = getNode(tId).y;
+      link.ty = stackedHeightsByNodeId.target[tId];
+      stackedHeightsByNodeId.target[tId] = link.ty + link.dy;
+
+      const tLayerIndex = link.targetNodeLayerIndex;
+      if (layerOffsets && layerOffsets[tLayerIndex]) {
+        link.ty += layerOffsets[tLayerIndex];
+      }
     });
   };
 
@@ -332,28 +339,28 @@ d3.sankey = function() {
     sortLinksByNode(sortDesc);
 
     // add y pos and height values to nodes and links
-    computeCoords();
+    computeHorizontalCoords();
+    computeNodesVerticalCoords();
     return sankey;
   };
 
-  sankey.reorderNodes = nodeId => {
+  sankey.reorderNodes = (selectedNodeId, linksData, layersOffsets) => {
     selectedNodeIds = _
       .chain(links)
-      .filter(link => link.originalPath.indexOf(nodeId) > -1)
+      .filter(link => link.originalPath.indexOf(selectedNodeId) > -1)
       .map(link => [link.sourceNodeId, link.targetNodeId])
       .flatten()
       .uniq()
       .value();
 
-    sortNodes(sortDescOtherLastSelectedFirst);
-    computeCoords();
+    sortNodes(sortDescOtherLastSelectedFirst); // TODO uses selectedNodeIds, should be sent as an arg not used as a global var
+    computeNodesVerticalCoords();
+    computeMergedLinksVerticalCoords(linksData, layersOffsets);
   };
 
-  sankey.highlightLinks = nodeId => {
-    // merge links that have same source and target node\
-    // + collect node ids for later placement
-    mergedLinks = [];
-    let nodeIds = [];
+  sankey.getLinksForNodeId = (nodeId, layersOffsets) => {
+    // merge links that have same source and target node
+    const mergedLinks = [];
     let dict = {};
 
     for (var i = 0; i < links.length; i++) {
@@ -361,8 +368,6 @@ d3.sankey = function() {
       if (link.originalPath.indexOf(nodeId) === -1) continue;
 
       const key = link.sourceNodeId + '' + link.targetNodeId;
-      // nodeIds.push(link.sourceNodeId);
-      // nodeIds.push(link.targetNodeId);
       if (!dict[key]) {
         const mergedLink = _.cloneDeep(link);
         mergedLinks.push(mergedLink);
@@ -372,24 +377,14 @@ d3.sankey = function() {
       }
     }
 
-    // nodeIds = _.uniq(nodeIds);
-    const stackedHeightsByNodeId = {source:{},target:{}};
+    computeMergedLinksVerticalCoords(mergedLinks, layersOffsets);
 
-    mergedLinks.forEach(link => {
-      link.dy = link.value * scaleY;
+    return mergedLinks;
+  };
 
-      const sId = link.sourceNodeId;
-      if (!stackedHeightsByNodeId.source[sId]) stackedHeightsByNodeId.source[sId] = getNode(sId).y;
-      link.sy = stackedHeightsByNodeId.source[sId];
-      stackedHeightsByNodeId.source[sId] = link.sy + link.dy;
-
-      const tId = link.targetNodeId;
-      if (!stackedHeightsByNodeId.target[tId]) stackedHeightsByNodeId.target[tId] = getNode(tId).y;
-      link.ty = stackedHeightsByNodeId.target[tId];
-      stackedHeightsByNodeId.target[tId] = link.ty + link.dy;
-    });
-
-
+  sankey.setLayersOffsets = (linksData, layersOffsets) => {
+    computeMergedLinksVerticalCoords(linksData, layersOffsets);
+    return linksData;
   };
 
   return sankey;
