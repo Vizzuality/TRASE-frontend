@@ -218,6 +218,7 @@ d3.sankey = function() {
         });
         node.nodeNameLines.push(currentLine);
         node.nodeNameLinesShown = node.nodeNameLines.slice(0, maxLabelLines);
+        node.nodeNameLinesShown[0] = node.id + ' ' + node.nodeNameLinesShown[0];
 
         // ellipsis
         if (node.nodeNameLines.length > maxLabelLines) {

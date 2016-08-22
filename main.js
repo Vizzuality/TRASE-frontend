@@ -5,13 +5,13 @@ const params = {
   country: 'brazil',
   raw: 'soy',
   year: '2012',
-  nNodes: '50',
-  excludeLayers: [0,5,6,7,9],//378
-  excludeNodes: [2575,2576,2577,2578],//378
+  nNodes: '10000000',
+  excludeLayers: [0,2,4,6,7,8,9],
+  // excludeNodes: [2575,2576,2577,2578],
   flowQuant: 'Volume',
   flowQual: 'Commodity',
-  includeNodeQuals: ['Mun Id IBGE'],
-  clickedNodes: [39]
+  // includeNodeQuals: ['Mun Id IBGE'],
+  // clickedNodes: [39]
 };
 
 window.layerNames = [
@@ -41,8 +41,11 @@ const sankeyURL = (!window.location.href.match('localhost')) ? 'sample.json' : O
 
 
 let data = {};
+let svg;
 let sankey;
+let sankeyContainer;
 let layers;
+let zoom;
 let clickedLinksContainer;
 let hoverLinksContainer;
 let statesLinksContainer;
@@ -52,15 +55,16 @@ let selectedNode;
 let currentLayerOffsets;
 let geoPath;
 
-const viewportHeight = document.documentElement.clientHeight - 10;
 const compactMode = location.search.match('compactMode');
+const slippyMode = location.search.match('slippyMode');
+const viewportHeight = document.documentElement.clientHeight - 10;
 const layerWidth = 130;
 const layerSpacing = 160;
 
 const build = () => {
   sankey = d3.sankey()
     .minNodeHeight(compactMode ? 15 : 30)
-    .scaleY(compactMode ? .00007 : .00004)
+    .scaleY(compactMode ? .00005 : .00004)
     .layerWidth(layerWidth)
     .layerSpacing(layerSpacing)
     .maxLabelCharsWidth(layerWidth)
@@ -71,12 +75,23 @@ const build = () => {
 
   console.log(sankey.layers());
 
-  const svg = d3.select('svg')
+  svg = d3.select('svg')
     .style('width', '2500px')
     .style('height', `${viewportHeight}px`);
 
-  const sankeyContainer = svg.append('g')
-    .attr('class','sankey');
+
+
+  sankeyContainer = svg.append('g')
+    .attr('class','sankey')
+    .append('g')
+    .attr('class', 'sankey-container');
+
+
+
+  sankeyContainer.append('rect')
+    .attr('class', 'sankey-bg')
+    .attr('width', '3000px')
+    .attr('height', '3000px');
 
   // layers
   layers = sankeyContainer
@@ -89,7 +104,7 @@ const build = () => {
     .append('g')
     .attr('class','sankey-layer')
     .attr('transform', d => `translate(${d.x},0)`)
-    .on('mousewheel', offset)
+    .on('mousewheel', (slippyMode) ? ()=>{} : offset)
     .on('mouseout', removeHoverLinks);
 
   currentLayerOffsets = sankey.layers().map(() => 0);
@@ -101,6 +116,7 @@ const build = () => {
     .data(d => d.values)
     .enter()
     .append('g')
+    .attr('class', 'sankey-node')
     .attr('transform', d => `translate(0,${d.y})`)
     .on('mouseover', d => {
       highlightNodeLinks(d);
@@ -143,6 +159,26 @@ const build = () => {
   hoverLinksContainer = sankeyContainer
     .append('g')
     .attr('class','sankey-hover-links');
+
+
+
+  if (slippyMode) {
+    zoom = d3.zoom()
+      .scaleExtent([.6, 1])
+      .on('zoom', () => {
+        const t = d3.event.transform;
+        // const transform = `translate(${t.x}px,${t.y}px)`;
+        // const transform = `translate(-168px,-524px))`;
+        // const transform = `translate(${Math.min(0,t.x)},${Math.min(0,t.y)}) scale(${t.k},${t.k})`;
+        const transform = `translate(0,${Math.min(0,t.y)}) scale(${t.k},${t.k})`;
+
+        // console.log(transform)
+        sankeyContainer.attr('transform', transform);
+        // console.log(d3.event.transform);
+        // console.log(d3.event.transform.k);
+      });
+    svg.call(zoom);
+  }
 
 
 
@@ -294,20 +330,21 @@ const selectCurrentNode = () => {
   removeHoverLinks();
 
   // do we reset all layers, or only the one that owns the clicked node?
-  // currentLayerOffsets[selectedNode.shownLayerIndex] = 0;
-  currentLayerOffsets = currentLayerOffsets.map(() => 0);
-  // offsetLayer(selectedNode.shownLayerIndex, true);
-  offsetLayer(null, true);
+  if (slippyMode) {
+    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
+  } else {
+    currentLayerOffsets = currentLayerOffsets.map(() => 0);
+    offsetLayer(null, true);
+  }
 
   sankey.reorderNodes(highlightedNode.id, clickedLinksData, currentLayerOffsets);
-
 
   nodes
     .transition()
     .duration(500)
     .attr('transform', d => `translate(0,${d.y})`);
 
-  redrawLinks(clickedLinksContainer, clickedLinksData); // TODO transition
+  redrawLinks(clickedLinksContainer, clickedLinksData);
 
 };
 

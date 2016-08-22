@@ -13,8 +13,12 @@ svg {
   transform: translate(350px,0);
 }
 
-.sankey-nodes {
+.sankey-bg {
+  fill: white;
+}
 
+.sankey-node {
+  cursor: pointer;
 }
 
 .sankey-node-rect {
