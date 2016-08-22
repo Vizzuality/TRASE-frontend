@@ -78,8 +78,6 @@ d3.sankey = function() {
   };
 
   sankey.link = function() {
-    var curvature = 1 ;
-
     function link(d) {
       // const r = d.sy/1000;
       // // console.log(r);
@@ -110,11 +108,24 @@ d3.sankey = function() {
            + ' ' + x1 + ',' + y1;
     }
 
-    link.curvature = function(_) {
-      if (!arguments.length) return curvature;
-      curvature = +_;
-      return link;
-    };
+    return link;
+  };
+
+  sankey.mapLink = function() {
+
+    function link(d) {
+      var x0 = d.x,
+        x1 = d.x + d.dx,
+        xi = d3.interpolateNumber(x0, x1),
+        x2 = xi(.75),
+        x3 = xi(.25),
+        y0 = d.sy,
+        y1 = d.ty;
+      return 'M' + x0 + ',' + y0
+           + 'C' + x2 + ',' + y0
+           + ' ' + x3 + ',' + y1
+           + ' ' + x1 + ',' + y1;
+    }
 
     return link;
   };

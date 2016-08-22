@@ -42,6 +42,10 @@ svg {
   opacity: 0.2;
   stroke: red;
 }
+.sankey-state-links .sankey-link {
+  opacity: 0.2;
+  stroke: black;
+}
 
 .maps-country-mask-rect {
   width: 350px;

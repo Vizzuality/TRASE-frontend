@@ -6,7 +6,7 @@ const params = {
   raw: 'soy',
   year: '2012',
   nNodes: '50',
-  excludeLayers: [1,5,6,7,9],//378
+  excludeLayers: [0,5,6,7,9],//378
   excludeNodes: [2575,2576,2577,2578],//378
   flowQuant: 'Volume',
   flowQual: 'Commodity',
@@ -45,10 +45,12 @@ let sankey;
 let layers;
 let clickedLinksContainer;
 let hoverLinksContainer;
+let statesLinksContainer;
 let nodes;
 let highlightedNode;
 let selectedNode;
 let currentLayerOffsets;
+let geoPath;
 
 const viewportHeight = document.documentElement.clientHeight - 10;
 const compactMode = location.search.match('compactMode');
@@ -101,7 +103,7 @@ const build = () => {
     .append('g')
     .attr('transform', d => `translate(0,${d.y})`)
     .on('mouseover', d => {
-      showNodeLinks(d);
+      highlightNodeLinks(d);
     })
     .on('click', () => {
       selectCurrentNode();
@@ -155,10 +157,10 @@ const build = () => {
 
 
   const proj = d3.geoEquirectangular()
-    .scale(400)
-    .translate([550, 200]);
+    .scale(600)
+    .translate([680, 200]);
 
-  const geoPath = d3.geoPath()
+  geoPath = d3.geoPath()
     .projection(proj);
 
   mapsContainer.append('g')
@@ -175,26 +177,43 @@ const build = () => {
     .attr('d', geoPath)
     .attr('class', 'maps-country');
 
-  mapsContainer.append('g')
+  var states = mapsContainer.append('g')
     .attr('class', 'maps-states')
-    .selectAll('path')
+    .selectAll('g')
     .data(data.states.features)
     .enter()
-    .append('path')
+    .append('g');
+
+  states.append('path')
     .attr('d', geoPath)
     .attr('class', 'maps-state')
     .on('click', d => {
       console.log(d.properties.node_id);
     });
 
-  mapsContainer.append('g')
-    .attr('class', 'maps-municips')
-    .selectAll('path')
-    .data(data.municips.features)
-    .enter()
-    .append('path')
-    .attr('d', geoPath)
-    .attr('class', 'maps-municip');
+  states.append('circle')
+    .attr('class', 'maps-state-circle')
+    .attr('cx', d => {
+      return geoPath.centroid(d)[0];
+    })
+    .attr('cy', d => {
+      return geoPath.centroid(d)[1];
+    })
+    .attr('r', 5);
+
+  statesLinksContainer = mapsContainer
+      .append('g')
+      .attr('class','sankey-state-links');
+
+
+  // mapsContainer.append('g')
+  //   .attr('class', 'maps-municips')
+  //   .selectAll('path')
+  //   .data(data.municips.features)
+  //   .enter()
+  //   .append('path')
+  //   .attr('d', geoPath)
+  //   .attr('class', 'maps-municip');
 };
 
 
@@ -213,6 +232,39 @@ const redrawLinks = (linksContainer, linksData) => {
     .attr('class','sankey-link')
     .attr('stroke-width', d => Math.max(d.dy, .5))
     .attr('d', sankey.link());
+
+
+  statesLinksContainer
+    .selectAll('path').remove();
+  var stateNodes = sankey.layers()[0].values
+    .filter(node => node.id === highlightedNode.id);
+  statesLinksContainer
+    .selectAll('path')
+    .data(stateNodes)
+    // .filter(node => { debugger; node.id === highlightedNode.id})
+    .enter()
+    .append('path')
+    // .append('circle')
+    .attr('class','sankey-link')
+    .attr('stroke-width', d => d.dy/10)
+    .each(node => {
+      const state = data.states.features.find(feature => {
+        return parseInt(feature.properties.node_id)  === node.id;
+      });
+
+      if (state) {
+        node.x = geoPath.centroid(state)[0];
+        node.sy = geoPath.centroid(state)[1];
+        node.dx = 350 - node.x;
+        node.ty = node.y + 15 + currentLayerOffsets[0];
+      }
+    })
+    .attr('id', node => node.attributes.nodeName)
+    .attr('cx', node => node.x)
+    .attr('cy', node => node.sy)
+    .attr('r', 10)
+    .attr('d', sankey.mapLink());
+
 };
 
 const removeLinks = linksContainer => {
@@ -225,7 +277,7 @@ const removeHoverLinks = () => {
   removeLinks(hoverLinksContainer);
 };
 
-const showNodeLinks = node => {
+const highlightNodeLinks = node => {
   if (selectedNode && node.id === selectedNode.id) {
     removeHoverLinks();
     return;
@@ -262,7 +314,7 @@ const selectCurrentNode = () => {
 const offset = (l, li) => {
   const e = d3.event;
   const currentLayerOffset = currentLayerOffsets[li];
-  const delta =  - e.deltaY/10;
+  const delta =  - e.deltaY/5;
   const layerOverflow = -(l.dy - viewportHeight);
   currentLayerOffsets[li] = Math.min(0, Math.max(layerOverflow, currentLayerOffset + delta));
   offsetLayer(li);
