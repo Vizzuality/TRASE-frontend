@@ -1,19 +1,8 @@
-body {
-  color: green;
-  font-family: sans-serif;
-  overflow-y: hidden;
-}
-
-svg {
-  width: 2000px;
-  height: 1200px;
-}
-
-.sankey {
-  transform: translate(350px,0);
-}
+$someVar: orange;
 
 .sankey-bg {
+  width: 100%;
+  height: 100%;
   fill: white;
 }
 
@@ -38,30 +27,15 @@ svg {
 }
 
 .sankey-clicked-links .sankey-link {
-  stroke: blue;
+  stroke: $someVar;
   opacity: .5;
 
 }
-.sankey-hover-links .sankey-link {
+.sankey-highlighted-links .sankey-link {
   opacity: 0.2;
   stroke: red;
 }
 .sankey-state-links .sankey-link {
   opacity: 0.2;
   stroke: black;
-}
-
-.maps-country-mask-rect {
-  width: 350px;
-  height: 1200px;
-}
-
-.maps-country {
-  fill: #fff;
-  stroke: #ccc;
-}
-
-.maps-state {
-  stroke: red;
-  fill: orange;
 }

@@ -1,0 +1,12 @@
+.dropdown {
+  .dropdown-list {
+    display: none;
+    position: absolute;
+    z-index: 555;
+  }
+
+  .dropdown-item:not([data-value]) {
+    opacity: .5;
+    pointer-events: none;
+  }
+}

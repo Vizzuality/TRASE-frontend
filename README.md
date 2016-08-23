@@ -1,5 +1,11 @@
 # TRASE-frontend
 
+Original prototype:
+https://ttp.sei-international.org/
+
+This project mainly uses D3 and Leaflet, plus Redux for managing app state. More on the stack:
+https://github.com/Vizzuality/TRASE-frontend/issues/9
+
 ## Run locally
 
 ### backend
@@ -10,7 +16,7 @@ python API/server.py
 ```
 
 ### frontend
-- Checkout gh-pages branch
+- Checkout develop branch
 - install dependencies:
 ```
 npm i
@@ -19,8 +25,9 @@ npm i
 ```
 npm run dev
 ```
-- [http://localhost:9090/](http://localhost:9090/prev)
+- [http://localhost:8081/](http://localhost:8081/)
 
 
-## gh pages preview
-[looky look](https://vizzuality.github.io/TRASE-frontend)
+## LICENSE
+
+[MIT](LICENSE)

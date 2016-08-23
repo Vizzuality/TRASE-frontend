@@ -3,3 +3,6 @@ npm-debug.log
 
 # ENV variables
 .env
+
+public/js
+dist
