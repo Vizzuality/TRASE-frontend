@@ -5,50 +5,57 @@
 </head>
 <body>
 
-  <div id="nav" class="section">
-    <label class="dropdown" data-dropdown="country">
-      <span class="dropdown-label">Country</span>
-      <span class=" js-dropdown-title dropdown-title">
-        Country
-      </span>
-      <ul class="js-dropdown-list dropdown-list">
-        <li class="js-dropdown-item dropdown-item">Brazil</li>
-      </ul>
-    </label>
-    <label class="dropdown" data-dropdown="indicator">
-      <span class="dropdown-label">Resize by</span>
-      <span class=" js-dropdown-title dropdown-title">
-        Resize by
-      </span>
-      <ul class="js-dropdown-list dropdown-list">
-        <li class="js-dropdown-item dropdown-item" data-value="trade">Trade volume</li>
-        <li class="js-dropdown-item dropdown-item" data-value="deforestation">Deforestation risk</li>
-        <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Water footprint</li>
-        <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Land-based emissions</li>
-        <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Financial flows</li>
-      </ul>
-    </label>
-  </div>
+  <div class="l-flows">
 
-  <div id="map" class="section">
-    <div class="map-legend">
-      this the map legend
+    <div id="nav" class="c-nav is-absolute">
+      <div class="filters">
+        <div class="c-dropdown" data-dropdown="country">
+          <span class="dropdown-label">Country</span>
+          <span class="js-dropdown-title dropdown-title">
+            Country
+          </span>
+          <ul class="js-dropdown-list dropdown-list is-hidden">
+            <li class="js-dropdown-item dropdown-item" data-value="brazil">Brazil</li>
+          </ul>
+        </div>
+      </div>
+      <div class="filters">
+        <div class="c-dropdown" data-dropdown="indicator">
+          <span class="dropdown-label">Resize by</span>
+          <span class=" js-dropdown-title dropdown-title">
+            Resize by
+          </span>
+          <ul class="js-dropdown-list dropdown-list">
+            <li class="js-dropdown-item dropdown-item" data-value="trade">Trade volume</li>
+            <li class="js-dropdown-item dropdown-item" data-value="deforestation">Deforestation risk</li>
+            <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Water footprint</li>
+            <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Land-based emissions</li>
+            <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Financial flows</li>
+          </ul>
+        </div>
+      </div>
     </div>
+
+    <div id="map" class="c-map is-absolute">
+      <div class="c-map-legend">
+        this the map legend
+      </div>
+    </div>
+
+    <svg id="sankey" class="c-sankey is-absolute">
+      <g class="sankey-container">
+        <rect classs="sankey-bg"></rect>
+        <g class="sankey-layers"></g>
+        <g class="sankey-clicked-links"></g>
+        <g class="sankey-highlighted-links"></g>
+      </g>
+    </svg>
+
+    <svg id="timeline" class="c-timeline is-absolute"></svg>
+
+    <svg id="chord" class="c-chord is-absolute is-hidden"></svg>
+
+    <%= htmlWebpackPlugin.options.footer %>
   </div>
-
-  <svg id="sankey" class="section">
-    <g class="sankey-container">
-      <rect classs="sankey-bg"></rect>
-      <g class="sankey-layers"></g>
-      <g class="sankey-clicked-links"></g>
-      <g class="sankey-highlighted-links"></g>
-    </g>
-  </svg>
-
-  <svg id="timeline" class="section"></svg>
-
-  <svg id="chord" class="section"></svg>
-
-  <%= htmlWebpackPlugin.options.footer %>
 </body>
 </html>

@@ -1,9 +1,9 @@
-$someVar: orange;
+@import '../../settings';
 
 .sankey-bg {
   width: 100%;
   height: 100%;
-  fill: white;
+  fill: $white;
 }
 
 .sankey-node {
@@ -11,15 +11,15 @@ $someVar: orange;
 }
 
 .sankey-node-rect {
-  fill: white;
-  stroke: black;
+  fill: $white;
+  stroke: $black;
   stroke-width: .5px;
 }
 
 .sankey-node-label {
   font-size: 12px;
-  text-anchor: middle;
   text-transform: capitalize;
+  text-anchor: middle;
 }
 
 .sankey-link {
@@ -27,15 +27,16 @@ $someVar: orange;
 }
 
 .sankey-clicked-links .sankey-link {
-  stroke: $someVar;
   opacity: .5;
+  stroke: $orange;
+}
 
-}
 .sankey-highlighted-links .sankey-link {
-  opacity: 0.2;
-  stroke: red;
+  opacity: .2;
+  stroke: $medium-pink;
 }
+
 .sankey-state-links .sankey-link {
-  opacity: 0.2;
-  stroke: black;
+  opacity: .2;
+  stroke: $black;
 }

@@ -1,0 +1,33 @@
+@import 'reset';
+@import 'settings';
+@import 'helpers';
+
+@font-face {
+  font-family: 'DecimaMonoPro';
+  font-weight: $font-weight-regular;
+  src: url('/fonts/DecimaMonoPro.otf');
+}
+
+@font-face {
+  font-family: 'DecimaMonoPro';
+  font-weight: $font-weight-bold;
+  src: url('/fonts/DecimaMonoPro-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  font-weight: $font-weight-light;
+  src: url('/fonts/Merriweather-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  font-weight: $font-weight-regular;
+  src: url('/fonts/Merriweather-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  font-weight: $font-weight-bold;
+  src: url('/fonts/Merriweather-Bold.ttf');
+}

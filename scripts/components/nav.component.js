@@ -1,4 +1,4 @@
-import 'styles/nav.scss';
+import 'styles/components/nav.scss';
 import Dropdown from 'components/dropdown.component';
 
 export default class {
