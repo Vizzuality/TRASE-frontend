@@ -1,0 +1,17 @@
+rules:
+  property-sort-order:
+    - 2
+    - order: 'smacss'
+  force-element-nesting:
+    - 0
+  no-color-literals:
+    - 2
+    -
+      allow-rgba: true
+  no-url-protocols:
+    - 0
+  nesting-depth:
+    - 2
+    -
+      max-depth: 3
+  no-vendor-prefixes: 0
