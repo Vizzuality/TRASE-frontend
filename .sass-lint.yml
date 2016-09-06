@@ -17,3 +17,6 @@ rules:
   no-vendor-prefixes: 0
   single-line-per-selector:
     - 0
+files:
+  ignore:
+    - 'styles/_reset.scss'
