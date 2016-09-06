@@ -6,6 +6,23 @@ https://ttp.sei-international.org/
 This project mainly uses D3 and Leaflet, plus Redux for managing app state. More on the stack:
 https://github.com/Vizzuality/TRASE-frontend/issues/9
 
+## Lexicon
+
+```
++-------+             +-------+
+|       |             |       |
+|       |             |       |
++-------+ ---\        |       |
+| node  |     \-------+-------+
++-------+--\  link    | node  |
+|       |   \         |       |
+|       |    \--------+-------+
+|       |             |       |   
++-------+             +-------+
+  layer                 layer
+
+```
+
 ## Run locally
 
 ### backend
