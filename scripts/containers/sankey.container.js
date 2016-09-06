@@ -1,4 +1,4 @@
-import { loadData, selectNode, highlightNode } from 'actions/sankey.actions';
+import { loadData, selectNode, highlightNode } from 'actions/flows.actions';
 import connect from 'connect';
 import Sankey from 'components/sankey.component.js';
 
