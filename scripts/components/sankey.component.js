@@ -42,6 +42,7 @@ export default class {
   selectNode(id) {
     this.clickedLinksData = this.layout.getLinksForNodeId(id, this.currentLayerOffsets);
     this._removeHighlightedLinks();
+    this._removeLinks(this.clickedLinksContainer);
 
     // do we reset all layers, or only the one that owns the clicked node?
     // slippy
@@ -65,11 +66,20 @@ export default class {
 
 
   _destroy() {
+    if (!this.svg) return;
     if (this.zoom) this.zoom.on('zoom', null);
+    this._removeLinks(this.highlightedLinksContainer);
+    this._removeLinks(this.clickedLinksContainer);
+    //
+    // this.layers.on('mousewheel', null);
+    // this.layers.on('mouseout', null);
+    // this.nodes.on('mouseover', null);
+    // this.nodes.on('mouseout', null);
+
+    this.layers.html('');
   }
 
   _build(payload) {
-
     this.layout = sankeyLayout(payload)
       .minNodeHeight(params.minNodeHeight)
       .scaleY(params.scaleY)
@@ -95,12 +105,13 @@ export default class {
       .attr('class','sankey-layer')
       .attr('transform', d => `translate(${d.x},0)`)
       .on('mousewheel', (params.slippyMode) ? ()=>{} : this._onMouseWheel)
-      .on('mouseout', this.callbacks.onNodeHighlighted(null));
+      .on('mouseout', () => { this.callbacks.onNodeHighlighted(null); } );
+
 
     // build node containers inside layers
-    this.nodes = this.layers.append('g')
+    this.nodes = this.sankeyContainer.selectAll('.sankey-layer').append('g')
       .attr('class','sankey-nodes')
-      .selectAll('rect')
+      .selectAll('g')
       .data(d => d.values)
       .enter()
       .append('g')
@@ -129,7 +140,7 @@ export default class {
       .attr('y', (d, i) => 4+i * 12)
       .text(d => d);
 
-    this.layers.append('text')
+    this.sankeyContainer.selectAll('.sankey-layer').append('text')
       .text(d => `${d.key} (${LAYER_NAMES.indexOf(d.key)})`)
       .attr('y', 40);
 
@@ -152,8 +163,6 @@ export default class {
 
   // draw all links on a linksContainer (either highlight or click)
   _drawLinks(linksContainer, linksData) {
-    this._removeLinks(linksContainer);
-
     linksContainer
       .selectAll('path')
       .data(linksData)
@@ -199,8 +208,10 @@ export default class {
 
   // get rid of all paths objects in a links container
   _removeLinks(linksContainer) {
-    linksContainer
+    if (linksContainer) {
+      linksContainer
       .selectAll('path').remove();
+    }
   }
 
   _removeHighlightedLinks() {

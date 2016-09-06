@@ -1,5 +1,5 @@
 // see sankey.container for details on how to use those containers
-import { selectNode, highlightNode } from 'actions/sankey.actions';
+import { selectNode, highlightNode } from 'actions/flows.actions';
 import connect from 'connect';
 import Map from 'components/map.component.js';
 
