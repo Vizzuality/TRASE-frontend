@@ -9,7 +9,7 @@
     "build": "npm run webpack:prod",
     "webpack": "webpack --config config/webpack.js",
     "webpack:prod": "npm run webpack -- -p",
-    "webpack:server": "webpack-dev-server --inline --port 8081 --content-base public/ --open --config config/webpack.js",
+    "webpack:server": "webpack-dev-server --inline --port 8081 --content-base public/ --config config/webpack.js",
     "lint-js": "eslint -c .eslintrc.js src/sankey_page.js",
     "postinstall": "npm run build"
   },
