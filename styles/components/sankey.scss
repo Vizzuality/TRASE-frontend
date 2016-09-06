@@ -1,2 +1,44 @@
+@import '../settings';
 
-.c-sankey {}
+.c-sankey {
+  .sankey-bg {
+    width: 100%;
+    height: 100%;
+    fill: $white;
+  }
+
+  .sankey-node {
+    cursor: pointer;
+  }
+
+  .sankey-node-rect {
+    fill: $white;
+    stroke: $black;
+    stroke-width: .5px;
+  }
+
+  .sankey-node-label {
+    font-size: 12px;
+    text-transform: capitalize;
+    text-anchor: middle;
+  }
+
+  .sankey-link {
+    fill: none;
+  }
+
+  .sankey-clicked-links .sankey-link {
+    opacity: .5;
+    stroke: $orange;
+  }
+
+  .sankey-highlighted-links .sankey-link {
+    opacity: .2;
+    stroke: $medium-pink;
+  }
+
+  .sankey-state-links .sankey-link {
+    opacity: .2;
+    stroke: $black;
+  }
+}

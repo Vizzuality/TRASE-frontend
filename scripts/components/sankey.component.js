@@ -1,7 +1,6 @@
 import { select as d3_select, event as d3_event } from 'd3-selection';
 import { zoomIdentity as d3_zoomIdentity, zoom as d3_zoom } from 'd3-zoom';
 import 'styles/components/sankey.scss';
-import 'styles/components/sankey/sankey.scss';
 import { LAYER_NAMES } from 'constants';
 import sankeyLayout from './sankey.d3layout.js';
 
