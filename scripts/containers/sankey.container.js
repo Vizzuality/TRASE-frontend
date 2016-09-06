@@ -1,11 +1,6 @@
-import { loadData, selectNode, highlightNode } from 'actions/flows.actions';
+import { selectNode, highlightNode } from 'actions/flows.actions';
 import connect from 'connect';
 import Sankey from 'components/sankey.component.js';
-
-// use this to dispatch redux actions when the component is created
-const onCreated = (dispatch) => {
-  dispatch(loadData());
-};
 
 // this maps component methods to app state updates
 // keys correspond to method names, values to state prop path
@@ -25,4 +20,4 @@ const mapViewCallbacksToActions = () => ({
   onNodeHighlighted: id => highlightNode(id)
 });
 
-export default connect(Sankey, mapMethodsToState, mapViewCallbacksToActions, onCreated);
+export default connect(Sankey, mapMethodsToState, mapViewCallbacksToActions);

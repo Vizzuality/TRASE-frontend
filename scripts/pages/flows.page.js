@@ -7,7 +7,7 @@ import NavContainer from 'containers/nav.container';
 import AppReducer from 'reducers/app.reducer';
 import FlowsReducer from 'reducers/flows.reducer';
 import {resize} from 'actions/app.actions';
-import {selectIndicator} from 'actions/flows.actions';
+import {selectIndicator, loadLinks} from 'actions/flows.actions';
 
 
 var store = createStore(
@@ -26,4 +26,5 @@ new SankeyContainer(store);
 new MapContainer(store);
 new NavContainer(store);
 
-store.dispatch(selectIndicator('trade'));
+store.dispatch(selectIndicator('Volume', false));
+store.dispatch(loadLinks());

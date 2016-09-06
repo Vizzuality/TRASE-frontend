@@ -8,9 +8,9 @@ import getURLFromParams from 'utils/sankey.getURLFromParams';
 const params = {
   country: 'brazil',
   raw: 'soy',
-  year: '2012',
-  nNodes: '10000000',
-  excludeLayers: [0,2,4,6,7,8,9],
+  yearStart: '2012',
+  // nNodes: '10000000',
+  includeLayers: [0,3,7,9],
   // excludeNodes: [2575,2576,2577,2578],
   flowQuant: 'Volume',
   flowQual: 'Commodity',
@@ -18,15 +18,21 @@ const params = {
   // clickedNodes: [39]
 };
 
-export function selectIndicator(indicator) {
-  return {
-    type: actions.SELECT_INDICATOR,
-    indicator
+export function selectIndicator(indicator, reloadLinks = true) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_INDICATOR,
+      indicator
+    });
+    if (reloadLinks) {
+      dispatch(loadLinks());
+    }
   };
 }
 
-export function loadData() {
-  return (dispatch) => {
+export function loadLinks() {
+  return (dispatch, getState) => {
+    params.flowQuant = getState().flows.selectedIndicator;
     // FIXME currently the API only runs locally, production version uses a CLI-pregenerated JSON file
     const url = (NODE_ENV_DEV) ?  getURLFromParams(params) : 'sample.json';
     fetch(url)
