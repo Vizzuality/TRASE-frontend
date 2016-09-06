@@ -1,0 +1,14 @@
+@import '../settings';
+
+.c-nav {
+  display: flex;
+
+  > .filters {
+    padding: 0 20px;
+
+    &:not(:last-child) {
+      border-right: 1px solid $pale-grey;
+      border-left: 1px solid $pale-grey;
+    }
+  }
+}

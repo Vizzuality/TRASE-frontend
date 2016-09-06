@@ -1,4 +1,4 @@
-import 'styles/dropdown.scss';
+import 'styles/components/dropdown.scss';
 
 export default class {
   constructor(id, callback) {
@@ -25,11 +25,11 @@ export default class {
   }
 
   _open() {
-    this.list.style.display = 'block';
+    this.list.classList.remove('is-hidden');
   }
 
   _close() {
-    this.list.style.display = 'none';
+    this.list.classList.add('is-hidden');
   }
 
   _onListClick(value) {

@@ -1,0 +1,64 @@
+@import '../settings';
+@import '../mixins';
+
+.c-dropdown {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+
+  .dropdown-label {
+    color: rgba($charcoal-grey, .6);
+    font-family: $font-family-1;
+    font-size: $font-size-small;
+    letter-spacing: -.2px;
+    text-transform: uppercase;
+  }
+
+  .dropdown-title {
+    position: relative;
+    padding: 0 20px 0 0;
+    color: $charcoal-grey;
+    font-family: $font-family-2;
+    font-size: $font-size-big;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+
+    &::after {
+      @include triangle(8px, 2px, $medium-pink, 'down');
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  }
+
+  .dropdown-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 0;
+
+    background-color: $white;
+    box-shadow: 0 3px 6px 0 rgba($black, .16), 0 3px 6px 0 rgba($black, .23);
+    z-index: 2;
+  }
+
+  .dropdown-list > .dropdown-item {
+    padding: 10px 25px;
+    font-family: $font-family-2;
+    font-size: $font-size-big;
+    font-weight: $font-weight-light;
+
+    &:hover {
+      background-color: $manilla;
+      cursor: pointer;
+    }
+
+    &:not([data-value]) {
+      color: rgba($charcoal-grey, .3);
+      pointer-events: none;
+    }
+  }
+}
