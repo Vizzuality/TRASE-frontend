@@ -1,6 +1,7 @@
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import 'style/map.scss';
+import 'style/components/map.scss';
+import 'style/components/map/map-legend.scss';
 
 export default class {
   constructor() {
