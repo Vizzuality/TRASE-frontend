@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
 // Serving assets from public folder
-app.use(auth, express.static(path.join(rootPath, 'dist')));
+app.use(auth);
+app.use(express.static(path.join(rootPath, 'dist')));
 app.use(express.static(path.join(rootPath, 'public')));
 
 module.exports = app;
