@@ -39,7 +39,6 @@
         border-color: rgba($charcoal-grey, .3);
         background-color: $medium-pink;
         color: $white;
-        font-weight: $font-weight-bold;
       }
     }
 
@@ -50,6 +49,11 @@
         &:nth-child(even) {
           margin: 0 10px;
         }
+      }
+
+      > .bookmark-action > svg {
+        fill: rgba($charcoal-grey, .4);
+        stroke: rgba($charcoal-grey, .4);
       }
     }
   }

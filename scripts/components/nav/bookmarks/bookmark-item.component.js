@@ -5,14 +5,14 @@ export default class {
   constructor(settings) {
     this.el= settings.el;
     this.bookmark = settings.bookmark;
-    this.actions = ['update', 'share', 'delete'];
+    this.actions = ['update', 'share-bookmark', 'delete'];
 
     return this;
   }
 
   _setEventListener() {
     this.bookmarkItem.querySelector('.update').addEventListener('click', () => this._update());
-    this.bookmarkItem.querySelector('.share').addEventListener('click', () => this._share());
+    this.bookmarkItem.querySelector('.share-bookmark').addEventListener('click', () => this._share());
     this.bookmarkItem.querySelector('.delete').addEventListener('click', () => this._delete());
   }
 
