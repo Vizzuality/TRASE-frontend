@@ -6,6 +6,13 @@
 <body>
   <div class="l-flows">
     <div id="nav" class="c-nav is-absolute">
+      <div class="menu">
+        <div class="burger">
+          <span class="burger-ingredient"></span>
+          <span class="burger-ingredient"></span>
+          <span class="burger-ingredient"></span>
+        </div>
+      </div>
       <div class="filters">
         <div class="c-dropdown" data-dropdown="country">
           <span class="dropdown-label">Country</span>
@@ -20,7 +27,7 @@
       <div class="filters">
         <div class="c-dropdown" data-dropdown="indicator">
           <span class="dropdown-label">Resize by</span>
-          <span class=" js-dropdown-title dropdown-title">
+          <span class="js-dropdown-title dropdown-title">
             Resize by
           </span>
           <ul class="js-dropdown-list dropdown-list">
@@ -32,6 +39,19 @@
           </ul>
         </div>
       </div>
+      <ul class="menu-options">
+        <li class="option-item js-share">
+          <svg class="icon icon-bookmark"><use xlink:href="#icon-bookmark"></use></svg>
+          <div class="c-bookmark-dropdown js-dropdown">
+            <ul class="bookmark-list"></ul>
+            <div class="bookmark-btn-container">
+              <button class="c-button add-bookmark">+ add a new bookmark</button>
+            </div>
+          </div>
+        </li>
+        <li class="option-item"><svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg></li>
+        <li class="option-item"><svg class="icon icon-settings"><use xlink:href="#icon-settings"></use></svg></li>
+      </ul>
     </div>
 
     <div id="map" class="c-map is-absolute">
@@ -55,5 +75,6 @@
 
     <%= htmlWebpackPlugin.options.footer %>
   </div>
+  <%= htmlWebpackPlugin.options.icons %>
 </body>
 </html>

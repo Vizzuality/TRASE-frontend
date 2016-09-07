@@ -2,13 +2,54 @@
 
 .c-nav {
   display: flex;
+  box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
+
+
+  > .menu  {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+
+    > .burger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 14px;
+      cursor: pointer;
+
+      .burger-ingredient {
+        display: inline-block;
+        width: 20px;
+        height: 2px;
+        background-color: $charcoal-grey;
+      }
+    }
+  }
 
   > .filters {
     padding: 0 20px;
 
-    &:not(:last-child) {
-      border-right: 1px solid $pale-grey;
-      border-left: 1px solid $pale-grey;
+    border-left: 1px solid $pale-grey;
+  }
+
+  > .menu-options {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    .option-item {
+      display: flex;
+      position: relative;
+      align-items: center;
+      height: 100%;
+      padding: 0 20px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $manilla;
+      }
     }
   }
 }
