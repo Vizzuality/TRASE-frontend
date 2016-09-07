@@ -55,6 +55,7 @@ module.exports = {
     alias: {
       actions: 'scripts/actions',
       reducers: 'scripts/reducers',
+      templates: 'scripts/templates',
       style: 'styles',
       components: 'scripts/components',
       containers: 'scripts/containers',
@@ -78,7 +79,8 @@ module.exports = {
         test: /\.png$/,
         loader: 'url-loader',
         query: { mimetype: 'image/png' }
-      }
+      },
+      { test: /\.handlebars$/, loader: 'handlebars-loader' }
     ]
   },
   postcss: function () {
