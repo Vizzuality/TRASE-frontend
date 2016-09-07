@@ -3,6 +3,9 @@
 
 .c-bookmark-dropdown {
   @extend %dropdown;
+  position: absolute;
+  top: calc(100% - 10px);
+  right: 10px;
   min-width: 240px;
 
   > .bookmark-list {
