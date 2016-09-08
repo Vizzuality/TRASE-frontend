@@ -1,5 +1,5 @@
 import stringToHTML from 'utils/stringToHTML';
-import BookmarkTemplate from 'templates/bookmark.handlebars';
+import BookmarkTemplate from 'ejs!templates/bookmark.ejs';
 
 export default class {
   constructor(settings) {

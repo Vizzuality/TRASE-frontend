@@ -4,6 +4,7 @@ import BookmarkMenu from 'components/nav/bookmarks/bookmark-menu.component';
 
 export default class {
   onCreated() {
+
     this.countryDropdown = new Dropdown('country', this.callbacks.onIndicatorSelected);
     this.indicatorDropdown = new Dropdown('indicator', this.callbacks.onIndicatorSelected);
     this.bookmarkMenu = new BookmarkMenu();
