@@ -1,4 +1,4 @@
-import ShareTemplate from 'templates/share.handlebars';
+import ShareTemplate from 'ejs!templates/share.ejs';
 import 'styles/components/nav/share-dropdown.scss';
 
 export default class {
@@ -25,7 +25,6 @@ export default class {
     this.el.addEventListener('mouseleave', () => this._close());
     this.copyBtn.addEventListener('click', () => this._copyURL());
   }
-
 
   _copyURL() {
     const range = document.createRange();
