@@ -1,0 +1,77 @@
+@import '../../settings';
+@import '/basic-dropdown';
+
+.c-share-dropdown {
+  @extend %dropdown;
+  position: absolute;
+  top: calc(100% - 10px);
+  right: 10px;
+  min-width: 240px;
+  padding: 25px 15px 20px;
+
+  > .share-view > .share-text {
+    color: rgba($charcoal-grey, .8);
+    font-family: $font-family-1;
+    font-size: $font-size-x-regular;
+    letter-spacing: -.5px;
+    text-transform: uppercase;
+  }
+
+  > .share-view  {
+    &::after {
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      width: 100%;
+      margin: 15px 0 0;
+      transform: translate(-50%, 0);
+      border-bottom: 1px solid $pale-grey;
+      content: '';
+    }
+  }
+
+  > .share-view > .url-share-container {
+    display: flex;
+    align-items: center;
+    margin: 5px 0 0;
+    border: 1px solid rgba($charcoal-grey, .3);
+    border-radius: 4px;
+
+    > .url-display {
+      padding: 10px;
+      border-right: 1px solid rgba($charcoal-grey, .3);
+      color: rgba($charcoal-grey, .8);
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      letter-spacing: -.5px;
+    }
+
+    > .btn-clipboard-url {
+      padding: 10px 15px;
+      color: $charcoal-grey;
+      font-family: $font-family-1;
+      font-size: $font-size-regular;
+      line-height: .9;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  }
+
+  > .social-links {
+    margin: 15px 0 0;
+    padding: 15px 0 0;
+  }
+
+  > .social-links > .social-link-list {
+    display: flex;
+    justify-content: space-around;
+    width:  80%;
+    margin: 0 auto;
+    cursor: pointer;
+
+    > .social-item > svg {
+      fill: $charcoal-grey;
+      stroke: $charcoal-grey;
+    }
+  }
+}

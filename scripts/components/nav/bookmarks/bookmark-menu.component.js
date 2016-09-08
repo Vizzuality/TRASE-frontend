@@ -28,7 +28,7 @@ export default class {
   }
 
   _setVars() {
-    this.el = document.querySelector('.js-share');
+    this.el = document.querySelector('.js-bookmark');
     this.dropdown = this.el.querySelector('.js-dropdown');
     this.bookmarkList = this.dropdown.querySelector('.bookmark-list');
   }
