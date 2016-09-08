@@ -36,7 +36,7 @@ export default class {
     this.el.appendChild(bookmarkHTML);
 
     this._setVars();
-    this._setEventListener();
+    this._setEventListeners();
   }
 
   _update() {}

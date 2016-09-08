@@ -18,7 +18,7 @@ export default class {
 
     this._setVars();
     this.render();
-    this._setEventListener();
+    this._setEventListeners();
   }
 
   _setEventListeners() {
