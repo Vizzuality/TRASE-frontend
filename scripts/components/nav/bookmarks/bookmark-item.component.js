@@ -10,7 +10,7 @@ export default class {
     return this;
   }
 
-  _setEventListener() {
+  _setEventListeners() {
     this.bookmarkItem.querySelector('.update').addEventListener('click', () => this._update());
     this.bookmarkItem.querySelector('.share-bookmark').addEventListener('click', () => this._share());
     this.bookmarkItem.querySelector('.delete').addEventListener('click', () => this._delete());

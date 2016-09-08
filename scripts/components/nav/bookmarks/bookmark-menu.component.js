@@ -21,7 +21,7 @@ export default class {
     this._setEventListener();
   }
 
-  _setEventListener() {
+  _setEventListeners() {
     this.el.addEventListener('mouseenter', () => this._open());
     this.el.addEventListener('mouseleave', () => this._close());
     this.el.querySelector('.add-bookmark').addEventListener('click', () => this._addBookmark());
