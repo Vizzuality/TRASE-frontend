@@ -20,7 +20,7 @@ const pages = {
 
 const htmlHeadTemplate = _.template(fs.readFileSync('./html/includes/_head.ejs', 'utf8'));
 const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
-const htmlIconsTemplate = _.template(fs.readFileSync('./html/includes/_icons.ejs', 'utf8'));
+const htmlIconsTemplate = _.template(fs.readFileSync('./html/statics/icons.html', 'utf8'));
 const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
   inject: false,
   head: htmlHeadTemplate({
@@ -79,8 +79,7 @@ module.exports = {
         test: /\.png$/,
         loader: 'url-loader',
         query: { mimetype: 'image/png' }
-      },
-      { test: /\.handlebars$/, loader: 'handlebars-loader' }
+      }
     ]
   },
   postcss: function () {
