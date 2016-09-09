@@ -20,7 +20,6 @@ const pages = {
 
 const htmlHeadTemplate = _.template(fs.readFileSync('./html/includes/_head.ejs', 'utf8'));
 const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
-const htmlIconsTemplate = _.template(fs.readFileSync('./html/statics/icons.html', 'utf8'));
 const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
   inject: false,
   head: htmlHeadTemplate({
@@ -28,7 +27,7 @@ const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
     dev: process.env.NODE_ENV === 'development'
   }),
   footer: htmlFooterTemplate({bundle: id}),
-  icons: htmlIconsTemplate(),
+  icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
   filename: id+'.html',
   template: './html/'+id+'.ejs',
 });
