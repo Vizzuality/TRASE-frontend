@@ -1,0 +1,12 @@
+@import '../settings';
+
+.c-button {
+  border: 1px solid rgba($charcoal-grey, .3);
+  border-radius: 4px;
+  color: $charcoal-grey;
+  font-family: $font-family-1;
+  font-size: $font-size-x-regular;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+}

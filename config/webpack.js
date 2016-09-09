@@ -27,6 +27,7 @@ const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
     dev: process.env.NODE_ENV === 'development'
   }),
   footer: htmlFooterTemplate({bundle: id}),
+  icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
   filename: id+'.html',
   template: './html/'+id+'.ejs',
 });
@@ -53,6 +54,7 @@ module.exports = {
     alias: {
       actions: 'scripts/actions',
       reducers: 'scripts/reducers',
+      templates: 'scripts/templates',
       style: 'styles',
       components: 'scripts/components',
       containers: 'scripts/containers',

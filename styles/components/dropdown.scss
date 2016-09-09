@@ -1,5 +1,6 @@
 @import '../settings';
 @import '../mixins';
+@import './nav/basic-dropdown';
 
 .c-dropdown {
   display: flex;
@@ -35,14 +36,12 @@
   }
 
   .dropdown-list {
+    @extend %dropdown;
     position: absolute;
     top: 0;
     left: 0;
     padding: 5px 0;
 
-    background-color: $white;
-    box-shadow: 0 3px 6px 0 rgba($black, .16), 0 3px 6px 0 rgba($black, .23);
-    z-index: 2;
   }
 
   .dropdown-list > .dropdown-item {
