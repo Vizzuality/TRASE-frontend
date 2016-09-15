@@ -13,7 +13,9 @@ export default class {
     this.indicatorDropdown = new Dropdown('indicator', this.callbacks.onIndicatorSelected);
 
     new BookmarkMenu();
-    new ShareMenu();
+    new Dropdown('bookmark', this.callbacks.onIndicatorSelected);
+    const shareMenu = new ShareMenu();
+    new Dropdown('share', this.callbacks.onIndicatorSelected, shareMenu);
     new SettingsMenu();
   }
 

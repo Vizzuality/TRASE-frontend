@@ -1,9 +1,10 @@
 import 'styles/components/dropdown.scss';
 
 export default class {
-  constructor(id, callback) {
+  constructor(id, callback, child) {
     this.id = id;
     this.callback = callback;
+    this.child = child;
     this.el = document.querySelector(`[data-dropdown=${id}]`);
     this.title = this.el.querySelector('.js-dropdown-title');
     this.list = this.el.querySelector('.js-dropdown-list');
@@ -24,9 +25,20 @@ export default class {
     const allDropdowns = document.querySelectorAll('.js-dropdown-list');
     for (let i = 0; i < allDropdowns.length; ++i) {
       if (allDropdowns[i].parentNode.getAttribute('data-dropdown') === this.id) {
-        allDropdowns[i].classList.toggle('is-hidden');
+        this._toggle();
       } else {
         allDropdowns[i].classList.add('is-hidden');
+      }
+    }
+  }
+
+  _toggle() {
+    var isOpen = !this.list.classList.toggle('is-hidden');
+    if (this.child) {
+      if (isOpen) {
+        this.child.onDropdownOpen();
+      } else {
+        this.child.onDropdownClose();
       }
     }
   }

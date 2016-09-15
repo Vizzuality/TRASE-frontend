@@ -26,29 +26,35 @@
     }
   }
 
-  > .filters {
+  > .c-nav-param {
     padding: 0 20px;
 
     border-left: 1px solid $pale-grey;
   }
 
-  > .menu-options {
+  > .c-nav-right {
     display: flex;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
 
-    .option-item {
+    .c-nav-right-filter {
       display: flex;
       position: relative;
       align-items: center;
       height: 100%;
-      padding: 0 20px;
+
       cursor: pointer;
 
       &:hover {
         background-color: $manilla;
+      }
+
+      .c-nav-right-filter-title {
+        width: 60px;
+        height: 100%;
+        padding: 20px;
       }
     }
   }

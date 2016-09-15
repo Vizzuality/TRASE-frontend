@@ -5,14 +5,12 @@ export default class {
 
   constructor() {
     this.el = document.querySelector('.js-share');
-    this.dropdown = this.el.querySelector('.js-dropdown');
+    this.dropdown = this.el.querySelector('.js-dropdown-list');
     this.isCopied = false;
 
     this.render();
     this._setVars();
     this._setListeners();
-
-    this._close();
   }
 
   _setVars() {
@@ -21,8 +19,6 @@ export default class {
   }
 
   _setListeners() {
-    this.el.addEventListener('mouseenter', () => this._open());
-    this.el.addEventListener('mouseleave', () => this._close());
     this.copyBtn.addEventListener('click', () => this._copyURL());
   }
 
@@ -62,13 +58,11 @@ export default class {
     }
   }
 
-  _open() {
+  onDropdownOpen() {
     this._getURL();
-    this.dropdown.classList.remove('is-hidden');
   }
 
-  _close() {
-    this.dropdown.classList.add('is-hidden');
+  onDropdownClose() {
     this._resetCopyButton();
   }
 
