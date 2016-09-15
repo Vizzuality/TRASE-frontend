@@ -1,10 +1,7 @@
 import 'styles/components/nav.scss';
 import Dropdown from 'components/dropdown.component';
-// import NavMenu from 'components/nav/nav-menu.component';
-// import dropdownBehavior from 'dropdownBehavior';
 import BookmarkMenu from 'components/nav/bookmarks/bookmark-menu.component';
 import ShareMenu from 'components/nav/share/share-menu.component';
-import SettingsMenu from 'components/nav/settings/settings-menu.component';
 
 export default class {
   onCreated() {
@@ -16,7 +13,6 @@ export default class {
     new Dropdown('bookmark', this.callbacks.onIndicatorSelected);
     const shareMenu = new ShareMenu();
     new Dropdown('share', this.callbacks.onIndicatorSelected, shareMenu);
-    new SettingsMenu();
   }
 
   selectIndicator(value) {
