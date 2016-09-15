@@ -13,18 +13,21 @@
           <span class="burger-ingredient"></span>
         </div>
       </div>
-      <div class="filters">
+
+      <div class="c-nav-param">
         <div class="c-dropdown" data-dropdown="country">
           <span class="dropdown-label">Country</span>
           <span class="js-dropdown-title dropdown-title">
             Country
           </span>
-          <ul class="js-dropdown-list dropdown-list is-hidden">
+          <ul class="js-dropdown-list dropdown-list">
             <li class="js-dropdown-item dropdown-item" data-value="brazil">Brazil</li>
+            <li class="js-dropdown-item dropdown-item" data-value="columbia">Columbia</li>
           </ul>
         </div>
       </div>
-      <div class="filters">
+
+      <div class="c-nav-param">
         <div class="c-dropdown" data-dropdown="indicator">
           <span class="dropdown-label">Resize by</span>
           <span class="js-dropdown-title dropdown-title">
@@ -39,18 +42,25 @@
           </ul>
         </div>
       </div>
-      <ul class="menu-options">
-        <li class="option-item js-share">
-          <svg class="icon icon-bookmark"><use xlink:href="#icon-bookmark"></use></svg>
-          <div class="c-bookmark-dropdown js-dropdown">
+
+      <ul class="c-nav-right">
+        <li class="c-nav-right-filter js-bookmark" data-dropdown="bookmark">
+          <div class="c-nav-right-filter-title js-dropdown-title">
+            <svg class="icon icon-bookmark"><use xlink:href="#icon-bookmark"></use></svg>
+          </div>
+          <div class="c-bookmark-dropdown js-dropdown-list">
             <ul class="bookmark-list"></ul>
             <div class="bookmark-btn-container">
               <button class="c-button add-bookmark">+ add a new bookmark</button>
             </div>
           </div>
         </li>
-        <li class="option-item"><svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg></li>
-        <li class="option-item"><svg class="icon icon-settings"><use xlink:href="#icon-settings"></use></svg></li>
+        <li class="c-nav-right-filter js-share" data-dropdown="share">
+          <div class="c-nav-right-filter-title js-dropdown-title">
+            <svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg>
+          </div>
+          <div class="c-share-dropdown js-dropdown-list"></div>
+        </li>
       </ul>
     </div>
 

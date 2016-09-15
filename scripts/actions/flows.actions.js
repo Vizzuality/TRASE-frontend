@@ -18,15 +18,24 @@ const params = {
   // clickedNodes: [39]
 };
 
-export function selectIndicator(indicator, reloadLinks = true) {
+export function selectIndicator(indicator /*, reloadLinks = true*/) {
   return dispatch => {
     dispatch({
       type: actions.SELECT_INDICATOR,
       indicator
     });
-    if (reloadLinks) {
-      dispatch(loadLinks());
-    }
+    // if (reloadLinks) {
+    //   dispatch(loadLinks());
+    // }
+  };
+}
+
+export function selectCountry(country) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_COUNTRY,
+      country
+    });
   };
 }
 

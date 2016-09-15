@@ -22,14 +22,12 @@ export default class {
   }
 
   _setEventListeners() {
-    this.el.addEventListener('mouseenter', () => this._open());
-    this.el.addEventListener('mouseleave', () => this._close());
     this.el.querySelector('.add-bookmark').addEventListener('click', () => this._addBookmark());
   }
 
   _setVars() {
-    this.el = document.querySelector('.js-share');
-    this.dropdown = this.el.querySelector('.js-dropdown');
+    this.el = document.querySelector('.js-bookmark');
+    this.dropdown = this.el.querySelector('.js-dropdown-list');
     this.bookmarkList = this.dropdown.querySelector('.bookmark-list');
   }
 
@@ -40,22 +38,7 @@ export default class {
         bookmark: bookmark
       }).render();
     });
-
-    this._close();
   }
 
   _addBookmark() {}
-
-  _toggle() {
-    this.dropdown.classList.contains('is-hidden') ?
-      this._open() : this._close();
-  }
-
-  _open() {
-    this.dropdown.classList.remove('is-hidden');
-  }
-
-  _close() {
-    this.dropdown.classList.add('is-hidden');
-  }
 }
