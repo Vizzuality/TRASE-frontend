@@ -7,6 +7,7 @@ export default class {
     this.el = document.querySelector(`[data-dropdown=${id}]`);
     this.title = this.el.querySelector('.js-dropdown-title');
     this.list = this.el.querySelector('.js-dropdown-list');
+    this.list.classList.add('is-hidden');
     this.title.addEventListener('click', this._onTitleClick.bind(this));
     this.list.addEventListener('click', (e) => {
       if (e.target.getAttribute('data-value')) {
@@ -17,15 +18,17 @@ export default class {
 
   selectValue(value) {
     this.title.innerHTML = this.list.querySelector(`[data-value="${value}"]`).innerHTML;
-    this._close();
   }
 
   _onTitleClick() {
-    this._open();
-  }
-
-  _open() {
-    this.list.classList.remove('is-hidden');
+    const allDropdowns = document.querySelectorAll('.js-dropdown-list');
+    for (let i = 0; i < allDropdowns.length; ++i) {
+      if (allDropdowns[i].parentNode.getAttribute('data-dropdown') === this.id) {
+        allDropdowns[i].classList.toggle('is-hidden');
+      } else {
+        allDropdowns[i].classList.add('is-hidden');
+      }
+    }
   }
 
   _close() {
@@ -34,5 +37,6 @@ export default class {
 
   _onListClick(value) {
     this.callback(value);
+    this._close();
   }
 }

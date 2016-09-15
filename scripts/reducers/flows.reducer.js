@@ -10,6 +10,8 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { selectedNodeId: state.highlightedNodeId });
   case actions.SELECT_INDICATOR:
     return Object.assign({}, state, { selectedIndicator: action.indicator });
+  case actions.SELECT_COUNTRY:
+    return Object.assign({}, state, { selectedCountry: action.country });
   default:
     return state;
   }
