@@ -7,16 +7,16 @@ export default class {
   onCreated() {
 
     this.countryDropdown = new Dropdown('country', this.callbacks.onCountrySelected);
-    this.indicatorDropdown = new Dropdown('indicator', this.callbacks.onIndicatorSelected);
+    this.quantDropdown = new Dropdown('quant', this.callbacks.onQuantSelected);
 
     new BookmarkMenu();
-    new Dropdown('bookmark', this.callbacks.onIndicatorSelected);
-    const shareMenu = new ShareMenu();
-    new Dropdown('share', this.callbacks.onIndicatorSelected, shareMenu);
+    new Dropdown('bookmark', this.callbacks.onQuantSelected);
+    new ShareMenu();
+    new Dropdown('share');
   }
 
-  selectIndicator(value) {
-    this.indicatorDropdown.selectValue(value);
+  selectQuant(value) {
+    this.quantDropdown.selectValue(value);
   }
 
   selectCountry(value) {

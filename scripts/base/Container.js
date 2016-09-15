@@ -35,7 +35,11 @@ export default class {
         // in which case update internal _props
         this._props[k] = stateValue;
         // and call the method (k, the dict key) directly on the component
-        this.view[k](stateValue);
+        if (this.view[k]) {
+          this.view[k](stateValue);
+        } else {
+          console.warn(`trying to call ${k} on view but it doesn't exist`);
+        }
       }
     });
   }

@@ -9,5 +9,5 @@ export default (params) => {
       return `${prev}&${arrUrl}`;
     }
     return `${prev}&${current}=${params[current]}`;
-  }, 'http://localhost:8080?');
+  }, `${API_URL}?`);
 };

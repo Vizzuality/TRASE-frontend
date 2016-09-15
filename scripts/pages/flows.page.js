@@ -8,8 +8,22 @@ import MapContainer from 'containers/map.container';
 import NavContainer from 'containers/nav.container';
 import AppReducer from 'reducers/app.reducer';
 import FlowsReducer from 'reducers/flows.reducer';
-import {resize} from 'actions/app.actions';
-import {selectIndicator, loadLinks} from 'actions/flows.actions';
+import { resize } from 'actions/app.actions';
+import { loadInitialData } from 'actions/flows.actions';
+
+
+// TODO: load from URL params (only flows)
+const initialState = {
+  app: {},
+  flows: {
+    selectedCountry: 'brazil',
+    selectedCommodity: 'soy',
+    selectedYears: [2011, 2012],
+    selectedQuant: 'Deforestation risk',
+    selectedQual: 'Commodity',
+    selectedNodesIds: []
+  }
+};
 
 
 var store = createStore(
@@ -17,16 +31,19 @@ var store = createStore(
     app: AppReducer,
     flows: FlowsReducer
   }),
+  initialState,
   applyMiddleware(thunk)
 );
 
-window.addEventListener('resize', () => {
-  store.dispatch(resize(window.innerWidth, window.innerHeight));
-});
+
 
 new SankeyContainer(store);
 new MapContainer(store);
 new NavContainer(store);
 
-store.dispatch(selectIndicator('Volume', false));
-store.dispatch(loadLinks());
+store.dispatch(loadInitialData());
+store.dispatch(resize(window.innerWidth, window.innerHeight));
+
+window.addEventListener('resize', () => {
+  store.dispatch(resize(window.innerWidth, window.innerHeight));
+});

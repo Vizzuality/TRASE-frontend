@@ -21,7 +21,7 @@ module.exports = {
           1,
             "always"
         ],
-        "no-console": 1,
+        "no-console": [1, { allow: ["warn", "error"] }],
         "no-debugger": 1
     },
     "parserOptions": {
@@ -31,6 +31,7 @@ module.exports = {
       "sourceType": "module"
     },
     "globals": {
-      NODE_ENV_DEV: true
+      NODE_ENV_DEV: true,
+      API_URL: true
     }
 };
