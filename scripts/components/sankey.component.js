@@ -12,7 +12,7 @@ export default class {
   windowResized() {
     // console.log(size);
 
-    this.layout.setViewportSize(getComputedSize('#sankey'));
+    this.layout.setViewportSize(getComputedSize('.js-sankey'));
 
     if (this.layout.relayout()) {
       this._render();
@@ -43,7 +43,7 @@ export default class {
     this.layout = sankeyLayout()
       .columnWidth(100);
 
-    this.svg = d3_select('#sankey');
+    this.svg = d3_select('.js-sankey');
     this.sankeyColumns = this.svg.selectAll('.sankey-column');
     this.linksContainer = this.svg.select('.sankey-links');
 
