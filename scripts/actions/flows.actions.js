@@ -33,6 +33,10 @@ const _getSelectAction = (param, value, type, reloadLinks = true) => {
 
 export function loadInitialData() {
   return (dispatch, getState) => {
+    dispatch({
+      type: actions.LOAD_INITIAL_DATA
+    });
+
     const params = {
       method: 'get_all_nodes',
       country: getState().flows.selectedCountry,
@@ -56,6 +60,10 @@ export function loadInitialData() {
 
 export function loadLinks() {
   return (dispatch, getState) => {
+    dispatch({
+      type: actions.LOAD_LINKS
+    });
+
     const columnIndexes = [0,3,4,8];
     const params = {
       method: 'get_flows',

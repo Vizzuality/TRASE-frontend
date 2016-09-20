@@ -1,0 +1,20 @@
+@import '../settings';
+
+.c-loading {
+  position: absolute;
+  top: calc(50% - 60px);
+  left: calc(50% - 20px);
+  padding: 10px;
+  background: $white;
+  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);
+  width: 120px;
+  height: 40px;
+  font-family: $font-family-1;
+  display: none;
+  text-align: center;
+
+  &.-visible {
+    display: block;
+  }
+
+}

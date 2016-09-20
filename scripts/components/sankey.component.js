@@ -12,11 +12,19 @@ export default class {
   windowResized() {
     // console.log(size);
 
-    this.layout.setViewportSize(getComputedSize('.js-sankey'));
+    this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
 
     if (this.layout.relayout()) {
       this._render();
     }
+  }
+
+  initialDataLoadStarted(loading) {
+    this._toggleLoading(loading);
+  }
+
+  linksLoadStarted(loading) {
+    this._toggleLoading(loading);
   }
 
   linksLoaded(linksPayload) {
@@ -43,11 +51,16 @@ export default class {
     this.layout = sankeyLayout()
       .columnWidth(100);
 
-    this.svg = d3_select('.js-sankey');
+    this.el = document.querySelector('.js-sankey');
+    this.svg = d3_select('.js-sankey-canvas');
     this.sankeyColumns = this.svg.selectAll('.sankey-column');
     this.linksContainer = this.svg.select('.sankey-links');
 
     this.sankeyColumns.on('mouseleave', () => { this.callbacks.onNodeHighlighted(null); } );
+  }
+
+  _toggleLoading(loading) {
+    this.el.querySelector('.js-loading').classList.toggle('-visible', loading);
   }
 
   _render() {
