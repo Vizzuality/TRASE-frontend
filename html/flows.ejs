@@ -28,7 +28,7 @@
       </div>
 
       <div class="c-nav-param">
-        <div class="c-dropdown" data-dropdown="indicator">
+        <div class="c-dropdown" data-dropdown="quant">
           <span class="dropdown-label">Resize by</span>
           <span class="js-dropdown-title dropdown-title">
             Resize by
@@ -73,15 +73,23 @@
     <svg id="sankey" class="c-sankey is-absolute">
       <g class="sankey-container">
         <rect classs="sankey-bg"></rect>
-        <g class="sankey-layers"></g>
-        <g class="sankey-clicked-links"></g>
-        <g class="sankey-highlighted-links"></g>
+        <g class="sankey-columns">
+          <g class="sankey-column">
+            <g class="sankey-nodes"></g>
+          </g>
+          <g class="sankey-column">
+            <g class="sankey-nodes"></g>
+          </g>
+          <g class="sankey-column">
+            <g class="sankey-nodes"></g>
+          </g>
+          <g class="sankey-column">
+            <g class="sankey-nodes"></g>
+          </g>
+        </g>
+        <g class="sankey-links"></g>
       </g>
     </svg>
-
-    <svg id="timeline" class="c-timeline is-absolute"></svg>
-
-    <svg id="chord" class="c-chord is-absolute is-hidden"></svg>
 
     <%= htmlWebpackPlugin.options.footer %>
   </div>

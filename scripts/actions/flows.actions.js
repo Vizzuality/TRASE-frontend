@@ -1,69 +1,97 @@
 import actions from 'actions';
-import prepareData from 'utils/sankey.prepareData';
-import getURLFromParams from 'utils/sankey.getURLFromParams';
+import getURLFromParams from 'utils/getURLFromParams';
 
-
-// params sent to the API
-// FIXME will be dynamic at some point
-const params = {
-  country: 'brazil',
-  raw: 'soy',
-  yearStart: '2012',
-  // nNodes: '10000000',
-  includeLayers: [0,3,7,9],
-  // excludeNodes: [2575,2576,2577,2578],
-  flowQuant: 'Volume',
-  flowQual: 'Commodity',
-  // includeNodeQuals: ['Mun Id IBGE'],
-  // clickedNodes: [39]
-};
-
-export function selectIndicator(indicator /*, reloadLinks = true*/) {
-  return dispatch => {
-    dispatch({
-      type: actions.SELECT_INDICATOR,
-      indicator
-    });
-    // if (reloadLinks) {
-    //   dispatch(loadLinks());
-    // }
-  };
+export function selectCountry(country, reloadLinks) {
+  return _getSelectAction('country', country, actions.SELECT_COUNTRY, reloadLinks);
+}
+export function selectCommodity(commodity, reloadLinks) {
+  return _getSelectAction('commodity', commodity, actions.SELECT_COMMODITY, reloadLinks);
+}
+export function selectYears(years, reloadLinks) {
+  return _getSelectAction('years', years, actions.SELECT_YEARS, reloadLinks);
+}
+export function selectQuant(quant, reloadLinks) {
+  return _getSelectAction('quant', quant, actions.SELECT_QUANT, reloadLinks);
+}
+export function selectQual(qual, reloadLinks) {
+  return _getSelectAction('qual', qual, actions.SELECT_QUAL, reloadLinks);
 }
 
-export function selectCountry(country) {
+const _getSelectAction = (param, value, type, reloadLinks = true) => {
+  // console.log(param, value, type, reloadLinks)
   return dispatch => {
-    dispatch({
-      type: actions.SELECT_COUNTRY,
-      country
+    const action = {
+      type
+    };
+    action[param] = value;
+    dispatch(action);
+    if (reloadLinks) {
+      dispatch(loadLinks());
+    }
+  };
+};
+
+export function loadInitialData() {
+  return (dispatch, getState) => {
+    const params = {
+      method: 'get_all_nodes',
+      country: getState().flows.selectedCountry,
+      raw: getState().flows.selectedCommodity
+    };
+    const nodesURL = getURLFromParams(params);
+    params.method = 'get_columns';
+    const columnsURL = getURLFromParams(params);
+
+    Promise.all([nodesURL, columnsURL].map(url =>
+        fetch(url).then(resp => resp.text())
+    )).then(payload => {
+      dispatch({
+        type: actions.GET_COLUMNS,
+        payload,
+      });
+      dispatch(loadLinks());
     });
   };
 }
 
 export function loadLinks() {
   return (dispatch, getState) => {
-    params.flowQuant = getState().flows.selectedIndicator;
-    // FIXME currently the API only runs locally, production version uses a CLI-pregenerated JSON file
-    const url = (NODE_ENV_DEV) ?  getURLFromParams(params) : 'sample.json';
+    const columnIndexes = [0,3,4,8];
+    const params = {
+      method: 'get_flows',
+      country: getState().flows.selectedCountry.toUpperCase(),
+      raw: getState().flows.selectedCommodity.toUpperCase(),
+      yearStart: getState().flows.selectedYears[0],
+      includeColumns: columnIndexes,
+      nNodes: 10,
+      flowQuant: getState().flows.selectedQuant,
+      flowQual: getState().flows.selectedQual
+    };
+    console.log(params)
+    const url = getURLFromParams(params);
+
     fetch(url)
       .then(res => res.text())
       .then(payload => {
         dispatch({
-          type: actions.GET_DATA,
-          payload: prepareData(JSON.parse(payload))
+          type: actions.GET_LINKS,
+          payload,
+          columnIndexes
         });
       });
   };
 }
 
-export function selectNode() {
+export function selectNode(id) {
   return {
-    type: actions.SELECT_NODE
+    type: actions.SELECT_NODE,
+    id
   };
 }
 
 export function highlightNode(id) {
   return (dispatch, getState) => {
-    if (id === getState().flows.selectedNodeId) return;
+    if (getState().flows.selectedNodesIds.indexOf(id) > -1) return;
     dispatch({
       type: actions.HIGHLIGHT_NODE,
       id

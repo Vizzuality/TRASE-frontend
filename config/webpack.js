@@ -34,7 +34,6 @@ const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
 
 const pagePlugins = Object.keys(pages).map(id => getPagePlugin(id, pages[id].title));
 const entry = _.mapValues(pages, (page, id) => './scripts/pages/' + id + '.page.js' );
-
 module.exports = {
   entry: entry,
   devtool: 'source-map',
@@ -42,13 +41,14 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({ name: 'common' }),
     new webpack.DefinePlugin({
       NODE_ENV_DEV: process.env.NODE_ENV === 'development',
+      API_URL: JSON.stringify(process.env.API_URL)
     })
   ].concat(pagePlugins),
   output: {
     path: './dist',
     filename: '[name].bundle.js'
   },
-  // this section allows imports with absolute paths (as if usiong node_modules)
+  // this section allows imports with absolute paths (as if using node_modules)
   resolve: {
     root: process.cwd(),
     alias: {
