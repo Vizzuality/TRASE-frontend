@@ -1,5 +1,5 @@
 // builds an URL usable to call the API, using params
-export default (params) => {
+export default (endpoint, params) => {
   return Object.keys(params).reduce((prev, current) => {
     const value = params[current];
     if (Array.isArray(value)) {
@@ -9,5 +9,5 @@ export default (params) => {
       return `${prev}&${arrUrl}`;
     }
     return `${prev}&${current}=${params[current]}`;
-  }, `${API_URL}?`);
+  }, `${API_URL}${endpoint}?`);
 };
