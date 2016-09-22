@@ -17,8 +17,12 @@ const initialState = {
   flows: {
     selectedCountry: 'brazil',
     selectedCommodity: 'soy',
-    selectedYears: [2011, 2012],
+    // years has to be an array
+    // this in a temporal patch to avoid failing on dropdown initialisation
+    selectedYears: 2015,
     selectedQuant: 'Deforestation risk',
+    selectedColor: 1,
+    selectedView: 1,
     selectedQual: 'Commodity',
     selectedNodesIds: []
   }
