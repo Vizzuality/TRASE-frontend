@@ -50,6 +50,8 @@ export default function (state = initialState, action) {
     }
     return Object.assign({}, state, { selectedNodesIds: selectedNodesIds });
   }
+  case actions.GET_GEO_DATA:
+    return Object.assign({}, state, { geoData: action.payload });
   default:
     return state;
   }

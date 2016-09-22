@@ -42,13 +42,20 @@ export function loadInitialData() {
     params.method = 'get_columns';
     const columnsURL = getURLFromParams(params);
 
-    Promise.all([nodesURL, columnsURL].map(url =>
+    const municipURL = 'municip.topo.json';
+
+    Promise.all([nodesURL, columnsURL, municipURL].map(url =>
         fetch(url).then(resp => resp.text())
     )).then(payload => {
+      // TODO do not wait for end of all promises/use another .all call
       dispatch({
         type: actions.GET_COLUMNS,
-        payload,
+        payload: payload.slice(0,2),
       });
+      dispatch({
+        type: actions.GET_GEO_DATA,
+        payload: payload[2]
+      })
       dispatch(loadLinks());
     });
   };

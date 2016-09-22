@@ -5,7 +5,8 @@ import Map from 'components/map.component.js';
 
 const mapMethodsToState = (state) => ({
   highlightNode: state.flows.highlightedNodeId,
-  selectNode: state.flows.selectedNodeId
+  selectNode: state.flows.selectedNodeId,
+  loadMap: state.flows.geoData
 });
 
 const mapViewCallbacksToActions = () => ({
