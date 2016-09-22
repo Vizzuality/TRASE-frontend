@@ -34,13 +34,11 @@ const _getSelectAction = (param, value, type, reloadLinks = true) => {
 export function loadInitialData() {
   return (dispatch, getState) => {
     const params = {
-      method: 'get_all_nodes',
       country: getState().flows.selectedCountry,
       raw: getState().flows.selectedCommodity
     };
-    const nodesURL = getURLFromParams(params);
-    params.method = 'get_columns';
-    const columnsURL = getURLFromParams(params);
+    const nodesURL = getURLFromParams('/v1/get_all_nodes', params);
+    const columnsURL = getURLFromParams('/v1/get_columns', params);
 
     Promise.all([nodesURL, columnsURL].map(url =>
         fetch(url).then(resp => resp.text())
@@ -58,17 +56,15 @@ export function loadLinks() {
   return (dispatch, getState) => {
     const columnIndexes = [0,3,4,8];
     const params = {
-      method: 'get_flows',
       country: getState().flows.selectedCountry.toUpperCase(),
       raw: getState().flows.selectedCommodity.toUpperCase(),
-      yearStart: getState().flows.selectedYears[0],
-      includeColumns: columnIndexes,
-      nNodes: 10,
-      flowQuant: getState().flows.selectedQuant,
-      flowQual: getState().flows.selectedQual
+      year_start: getState().flows.selectedYears[0],
+      include_columns: columnIndexes,
+      n_nodes: 10,
+      flow_quant: getState().flows.selectedQuant,
+      flow_qual: getState().flows.selectedQual
     };
-    console.log(params)
-    const url = getURLFromParams(params);
+    const url = getURLFromParams('/v1/get_flows', params);
 
     fetch(url)
       .then(res => res.text())
