@@ -42,9 +42,7 @@ export function loadInitialData() {
     params.method = 'get_columns';
     const columnsURL = getURLFromParams(params);
 
-    const municipURL = 'municip.topo.json';
-
-    Promise.all([nodesURL, columnsURL, municipURL].map(url =>
+    Promise.all([nodesURL, columnsURL].map(url =>
         fetch(url).then(resp => resp.text())
     )).then(payload => {
       // TODO do not wait for end of all promises/use another .all call
@@ -52,12 +50,10 @@ export function loadInitialData() {
         type: actions.GET_COLUMNS,
         payload: payload.slice(0,2),
       });
-      dispatch({
-        type: actions.GET_GEO_DATA,
-        payload: payload[2]
-      })
       dispatch(loadLinks());
     });
+
+    dispatch(loadLowResMapVectorLayers());
   };
 }
 
@@ -74,12 +70,17 @@ export function loadLinks() {
       flowQuant: getState().flows.selectedQuant,
       flowQual: getState().flows.selectedQual
     };
-    console.log(params)
     const url = getURLFromParams(params);
 
     fetch(url)
       .then(res => res.text())
       .then(payload => {
+
+        // load hi res map vector layers only after links have been loaded once
+        if (!getState().flows.linksPayload) {
+          dispatch(loadHiResMapVectorLayers());
+        }
+
         dispatch({
           type: actions.GET_LINKS,
           payload,
@@ -88,6 +89,32 @@ export function loadLinks() {
       });
   };
 }
+
+export function loadLowResMapVectorLayers() {
+  return (dispatch) => {
+    const municipURL = 'municip.topo.low.json';
+    _loadMapVectorLayers([municipURL], dispatch);
+  };
+}
+
+export function loadHiResMapVectorLayers() {
+  return (dispatch) => {
+    const municipURL = 'municip.topo.json';
+    _loadMapVectorLayers([municipURL], dispatch);
+  };
+}
+
+const _loadMapVectorLayers = (urls, dispatch) => {
+  Promise.all(urls.map(url =>
+      fetch(url).then(resp => resp.text())
+  )).then(payload => {
+    dispatch({
+      type: actions.GET_GEO_DATA,
+      payload: payload[0]
+    });
+  });
+};
+
 
 export function selectNode(id) {
   return {
