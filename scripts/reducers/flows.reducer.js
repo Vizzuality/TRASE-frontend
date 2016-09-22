@@ -5,6 +5,7 @@ import getVisibleNodes from './sankey/getVisibleNodes';
 import getColumns from './sankey/getColumns';
 import getLinks from './sankey/getLinks';
 import mergeLinks from './sankey/mergeLinks';
+import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
 
 const initialState = {
   selectedNodesIds: [],
@@ -40,19 +41,28 @@ export default function (state = initialState, action) {
   case actions.HIGHLIGHT_NODE:
     return Object.assign({}, state, { highlightedNodeId: action.id });
   case actions.SELECT_NODE: {
-    const currentIndex = state.selectedNodesIds.indexOf(action.id);
-    let selectedNodesIds;
-    console.log(action.id)
-    if (currentIndex > -1) {
-      selectedNodesIds = _.without(state.selectedNodesIds, action.id);
-    } else {
-      selectedNodesIds = [action.id].concat(state.selectedNodesIds);
-    }
-    return Object.assign({}, state, { selectedNodesIds: selectedNodesIds });
+    const selectedNodeIds = getSelectedNodeIds(action.nodeId, state.selectedNodeIds);
+    return Object.assign({}, state, { selectedNodeIds });
   }
   case actions.GET_GEO_DATA:
     return Object.assign({}, state, { geoData: JSON.parse(action.payload) });
+  case actions.SELECT_NODE_FROM_GEOID: {
+    const nodeId = getNodeIdFromGeoId(action.geoId, state.nodesDict);
+    const selectedNodeIds = getSelectedNodeIds(nodeId, state.selectedNodeIds);
+    return Object.assign({}, state, { selectedNodeIds });
+  }
   default:
     return state;
   }
 }
+
+const getSelectedNodeIds = (addedNodeId, currentSelectedNodeIds) => {
+  const currentIndex = currentSelectedNodeIds.indexOf(addedNodeId);
+  let selectedNodeIds;
+  if (currentIndex > -1) {
+    selectedNodeIds = _.without(currentSelectedNodeIds, addedNodeId);
+  } else {
+    selectedNodeIds = [addedNodeId].concat(currentSelectedNodeIds);
+  }
+  return selectedNodeIds;
+};

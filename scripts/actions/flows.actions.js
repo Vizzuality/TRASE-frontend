@@ -132,3 +132,10 @@ export function highlightNode(id) {
     });
   };
 }
+
+export function selectNodeFromGeoId(geoId) {
+  return {
+    type: actions.SELECT_NODE_FROM_GEOID,
+    geoId
+  };
+}

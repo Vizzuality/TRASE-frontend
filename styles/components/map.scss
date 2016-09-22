@@ -1,4 +1,17 @@
+@import '../settings';
 
 .c-map {
   z-index: 1;
+
+  .map-polygon {
+    fill: $pale-grey;
+    stroke: $charcoal-grey;
+    stroke-width: .5px;
+    stroke-opacity: .5;
+
+    &.-highlighted {
+      stroke-width: 2px;
+      stroke-opacity: 1;
+    }
+  }
 }

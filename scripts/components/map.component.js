@@ -12,15 +12,30 @@ export default class {
   }
 
   loadMap(geoData) {
-    // console.log(geoData)
     var topoLayer = new L.GeoJSON();
     var keys = Object.keys(geoData.objects);
     keys.forEach(key => {
-      console.log(key);
       const geojson = topojson.feature(geoData, geoData.objects[key]);
       topoLayer.addData(geojson);
     });
     topoLayer.addTo(this.map);
+    topoLayer.eachLayer(layer => {
+      const that = this;
+      layer._path.classList.add('map-polygon');
+      layer.on({
+        mouseover: function() {
+          this._path.classList.add('-highlighted');
+        },
+        mouseout: function() {
+          this._path.classList.remove('-highlighted');
+        },
+        click: function() {
+          console.log(this.feature.properties.geoid);
+          that.callbacks.onPolygonClicked(this.feature.properties.geoid);
+        }
+      });
+    });
+
   }
 
   highlightNode(id) {
