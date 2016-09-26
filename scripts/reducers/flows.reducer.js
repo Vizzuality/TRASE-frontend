@@ -45,7 +45,13 @@ export default function (state = initialState, action) {
     return Object.assign({}, state, { selectedNodeIds });
   }
   case actions.GET_GEO_DATA:
-    return Object.assign({}, state, { geoData: JSON.parse(action.payload) });
+    return Object.assign({}, state, { 
+      geoData: {
+        municipalities: JSON.parse(action.payload[0]),
+        states: JSON.parse(action.payload[1]),
+        biomes: JSON.parse(action.payload[2])
+      }
+    });
   case actions.SELECT_NODE_FROM_GEOID: {
     const nodeId = getNodeIdFromGeoId(action.geoId, state.nodesDict);
     const selectedNodeIds = getSelectedNodeIds(nodeId, state.selectedNodeIds);

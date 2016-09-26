@@ -53,7 +53,7 @@ export function loadInitialData() {
       dispatch(loadLinks());
     });
 
-    dispatch(loadLowResMapVectorLayers());
+    dispatch(loadMapVectorLayers());
   };
 }
 
@@ -76,10 +76,7 @@ export function loadLinks() {
       .then(res => res.text())
       .then(payload => {
 
-        // load hi res map vector layers only after links have been loaded once
-        if (!getState().flows.linksPayload) {
-          dispatch(loadHiResMapVectorLayers());
-        }
+        // load hi res map vector layers only after links have been loaded once?
 
         dispatch({
           type: actions.GET_LINKS,
@@ -90,17 +87,13 @@ export function loadLinks() {
   };
 }
 
-export function loadLowResMapVectorLayers() {
+export function loadMapVectorLayers() {
   return (dispatch) => {
-    const municipURL = 'municip.topo.low.json';
-    _loadMapVectorLayers([municipURL], dispatch);
-  };
-}
-
-export function loadHiResMapVectorLayers() {
-  return (dispatch) => {
-    const municipURL = 'municip.topo.json';
-    _loadMapVectorLayers([municipURL], dispatch);
+    _loadMapVectorLayers([
+      'municip.topo.hi.json',
+      'states.topo.json',
+      'biomes.topo.json'
+    ], dispatch);
   };
 }
 
@@ -110,7 +103,7 @@ const _loadMapVectorLayers = (urls, dispatch) => {
   )).then(payload => {
     dispatch({
       type: actions.GET_GEO_DATA,
-      payload: payload[0]
+      payload
     });
   });
 };

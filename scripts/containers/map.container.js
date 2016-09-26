@@ -1,5 +1,5 @@
 // see sankey.container for details on how to use those containers
-import { selectNodeFromGeoID } from 'actions/flows.actions';
+import { selectNodeFromGeoId } from 'actions/flows.actions';
 import connect from 'connect';
 import Map from 'components/map.component.js';
 
@@ -10,7 +10,7 @@ const mapMethodsToState = (state) => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  onPolygonClicked: geoId => selectNodeFromGeoID(geoId)
+  onPolygonClicked: geoId => selectNodeFromGeoId(geoId)
 });
 
 export default connect(Map, mapMethodsToState, mapViewCallbacksToActions);

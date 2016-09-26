@@ -12,6 +12,22 @@ export default class {
   }
 
   loadMap(geoData) {
+    this.vectorLayers = {
+      municipalities: this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality', true),
+      states: this._getVectorLayer(geoData.states, 'map-polygon-state'),
+      biomes: this._getVectorLayer(geoData.biomes, 'map-polygon-biome')
+    };
+  }
+
+  highlightNode(id) {
+    this.id = id;
+  }
+
+  selectNode(id) {
+    this.id = id;
+  }
+
+  _getVectorLayer(geoData, polygonClassName, interactive = false) {
     var topoLayer = new L.GeoJSON();
     var keys = Object.keys(geoData.objects);
     keys.forEach(key => {
@@ -21,28 +37,22 @@ export default class {
     topoLayer.addTo(this.map);
     topoLayer.eachLayer(layer => {
       const that = this;
+      layer._path.classList.add(polygonClassName);
       layer._path.classList.add('map-polygon');
-      layer.on({
-        mouseover: function() {
-          this._path.classList.add('-highlighted');
-        },
-        mouseout: function() {
-          this._path.classList.remove('-highlighted');
-        },
-        click: function() {
-          console.log(this.feature.properties.geoid);
-          that.callbacks.onPolygonClicked(this.feature.properties.geoid);
-        }
-      });
+      if (interactive) {
+        layer.on({
+          mouseover: function() {
+            this._path.classList.add('-highlighted');
+          },
+          mouseout: function() {
+            this._path.classList.remove('-highlighted');
+          },
+          click: function() {
+            // console.log(this.feature.properties.geoid);
+            that.callbacks.onPolygonClicked(this.feature.properties.geoid);
+          }
+        });
+      }
     });
-
-  }
-
-  highlightNode(id) {
-    this.id = id;
-  }
-
-  selectNode(id) {
-    this.id = id;
   }
 }
