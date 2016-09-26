@@ -19,7 +19,7 @@ https://github.com/Vizzuality/TRASE-frontend/issues/9
 |       |    \--------+-------+
 |       |             |       |   
 +-------+             +-------+
-  layer                 layer
+  column                column
 
 ```
 
