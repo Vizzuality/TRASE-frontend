@@ -65,12 +65,12 @@ export function loadLinks() {
       type: actions.LOAD_LINKS
     });
 
-    const columnIndexes = [0,3,4,8];
+    const columnIndexes = [0,3,8,9];
     const params = {
       country: getState().flows.selectedCountry.toUpperCase(),
       raw: getState().flows.selectedCommodity.toUpperCase(),
       year_start: getState().flows.selectedYears[0],
-      include_columns: columnIndexes,
+      include_columns: columnIndexes.join(','),
       n_nodes: 10,
       flow_quant: getState().flows.selectedQuant,
       flow_qual: getState().flows.selectedQual
