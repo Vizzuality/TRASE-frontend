@@ -35,4 +35,10 @@
       height: 100%;
     }
   }
+
+  > .c-columnsSelector {
+    bottom: 100px;
+    left: 320px;
+    width: calc(100% - 320px);
+  }
 }
