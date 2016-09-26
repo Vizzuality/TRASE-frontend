@@ -4,7 +4,7 @@ export default (endpoint, params) => {
     const value = params[current];
     if (Array.isArray(value)) {
       const arrUrl = value.reduce((arrPrev, arrCurrent) => {
-        return `${arrPrev}&${current}${arrCurrent}`;
+        return `${arrPrev}&${current}=${arrCurrent}`;
       },'');
       return `${prev}&${arrUrl}`;
     }
