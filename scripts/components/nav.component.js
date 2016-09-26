@@ -2,6 +2,7 @@ import 'styles/components/nav.scss';
 import Dropdown from 'components/dropdown.component';
 import BookmarkMenu from 'components/nav/bookmarks/bookmark-menu.component';
 import ShareMenu from 'components/nav/share/share-menu.component';
+import YearsMenu from 'components/nav/years-brush/years-slider.component';
 
 export default class {
   onCreated() {
@@ -9,7 +10,9 @@ export default class {
     // left side
     this.countryDropdown = new Dropdown('country', this.callbacks.onCountrySelected);
     this.commodityDropdown = new Dropdown('commodity', this.callbacks.onCommoditySelected);
-    this.yearsDropdown = new Dropdown('years', this.callbacks.onYearsSelected);
+    this.yearsDropdown = new Dropdown('years', null);
+
+    this.yearsMenu = new YearsMenu('js-years-slider', this.callbacks.onYearsSelected);
 
     // right side
     this.quantDropdown = new Dropdown('quant', this.callbacks.onQuantSelected);
@@ -22,8 +25,8 @@ export default class {
     new Dropdown('share');
   }
 
-  selectYears(value) {
-    this.yearsDropdown.selectValue(value);
+  selectYears() {
+    // this.yearsDropdown.selectValue(value);
   }
 
   selectCountry(value) {

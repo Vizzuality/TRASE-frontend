@@ -1,0 +1,33 @@
+@import '../../settings';
+
+.c-years-slider {
+  padding: 20px;
+
+  .axis--grid .domain {
+    fill: $pale-grey;
+    stroke: none;
+  }
+
+  .axis--x .domain,
+  .axis--grid .tick line {
+    stroke: $white;
+  }
+
+  .axis--grid .tick-minor line {
+    stroke-opacity: .5;
+  }
+
+  .brush > {
+
+    .handle {
+      width: 3px;
+      fill: $medium-pink;
+    }
+
+    .selection {
+      transform: scaleY(1.2);
+      transform-origin: center;
+      fill: $white;
+    }
+  }
+}

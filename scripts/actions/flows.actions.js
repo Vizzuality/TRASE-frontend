@@ -81,7 +81,8 @@ export function loadLinks() {
       flow_quant: getState().flows.selectedQuant,
       flow_qual: getState().flows.selectedQual,
       color: +getState().flows.selectedColor,
-      view: +getState().flows.selectedView
+      view: +getState().flows.selectedView,
+      years: getState().flows.selectedYears
     };
     const url = getURLFromParams('/v1/get_flows', params);
 
