@@ -9,6 +9,12 @@ export default class {
     this.map = L.map('map').setView([-16.20639, -44.43333], 4);
     var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' });
     this.map.addLayer(layer);
+
+    this._setEventListeners();
+  }
+
+  _setEventListeners() {
+    document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this._onToggleBasemap(); });
   }
 
   loadMap(geoData) {
@@ -63,5 +69,10 @@ export default class {
       });
     });
     return topoLayer;
+  }
+
+  _onToggleBasemap() {
+    document.querySelector('.c-basemap-options').classList.toggle('-open');
+    document.querySelector('.c-map').classList.toggle('-moved');
   }
 }

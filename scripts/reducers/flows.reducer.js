@@ -88,6 +88,12 @@ export default function (state = initialState, action) {
     const selectedNodeIds = getSelectedNodeIds(nodeId, state.selectedNodeIds);
     return Object.assign({}, state, { selectedNodeIds });
   }
+  case actions.SELECT_LAYERS: {
+    return Object.assign({}, state, { selectedLayers: action.layers });
+  }
+  case actions.SELECT_CONTEXTUAL_LAYERS: {
+    return Object.assign({}, state, { selectedContextualLayers: action.layers});
+  }
   default:
     return state;
   }

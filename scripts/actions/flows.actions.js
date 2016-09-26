@@ -34,6 +34,14 @@ export function selectColumn(columnIndex, columnId) {
   };
 }
 
+export function selectLayers(layers, reloadLinks) {
+  return _getSelectAction('layers', layers, actions.SELECT_LAYERS, reloadLinks);
+}
+
+export function selectContextualLayers(layers, reloadLinks) {
+  return _getSelectAction('contextualLayers', layers, actions.SELECT_CONTEXTUAL_LAYERS, reloadLinks);
+}
+
 const _getSelectAction = (param, value, type, reloadLinks = true) => {
   // console.log(param, value, type, reloadLinks)
   return dispatch => {
@@ -92,8 +100,11 @@ export function loadLinks() {
       flow_qual: getState().flows.selectedQual,
       color: +getState().flows.selectedColor,
       view: +getState().flows.selectedView,
-      years: getState().flows.selectedYears
+      years: getState().flows.selectedYears,
+      layers: getState().flows.selectedLayers,
+      contextualLayers: getState().flows.seletedContextualLayers
     };
+    console.log(params);
     const url = getURLFromParams('/v1/get_flows', params);
 
     fetch(url)

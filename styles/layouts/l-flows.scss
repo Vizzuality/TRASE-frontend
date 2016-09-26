@@ -12,6 +12,12 @@
     }
   }
 
+  > .c-basemap-options {
+    top: 56px;
+    width: 320px;
+    height: calc(100% - 56px);
+  }
+
   > .c-map {
     top: 56px;
     width: 320px;

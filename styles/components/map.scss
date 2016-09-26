@@ -1,7 +1,28 @@
 @import '../settings';
 
 .c-map {
+  transform: translate(0, 0);
+  transition: transform 1s ease;
   z-index: 1;
+
+  &.-moved {
+    transform: translate(100%, 0);
+  }
+
+  .btn-basemap {
+    display: inline-block;
+
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    width: 34px;
+    height: 34px;
+
+    background-color: $white;
+    cursor: pointer;
+    z-index: 401;
+  }
 
   .map-polygon {
     fill: $pale-grey;
