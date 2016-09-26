@@ -70,26 +70,31 @@
       </div>
     </div>
 
-    <svg id="sankey" class="c-sankey is-absolute">
-      <g class="sankey-container">
-        <rect classs="sankey-bg"></rect>
-        <g class="sankey-columns">
-          <g class="sankey-column">
-            <g class="sankey-nodes"></g>
+    <div class="c-sankey is-absolute js-sankey">
+      <div class="c-loading js-loading">
+        Loading...
+      </div>
+      <svg class="js-sankey-canvas sankey">
+        <g class="sankey-container">
+          <rect classs="sankey-bg"></rect>
+          <g class="sankey-columns">
+            <g class="sankey-column">
+              <g class="sankey-nodes"></g>
+            </g>
+            <g class="sankey-column">
+              <g class="sankey-nodes"></g>
+            </g>
+            <g class="sankey-column">
+              <g class="sankey-nodes"></g>
+            </g>
+            <g class="sankey-column">
+              <g class="sankey-nodes"></g>
+            </g>
           </g>
-          <g class="sankey-column">
-            <g class="sankey-nodes"></g>
-          </g>
-          <g class="sankey-column">
-            <g class="sankey-nodes"></g>
-          </g>
-          <g class="sankey-column">
-            <g class="sankey-nodes"></g>
-          </g>
+          <g class="sankey-links"></g>
         </g>
-        <g class="sankey-links"></g>
-      </g>
-    </svg>
+      </svg>
+    </div>
 
     <%= htmlWebpackPlugin.options.footer %>
   </div>

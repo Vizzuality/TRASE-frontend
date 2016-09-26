@@ -33,6 +33,10 @@ const _getSelectAction = (param, value, type, reloadLinks = true) => {
 
 export function loadInitialData() {
   return (dispatch, getState) => {
+    dispatch({
+      type: actions.LOAD_INITIAL_DATA
+    });
+
     const params = {
       country: getState().flows.selectedCountry,
       raw: getState().flows.selectedCommodity
@@ -57,6 +61,10 @@ export function loadInitialData() {
 
 export function loadLinks() {
   return (dispatch, getState) => {
+    dispatch({
+      type: actions.LOAD_LINKS
+    });
+
     const columnIndexes = [0,3,4,8];
     const params = {
       country: getState().flows.selectedCountry.toUpperCase(),

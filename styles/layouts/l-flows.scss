@@ -15,7 +15,7 @@
   > .c-map {
     top: 56px;
     width: 320px;
-    height: calc(100% - 108px);
+    height: calc(100% - 56px);
 
     > .c-map-legend {
       bottom: 20px;
@@ -28,12 +28,11 @@
     top: 56px;
     left: 320px;
     width: calc(100% - 320px);
-    height: calc(100% - 108px);
-  }
+    height: calc(100% - 56px);
 
-  > .c-timeline {
-    bottom: 0;
-    width: 100%;
-    height: 56px;
+    .sankey {
+      width: 100%;
+      height: 100%;
+    }
   }
 }

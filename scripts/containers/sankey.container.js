@@ -5,6 +5,8 @@ import Sankey from 'components/sankey.component.js';
 // this maps component methods to app state updates
 // keys correspond to method names, values to state prop path
 const mapMethodsToState = (state) => ({
+  initialDataLoadStarted: state.flows.initialDataLoading,
+  linksLoadStarted: state.flows.linksLoading,
   linksLoaded: state.flows.linksPayload,
   windowResized: state.app.windowSize,
   highlightNode: state.flows.highlightedNodeId,
