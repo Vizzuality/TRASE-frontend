@@ -43,12 +43,15 @@ export function loadInitialData() {
     Promise.all([nodesURL, columnsURL].map(url =>
         fetch(url).then(resp => resp.text())
     )).then(payload => {
+      // TODO do not wait for end of all promises/use another .all call
       dispatch({
         type: actions.GET_COLUMNS,
-        payload,
+        payload: payload.slice(0,2),
       });
       dispatch(loadLinks());
     });
+
+    dispatch(loadMapVectorLayers());
   };
 }
 
@@ -69,6 +72,9 @@ export function loadLinks() {
     fetch(url)
       .then(res => res.text())
       .then(payload => {
+
+        // load hi res map vector layers only after links have been loaded once?
+
         dispatch({
           type: actions.GET_LINKS,
           payload,
@@ -77,6 +83,28 @@ export function loadLinks() {
       });
   };
 }
+
+export function loadMapVectorLayers() {
+  return (dispatch) => {
+    _loadMapVectorLayers([
+      'municip.topo.hi.json',
+      'states.topo.json',
+      'biomes.topo.json'
+    ], dispatch);
+  };
+}
+
+const _loadMapVectorLayers = (urls, dispatch) => {
+  Promise.all(urls.map(url =>
+      fetch(url).then(resp => resp.text())
+  )).then(payload => {
+    dispatch({
+      type: actions.GET_GEO_DATA,
+      payload
+    });
+  });
+};
+
 
 export function selectNode(id) {
   return {
@@ -92,5 +120,12 @@ export function highlightNode(id) {
       type: actions.HIGHLIGHT_NODE,
       id
     });
+  };
+}
+
+export function selectNodeFromGeoId(geoId) {
+  return {
+    type: actions.SELECT_NODE_FROM_GEOID,
+    geoId
   };
 }

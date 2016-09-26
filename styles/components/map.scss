@@ -1,4 +1,28 @@
+@import '../settings';
 
 .c-map {
   z-index: 1;
+
+  .map-polygon {
+    fill: $pale-grey;
+    stroke: $charcoal-grey;
+    stroke-opacity: .5;
+
+    &.-highlighted {
+      fill: blue;
+      fill-opacity: 1;
+    }
+  }
+
+  .map-polygon-municipality {
+    stroke-width: .2px;
+  }
+  .map-polygon-state {
+    stroke-width: 1px;
+    pointer-events: none !important;
+  }
+  .map-polygon-biome {
+    stroke-width: 2px;
+    pointer-events: none !important;
+  }
 }
