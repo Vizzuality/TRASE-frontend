@@ -60,4 +60,10 @@
       pointer-events: none;
     }
   }
+
+  & .-small {
+    .dropdown-title {
+      font-family: $font-family-1;
+    }
+  }
 }
