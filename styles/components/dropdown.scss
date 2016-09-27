@@ -61,9 +61,29 @@
     }
   }
 
-  & .-small {
+  &.-columnSelector {
     .dropdown-title {
       font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      text-align: center;
+      text-transform: uppercase;
+
+      &::after {
+        @include triangle(8px, 2px, $charcoal-grey, 'down');
+        top: 20%;
+      }
+    }
+    .dropdown-list {
+      bottom: 40px;
+      top: auto
+    }
+    .dropdown-list > .dropdown-item {
+      padding: 10px 25px;
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      font-weight: $font-weight-light;
+      text-align: center;
+      text-transform: uppercase;
     }
   }
 }
