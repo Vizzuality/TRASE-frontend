@@ -60,31 +60,4 @@
       pointer-events: none;
     }
   }
-
-  &.-columnSelector {
-    .dropdown-title {
-      font-family: $font-family-1;
-      font-size: $font-size-regular;
-      text-align: center;
-      text-transform: uppercase;
-      padding: 0;
-
-      &::after {
-        @include triangle(8px, 2px, $charcoal-grey, 'down');
-        top: 0;
-      }
-    }
-    .dropdown-list {
-      bottom: 40px;
-      top: auto
-    }
-    .dropdown-list > .dropdown-item {
-      padding: 10px 25px;
-      font-family: $font-family-1;
-      font-size: $font-size-regular;
-      font-weight: $font-weight-light;
-      text-align: center;
-      text-transform: uppercase;
-    }
-  }
 }
