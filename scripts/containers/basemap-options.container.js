@@ -4,7 +4,7 @@ import BasemapOptions from 'components/map/basemap-options.component';
 
 const mapMethodsToState = (state) => ({
   selectedLayer: state.flows.selectedLayers,
-  selectedContextualLayer: state.flows.seletedContextualLayers
+  selectContextualLayers: state.flows.selectedContextualLayers
 });
 
 const mapViewCallbacksToActions = () => ({

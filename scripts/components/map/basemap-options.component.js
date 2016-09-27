@@ -9,7 +9,6 @@ import 'styles/components/shared/switcher.scss';
 export default class {
 
   onCreated() {
-    debugger;
     this.layers = [{
       slug: 'soy_trade_volume',
       name: 'soy trade volume'
@@ -44,6 +43,9 @@ export default class {
 
     this._setVars();
     this._populateLists();
+  }
+  selectContextualLayers(layers) {
+    console.log('YIPPEEE', layers)
   }
 
   _setVars() {
