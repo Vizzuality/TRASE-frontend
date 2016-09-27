@@ -58,15 +58,17 @@
   > .layer-list {
     margin: 20px 0 40px;
 
-    &::after {
-      display: inline-block;
-      position: absolute;
-      left: -50%;
-      width: 100%;
-      margin: 20px 0 0;
-      transform: translate(50%, 0);
-      border-bottom: 1px solid rgba($charcoal-grey, .1);
-      content: '';
+    &:not(:last-child){
+      &::after {
+        display: inline-block;
+        position: absolute;
+        left: -50%;
+        width: 100%;
+        margin: 20px 0 0;
+        transform: translate(50%, 0);
+        border-bottom: 1px solid rgba($charcoal-grey, .1);
+        content: '';
+      }
     }
 
     > .layer-item {

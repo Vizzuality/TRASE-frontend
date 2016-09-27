@@ -4,15 +4,6 @@ import 'styles/components/shared/switcher.scss';
 
 export default class {
 
-  constructor() {
-    this.state = {
-      mapVectorLayers: {
-        horizontal: null,
-        vertical: null
-      }
-    };
-  }
-
   onCreated() {
     this._setVars();
     this._setEventListeners();
@@ -57,6 +48,7 @@ export default class {
     });
   }
 
+  // used for incoming params
   _setActiveVectorLayers(layers) {
     const groups = Object.keys(layers);
 
@@ -64,11 +56,16 @@ export default class {
       const radios = this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`);
       radios.forEach((radio) => {
         if (radio.getAttribute('value') !== layers[group]) return;
+        const partnerRadio = radio.nextElementSibling ?
+          radio.nextElementSibling : radio.previousElementSibling;
+
         radio.classList.add('-enabled');
+        partnerRadio.classList.add('-disabled');
       });
     });
   }
 
+  // used for incoming params
   _setActiveContextualLayers(layers) {
     layers.forEach((layerSlug) => {
       this.switchers.forEach((switcher) => {
@@ -97,13 +94,17 @@ export default class {
 
     const group = radio.getAttribute('data-group');
     const layerSlug = radio.getAttribute('value');
+    const currentSelectedRadio = this.layerList.querySelector('.c-radio-btn.-enabled');
 
-    this._cleanRadiosByGroup(group);
-    radio.classList.toggle('-enabled');
+    if (radio === currentSelectedRadio) {
+      this._disableRadio(radio);
+    } else {
+      this._cleanRadiosByGroup(group);
+    }
 
-    if (this.state.mapVectorLayers[group] === layerSlug) return;
+    this.state.mapVectorLayers[group] = this.state.mapVectorLayers[group] !== layerSlug ?
+      layerSlug : null;
 
-    this.state.mapVectorLayers[group] = layerSlug;
     this.callbacks.onSelectedVectorLayers(this.state.mapVectorLayers);
   }
 
@@ -117,11 +118,23 @@ export default class {
     this.callbacks.onSelectedContextualLayer(layers);
   }
 
+  _disableRadio(radio) {
+    const partnerRadio = radio.nextElementSibling ?
+      radio.nextElementSibling : radio.previousElementSibling;
+
+    radio.classList.remove('-enabled');
+    partnerRadio.classList.remove('-disabled');
+  }
+
   _cleanRadiosByGroup(group) {
     this.radios.forEach((radio) => {
       if (radio.getAttribute('data-group') === group
         && radio.classList.contains('-enabled')) {
+        const partnerRadio = radio.nextElementSibling ?
+          radio.nextElementSibling : radio.previousElementSibling;
+
         radio.classList.remove('-enabled');
+        partnerRadio.classList.remove('-disabled');
       }
     });
   }
