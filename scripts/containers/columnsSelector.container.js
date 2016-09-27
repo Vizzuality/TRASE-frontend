@@ -3,6 +3,7 @@ import connect from 'connect';
 import ColumnsSelector from 'components/columnsSelector.component.js';
 
 const mapMethodsToState = (state) => ({
+  selectColumns: state.flows.selectedColumnsIds,
   columnsLoaded: state.flows.columns
 });
 

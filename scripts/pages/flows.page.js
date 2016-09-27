@@ -22,7 +22,7 @@ const initialState = {
     selectedQuant: 'Deforestation risk',
     selectedQual: 'Commodity',
     selectedNodesIds: [],
-    selectedColumnsIds: [0, ]
+    selectedColumnsIds: [0, 3, 9, 11]
   }
 };
 
