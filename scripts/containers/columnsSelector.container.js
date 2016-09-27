@@ -3,12 +3,11 @@ import connect from 'connect';
 import ColumnsSelector from 'components/columnsSelector.component.js';
 
 const mapMethodsToState = (state) => ({
-  selectColumns: state.flows.selectedColumnsIds,
-  columnsLoaded: state.flows.columns
+  selectColumns: state.flows.selectedColumnsIds
 });
 
 const mapViewCallbacksToActions = () => ({
-  onColumnClicked: id => selectColumn(id)
+  onColumnSelected: (columnIndex, columnId) => selectColumn(columnIndex, columnId)
 });
 
 export default connect(ColumnsSelector, mapMethodsToState, mapViewCallbacksToActions);

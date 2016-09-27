@@ -16,6 +16,16 @@ export function selectQuant(quant, reloadLinks) {
 export function selectQual(qual, reloadLinks) {
   return _getSelectAction('qual', qual, actions.SELECT_QUAL, reloadLinks);
 }
+export function selectColumn(columnIndex, columnId) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_COLUMN,
+      columnIndex,
+      columnId
+    });
+    // dispatch(loadLinks());
+  };
+}
 
 const _getSelectAction = (param, value, type, reloadLinks = true) => {
   // console.log(param, value, type, reloadLinks)
