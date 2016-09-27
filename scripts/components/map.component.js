@@ -17,7 +17,7 @@ export default class {
       this._getVectorLayer(geoData.states, 'map-polygon-state'),
       this._getVectorLayer(geoData.biomes, 'map-polygon-biome')
     ];
-    this.selectVectorLayer([0]);
+    this.selectVectorLayer([geoData.currentLayer]);
   }
 
   highlightNode(id) {
