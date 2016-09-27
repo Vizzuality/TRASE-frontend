@@ -14,16 +14,20 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
   case actions.LOAD_INITIAL_DATA:
     return Object.assign({}, state, { initialDataLoading: true });
+
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
     const rawColumns = JSON.parse(action.payload[1]).data;
     const nodesDict = getNodesDict(rawNodes);
     return Object.assign({}, state, { columns: rawColumns, nodesDict, initialDataLoading: false });
   }
+
   case actions.LOAD_LINKS:
     return Object.assign({}, state, { linksLoading: true });
+
   case actions.GET_LINKS: {
     const jsonPayload = JSON.parse(action.payload);
     const rawLinks = jsonPayload.data;
@@ -33,28 +37,36 @@ export default function (state = initialState, action) {
     const links = mergeLinks(getLinks(rawLinks, state.nodesDict));
     return Object.assign({}, state, { linksPayload: { links, visibleNodes, columns}, linksLoading: false });
   }
+
   case actions.SELECT_COUNTRY:
     return Object.assign({}, state, { selectedCountry: action.country });
+
   case actions.SELECT_COMMODITY:
     return Object.assign({}, state, { selectedCommodity: action.commodity });
+
   case actions.SELECT_YEARS:
     return Object.assign({}, state, { selectedYears: action.years });
+
   case actions.SELECT_QUAL:
     return Object.assign({}, state, { selectedQual: action.qual });
+
   case actions.SELECT_QUANT:
     return Object.assign({}, state, { selectedQuant: action.quant });
+
   case actions.SELECT_COLUMN: {
     const selectedColumnsIds = [].concat(state.selectedColumnsIds);
     selectedColumnsIds[action.columnIndex] = action.columnId;
-    console.log(selectedColumnsIds)
     return Object.assign({}, state, { selectedColumnsIds });
   }
+
   case actions.HIGHLIGHT_NODE:
     return Object.assign({}, state, { highlightedNodeId: action.id });
+
   case actions.SELECT_NODE: {
     const selectedNodeIds = getSelectedNodeIds(action.nodeId, state.selectedNodeIds);
     return Object.assign({}, state, { selectedNodeIds });
   }
+
   case actions.GET_GEO_DATA:
     return Object.assign({}, state, {
       geoData: {
@@ -63,6 +75,7 @@ export default function (state = initialState, action) {
         biomes: JSON.parse(action.payload[2])
       }
     });
+
   case actions.SELECT_NODE_FROM_GEOID: {
     const nodeId = getNodeIdFromGeoId(action.geoId, state.nodesDict);
     const selectedNodeIds = getSelectedNodeIds(nodeId, state.selectedNodeIds);
