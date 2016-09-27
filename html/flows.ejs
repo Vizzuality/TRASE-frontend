@@ -146,6 +146,10 @@
           data-layer-slug="number_traders"
         >
           <label class="layer-name">number of traders</label>
+          <ul class="layer-options">
+            <li><svg class="icon icon-layer-info"><use xlink:href="#icon-layer-info"></use></svg></li>
+            <li><svg class="icon icon-layer-download"><use xlink:href="#icon-layer-download"></use></svg></li>
+          </ul>
           <div class="radios">
             <div class="c-radio-btn" data-group="horizontal" value="number_traders"></div>
             <div class="c-radio-btn" data-group="vertical" value="number_traders"></div>
@@ -290,7 +294,9 @@
     </div>
 
     <div id="map" class="c-map is-absolute">
-      <div class="btn-basemap js-basemap-switcher"></div>
+      <div class="btn-basemap js-basemap-switcher">
+        <svg class="icon icon-layers"><use xlink:href="#icon-layers"></use></svg>
+      </div>
       <div class="c-map-legend is-absolute">
         this the map legend
       </div>
