@@ -25,8 +25,9 @@ export default function (state = initialState, action) {
   case actions.LOAD_LINKS:
     return Object.assign({}, state, { linksLoading: true });
   case actions.GET_LINKS: {
-    const rawLinks = JSON.parse(action.payload).data;
-    const nodesMeta = JSON.parse(action.payload).include;
+    const jsonPayload = JSON.parse(action.payload);
+    const rawLinks = jsonPayload.data;
+    const nodesMeta = jsonPayload.include;
     const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, nodesMeta, action.columnIndexes);
     const columns = getColumns(state.columns, action.columnIndexes);
     const links = mergeLinks(getLinks(rawLinks, state.nodesDict));
@@ -49,7 +50,7 @@ export default function (state = initialState, action) {
     return Object.assign({}, state, { selectedNodeIds });
   }
   case actions.GET_GEO_DATA:
-    return Object.assign({}, state, { 
+    return Object.assign({}, state, {
       geoData: {
         municipalities: JSON.parse(action.payload[0]),
         states: JSON.parse(action.payload[1]),
