@@ -32,8 +32,8 @@ export default function (state = initialState, action) {
     const jsonPayload = JSON.parse(action.payload);
     const rawLinks = jsonPayload.data;
     const nodesMeta = jsonPayload.include;
-    const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, nodesMeta, action.columnIndexes);
-    const columns = getColumns(state.columns, action.columnIndexes);
+    const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, nodesMeta, state.selectedColumnsIds);
+    const columns = getColumns(state.columns, state.selectedColumnsIds);
     const links = mergeLinks(getLinks(rawLinks, state.nodesDict));
     return Object.assign({}, state, { linksPayload: { links, visibleNodes, columns}, linksLoading: false });
   }
