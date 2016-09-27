@@ -4,7 +4,7 @@ import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columnsSelector.container';
-import BasemapOptionsContainer from 'containers/basemap-options.container';
+import MapLayersContainer from 'containers/map-layers.container';
 import MapContainer from 'containers/map.container';
 import NavContainer from 'containers/nav.container';
 import AppReducer from 'reducers/app.reducer';
@@ -26,6 +26,10 @@ const initialState = {
     selectedQual: 'Commodity',
     selectedNodesIds: [],
     selectedColumnsIds: [0, 3, 9, 11],
+    selectedVectorLayers: {
+      horizontal: 'biomass_conversion',
+      vertical: 'HDI'
+    },
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
   }
 };
@@ -45,7 +49,7 @@ var store = createStore(
 new SankeyContainer(store);
 new ColumnsSelectorContainer(store);
 new MapContainer(store);
-new BasemapOptionsContainer(store);
+new MapLayersContainer(store);
 new NavContainer(store);
 
 store.dispatch(loadInitialData());

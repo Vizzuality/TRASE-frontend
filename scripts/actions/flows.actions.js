@@ -34,8 +34,8 @@ export function selectColumn(columnIndex, columnId) {
   };
 }
 
-export function selectLayers(layers, reloadLinks) {
-  return _getSelectAction('layers', layers, actions.SELECT_LAYERS, reloadLinks);
+export function selectVectorLayers(vectorLayers, reloadLinks) {
+  return _getSelectAction('vectorLayers', vectorLayers, actions.SELECT_VECTOR_LAYERS, reloadLinks);
 }
 
 export function selectContextualLayers(contextualLayers, reloadLinks) {
@@ -89,6 +89,7 @@ export function loadLinks() {
     dispatch({
       type: actions.LOAD_LINKS
     });
+    console.log(getState().flows);
 
     const params = {
       country: getState().flows.selectedCountry.toUpperCase(),
@@ -102,6 +103,7 @@ export function loadLinks() {
       view: +getState().flows.selectedView,
       years: getState().flows.selectedYears,
       layers: getState().flows.selectedLayers,
+      vectorLayers: getState().flows.selectedVectorLayers,
       contextualLayers: getState().flows.selectedContextualLayers
     };
     console.log(params);
