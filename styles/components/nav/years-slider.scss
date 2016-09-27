@@ -3,31 +3,43 @@
 .c-years-slider {
   padding: 20px;
 
-  .axis--grid .domain {
-    fill: $pale-grey;
-    stroke: none;
+  .axis, .axisFront {
+    pointer-events: none;
+  }
+  .axis .domain, .axisFront .domain, .axis text, .axisFront line {
+    display: none;
   }
 
-  .axis--x .domain,
-  .axis--grid .tick line {
-    stroke: $white;
+  .axisFront text {
+    font-family: $font-family-1;
+    font-size: $font-size-small;
   }
 
-  .axis--grid .tick-minor line {
-    stroke-opacity: .5;
+  .axis .tick line {
+    stroke-width: .5;
+    stroke: $charcoal-grey;
+  }
+
+  .selectionOverlay {
+    pointer-events: none;
+  }
+
+  .selectionOverlayRect {
+    transform: scaleY(1.2);
+    transform-origin: center;
+    fill: $white;
   }
 
   .brush > {
 
-    .handle {
-      width: 3px;
-      fill: $medium-pink;
+    .overlay {
+      fill: $pale-grey;
+      stroke: $charcoal-grey;
+      stroke-width: .5;
     }
 
-    .selection {
-      transform: scaleY(1.2);
-      transform-origin: center;
-      fill: $white;
+    .handle {
+      width: 8px;
     }
   }
 }
