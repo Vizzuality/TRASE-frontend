@@ -92,7 +92,7 @@ export default function (state = initialState, action) {
     return Object.assign({}, state, { selectedLayers: action.layers });
   }
   case actions.SELECT_CONTEXTUAL_LAYERS: {
-    return Object.assign({}, state, { selectedContextualLayers: action.layers});
+    return Object.assign({}, state, { selectedContextualLayers: action.contextualLayers});
   }
   default:
     return state;

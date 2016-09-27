@@ -2,9 +2,11 @@
   class="layer-item"
   data-layer-slug="<%= slug %>"
 >
-  <span class="layer-name"><%= name %></span>
+  <label class="layer-name"><%= name %></label>
   <div class="radios">
-    <input class="c-radio-btn" type="radio" name="horizontal" value="<%= slug %>">
-    <input class="c-radio-btn" type="radio" name="vertical" value="<%= slug %>">
+    <input type="radio" name="horizontal" value="<%= slug %>">
+    <div class="c-radio-btn"></div>
+    <input type="radio" name="vertical" value="<%= slug %>">
+    <div class="c-radio-btn"></div>
   </div>
 </li>

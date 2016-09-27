@@ -38,8 +38,8 @@ export function selectLayers(layers, reloadLinks) {
   return _getSelectAction('layers', layers, actions.SELECT_LAYERS, reloadLinks);
 }
 
-export function selectContextualLayers(layers, reloadLinks) {
-  return _getSelectAction('contextualLayers', layers, actions.SELECT_CONTEXTUAL_LAYERS, reloadLinks);
+export function selectContextualLayers(contextualLayers, reloadLinks) {
+  return _getSelectAction('contextualLayers', contextualLayers, actions.SELECT_CONTEXTUAL_LAYERS, reloadLinks);
 }
 
 const _getSelectAction = (param, value, type, reloadLinks = true) => {
@@ -102,7 +102,7 @@ export function loadLinks() {
       view: +getState().flows.selectedView,
       years: getState().flows.selectedYears,
       layers: getState().flows.selectedLayers,
-      contextualLayers: getState().flows.seletedContextualLayers
+      contextualLayers: getState().flows.selectedContextualLayers
     };
     console.log(params);
     const url = getURLFromParams('/v1/get_flows', params);

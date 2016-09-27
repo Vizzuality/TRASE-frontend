@@ -25,7 +25,8 @@ const initialState = {
     selectedView: 1,
     selectedQual: 'Commodity',
     selectedNodesIds: [],
-    selectedColumnsIds: [0, 3, 9, 11]
+    selectedColumnsIds: [0, 3, 9, 11],
+    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
   }
 };
 

@@ -9,6 +9,7 @@ import 'styles/components/shared/switcher.scss';
 export default class {
 
   onCreated() {
+    debugger;
     this.layers = [{
       slug: 'soy_trade_volume',
       name: 'soy trade volume'
@@ -39,6 +40,8 @@ export default class {
       name: 'forest code compilance'
     }];
 
+    console.log(this);
+
     this._setVars();
     this._populateLists();
   }
@@ -47,6 +50,14 @@ export default class {
     this.el = document.querySelector('.c-basemap-options');
     this.layerList = this.el.querySelector('.js-layer-list');
     this.contextualLayerList = this.el.querySelector('.js-layer-contextual');
+  }
+
+  _setEventListeners() {
+    const switchers = this.contextualLayerList.querySelectorAll('.c-switcher');
+
+    switchers.forEach((switcher) => {
+      switcher.addEventListener('click', (e) => this._onToggleSwitcher(e));
+    });
   }
 
   _populateLists () {
@@ -67,5 +78,35 @@ export default class {
 
       this.contextualLayerList.appendChild(layerHTML);
     });
+
+    this._setEventListeners();
   }
+
+  _selectedContextualLayer(layers) {
+    console.log(layers);
+  }
+
+  _getActivelayers() {
+    const switchers = this.contextualLayerList.querySelectorAll('.c-switcher.-enabled');
+    const activeLayers = [];
+
+    switchers.forEach((switcher) => {
+      const layerSlug = switcher.getAttribute('data-layer-slug');
+      activeLayers.push(layerSlug);
+    });
+
+    return activeLayers;
+  }
+
+  _onToggleSwitcher(e) {
+    var switcher = e && e.currentTarget;
+    if (!switcher) return;
+
+    switcher.classList.toggle('-enabled');
+
+    const layers = this._getActivelayers();
+
+    this.callbacks.onSelectedContextualLayer(layers);
+  }
+
 }

@@ -73,15 +73,60 @@
       display: flex;
       justify-content: space-between;
 
+      color: rgba($charcoal-grey, .8);
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      &:hover {
+        color: $charcoal-grey;
+        font-weight: $font-weight-bold;
+      }
+
       &:not(:last-child) {
         margin:  0 0 16px;
       }
 
       > .radios {
+        display: flex;
+        align-items: center;
 
+        input[type='radio'] {
+          position: absolute;
+          margin: 0;
+          visibility: hidden;
+        }
+
+        input[type='radio']:checked ~ .c-radio-btn {
+          display: none;
+        }
+      }
+
+      > .c-switcher {
+        width: 29px;
+        height: 12px;
+
+        background-color: rgba($charcoal-grey, .2);
+
+        &::before {
+          left: -3px;
+          width: 16px;
+          height: 16px;
+        }
+
+        &.-enabled {
+          background-color: $medium-pink;
+
+          &::before {
+            right: -3px;
+            left: 0;
+            transform: translate(100%, -50%);
+          }
+        }
       }
     }
   }
-
-  > .layer-contextual-list {}
 }

@@ -1,5 +1,27 @@
 @import '../../settings';
 
 .c-radio-btn {
-  margin: 0;
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid $charcoal-grey;
+  border-radius: 50%;
+
+  &::after {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+    background-color: $medium-pink;
+
+    content: '';
+  }
 }
