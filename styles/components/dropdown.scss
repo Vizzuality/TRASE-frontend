@@ -70,7 +70,7 @@
 
       &::after {
         @include triangle(8px, 2px, $charcoal-grey, 'down');
-        top: 20%;
+        top: 0;
       }
     }
     .dropdown-list {
