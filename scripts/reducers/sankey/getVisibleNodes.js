@@ -40,7 +40,7 @@ export default function(links, nodesDict, nodesMeta, columnIndexes) {
 
   columns.forEach(column => {
     column.columnId = parseInt(column.key);
-  })
+  });
 
   return columns;
 }

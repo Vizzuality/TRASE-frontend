@@ -6,6 +6,7 @@ import Map from 'components/map.component.js';
 const mapMethodsToState = (state) => ({
   highlightNode: state.flows.highlightedNodeId,
   selectNode: state.flows.selectedNodeId,
+  selectVectorLayer: state.flows.selectedColumnsIds,
   loadMap: state.flows.geoData
 });
 

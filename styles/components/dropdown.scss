@@ -67,6 +67,7 @@
       font-size: $font-size-regular;
       text-align: center;
       text-transform: uppercase;
+      padding: 0;
 
       &::after {
         @include triangle(8px, 2px, $charcoal-grey, 'down');

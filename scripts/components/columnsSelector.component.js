@@ -8,7 +8,7 @@ export default class {
       new Dropdown('column1', this._onDropdownValueSelected.bind(this)),
       new Dropdown('column2', this._onDropdownValueSelected.bind(this)),
       new Dropdown('column3', this._onDropdownValueSelected.bind(this))
-    ]
+    ];
   }
 
   selectColumns(columnIds) {
