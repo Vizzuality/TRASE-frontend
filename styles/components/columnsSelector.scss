@@ -1,7 +1,9 @@
 .c-columnsSelector {
   display: flex;
+  justify-content: center;
 
   > .c-dropdown {
-
+    flex-grow: 1;
+    margin: 0 60px;
   }
 }

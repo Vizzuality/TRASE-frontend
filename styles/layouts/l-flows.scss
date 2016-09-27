@@ -28,7 +28,8 @@
     top: 56px;
     left: 320px;
     width: calc(100% - 320px);
-    height: calc(100% - 56px);
+    height: calc(100% - 100px);
+    padding: 0 48px;
 
     .sankey {
       width: 100%;
@@ -37,7 +38,7 @@
   }
 
   > .c-columnsSelector {
-    bottom: 100px;
+    bottom: 12px;
     left: 320px;
     width: calc(100% - 320px);
   }
