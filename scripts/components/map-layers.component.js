@@ -31,14 +31,25 @@ export default class {
   _setVars() {
     this.el = document.querySelector('.c-basemap-options');
 
-    this.layerList = this.el.querySelector('.js-layer-list');
-    this.radios = this.layerList.querySelectorAll('.c-radio-btn');
+    this.layerList   = this.el.querySelector('.js-layer-list');
+    this.infoBtns    = this.layerList.querySelectorAll('.js-layer-info');
+    this.downloadBtns = this.layerList.querySelectorAll('.js-layer-download');
+    this.radios      = this.layerList.querySelectorAll('.c-radio-btn');
 
     this.contextualLayerList = this.el.querySelector('.js-layer-contextual');
-    this.switchers = this.contextualLayerList.querySelectorAll('.c-switcher');
+    this.switchers  = this.contextualLayerList.querySelectorAll('.c-switcher');
   }
 
   _setEventListeners() {
+
+    this.infoBtns.forEach((infoBtn) => {
+      infoBtn.addEventListener('click', (e) => this._onInfo(e));
+    });
+
+    this.downloadBtns.forEach((downloadBtn) => {
+      downloadBtn.addEventListener('click', (e) => this._onDownload(e));
+    });
+
     this.radios.forEach((radio) => {
       radio.addEventListener('click', (e) => this._onToggleRadio(e));
     });
@@ -137,5 +148,20 @@ export default class {
         partnerRadio.classList.remove('-disabled');
       }
     });
+  }
+
+
+  _onInfo(e) {
+    const target = e && e.currentTarget;
+    const layerSlug = target.closest('.layer-item').getAttribute('data-layer-slug');
+
+    console.info(`showing info of ${layerSlug}`);
+  }
+
+  _onDownload(e) {
+    const target = e && e.currentTarget;
+    const layerSlug = target.closest('.layer-item').getAttribute('data-layer-slug');
+
+    console.info(`download of ${layerSlug}`);
   }
 }
