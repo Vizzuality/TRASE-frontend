@@ -89,7 +89,6 @@ export function loadLinks() {
     dispatch({
       type: actions.LOAD_LINKS
     });
-    console.log(getState().flows);
 
     const params = {
       country: getState().flows.selectedCountry.toUpperCase(),

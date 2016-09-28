@@ -151,6 +151,7 @@ export default class {
   }
 
 
+  // TODO: develop info function once is clear how it works
   _onInfo(e) {
     const target = e && e.currentTarget;
     const layerSlug = target.closest('.layer-item').getAttribute('data-layer-slug');
@@ -158,6 +159,7 @@ export default class {
     console.info(`showing info of ${layerSlug}`);
   }
 
+  // TODO: develop download function once is clear how it works
   _onDownload(e) {
     const target = e && e.currentTarget;
     const layerSlug = target.closest('.layer-item').getAttribute('data-layer-slug');
