@@ -9,9 +9,10 @@ export default class {
 
     // left side
     this.countryDropdown = new Dropdown('country', this.callbacks.onCountrySelected);
-    this.commodityDropdown = new Dropdown('commodity', this.callbacks.onCommoditySelected);
-    this.yearsDropdown = new Dropdown('years', null);
 
+    this.commodityDropdown = new Dropdown('commodity', this.callbacks.onCommoditySelected);
+
+    this.yearsDropdown = new Dropdown('years', null);
     this.yearsMenu = new YearsMenu('js-years-slider', this.callbacks.onYearsSelected);
 
     // right side
@@ -25,8 +26,10 @@ export default class {
     new Dropdown('share');
   }
 
-  selectYears() {
-    // this.yearsDropdown.selectValue(value);
+  selectYears(years) {
+    const title = (years[0] === years[1]) ? years[0] : years.join(' - ');
+    this.yearsDropdown.setTitle(title);
+    this.yearsMenu.setYears(years);
   }
 
   selectCountry(value) {
