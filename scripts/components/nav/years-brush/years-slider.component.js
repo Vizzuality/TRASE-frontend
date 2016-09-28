@@ -20,6 +20,19 @@ export default class {
     this._build();
   }
 
+  setYears(years) {
+    const d0 = [new Date(years[0], 0, 1), new Date(years[1] + 1, 0, 1)];
+    const pixelSelection = d0.map(this.xScale);
+
+    // disable brush end event listener to avoid infinite loop
+    this.brushBehavior.on('end', null);
+    // this will automatically trigger a brush event, calling _moveBrushOverlay
+    this.brush.call(this.brushBehavior.move, pixelSelection);
+    // re-enable brush end event after brush has been moved
+    this.brushBehavior.on('end', this._onBrushEnd.bind(this));
+
+  }
+
   _build () {
     const startYear = AVAILABLE_YEARS[0];
     const endYear = AVAILABLE_YEARS[AVAILABLE_YEARS.length - 1];
@@ -33,7 +46,7 @@ export default class {
     const width = (AVAILABLE_YEARS.length * 40) - margin.left - margin.right;
     const height = 45 - margin.top - margin.bottom;
     this.xScale = d3_scale_time()
-      .domain([new Date(startYear, 1, 1), new Date(endYear, 11, 31)])
+      .domain([new Date(startYear, 0, 1), new Date(endYear, 11, 31)])
       .rangeRound([0, width])
       .nice(d3_time_timeYear);
 
@@ -93,7 +106,7 @@ export default class {
   }
 
   _onBrushMove() {
-    this._moveBrush(d3_event.selection);
+    this._moveBrushOverlay(d3_event.selection);
   }
 
   _onBrushEnd() {
@@ -110,18 +123,18 @@ export default class {
 
     const pixelSelection = d1.map(this.xScale);
 
-    this._moveBrush(pixelSelection);
+    this._moveBrushOverlay(pixelSelection);
 
-    d3_select('.brush').transition()
+    this.brush.transition()
       .call(d3_event.target.move, pixelSelection);
 
-    // var startYear = new Date (d1[0]).getFullYear();
-    // var endYear= new Date (d1[1]).getFullYear();
+    var startYear = new Date (d1[0]).getFullYear();
+    var endYear = new Date (d1[1]).getFullYear() - 1;
 
-    // callback([startYear, endYear]);
+    this.callback([startYear, endYear]);
   }
 
-  _moveBrush(pixelSelection) {
+  _moveBrushOverlay(pixelSelection) {
     const x = pixelSelection[0];
     const width = pixelSelection[1] - x;
     this.selectionOverlay.attr('transform', `translate(${x}, 0)`);

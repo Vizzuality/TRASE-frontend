@@ -18,7 +18,11 @@ export default class {
   }
 
   selectValue(value) {
-    this.title.innerHTML = this.list.querySelector(`[data-value="${value}"]`).innerHTML;
+    this.setTitle(this.list.querySelector(`[data-value="${value}"]`).innerHTML);
+  }
+
+  setTitle(text) {
+    this.title.innerHTML = text;
   }
 
   _onTitleClick() {
