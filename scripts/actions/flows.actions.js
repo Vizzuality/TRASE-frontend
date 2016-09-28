@@ -16,6 +16,16 @@ export function selectQuant(quant, reloadLinks) {
 export function selectQual(qual, reloadLinks) {
   return _getSelectAction('qual', qual, actions.SELECT_QUAL, reloadLinks);
 }
+export function selectColumn(columnIndex, columnId) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_COLUMN,
+      columnIndex,
+      columnId
+    });
+    dispatch(loadLinks());
+  };
+}
 
 const _getSelectAction = (param, value, type, reloadLinks = true) => {
   // console.log(param, value, type, reloadLinks)
@@ -65,12 +75,11 @@ export function loadLinks() {
       type: actions.LOAD_LINKS
     });
 
-    const columnIndexes = [0,3,8,9];
     const params = {
       country: getState().flows.selectedCountry.toUpperCase(),
       raw: getState().flows.selectedCommodity.toUpperCase(),
       year_start: getState().flows.selectedYears[0],
-      include_columns: columnIndexes.join(','),
+      include_columns: getState().flows.selectedColumnsIds.join(','),
       n_nodes: 10,
       flow_quant: getState().flows.selectedQuant,
       flow_qual: getState().flows.selectedQual
@@ -85,8 +94,7 @@ export function loadLinks() {
 
         dispatch({
           type: actions.GET_LINKS,
-          payload,
-          columnIndexes
+          payload
         });
       });
   };

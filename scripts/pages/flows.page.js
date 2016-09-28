@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
 import SankeyContainer from 'containers/sankey.container';
+import ColumnsSelectorContainer from 'containers/columnsSelector.container';
 import MapContainer from 'containers/map.container';
 import NavContainer from 'containers/nav.container';
 import AppReducer from 'reducers/app.reducer';
@@ -20,7 +21,8 @@ const initialState = {
     selectedYears: [2012, 2013],
     selectedQuant: 'Deforestation risk',
     selectedQual: 'Commodity',
-    selectedNodesIds: []
+    selectedNodesIds: [],
+    selectedColumnsIds: [0, 3, 9, 11]
   }
 };
 
@@ -37,6 +39,7 @@ var store = createStore(
 
 
 new SankeyContainer(store);
+new ColumnsSelectorContainer(store);
 new MapContainer(store);
 new NavContainer(store);
 
