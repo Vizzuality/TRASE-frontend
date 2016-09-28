@@ -8,7 +8,7 @@ var auth = function (req, res, next) {
     return res.sendStatus(401);
   }
 
-  if (req.url === '/sample.json') {
+  if (req.url === '/sample.json' || req.url === '/municip.topo.hi.json' || req.url === '/states.topo.json' || req.url === '/biomes.topo.json') {
     return next();
   }
 

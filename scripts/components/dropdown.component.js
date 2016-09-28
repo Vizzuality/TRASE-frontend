@@ -52,7 +52,7 @@ export default class {
   }
 
   _onListClick(value) {
-    this.callback(value);
+    this.callback(value, this.id);
     this._close();
   }
 }

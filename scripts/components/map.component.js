@@ -12,11 +12,12 @@ export default class {
   }
 
   loadMap(geoData) {
-    this.vectorLayers = {
-      municipalities: this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality', true),
-      states: this._getVectorLayer(geoData.states, 'map-polygon-state'),
-      biomes: this._getVectorLayer(geoData.biomes, 'map-polygon-biome')
-    };
+    this.vectorLayers = [
+      this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality'),
+      this._getVectorLayer(geoData.states, 'map-polygon-state'),
+      this._getVectorLayer(geoData.biomes, 'map-polygon-biome')
+    ];
+    this.selectVectorLayer([geoData.currentLayer]);
   }
 
   highlightNode(id) {
@@ -27,32 +28,40 @@ export default class {
     this.id = id;
   }
 
-  _getVectorLayer(geoData, polygonClassName, interactive = false) {
+  selectVectorLayer(columnIds) {
+    if (!this.vectorLayers) return;
+    const id = columnIds[0];
+    this.vectorLayers.forEach((layer, i) => {
+      if (id === i) {
+        this.map.addLayer(layer);
+      } else {
+        this.map.removeLayer(layer);
+      }
+    });
+  }
+
+  _getVectorLayer(geoData, polygonClassName) {
     var topoLayer = new L.GeoJSON();
     var keys = Object.keys(geoData.objects);
     keys.forEach(key => {
       const geojson = topojson.feature(geoData, geoData.objects[key]);
       topoLayer.addData(geojson);
     });
-    topoLayer.addTo(this.map);
+    topoLayer.setStyle(() => { return { className: `${polygonClassName} map-polygon`}; });
     topoLayer.eachLayer(layer => {
       const that = this;
-      layer._path.classList.add(polygonClassName);
-      layer._path.classList.add('map-polygon');
-      if (interactive) {
-        layer.on({
-          mouseover: function() {
-            this._path.classList.add('-highlighted');
-          },
-          mouseout: function() {
-            this._path.classList.remove('-highlighted');
-          },
-          click: function() {
-            // console.log(this.feature.properties.geoid);
-            that.callbacks.onPolygonClicked(this.feature.properties.geoid);
-          }
-        });
-      }
+      layer.on({
+        mouseover: function() {
+          this._path.classList.add('-highlighted');
+        },
+        mouseout: function() {
+          this._path.classList.remove('-highlighted');
+        },
+        click: function() {
+          that.callbacks.onPolygonClicked(this.feature.properties.geoid);
+        }
+      });
     });
+    return topoLayer;
   }
 }

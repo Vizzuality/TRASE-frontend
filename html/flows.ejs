@@ -19,11 +19,11 @@
           <div class="c-dropdown" data-dropdown="country">
             <span class="dropdown-label">Country</span>
             <span class="js-dropdown-title dropdown-title">
-              Country
+              -
             </span>
             <ul class="js-dropdown-list dropdown-list">
               <li class="js-dropdown-item dropdown-item" data-value="brazil">Brazil</li>
-              <li class="js-dropdown-item dropdown-item" data-value="columbia">Columbia</li>
+              <li class="js-dropdown-item dropdown-item">Columbia</li>
             </ul>
           </div>
         </div>
@@ -32,10 +32,11 @@
           <div class="c-dropdown" data-dropdown="commodity">
             <span class="dropdown-label">Commodity</span>
             <span class="js-dropdown-title dropdown-title">
-              Soy
+              -
             </span>
             <ul class="js-dropdown-list dropdown-list">
-              <li class="js-dropdown-item dropdown-item" data-value="soy">Sugar</li>
+              <li class="js-dropdown-item dropdown-item" data-value="soy">Soy</li>
+              <li class="js-dropdown-item dropdown-item">Coffee</li>
             </ul>
           </div>
         </div>
@@ -44,13 +45,14 @@
           <div class="c-dropdown" data-dropdown="years">
             <span class="dropdown-label">years</span>
             <span class="js-dropdown-title dropdown-title">
-              Years
+              -
             </span>
             <ul class="js-dropdown-list dropdown-list">
               <div class="js-years-slider c-years-slider"></div>
             </ul>
           </div>
         </div>
+
       </div>
 
       <div class="right-side">
@@ -58,7 +60,7 @@
           <div class="c-dropdown" data-dropdown="quant">
             <span class="dropdown-label">Resize by</span>
             <span class="js-dropdown-title dropdown-title">
-              Resize by
+              -
             </span>
             <ul class="js-dropdown-list dropdown-list">
               <li class="js-dropdown-item dropdown-item" data-value="Volume">Trade volume</li>
@@ -77,8 +79,8 @@
               Biome
             </span>
             <ul class="js-dropdown-list dropdown-list">
-              <li class="js-dropdown-item dropdown-item" data-value="1">Rainbow</li>
-              <li class="js-dropdown-item dropdown-item" data-value="2">Ponies</li>
+              <li class="js-dropdown-item dropdown-item" data-value="1">Biome</li>
+              <li class="js-dropdown-item dropdown-item" data-value="2">Biome</li>
             </ul>
           </div>
           <div class="color-flag">
@@ -135,7 +137,7 @@
       </div>
       <svg class="js-sankey-canvas sankey">
         <g class="sankey-container">
-          <rect classs="sankey-bg"></rect>
+          <rect class="sankey-bg"></rect>
           <g class="sankey-columns">
             <g class="sankey-column">
               <g class="sankey-nodes"></g>
@@ -153,6 +155,44 @@
           <g class="sankey-links"></g>
         </g>
       </svg>
+    </div>
+
+    <!--
+    [0,1,2],  //1. Municipality / State / Biome
+    [3,5],    //2. Port of export / Exporter
+    [9,10],   //3. Importer / Port of import
+    [11],     //4. Country of Import / Country of consumption (???)
+    -->
+    <div class="c-columnsSelector is-absolute">
+      <div class="c-dropdown -columnSelector" data-dropdown="column0">
+        <span class="js-dropdown-title dropdown-title">select column</span>
+        <ul class="js-dropdown-list dropdown-list">
+          <li class="dropdown-item" data-value="0">Municipality</li>
+          <li class="dropdown-item" data-value="1">State</li>
+          <li class="dropdown-item" data-value="2">Biome</li>
+        </ul>
+      </div>
+      <div class="c-dropdown -columnSelector" data-dropdown="column1">
+        <span class="js-dropdown-title dropdown-title">select column</span>
+        <ul class="js-dropdown-list dropdown-list">
+          <li class="dropdown-item" data-value="3">Port of export</li>
+          <li class="dropdown-item" data-value="5">Exporter</li>
+        </ul>
+      </div>
+      <div class="c-dropdown -columnSelector" data-dropdown="column2">
+        <span class="js-dropdown-title dropdown-title">select column</span>
+        <ul class="js-dropdown-list dropdown-list">
+          <li class="dropdown-item" data-value="9">Importer</li>
+          <li class="dropdown-item" data-value="10">Port of import</li>
+        </ul>
+      </div>
+      <div class="c-dropdown -columnSelector" data-dropdown="column3">
+        <span class="js-dropdown-title dropdown-title">select column</span>
+        <ul class="js-dropdown-list dropdown-list">
+          <li class="dropdown-item" data-value="11">Country of import</li>
+          <li class="dropdown-item">Country of consumption</li>
+        </ul>
+      </div>
     </div>
 
     <%= htmlWebpackPlugin.options.footer %>
