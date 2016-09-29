@@ -1,0 +1,7 @@
+<ul class="bucket-legend <%= isBidimensional ? '-bidimensional' : '' %> <%= isVertical ? '-vertical' : '' %>">
+  <% colors.forEach(function(color) { %>
+    <li class="bucket-item" >
+      <div class="bucket" style="background-color: <%= color %>"></div>
+    </li>
+  <% }) %>
+</ul>

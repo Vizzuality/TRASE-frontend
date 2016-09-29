@@ -6,6 +6,7 @@ import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columnsSelector.container';
 import MapLayersContainer from 'containers/map-layers.container';
+import MapLegendContainer from 'containers/map-legend.container';
 import MapContainer from 'containers/map.container';
 import NavContainer from 'containers/nav.container';
 import AppReducer from 'reducers/app.reducer';
@@ -27,8 +28,8 @@ const initialState = {
     selectedNodesIds: [],
     selectedColumnsIds: [0, 3, 9, 11],
     selectedVectorLayers: {
-      horizontal: 'biomass_conversion',
-      vertical: 'HDI'
+      horizontal: { layerSlug: null },
+      vertical: { layerSlug: 'HDI'}
     },
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
   }
@@ -51,6 +52,7 @@ new SankeyContainer(store);
 new ColumnsSelectorContainer(store);
 new MapContainer(store);
 new MapLayersContainer(store);
+new MapLegendContainer(store);
 new NavContainer(store);
 
 store.dispatch(loadInitialData());

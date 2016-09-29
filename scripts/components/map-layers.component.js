@@ -63,7 +63,7 @@ export default class {
     groups.forEach((group) => {
       const radios = this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`);
       radios.forEach((radio) => {
-        if (radio.getAttribute('value') !== layers[group]) return;
+        if (radio.getAttribute('value') !== layers[group]['layerSlug']) return;
         const partnerRadio = radio.nextElementSibling ?
           radio.nextElementSibling : radio.previousElementSibling;
 
@@ -102,6 +102,7 @@ export default class {
 
     const group = radio.getAttribute('data-group');
     const layerSlug = radio.getAttribute('value');
+    const title = this.layerList.querySelector(`.layer-item[data-layer-slug="${layerSlug}"] > .layer-name`).innerText;
     const currentSelectedRadio = this.layerList.querySelector('.c-radio-btn.-enabled');
 
     if (radio === currentSelectedRadio) {
@@ -110,8 +111,10 @@ export default class {
       this._cleanRadiosByGroup(group);
     }
 
-    this.settings.mapVectorLayers[group] = this.settings.mapVectorLayers[group] !== layerSlug ?
-      layerSlug : null;
+    this.state.mapVectorLayers[group] = {
+      title,
+      layerSlug: this.state.mapVectorLayers[group]['layerSlug'] !== layerSlug ? layerSlug : null
+    };
 
     this.callbacks.onVectorLayersSelected(this.settings.mapVectorLayers);
   }

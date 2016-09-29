@@ -1,6 +1,38 @@
 @import '../../settings';
 
 .c-map-legend {
+  padding: 8px 16px 8px 8px;
+
   background: $white;
   z-index: 401;
+
+  .bucket-legend {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85px;
+
+    border: 1px solid #cbcbcb;
+
+    &.-vertical  {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      width: 18px;
+    }
+
+    &.-bidimensional {
+      width: 48px;
+
+      > .bucket-item {
+        flex-basis: calc(100% / 3);
+      }
+    }
+
+    > .bucket-item {
+      flex-basis: calc(100% / 5);
+
+      > .bucket {
+        padding-bottom: 100%;
+      }
+    }
+  }
 }
