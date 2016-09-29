@@ -1,0 +1,45 @@
+@import '../../settings';
+
+.c-years-slider {
+  padding: 20px;
+
+  .axis, .axisFront {
+    pointer-events: none;
+  }
+  .axis .domain, .axisFront .domain, .axis text, .axisFront line {
+    display: none;
+  }
+
+  .axisFront text {
+    font-family: $font-family-1;
+    font-size: $font-size-small;
+  }
+
+  .axis .tick line {
+    stroke-width: .5;
+    stroke: $charcoal-grey;
+  }
+
+  .selectionOverlay {
+    pointer-events: none;
+  }
+
+  .selectionOverlayRect {
+    transform: scaleY(1.2);
+    transform-origin: center;
+    fill: $white;
+  }
+
+  .brush > {
+
+    .overlay {
+      fill: $pale-grey;
+      stroke: $charcoal-grey;
+      stroke-width: .5;
+    }
+
+    .handle {
+      width: 8px;
+    }
+  }
+}

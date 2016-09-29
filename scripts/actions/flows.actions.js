@@ -13,9 +13,16 @@ export function selectYears(years, reloadLinks) {
 export function selectQuant(quant, reloadLinks) {
   return _getSelectAction('quant', quant, actions.SELECT_QUANT, reloadLinks);
 }
+export function selectColor(color, reloadLinks) {
+  return _getSelectAction('color', color, actions.SELECT_COLOR, reloadLinks);
+}
 export function selectQual(qual, reloadLinks) {
   return _getSelectAction('qual', qual, actions.SELECT_QUAL, reloadLinks);
 }
+export function selectView(view, reloadLinks) {
+  return _getSelectAction('view', view, actions.SELECT_VIEW, reloadLinks);
+}
+
 export function selectColumn(columnIndex, columnId) {
   return dispatch => {
     dispatch({
@@ -82,7 +89,10 @@ export function loadLinks() {
       include_columns: getState().flows.selectedColumnsIds.join(','),
       n_nodes: 10,
       flow_quant: getState().flows.selectedQuant,
-      flow_qual: getState().flows.selectedQual
+      flow_qual: getState().flows.selectedQual,
+      color: +getState().flows.selectedColor,
+      view: +getState().flows.selectedView,
+      years: getState().flows.selectedYears
     };
     const url = getURLFromParams('/v1/get_flows', params);
 

@@ -4,6 +4,20 @@
   display: flex;
   box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
 
+  > .left-side,
+  > .right-side {
+    display: flex;
+
+    border-right: 1px solid $pale-grey;
+    border-left: 1px solid $pale-grey;
+  }
+
+  > .right-side {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+  }
 
   > .menu  {
     display: flex;
@@ -26,34 +40,59 @@
     }
   }
 
-  > .c-nav-param {
+  .c-nav-param {
     padding: 0 20px;
 
-    border-left: 1px solid $pale-grey;
+    &.-color {
+      position: relative;
+    }
+
+    & + .c-nav-param {
+      border-left: 1px solid $pale-grey;
+    }
+
+    .color-flag {
+      display: flex;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%, 0);
+
+      > .color {
+        flex-basis: 50%;
+        flex-grow: 1;
+        height: 5px;
+
+        // sample colors
+        &.-left {
+          background-color: $orange;
+        }
+
+        &.-right {
+          background-color: $medium-pink;
+        }
+      }
+    }
   }
 
-  > .c-nav-right {
+  .miscellaneous-nav {
     display: flex;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
+    border-left: 1px solid $pale-grey;
 
-    .c-nav-right-filter {
-      display: flex;
-      position: relative;
-      align-items: center;
-      height: 100%;
-
+    .miscellaneous-item {
       cursor: pointer;
+
+      & + .miscellaneous-item {
+        border-left: 1px solid $pale-grey;
+      }
 
       &:hover {
         background-color: $manilla;
       }
 
-      .c-nav-right-filter-title {
+      .miscellaneous-item-title {
         width: 60px;
-        height: 100%;
         padding: 20px;
       }
     }

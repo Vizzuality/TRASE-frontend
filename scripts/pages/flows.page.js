@@ -18,8 +18,10 @@ const initialState = {
   flows: {
     selectedCountry: 'brazil',
     selectedCommodity: 'soy',
-    selectedYears: [2012, 2013],
+    selectedYears: [2012, 2014],
     selectedQuant: 'Deforestation risk',
+    selectedColor: 1,
+    selectedView: 1,
     selectedQual: 'Commodity',
     selectedNodesIds: [],
     selectedColumnsIds: [0, 3, 9, 11]
