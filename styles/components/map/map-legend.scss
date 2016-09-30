@@ -1,10 +1,87 @@
 @import '../../settings';
+@import '../../mixins';
 
 .c-map-legend {
   padding: 8px 16px 8px 8px;
 
   background: $white;
   z-index: 401;
+
+  > .bucket-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+    > .bucket-block {
+      display: flex;
+      position: relative;
+      align-items: center;
+
+      > .layer-name {
+        display: none;
+        max-width: 50px;
+        margin:  0 8px 0 0;
+        padding: 0 8px 0 0;
+
+        &.-bidimensional,
+        &.-vertical {
+          display: block;
+        }
+
+        &::before {
+          display: inline-block;
+          position: absolute;
+          top: calc(50% + 1px);
+          right: 50%;
+          height: calc(100% - 2px);
+
+          transform: translate(0, -50%);
+
+          border-left: 1px solid rgba($charcoal-grey, .5);
+
+          content: '';
+        }
+
+        &::after {
+          @include triangle(7px, 1px, rgba($charcoal-grey, .5), 'up');
+          position: absolute;
+          top: 3px;
+          right: calc(50% - 3px);
+          transform: rotate(45deg) skew(15deg, 15deg);
+        }
+      }
+    }
+
+    > .bucket-footer {
+      display: flex;
+      position: relative;
+      margin: 8px 0 0;
+      padding: 16px 0 0;
+
+      &::before {
+        display: inline-block;
+        position: absolute;
+        top: 3px;
+        right: 2px;
+
+        width: 46px;
+        height: 1px;
+
+        background-color: rgba($charcoal-grey, .5);
+
+        content: '';
+      }
+
+      &::after {
+        @include triangle(7px, 1px, rgba($charcoal-grey, .5), 'right');
+        position: absolute;
+        top: 0;
+        right: 4px;
+        transform: rotate(45deg) skew(-15deg, -15deg);
+      }
+    }
+  }
 
   .bucket-legend {
     display: flex;
@@ -34,5 +111,18 @@
         padding-bottom: 100%;
       }
     }
+
+  }
+
+  .layer-name {
+
+    color: rgba($charcoal-grey, .5);
+    font-family: $font-family-1;
+    font-size: $font-size-small;
+    letter-spacing: -.5px;
+    line-height: .8;
+    text-align: right;
+    text-transform: uppercase;
+
   }
 }

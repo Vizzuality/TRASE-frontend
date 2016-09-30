@@ -44,20 +44,23 @@ export default class {
   }
 
   _cleanLegend() {
-    console.log('clean');
     this.buckets.innerHTML = '';
   }
 
   _renderLegend(settings) {
     let colors = LEGEND_COLORS['horizontal'];
+    let title = settings.vertical.title ? [settings.vertical.title] : [settings.horizontal.title];
+    console.log(settings);
 
     if (settings.isBidimensional) {
       colors = LEGEND_COLORS['bidimensional'];
+      title = [settings.vertical.title, settings.horizontal.title];
     } else if (settings.vertical) {
       colors = LEGEND_COLORS['vertical'];
     }
 
     const legendHTML = stringToHTML(LegendTemplate({
+      title,
       colors,
       isBidimensional: settings.isBidimensional,
       isVertical: !settings.isBidimensional && settings.vertical
@@ -68,56 +71,8 @@ export default class {
       return;
     }
 
-    this.buckets.appendChild(legendHTML);
-
-
-    // if (settings.isBidimensional) {
-    //   const bucketsperRow = 3;
-    //   const colors = LEGEND_COLORS['bidimensional'];
-    //   let indexColor = 0;
-    //
-    //   for (let y = 0; y < bucketsperRow; y++) {
-    //     const row = document.createElement('div');
-    //     row.classList.add('row');
-    //
-    //     for (let x = 0; x < bucketsperRow; x++) {
-    //       var bucket = document.createElement('div');
-    //       bucket.classList.add('bucket');
-    //       bucket.setAttribute('style', `background-color: ${colors[indexColor]}`);
-    //       row.appendChild(bucket);
-    //       this.buckets.appendChild(row);
-    //       indexColor++;
-    //     }
-    //   }
-    //   return;
-    // }
-    //
-    // if (!settings.isBidimensional &&
-    //   settings.vertical || settings.horizontal) {
-    //
-    //   const totalBuckets = 5;
-    //   const colors = settings.vertical ? LEGEND_COLORS['vertical'] : LEGEND_COLORS['horizontal'];
-    //   let indexColor = 0;
-    //
-    //   const row = document.createElement('div');
-    //
-    //   if (settings.vertical) {
-    //     row.classList.add('row', '-vertical');
-    //   } else {
-    //     row.classList.add('row');
-    //   }
-    //
-    //   for (let x = 0; x < totalBuckets; x++) {
-    //     const bucket = document.createElement('div');
-    //     bucket.classList.add('bucket');
-    //     bucket.setAttribute('style', `background-color: ${colors[indexColor]}`);
-    //     row.appendChild(bucket);
-    //     indexColor++;
-    //   }
-    //
-    //   this.buckets.appendChild(row);
-    //
-    //   return;
-    // }
+    for (var i = 0; i < legendHTML.length; i++) {
+      this.buckets.appendChild(legendHTML[i].cloneNode(true));
+    }
   }
 }

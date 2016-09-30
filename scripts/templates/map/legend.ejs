@@ -1,7 +1,13 @@
-<ul class="bucket-legend <%= isBidimensional ? '-bidimensional' : '' %> <%= isVertical ? '-vertical' : '' %>">
-  <% colors.forEach(function(color) { %>
-    <li class="bucket-item" >
-      <div class="bucket" style="background-color: <%= color %>"></div>
-    </li>
-  <% }) %>
-</ul>
+<div class="bucket-block">
+  <div class="layer-name <%= isBidimensional ? '-bidimensional' : '' %> <%= isVertical ? '-vertical' : '' %>"><%= title[0] %></div>
+  <ul class="bucket-legend <%= isBidimensional ? '-bidimensional' : '' %> <%= isVertical ? '-vertical' : '' %>">
+    <% colors.forEach(function(color) { %>
+      <li class="bucket-item" >
+        <div class="bucket" style="background-color: <%= color %>"></div>
+      </li>
+      <% }) %>
+    </ul>
+</div>
+<div class="bucket-footer">  
+  <div class="layer-name <%= isBidimensional ? '-bidimensional' : '' %> <%= isVertical ? '-vertical' : '' %>"><%= title[1] %></div>
+</div>
