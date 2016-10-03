@@ -10,25 +10,22 @@ export default class {
   }
 
   selectedVectorLayers(layers) {
-    this.state = {
-      mapVectorLayers: {
-        horizontal: layers.horizontal || null,
-        vertical: layers.vertical || null
-      }
+    this.settings.mapVectorLayers =  {
+      horizontal: layers.horizontal || null,
+      vertical: layers.vertical || null
     };
 
-    this._setActiveVectorLayers(this.state.mapVectorLayers);
+    this._setActiveVectorLayers(this.settings.mapVectorLayers);
   }
 
   selectContextualLayers(layers) {
-    this.state.contextualLayers = layers;
-
-    if (this.state.contextualLayers.length) {
-      this._setActiveContextualLayers(this.state.contextualLayers);
+    if (layers.length) {
+      this._setActiveContextualLayers(layers);
     }
   }
 
   _setVars() {
+    this.settings = {};
     this.el = document.querySelector('.c-basemap-options');
 
     this.layerList   = this.el.querySelector('.js-layer-list');
@@ -113,10 +110,10 @@ export default class {
       this._cleanRadiosByGroup(group);
     }
 
-    this.state.mapVectorLayers[group] = this.state.mapVectorLayers[group] !== layerSlug ?
+    this.settings.mapVectorLayers[group] = this.settings.mapVectorLayers[group] !== layerSlug ?
       layerSlug : null;
 
-    this.callbacks.onSelectedVectorLayers(this.state.mapVectorLayers);
+    this.callbacks.onSelectedVectorLayers(this.settings.mapVectorLayers);
   }
 
   _onToggleSwitcher(e) {
