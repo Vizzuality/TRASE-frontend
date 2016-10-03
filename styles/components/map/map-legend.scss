@@ -1,14 +1,16 @@
 @import '../../settings';
-@import '../../mixins';
 
 .c-map-legend {
-  padding: 8px 16px 8px 8px;
+  padding: 8px;
 
-  background: $white;
+  border: 1px solid $pinkish-grey;
+  background-color: $white-two;
+
   z-index: 401;
 
   > .bucket-container {
     display: flex;
+    position: relative;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: flex-end;
@@ -18,111 +20,124 @@
       position: relative;
       align-items: center;
 
-      > .layer-name {
-        display: none;
-        max-width: 50px;
-        margin:  0 8px 0 0;
-        padding: 0 8px 0 0;
+      .bucket-legend {
+        display: flex;
+        flex-wrap: wrap;
+        width: 85px;
+        height: 18px; // 16px content + 2px border
 
-        &.-bidimensional,
-        &.-vertical {
-          display: block;
-        }
+        border: 1px solid $pinkish-grey-two;
 
-        &::before {
-          display: inline-block;
-          position: absolute;
-          top: calc(50% + 1px);
-          right: 50%;
-          height: calc(100% - 2px);
-
-          transform: translate(0, -50%);
-
-          border-left: 1px solid rgba($charcoal-grey, .5);
-
-          content: '';
-        }
-
-        &::after {
-          @include triangle(7px, 1px, rgba($charcoal-grey, .5), 'up');
-          position: absolute;
-          top: 3px;
-          right: calc(50% - 3px);
-          transform: rotate(45deg) skew(15deg, 15deg);
-        }
-      }
-    }
-
-    > .bucket-footer {
-      display: flex;
-      position: relative;
-      margin: 8px 0 0;
-      padding: 16px 0 0;
-
-      &::before {
-        display: inline-block;
-        position: absolute;
-        top: 3px;
-        right: 2px;
-
-        width: 46px;
-        height: 1px;
-
-        background-color: rgba($charcoal-grey, .5);
-
-        content: '';
       }
 
-      &::after {
-        @include triangle(7px, 1px, rgba($charcoal-grey, .5), 'right');
-        position: absolute;
-        top: 0;
-        right: 4px;
-        transform: rotate(45deg) skew(-15deg, -15deg);
-      }
-    }
-  }
-
-  .bucket-legend {
-    display: flex;
-    flex-wrap: wrap;
-    width: 85px;
-
-    border: 1px solid #cbcbcb;
-
-    &.-vertical  {
-      flex-direction: column;
-      flex-wrap: nowrap;
-      width: 18px;
-    }
-
-    &.-bidimensional {
-      width: 48px;
-
-      > .bucket-item {
-        flex-basis: calc(100% / 3);
-      }
-    }
-
-    > .bucket-item {
-      flex-basis: calc(100% / 5);
-
-      > .bucket {
+      .bucket-legend > .bucket-item > .bucket {
         padding-bottom: 100%;
       }
     }
 
-  }
+    > .bucket-footer {
+      margin: 16px 0 0;
 
-  .layer-name {
+      > .icon-legend-arrow {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 48px;
+        transform: translate(-50%, 0) rotate(90deg);
+      }
+    }
 
-    color: rgba($charcoal-grey, .5);
-    font-family: $font-family-1;
-    font-size: $font-size-small;
-    letter-spacing: -.5px;
-    line-height: .8;
-    text-align: right;
-    text-transform: uppercase;
+    .layer-name {
+      max-width: 75px;
 
+      color: rgba($charcoal-grey, .5);
+      font-family: $font-family-1;
+      font-size: $font-size-small;
+      letter-spacing: -.5px;
+      line-height: .8;
+      text-transform: uppercase;
+    }
+
+    &.-horizontal {
+
+      > .bucket-block {
+        .bucket-legend > .bucket-item {
+          flex-basis: calc(100% / 5);
+        }
+
+        > .layer-name,
+        > .icon-legend-arrow {
+          display: none;
+        }
+      }
+
+      > .bucket-footer {
+        width: 100%;
+
+        > .layer-name {
+          max-width: 85px;
+        }
+      }
+    }
+
+    &.-vertical {
+
+      > .bucket-block {
+
+        > .layer-name {
+          margin:  0 16px 0 0;
+        }
+
+        > .icon-legend-arrow {
+          position: absolute;
+          right: calc(26px - 6px);
+        }
+
+        > .bucket-legend {
+          flex-direction: column;
+          flex-wrap: nowrap;
+          width: 18px;
+          height: 100%;
+        }
+      }
+
+      > .bucket-footer {
+        display: none;
+      }
+    }
+
+    &.-bidimensional {
+
+      > .bucket-block {
+        .bucket-legend {
+          width: 48px;
+          height: 48px;
+
+          > .bucket-item {
+            flex-basis: calc(100% / 3);
+          }
+        }
+
+        > .layer-name {
+          text-align: right;
+        }
+      }
+
+      > .bucket-footer {
+        position: relative;
+        min-height: 16px;
+
+        > .layer-name {
+          max-width: 56px;
+        }
+
+        > .icon-legend-arrow {
+          top: auto;
+          right: 13px;
+          bottom: 3px;
+          left: auto;
+        }
+      }
+    }
   }
 }

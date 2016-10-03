@@ -34,6 +34,10 @@
     }
   }
 
+  .leaflet-control-attribution {
+    display: none;
+  }
+
   .map-polygon {
     fill: $pale-grey;
     stroke: $charcoal-grey;

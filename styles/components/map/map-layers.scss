@@ -28,7 +28,7 @@
         display: inline-flex;
         width: 24px;
         height: 24px;
-        background-color: rgba($charcoal-grey, .3);
+
 
         &::before,
         &::after {
@@ -37,20 +37,31 @@
           content: '';
         }
 
-        &::before {
-          background-color: $charcoal-grey;
-        }
-
-        &::after {
-          background-color: rgba($charcoal-grey, .6);
-        }
-
         &.-horizontal {
           flex-direction: column;
+
+          background-color: $beige;
+
+          &::before {
+            background-color: $light-grey-blue;
+
+          }
+
+          &::after {
+            background-color: $cloudy-blue;
+          }
         }
 
         &.-vertical {
-          flex-direction: row-reverse;
+          background-color: $warm-pink;
+
+          &::before {
+            background-color: $beige;
+          }
+
+          &::after {
+            background-color: $blush;
+          }
         }
       }
     }
@@ -75,6 +86,7 @@
     > .layer-item {
       display: flex;
       justify-content: space-between;
+      height: 18px;
 
       color: rgba($charcoal-grey, .8);
       font-family: $font-family-1;
@@ -82,45 +94,40 @@
       letter-spacing: -1px;
       text-transform: uppercase;
 
-      &:hover {
-        color: $charcoal-grey;
-
-        > .layer-name {
-          font-weight: $font-weight-bold;
-        }
-      }
-
       > .layer-name {
         display: flex;
         align-items: center;
 
         > .layer-options-list {
-          display: inline-flex;
+          display: none;
+          align-items: flex-end;
 
           margin: 0 0 0 8px;
+        }
 
-          > .layer-option {
-            & + .layer-option {
-              margin: 0 0 0 8px;
+        > .layer-options-list > .layer-option {
+          display: inline-flex;
+
+          & + .layer-option {
+            margin: 0 0 0 8px;
+          }
+
+          > svg {
+            cursor: pointer;
+            fill: rgba($charcoal-grey, .3);
+
+            &.icon-layer-info {
+              width: 15px;
+              height: 15px;
             }
 
-            > svg {
-              cursor: pointer;
-              fill: rgba($charcoal-grey, .3);
+            &.icon-layer-download {
+              width: 12px;
+              height: 13px;
+            }
 
-              &.icon-layer-info {
-                width: 15px;
-                height: 15px;
-              }
-
-              &.icon-layer-download {
-                width: 12px;
-                height: 13px;
-              }
-
-              &:hover {
-                fill: $charcoal-grey;
-              }
+            &:hover {
+              fill: $charcoal-grey;
             }
           }
         }
@@ -129,7 +136,6 @@
       &:not(:last-child) {
         margin:  0 0 16px;
       }
-
 
       > .radios {
         display: flex;
@@ -191,6 +197,19 @@
             left: 0;
             transform: translate(100%, -50%);
           }
+        }
+      }
+
+
+      &.-selected,
+      &:hover {
+        > .layer-name {
+          color: $charcoal-grey;
+          font-weight: $font-weight-bold;
+        }
+
+        .layer-options-list {
+          display: inline-flex;
         }
       }
     }

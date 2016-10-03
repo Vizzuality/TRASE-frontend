@@ -29,12 +29,12 @@ const initialState = {
     selectedColumnsIds: [0, 3, 9, 11],
     selectedVectorLayers: {
       horizontal: {
-        layerSlug: 'Deforestation',
-        title: 'deforestation'
+        layerSlug: null,
+        title: null
       },
       vertical: {
-        layerSlug: 'soy_trade_volume',
-        title: 'Soy Trade Volume'
+        layerSlug: 'deforestation',
+        title: 'Deforestation'
       }
     },
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']

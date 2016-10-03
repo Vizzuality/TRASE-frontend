@@ -22,6 +22,7 @@ export default class {
     this.copyBtn.addEventListener('click', () => this._copyURL());
   }
 
+  // añadir callback de error
   _copyURL() {
     const range = document.createRange();
     range.selectNode(this.URLDisplay);

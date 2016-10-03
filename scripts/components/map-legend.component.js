@@ -18,7 +18,6 @@ export default class {
 
   _setVars() {
     this.el = document.querySelector('.js-map-legend');
-    this.buckets = this.el.querySelector('.js-bucket-legend');
   }
 
   _setupLegend() {
@@ -36,32 +35,55 @@ export default class {
       vertical: verticalLayer.layerSlug ? verticalLayer : null
     };
 
-    if (this.buckets.hasChildNodes()) {
+    if (this.el.hasChildNodes()) {
       this._cleanLegend();
     }
 
-    this._renderLegend(settings);
+    if (!!settings.horizontal || !!settings.vertical) {
+      if (this.el.classList.contains('is-hidden')) {
+        this._showLegend();
+      }
+
+      this._renderLegend(settings);
+    } else {
+      this._hideLegend();
+    }
+  }
+
+  _showLegend() {
+    this.el.classList.remove('is-hidden');
+  }
+
+  _hideLegend() {
+    this.el.classList.add('is-hidden');
   }
 
   _cleanLegend() {
-    this.buckets.innerHTML = '';
+    this.el.innerHTML = '';
   }
 
   _renderLegend(settings) {
     let colors = LEGEND_COLORS['horizontal'];
-    let title = settings.vertical.title ? [settings.vertical.title] : [settings.horizontal.title];
-    console.log(settings);
+    let title = [];
+    let cssClass = '';
 
     if (settings.isBidimensional) {
       colors = LEGEND_COLORS['bidimensional'];
       title = [settings.vertical.title, settings.horizontal.title];
+      cssClass = '-bidimensional';
     } else if (settings.vertical) {
       colors = LEGEND_COLORS['vertical'];
+      title = [settings.vertical.title, null];
+      cssClass = '-vertical';
+    } else {
+      title = [null, settings.horizontal.title];
+      cssClass = '-horizontal';
     }
 
     const legendHTML = stringToHTML(LegendTemplate({
       title,
       colors,
+      cssClass,
       isBidimensional: settings.isBidimensional,
       isVertical: !settings.isBidimensional && settings.vertical
     }));
@@ -72,7 +94,7 @@ export default class {
     }
 
     for (var i = 0; i < legendHTML.length; i++) {
-      this.buckets.appendChild(legendHTML[i].cloneNode(true));
+      this.el.appendChild(legendHTML[i].cloneNode(true));
     }
   }
 }
