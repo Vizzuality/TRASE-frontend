@@ -113,7 +113,7 @@ export default class {
     this.settings.mapVectorLayers[group] = this.settings.mapVectorLayers[group] !== layerSlug ?
       layerSlug : null;
 
-    this.callbacks.onSelectedVectorLayers(this.settings.mapVectorLayers);
+    this.callbacks.onVectorLayersSelected(this.settings.mapVectorLayers);
   }
 
   _onToggleSwitcher(e) {
@@ -123,7 +123,7 @@ export default class {
     switcher.classList.toggle('-enabled');
 
     const layers = this._getActivelayers();
-    this.callbacks.onSelectedContextualLayer(layers);
+    this.callbacks.onContextualLayerSelected(layers);
   }
 
   _disableRadio(radio) {

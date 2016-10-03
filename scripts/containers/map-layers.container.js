@@ -8,8 +8,8 @@ const mapMethodsToState = (state) => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  onSelectedVectorLayers: layers => selectVectorLayers(layers),
-  onSelectedContextualLayer: layers => selectContextualLayers(layers)
+  onVectorLayersSelected: layers => selectVectorLayers(layers),
+  onContextualLayerSelected: layers => selectContextualLayers(layers)
 });
 
 export default connect(mapLayers, mapMethodsToState, mapViewCallbacksToActions);
