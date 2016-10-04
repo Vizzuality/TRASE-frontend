@@ -21,11 +21,10 @@
     top: $nav-height;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 56px);
 
     transform: translate(-$layer-map-width, 0);
     transition: transform .85s ease-in-out;
-    // overflow-y: hidden;
 
     &.-open {
       transform: translate(0, 0);
@@ -63,7 +62,7 @@
       }
     }
 
-    > .c-columnsSelector {
+    > .c-columns-selector {
       bottom: 12px;
       left: 640px;
       width: calc(100% - 320px);

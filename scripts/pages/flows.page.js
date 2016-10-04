@@ -4,7 +4,7 @@ import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
 import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
-import ColumnsSelectorContainer from 'containers/columnsSelector.container';
+import ColumnsSelectorContainer from 'containers/columns-selector.container';
 import MapLayersContainer from 'containers/map-layers.container';
 import MapLegendContainer from 'containers/map-legend.container';
 import MapContainer from 'containers/map.container';
