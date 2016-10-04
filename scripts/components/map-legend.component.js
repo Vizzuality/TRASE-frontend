@@ -8,6 +8,7 @@ export default class {
 
   onCreated() {
     this._setVars();
+    this._setEventListeners();
   }
 
   selectedVectorLayers(vectorLayers) {
@@ -18,6 +19,10 @@ export default class {
 
   _setVars() {
     this.el = document.querySelector('.js-map-legend');
+  }
+
+  _setEventListeners() {
+    this.el.addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
   }
 
   _setupLegend() {
