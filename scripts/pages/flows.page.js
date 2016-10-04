@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
+import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columnsSelector.container';
 import MapLayersContainer from 'containers/map-layers.container';
@@ -15,7 +16,6 @@ import { loadInitialData } from 'actions/flows.actions';
 
 // TODO: load from URL params (only flows)
 const initialState = {
-  app: {},
   flows: {
     selectedCountry: 'brazil',
     selectedCommodity: 'soy',
@@ -46,6 +46,7 @@ var store = createStore(
 
 
 
+new FlowContentContainer(store);
 new SankeyContainer(store);
 new ColumnsSelectorContainer(store);
 new MapContainer(store);

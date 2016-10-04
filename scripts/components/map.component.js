@@ -14,7 +14,7 @@ export default class {
   }
 
   _setEventListeners() {
-    document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this._onToggleBasemap(); });
+    document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
   }
 
   loadMap(geoData) {
@@ -69,10 +69,5 @@ export default class {
       });
     });
     return topoLayer;
-  }
-
-  _onToggleBasemap() {
-    document.querySelector('.c-basemap-options').classList.toggle('-open');
-    document.querySelector('.c-map').classList.toggle('-moved');
   }
 }

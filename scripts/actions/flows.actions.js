@@ -2,25 +2,25 @@ import actions from 'actions';
 import getURLFromParams from 'utils/getURLFromParams';
 
 export function selectCountry(country, reloadLinks) {
-  return _getSelectAction('country', country, actions.SELECT_COUNTRY, reloadLinks);
+  return _reloadLinks('country', country, actions.SELECT_COUNTRY, reloadLinks);
 }
 export function selectCommodity(commodity, reloadLinks) {
-  return _getSelectAction('commodity', commodity, actions.SELECT_COMMODITY, reloadLinks);
+  return _reloadLinks('commodity', commodity, actions.SELECT_COMMODITY, reloadLinks);
 }
 export function selectYears(years, reloadLinks) {
-  return _getSelectAction('years', years, actions.SELECT_YEARS, reloadLinks);
+  return _reloadLinks('years', years, actions.SELECT_YEARS, reloadLinks);
 }
 export function selectQuant(quant, reloadLinks) {
-  return _getSelectAction('quant', quant, actions.SELECT_QUANT, reloadLinks);
+  return _reloadLinks('quant', quant, actions.SELECT_QUANT, reloadLinks);
 }
 export function selectColor(color, reloadLinks) {
-  return _getSelectAction('color', color, actions.SELECT_COLOR, reloadLinks);
+  return _reloadLinks('color', color, actions.SELECT_COLOR, reloadLinks);
 }
 export function selectQual(qual, reloadLinks) {
-  return _getSelectAction('qual', qual, actions.SELECT_QUAL, reloadLinks);
+  return _reloadLinks('qual', qual, actions.SELECT_QUAL, reloadLinks);
 }
 export function selectView(view, reloadLinks) {
-  return _getSelectAction('view', view, actions.SELECT_VIEW, reloadLinks);
+  return _reloadLinks('view', view, actions.SELECT_VIEW, reloadLinks);
 }
 
 export function selectColumn(columnIndex, columnId) {
@@ -34,15 +34,40 @@ export function selectColumn(columnIndex, columnId) {
   };
 }
 
-export function selectVectorLayers(vectorLayers, reloadLinks) {
-  return _getSelectAction('vectorLayers', vectorLayers, actions.SELECT_VECTOR_LAYERS, reloadLinks);
+// we don't know at this moment waht to do with a vector layer.
+// this isan example of the implementation
+export function selectVectorLayers(vectorLayers) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_VECTOR_LAYERS,
+      vectorLayers
+    });
+
+    const params = {
+      vectorLayers
+    };
+
+    // do something with params and URL
+    const url = '' + params;
+
+    //
+    fetch(url)
+      .then(res => res.text())
+      .then(payload => {
+
+        dispatch({
+          type: actions.UPDATE_VECTOR_LAYER_MAP,
+          payload
+        });
+      });
+  };
 }
 
 export function selectContextualLayers(contextualLayers, reloadLinks) {
-  return _getSelectAction('contextualLayers', contextualLayers, actions.SELECT_CONTEXTUAL_LAYERS, reloadLinks);
+  return _reloadLinks('contextualLayers', contextualLayers, actions.SELECT_CONTEXTUAL_LAYERS, reloadLinks);
 }
 
-const _getSelectAction = (param, value, type, reloadLinks = true) => {
+const _reloadLinks = (param, value, type, reloadLinks = true) => {
   // console.log(param, value, type, reloadLinks)
   return dispatch => {
     const action = {

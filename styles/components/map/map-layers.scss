@@ -2,12 +2,6 @@
 
 .c-basemap-options {
   padding: 24px;
-  transform: translate(-100%, 0);
-  transition: transform .85s ease-in-out;
-
-  &.-open {
-    transform: translate(0, 0);
-  }
 
   > .explanation {
     display: flex;
