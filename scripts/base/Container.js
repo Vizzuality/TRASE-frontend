@@ -30,13 +30,16 @@ export default class {
     const methodsToState = this._methodsToState(state);
     Object.keys(methodsToState).forEach(k => {
       const stateValue = methodsToState[k];
+      let comparedValue = (stateValue && stateValue._comparedValue) ? stateValue._comparedValue(state) : stateValue;
+
       // check if internal _prop differs from new app state value
-      if (stateValue !== undefined && stateValue !== this._props[k]) {
+      if (comparedValue !== undefined && comparedValue !== this._props[k]) {
         // in which case update internal _props
-        this._props[k] = stateValue;
+        this._props[k] = comparedValue;
         // and call the method (k, the dict key) directly on the component
         if (this.view[k]) {
-          this.view[k](stateValue);
+          const returnedValue = (stateValue._returnedValue) ? stateValue._returnedValue(state) : comparedValue;
+          this.view[k](returnedValue);
         } else {
           console.warn(`trying to call ${k} on view but it doesn't exist`);
         }

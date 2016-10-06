@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+// merges same origin - destination links
 export default function(links) {
   const mergedLinks = [];
   let dict = {};
