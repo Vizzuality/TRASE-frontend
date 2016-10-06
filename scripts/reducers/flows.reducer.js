@@ -64,7 +64,7 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { highlightedNodeId: action.id });
 
   case actions.SELECT_NODE: {
-    const selectedNodeIds = getSelectedNodeIds(action.nodeId, state.selectedNodeIds);
+    const selectedNodeIds = getSelectedNodeIds(action.nodeId, state.selectedNodesIds);
     return Object.assign({}, state, { selectedNodeIds });
   }
 
@@ -80,7 +80,8 @@ export default function (state = {}, action) {
 
   case actions.SELECT_NODE_FROM_GEOID: {
     const nodeId = getNodeIdFromGeoId(action.geoId, state.nodesDict);
-    const selectedNodeIds = getSelectedNodeIds(nodeId, state.selectedNodeIds);
+    const selectedNodeIds = getSelectedNodeIds(nodeId, state.selectedNodesIds);
+    console.log(selectedNodeIds)
     return Object.assign({}, state, { selectedNodeIds });
   }
   case actions.SELECT_VECTOR_LAYERS: {
@@ -101,13 +102,14 @@ export default function (state = {}, action) {
   }
 }
 
-const getSelectedNodeIds = (addedNodeId, currentSelectedNodeIds) => {
-  const currentIndex = currentSelectedNodeIds.indexOf(addedNodeId);
+const getSelectedNodeIds = (addedNodeId, currentSelectedNodesIds) => {
+  const currentIndex = currentSelectedNodesIds.indexOf(addedNodeId);
+  debugger;
   let selectedNodeIds;
   if (currentIndex > -1) {
-    selectedNodeIds = _.without(currentSelectedNodeIds, addedNodeId);
+    selectedNodeIds = _.without(currentSelectedNodesIds, addedNodeId);
   } else {
-    selectedNodeIds = [addedNodeId].concat(currentSelectedNodeIds);
+    selectedNodeIds = [addedNodeId].concat(currentSelectedNodesIds);
   }
   return selectedNodeIds;
 };
