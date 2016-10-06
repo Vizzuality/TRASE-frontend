@@ -3,29 +3,21 @@
 .c-switcher {
   display: flex;
   position: relative;
-  width: 44px;
-  height: 24px;
 
-  border: 1px solid rgba($charcoal-grey, .3);
   border-radius: 100px;
-  background-color: $medium-pink;
 
   &::before {
     display: inline-block;
 
     position: absolute;
     top: 50%;
-    left: 3px;
-
-    width: 18px;
-    height: 18px;
 
     transform: translate(0, -50%);
     transition: left .25s linear, transform .25s linear;
 
     border-radius: 50%;
     background-color: $white;
-    box-shadow: 0 3px 6px 0 rgba($black, .16), 0 3px 6px 0 rgba($black, .23);
+    box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
 
     content: '';
   }

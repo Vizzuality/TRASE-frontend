@@ -7,12 +7,7 @@ import getLinks from './sankey/getLinks';
 import mergeLinks from './sankey/mergeLinks';
 import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
 
-const initialState = {
-  selectedNodesIds: [],
-  selectedQuant: 'Deforestation risk'
-};
-
-export default function (state = initialState, action) {
+export default function (state = {}, action) {
   switch (action.type) {
 
   case actions.LOAD_INITIAL_DATA:
@@ -87,6 +82,12 @@ export default function (state = initialState, action) {
     const nodeId = getNodeIdFromGeoId(action.geoId, state.nodesDict);
     const selectedNodeIds = getSelectedNodeIds(nodeId, state.selectedNodeIds);
     return Object.assign({}, state, { selectedNodeIds });
+  }
+  case actions.SELECT_VECTOR_LAYERS: {
+    return Object.assign({}, state, { selectedVectorLayers: action.vectorLayers });
+  }
+  case actions.SELECT_CONTEXTUAL_LAYERS: {
+    return Object.assign({}, state, { selectedContextualLayers: action.contextualLayers});
   }
   default:
     return state;

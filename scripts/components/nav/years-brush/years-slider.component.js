@@ -3,7 +3,7 @@ import { axisTop as d3_axis_top } from 'd3-axis';
 import { scaleTime as d3_scale_time } from 'd3-scale';
 import { timeYear as d3_time_timeYear } from 'd3-time';
 import { brushX as d3_brush_x } from 'd3-brush';
-import { event as d3_event } from 'd3-selection'
+import { event as d3_event } from 'd3-selection';
 import ThumbTemplate from 'ejs!templates/years-slider-thumb.ejs';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import {AVAILABLE_YEARS} from 'constants';
