@@ -151,19 +151,19 @@ const _loadMapVectorLayers = (urls, dispatch) => {
 };
 
 
-export function selectNode(id) {
+export function selectNode(nodeId) {
   return {
     type: actions.SELECT_NODE,
-    id
+    nodeId
   };
 }
 
-export function highlightNode(id) {
+export function highlightNode(nodeId) {
   return (dispatch, getState) => {
-    if (getState().flows.selectedNodesIds.indexOf(id) > -1) return;
+    if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) return;
     dispatch({
       type: actions.HIGHLIGHT_NODE,
-      id
+      nodeId
     });
   };
 }

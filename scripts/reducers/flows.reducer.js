@@ -64,8 +64,8 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { highlightedNodeId: action.id });
 
   case actions.SELECT_NODE: {
-    const selectedNodeIds = getSelectedNodeIds(action.nodeId, state.selectedNodeIds);
-    return Object.assign({}, state, { selectedNodeIds });
+    const selectedNodesIds = getSelectedNodeIds(action.nodeId, state.selectedNodesIds);
+    return Object.assign({}, state, { selectedNodesIds });
   }
 
   case actions.GET_GEO_DATA:
@@ -101,7 +101,9 @@ export default function (state = {}, action) {
   }
 }
 
-const getSelectedNodeIds = (addedNodeId, currentSelectedNodeIds) => {
+const getSelectedNodeIds = function(addedNodeId, currentSelectedNodeIds) {
+  console.log(arguments)
+  console.log(addedNodeId, currentSelectedNodeIds)
   const currentIndex = currentSelectedNodeIds.indexOf(addedNodeId);
   let selectedNodeIds;
   if (currentIndex > -1) {
