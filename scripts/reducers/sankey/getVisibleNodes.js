@@ -52,8 +52,10 @@ const _setNodesMeta = (nodesDict, nodesMeta) => {
   nodesMeta.forEach(nodeMeta => {
     const nodeId = nodeMeta.id;
     const node = Object.assign({}, nodesDict[nodeId]);
-    node.height = nodeMeta.attributes.height;
-    nodesDictWithMeta[nodeId] = node;
+    if (nodeMeta.attributes && nodeMeta.attributes.height) {
+      node.height = nodeMeta.attributes.height;
+      nodesDictWithMeta[nodeId] = node;
+    }
   });
 
   return nodesDictWithMeta;
