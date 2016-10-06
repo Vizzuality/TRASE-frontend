@@ -2,9 +2,10 @@ import _ from 'lodash';
 import actions from 'actions';
 import getNodesDict from './sankey/getNodesDict';
 import getVisibleNodes from './sankey/getVisibleNodes';
-import getColumns from './sankey/getColumns';
-import getLinks from './sankey/getLinks';
+import getVisibleColumns from './sankey/getVisibleColumns';
+import splitLinksByColumn from './sankey/splitLinksByColumn';
 import mergeLinks from './sankey/mergeLinks';
+import filterLinks from './sankey/filterLinks';
 import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
 
 export default function (state = {}, action) {
@@ -28,9 +29,10 @@ export default function (state = {}, action) {
     const rawLinks = jsonPayload.data;
     const nodesMeta = jsonPayload.include;
     const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, nodesMeta, state.selectedColumnsIds);
-    const columns = getColumns(state.columns, state.selectedColumnsIds);
-    const links = mergeLinks(getLinks(rawLinks, state.nodesDict));
-    return Object.assign({}, state, { linksPayload: { links, visibleNodes, columns}, linksLoading: false });
+    const visibleColumns = getVisibleColumns(state.columns, state.selectedColumnsIds);
+    const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict);
+    const links = mergeLinks(unmergedLinks);
+    return Object.assign({}, state, { links, unmergedLinks, visibleNodes, visibleColumns, linksLoading: false });
   }
 
   case actions.SELECT_COUNTRY:
@@ -65,7 +67,15 @@ export default function (state = {}, action) {
 
   case actions.SELECT_NODE: {
     const selectedNodesIds = getSelectedNodeIds(action.nodeId, state.selectedNodesIds);
-    return Object.assign({}, state, { selectedNodesIds });
+
+    let links;
+    if (selectedNodesIds.length > 0) {
+      const filteredLinks = filterLinks(state.unmergedLinks, selectedNodesIds);
+      links = mergeLinks(filteredLinks);
+    } else {
+      links = mergeLinks(state.unmergedLinks);
+    }
+    return Object.assign({}, state, { selectedNodesIds, links });
   }
 
   case actions.GET_GEO_DATA:
@@ -102,8 +112,6 @@ export default function (state = {}, action) {
 }
 
 const getSelectedNodeIds = function(addedNodeId, currentSelectedNodeIds) {
-  console.log(arguments)
-  console.log(addedNodeId, currentSelectedNodeIds)
   const currentIndex = currentSelectedNodeIds.indexOf(addedNodeId);
   let selectedNodeIds;
   if (currentIndex > -1) {

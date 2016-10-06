@@ -112,7 +112,12 @@ export function loadLinks() {
       vectorLayers: getState().flows.selectedVectorLayers,
       contextualLayers: getState().flows.selectedContextualLayers
     };
-    console.log(params);
+    
+    // if (getState().flows.selectedNodesIds.length) {
+    //   params.clicked_nodes = getState().flows.selectedNodesIds.join(',');
+    //   params.filter_mode = 2;
+    // }
+
     const url = getURLFromParams('/v1/get_flows', params);
 
     fetch(url)
@@ -152,9 +157,12 @@ const _loadMapVectorLayers = (urls, dispatch) => {
 
 
 export function selectNode(nodeId) {
-  return {
-    type: actions.SELECT_NODE,
-    nodeId
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_NODE,
+      nodeId
+    });
+    // dispatch(loadLinks());
   };
 }
 
