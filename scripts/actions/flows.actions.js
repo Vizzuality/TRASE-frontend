@@ -112,7 +112,12 @@ export function loadLinks() {
       vectorLayers: getState().flows.selectedVectorLayers,
       contextualLayers: getState().flows.selectedContextualLayers
     };
-    console.log(params);
+    
+    // if (getState().flows.selectedNodesIds.length) {
+    //   params.clicked_nodes = getState().flows.selectedNodesIds.join(',');
+    //   params.filter_mode = 2;
+    // }
+
     const url = getURLFromParams('/v1/get_flows', params);
 
     fetch(url)
@@ -151,19 +156,22 @@ const _loadMapVectorLayers = (urls, dispatch) => {
 };
 
 
-export function selectNode(id) {
-  return {
-    type: actions.SELECT_NODE,
-    id
+export function selectNode(nodeId) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_NODE,
+      nodeId
+    });
+    // dispatch(loadLinks());
   };
 }
 
-export function highlightNode(id) {
+export function highlightNode(nodeId) {
   return (dispatch, getState) => {
-    if (getState().flows.selectedNodesIds.indexOf(id) > -1) return;
+    if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) return;
     dispatch({
       type: actions.HIGHLIGHT_NODE,
-      id
+      nodeId
     });
   };
 }

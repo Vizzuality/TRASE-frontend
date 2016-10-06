@@ -7,7 +7,16 @@ import Sankey from 'components/sankey.component.js';
 const mapMethodsToState = (state) => ({
   initialDataLoadStarted: state.flows.initialDataLoading,
   linksLoadStarted: state.flows.linksLoading,
-  linksLoaded: state.flows.linksPayload,
+  linksLoaded: {
+    _comparedValue: (state) => state.flows.links,
+    _returnedValue: (state) => {
+      return {
+        links: state.flows.links,
+        visibleNodes: state.flows.visibleNodes,
+        visibleColumns: state.flows.visibleColumns,
+      };
+    }
+  },
   windowResized: state.app.windowSize,
   highlightNode: state.flows.highlightedNodeId,
   selectNodes: state.flows.selectedNodesIds
