@@ -37,7 +37,7 @@
           content: '';
         }
 
-        &.-horizontal {
+        &.-vertical {
           flex-direction: column;
 
           background-color: $beige;
@@ -52,7 +52,7 @@
           }
         }
 
-        &.-vertical {
+        &.-horizontal {
           background-color: $warm-pink;
 
           &::before {
