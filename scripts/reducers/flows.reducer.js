@@ -67,15 +67,24 @@ export default function (state = {}, action) {
 
   case actions.SELECT_NODE: {
     const selectedNodesIds = getSelectedNodesIds(action.nodeId, state.selectedNodesIds);
+    return Object.assign({}, state, { selectedNodesIds });
+  }
 
+  case actions.SELECT_NODE_FROM_GEOID: {
+    const nodeId = getNodeIdFromGeoId(action.geoId, state.nodesDict);
+    const selectedNodesIds = getSelectedNodesIds(nodeId, state.selectedNodesIds);
+    return Object.assign({}, state, { selectedNodesIds });
+  }
+
+  case actions.FILTER_LINKS_BY_NODES: {
     let links;
-    if (selectedNodesIds.length > 0) {
-      const filteredLinks = filterLinks(state.unmergedLinks, selectedNodesIds);
+    if (state.selectedNodesIds.length > 0) {
+      const filteredLinks = filterLinks(state.unmergedLinks, state.selectedNodesIds);
       links = mergeLinks(filteredLinks);
     } else {
       links = mergeLinks(state.unmergedLinks);
     }
-    return Object.assign({}, state, { selectedNodesIds, links });
+    return Object.assign({}, state, { links });
   }
 
   case actions.GET_GEO_DATA:
@@ -88,12 +97,7 @@ export default function (state = {}, action) {
       }
     });
 
-  case actions.SELECT_NODE_FROM_GEOID: {
-    const nodeId = getNodeIdFromGeoId(action.geoId, state.nodesDict);
-    const selectedNodesIds = getSelectedNodesIds(nodeId, state.selectedNodesIds);
-    console.log(selectedNodesIds)
-    return Object.assign({}, state, { selectedNodesIds });
-  }
+
   case actions.SELECT_VECTOR_LAYERS: {
     const selectedVectorLayers = Object.assign({}, state.selectedVectorLayers);
     const currentSlugForDirection = selectedVectorLayers[action.layerData.direction].layerSlug;

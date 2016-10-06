@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
 export default (geoId, nodesDict) => {
-  const node = _.findKey(nodesDict, { geoId: geoId });
-  return node;
+  const nodeId = _.findKey(nodesDict, { geoId: geoId });
+  return parseInt(nodeId);
 };
