@@ -8,7 +8,7 @@ const mapMethodsToState = (state) => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  onVectorLayersSelected: layers => selectVectorLayers(layers),
+  onVectorLayersSelected: layerData => selectVectorLayers(layerData),
   onContextualLayerSelected: layers => selectContextualLayers(layers)
 });
 

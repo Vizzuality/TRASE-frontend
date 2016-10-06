@@ -10,12 +10,12 @@ export default class {
   }
 
   selectedVectorLayers(layers) {
-    this._mapVectorLayers =  {
+    const mapVectorLayers =  {
       horizontal: layers.horizontal || null,
       vertical: layers.vertical || null
     };
 
-    this._setActiveVectorLayers(this._mapVectorLayers);
+    this._setActiveVectorLayers(mapVectorLayers);
   }
 
   selectContextualLayers(layers) {
@@ -116,12 +116,11 @@ export default class {
       this._cleanRadiosByGroup(group);
     }
 
-    this._mapVectorLayers[group] = {
+    this.callbacks.onVectorLayersSelected({
+      direction: group, // 'vertical' or 'horizontal'
       title,
-      layerSlug: this._mapVectorLayers[group]['layerSlug'] !== layerSlug ? layerSlug : null
-    };
-
-    this.callbacks.onVectorLayersSelected(this._mapVectorLayers);
+      layerSlug
+    });
   }
 
   _onToggleSwitcher(e) {
