@@ -36,30 +36,12 @@ export function selectColumn(columnIndex, columnId) {
 
 // we don't know at this moment waht to do with a vector layer.
 // this isan example of the implementation
-export function selectVectorLayers(vectorLayers) {
+export function selectVectorLayers(layerData) {
   return dispatch => {
     dispatch({
       type: actions.SELECT_VECTOR_LAYERS,
-      vectorLayers
+      layerData
     });
-
-    const params = {
-      vectorLayers
-    };
-
-    // do something with params and URL
-    const url = '' + params;
-
-    //
-    fetch(url)
-      .then(res => res.text())
-      .then(payload => {
-
-        dispatch({
-          type: actions.UPDATE_VECTOR_LAYER_MAP,
-          payload
-        });
-      });
   };
 }
 

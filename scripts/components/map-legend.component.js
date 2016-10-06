@@ -12,9 +12,7 @@ export default class {
   }
 
   selectedVectorLayers(vectorLayers) {
-    this.vectorLayers = vectorLayers;
-
-    this._setupLegend();
+    this._setupLegend(vectorLayers);
   }
 
   _setVars() {
@@ -25,9 +23,9 @@ export default class {
     this.el.addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
   }
 
-  _setupLegend() {
-    const horizontalLayer = this.vectorLayers['horizontal'];
-    const verticalLayer = this.vectorLayers['vertical'];
+  _setupLegend(vectorLayers) {
+    const horizontalLayer = vectorLayers['horizontal'];
+    const verticalLayer = vectorLayers['vertical'];
 
     // Error handling
     if(horizontalLayer === 'undefined' && verticalLayer === 'undefined') {

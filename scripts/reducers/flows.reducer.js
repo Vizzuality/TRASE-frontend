@@ -84,7 +84,14 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { selectedNodeIds });
   }
   case actions.SELECT_VECTOR_LAYERS: {
-    return Object.assign({}, state, { selectedVectorLayers: action.vectorLayers });
+    const selectedVectorLayers = Object.assign({}, state.selectedVectorLayers);
+    const currentSlugForDirection = selectedVectorLayers[action.layerData.direction].layerSlug;
+    const nextSlug = action.layerData.layerSlug;
+    selectedVectorLayers[action.layerData.direction] = {
+      title: action.layerData.title,
+      layerSlug: (currentSlugForDirection === nextSlug) ? null : nextSlug
+    };
+    return Object.assign({}, state, { selectedVectorLayers });
   }
   case actions.SELECT_CONTEXTUAL_LAYERS: {
     return Object.assign({}, state, { selectedContextualLayers: action.contextualLayers});
