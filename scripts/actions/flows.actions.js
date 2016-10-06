@@ -124,11 +124,12 @@ export function loadLinks() {
       .then(res => res.text())
       .then(payload => {
 
-        // load hi res map vector layers only after links have been loaded once?
-
         dispatch({
           type: actions.GET_LINKS,
           payload
+        });
+        dispatch({
+          type: actions.RESELECT_NODES
         });
       });
   };

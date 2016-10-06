@@ -8,6 +8,7 @@ import splitLinksByColumn from './sankey/splitLinksByColumn';
 import mergeLinks from './sankey/mergeLinks';
 import filterLinks from './sankey/filterLinks';
 import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
+import getSelectedNodesStillVisible from './sankey/getSelectedNodesStillVisible';
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -29,12 +30,30 @@ export default function (state = {}, action) {
     const jsonPayload = JSON.parse(action.payload);
     const rawLinks = jsonPayload.data;
     const nodesMeta = jsonPayload.include;
+
     const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, nodesMeta, state.selectedColumnsIds);
     const visibleNodesByColumn = sortVisibleNodesByColumn(visibleNodes);
+
     const visibleColumns = getVisibleColumns(state.columns, state.selectedColumnsIds);
+
     const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict);
     const links = mergeLinks(unmergedLinks);
-    return Object.assign({}, state, { links, unmergedLinks, visibleNodes, visibleNodesByColumn, visibleColumns, linksLoading: false });
+
+    return Object.assign({}, state, {
+      links,
+      unmergedLinks,
+      visibleNodes,
+      visibleNodesByColumn,
+      visibleColumns,
+      linksLoading: false
+    });
+  }
+
+  // this is triggered when links are reloaded to keep track of selected node/links
+  case actions.RESELECT_NODES: {
+    const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
+    const links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
+    return Object.assign({}, state, { selectedNodesIds, links });
   }
 
   case actions.SELECT_COUNTRY:
@@ -82,13 +101,7 @@ export default function (state = {}, action) {
 
   }
   case actions.FILTER_LINKS_BY_NODES: {
-    let links;
-    if (state.selectedNodesIds.length > 0) {
-      const filteredLinks = filterLinks(state.unmergedLinks, state.selectedNodesIds);
-      links = mergeLinks(filteredLinks);
-    } else {
-      links = mergeLinks(state.unmergedLinks);
-    }
+    const links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
     return Object.assign({}, state, { links });
   }
 
@@ -131,3 +144,14 @@ const getSelectedNodesIds = (addedNodeId, currentSelectedNodesIds) => {
   }
   return selectedNodesIds;
 };
+
+const getFilteredLinks = (unmergedLinks, selectedNodesIds) => {
+  let links;
+  if (selectedNodesIds.length > 0) {
+    const filteredLinks = filterLinks(unmergedLinks, selectedNodesIds);
+    links = mergeLinks(filteredLinks);
+  } else {
+    links = mergeLinks(unmergedLinks);
+  }
+  return links;
+}
