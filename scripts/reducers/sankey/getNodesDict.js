@@ -4,8 +4,8 @@ export default function (rawNodes) {
   const nodesDict = {};
   rawNodes.forEach(node => {
     const newNode = {
-      columnId: parseInt(node.attributes.columnId),
-      name: node.attributes.name,
+      columnId: parseInt(node.columnId),
+      name: node.name
     };
     if (node.isAggregated) newNode.isAggregated = true;
     nodesDict[parseInt(node.id)] = newNode;
