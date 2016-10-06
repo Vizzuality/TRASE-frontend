@@ -26,12 +26,13 @@ export default class {
     this.selectVectorLayer([geoData.currentLayer]);
   }
 
-  highlightNode(id) {
-    this.id = id;
-  }
-
-  selectNode(id) {
-    this.id = id;
+  selectPolygons(geoIds) {
+    document.querySelectorAll('.map-polygon').forEach(e => { e.classList.remove('-selected'); });
+    this.currentLayer.eachLayer(layer => {
+      if (geoIds.indexOf(layer.feature.properties.geoid) > - 1) {
+        layer._path.classList.add('-selected');
+      }
+    });
   }
 
   selectVectorLayer(columnIds) {
@@ -39,6 +40,7 @@ export default class {
     const id = columnIds[0];
     this.vectorLayers.forEach((layer, i) => {
       if (id === i) {
+        this.currentLayer = layer;
         this.map.addLayer(layer);
       } else {
         this.map.removeLayer(layer);

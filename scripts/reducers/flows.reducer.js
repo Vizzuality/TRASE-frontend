@@ -9,6 +9,7 @@ import mergeLinks from './sankey/mergeLinks';
 import filterLinks from './sankey/filterLinks';
 import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
 import getSelectedNodesStillVisible from './sankey/getSelectedNodesStillVisible';
+import getSelectedNodesData from './sankey/getSelectedNodesData';
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -49,12 +50,6 @@ export default function (state = {}, action) {
     });
   }
 
-  // this is triggered when links are reloaded to keep track of selected node/links
-  case actions.RESELECT_NODES: {
-    const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
-    const links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
-    return Object.assign({}, state, { selectedNodesIds, links });
-  }
 
   case actions.SELECT_COUNTRY:
     return Object.assign({}, state, { selectedCountry: action.country });
@@ -88,7 +83,8 @@ export default function (state = {}, action) {
 
   case actions.SELECT_NODE: {
     const selectedNodesIds = getSelectedNodesIds(action.nodeId, state.selectedNodesIds);
-    return Object.assign({}, state, { selectedNodesIds });
+    const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
+    return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
   case actions.SELECT_NODE_FROM_GEOID: {
@@ -97,9 +93,19 @@ export default function (state = {}, action) {
     if (nodeId === null) return state;
 
     const selectedNodesIds = getSelectedNodesIds(nodeId, state.selectedNodesIds);
-    return Object.assign({}, state, { selectedNodesIds });
-
+    const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
+    return Object.assign({}, state, selectedNodesStateUpdates);
   }
+
+  // this is triggered when links are reloaded to keep track of selected node/links
+  case actions.RESELECT_NODES: {
+    const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
+    const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
+    selectedNodesStateUpdates.links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
+    return Object.assign({}, state, selectedNodesStateUpdates);
+  }
+
+
   case actions.FILTER_LINKS_BY_NODES: {
     const links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
     return Object.assign({}, state, { links });
@@ -154,4 +160,15 @@ const getFilteredLinks = (unmergedLinks, selectedNodesIds) => {
     links = mergeLinks(unmergedLinks);
   }
   return links;
-}
+};
+
+const getSelectedNodesStateUpdates = (selectedNodesIds, visibleNodes) => {
+  const selectedNodesData = getSelectedNodesData(selectedNodesIds, visibleNodes);
+  const selectedNodesGeoIds = selectedNodesData.map(node => node.geoId).filter(geoId => geoId !== undefined);
+
+  return {
+    selectedNodesIds,
+    selectedNodesData,
+    selectedNodesGeoIds
+  };
+};
