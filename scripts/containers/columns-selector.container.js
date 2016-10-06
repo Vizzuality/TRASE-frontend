@@ -1,6 +1,6 @@
 import { selectColumn } from 'actions/flows.actions';
 import connect from 'connect';
-import ColumnsSelector from 'components/columnsSelector.component.js';
+import ColumnsSelector from 'components/columns-selector.component.js';
 
 const mapMethodsToState = (state) => ({
   selectColumns: state.flows.selectedColumnsIds

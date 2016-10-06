@@ -48,6 +48,10 @@
 <title>layers</title>
 <path class="path1" d="M0.533 12.267l14.4-11.175 14.4 11.175-14.4 11.175-14.4-11.175zM14.933 27.567l11.775-9.225 2.625 2.025-14.4 11.175-14.4-11.175 2.625-2.025 11.775 9.225z"></path>
 </symbol>
+<symbol id="icon-legend-arrow" viewBox="0 0 5 32">
+<title>legend-arrow</title>
+<path class="path1" d="M2.348 1.6l-1.801 2.443-0.548-0.405 2.689-3.639 2.689 3.639-0.548 0.405-1.801-2.443v30.075h-0.681v-30.075z"></path>
+</symbol>
 </defs>
 </svg>
 </div>

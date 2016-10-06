@@ -10,12 +10,12 @@ export default class {
   }
 
   selectedVectorLayers(layers) {
-    this.settings.mapVectorLayers =  {
+    this._mapVectorLayers =  {
       horizontal: layers.horizontal || null,
       vertical: layers.vertical || null
     };
 
-    this._setActiveVectorLayers(this.settings.mapVectorLayers);
+    this._setActiveVectorLayers(this._mapVectorLayers);
   }
 
   selectContextualLayers(layers) {
@@ -60,13 +60,16 @@ export default class {
   _setActiveVectorLayers(layers) {
     const groups = Object.keys(layers);
 
+
     groups.forEach((group) => {
       const radios = this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`);
       radios.forEach((radio) => {
-        if (radio.getAttribute('value') !== layers[group]) return;
+        if (radio.getAttribute('value') !== layers[group]['layerSlug']) return;
+        const layerItem = radio.closest('.layer-item');
         const partnerRadio = radio.nextElementSibling ?
           radio.nextElementSibling : radio.previousElementSibling;
 
+        layerItem.classList.add('-selected');
         radio.classList.add('-enabled');
         partnerRadio.classList.add('-disabled');
       });
@@ -78,6 +81,7 @@ export default class {
     layers.forEach((layerSlug) => {
       this.switchers.forEach((switcher) => {
         if (switcher.getAttribute('data-layer-slug') !== layerSlug) return;
+        switcher.closest('.layer-item').classList.add('-selected');
         switcher.classList.add('-enabled');
       });
     });
@@ -102,6 +106,8 @@ export default class {
 
     const group = radio.getAttribute('data-group');
     const layerSlug = radio.getAttribute('value');
+    const title = this.layerList.querySelector(`.layer-item[data-layer-slug="${layerSlug}"]`)
+      .querySelector('.layer-name').innerText;
     const currentSelectedRadio = this.layerList.querySelector('.c-radio-btn.-enabled');
 
     if (radio === currentSelectedRadio) {
@@ -110,16 +116,20 @@ export default class {
       this._cleanRadiosByGroup(group);
     }
 
-    this.settings.mapVectorLayers[group] = this.settings.mapVectorLayers[group] !== layerSlug ?
-      layerSlug : null;
+    this._mapVectorLayers[group] = {
+      title,
+      layerSlug: this._mapVectorLayers[group]['layerSlug'] !== layerSlug ? layerSlug : null
+    };
 
-    this.callbacks.onVectorLayersSelected(this.settings.mapVectorLayers);
+    this.callbacks.onVectorLayersSelected(this._mapVectorLayers);
   }
 
   _onToggleSwitcher(e) {
     var switcher = e && e.currentTarget;
     if (!switcher) return;
 
+
+    switcher.closest('.layer-item').classList.toggle('-selected');
     switcher.classList.toggle('-enabled');
 
     const layers = this._getActivelayers();
@@ -127,9 +137,11 @@ export default class {
   }
 
   _disableRadio(radio) {
+    const layerItem = radio.closest('.layer-item');
     const partnerRadio = radio.nextElementSibling ?
       radio.nextElementSibling : radio.previousElementSibling;
 
+    layerItem.classList.remove('-selected');
     radio.classList.remove('-enabled');
     partnerRadio.classList.remove('-disabled');
   }
@@ -140,7 +152,10 @@ export default class {
         && radio.classList.contains('-enabled')) {
         const partnerRadio = radio.nextElementSibling ?
           radio.nextElementSibling : radio.previousElementSibling;
+        const layerItem = radio.closest('.layer-item');
 
+
+        layerItem.classList.remove('-selected');
         radio.classList.remove('-enabled');
         partnerRadio.classList.remove('-disabled');
       }
