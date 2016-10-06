@@ -25,7 +25,6 @@ export default class {
   }
 
   _setVars() {
-    this.settings = {};
     this.el = document.querySelector('.c-basemap-options');
 
     this.layerList   = this.el.querySelector('.js-layer-list');
