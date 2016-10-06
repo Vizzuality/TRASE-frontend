@@ -1,5 +1,3 @@
-import { nest as d3_nest } from 'd3-collection';
-
 export default function(links, nodesDict, nodesMeta, columnIndexes) {
   const nodeIdsList = [];
   const nodes = [];
@@ -21,28 +19,15 @@ export default function(links, nodesDict, nodesMeta, columnIndexes) {
             id: nodeId,
             name: nodesDictWithMeta[nodeId].name,
             columnId: nodesDictWithMeta[nodeId].columnId,
-            height: nodesDictWithMeta[nodeId].height
+            geoId: nodesDictWithMeta[nodeId].geoId,
+            height: nodesDictWithMeta[nodeId].height,
           });
         }
       }
     });
   });
 
-
-  const columns = d3_nest()
-  .key(el => {
-    return el.columnId;
-  })
-  .sortKeys((a, b) => {
-    return (parseInt(a) < parseInt(b)) ? -1 : 1;
-  })
-  .entries(nodes);
-
-  columns.forEach(column => {
-    column.columnId = parseInt(column.key);
-  });
-
-  return columns;
+  return nodes;
 }
 
 const _setNodesMeta = (nodesDict, nodesMeta) => {

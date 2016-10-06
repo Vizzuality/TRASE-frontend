@@ -51,8 +51,7 @@ const sankeyLayout = function() {
       console.warn('not ready');
       return false;
     }
-
-    columns = linksPayload.visibleNodes;
+    columns = linksPayload.visibleNodesByColumn;
     links = linksPayload.links;
 
     _sortNodes();

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import actions from 'actions';
 import getNodesDict from './sankey/getNodesDict';
 import getVisibleNodes from './sankey/getVisibleNodes';
+import sortVisibleNodesByColumn from './sankey/sortVisibleNodesByColumn';
 import getVisibleColumns from './sankey/getVisibleColumns';
 import splitLinksByColumn from './sankey/splitLinksByColumn';
 import mergeLinks from './sankey/mergeLinks';
@@ -29,10 +30,11 @@ export default function (state = {}, action) {
     const rawLinks = jsonPayload.data;
     const nodesMeta = jsonPayload.include;
     const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, nodesMeta, state.selectedColumnsIds);
+    const visibleNodesByColumn = sortVisibleNodesByColumn(visibleNodes);
     const visibleColumns = getVisibleColumns(state.columns, state.selectedColumnsIds);
     const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict);
     const links = mergeLinks(unmergedLinks);
-    return Object.assign({}, state, { links, unmergedLinks, visibleNodes, visibleColumns, linksLoading: false });
+    return Object.assign({}, state, { links, unmergedLinks, visibleNodes, visibleNodesByColumn, visibleColumns, linksLoading: false });
   }
 
   case actions.SELECT_COUNTRY:
@@ -71,11 +73,14 @@ export default function (state = {}, action) {
   }
 
   case actions.SELECT_NODE_FROM_GEOID: {
-    const nodeId = getNodeIdFromGeoId(action.geoId, state.nodesDict);
+    const nodeId = getNodeIdFromGeoId(action.geoId, state.visibleNodes);
+    // node not found in visible nodes: abort
+    if (nodeId === null) return state;
+
     const selectedNodesIds = getSelectedNodesIds(nodeId, state.selectedNodesIds);
     return Object.assign({}, state, { selectedNodesIds });
-  }
 
+  }
   case actions.FILTER_LINKS_BY_NODES: {
     let links;
     if (state.selectedNodesIds.length > 0) {
