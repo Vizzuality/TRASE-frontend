@@ -21,19 +21,13 @@ export default class {
     this.optionList = this.el.querySelector('.bookmark-options');
   }
 
-  htmlToElement(html) {
-    var template = document.createElement('template');
-    template.innerHTML = html;
-    return template.content.firstChild;
-  }
-
   render() {
     var bookmarkHTML = stringToHTML(BookmarkTemplate({
       bookmark: this.bookmark,
       actions: this.actions
     }));
 
-    this.el.appendChild(bookmarkHTML);
+    this.el.appendChild(bookmarkHTML[0]);
 
     this._setVars();
     this._setEventListeners();

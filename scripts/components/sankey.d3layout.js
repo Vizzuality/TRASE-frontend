@@ -51,7 +51,7 @@ const sankeyLayout = function() {
       console.warn('not ready');
       return false;
     }
-    console.log(linksPayload)
+    console.log(linksPayload);
 
     columns = linksPayload.visibleNodes;
     links = linksPayload.links;
@@ -167,7 +167,7 @@ const sankeyLayout = function() {
       // }
     });
 
-    console.log(links)
+    console.log(links);
   };
 
   const _getColumnX = (columnIndex) => columnIndex * (columnWidth + linksColumnWidth);
@@ -177,8 +177,8 @@ const sankeyLayout = function() {
   const _getNode = (columnId, nodeId) => {
     const columnIndex = _getColumnIndex(columnId);
     const column = columns[columnIndex];
-    return column.values.find(node => node.id === nodeId)
-  }
+    return column.values.find(node => node.id === nodeId);
+  };
 
 
   return sankeyLayout;

@@ -1,45 +1,71 @@
 @import '../base';
 
 .l-flows {
-  overflow-y: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
   > .c-nav {
     width: 100%;
-    height: 56px;
+    height: $nav-height;
 
     .dropdown-list {
-      top: 56px;
+      top: $nav-height;
     }
   }
 
-  > .c-map {
-    top: 56px;
-    width: 320px;
+  > .flow-content {
+    position: relative;
+    top: $nav-height;
+    left: 0;
+    width: 100%;
     height: calc(100% - 56px);
 
-    > .c-map-legend {
-      bottom: 20px;
-      left: 20px;
-      padding: 20px;
+    transform: translate(-$layer-map-width, 0);
+    transition: transform .85s ease-in-out;
+
+    &.-open {
+      transform: translate(0, 0);
     }
-  }
 
-  > .c-sankey {
-    top: 56px;
-    left: 320px;
-    width: calc(100% - 320px);
-    height: calc(100% - 100px);
-    padding: 0 48px;
-
-    .sankey {
-      width: 100%;
-      height: 100%;
+    > .c-basemap-options {
+      top: $nav-height;
+      width: 320px;
+      height: calc(100% - 56px);
     }
-  }
 
-  > .c-columnsSelector {
-    bottom: 12px;
-    left: 320px;
-    width: calc(100% - 320px);
+    > .c-map {
+      top: $nav-height;
+      left: $layer-map-width;
+      width: 320px;
+      height: calc(100% - 56px);
+
+      > .c-map-legend {
+        right: 0;
+        bottom: 0;
+        padding: 16px;
+      }
+    }
+
+    > .c-sankey {
+      top: $nav-height;
+      left: 640px;
+      width: calc(100% - 320px);
+      height: calc(100% - 100px);
+      padding: 0 48px;
+
+      .sankey {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    > .c-columns-selector {
+      bottom: 12px;
+      left: 640px;
+      width: calc(100% - 320px);
+    }
   }
 }

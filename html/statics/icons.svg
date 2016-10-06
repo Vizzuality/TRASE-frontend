@@ -36,6 +36,22 @@
 <title>delete</title>
 <path class="path1" fill="none" stroke-width="3.4" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M24 6.977h-16.957l1.792-4.977h6.461l1.751 4.977h6.952zM3 7h18l-0.954 19.031c0 0.783-0.305 1.473-0.914 2.072s-1.313 0.898-2.109 0.898h-10.029c-0.797 0-1.5-0.299-2.109-0.898s-0.914-1.289-0.914-2.072l-0.971-19.031z"></path>
 </symbol>
+<symbol id="icon-layer-download" viewBox="0 0 30 32">
+<title>layer-download</title>
+<path class="path1" d="M0 27.077h29.538v4.923h-29.538v-4.923zM24.615 14.769l-9.846 9.846-9.846-9.846h7.385v-14.769h4.923v14.769h7.385z"></path>
+</symbol>
+<symbol id="icon-layer-info" viewBox="0 0 32 32">
+<title>layer-info</title>
+<path class="path1" d="M16 1.024c-4.126 0-7.652 1.464-10.582 4.394s-4.394 6.456-4.394 10.582c0 4.126 1.464 7.652 4.394 10.582s6.456 4.394 10.582 4.394c4.126 0 7.652-1.464 10.582-4.394s4.394-6.456 4.394-10.582c0-4.126-1.464-7.652-4.394-10.582s-6.456-4.394-10.582-4.394zM14 14h4v10h-4v-10zM14 8h4v4h-4v-4z"></path>
+</symbol>
+<symbol id="icon-layers" viewBox="0 0 30 32">
+<title>layers</title>
+<path class="path1" d="M0.533 12.267l14.4-11.175 14.4 11.175-14.4 11.175-14.4-11.175zM14.933 27.567l11.775-9.225 2.625 2.025-14.4 11.175-14.4-11.175 2.625-2.025 11.775 9.225z"></path>
+</symbol>
+<symbol id="icon-legend-arrow" viewBox="0 0 5 32">
+<title>legend-arrow</title>
+<path class="path1" d="M2.348 1.6l-1.801 2.443-0.548-0.405 2.689-3.639 2.689 3.639-0.548 0.405-1.801-2.443v30.075h-0.681v-30.075z"></path>
+</symbol>
 </defs>
 </svg>
 </div>

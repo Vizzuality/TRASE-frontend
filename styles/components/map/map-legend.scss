@@ -1,6 +1,144 @@
 @import '../../settings';
 
 .c-map-legend {
-  background: $white;
+  padding: 8px;
+
+  border: 1px solid $pinkish-grey;
+  background-color: $white-two;
+
+  cursor: pointer;
   z-index: 401;
+
+  > .bucket-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+    > .bucket-block {
+      display: flex;
+      position: relative;
+      align-items: center;
+
+      .bucket-legend {
+        display: flex;
+        flex-wrap: wrap;
+        width: 85px;
+        height: 18px; // 16px content + 2px border
+
+        border: 1px solid $pinkish-grey-two;
+
+      }
+
+      .bucket-legend > .bucket-item > .bucket {
+        padding-bottom: 100%;
+      }
+    }
+
+    > .bucket-footer {
+      margin: 16px 0 0;
+
+      > .icon-legend-arrow {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 48px;
+        transform: translate(-50%, 0) rotate(90deg);
+      }
+    }
+
+    .layer-name {
+      max-width: 75px;
+
+      color: rgba($charcoal-grey, .5);
+      font-family: $font-family-1;
+      font-size: $font-size-small;
+      letter-spacing: -.5px;
+      line-height: .8;
+      text-transform: uppercase;
+    }
+
+    &.-horizontal {
+
+      > .bucket-block {
+        .bucket-legend > .bucket-item {
+          flex-basis: calc(100% / 5);
+        }
+
+        > .layer-name,
+        > .icon-legend-arrow {
+          display: none;
+        }
+      }
+
+      > .bucket-footer {
+        width: 100%;
+
+        > .layer-name {
+          max-width: 85px;
+        }
+      }
+    }
+
+    &.-vertical {
+
+      > .bucket-block {
+
+        > .layer-name {
+          margin:  0 16px 0 0;
+        }
+
+        > .icon-legend-arrow {
+          position: absolute;
+          right: calc(26px - 6px);
+        }
+
+        > .bucket-legend {
+          flex-direction: column;
+          flex-wrap: nowrap;
+          width: 18px;
+          height: 100%;
+        }
+      }
+
+      > .bucket-footer {
+        display: none;
+      }
+    }
+
+    &.-bidimensional {
+
+      > .bucket-block {
+        .bucket-legend {
+          width: 48px;
+          height: 48px;
+
+          > .bucket-item {
+            flex-basis: calc(100% / 3);
+          }
+        }
+
+        > .layer-name {
+          text-align: right;
+        }
+      }
+
+      > .bucket-footer {
+        position: relative;
+        min-height: 16px;
+
+        > .layer-name {
+          max-width: 56px;
+        }
+
+        > .icon-legend-arrow {
+          top: auto;
+          right: 13px;
+          bottom: 3px;
+          left: auto;
+        }
+      }
+    }
+  }
 }

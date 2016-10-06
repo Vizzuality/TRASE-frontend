@@ -7,3 +7,9 @@ export function resize(width, height) {
     height
   };
 }
+
+export function toggleMapLayerMenu() {
+  return {
+    type: actions.TOGGLE_MAP_LAYERS_MENU
+  };
+}

@@ -34,4 +34,4 @@ export default svg => {
       .attr('in', 'offsetBlur');
   feMerge.append('feMergeNode')
       .attr('in', 'SourceGraphic');
-}
+};

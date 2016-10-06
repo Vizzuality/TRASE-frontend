@@ -1,5 +1,5 @@
 import Dropdown from 'components/dropdown.component';
-import 'styles/components/columnsSelector.scss';
+import 'styles/components/columns-selector.scss';
 
 export default class {
   onCreated() {

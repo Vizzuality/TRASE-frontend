@@ -1,7 +1,42 @@
 @import '../settings';
 
 .c-map {
+  transform: translate(0, 0);
+  transition: transform 1s ease;
   z-index: 1;
+
+  &.-moved {
+    transform: translate(100%, 0);
+  }
+
+  .btn-basemap {
+    display: flex;
+
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 4px;
+    background-color: $white;
+    box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
+
+    cursor: pointer;
+    z-index: 401;
+
+    > .icon-layers {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .leaflet-control-attribution {
+    display: none;
+  }
 
   .map-polygon {
     fill: $pale-grey;

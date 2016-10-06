@@ -1,0 +1,217 @@
+@import '../../settings';
+
+.c-basemap-options {
+  padding: 24px;
+
+  > .explanation {
+    display: flex;
+    justify-content: space-between;
+
+    > .explanation-text {
+      flex-basis: 65%;
+
+      color: rgba($charcoal-grey, .6);
+      font-family: $font-family-1;
+      font-size: $font-size-small;
+      letter-spacing: -.2px;
+      text-transform: uppercase;
+    }
+
+
+    > .chroropleth-distribution-sample {
+      display: flex;
+      flex-basis: 25%;
+      align-items: center;
+      justify-content: space-between;
+
+      > .sample {
+        display: inline-flex;
+        width: 24px;
+        height: 24px;
+
+
+        &::before,
+        &::after {
+          display: inline-block;
+          flex-basis: calc(100% / 3);
+          content: '';
+        }
+
+        &.-vertical {
+          flex-direction: column;
+
+          background-color: $beige;
+
+          &::before {
+            background-color: $light-grey-blue;
+
+          }
+
+          &::after {
+            background-color: $cloudy-blue;
+          }
+        }
+
+        &.-horizontal {
+          background-color: $warm-pink;
+
+          &::before {
+            background-color: $beige;
+          }
+
+          &::after {
+            background-color: $blush;
+          }
+        }
+      }
+    }
+  }
+
+  > .layer-list {
+    margin: 20px 0 40px;
+
+    &:not(:last-child) {
+      &::after {
+        display: inline-block;
+        position: absolute;
+        left: -50%;
+        width: 100%;
+        margin: 20px 0 0;
+        transform: translate(50%, 0);
+        border-bottom: 1px solid rgba($charcoal-grey, .1);
+        content: '';
+      }
+    }
+
+    > .layer-item {
+      display: flex;
+      justify-content: space-between;
+      height: 18px;
+
+      color: rgba($charcoal-grey, .8);
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+
+      > .layer-name {
+        display: flex;
+        align-items: center;
+
+        > .layer-options-list {
+          display: none;
+          align-items: flex-end;
+
+          margin: 0 0 0 8px;
+        }
+
+        > .layer-options-list > .layer-option {
+          display: inline-flex;
+
+          & + .layer-option {
+            margin: 0 0 0 8px;
+          }
+
+          > svg {
+            cursor: pointer;
+            fill: rgba($charcoal-grey, .3);
+
+            &.icon-layer-info {
+              width: 15px;
+              height: 15px;
+            }
+
+            &.icon-layer-download {
+              width: 12px;
+              height: 13px;
+            }
+
+            &:hover {
+              fill: $charcoal-grey;
+            }
+          }
+        }
+      }
+
+      &:not(:last-child) {
+        margin:  0 0 16px;
+      }
+
+      > .radios {
+        display: flex;
+        position: relative;
+        flex-basis: 25%;
+        align-items: center;
+        justify-content: space-between;
+
+        padding: 0 4px;
+
+        &::after {
+          display: inline-block;
+          position: absolute;
+          left: 50%;
+          height: 185%;
+
+          transform: translate(-50%, 0);
+          border-left: 1px solid rgba($charcoal-grey, .2);
+
+          content: '';
+        }
+      }
+
+      &:first-child {
+        > .radios {
+          &::after {
+            top: 0;
+            height: 145%;
+          }
+        }
+      }
+
+      &:last-child {
+        > .radios {
+          &::after {
+            top: -45%;
+            height: 145%;
+          }
+        }
+      }
+
+      > .c-switcher {
+        width: 29px;
+        height: 12px;
+
+        background-color: rgba($charcoal-grey, .2);
+
+        &::before {
+          left: -3px;
+          width: 16px;
+          height: 16px;
+        }
+
+        &.-enabled {
+          background-color: $medium-pink;
+
+          &::before {
+            right: -3px;
+            left: 0;
+            transform: translate(100%, -50%);
+          }
+        }
+      }
+
+
+      &.-selected,
+      &:hover {
+        > .layer-name {
+          color: $charcoal-grey;
+          font-weight: $font-weight-bold;
+        }
+
+        .layer-options-list {
+          display: inline-flex;
+        }
+      }
+    }
+  }
+}
