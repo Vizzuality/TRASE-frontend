@@ -41,10 +41,23 @@ body, html {
     height: calc(100% - #{$flow-content-y});
 
     transform: translate(-$layer-map-width, 0);
-    transition: transform .85s ease-in-out;
+    transition: transform .15s linear, width .15s linear;
+    background-color: $gray;
+
+    overflow: hidden;
+
+    &.-center-map {
+      transform: translate(-310px, 0);
+
+      > .c-sankey,
+      >.c-columns-selector {
+        left: 90%;
+      }
+    }
 
     &.-open {
       transform: translate(0, 0);
+      width: 100%;
     }
 
     > .c-basemap-options {
@@ -58,6 +71,12 @@ body, html {
       width: 320px;
       height: 100%;
 
+      transition: width .45s linear;
+
+      &.-fullscreen {
+        width: calc(90% - 320px);
+      }
+
       > .c-map-legend {
         right: 0;
         bottom: 0;
@@ -67,9 +86,15 @@ body, html {
 
     > .c-sankey {
       left: 640px;
+<<<<<<< 403ea0cfd3d99f29cc3d972c6b0a9a01fb3c269b
       width: calc(100% - 320px);
       height: calc(100% - 50px);
+=======
+      width: calc(100% - 640px);
+      height: calc(100% - 100px);
+>>>>>>> WIP
       padding: 0 48px;
+      transition: left .45s linear;
 
       .sankey {
         width: 100%;
@@ -80,7 +105,7 @@ body, html {
     > .c-columns-selector {
       bottom: 12px;
       left: 640px;
-      width: calc(100% - 320px);
+      width: calc(100% - 640px);
     }
   }
 }
