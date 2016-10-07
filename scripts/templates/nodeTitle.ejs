@@ -5,8 +5,15 @@
     <a href="./factsheet.html#<%= node.id %>"> -> </a>
   <% }) %>
 <% } else { %>
+
   <%= node.columnName %>
   <%= node.name %>
+
+  <% node.inds.forEach(function(ind) { %>
+    <%= ind.name %>
+    <%= ind.values[0] %>
+    <!-- <%= ind.unit %> -->
+  <% }) %>
 
   view more
   <a href="./factsheet.html#<%= node.id %>"> -> </a>

@@ -19,8 +19,9 @@ export default function (state = {}, action) {
 
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
+    const rawNodesMeta = JSON.parse(action.payload[0]).include;
     const rawColumns = JSON.parse(action.payload[1]).data;
-    const nodesDict = getNodesDict(rawNodes, rawColumns);
+    const nodesDict = getNodesDict(rawNodes, rawColumns, rawNodesMeta);
     return Object.assign({}, state, { columns: rawColumns, nodesDict, initialDataLoading: false });
   }
 

@@ -6,7 +6,8 @@ export default class {
   }
 
   update(nodesData) {
-    console.log(nodesData);
+    if (nodesData.length === 0) return;
+    console.log(nodesData)
     this.el.innerHTML = NodeTitleTemplate({
       nodes: nodesData,
       node: nodesData[0],

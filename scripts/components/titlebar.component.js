@@ -3,8 +3,8 @@ export default class {
     this.search = document.querySelector('.js-search');
     this.nodesTitles = document.querySelector('.js-nodes-titles');
   }
-  toggle(selectedNodesIds) {
-    if (selectedNodesIds.length === 0) {
+  toggle(selectedNodesData) {
+    if (selectedNodesData.length === 0) {
       this.search.classList.remove('is-hidden');
       this.nodesTitles.classList.add('is-hidden');
     } else {
