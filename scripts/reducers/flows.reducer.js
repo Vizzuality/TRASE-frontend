@@ -20,7 +20,7 @@ export default function (state = {}, action) {
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
     const rawColumns = JSON.parse(action.payload[1]).data;
-    const nodesDict = getNodesDict(rawNodes);
+    const nodesDict = getNodesDict(rawNodes, rawColumns);
     return Object.assign({}, state, { columns: rawColumns, nodesDict, initialDataLoading: false });
   }
 

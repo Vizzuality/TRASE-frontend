@@ -1,1 +1,11 @@
-hello world
+<% if (multiple) { %>
+  <%= node.columnName %>
+  <% nodes.forEach(function(node) { %>
+    <%= node.name %>
+  <% }) %>
+<% } else { %>
+  <%= node.columnName %>
+
+  <%= node.name %>
+
+<% } %>

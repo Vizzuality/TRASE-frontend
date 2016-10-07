@@ -7,6 +7,10 @@ export default class {
 
   update(nodesData) {
     console.log(nodesData);
-    this.el.innerHTML = NodeTitleTemplate();
+    this.el.innerHTML = NodeTitleTemplate({
+      nodes: nodesData,
+      node: nodesData[0],
+      multiple: nodesData.length > 1
+    });
   }
 }
