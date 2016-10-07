@@ -7,8 +7,4 @@ const mapMethodsToState = (state) => ({
   toggle: state.flows.selectedNodesData
 });
 
-const mapViewCallbacksToActions = () => ({
-
-});
-
-export default connect(Titlebar, mapMethodsToState, mapViewCallbacksToActions);
+export default connect(Titlebar, mapMethodsToState);
