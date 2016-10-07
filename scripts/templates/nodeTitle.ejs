@@ -9,6 +9,9 @@
   <%= node.columnName %>
   <%= node.name %>
 
+  <%= node.quant.name %>
+  <%= node.quant.value %> <%= node.quant.unit %>
+
   <% node.inds.forEach(function(ind) { %>
     <%= ind.name %>
     <%= ind.values[0] %>

@@ -41,12 +41,16 @@ export default function (state = {}, action) {
     const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict);
     const links = mergeLinks(unmergedLinks);
 
+    // we also need to refresh nodes data, because values change when year or quant changes
+    const selectedNodesData = getSelectedNodesData(state.selectedNodesIds, visibleNodes);
+
     return Object.assign({}, state, {
       links,
       unmergedLinks,
       visibleNodes,
       visibleNodesByColumn,
       visibleColumns,
+      selectedNodesData,
       linksLoading: false
     });
   }

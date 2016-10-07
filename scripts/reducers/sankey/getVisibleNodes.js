@@ -34,6 +34,12 @@ const _setNodesMeta = (nodesDict, nodesMeta) => {
     const nodeId = nodeMeta.id;
     const node = Object.assign({}, nodesDict[nodeId]);
     if (nodeMeta.attributes && nodeMeta.attributes.height) {
+      node.quant = {
+        // TBD need to get node meta and quant meta https://github.com/sei-international/TRASE/issues/65
+        value: nodeMeta.attributes.height,
+        unit: '[unit]',
+        name: '[quant]'
+      }
       node.height = nodeMeta.attributes.height;
       nodesDictWithMeta[nodeId] = node;
     }
