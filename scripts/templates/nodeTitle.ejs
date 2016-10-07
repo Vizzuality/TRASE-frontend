@@ -2,10 +2,12 @@
   <%= node.columnName %>
   <% nodes.forEach(function(node) { %>
     <%= node.name %>
+    <a href="./factsheet.html#<%= node.id %>"> -> </a>
   <% }) %>
 <% } else { %>
   <%= node.columnName %>
-
   <%= node.name %>
 
+  view more
+  <a href="./factsheet.html#<%= node.id %>"> -> </a>
 <% } %>
