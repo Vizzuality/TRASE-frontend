@@ -1,4 +1,3 @@
-
 import { LEGEND_COLORS } from 'constants';
 import stringToHTML from 'utils/stringToHTML';
 import LegendTemplate from 'ejs!templates/map/legend.ejs';
