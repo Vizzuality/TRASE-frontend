@@ -15,13 +15,9 @@ export default function(links, nodesDict, nodesMeta, columnIndexes) {
         } else if (columnIndexes.indexOf(node.columnId) === -1) {
           console.warn('link contains a node not in requested columns', node);
         } else {
-          nodes.push({
-            id: nodeId,
-            name: nodesDictWithMeta[nodeId].name,
-            columnId: nodesDictWithMeta[nodeId].columnId,
-            geoId: nodesDictWithMeta[nodeId].geoId,
-            height: nodesDictWithMeta[nodeId].height,
-          });
+          const node = Object.assign({}, nodesDictWithMeta[nodeId]);
+          node.id = nodeId;
+          nodes.push(node);
         }
       }
     });
