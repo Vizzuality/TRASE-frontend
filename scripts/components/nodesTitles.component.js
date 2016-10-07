@@ -1,4 +1,5 @@
 import NodeTitleTemplate from 'ejs!templates/nodeTitle.ejs';
+import 'styles/components/nodesTitles.scss';
 
 export default class {
   onCreated() {

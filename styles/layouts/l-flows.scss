@@ -1,7 +1,10 @@
 @import '../base';
+@import '../settings';
 
+// todo move this to a page style scss
 body, html {
   overflow: hidden;
+  background: $background-white;
 }
 
 .l-flows {
