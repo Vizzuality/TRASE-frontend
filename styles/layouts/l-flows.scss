@@ -1,5 +1,9 @@
 @import '../base';
 
+body, html {
+  overflow: hidden;
+}
+
 .l-flows {
   position: absolute;
   top: 0;
@@ -16,12 +20,17 @@
     }
   }
 
+  > .c-titlebar {
+      position: absolute;
+      top: $nav-height;
+  }
+
   > .flow-content {
-    position: relative;
-    top: $nav-height;
+    position: absolute;
+    top: $flow-content-y;
     left: 0;
     width: 100%;
-    height: calc(100% - 56px);
+    height: calc(100% - #{$flow-content-y});
 
     transform: translate(-$layer-map-width, 0);
     transition: transform .85s ease-in-out;
@@ -33,14 +42,13 @@
     > .c-basemap-options {
       top: $nav-height;
       width: 320px;
-      height: calc(100% - 56px);
+      height: 100%;
     }
 
     > .c-map {
-      top: $nav-height;
       left: $layer-map-width;
       width: 320px;
-      height: calc(100% - 56px);
+      height: 100%;
 
       > .c-map-legend {
         right: 0;
@@ -50,10 +58,9 @@
     }
 
     > .c-sankey {
-      top: $nav-height;
       left: 640px;
       width: calc(100% - 320px);
-      height: calc(100% - 100px);
+      height: calc(100% - 50px);
       padding: 0 48px;
 
       .sankey {
