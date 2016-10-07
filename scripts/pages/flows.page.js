@@ -9,6 +9,7 @@ import MapLayersContainer from 'containers/map-layers.container';
 import MapLegendContainer from 'containers/map-legend.container';
 import MapContainer from 'containers/map.container';
 import NavContainer from 'containers/nav.container';
+import TitlebarContainer from 'containers/titlebar.container';
 import AppReducer from 'reducers/app.reducer';
 import FlowsReducer from 'reducers/flows.reducer';
 import { resize } from 'actions/app.actions';
@@ -60,6 +61,7 @@ new MapContainer(store);
 new MapLayersContainer(store);
 new MapLegendContainer(store);
 new NavContainer(store);
+new TitlebarContainer(store);
 
 store.dispatch(loadInitialData());
 store.dispatch(resize(window.innerWidth, window.innerHeight));
