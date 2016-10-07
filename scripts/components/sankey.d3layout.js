@@ -51,9 +51,7 @@ const sankeyLayout = function() {
       console.warn('not ready');
       return false;
     }
-    console.log(linksPayload);
-
-    columns = linksPayload.visibleNodes;
+    columns = linksPayload.visibleNodesByColumn;
     links = linksPayload.links;
 
     _sortNodes();
@@ -166,8 +164,6 @@ const sankeyLayout = function() {
       //   link.ty += layerOffsets[tLayerIndex];
       // }
     });
-
-    console.log(links);
   };
 
   const _getColumnX = (columnIndex) => columnIndex * (columnWidth + linksColumnWidth);

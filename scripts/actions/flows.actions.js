@@ -112,7 +112,7 @@ export function loadLinks() {
       vectorLayers: getState().flows.selectedVectorLayers,
       contextualLayers: getState().flows.selectedContextualLayers
     };
-    
+
     // if (getState().flows.selectedNodesIds.length) {
     //   params.clicked_nodes = getState().flows.selectedNodesIds.join(',');
     //   params.filter_mode = 2;
@@ -124,11 +124,12 @@ export function loadLinks() {
       .then(res => res.text())
       .then(payload => {
 
-        // load hi res map vector layers only after links have been loaded once?
-
         dispatch({
           type: actions.GET_LINKS,
           payload
+        });
+        dispatch({
+          type: actions.RESELECT_NODES
         });
       });
   };
@@ -162,9 +163,25 @@ export function selectNode(nodeId) {
       type: actions.SELECT_NODE,
       nodeId
     });
+    dispatch({
+      type: actions.FILTER_LINKS_BY_NODES
+    });
     // dispatch(loadLinks());
   };
 }
+
+export function selectNodeFromGeoId(geoId) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_NODE_FROM_GEOID,
+      geoId
+    });
+    dispatch({
+      type: actions.FILTER_LINKS_BY_NODES
+    });
+  };
+}
+
 
 export function highlightNode(nodeId) {
   return (dispatch, getState) => {
@@ -173,12 +190,5 @@ export function highlightNode(nodeId) {
       type: actions.HIGHLIGHT_NODE,
       nodeId
     });
-  };
-}
-
-export function selectNodeFromGeoId(geoId) {
-  return {
-    type: actions.SELECT_NODE_FROM_GEOID,
-    geoId
   };
 }

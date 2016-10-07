@@ -47,6 +47,10 @@
       fill: blue;
       fill-opacity: 1;
     }
+    &.-selected {
+      stroke-opacity: 1;
+      stroke-width: 2.5px;
+    }
   }
 
   .map-polygon-municipality {
@@ -56,6 +60,6 @@
     stroke-width: 1px;
   }
   .map-polygon-biome {
-    stroke-width: 2px;
+    stroke-width: 1.5px;
   }
 }

@@ -5,10 +5,9 @@ import connect from 'connect';
 import Map from 'components/map.component.js';
 
 const mapMethodsToState = (state) => ({
-  highlightNode: state.flows.highlightedNodeId,
-  selectNode: state.flows.selectedNodeId,
+  loadMap: state.flows.geoData,
   selectVectorLayer: state.flows.selectedColumnsIds,
-  loadMap: state.flows.geoData
+  selectPolygons: state.flows.selectedNodesGeoIds
 });
 
 const mapViewCallbacksToActions = () => ({

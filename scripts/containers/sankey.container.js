@@ -13,7 +13,7 @@ const mapMethodsToState = (state) => ({
       return {
         links: state.flows.links,
         visibleNodes: state.flows.visibleNodes,
-        visibleColumns: state.flows.visibleColumns,
+        visibleNodesByColumn: state.flows.visibleNodesByColumn,
       };
     }
   },
