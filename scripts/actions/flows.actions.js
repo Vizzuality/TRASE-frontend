@@ -96,23 +96,22 @@ export function loadLinks() {
     dispatch({
       type: actions.LOAD_LINKS
     });
-
     const params = {
       country: getState().flows.selectedCountry.toUpperCase(),
       raw: getState().flows.selectedCommodity.toUpperCase(),
       year_start: getState().flows.selectedYears[0],
+      year_end: getState().flows.selectedYears[1],
       include_columns: getState().flows.selectedColumnsIds.join(','),
       n_nodes: 10,
       flow_quant: getState().flows.selectedQuant,
       flow_qual: getState().flows.selectedQual,
       color: +getState().flows.selectedColor,
       view: +getState().flows.selectedView,
-      years: getState().flows.selectedYears,
       layers: getState().flows.selectedLayers,
       vectorLayers: getState().flows.selectedVectorLayers,
       contextualLayers: getState().flows.selectedContextualLayers
     };
-    
+
     // if (getState().flows.selectedNodesIds.length) {
     //   params.clicked_nodes = getState().flows.selectedNodesIds.join(',');
     //   params.filter_mode = 2;
