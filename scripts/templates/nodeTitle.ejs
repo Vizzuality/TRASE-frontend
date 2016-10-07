@@ -2,7 +2,9 @@
   <%= node.columnName %>
   <% nodes.forEach(function(node) { %>
     <%= node.name %>
-    <a href="./factsheet.html#<%= node.id %>"> -> </a>
+    <a href="./factsheet.html#<%= node.id %>">
+      <svg class="icon icon-outside-link"><use xlink:href="#icon-outside-link"></use></svg>
+    </a>
   <% }) %>
 <% } else { %>
 
@@ -19,5 +21,7 @@
   <% }) %>
 
   view more
-  <a href="./factsheet.html#<%= node.id %>"> -> </a>
+  <a href="./factsheet.html#<%= node.id %>">
+    <svg class="icon icon-outside-link"><use xlink:href="#icon-outside-link"></use></svg>
+  </a>
 <% } %>
