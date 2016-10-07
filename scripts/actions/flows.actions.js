@@ -1,4 +1,5 @@
 import actions from 'actions';
+import { NUM_NODES } from 'constants';
 import getURLFromParams from 'utils/getURLFromParams';
 
 export function selectCountry(country, reloadLinks) {
@@ -102,7 +103,7 @@ export function loadLinks() {
       year_start: getState().flows.selectedYears[0],
       year_end: getState().flows.selectedYears[1],
       include_columns: getState().flows.selectedColumnsIds.join(','),
-      n_nodes: 10,
+      n_nodes: NUM_NODES,
       flow_quant: getState().flows.selectedQuant,
       flow_qual: getState().flows.selectedQual,
       color: +getState().flows.selectedColor,
