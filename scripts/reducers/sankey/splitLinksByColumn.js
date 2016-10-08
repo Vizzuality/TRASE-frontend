@@ -2,7 +2,7 @@
 export default function(rawLinks, nodesDict) {
   const links = [];
   rawLinks.forEach(link => {
-    var path = link.attributes.path;
+    var path = link.path;
     for (var i = 0; i < path.length-1; i++) {
       const sourceNodeId = path[i];
       const targetNodeId = path[i + 1];
@@ -11,8 +11,8 @@ export default function(rawLinks, nodesDict) {
         targetNodeId,
         sourceColumnId: nodesDict[sourceNodeId].columnId,
         targetColumnId: nodesDict[targetNodeId].columnId,
-        height: link.attributes.height,
-        quant: parseFloat(link.attributes.flowQuants[0].value),
+        height: link.height,
+        quant: parseFloat(link.quant),
         originalPath: path
       });
     }

@@ -5,7 +5,7 @@ export default function(links, nodesDict, nodesMeta, columnIndexes) {
   const nodesDictWithMeta = _setNodesMeta(nodesDict, nodesMeta);
 
   links.forEach(link => {
-    const pathNodeIds = link.attributes.path;
+    const pathNodeIds = link.path;
     pathNodeIds.forEach(nodeId => {
       if (nodeIdsList.indexOf(nodeId) === -1) {
         nodeIdsList.push(nodeId);
@@ -30,19 +30,16 @@ const _setNodesMeta = (nodesDict, nodesMeta) => {
 
   const nodesDictWithMeta = {};
 
-  nodesMeta.forEach(nodeMeta => {
-    const nodeId = nodeMeta.id;
+  nodesMeta.nodeHeights.forEach(nodeHeight => {
+    const nodeId = nodeHeight.id;
     const node = Object.assign({}, nodesDict[nodeId]);
-    if (nodeMeta.attributes && nodeMeta.attributes.height) {
-      node.quant = {
-        // TBD need to get node meta and quant meta https://github.com/sei-international/TRASE/issues/65
-        value: nodeMeta.attributes.height,
-        unit: '[unit]',
-        name: '[quant name]'
-      }
-      node.height = nodeMeta.attributes.height;
-      nodesDictWithMeta[nodeId] = node;
-    }
+    node.height = nodeHeight.height;
+    node.quant = nodeHeight.quant;
+    // TBD need to get node meta and quant meta https://github.com/sei-international/TRASE/issues/65
+    // value: nodeMeta.attributes.height,
+    // unit: '[unit]',
+    // name: '[quant name]'
+    nodesDictWithMeta[nodeId] = node;
   });
 
   return nodesDictWithMeta;
