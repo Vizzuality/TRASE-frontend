@@ -21,6 +21,7 @@ export default function (state = {}, action) {
     const rawNodes = JSON.parse(action.payload[0]).data;
     const rawColumns = JSON.parse(action.payload[1]).data;
     const nodesDict = getNodesDict(rawNodes);
+    // console.log(nodesDict)
     return Object.assign({}, state, { columns: rawColumns, nodesDict, initialDataLoading: false });
   }
 
