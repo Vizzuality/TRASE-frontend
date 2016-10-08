@@ -1,7 +1,7 @@
 export default class {
   onCreated() {
-    this.search = document.querySelector('.js-search');
-    this.nodesTitles = document.querySelector('.js-nodes-titles');
+    this.search = document.querySelector('.js-search-container');
+    this.nodesTitles = document.querySelector('.js-nodes-titles-container');
   }
   toggle(selectedNodesData) {
     if (selectedNodesData.length === 0) {
