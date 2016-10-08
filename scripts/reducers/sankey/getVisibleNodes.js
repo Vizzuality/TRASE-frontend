@@ -35,10 +35,15 @@ const _setNodesMeta = (nodesDict, nodesMeta) => {
     const node = Object.assign({}, nodesDict[nodeId]);
     node.height = nodeHeight.height;
     node.quant = nodeHeight.quant;
-    // TBD need to get node meta and quant meta https://github.com/sei-international/TRASE/issues/65
-    // value: nodeMeta.attributes.height,
-    // unit: '[unit]',
-    // name: '[quant name]'
+    node.quantName = nodesMeta.quant.name;
+    node.quantUnit = nodesMeta.quant.unit;
+
+    if (node.quantName === 'Deforestation risk') {
+      node.quant = Math.round(node.quant);
+    }
+
+    node.quantNice = node.quant.toLocaleString();
+
     nodesDictWithMeta[nodeId] = node;
   });
 
