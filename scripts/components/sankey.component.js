@@ -87,7 +87,7 @@ export default class {
 
     nodesEnter.append('g')
       .attr('class', 'sankey-node-labels')
-      .attr('transform', d => `translate(0,${d.renderedHeight/2})`)
+      .attr('transform', d => `translate(0,${2 + d.renderedHeight/2})`)
       .selectAll('text')
       .data(node => { return this.layout.getNodeLabel(node.name, node.renderedHeight);})
       .enter()

@@ -4,26 +4,33 @@
   .sankey-bg {
     width: 100%;
     height: 100%;
-    fill: $white;
+    fill: rgba(255, 255, 255, 0);
   }
 
   .sankey-node {
     cursor: pointer;
 
     .sankey-node-rect {
-      fill: $white;
-      stroke: $black;
-      stroke-width: .5px;
+      fill: $white-transparent;
+      stroke: $pinkish-grey-two;
+      stroke-width: 1px;
     }
 
     .sankey-node-label {
-      font-size: 12px;
+      fill: $charcoal-grey;
+      font-family: $font-family-1;
+      font-size: $font-size-regular;
       text-transform: capitalize;
       text-anchor: middle;
     }
 
-    &.-selected .sankey-node-rect {
-      stroke-width: 2px;
+    &.-selected {
+      // transform: scale(1.1,1);
+      // transform-origin: center;
+
+      .sankey-node-rect {
+        fill: $white;
+      }
     }
   }
 
