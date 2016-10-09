@@ -1,7 +1,9 @@
 <% if (multiple) { %>
-  <div class="column-title"><%= node.columnName %></div>
-  <% nodes.forEach(function(node) { %>
+  <% nodes.forEach(function(node, i) { %>
     <div class="column">
+      <% if (i === 0) { %>
+        <div class="column-title"><%= node.columnName %></div>
+      <% } %>
       <div class="column-content">
         <%= node.name %>
         <a href="./factsheet.html#<%= node.id %>" class="outside-link">

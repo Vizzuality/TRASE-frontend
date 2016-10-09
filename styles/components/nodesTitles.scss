@@ -3,12 +3,11 @@
 .c-nodes-titles {
   padding: 16px;
   display: flex;
-  flex-direction: row;
 
   .column {
     display:flex;
     flex-direction: column;
-        align-content: space-between;
+    justify-content: flex-end;
     margin-right: 34px;
   }
 
