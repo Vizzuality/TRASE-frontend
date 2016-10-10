@@ -5,6 +5,4 @@ const mapMethodsToState = (state) => ({
   toggleMapLayersVisibility: state.app.isMapLayerVisible
 });
 
-const mapViewCallbacksToActions = () => ({});
-
-export default connect(flowContent, mapMethodsToState, mapViewCallbacksToActions);
+export default connect(flowContent, mapMethodsToState);

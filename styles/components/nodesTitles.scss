@@ -1,0 +1,37 @@
+@import '../settings';
+
+.c-nodes-titles {
+  display: flex;
+  padding: 16px;
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-right: 34px;
+  }
+
+  .column-title {
+    margin-bottom: 8px;
+    color: $charcoal-grey;
+    font-family: $font-family-1;
+    font-size: $font-size-small;
+    text-transform: uppercase;
+  }
+
+  .column-content {
+    align-content: space-between;
+
+    color: $black;
+    font-family: $font-family-1;
+    font-size: $font-size-medium;
+  }
+
+  .unit {
+    color: $charcoal-grey;
+  }
+
+  .outside-link {
+    color: $warm-pink;
+  }
+}

@@ -15,13 +15,9 @@ export default function(links, nodesDict, nodesMeta, columnIndexes) {
         } else if (columnIndexes.indexOf(node.columnId) === -1) {
           console.warn('link contains a node not in requested columns', node);
         } else {
-          nodes.push({
-            id: nodeId,
-            name: nodesDictWithMeta[nodeId].name,
-            columnId: nodesDictWithMeta[nodeId].columnId,
-            geoId: nodesDictWithMeta[nodeId].geoId,
-            height: nodesDictWithMeta[nodeId].height,
-          });
+          const node = Object.assign({}, nodesDictWithMeta[nodeId]);
+          node.id = nodeId;
+          nodes.push(node);
         }
       }
     });
@@ -39,6 +35,15 @@ const _setNodesMeta = (nodesDict, nodesMeta) => {
     const node = Object.assign({}, nodesDict[nodeId]);
     node.height = nodeHeight.height;
     node.quant = nodeHeight.quant;
+    node.quantName = nodesMeta.quant.name;
+    node.quantUnit = nodesMeta.quant.unit;
+
+    if (node.quantName === 'Deforestation risk') {
+      node.quant = Math.round(node.quant);
+    }
+
+    node.quantNice = node.quant.toLocaleString();
+
     nodesDictWithMeta[nodeId] = node;
   });
 

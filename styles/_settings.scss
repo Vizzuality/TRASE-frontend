@@ -1,6 +1,8 @@
 
 // layout
 $nav-height: 56px;
+$titlebar-height: 64px;
+$flow-content-y: $nav-height + $titlebar-height;
 $layer-map-width: 320px;
 
 // colors
@@ -16,6 +18,7 @@ $white: #fff;
 $white-transparent: rgba(255, 255, 255, .5);
 $background-white: #E8E8E8;
 $white-two: #f4f3f3;
+$background-white: #e8e8e8;
 
 $beige: #f5f3ea;
 $blush: #f6c7ad;
@@ -34,4 +37,5 @@ $font-weight-bold: 700;
 $font-size-small: 10px;
 $font-size-regular: 12px;
 $font-size-x-regular: 13px;
+$font-size-medium: 18px;
 $font-size-big: 24px;

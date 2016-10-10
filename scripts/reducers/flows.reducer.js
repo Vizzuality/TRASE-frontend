@@ -19,9 +19,9 @@ export default function (state = {}, action) {
 
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
+    const rawNodesMeta = JSON.parse(action.payload[0]).include;
     const rawColumns = JSON.parse(action.payload[1]).data;
-    const nodesDict = getNodesDict(rawNodes);
-    // console.log(nodesDict)
+    const nodesDict = getNodesDict(rawNodes, rawColumns, rawNodesMeta);
     return Object.assign({}, state, { columns: rawColumns, nodesDict, initialDataLoading: false });
   }
 
@@ -41,12 +41,16 @@ export default function (state = {}, action) {
     const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict);
     const links = mergeLinks(unmergedLinks);
 
+    // we also need to refresh nodes data, because values change when year or quant changes
+    const selectedNodesData = getSelectedNodesData(state.selectedNodesIds, visibleNodes);
+
     return Object.assign({}, state, {
       links,
       unmergedLinks,
       visibleNodes,
       visibleNodesByColumn,
       visibleColumns,
+      selectedNodesData,
       linksLoading: false
     });
   }

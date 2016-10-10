@@ -17,7 +17,9 @@ export default class {
     this._methodsToState = mapMethodsToState;
 
     // make container callbacks available to the component
-    this.view.callbacks = this._prepareCallbacks(store, mapViewCallbacksToActions());
+    if (mapViewCallbacksToActions) {
+      this.view.callbacks = this._prepareCallbacks(store, mapViewCallbacksToActions());
+    }
 
     // use this as a chance to dispatch an action when component is instanciated (always miss this in react-redux)
     if (onCreated) onCreated(store.dispatch);
