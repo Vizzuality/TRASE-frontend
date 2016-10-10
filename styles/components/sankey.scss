@@ -4,24 +4,25 @@
   .sankey-bg {
     width: 100%;
     height: 100%;
-    fill: rgba(255, 255, 255, 0);
+    fill: rgba($white, 0);
   }
 
   .sankey-node {
     cursor: pointer;
 
     .sankey-node-rect {
-      fill: $white-transparent;
+      fill: rgba($white, .5);
       stroke: $pinkish-grey-two;
       stroke-width: 1px;
     }
 
     .sankey-node-label {
-      fill: $charcoal-grey;
       font-family: $font-family-1;
       font-size: $font-size-regular;
       text-transform: capitalize;
       text-anchor: middle;
+
+      fill: $charcoal-grey;
     }
 
     &.-selected {

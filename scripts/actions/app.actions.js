@@ -8,6 +8,12 @@ export function resize(width, height) {
   };
 }
 
+export function toggleMap() {
+  return {
+    type: actions.TOGGLE_MAP
+  };
+}
+
 export function toggleMapLayerMenu() {
   return {
     type: actions.TOGGLE_MAP_LAYERS_MENU

@@ -27,7 +27,7 @@
     cursor: pointer;
 
     &::after {
-      @include triangle(8px, 2px, $medium-pink, 'down');
+      @include arrow(8px, 2px, $medium-pink, 'down');
       position: absolute;
       top: 50%;
       right: 0;

@@ -7,6 +7,17 @@ export default class {
 
   _setVars() {
     this.el = document.querySelector('.flow-content');
+    this.map = this.el.querySelector('.c-map');
+  }
+
+  toggleMapVisibility(isMapVisible) {
+    if (isMapVisible) {
+      this.el.classList.add('-center-map');
+      this.map.classList.add('-fullscreen');
+    } else {
+      this.el.classList.remove('-center-map');
+      this.map.classList.remove('-fullscreen');
+    }
   }
 
   toggleMapLayersVisibility(isVisible) {

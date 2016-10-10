@@ -6,7 +6,12 @@ import 'style/components/map/map-legend.scss';
 
 export default class {
   constructor() {
-    this.map = L.map('map').setView([-16.20639, -44.43333], 4);
+
+    const mapOptions = {
+      zoomControl: false
+    };
+
+    this.map = L.map('map', mapOptions).setView([-16.20639, -44.43333], 4);
     var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' });
     this.map.addLayer(layer);
 
@@ -15,6 +20,7 @@ export default class {
 
   _setEventListeners() {
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
+    document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
   }
 
   loadMap(geoData) {
@@ -71,5 +77,14 @@ export default class {
       });
     });
     return topoLayer;
+  }
+
+  _onToggleMap () {
+    this.callbacks.onToggleMap();
+
+    // recalculates map size once CSS transition ends
+    setTimeout( () => {
+      this.map.invalidateSize(true);
+    }, 850);
   }
 }

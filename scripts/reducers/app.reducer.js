@@ -2,7 +2,8 @@ import actions from 'actions';
 
 const initialState = {
   windowSize: [window.innerWidth, window.innerHeight],
-  isMapLayerVisible: false
+  isMapLayerVisible: false,
+  isMapVisible: false
 };
 
 export default function (state = initialState, action) {
@@ -13,6 +14,9 @@ export default function (state = initialState, action) {
 
   case actions.TOGGLE_MAP_LAYERS_MENU:
     return Object.assign({}, state, { isMapLayerVisible: !state.isMapLayerVisible });
+
+  case actions.TOGGLE_MAP:
+    return Object.assign({}, state, { isMapVisible: !state.isMapVisible });
 
   default:
     return state;
