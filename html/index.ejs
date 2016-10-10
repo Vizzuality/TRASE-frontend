@@ -4,12 +4,79 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  Welcome to TRASE :)
+  <div class="l-homepage">
 
-  <p>
-    <a href='./flows.html'>Bring me to the sankey page</a>
-  </p> 
+    <div class="page-nav">
+      <nav class="page-section-list">
+        <li class="page-section"><a href="">Tool</a></li>
+        <li class="page-section"><a href="">Dashboards</a></li>
+        <li class="page-section"><a href="">FAQ</a></li>
+        <li class="page-section"><a href="">Contact</a></li>
+      </nav>
+
+      <div class="logos"></div>
+
+      <div class="share-menu">
+        <svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg>
+      </div>
+    </div>
+
+    <section class="c-introduction">
+      <div class="wrapper">
+        <div class="trase-logo"></div>
+
+        <p class="paragraph">Production and international trade of "forest risk" commodities is driving
+          two-thirds of tropical deforestation and shaping the future of biodiversity,
+          climate change and rural development across the planet. Yet answers to basic
+          questions remain elusive:
+        </p>
+
+        <div class="workflow-graphic"></div>
+
+        <p class="paragraph">Transformative Transparency is a new kind of traceability platform.
+          It harnesses huge untapped data sets to see inside complex commodity supply chains,
+          helping link production landscapes – and the social and environmental impacts
+          and opportunities associated with them – to specific traders, manufacturers,
+          retailers and investors worldwide.
+        </p>
+
+        <a href="" class="btn -pink">explore the tool</a>
+
+        <div class="map-selector">
+          <h3 class="intro">What are the sustainability risks associated with
+            the trading of
+            <select name="commodity" id="">Soy</select>
+            in
+            <select name="country_origin" id="">Brazil</select>
+            ?
+          </h3>
+
+          <div id="map"></div>
+
+          <a href="" class="btn">find out here</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="c-posts"></section>
+
+    <footer class="c-footer">
+      <div class="signup">
+        <p>Sign up here to receive news updates <br/> about Transformative Transparency</p>
+        <div class="subscribe-container">
+          <input type="email" required>
+          <button class="btn-subscribe">subscribe</button>
+        </div>
+      </div>
+
+      <ul class="links-list">
+        <li class="link-item"><a href="">Terms of Service</a></li>
+        <li class="link-item"><a href="">Contact Us</a></li>
+      </ul>
+      </footer>
+  </div>
 
   <%= htmlWebpackPlugin.options.footer %>
+  <%= htmlWebpackPlugin.options.icons %>
 </body>
 </html>
