@@ -3,8 +3,8 @@
 
 // todo move this to a page style scss
 body, html {
-  overflow: hidden;
   background: $background-white;
+  overflow: hidden;
 }
 
 .l-flows {
@@ -24,8 +24,8 @@ body, html {
   }
 
   > .c-titlebar {
-      position: absolute;
-      top: $nav-height;
+    position: absolute;
+    top: $nav-height;
   }
 
   > .flow-content {

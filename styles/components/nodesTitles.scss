@@ -1,26 +1,27 @@
 @import '../settings';
 
 .c-nodes-titles {
-  padding: 16px;
   display: flex;
+  padding: 16px;
 
   .column {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end;
     margin-right: 34px;
   }
 
   .column-title {
+    margin-bottom: 8px;
     color: $charcoal-grey;
     font-family: $font-family-1;
     font-size: $font-size-small;
     text-transform: uppercase;
-    margin-bottom: 4px;
   }
 
   .column-content {
     align-content: space-between;
+
     color: $black;
     font-family: $font-family-1;
     font-size: $font-size-medium;
