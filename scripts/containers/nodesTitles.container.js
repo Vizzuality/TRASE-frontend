@@ -7,8 +7,4 @@ const mapMethodsToState = (state) => ({
   update: state.flows.selectedNodesData
 });
 
-const mapViewCallbacksToActions = () => ({
-
-});
-
-export default connect(NodesTitles, mapMethodsToState, mapViewCallbacksToActions);
+export default connect(NodesTitles, mapMethodsToState);
