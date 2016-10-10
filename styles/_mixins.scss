@@ -1,4 +1,4 @@
-@mixin triangle($size, $border-width, $color, $direction) {
+@mixin arrow($size, $border-width, $color, $direction) {
   display: inline-block;
   width: $size;
   height: $size;
@@ -27,5 +27,22 @@
     transform: rotate(45deg);
     border-top: 0;
     border-right: 0;
+  }
+}
+
+@mixin triangle ($size, $color, $direction) {
+  width: 0;
+  height: 0;
+
+  @if($direction == 'left') {
+    border-top: $size solid transparent;
+    border-right: $size solid $color;
+    border-bottom: $size solid transparent;
+  }
+
+  @if($direction == 'right') {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
   }
 }

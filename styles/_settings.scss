@@ -6,7 +6,9 @@ $flow-content-y: $nav-height + $titlebar-height;
 $layer-map-width: 320px;
 
 // colors
+$background-white: #e8e8e8;
 $black: #000;
+$blue-map: #00f;
 $charcoal-grey: #34444c;
 $gray: #ebebeb;
 $medium-pink: #ea6869;
@@ -16,10 +18,8 @@ $pale-grey: #e0e4e8;
 $pinkish-grey: #c7c7c7;
 $pinkish-grey-two: #cbcbcb;
 $white: #fff;
-$white-transparent: rgba(255, 255, 255, .5);
-$background-white: #E8E8E8;
 $white-two: #f4f3f3;
-$background-white: #e8e8e8;
+
 
 $beige: #f5f3ea;
 $blush: #f6c7ad;
@@ -40,3 +40,7 @@ $font-size-regular: 12px;
 $font-size-x-regular: 13px;
 $font-size-medium: 18px;
 $font-size-big: 24px;
+
+
+// Animations
+$ease-in-out-sine:  cubic-bezier(.445, .05, .55, .95);

@@ -1,7 +1,7 @@
 @import '../../settings';
 
 .c-basemap-options {
-  padding: 24px;
+  padding: 0 24px 24px;
 
   > .explanation {
     display: flex;
@@ -26,20 +26,23 @@
 
       > .sample {
         display: inline-flex;
-        width: 24px;
-        height: 24px;
+        flex-direction: column;
+        width: 10px;
+        height: 26px;
 
+        border: 1px solid rgba($charcoal-grey, .3);
 
         &::before,
         &::after {
           display: inline-block;
           flex-basis: calc(100% / 3);
+          width: 8px;
+          height: 8px;
           content: '';
         }
 
         &.-vertical {
-          flex-direction: column;
-
+          transform: translate(calc(50% + 2px), 0);
           background-color: $beige;
 
           &::before {
@@ -53,6 +56,7 @@
         }
 
         &.-horizontal {
+          transform: translate(calc(-50% - 2px), 0) rotate(90deg);
           background-color: $warm-pink;
 
           &::before {

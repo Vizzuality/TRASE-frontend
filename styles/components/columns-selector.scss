@@ -18,7 +18,7 @@
       text-transform: uppercase;
 
       &::after {
-        @include triangle(8px, 2px, $charcoal-grey, 'down');
+        @include arrow(8px, 2px, $charcoal-grey, 'down');
         top: 0;
       }
     }

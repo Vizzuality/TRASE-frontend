@@ -7,11 +7,6 @@ body, html {
   overflow: hidden;
 }
 
-body, html {
-  overflow: hidden;
-  background: $background-white;
-}
-
 .l-flows {
   position: absolute;
   top: 0;
@@ -37,11 +32,11 @@ body, html {
     position: absolute;
     top: $flow-content-y;
     left: 0;
-    width: 100%;
+    width: calc(100% + #{$layer-map-width});
     height: calc(100% - #{$flow-content-y});
 
     transform: translate(-$layer-map-width, 0);
-    transition: transform .15s linear, width .15s linear;
+    transition: transform .15s $ease-in-out-sine, width .15s $ease-in-out-sine;
     background-color: $gray;
 
     overflow: hidden;
@@ -56,12 +51,12 @@ body, html {
     }
 
     &.-open {
-      transform: translate(0, 0);
       width: 100%;
+      transform: translate(0, 0);
     }
 
     > .c-basemap-options {
-      top: $nav-height;
+      top: 0;
       width: 320px;
       height: 100%;
     }
@@ -71,7 +66,7 @@ body, html {
       width: 320px;
       height: 100%;
 
-      transition: width .45s linear;
+      transition: width .45s $ease-in-out-sine;
 
       &.-fullscreen {
         width: calc(90% - 320px);
@@ -86,10 +81,10 @@ body, html {
 
     > .c-sankey {
       left: 640px;
-      width: calc(100% - 320px);
+      width: calc(100% - 640px);
       height: calc(100% - 50px);
       padding: 0 48px;
-      transition: left .45s linear;
+      transition: left .45s $ease-in-out-sine;
 
       .sankey {
         width: 100%;

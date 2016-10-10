@@ -6,10 +6,6 @@
   transition: transform 1s ease;
   z-index: 1;
 
-  &.-moved {
-    transform: translate(100%, 0);
-  }
-
   .btn-map {
     display: flex;
     align-items: center;
@@ -23,8 +19,7 @@
     box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
 
     cursor: pointer;
-    z-index: 401;
-
+    z-index: 402;
 
     &.-basemap {
       position: absolute;
@@ -40,14 +35,20 @@
     &.-toggle-map {
       position: absolute;
       top: 16px;
-      right: 0;
+      right: 8px;
 
       &::before {
-        @include triangle(7px, 2px, $medium-pink, 'left');
+        @include triangle(6px, rgba($charcoal-grey, .3), 'left');
+        position: absolute;
+        left: 8px;
+        content: '';
       }
 
       &::after {
-        @include triangle(7px, 2px, $medium-pink, 'right');
+        @include triangle(6px, $medium-pink, 'right');
+        position: absolute;
+        right: 8px;
+        content: '';
       }
     }
   }
@@ -62,9 +63,10 @@
     stroke-opacity: .5;
 
     &.-highlighted {
-      fill: blue;
+      fill: $blue-map;
       fill-opacity: 1;
     }
+
     &.-selected {
       stroke-opacity: 1;
       stroke-width: 2.5px;
@@ -74,10 +76,29 @@
   .map-polygon-municipality {
     stroke-width: .2px;
   }
+
   .map-polygon-state {
     stroke-width: 1px;
   }
+
   .map-polygon-biome {
     stroke-width: 1.5px;
+  }
+
+  // map modifiers
+  &.-moved {
+    transform: translate(100%, 0);
+  }
+
+  &.-fullscreen {
+    .-toggle-map {
+      &::before {
+        border-right-color: $medium-pink;
+      }
+
+      &::after {
+        border-left-color: rgba($charcoal-grey, .3);
+      }
+    }
   }
 }
