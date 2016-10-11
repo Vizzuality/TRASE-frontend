@@ -4,6 +4,7 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
+  <%= htmlWebpackPlugin.options.icons %>
   <div class="l-homepage">
 
   <%= htmlWebpackPlugin.options.nav %>
@@ -47,23 +48,11 @@
 
     <section class="c-posts"></section>
 
-    <footer class="c-footer">
-      <div class="signup">
-        <p>Sign up here to receive news updates <br/> about Transformative Transparency</p>
-        <div class="subscribe-container">
-          <input type="email" required>
-          <button class="btn-subscribe">subscribe</button>
-        </div>
-      </div>
+    <%= htmlWebpackPlugin.options.footer %>
 
-      <ul class="links-list">
-        <li class="link-item"><a href="">Terms of Service</a></li>
-        <li class="link-item"><a href="">Contact Us</a></li>
-      </ul>
-      </footer>
   </div>
 
-  <%= htmlWebpackPlugin.options.footer %>
-  <%= htmlWebpackPlugin.options.icons %>
+
+  <%= htmlWebpackPlugin.options.scripts %>
 </body>
 </html>

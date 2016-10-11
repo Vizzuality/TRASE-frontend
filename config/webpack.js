@@ -28,8 +28,10 @@ const pages = {
 };
 
 const htmlHeadTemplate = _.template(fs.readFileSync('./html/includes/_head.ejs', 'utf8'));
-const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
 const htmlNavTemplate = _.template(fs.readFileSync('./html/includes/_nav.ejs', 'utf8'));
+const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
+
+const htmlScriptsTemplate = _.template(fs.readFileSync('./html/includes/_scripts.ejs', 'utf8'));
 const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
   inject: false,
   head: htmlHeadTemplate({
@@ -37,7 +39,8 @@ const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
     dev: process.env.NODE_ENV === 'development'
   }),
   nav: htmlNavTemplate({page: id}),
-  footer: htmlFooterTemplate({bundle: id}),
+  footer: htmlFooterTemplate(),
+  scripts: htmlScriptsTemplate({bundle: id}),
   icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
   filename: id+'.html',
   template: './html/'+id+'.ejs',
