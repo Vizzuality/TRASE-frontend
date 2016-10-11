@@ -9,4 +9,16 @@
   line-height: 1;
   text-transform: uppercase;
   cursor: pointer;
+
+  &.-pink {
+    border-color: transparent;
+    background-color: $medium-pink;
+  }
+
+  &.-gray {
+    border-color: transparent;
+    background-color: $gray;
+
+    color: $charcoal-grey;
+  }
 }
