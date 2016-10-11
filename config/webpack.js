@@ -15,17 +15,28 @@ const pages = {
   },
   flows: {
     title: 'TRASE flows'
+  },
+  factsheets: {
+    title: 'TRASE factsheets'
+  },
+  FAQ: {
+    title: 'TRASE FAQ'
+  },
+  contact: {
+    title: 'TRASE conctact'
   }
 };
 
 const htmlHeadTemplate = _.template(fs.readFileSync('./html/includes/_head.ejs', 'utf8'));
 const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
+const htmlNavTemplate = _.template(fs.readFileSync('./html/includes/_nav.ejs', 'utf8'));
 const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
   inject: false,
   head: htmlHeadTemplate({
     title,
     dev: process.env.NODE_ENV === 'development'
   }),
+  nav: htmlNavTemplate({page: id}),
   footer: htmlFooterTemplate({bundle: id}),
   icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
   filename: id+'.html',
