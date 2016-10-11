@@ -2,7 +2,7 @@
 
 .c-nav {
   display: flex;
-  box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
+  box-shadow: $box-shadow;
 
   > .left-side,
   > .right-side {

@@ -17,6 +17,7 @@ $orange: #ffa500;
 $pale-grey: #e0e4e8;
 $pinkish-grey: #c7c7c7;
 $pinkish-grey-two: #cbcbcb;
+$silver: #dbe0e5;
 $white: #fff;
 $white-two: #f4f3f3;
 
@@ -38,9 +39,13 @@ $font-weight-bold: 700;
 $font-size-small: 10px;
 $font-size-regular: 12px;
 $font-size-x-regular: 13px;
+$font-size-xx-regular: 16px;
 $font-size-medium: 18px;
 $font-size-big: 24px;
 
 
 // Animations
 $ease-in-out-sine:  cubic-bezier(.445, .05, .55, .95);
+
+// Miscellaneous
+$box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);

@@ -1,0 +1,32 @@
+<div class="c-nav">
+
+  <div class="left-side">
+    <% if(page !== 'index') { %>
+    <div class="trase-logo-container">
+      <a class="trase-logo" href="/"><img src="images/logos/trase.png" alt="TRASE"></a>
+    </div>
+    <% } %>
+    <nav class="page-section-list">
+      <li class="<%= page === 'flows' ? 'page-section -selected' : 'page-section' %>"><a href="/flows.html">Tool</a></li>
+      <li class="<%= page === 'factsheets' ? 'page-section -selected' : 'page-section' %>"><a href="/factsheets.html">Factsheets</a></li>
+      <li class="<%= page === 'FAQ' ? 'page-section -selected' : 'page-section' %>"><a href="/FAQ.html">FAQ</a></li>
+      <li class="<%= page === 'contact' ? 'page-section -selected' : 'page-section' %>"><a href="/contact.html">Contact</a></li>
+    </nav>
+  </div>
+
+  <div class="right-side">
+    <% if(page === 'index') { %>
+    <ul class="logos-list">
+      <li class="logo-item">
+        <a class="logo-link" target="_blank" href="https://www.sei-international.org/"><img class="logo-img -sei" src="images/logos/SEI_0@2x.png" alt="SEI International"></a>
+      </li>
+      <li class="logo-item">
+        <a class="logo-link" target="_blank" href="http://globalcanopy.org/"><img class="logo-img -gcp" src="images/logos/GCP@2x.png" alt="Global Canopy Programme"></a></li>
+    </ul>
+    <% } %>
+
+    <div class="share-menu">
+      <svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg>
+    </div>
+  </div>
+</div>
