@@ -1,0 +1,16 @@
+
+.c-introduction {
+  padding: 72px 0 40px;
+
+  > .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: $content-max-width;
+
+    .c-button {
+      margin: 32px 0 0;
+      padding: 16px 28px;
+    }
+  }
+}

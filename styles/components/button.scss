@@ -10,9 +10,15 @@
   text-transform: uppercase;
   cursor: pointer;
 
+  &.-bold {
+    font-weight: $font-weight-bold;
+  }
+
   &.-pink {
     border-color: transparent;
     background-color: $medium-pink;
+
+    color: $gray;
   }
 
   &.-gray {
