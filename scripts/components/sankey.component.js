@@ -114,7 +114,7 @@ export default class {
       .data(this.layout.links())
       .enter()
       .append('path')
-      .attr('class', 'sankey-link')
+      .attr('class', link => `sankey-link -qual-${link.qual}`)
       .attr('stroke-width', d => d.renderedHeight)
       .attr('d', this.layout.link())
       .on('mouseover', function() {
