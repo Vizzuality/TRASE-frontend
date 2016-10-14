@@ -17,7 +17,7 @@ export default class {
 
     // right side
     this.quantDropdown = new Dropdown('quant', this.callbacks.onQuantSelected);
-    this.colorDropdown = new Dropdown('color', this.callbacks.onColorSelected);
+    this.qualDropdown = new Dropdown('qual', this.callbacks.onQualSelected);
     this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
 
     new BookmarkMenu();
@@ -44,8 +44,8 @@ export default class {
     this.quantDropdown.selectValue(value);
   }
 
-  selectColor(value) {
-    this.colorDropdown.selectValue(value);
+  selectQual(value) {
+    this.qualDropdown.selectValue(value);
   }
 
   selectView(value) {

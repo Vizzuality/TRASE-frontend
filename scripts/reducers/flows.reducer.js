@@ -73,9 +73,6 @@ export default function (state = {}, action) {
   case actions.SELECT_QUANT:
     return Object.assign({}, state, { selectedQuant: action.quant });
 
-  case actions.SELECT_COLOR:
-    return Object.assign({}, state, { selectedColor: action.color });
-
   case actions.SELECT_VIEW:
     return Object.assign({}, state, { selectedView: action.view });
 
