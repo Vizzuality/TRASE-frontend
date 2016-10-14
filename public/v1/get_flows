@@ -1,0 +1,9794 @@
+{
+  "data": [
+    {
+      "height": 1.4e-05,
+      "path": [
+        55,
+        57,
+        1219,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1190.07
+    },
+    {
+      "height": 0.001104,
+      "path": [
+        171,
+        57,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 94912.7
+    },
+    {
+      "height": 2e-06,
+      "path": [
+        114,
+        48,
+        8,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 169.19
+    },
+    {
+      "height": 1.1e-05,
+      "path": [
+        99,
+        57,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 962.34
+    },
+    {
+      "height": 0.000281,
+      "path": [
+        114,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 24115.2
+    },
+    {
+      "height": 3.5e-05,
+      "path": [
+        55,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2972.61
+    },
+    {
+      "height": 0.005283,
+      "path": [
+        5,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 454132.42
+    },
+    {
+      "height": 0.000319,
+      "path": [
+        5,
+        74,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 27440.0
+    },
+    {
+      "height": 0.000545,
+      "path": [
+        247,
+        57,
+        70,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 46881.69
+    },
+    {
+      "height": 0.000624,
+      "path": [
+        171,
+        57,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 53620.8
+    },
+    {
+      "height": 0.001279,
+      "path": [
+        5,
+        57,
+        24,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 109983.52
+    },
+    {
+      "height": 0.001852,
+      "path": [
+        141,
+        100,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 159240.87
+    },
+    {
+      "height": 0.000453,
+      "path": [
+        55,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 38961.14
+    },
+    {
+      "height": 0.000233,
+      "path": [
+        135,
+        85,
+        70,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 20054.97
+    },
+    {
+      "height": 0.000225,
+      "path": [
+        114,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 19379.32
+    },
+    {
+      "height": 0.000697,
+      "path": [
+        5,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 59911.59
+    },
+    {
+      "height": 1.3e-05,
+      "path": [
+        114,
+        1,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1101.41
+    },
+    {
+      "height": 6.2e-05,
+      "path": [
+        55,
+        18,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5350.8
+    },
+    {
+      "height": 0.000545,
+      "path": [
+        5,
+        243,
+        70,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 46817.13
+    },
+    {
+      "height": 0.000366,
+      "path": [
+        141,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 31468.63
+    },
+    {
+      "height": 0.001133,
+      "path": [
+        55,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 97403.46
+    },
+    {
+      "height": 2.5e-05,
+      "path": [
+        114,
+        74,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2185.22
+    },
+    {
+      "height": 4.9e-05,
+      "path": [
+        171,
+        57,
+        80,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 4193.88
+    },
+    {
+      "height": 4.4e-05,
+      "path": [
+        99,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 3802.11
+    },
+    {
+      "height": 0.00079,
+      "path": [
+        5,
+        85,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 67905.19
+    },
+    {
+      "height": 3.6e-05,
+      "path": [
+        135,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 3052.04
+    },
+    {
+      "height": 0.000551,
+      "path": [
+        55,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 47336.98
+    },
+    {
+      "height": 0.000123,
+      "path": [
+        247,
+        48,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10586.6
+    },
+    {
+      "height": 5.7e-05,
+      "path": [
+        5,
+        57,
+        24,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 4868.84
+    },
+    {
+      "height": 0.000579,
+      "path": [
+        55,
+        85,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 49796.95
+    },
+    {
+      "height": 0.000122,
+      "path": [
+        135,
+        85,
+        80,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 10467.15
+    },
+    {
+      "height": 1.6e-05,
+      "path": [
+        55,
+        57,
+        80,
+        26
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1377.98
+    },
+    {
+      "height": 0.001019,
+      "path": [
+        5,
+        18,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 87617.25
+    },
+    {
+      "height": 9.8e-05,
+      "path": [
+        5,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 8428.64
+    },
+    {
+      "height": 0.003747,
+      "path": [
+        5,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 322101.54
+    },
+    {
+      "height": 0.000239,
+      "path": [
+        114,
+        85,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 20515.32
+    },
+    {
+      "height": 0.001542,
+      "path": [
+        247,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 132575.6
+    },
+    {
+      "height": 0.002303,
+      "path": [
+        247,
+        57,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 198018.36
+    },
+    {
+      "height": 0.03068,
+      "path": [
+        5,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2637441.89
+    },
+    {
+      "height": 0.002226,
+      "path": [
+        16,
+        18,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 191342.98
+    },
+    {
+      "height": 0.000755,
+      "path": [
+        247,
+        57,
+        8,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 64892.78
+    },
+    {
+      "height": 0.000698,
+      "path": [
+        171,
+        57,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 59977.5
+    },
+    {
+      "height": 0.00218,
+      "path": [
+        135,
+        85,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 187370.78
+    },
+    {
+      "height": 0.001155,
+      "path": [
+        5,
+        85,
+        70,
+        343
+      ],
+      "qual": "SOYBEANS",
+      "quant": 99284.83
+    },
+    {
+      "height": 0.000323,
+      "path": [
+        247,
+        85,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 27808.92
+    },
+    {
+      "height": 3.1e-05,
+      "path": [
+        114,
+        85,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2650.67
+    },
+    {
+      "height": 0.000656,
+      "path": [
+        182,
+        57,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 56420.46
+    },
+    {
+      "height": 0.00073,
+      "path": [
+        5,
+        2299,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 62715.55
+    },
+    {
+      "height": 0.000782,
+      "path": [
+        247,
+        57,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 67203.7
+    },
+    {
+      "height": 0.000291,
+      "path": [
+        55,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 25021.56
+    },
+    {
+      "height": 0.000739,
+      "path": [
+        114,
+        2299,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 63540.72
+    },
+    {
+      "height": 4.2e-05,
+      "path": [
+        5,
+        57,
+        33,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 3612.21
+    },
+    {
+      "height": 0.002236,
+      "path": [
+        247,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 192190.93
+    },
+    {
+      "height": 0.000104,
+      "path": [
+        247,
+        57,
+        1219,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 8951.09
+    },
+    {
+      "height": 0.000481,
+      "path": [
+        5,
+        368,
+        33,
+        179
+      ],
+      "qual": "SOYBEANS",
+      "quant": 41343.81
+    },
+    {
+      "height": 0.002311,
+      "path": [
+        135,
+        85,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 198630.01
+    },
+    {
+      "height": 0.000589,
+      "path": [
+        182,
+        57,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 50608.9
+    },
+    {
+      "height": 0.000188,
+      "path": [
+        5,
+        74,
+        52,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 16133.17
+    },
+    {
+      "height": 0.000513,
+      "path": [
+        141,
+        100,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 44068.76
+    },
+    {
+      "height": 0.000102,
+      "path": [
+        5,
+        85,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 8762.71
+    },
+    {
+      "height": 0.000261,
+      "path": [
+        99,
+        57,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 22446.9
+    },
+    {
+      "height": 0.000303,
+      "path": [
+        171,
+        57,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 26081.04
+    },
+    {
+      "height": 6.4e-05,
+      "path": [
+        182,
+        57,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5529.45
+    },
+    {
+      "height": 0.000172,
+      "path": [
+        55,
+        100,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 14743.18
+    },
+    {
+      "height": 0.025529,
+      "path": [
+        247,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2194595.43
+    },
+    {
+      "height": 0.002197,
+      "path": [
+        5,
+        243,
+        70,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 188864.38
+    },
+    {
+      "height": 0.00049,
+      "path": [
+        5,
+        85,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 42149.55
+    },
+    {
+      "height": 0.029086,
+      "path": [
+        5,
+        85,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2500442.62
+    },
+    {
+      "height": 0.004209,
+      "path": [
+        5,
+        57,
+        8,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 361798.63
+    },
+    {
+      "height": 0.000863,
+      "path": [
+        5,
+        100,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 74191.14
+    },
+    {
+      "height": 0.0,
+      "path": [
+        5,
+        48,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 35.07
+    },
+    {
+      "height": 0.000347,
+      "path": [
+        114,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 29792.75
+    },
+    {
+      "height": 0.00014,
+      "path": [
+        182,
+        48,
+        52,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 12041.52
+    },
+    {
+      "height": 0.000205,
+      "path": [
+        5,
+        18,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 17661.48
+    },
+    {
+      "height": 0.00028,
+      "path": [
+        99,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 24080.06
+    },
+    {
+      "height": 0.000731,
+      "path": [
+        182,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 62819.71
+    },
+    {
+      "height": 0.000132,
+      "path": [
+        55,
+        85,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 11310.47
+    },
+    {
+      "height": 0.006482,
+      "path": [
+        5,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 557201.88
+    },
+    {
+      "height": 0.00142,
+      "path": [
+        5,
+        57,
+        1219,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 122109.68
+    },
+    {
+      "height": 0.000664,
+      "path": [
+        5,
+        57,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 57050.33
+    },
+    {
+      "height": 0.000377,
+      "path": [
+        5,
+        57,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 32367.13
+    },
+    {
+      "height": 0.001392,
+      "path": [
+        5,
+        85,
+        52,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 119655.43
+    },
+    {
+      "height": 0.000843,
+      "path": [
+        5,
+        57,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 72446.48
+    },
+    {
+      "height": 0.008145,
+      "path": [
+        5,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 700215.09
+    },
+    {
+      "height": 2.1e-05,
+      "path": [
+        171,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1803.53
+    },
+    {
+      "height": 3e-06,
+      "path": [
+        114,
+        57,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 230.32
+    },
+    {
+      "height": 0.000241,
+      "path": [
+        55,
+        57,
+        1219,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 20677.09
+    },
+    {
+      "height": 9.2e-05,
+      "path": [
+        247,
+        57,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 7886.89
+    },
+    {
+      "height": 0.00145,
+      "path": [
+        5,
+        2299,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 124686.67
+    },
+    {
+      "height": 0.0,
+      "path": [
+        114,
+        85,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 30.46
+    },
+    {
+      "height": 0.000758,
+      "path": [
+        162,
+        85,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 65122.36
+    },
+    {
+      "height": 0.00058,
+      "path": [
+        5,
+        368,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 49854.03
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        55,
+        57,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 103.36
+    },
+    {
+      "height": 0.001162,
+      "path": [
+        5,
+        100,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 99883.88
+    },
+    {
+      "height": 0.000167,
+      "path": [
+        5,
+        18,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 14368.56
+    },
+    {
+      "height": 1.6e-05,
+      "path": [
+        171,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1353.06
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        171,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 122.72
+    },
+    {
+      "height": 0.00031,
+      "path": [
+        247,
+        1,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 26679.09
+    },
+    {
+      "height": 6.5e-05,
+      "path": [
+        247,
+        57,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 5565.33
+    },
+    {
+      "height": 0.000241,
+      "path": [
+        135,
+        85,
+        80,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 20679.13
+    },
+    {
+      "height": 1.1e-05,
+      "path": [
+        182,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 980.66
+    },
+    {
+      "height": 0.003649,
+      "path": [
+        5,
+        57,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 313716.46
+    },
+    {
+      "height": 0.000235,
+      "path": [
+        114,
+        48,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 20176.83
+    },
+    {
+      "height": 0.002447,
+      "path": [
+        247,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 210345.34
+    },
+    {
+      "height": 0.00059,
+      "path": [
+        5,
+        85,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 50749.4
+    },
+    {
+      "height": 0.00098,
+      "path": [
+        171,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 84238.88
+    },
+    {
+      "height": 6.6e-05,
+      "path": [
+        55,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5664.46
+    },
+    {
+      "height": 0.000694,
+      "path": [
+        171,
+        85,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 59644.05
+    },
+    {
+      "height": 0.000121,
+      "path": [
+        247,
+        100,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10398.59
+    },
+    {
+      "height": 8.6e-05,
+      "path": [
+        114,
+        57,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 7398.76
+    },
+    {
+      "height": 0.000461,
+      "path": [
+        16,
+        18,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 39589.31
+    },
+    {
+      "height": 0.000136,
+      "path": [
+        182,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 11661.12
+    },
+    {
+      "height": 1.1e-05,
+      "path": [
+        114,
+        100,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 925.64
+    },
+    {
+      "height": 0.001177,
+      "path": [
+        5,
+        57,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 101209.52
+    },
+    {
+      "height": 7.5e-05,
+      "path": [
+        5,
+        74,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6476.43
+    },
+    {
+      "height": 9.1e-05,
+      "path": [
+        135,
+        368,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 7803.12
+    },
+    {
+      "height": 0.001938,
+      "path": [
+        114,
+        18,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 166642.87
+    },
+    {
+      "height": 0.000578,
+      "path": [
+        171,
+        57,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 49679.69
+    },
+    {
+      "height": 0.000102,
+      "path": [
+        5,
+        18,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 8779.27
+    },
+    {
+      "height": 0.000182,
+      "path": [
+        247,
+        85,
+        70,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 15658.58
+    },
+    {
+      "height": 0.020597,
+      "path": [
+        5,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1770608.57
+    },
+    {
+      "height": 0.000431,
+      "path": [
+        5,
+        57,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 37072.35
+    },
+    {
+      "height": 0.000832,
+      "path": [
+        182,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 71525.41
+    },
+    {
+      "height": 0.00094,
+      "path": [
+        5,
+        100,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 80800.44
+    },
+    {
+      "height": 0.000739,
+      "path": [
+        5,
+        2299,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 63513.69
+    },
+    {
+      "height": 0.00058,
+      "path": [
+        16,
+        18,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 49871.49
+    },
+    {
+      "height": 0.000416,
+      "path": [
+        162,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 35773.47
+    },
+    {
+      "height": 0.000231,
+      "path": [
+        16,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 19872.04
+    },
+    {
+      "height": 0.000925,
+      "path": [
+        5,
+        85,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 79549.45
+    },
+    {
+      "height": 1.3e-05,
+      "path": [
+        114,
+        57,
+        24,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1084.08
+    },
+    {
+      "height": 0.000382,
+      "path": [
+        5,
+        85,
+        70,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 32831.29
+    },
+    {
+      "height": 0.000266,
+      "path": [
+        247,
+        85,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 22848.1
+    },
+    {
+      "height": 7.8e-05,
+      "path": [
+        5,
+        74,
+        8,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6711.04
+    },
+    {
+      "height": 0.000765,
+      "path": [
+        182,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 65775.48
+    },
+    {
+      "height": 5e-06,
+      "path": [
+        5,
+        48,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 389.69
+    },
+    {
+      "height": 0.000255,
+      "path": [
+        55,
+        57,
+        8,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 21881.25
+    },
+    {
+      "height": 0.000129,
+      "path": [
+        162,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 11073.46
+    },
+    {
+      "height": 0.000238,
+      "path": [
+        182,
+        57,
+        24,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 20483.29
+    },
+    {
+      "height": 0.000191,
+      "path": [
+        141,
+        48,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 16403.13
+    },
+    {
+      "height": 0.000637,
+      "path": [
+        5,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 54718.23
+    },
+    {
+      "height": 7.6e-05,
+      "path": [
+        247,
+        100,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6508.97
+    },
+    {
+      "height": 0.000669,
+      "path": [
+        182,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 57521.89
+    },
+    {
+      "height": 3.1e-05,
+      "path": [
+        247,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 2705.54
+    },
+    {
+      "height": 5e-06,
+      "path": [
+        141,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 419.91
+    },
+    {
+      "height": 0.000324,
+      "path": [
+        5,
+        85,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 27856.12
+    },
+    {
+      "height": 0.000879,
+      "path": [
+        5,
+        2299,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 75595.09
+    },
+    {
+      "height": 0.003393,
+      "path": [
+        5,
+        368,
+        1219,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 291686.7
+    },
+    {
+      "height": 0.00488,
+      "path": [
+        16,
+        18,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 419550.01
+    },
+    {
+      "height": 0.000133,
+      "path": [
+        55,
+        57,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 11418.94
+    },
+    {
+      "height": 0.006359,
+      "path": [
+        114,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 546655.7
+    },
+    {
+      "height": 1.1e-05,
+      "path": [
+        114,
+        48,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 980.16
+    },
+    {
+      "height": 5e-06,
+      "path": [
+        247,
+        57,
+        1219,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 448.97
+    },
+    {
+      "height": 0.000559,
+      "path": [
+        114,
+        57,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 48022.02
+    },
+    {
+      "height": 0.000591,
+      "path": [
+        182,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 50781.2
+    },
+    {
+      "height": 0.00025,
+      "path": [
+        182,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 21470.24
+    },
+    {
+      "height": 0.001875,
+      "path": [
+        5,
+        85,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 161183.33
+    },
+    {
+      "height": 0.00014,
+      "path": [
+        55,
+        57,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 12070.36
+    },
+    {
+      "height": 8e-06,
+      "path": [
+        141,
+        100,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 678.65
+    },
+    {
+      "height": 0.00235,
+      "path": [
+        16,
+        18,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 202014.83
+    },
+    {
+      "height": 3.4e-05,
+      "path": [
+        135,
+        57,
+        1219,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2901.48
+    },
+    {
+      "height": 9.5e-05,
+      "path": [
+        55,
+        57,
+        70,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 8169.74
+    },
+    {
+      "height": 1.3e-05,
+      "path": [
+        182,
+        57,
+        33,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1127.6
+    },
+    {
+      "height": 0.000775,
+      "path": [
+        5,
+        48,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 66619.47
+    },
+    {
+      "height": 0.000909,
+      "path": [
+        247,
+        57,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 78121.78
+    },
+    {
+      "height": 0.000109,
+      "path": [
+        114,
+        48,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 9329.38
+    },
+    {
+      "height": 0.000258,
+      "path": [
+        182,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 22177.76
+    },
+    {
+      "height": 7e-05,
+      "path": [
+        247,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 5975.31
+    },
+    {
+      "height": 0.005007,
+      "path": [
+        5,
+        57,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 430401.69
+    },
+    {
+      "height": 0.0015,
+      "path": [
+        5,
+        74,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 128926.01
+    },
+    {
+      "height": 0.000107,
+      "path": [
+        55,
+        100,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 9222.46
+    },
+    {
+      "height": 3e-06,
+      "path": [
+        114,
+        48,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 265.22
+    },
+    {
+      "height": 0.000277,
+      "path": [
+        5,
+        57,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 23792.62
+    },
+    {
+      "height": 0.002917,
+      "path": [
+        5,
+        18,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 250734.27
+    },
+    {
+      "height": 1.4e-05,
+      "path": [
+        5,
+        57,
+        8,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1173.84
+    },
+    {
+      "height": 0.0,
+      "path": [
+        114,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOY SAUCE",
+      "quant": 24.78
+    },
+    {
+      "height": 0.002268,
+      "path": [
+        55,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 194927.49
+    },
+    {
+      "height": 9e-05,
+      "path": [
+        141,
+        100,
+        52,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 7732.07
+    },
+    {
+      "height": 0.001631,
+      "path": [
+        247,
+        48,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 140241.43
+    },
+    {
+      "height": 0.00021,
+      "path": [
+        16,
+        18,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 18065.99
+    },
+    {
+      "height": 0.001433,
+      "path": [
+        5,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 123163.87
+    },
+    {
+      "height": 0.006222,
+      "path": [
+        5,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 534920.86
+    },
+    {
+      "height": 0.007367,
+      "path": [
+        114,
+        48,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 633307.55
+    },
+    {
+      "height": 0.0,
+      "path": [
+        5,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOY SAUCE",
+      "quant": 4.2
+    },
+    {
+      "height": 0.00021,
+      "path": [
+        114,
+        57,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 18044.1
+    },
+    {
+      "height": 0.000208,
+      "path": [
+        55,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 17901.94
+    },
+    {
+      "height": 0.001323,
+      "path": [
+        5,
+        57,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 113755.3
+    },
+    {
+      "height": 2.7e-05,
+      "path": [
+        171,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2333.3
+    },
+    {
+      "height": 0.000222,
+      "path": [
+        114,
+        85,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 19057.84
+    },
+    {
+      "height": 0.001128,
+      "path": [
+        5,
+        74,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 96964.3
+    },
+    {
+      "height": 0.002304,
+      "path": [
+        99,
+        100,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 198059.57
+    },
+    {
+      "height": 0.006122,
+      "path": [
+        99,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 526289.67
+    },
+    {
+      "height": 0.000147,
+      "path": [
+        5,
+        57,
+        1219,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 12668.01
+    },
+    {
+      "height": 5.2e-05,
+      "path": [
+        141,
+        100,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 4437.65
+    },
+    {
+      "height": 7.8e-05,
+      "path": [
+        182,
+        57,
+        70,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6736.71
+    },
+    {
+      "height": 0.003326,
+      "path": [
+        247,
+        85,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 285884.53
+    },
+    {
+      "height": 3.2e-05,
+      "path": [
+        141,
+        100,
+        52,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2792.36
+    },
+    {
+      "height": 8.5e-05,
+      "path": [
+        5,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEANS",
+      "quant": 7289.13
+    },
+    {
+      "height": 9.3e-05,
+      "path": [
+        171,
+        57,
+        80,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 8007.84
+    },
+    {
+      "height": 0.000258,
+      "path": [
+        135,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 22201.79
+    },
+    {
+      "height": 0.000673,
+      "path": [
+        171,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 57888.65
+    },
+    {
+      "height": 7.9e-05,
+      "path": [
+        182,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 6801.36
+    },
+    {
+      "height": 0.000224,
+      "path": [
+        5,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 19227.43
+    },
+    {
+      "height": 7e-05,
+      "path": [
+        182,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 5983.41
+    },
+    {
+      "height": 0.001825,
+      "path": [
+        171,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 156916.66
+    },
+    {
+      "height": 0.00136,
+      "path": [
+        5,
+        29,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 116880.48
+    },
+    {
+      "height": 0.00031,
+      "path": [
+        114,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 26608.76
+    },
+    {
+      "height": 0.000715,
+      "path": [
+        5,
+        100,
+        52,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 61489.56
+    },
+    {
+      "height": 6e-06,
+      "path": [
+        5,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 477.22
+    },
+    {
+      "height": 0.000209,
+      "path": [
+        5,
+        100,
+        70,
+        54
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 17986.49
+    },
+    {
+      "height": 1e-05,
+      "path": [
+        141,
+        100,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 860.24
+    },
+    {
+      "height": 0.000835,
+      "path": [
+        5,
+        85,
+        8,
+        343
+      ],
+      "qual": "SOYBEANS",
+      "quant": 71812.98
+    },
+    {
+      "height": 0.000598,
+      "path": [
+        114,
+        100,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 51367.16
+    },
+    {
+      "height": 0.000687,
+      "path": [
+        5,
+        74,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 59056.54
+    },
+    {
+      "height": 0.000467,
+      "path": [
+        5,
+        2299,
+        33,
+        179
+      ],
+      "qual": "SOYBEANS",
+      "quant": 40157.49
+    },
+    {
+      "height": 0.00033,
+      "path": [
+        247,
+        100,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 28333.91
+    },
+    {
+      "height": 0.000595,
+      "path": [
+        55,
+        57,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 51125.86
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        5,
+        48,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 111.52
+    },
+    {
+      "height": 0.00026,
+      "path": [
+        162,
+        85,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 22338.39
+    },
+    {
+      "height": 0.001196,
+      "path": [
+        114,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 102777.71
+    },
+    {
+      "height": 0.000297,
+      "path": [
+        114,
+        18,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 25521.64
+    },
+    {
+      "height": 0.001759,
+      "path": [
+        247,
+        57,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 151222.47
+    },
+    {
+      "height": 3.4e-05,
+      "path": [
+        135,
+        57,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 2955.85
+    },
+    {
+      "height": 2.7e-05,
+      "path": [
+        114,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2348.25
+    },
+    {
+      "height": 8e-06,
+      "path": [
+        141,
+        48,
+        80,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 716.68
+    },
+    {
+      "height": 0.000363,
+      "path": [
+        114,
+        100,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 31230.34
+    },
+    {
+      "height": 0.000375,
+      "path": [
+        5,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 32259.42
+    },
+    {
+      "height": 0.0,
+      "path": [
+        114,
+        48,
+        8,
+        43
+      ],
+      "qual": "SOY SAUCE",
+      "quant": 0.74
+    },
+    {
+      "height": 0.000112,
+      "path": [
+        114,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 9637.01
+    },
+    {
+      "height": 6.2e-05,
+      "path": [
+        55,
+        57,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 5352.25
+    },
+    {
+      "height": 8e-05,
+      "path": [
+        5,
+        18,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 6893.61
+    },
+    {
+      "height": 0.006067,
+      "path": [
+        5,
+        57,
+        70,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 521568.46
+    },
+    {
+      "height": 0.000148,
+      "path": [
+        247,
+        85,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 12701.66
+    },
+    {
+      "height": 0.000103,
+      "path": [
+        99,
+        85,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 8812.33
+    },
+    {
+      "height": 5.3e-05,
+      "path": [
+        16,
+        18,
+        70,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4531.43
+    },
+    {
+      "height": 2.6e-05,
+      "path": [
+        55,
+        57,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 2241.02
+    },
+    {
+      "height": 5.9e-05,
+      "path": [
+        182,
+        57,
+        1219,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 5079.97
+    },
+    {
+      "height": 0.004054,
+      "path": [
+        5,
+        85,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 348469.11
+    },
+    {
+      "height": 0.001353,
+      "path": [
+        182,
+        57,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 116339.88
+    },
+    {
+      "height": 0.000795,
+      "path": [
+        171,
+        57,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 68379.93
+    },
+    {
+      "height": 0.00041,
+      "path": [
+        114,
+        48,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 35271.17
+    },
+    {
+      "height": 0.000191,
+      "path": [
+        247,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 16383.67
+    },
+    {
+      "height": 0.000118,
+      "path": [
+        55,
+        57,
+        70,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10115.51
+    },
+    {
+      "height": 0.000709,
+      "path": [
+        5,
+        85,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 60922.04
+    },
+    {
+      "height": 1.1e-05,
+      "path": [
+        114,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 914.84
+    },
+    {
+      "height": 0.009747,
+      "path": [
+        171,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 837921.77
+    },
+    {
+      "height": 2e-05,
+      "path": [
+        182,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1713.46
+    },
+    {
+      "height": 0.000421,
+      "path": [
+        247,
+        48,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 36216.77
+    },
+    {
+      "height": 0.014931,
+      "path": [
+        5,
+        368,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1283514.02
+    },
+    {
+      "height": 0.000104,
+      "path": [
+        55,
+        100,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 8959.08
+    },
+    {
+      "height": 0.000546,
+      "path": [
+        247,
+        57,
+        70,
+        179
+      ],
+      "qual": "SOYBEANS",
+      "quant": 46955.23
+    },
+    {
+      "height": 5.3e-05,
+      "path": [
+        162,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 4535.12
+    },
+    {
+      "height": 0.000101,
+      "path": [
+        135,
+        85,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 8711.18
+    },
+    {
+      "height": 0.003297,
+      "path": [
+        99,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 283417.55
+    },
+    {
+      "height": 0.000348,
+      "path": [
+        114,
+        57,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 29879.31
+    },
+    {
+      "height": 0.001415,
+      "path": [
+        162,
+        85,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 121627.55
+    },
+    {
+      "height": 5.6e-05,
+      "path": [
+        114,
+        100,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4856.25
+    },
+    {
+      "height": 0.000992,
+      "path": [
+        171,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 85301.1
+    },
+    {
+      "height": 2.1e-05,
+      "path": [
+        114,
+        100,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1807.7
+    },
+    {
+      "height": 0.001994,
+      "path": [
+        5,
+        29,
+        33,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 171416.14
+    },
+    {
+      "height": 0.000249,
+      "path": [
+        55,
+        85,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 21403.69
+    },
+    {
+      "height": 7.3e-05,
+      "path": [
+        182,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 6274.83
+    },
+    {
+      "height": 0.000181,
+      "path": [
+        114,
+        100,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 15526.48
+    },
+    {
+      "height": 0.000608,
+      "path": [
+        114,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 52281.28
+    },
+    {
+      "height": 0.007404,
+      "path": [
+        5,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 636516.92
+    },
+    {
+      "height": 7.2e-05,
+      "path": [
+        247,
+        57,
+        70,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6222.04
+    },
+    {
+      "height": 0.001071,
+      "path": [
+        114,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 92091.45
+    },
+    {
+      "height": 0.000123,
+      "path": [
+        5,
+        48,
+        80,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 10595.15
+    },
+    {
+      "height": 0.000971,
+      "path": [
+        99,
+        100,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 83485.65
+    },
+    {
+      "height": 0.000399,
+      "path": [
+        5,
+        243,
+        80,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 34292.19
+    },
+    {
+      "height": 0.001579,
+      "path": [
+        5,
+        18,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 135742.41
+    },
+    {
+      "height": 1.9e-05,
+      "path": [
+        5,
+        85,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1601.91
+    },
+    {
+      "height": 7.7e-05,
+      "path": [
+        114,
+        18,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 6623.88
+    },
+    {
+      "height": 0.000187,
+      "path": [
+        171,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 16042.65
+    },
+    {
+      "height": 0.000517,
+      "path": [
+        182,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 44455.18
+    },
+    {
+      "height": 0.000754,
+      "path": [
+        114,
+        18,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 64827.48
+    },
+    {
+      "height": 2e-06,
+      "path": [
+        247,
+        57,
+        80,
+        26
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 173.08
+    },
+    {
+      "height": 0.00043,
+      "path": [
+        162,
+        85,
+        52,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 37004.27
+    },
+    {
+      "height": 0.000113,
+      "path": [
+        247,
+        368,
+        33,
+        179
+      ],
+      "qual": "SOYBEANS",
+      "quant": 9704.82
+    },
+    {
+      "height": 0.000212,
+      "path": [
+        55,
+        85,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 18219.7
+    },
+    {
+      "height": 6.6e-05,
+      "path": [
+        182,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5638.33
+    },
+    {
+      "height": 2.2e-05,
+      "path": [
+        114,
+        368,
+        1219,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1869.83
+    },
+    {
+      "height": 0.000725,
+      "path": [
+        114,
+        57,
+        8,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 62337.1
+    },
+    {
+      "height": 0.004422,
+      "path": [
+        5,
+        85,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 380168.61
+    },
+    {
+      "height": 0.000732,
+      "path": [
+        114,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 62965.17
+    },
+    {
+      "height": 2.3e-05,
+      "path": [
+        171,
+        57,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1998.88
+    },
+    {
+      "height": 0.004624,
+      "path": [
+        5,
+        74,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 397490.81
+    },
+    {
+      "height": 6.7e-05,
+      "path": [
+        171,
+        57,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5750.6
+    },
+    {
+      "height": 9e-05,
+      "path": [
+        55,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 7776.37
+    },
+    {
+      "height": 0.000249,
+      "path": [
+        55,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 21390.38
+    },
+    {
+      "height": 0.000683,
+      "path": [
+        114,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 58696.16
+    },
+    {
+      "height": 0.002704,
+      "path": [
+        5,
+        85,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 232409.95
+    },
+    {
+      "height": 0.000549,
+      "path": [
+        5,
+        85,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 47228.14
+    },
+    {
+      "height": 7e-06,
+      "path": [
+        5,
+        48,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 641.96
+    },
+    {
+      "height": 1.8e-05,
+      "path": [
+        114,
+        57,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1525.87
+    },
+    {
+      "height": 0.000748,
+      "path": [
+        5,
+        29,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 64272.48
+    },
+    {
+      "height": 0.000975,
+      "path": [
+        5,
+        48,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 83776.86
+    },
+    {
+      "height": 9.5e-05,
+      "path": [
+        182,
+        57,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 8206.27
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        247,
+        48,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 89.15
+    },
+    {
+      "height": 6e-05,
+      "path": [
+        5,
+        48,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5192.65
+    },
+    {
+      "height": 1.3e-05,
+      "path": [
+        171,
+        57,
+        70,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1122.32
+    },
+    {
+      "height": 0.000272,
+      "path": [
+        182,
+        57,
+        70,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 23422.68
+    },
+    {
+      "height": 4.3e-05,
+      "path": [
+        247,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 3684.71
+    },
+    {
+      "height": 0.005507,
+      "path": [
+        171,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 473371.0
+    },
+    {
+      "height": 1.3e-05,
+      "path": [
+        171,
+        100,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1116.57
+    },
+    {
+      "height": 0.000544,
+      "path": [
+        5,
+        57,
+        24,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 46770.62
+    },
+    {
+      "height": 0.000498,
+      "path": [
+        114,
+        48,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 42788.59
+    },
+    {
+      "height": 5.9e-05,
+      "path": [
+        247,
+        18,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5064.04
+    },
+    {
+      "height": 0.000955,
+      "path": [
+        114,
+        48,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 82125.35
+    },
+    {
+      "height": 0.001768,
+      "path": [
+        5,
+        85,
+        70,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 151992.4
+    },
+    {
+      "height": 0.000646,
+      "path": [
+        16,
+        18,
+        33,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 55536.94
+    },
+    {
+      "height": 0.00059,
+      "path": [
+        114,
+        48,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 50720.38
+    },
+    {
+      "height": 0.0056,
+      "path": [
+        5,
+        100,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 481391.92
+    },
+    {
+      "height": 5e-06,
+      "path": [
+        247,
+        48,
+        8,
+        285
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 426.46
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        5,
+        29,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 74.77
+    },
+    {
+      "height": 0.000312,
+      "path": [
+        5,
+        85,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 26834.12
+    },
+    {
+      "height": 0.000119,
+      "path": [
+        114,
+        57,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10190.42
+    },
+    {
+      "height": 2.1e-05,
+      "path": [
+        5,
+        18,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1833.08
+    },
+    {
+      "height": 0.016613,
+      "path": [
+        135,
+        85,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1428144.87
+    },
+    {
+      "height": 0.000532,
+      "path": [
+        16,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 45724.58
+    },
+    {
+      "height": 2e-06,
+      "path": [
+        247,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 160.39
+    },
+    {
+      "height": 0.000397,
+      "path": [
+        16,
+        18,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 34138.96
+    },
+    {
+      "height": 0.000432,
+      "path": [
+        99,
+        57,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 37171.33
+    },
+    {
+      "height": 0.00139,
+      "path": [
+        171,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 119454.71
+    },
+    {
+      "height": 0.00333,
+      "path": [
+        99,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 286249.54
+    },
+    {
+      "height": 0.000934,
+      "path": [
+        247,
+        18,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 80263.9
+    },
+    {
+      "height": 0.00035,
+      "path": [
+        5,
+        74,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 30111.74
+    },
+    {
+      "height": 4e-06,
+      "path": [
+        247,
+        57,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 307.14
+    },
+    {
+      "height": 0.000193,
+      "path": [
+        247,
+        100,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 16633.52
+    },
+    {
+      "height": 0.000946,
+      "path": [
+        141,
+        100,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 81311.09
+    },
+    {
+      "height": 0.000647,
+      "path": [
+        99,
+        18,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 55620.94
+    },
+    {
+      "height": 0.000403,
+      "path": [
+        171,
+        85,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 34641.43
+    },
+    {
+      "height": 0.010334,
+      "path": [
+        5,
+        48,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 888335.48
+    },
+    {
+      "height": 6.7e-05,
+      "path": [
+        55,
+        57,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 5733.02
+    },
+    {
+      "height": 0.00161,
+      "path": [
+        5,
+        74,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 138377.57
+    },
+    {
+      "height": 0.00159,
+      "path": [
+        162,
+        85,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 136714.96
+    },
+    {
+      "height": 0.000515,
+      "path": [
+        247,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 44232.72
+    },
+    {
+      "height": 0.001022,
+      "path": [
+        5,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 87872.91
+    },
+    {
+      "height": 0.000138,
+      "path": [
+        5,
+        1,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 11822.88
+    },
+    {
+      "height": 6e-05,
+      "path": [
+        5,
+        57,
+        1219,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5184.65
+    },
+    {
+      "height": 0.000276,
+      "path": [
+        171,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 23695.49
+    },
+    {
+      "height": 0.000222,
+      "path": [
+        55,
+        57,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 19093.56
+    },
+    {
+      "height": 0.000251,
+      "path": [
+        5,
+        48,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 21592.21
+    },
+    {
+      "height": 0.000304,
+      "path": [
+        5,
+        1,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 26122.44
+    },
+    {
+      "height": 3.6e-05,
+      "path": [
+        55,
+        57,
+        33,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 3101.51
+    },
+    {
+      "height": 0.000191,
+      "path": [
+        114,
+        100,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 16461.75
+    },
+    {
+      "height": 0.000166,
+      "path": [
+        182,
+        57,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 14262.42
+    },
+    {
+      "height": 2e-05,
+      "path": [
+        55,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1737.85
+    },
+    {
+      "height": 0.00324,
+      "path": [
+        5,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 278542.6
+    },
+    {
+      "height": 7.1e-05,
+      "path": [
+        5,
+        48,
+        8,
+        285
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6086.81
+    },
+    {
+      "height": 0.000689,
+      "path": [
+        5,
+        2299,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 59270.02
+    },
+    {
+      "height": 0.002131,
+      "path": [
+        5,
+        57,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 183152.57
+    },
+    {
+      "height": 0.00018,
+      "path": [
+        5,
+        85,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 15499.12
+    },
+    {
+      "height": 0.000184,
+      "path": [
+        5,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 15799.88
+    },
+    {
+      "height": 0.004,
+      "path": [
+        5,
+        29,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 343901.5
+    },
+    {
+      "height": 0.0007,
+      "path": [
+        114,
+        85,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 60215.91
+    },
+    {
+      "height": 0.012677,
+      "path": [
+        5,
+        74,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1089750.86
+    },
+    {
+      "height": 0.005154,
+      "path": [
+        5,
+        368,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 443079.61
+    },
+    {
+      "height": 0.000759,
+      "path": [
+        5,
+        100,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 65281.05
+    },
+    {
+      "height": 0.000148,
+      "path": [
+        247,
+        48,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 12732.4
+    },
+    {
+      "height": 0.000227,
+      "path": [
+        5,
+        368,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 19491.76
+    },
+    {
+      "height": 0.00011,
+      "path": [
+        114,
+        74,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 9442.87
+    },
+    {
+      "height": 0.001137,
+      "path": [
+        247,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 97762.25
+    },
+    {
+      "height": 8.9e-05,
+      "path": [
+        171,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 7658.64
+    },
+    {
+      "height": 0.000167,
+      "path": [
+        247,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 14319.24
+    },
+    {
+      "height": 4.3e-05,
+      "path": [
+        114,
+        57,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 3660.11
+    },
+    {
+      "height": 3.4e-05,
+      "path": [
+        114,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2937.46
+    },
+    {
+      "height": 1.5e-05,
+      "path": [
+        171,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1265.38
+    },
+    {
+      "height": 0.000426,
+      "path": [
+        5,
+        85,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 36653.75
+    },
+    {
+      "height": 2.8e-05,
+      "path": [
+        5,
+        100,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 2382.12
+    },
+    {
+      "height": 0.000199,
+      "path": [
+        114,
+        57,
+        80,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 17126.79
+    },
+    {
+      "height": 0.000383,
+      "path": [
+        55,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 32921.81
+    },
+    {
+      "height": 1.7e-05,
+      "path": [
+        114,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 1443.92
+    },
+    {
+      "height": 0.003406,
+      "path": [
+        5,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 292792.15
+    },
+    {
+      "height": 0.003064,
+      "path": [
+        114,
+        48,
+        52,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 263419.68
+    },
+    {
+      "height": 9.4e-05,
+      "path": [
+        135,
+        85,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 8092.74
+    },
+    {
+      "height": 0.00027,
+      "path": [
+        182,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 23180.3
+    },
+    {
+      "height": 0.000286,
+      "path": [
+        182,
+        57,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 24555.89
+    },
+    {
+      "height": 0.000123,
+      "path": [
+        5,
+        18,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10586.37
+    },
+    {
+      "height": 0.00043,
+      "path": [
+        16,
+        18,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 36950.39
+    },
+    {
+      "height": 0.00137,
+      "path": [
+        5,
+        100,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 117758.7
+    },
+    {
+      "height": 0.000856,
+      "path": [
+        5,
+        85,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 73618.1
+    },
+    {
+      "height": 0.003508,
+      "path": [
+        5,
+        2299,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 301524.92
+    },
+    {
+      "height": 0.000154,
+      "path": [
+        114,
+        2299,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 13221.23
+    },
+    {
+      "height": 0.003063,
+      "path": [
+        5,
+        48,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 263332.3
+    },
+    {
+      "height": 8.1e-05,
+      "path": [
+        182,
+        48,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 6997.22
+    },
+    {
+      "height": 0.00251,
+      "path": [
+        5,
+        48,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 215737.61
+    },
+    {
+      "height": 0.000434,
+      "path": [
+        5,
+        48,
+        70,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 37309.94
+    },
+    {
+      "height": 0.000268,
+      "path": [
+        182,
+        57,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 23038.33
+    },
+    {
+      "height": 0.000407,
+      "path": [
+        162,
+        85,
+        52,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 34997.78
+    },
+    {
+      "height": 8.6e-05,
+      "path": [
+        162,
+        85,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 7359.98
+    },
+    {
+      "height": 0.000563,
+      "path": [
+        247,
+        57,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 48438.19
+    },
+    {
+      "height": 1.8e-05,
+      "path": [
+        171,
+        100,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1512.77
+    },
+    {
+      "height": 0.004143,
+      "path": [
+        5,
+        48,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 356168.05
+    },
+    {
+      "height": 0.000725,
+      "path": [
+        247,
+        57,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 62343.82
+    },
+    {
+      "height": 0.00057,
+      "path": [
+        247,
+        18,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 48973.51
+    },
+    {
+      "height": 0.000103,
+      "path": [
+        55,
+        57,
+        24,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 8888.14
+    },
+    {
+      "height": 0.001639,
+      "path": [
+        5,
+        74,
+        80,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 140894.15
+    },
+    {
+      "height": 0.003319,
+      "path": [
+        5,
+        48,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 285277.66
+    },
+    {
+      "height": 5e-06,
+      "path": [
+        171,
+        57,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 410.02
+    },
+    {
+      "height": 0.00224,
+      "path": [
+        5,
+        57,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 192596.14
+    },
+    {
+      "height": 7.9e-05,
+      "path": [
+        247,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6751.95
+    },
+    {
+      "height": 0.001056,
+      "path": [
+        182,
+        57,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 90744.51
+    },
+    {
+      "height": 0.000403,
+      "path": [
+        5,
+        57,
+        80,
+        26
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 34659.64
+    },
+    {
+      "height": 0.00399,
+      "path": [
+        5,
+        18,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 342973.7
+    },
+    {
+      "height": 5e-06,
+      "path": [
+        247,
+        48,
+        80,
+        285
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 389.02
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        5,
+        1,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 48.58
+    },
+    {
+      "height": 0.001176,
+      "path": [
+        247,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 101092.62
+    },
+    {
+      "height": 0.000594,
+      "path": [
+        247,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 51089.64
+    },
+    {
+      "height": 8.5e-05,
+      "path": [
+        182,
+        57,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 7295.63
+    },
+    {
+      "height": 0.006762,
+      "path": [
+        5,
+        57,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 581339.24
+    },
+    {
+      "height": 0.000647,
+      "path": [
+        5,
+        368,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 55619.26
+    },
+    {
+      "height": 0.000534,
+      "path": [
+        162,
+        368,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 45876.1
+    },
+    {
+      "height": 0.000402,
+      "path": [
+        99,
+        48,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 34590.25
+    },
+    {
+      "height": 3e-06,
+      "path": [
+        182,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 271.05
+    },
+    {
+      "height": 9e-06,
+      "path": [
+        247,
+        85,
+        80,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 763.89
+    },
+    {
+      "height": 0.000243,
+      "path": [
+        162,
+        85,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 20847.0
+    },
+    {
+      "height": 0.000126,
+      "path": [
+        247,
+        57,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 10807.19
+    },
+    {
+      "height": 0.000192,
+      "path": [
+        247,
+        57,
+        24,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 16481.47
+    },
+    {
+      "height": 0.000633,
+      "path": [
+        5,
+        18,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 54390.74
+    },
+    {
+      "height": 3e-06,
+      "path": [
+        114,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 274.51
+    },
+    {
+      "height": 0.000225,
+      "path": [
+        162,
+        85,
+        70,
+        343
+      ],
+      "qual": "SOYBEANS",
+      "quant": 19332.89
+    },
+    {
+      "height": 0.00048,
+      "path": [
+        171,
+        57,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 41302.52
+    },
+    {
+      "height": 1.3e-05,
+      "path": [
+        247,
+        57,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1132.42
+    },
+    {
+      "height": 0.000495,
+      "path": [
+        16,
+        18,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 42523.66
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        114,
+        1,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 119.56
+    },
+    {
+      "height": 0.000302,
+      "path": [
+        55,
+        57,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 25923.33
+    },
+    {
+      "height": 5.9e-05,
+      "path": [
+        114,
+        100,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5093.73
+    },
+    {
+      "height": 0.000942,
+      "path": [
+        5,
+        85,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 80998.49
+    },
+    {
+      "height": 7.5e-05,
+      "path": [
+        55,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6433.29
+    },
+    {
+      "height": 0.000969,
+      "path": [
+        162,
+        85,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 83279.29
+    },
+    {
+      "height": 0.000176,
+      "path": [
+        99,
+        57,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 15136.1
+    },
+    {
+      "height": 1.2e-05,
+      "path": [
+        247,
+        57,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 999.72
+    },
+    {
+      "height": 0.000149,
+      "path": [
+        5,
+        85,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 12794.2
+    },
+    {
+      "height": 0.001117,
+      "path": [
+        5,
+        85,
+        52,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 96059.71
+    },
+    {
+      "height": 0.000209,
+      "path": [
+        99,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 17975.95
+    },
+    {
+      "height": 7.2e-05,
+      "path": [
+        55,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 6159.42
+    },
+    {
+      "height": 0.00041,
+      "path": [
+        114,
+        48,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 35225.96
+    },
+    {
+      "height": 0.000575,
+      "path": [
+        114,
+        48,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 49407.62
+    },
+    {
+      "height": 1.3e-05,
+      "path": [
+        171,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1124.56
+    },
+    {
+      "height": 0.019597,
+      "path": [
+        5,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1684674.22
+    },
+    {
+      "height": 0.00195,
+      "path": [
+        5,
+        48,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 167665.9
+    },
+    {
+      "height": 3e-06,
+      "path": [
+        141,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 218.79
+    },
+    {
+      "height": 3.7e-05,
+      "path": [
+        247,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 3142.1
+    },
+    {
+      "height": 0.000778,
+      "path": [
+        5,
+        18,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 66870.0
+    },
+    {
+      "height": 0.001063,
+      "path": [
+        5,
+        48,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 91385.49
+    },
+    {
+      "height": 0.0,
+      "path": [
+        55,
+        57,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 39.53
+    },
+    {
+      "height": 1.2e-05,
+      "path": [
+        5,
+        85,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1051.77
+    },
+    {
+      "height": 9.1e-05,
+      "path": [
+        5,
+        18,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 7800.56
+    },
+    {
+      "height": 0.001084,
+      "path": [
+        5,
+        85,
+        80,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 93187.89
+    },
+    {
+      "height": 1.7e-05,
+      "path": [
+        99,
+        85,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1470.18
+    },
+    {
+      "height": 2e-06,
+      "path": [
+        247,
+        57,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 186.77
+    },
+    {
+      "height": 0.000237,
+      "path": [
+        16,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 20387.24
+    },
+    {
+      "height": 3.9e-05,
+      "path": [
+        182,
+        85,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 3323.86
+    },
+    {
+      "height": 0.001161,
+      "path": [
+        5,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 99831.07
+    },
+    {
+      "height": 0.000377,
+      "path": [
+        182,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 32443.97
+    },
+    {
+      "height": 0.000476,
+      "path": [
+        247,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 40933.65
+    },
+    {
+      "height": 0.000916,
+      "path": [
+        99,
+        100,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 78742.03
+    },
+    {
+      "height": 0.001035,
+      "path": [
+        5,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 88964.27
+    },
+    {
+      "height": 0.000301,
+      "path": [
+        5,
+        85,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 25913.73
+    },
+    {
+      "height": 0.000228,
+      "path": [
+        247,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 19589.74
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        247,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 81.96
+    },
+    {
+      "height": 0.005748,
+      "path": [
+        5,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 494160.12
+    },
+    {
+      "height": 1e-05,
+      "path": [
+        171,
+        57,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 895.24
+    },
+    {
+      "height": 6.5e-05,
+      "path": [
+        55,
+        57,
+        70,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 5560.59
+    },
+    {
+      "height": 8e-06,
+      "path": [
+        171,
+        57,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 651.51
+    },
+    {
+      "height": 0.013305,
+      "path": [
+        162,
+        85,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1143761.03
+    },
+    {
+      "height": 0.000399,
+      "path": [
+        182,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 34328.66
+    },
+    {
+      "height": 0.000123,
+      "path": [
+        182,
+        100,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 10558.73
+    },
+    {
+      "height": 0.002435,
+      "path": [
+        135,
+        85,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 209359.8
+    },
+    {
+      "height": 0.001464,
+      "path": [
+        16,
+        18,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 125845.66
+    },
+    {
+      "height": 0.002787,
+      "path": [
+        5,
+        368,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 239559.78
+    },
+    {
+      "height": 0.000405,
+      "path": [
+        5,
+        18,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 34812.0
+    },
+    {
+      "height": 0.000829,
+      "path": [
+        247,
+        57,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 71274.35
+    },
+    {
+      "height": 0.001498,
+      "path": [
+        5,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 128816.7
+    },
+    {
+      "height": 0.002916,
+      "path": [
+        135,
+        85,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 250644.63
+    },
+    {
+      "height": 0.001202,
+      "path": [
+        5,
+        57,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 103335.78
+    },
+    {
+      "height": 0.000152,
+      "path": [
+        5,
+        57,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 13075.81
+    },
+    {
+      "height": 9.1e-05,
+      "path": [
+        16,
+        18,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 7857.38
+    },
+    {
+      "height": 0.000154,
+      "path": [
+        247,
+        85,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 13242.49
+    },
+    {
+      "height": 0.000726,
+      "path": [
+        5,
+        29,
+        33,
+        179
+      ],
+      "qual": "SOYBEANS",
+      "quant": 62449.35
+    },
+    {
+      "height": 5.1e-05,
+      "path": [
+        135,
+        368,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4421.68
+    },
+    {
+      "height": 9.5e-05,
+      "path": [
+        182,
+        57,
+        70,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 8159.51
+    },
+    {
+      "height": 0.001368,
+      "path": [
+        16,
+        18,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 117608.35
+    },
+    {
+      "height": 0.000216,
+      "path": [
+        114,
+        48,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 18544.8
+    },
+    {
+      "height": 0.000623,
+      "path": [
+        247,
+        57,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 53531.23
+    },
+    {
+      "height": 7e-06,
+      "path": [
+        99,
+        100,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 604.9
+    },
+    {
+      "height": 0.000968,
+      "path": [
+        247,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 83233.84
+    },
+    {
+      "height": 7.8e-05,
+      "path": [
+        247,
+        1,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 6697.71
+    },
+    {
+      "height": 0.001061,
+      "path": [
+        5,
+        18,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 91206.08
+    },
+    {
+      "height": 1.7e-05,
+      "path": [
+        55,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1449.73
+    },
+    {
+      "height": 0.000176,
+      "path": [
+        114,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 15116.91
+    },
+    {
+      "height": 1.6e-05,
+      "path": [
+        114,
+        100,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1399.76
+    },
+    {
+      "height": 0.003739,
+      "path": [
+        5,
+        29,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 321447.07
+    },
+    {
+      "height": 0.002208,
+      "path": [
+        5,
+        48,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 189842.83
+    },
+    {
+      "height": 1.5e-05,
+      "path": [
+        141,
+        100,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1320.11
+    },
+    {
+      "height": 0.004134,
+      "path": [
+        5,
+        48,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 355402.42
+    },
+    {
+      "height": 0.000344,
+      "path": [
+        141,
+        100,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 29558.25
+    },
+    {
+      "height": 0.002558,
+      "path": [
+        247,
+        57,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 219942.99
+    },
+    {
+      "height": 0.0,
+      "path": [
+        114,
+        48,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 0.99
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        135,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 50.59
+    },
+    {
+      "height": 2.9e-05,
+      "path": [
+        99,
+        100,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2523.36
+    },
+    {
+      "height": 0.000208,
+      "path": [
+        99,
+        57,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 17884.79
+    },
+    {
+      "height": 0.000758,
+      "path": [
+        114,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 65137.61
+    },
+    {
+      "height": 9.7e-05,
+      "path": [
+        5,
+        100,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 8363.67
+    },
+    {
+      "height": 3.9e-05,
+      "path": [
+        5,
+        57,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 3335.33
+    },
+    {
+      "height": 1.7e-05,
+      "path": [
+        171,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1444.65
+    },
+    {
+      "height": 0.014494,
+      "path": [
+        141,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1245980.73
+    },
+    {
+      "height": 0.000305,
+      "path": [
+        99,
+        57,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 26215.98
+    },
+    {
+      "height": 0.034549,
+      "path": [
+        5,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2970072.47
+    },
+    {
+      "height": 0.000296,
+      "path": [
+        5,
+        48,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 25478.96
+    },
+    {
+      "height": 0.008222,
+      "path": [
+        16,
+        18,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 706832.86
+    },
+    {
+      "height": 3e-06,
+      "path": [
+        247,
+        48,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 240.35
+    },
+    {
+      "height": 0.000108,
+      "path": [
+        182,
+        100,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 9247.08
+    },
+    {
+      "height": 0.000561,
+      "path": [
+        247,
+        48,
+        52,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 48257.01
+    },
+    {
+      "height": 0.000299,
+      "path": [
+        5,
+        85,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 25708.03
+    },
+    {
+      "height": 0.000617,
+      "path": [
+        5,
+        18,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 53023.58
+    },
+    {
+      "height": 7.7e-05,
+      "path": [
+        5,
+        85,
+        70,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6605.6
+    },
+    {
+      "height": 0.000945,
+      "path": [
+        114,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 81208.33
+    },
+    {
+      "height": 0.006346,
+      "path": [
+        5,
+        368,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 545553.32
+    },
+    {
+      "height": 4.9e-05,
+      "path": [
+        171,
+        57,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4199.69
+    },
+    {
+      "height": 0.00038,
+      "path": [
+        5,
+        1,
+        70,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 32669.71
+    },
+    {
+      "height": 0.001115,
+      "path": [
+        5,
+        1,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 95830.15
+    },
+    {
+      "height": 0.001807,
+      "path": [
+        247,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 155318.16
+    },
+    {
+      "height": 0.002047,
+      "path": [
+        247,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 176003.15
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        171,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 87.69
+    },
+    {
+      "height": 0.000197,
+      "path": [
+        5,
+        57,
+        24,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 16922.6
+    },
+    {
+      "height": 1.2e-05,
+      "path": [
+        171,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1050.09
+    },
+    {
+      "height": 0.00069,
+      "path": [
+        5,
+        85,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 59331.19
+    },
+    {
+      "height": 0.000899,
+      "path": [
+        5,
+        74,
+        80,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 77286.73
+    },
+    {
+      "height": 0.000669,
+      "path": [
+        5,
+        57,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 57541.86
+    },
+    {
+      "height": 0.000692,
+      "path": [
+        16,
+        18,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 59507.02
+    },
+    {
+      "height": 3.7e-05,
+      "path": [
+        171,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 3196.54
+    },
+    {
+      "height": 0.001386,
+      "path": [
+        5,
+        85,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 119162.68
+    },
+    {
+      "height": 1.7e-05,
+      "path": [
+        55,
+        57,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1486.93
+    },
+    {
+      "height": 0.000603,
+      "path": [
+        5,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 51825.31
+    },
+    {
+      "height": 6e-06,
+      "path": [
+        16,
+        18,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 537.27
+    },
+    {
+      "height": 2.7e-05,
+      "path": [
+        114,
+        18,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2324.66
+    },
+    {
+      "height": 0.0,
+      "path": [
+        5,
+        48,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 40.27
+    },
+    {
+      "height": 6e-06,
+      "path": [
+        5,
+        368,
+        1219,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 501.47
+    },
+    {
+      "height": 0.00195,
+      "path": [
+        5,
+        57,
+        70,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 167629.3
+    },
+    {
+      "height": 0.000168,
+      "path": [
+        99,
+        100,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 14458.22
+    },
+    {
+      "height": 0.002737,
+      "path": [
+        5,
+        100,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 235250.69
+    },
+    {
+      "height": 0.000135,
+      "path": [
+        114,
+        100,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 11581.54
+    },
+    {
+      "height": 0.000188,
+      "path": [
+        5,
+        100,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 16173.37
+    },
+    {
+      "height": 0.000544,
+      "path": [
+        171,
+        57,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 46787.33
+    },
+    {
+      "height": 0.000247,
+      "path": [
+        114,
+        57,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 21213.02
+    },
+    {
+      "height": 0.000329,
+      "path": [
+        55,
+        57,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 28267.05
+    },
+    {
+      "height": 0.000769,
+      "path": [
+        16,
+        18,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 66086.84
+    },
+    {
+      "height": 0.0,
+      "path": [
+        114,
+        48,
+        8,
+        64
+      ],
+      "qual": "SOY SAUCE",
+      "quant": 5.54
+    },
+    {
+      "height": 0.001191,
+      "path": [
+        182,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 102397.25
+    },
+    {
+      "height": 8e-06,
+      "path": [
+        182,
+        57,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 694.92
+    },
+    {
+      "height": 8.3e-05,
+      "path": [
+        114,
+        57,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 7116.17
+    },
+    {
+      "height": 4.8e-05,
+      "path": [
+        182,
+        57,
+        24,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 4135.15
+    },
+    {
+      "height": 0.000452,
+      "path": [
+        182,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 38898.47
+    },
+    {
+      "height": 8.2e-05,
+      "path": [
+        5,
+        57,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 7087.77
+    },
+    {
+      "height": 0.000224,
+      "path": [
+        171,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 19292.17
+    },
+    {
+      "height": 0.005835,
+      "path": [
+        141,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 501599.65
+    },
+    {
+      "height": 0.000427,
+      "path": [
+        16,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 36674.14
+    },
+    {
+      "height": 0.000673,
+      "path": [
+        55,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 57885.33
+    },
+    {
+      "height": 0.000122,
+      "path": [
+        247,
+        57,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10496.89
+    },
+    {
+      "height": 0.000167,
+      "path": [
+        247,
+        18,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 14370.49
+    },
+    {
+      "height": 0.000687,
+      "path": [
+        247,
+        100,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 59060.89
+    },
+    {
+      "height": 0.000991,
+      "path": [
+        114,
+        57,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 85165.49
+    },
+    {
+      "height": 5e-05,
+      "path": [
+        247,
+        85,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4283.33
+    },
+    {
+      "height": 0.000205,
+      "path": [
+        135,
+        18,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 17638.33
+    },
+    {
+      "height": 8.7e-05,
+      "path": [
+        114,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 7475.09
+    },
+    {
+      "height": 2e-05,
+      "path": [
+        247,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1688.42
+    },
+    {
+      "height": 0.000423,
+      "path": [
+        247,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 36353.36
+    },
+    {
+      "height": 9e-05,
+      "path": [
+        16,
+        100,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 7703.66
+    },
+    {
+      "height": 0.00077,
+      "path": [
+        162,
+        85,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 66222.03
+    },
+    {
+      "height": 0.006257,
+      "path": [
+        182,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 537847.41
+    },
+    {
+      "height": 1.4e-05,
+      "path": [
+        171,
+        57,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1183.33
+    },
+    {
+      "height": 0.000296,
+      "path": [
+        247,
+        57,
+        70,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 25410.61
+    },
+    {
+      "height": 0.000957,
+      "path": [
+        247,
+        57,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 82281.81
+    },
+    {
+      "height": 0.001954,
+      "path": [
+        16,
+        18,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 167956.11
+    },
+    {
+      "height": 6.2e-05,
+      "path": [
+        171,
+        100,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5307.19
+    },
+    {
+      "height": 0.0001,
+      "path": [
+        114,
+        100,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 8584.19
+    },
+    {
+      "height": 0.000894,
+      "path": [
+        55,
+        100,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 76840.5
+    },
+    {
+      "height": 0.00069,
+      "path": [
+        135,
+        85,
+        80,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 59301.22
+    },
+    {
+      "height": 0.000262,
+      "path": [
+        55,
+        57,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 22527.35
+    },
+    {
+      "height": 0.002974,
+      "path": [
+        5,
+        29,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 255660.86
+    },
+    {
+      "height": 0.000604,
+      "path": [
+        162,
+        85,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 51932.73
+    },
+    {
+      "height": 2.2e-05,
+      "path": [
+        16,
+        57,
+        1219,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1871.77
+    },
+    {
+      "height": 0.001916,
+      "path": [
+        5,
+        100,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 164681.75
+    },
+    {
+      "height": 0.002424,
+      "path": [
+        5,
+        74,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 208349.31
+    },
+    {
+      "height": 0.000153,
+      "path": [
+        182,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 13139.42
+    },
+    {
+      "height": 0.00144,
+      "path": [
+        5,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 123794.53
+    },
+    {
+      "height": 0.000837,
+      "path": [
+        5,
+        18,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 71976.39
+    },
+    {
+      "height": 0.001466,
+      "path": [
+        5,
+        2299,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 125998.8
+    },
+    {
+      "height": 0.000115,
+      "path": [
+        114,
+        57,
+        1219,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 9865.82
+    },
+    {
+      "height": 0.002621,
+      "path": [
+        247,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 225358.74
+    },
+    {
+      "height": 6e-06,
+      "path": [
+        5,
+        48,
+        8,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 486.0
+    },
+    {
+      "height": 6.8e-05,
+      "path": [
+        16,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 5837.73
+    },
+    {
+      "height": 2.1e-05,
+      "path": [
+        114,
+        57,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1837.77
+    },
+    {
+      "height": 0.000527,
+      "path": [
+        5,
+        57,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 45332.39
+    },
+    {
+      "height": 0.000354,
+      "path": [
+        5,
+        57,
+        70,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 30472.89
+    },
+    {
+      "height": 0.000221,
+      "path": [
+        114,
+        100,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 19008.33
+    },
+    {
+      "height": 0.000833,
+      "path": [
+        16,
+        18,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 71615.15
+    },
+    {
+      "height": 8e-06,
+      "path": [
+        247,
+        1,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 676.55
+    },
+    {
+      "height": 3e-06,
+      "path": [
+        247,
+        57,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 237.05
+    },
+    {
+      "height": 0.001008,
+      "path": [
+        55,
+        57,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 86683.06
+    },
+    {
+      "height": 0.000505,
+      "path": [
+        114,
+        18,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 43434.49
+    },
+    {
+      "height": 0.000146,
+      "path": [
+        162,
+        85,
+        52,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 12517.59
+    },
+    {
+      "height": 8.1e-05,
+      "path": [
+        182,
+        57,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6957.73
+    },
+    {
+      "height": 0.001121,
+      "path": [
+        99,
+        57,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 96336.23
+    },
+    {
+      "height": 0.000737,
+      "path": [
+        5,
+        74,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 63359.24
+    },
+    {
+      "height": 0.000191,
+      "path": [
+        5,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 16398.49
+    },
+    {
+      "height": 5.9e-05,
+      "path": [
+        114,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5081.75
+    },
+    {
+      "height": 0.000209,
+      "path": [
+        114,
+        57,
+        70,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 17927.71
+    },
+    {
+      "height": 3.6e-05,
+      "path": [
+        135,
+        85,
+        70,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 3127.51
+    },
+    {
+      "height": 6.7e-05,
+      "path": [
+        182,
+        100,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5780.44
+    },
+    {
+      "height": 2.4e-05,
+      "path": [
+        114,
+        18,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2056.39
+    },
+    {
+      "height": 0.000304,
+      "path": [
+        114,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 26148.89
+    },
+    {
+      "height": 0.000178,
+      "path": [
+        247,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 15326.7
+    },
+    {
+      "height": 0.000342,
+      "path": [
+        182,
+        100,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 29422.03
+    },
+    {
+      "height": 0.000256,
+      "path": [
+        247,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 22011.87
+    },
+    {
+      "height": 0.000542,
+      "path": [
+        247,
+        57,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 46568.36
+    },
+    {
+      "height": 0.001745,
+      "path": [
+        5,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 150016.79
+    },
+    {
+      "height": 1.8e-05,
+      "path": [
+        247,
+        48,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1514.71
+    },
+    {
+      "height": 0.001046,
+      "path": [
+        171,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 89913.65
+    },
+    {
+      "height": 0.000167,
+      "path": [
+        5,
+        85,
+        8,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 14391.47
+    },
+    {
+      "height": 0.000431,
+      "path": [
+        99,
+        100,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 37090.84
+    },
+    {
+      "height": 0.002293,
+      "path": [
+        135,
+        85,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 197085.25
+    },
+    {
+      "height": 0.00109,
+      "path": [
+        114,
+        85,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 93693.88
+    },
+    {
+      "height": 0.009299,
+      "path": [
+        55,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 799425.38
+    },
+    {
+      "height": 0.000114,
+      "path": [
+        247,
+        85,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 9801.89
+    },
+    {
+      "height": 8.8e-05,
+      "path": [
+        114,
+        2299,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 7598.75
+    },
+    {
+      "height": 0.000254,
+      "path": [
+        247,
+        100,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 21801.09
+    },
+    {
+      "height": 2.7e-05,
+      "path": [
+        171,
+        57,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2297.96
+    },
+    {
+      "height": 0.000415,
+      "path": [
+        114,
+        18,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 35649.85
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        114,
+        1,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 65.01
+    },
+    {
+      "height": 0.000128,
+      "path": [
+        247,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 11037.46
+    },
+    {
+      "height": 0.000147,
+      "path": [
+        55,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 12679.16
+    },
+    {
+      "height": 0.002295,
+      "path": [
+        247,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 197296.37
+    },
+    {
+      "height": 0.0,
+      "path": [
+        5,
+        48,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 22.76
+    },
+    {
+      "height": 0.000562,
+      "path": [
+        171,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 48322.74
+    },
+    {
+      "height": 0.000133,
+      "path": [
+        247,
+        48,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 11441.1
+    },
+    {
+      "height": 3.4e-05,
+      "path": [
+        182,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 2883.01
+    },
+    {
+      "height": 0.00158,
+      "path": [
+        114,
+        48,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 135818.59
+    },
+    {
+      "height": 7.3e-05,
+      "path": [
+        135,
+        100,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6275.13
+    },
+    {
+      "height": 0.000433,
+      "path": [
+        182,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 37261.15
+    },
+    {
+      "height": 0.000224,
+      "path": [
+        182,
+        48,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 19244.8
+    },
+    {
+      "height": 8.2e-05,
+      "path": [
+        162,
+        85,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 7042.99
+    },
+    {
+      "height": 0.018929,
+      "path": [
+        182,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1627277.84
+    },
+    {
+      "height": 3.5e-05,
+      "path": [
+        171,
+        57,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 3025.45
+    },
+    {
+      "height": 6.6e-05,
+      "path": [
+        55,
+        57,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 5709.03
+    },
+    {
+      "height": 0.002366,
+      "path": [
+        141,
+        100,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 203366.17
+    },
+    {
+      "height": 0.001951,
+      "path": [
+        114,
+        48,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 167702.85
+    },
+    {
+      "height": 0.000217,
+      "path": [
+        99,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 18619.71
+    },
+    {
+      "height": 0.000159,
+      "path": [
+        5,
+        74,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 13703.01
+    },
+    {
+      "height": 0.001233,
+      "path": [
+        182,
+        57,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 105979.3
+    },
+    {
+      "height": 0.000117,
+      "path": [
+        114,
+        57,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10056.92
+    },
+    {
+      "height": 0.028333,
+      "path": [
+        5,
+        48,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2435650.58
+    },
+    {
+      "height": 0.000738,
+      "path": [
+        114,
+        57,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 63458.19
+    },
+    {
+      "height": 0.000361,
+      "path": [
+        182,
+        57,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 31064.33
+    },
+    {
+      "height": 0.00017,
+      "path": [
+        171,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 14597.24
+    },
+    {
+      "height": 0.001995,
+      "path": [
+        162,
+        85,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 171516.86
+    },
+    {
+      "height": 4.2e-05,
+      "path": [
+        171,
+        57,
+        70,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 3629.5
+    },
+    {
+      "height": 9.1e-05,
+      "path": [
+        247,
+        100,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 7863.75
+    },
+    {
+      "height": 0.000125,
+      "path": [
+        171,
+        100,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10768.47
+    },
+    {
+      "height": 0.000768,
+      "path": [
+        55,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 66017.0
+    },
+    {
+      "height": 5.9e-05,
+      "path": [
+        135,
+        48,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5053.5
+    },
+    {
+      "height": 0.000844,
+      "path": [
+        55,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 72564.53
+    },
+    {
+      "height": 0.00184,
+      "path": [
+        5,
+        2299,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 158200.32
+    },
+    {
+      "height": 4.6e-05,
+      "path": [
+        55,
+        57,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 3916.63
+    },
+    {
+      "height": 0.000459,
+      "path": [
+        247,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 39450.01
+    },
+    {
+      "height": 0.000504,
+      "path": [
+        247,
+        18,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 43299.51
+    },
+    {
+      "height": 0.000149,
+      "path": [
+        141,
+        48,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 12778.74
+    },
+    {
+      "height": 0.000504,
+      "path": [
+        5,
+        57,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 43357.48
+    },
+    {
+      "height": 0.004087,
+      "path": [
+        5,
+        100,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 351320.51
+    },
+    {
+      "height": 0.004215,
+      "path": [
+        5,
+        57,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 362310.15
+    },
+    {
+      "height": 0.001148,
+      "path": [
+        5,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 98714.46
+    },
+    {
+      "height": 0.000102,
+      "path": [
+        114,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 8779.05
+    },
+    {
+      "height": 0.00011,
+      "path": [
+        141,
+        85,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 9448.39
+    },
+    {
+      "height": 5.5e-05,
+      "path": [
+        114,
+        74,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4761.15
+    },
+    {
+      "height": 0.000114,
+      "path": [
+        162,
+        85,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 9775.58
+    },
+    {
+      "height": 0.001895,
+      "path": [
+        5,
+        243,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 162917.58
+    },
+    {
+      "height": 5.2e-05,
+      "path": [
+        99,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4479.6
+    },
+    {
+      "height": 0.000519,
+      "path": [
+        135,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 44604.67
+    },
+    {
+      "height": 2e-06,
+      "path": [
+        114,
+        48,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 147.98
+    },
+    {
+      "height": 2.6e-05,
+      "path": [
+        171,
+        57,
+        1219,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2199.31
+    },
+    {
+      "height": 9.9e-05,
+      "path": [
+        162,
+        85,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 8543.02
+    },
+    {
+      "height": 0.000171,
+      "path": [
+        247,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 14704.51
+    },
+    {
+      "height": 5e-06,
+      "path": [
+        5,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 466.85
+    },
+    {
+      "height": 0.001583,
+      "path": [
+        5,
+        100,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 136043.3
+    },
+    {
+      "height": 4.7e-05,
+      "path": [
+        114,
+        100,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4046.53
+    },
+    {
+      "height": 0.004353,
+      "path": [
+        5,
+        100,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 374166.5
+    },
+    {
+      "height": 2.9e-05,
+      "path": [
+        162,
+        18,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2481.17
+    },
+    {
+      "height": 0.000241,
+      "path": [
+        247,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 20738.42
+    },
+    {
+      "height": 8.1e-05,
+      "path": [
+        182,
+        48,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 6941.75
+    },
+    {
+      "height": 0.00158,
+      "path": [
+        5,
+        18,
+        70,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 135806.42
+    },
+    {
+      "height": 1.9e-05,
+      "path": [
+        114,
+        85,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1674.25
+    },
+    {
+      "height": 0.000267,
+      "path": [
+        5,
+        368,
+        1219,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 22966.2
+    },
+    {
+      "height": 0.00019,
+      "path": [
+        247,
+        57,
+        52,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 16293.65
+    },
+    {
+      "height": 0.000223,
+      "path": [
+        141,
+        85,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 19173.21
+    },
+    {
+      "height": 0.000217,
+      "path": [
+        55,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 18687.77
+    },
+    {
+      "height": 0.000179,
+      "path": [
+        55,
+        100,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 15400.61
+    },
+    {
+      "height": 0.009952,
+      "path": [
+        247,
+        57,
+        70,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 855505.86
+    },
+    {
+      "height": 0.001905,
+      "path": [
+        5,
+        74,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 163777.31
+    },
+    {
+      "height": 0.003648,
+      "path": [
+        5,
+        368,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 313600.29
+    },
+    {
+      "height": 0.001807,
+      "path": [
+        5,
+        48,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 155324.4
+    },
+    {
+      "height": 0.000847,
+      "path": [
+        5,
+        29,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 72772.63
+    },
+    {
+      "height": 0.000419,
+      "path": [
+        5,
+        1,
+        1219,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 36034.75
+    },
+    {
+      "height": 0.000566,
+      "path": [
+        162,
+        85,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 48644.56
+    },
+    {
+      "height": 0.000384,
+      "path": [
+        247,
+        48,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 33053.4
+    },
+    {
+      "height": 0.002044,
+      "path": [
+        5,
+        29,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 175745.17
+    },
+    {
+      "height": 3e-06,
+      "path": [
+        114,
+        57,
+        80,
+        26
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 217.54
+    },
+    {
+      "height": 6e-06,
+      "path": [
+        135,
+        368,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 490.51
+    },
+    {
+      "height": 0.000578,
+      "path": [
+        5,
+        57,
+        70,
+        285
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 49650.23
+    },
+    {
+      "height": 0.000212,
+      "path": [
+        99,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 18264.9
+    },
+    {
+      "height": 8.1e-05,
+      "path": [
+        55,
+        57,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 6933.16
+    },
+    {
+      "height": 0.002705,
+      "path": [
+        5,
+        85,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 232568.51
+    },
+    {
+      "height": 0.000105,
+      "path": [
+        162,
+        85,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 9052.09
+    },
+    {
+      "height": 0.004336,
+      "path": [
+        99,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 372774.8
+    },
+    {
+      "height": 0.013538,
+      "path": [
+        247,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1163833.71
+    },
+    {
+      "height": 0.000631,
+      "path": [
+        114,
+        48,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 54212.39
+    },
+    {
+      "height": 5.9e-05,
+      "path": [
+        135,
+        48,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 5095.01
+    },
+    {
+      "height": 0.000102,
+      "path": [
+        5,
+        48,
+        33,
+        179
+      ],
+      "qual": "SOYBEANS",
+      "quant": 8754.7
+    },
+    {
+      "height": 0.00113,
+      "path": [
+        5,
+        85,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 97115.14
+    },
+    {
+      "height": 0.000366,
+      "path": [
+        171,
+        57,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 31459.07
+    },
+    {
+      "height": 0.000853,
+      "path": [
+        5,
+        2299,
+        33,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 73356.75
+    },
+    {
+      "height": 0.000337,
+      "path": [
+        171,
+        57,
+        70,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 29009.18
+    },
+    {
+      "height": 7.7e-05,
+      "path": [
+        114,
+        57,
+        24,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6634.21
+    },
+    {
+      "height": 1.3e-05,
+      "path": [
+        5,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 1100.78
+    },
+    {
+      "height": 0.000799,
+      "path": [
+        5,
+        100,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 68719.99
+    },
+    {
+      "height": 0.000359,
+      "path": [
+        162,
+        85,
+        70,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 30895.18
+    },
+    {
+      "height": 0.002492,
+      "path": [
+        247,
+        57,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 214265.3
+    },
+    {
+      "height": 2.6e-05,
+      "path": [
+        99,
+        85,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2253.4
+    },
+    {
+      "height": 0.001883,
+      "path": [
+        5,
+        74,
+        52,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 161882.75
+    },
+    {
+      "height": 0.00024,
+      "path": [
+        182,
+        57,
+        8,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 20667.34
+    },
+    {
+      "height": 0.000471,
+      "path": [
+        114,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 40508.9
+    },
+    {
+      "height": 0.000179,
+      "path": [
+        114,
+        1,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 15375.65
+    },
+    {
+      "height": 0.000644,
+      "path": [
+        5,
+        85,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 55325.74
+    },
+    {
+      "height": 0.00116,
+      "path": [
+        162,
+        85,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 99711.76
+    },
+    {
+      "height": 0.006325,
+      "path": [
+        5,
+        1,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 543700.14
+    },
+    {
+      "height": 2.7e-05,
+      "path": [
+        182,
+        57,
+        24,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 2284.0
+    },
+    {
+      "height": 0.000487,
+      "path": [
+        5,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 41835.53
+    },
+    {
+      "height": 0.000199,
+      "path": [
+        99,
+        57,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 17125.02
+    },
+    {
+      "height": 0.000391,
+      "path": [
+        5,
+        368,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 33588.31
+    },
+    {
+      "height": 0.0,
+      "path": [
+        247,
+        57,
+        24,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 0.32
+    },
+    {
+      "height": 0.00027,
+      "path": [
+        55,
+        57,
+        70,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 23243.66
+    },
+    {
+      "height": 0.000622,
+      "path": [
+        55,
+        85,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 53437.56
+    },
+    {
+      "height": 0.002629,
+      "path": [
+        114,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 225967.81
+    },
+    {
+      "height": 0.00022,
+      "path": [
+        141,
+        100,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 18894.2
+    },
+    {
+      "height": 0.000728,
+      "path": [
+        135,
+        85,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 62602.61
+    },
+    {
+      "height": 0.002705,
+      "path": [
+        5,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 232549.15
+    },
+    {
+      "height": 0.000383,
+      "path": [
+        114,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 32885.22
+    },
+    {
+      "height": 3.5e-05,
+      "path": [
+        141,
+        100,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 3036.13
+    },
+    {
+      "height": 0.000174,
+      "path": [
+        171,
+        57,
+        70,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 14918.73
+    },
+    {
+      "height": 0.000123,
+      "path": [
+        55,
+        57,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10593.68
+    },
+    {
+      "height": 0.000697,
+      "path": [
+        5,
+        85,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 59960.6
+    },
+    {
+      "height": 2.5e-05,
+      "path": [
+        171,
+        57,
+        70,
+        285
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 2126.34
+    },
+    {
+      "height": 2e-06,
+      "path": [
+        247,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 135.96
+    },
+    {
+      "height": 0.00064,
+      "path": [
+        247,
+        100,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 55002.16
+    },
+    {
+      "height": 0.002535,
+      "path": [
+        5,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 217912.0
+    },
+    {
+      "height": 0.000796,
+      "path": [
+        5,
+        74,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 68402.05
+    },
+    {
+      "height": 2e-06,
+      "path": [
+        114,
+        100,
+        8,
+        285
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 179.7
+    },
+    {
+      "height": 0.00055,
+      "path": [
+        182,
+        48,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 47276.97
+    },
+    {
+      "height": 0.001244,
+      "path": [
+        162,
+        85,
+        80,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 106905.28
+    },
+    {
+      "height": 0.001824,
+      "path": [
+        5,
+        57,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 156819.07
+    },
+    {
+      "height": 1.9e-05,
+      "path": [
+        5,
+        57,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1653.28
+    },
+    {
+      "height": 3.2e-05,
+      "path": [
+        5,
+        57,
+        1219,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2767.8
+    },
+    {
+      "height": 3.5e-05,
+      "path": [
+        55,
+        57,
+        80,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 3007.86
+    },
+    {
+      "height": 6.3e-05,
+      "path": [
+        171,
+        48,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5379.8
+    },
+    {
+      "height": 0.017172,
+      "path": [
+        16,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1476210.92
+    },
+    {
+      "height": 0.003908,
+      "path": [
+        5,
+        85,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 335935.55
+    },
+    {
+      "height": 6.1e-05,
+      "path": [
+        141,
+        100,
+        1219,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5246.11
+    },
+    {
+      "height": 7.2e-05,
+      "path": [
+        247,
+        57,
+        80,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6185.07
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        114,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 63.69
+    },
+    {
+      "height": 0.000708,
+      "path": [
+        5,
+        74,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 60835.05
+    },
+    {
+      "height": 0.004147,
+      "path": [
+        5,
+        48,
+        52,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 356499.04
+    },
+    {
+      "height": 0.000113,
+      "path": [
+        5,
+        57,
+        8,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 9741.8
+    },
+    {
+      "height": 0.000759,
+      "path": [
+        5,
+        74,
+        52,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 65264.84
+    },
+    {
+      "height": 0.000388,
+      "path": [
+        182,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 33344.4
+    },
+    {
+      "height": 0.000144,
+      "path": [
+        99,
+        57,
+        70,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 12351.13
+    },
+    {
+      "height": 1.8e-05,
+      "path": [
+        114,
+        18,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1520.19
+    },
+    {
+      "height": 0.000145,
+      "path": [
+        55,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 12465.01
+    },
+    {
+      "height": 0.000204,
+      "path": [
+        5,
+        85,
+        80,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 17514.53
+    },
+    {
+      "height": 0.000339,
+      "path": [
+        114,
+        100,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 29173.84
+    },
+    {
+      "height": 1.6e-05,
+      "path": [
+        141,
+        100,
+        8,
+        54
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1383.29
+    },
+    {
+      "height": 6.7e-05,
+      "path": [
+        182,
+        57,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5782.16
+    },
+    {
+      "height": 2.5e-05,
+      "path": [
+        5,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2118.24
+    },
+    {
+      "height": 0.000674,
+      "path": [
+        16,
+        18,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 57916.45
+    },
+    {
+      "height": 0.000849,
+      "path": [
+        5,
+        74,
+        24,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 73009.48
+    },
+    {
+      "height": 7e-06,
+      "path": [
+        5,
+        48,
+        8,
+        43
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 635.67
+    },
+    {
+      "height": 0.00062,
+      "path": [
+        5,
+        243,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 53280.85
+    },
+    {
+      "height": 4e-06,
+      "path": [
+        247,
+        1,
+        8,
+        54
+      ],
+      "qual": "SOYBEANS",
+      "quant": 368.08
+    },
+    {
+      "height": 0.000289,
+      "path": [
+        114,
+        100,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 24874.47
+    },
+    {
+      "height": 8.8e-05,
+      "path": [
+        5,
+        100,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 7577.52
+    },
+    {
+      "height": 3.6e-05,
+      "path": [
+        182,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 3053.25
+    },
+    {
+      "height": 2.9e-05,
+      "path": [
+        135,
+        18,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2457.73
+    },
+    {
+      "height": 0.000523,
+      "path": [
+        135,
+        85,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 44959.13
+    },
+    {
+      "height": 0.000729,
+      "path": [
+        5,
+        74,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 62706.28
+    },
+    {
+      "height": 0.000495,
+      "path": [
+        247,
+        85,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 42595.96
+    },
+    {
+      "height": 5.3e-05,
+      "path": [
+        16,
+        18,
+        8,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4536.94
+    },
+    {
+      "height": 0.000312,
+      "path": [
+        171,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 26839.83
+    },
+    {
+      "height": 2.5e-05,
+      "path": [
+        135,
+        57,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2173.72
+    },
+    {
+      "height": 0.001143,
+      "path": [
+        114,
+        48,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 98252.2
+    },
+    {
+      "height": 0.00015,
+      "path": [
+        247,
+        57,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 12892.89
+    },
+    {
+      "height": 0.000217,
+      "path": [
+        171,
+        57,
+        70,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 18635.06
+    },
+    {
+      "height": 2.6e-05,
+      "path": [
+        114,
+        1,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2242.36
+    },
+    {
+      "height": 0.000702,
+      "path": [
+        114,
+        100,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 60370.75
+    },
+    {
+      "height": 0.000239,
+      "path": [
+        114,
+        57,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 20553.68
+    },
+    {
+      "height": 1.5e-05,
+      "path": [
+        114,
+        57,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1301.99
+    },
+    {
+      "height": 1.5e-05,
+      "path": [
+        5,
+        48,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1303.93
+    },
+    {
+      "height": 0.000131,
+      "path": [
+        55,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 11294.44
+    },
+    {
+      "height": 4.7e-05,
+      "path": [
+        55,
+        57,
+        80,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 4037.56
+    },
+    {
+      "height": 0.000363,
+      "path": [
+        182,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 31247.33
+    },
+    {
+      "height": 0.000185,
+      "path": [
+        141,
+        48,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 15923.06
+    },
+    {
+      "height": 0.000143,
+      "path": [
+        55,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 12278.32
+    },
+    {
+      "height": 2.5e-05,
+      "path": [
+        247,
+        1,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 2122.91
+    },
+    {
+      "height": 0.000503,
+      "path": [
+        247,
+        18,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 43265.51
+    },
+    {
+      "height": 0.00331,
+      "path": [
+        5,
+        85,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 284573.58
+    },
+    {
+      "height": 3.2e-05,
+      "path": [
+        135,
+        18,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2721.02
+    },
+    {
+      "height": 3e-05,
+      "path": [
+        135,
+        57,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2595.29
+    },
+    {
+      "height": 0.001513,
+      "path": [
+        5,
+        100,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 130038.91
+    },
+    {
+      "height": 0.000239,
+      "path": [
+        247,
+        368,
+        52,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 20585.35
+    },
+    {
+      "height": 0.000343,
+      "path": [
+        171,
+        57,
+        80,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 29464.72
+    },
+    {
+      "height": 0.000343,
+      "path": [
+        5,
+        85,
+        80,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 29461.8
+    },
+    {
+      "height": 0.001869,
+      "path": [
+        5,
+        368,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 160680.47
+    },
+    {
+      "height": 0.002461,
+      "path": [
+        5,
+        57,
+        33,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 211600.02
+    },
+    {
+      "height": 0.003852,
+      "path": [
+        5,
+        57,
+        1219,
+        43
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 331179.65
+    },
+    {
+      "height": 0.001342,
+      "path": [
+        5,
+        368,
+        1219,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 115407.72
+    },
+    {
+      "height": 0.001706,
+      "path": [
+        114,
+        48,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 146660.28
+    },
+    {
+      "height": 0.0023,
+      "path": [
+        247,
+        57,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 197686.7
+    },
+    {
+      "height": 0.000173,
+      "path": [
+        5,
+        85,
+        80,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 14882.5
+    },
+    {
+      "height": 0.000352,
+      "path": [
+        5,
+        243,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 30233.02
+    },
+    {
+      "height": 1.4e-05,
+      "path": [
+        55,
+        57,
+        24,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1190.11
+    },
+    {
+      "height": 1e-06,
+      "path": [
+        5,
+        48,
+        70,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 44.33
+    },
+    {
+      "height": 0.001247,
+      "path": [
+        114,
+        57,
+        89,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 107177.39
+    },
+    {
+      "height": 0.000525,
+      "path": [
+        5,
+        100,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 45108.16
+    },
+    {
+      "height": 6e-06,
+      "path": [
+        114,
+        368,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 542.5
+    },
+    {
+      "height": 0.000694,
+      "path": [
+        247,
+        57,
+        24,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 59689.56
+    },
+    {
+      "height": 0.000125,
+      "path": [
+        99,
+        100,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 10756.02
+    },
+    {
+      "height": 0.002063,
+      "path": [
+        162,
+        85,
+        149,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 177341.68
+    },
+    {
+      "height": 1.2e-05,
+      "path": [
+        114,
+        57,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 1031.86
+    },
+    {
+      "height": 0.00011,
+      "path": [
+        114,
+        57,
+        70,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 9472.78
+    },
+    {
+      "height": 0.001155,
+      "path": [
+        5,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 99264.41
+    },
+    {
+      "height": 0.000157,
+      "path": [
+        99,
+        100,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 13534.4
+    },
+    {
+      "height": 0.001196,
+      "path": [
+        247,
+        57,
+        70,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 102815.6
+    },
+    {
+      "height": 0.000988,
+      "path": [
+        5,
+        57,
+        8,
+        130
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 84960.25
+    },
+    {
+      "height": 0.000827,
+      "path": [
+        5,
+        57,
+        80,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 71125.0
+    },
+    {
+      "height": 9.9e-05,
+      "path": [
+        182,
+        57,
+        52,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 8492.37
+    },
+    {
+      "height": 6.1e-05,
+      "path": [
+        114,
+        18,
+        8,
+        43
+      ],
+      "qual": "SOYBEANS",
+      "quant": 5203.76
+    },
+    {
+      "height": 8.6e-05,
+      "path": [
+        5,
+        100,
+        8,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 7427.29
+    },
+    {
+      "height": 0.000681,
+      "path": [
+        5,
+        48,
+        70,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 58552.0
+    },
+    {
+      "height": 0.000639,
+      "path": [
+        247,
+        57,
+        8,
+        343
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 54911.47
+    },
+    {
+      "height": 0.000723,
+      "path": [
+        16,
+        18,
+        70,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 62161.49
+    },
+    {
+      "height": 0.001106,
+      "path": [
+        5,
+        57,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 95069.99
+    },
+    {
+      "height": 0.001873,
+      "path": [
+        141,
+        100,
+        208,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 160993.03
+    },
+    {
+      "height": 0.000515,
+      "path": [
+        5,
+        85,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 44308.57
+    },
+    {
+      "height": 0.000936,
+      "path": [
+        141,
+        100,
+        106,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 80432.14
+    },
+    {
+      "height": 0.003561,
+      "path": [
+        5,
+        243,
+        80,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 306091.14
+    },
+    {
+      "height": 0.0004,
+      "path": [
+        5,
+        85,
+        8,
+        64
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 34418.67
+    },
+    {
+      "height": 0.000129,
+      "path": [
+        171,
+        18,
+        8,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 11127.17
+    },
+    {
+      "height": 0.0,
+      "path": [
+        114,
+        48,
+        8,
+        179
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 0.87
+    },
+    {
+      "height": 8.7e-05,
+      "path": [
+        5,
+        57,
+        24,
+        12
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 7499.68
+    },
+    {
+      "height": 7e-06,
+      "path": [
+        5,
+        57,
+        8,
+        285
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 582.68
+    },
+    {
+      "height": 3e-05,
+      "path": [
+        114,
+        18,
+        70,
+        26
+      ],
+      "qual": "SOYBEANS",
+      "quant": 2619.19
+    },
+    {
+      "height": 0.000177,
+      "path": [
+        247,
+        57,
+        24,
+        26
+      ],
+      "qual": "SOYBEAN OIL",
+      "quant": 15233.47
+    },
+    {
+      "height": 0.000606,
+      "path": [
+        171,
+        57,
+        8,
+        130
+      ],
+      "qual": "SOYBEANS",
+      "quant": 52089.69
+    },
+    {
+      "height": 0.000256,
+      "path": [
+        99,
+        57,
+        8,
+        12
+      ],
+      "qual": "SOYBEANS",
+      "quant": 21966.49
+    },
+    {
+      "height": 0.000492,
+      "path": [
+        5,
+        100,
+        70,
+        252
+      ],
+      "qual": "SOYBEANS",
+      "quant": 42286.75
+    },
+    {
+      "height": 7.4e-05,
+      "path": [
+        182,
+        57,
+        52,
+        12
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 6343.97
+    },
+    {
+      "height": 1.9e-05,
+      "path": [
+        171,
+        57,
+        8,
+        252
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 1629.98
+    },
+    {
+      "height": 0.001132,
+      "path": [
+        55,
+        57,
+        52,
+        64
+      ],
+      "qual": "SOYBEANS",
+      "quant": 97311.31
+    },
+    {
+      "height": 8.1e-05,
+      "path": [
+        141,
+        100,
+        52,
+        82
+      ],
+      "qual": "SOYBEANS",
+      "quant": 6930.58
+    },
+    {
+      "height": 0.000402,
+      "path": [
+        55,
+        57,
+        70,
+        82
+      ],
+      "qual": "SOYBEAN CAKE",
+      "quant": 34550.44
+    },
+    {
+      "height": 0.002439,
+      "path": [
+        247,
+        57,
+        70,
+        285
+      ],
+      "qual": "SOYBEANS",
+      "quant": 209669.81
+    }
+  ],
+  "include": {
+    "nodeHeights": [
+      {
+        "height": 0.009326,
+        "id": 1,
+        "quant": 801676.98
+      },
+      {
+        "height": 0.032392,
+        "id": 130,
+        "quant": 2784631.47
+      },
+      {
+        "height": 0.077787,
+        "id": 43,
+        "quant": 6686982.31
+      },
+      {
+        "height": 0.555951,
+        "id": 5,
+        "quant": 47792751.97
+      },
+      {
+        "height": 0.033056,
+        "id": 135,
+        "quant": 2841722.44
+      },
+      {
+        "height": 0.414477,
+        "id": 8,
+        "quant": 35630853.23
+      },
+      {
+        "height": 0.130174,
+        "id": 12,
+        "quant": 11190540.98
+      },
+      {
+        "height": 0.031017,
+        "id": 141,
+        "quant": 2666412.62
+      },
+      {
+        "height": 0.048355,
+        "id": 16,
+        "quant": 4156859.59
+      },
+      {
+        "height": 0.084503,
+        "id": 18,
+        "quant": 7264337.04
+      },
+      {
+        "height": 0.019891,
+        "id": 149,
+        "quant": 1709929.61
+      },
+      {
+        "height": 0.031961,
+        "id": 24,
+        "quant": 2747588.53
+      },
+      {
+        "height": 0.580396,
+        "id": 26,
+        "quant": 49894191.44
+      },
+      {
+        "height": 0.018433,
+        "id": 29,
+        "quant": 1584620.45
+      },
+      {
+        "height": 0.024623,
+        "id": 33,
+        "quant": 2116704.73
+      },
+      {
+        "height": 0.030154,
+        "id": 162,
+        "quant": 2592226.17
+      },
+      {
+        "height": 0.03332,
+        "id": 171,
+        "quant": 2864373.96
+      },
+      {
+        "height": 0.022009,
+        "id": 285,
+        "quant": 1892036.13
+      },
+      {
+        "height": 0.107152,
+        "id": 48,
+        "quant": 9211376.49
+      },
+      {
+        "height": 0.032389,
+        "id": 179,
+        "quant": 2784326.13
+      },
+      {
+        "height": 0.056169,
+        "id": 52,
+        "quant": 4828619.19
+      },
+      {
+        "height": 0.04372,
+        "id": 182,
+        "quant": 3758400.72
+      },
+      {
+        "height": 0.027913,
+        "id": 55,
+        "quant": 2399561.37
+      },
+      {
+        "height": 0.392129,
+        "id": 57,
+        "quant": 33709624.01
+      },
+      {
+        "height": 0.031686,
+        "id": 64,
+        "quant": 2723934.35
+      },
+      {
+        "height": 0.018307,
+        "id": 1219,
+        "quant": 1573740.76
+      },
+      {
+        "height": 0.020939,
+        "id": 54,
+        "quant": 1800050.7
+      },
+      {
+        "height": 0.299434,
+        "id": 70,
+        "quant": 25741070.78
+      },
+      {
+        "height": 0.036914,
+        "id": 74,
+        "quant": 3173297.91
+      },
+      {
+        "height": 0.044614,
+        "id": 80,
+        "quant": 3835271.25
+      },
+      {
+        "height": 0.033764,
+        "id": 82,
+        "quant": 2902577.8
+      },
+      {
+        "height": 0.145487,
+        "id": 85,
+        "quant": 12506930.83
+      },
+      {
+        "height": 0.019445,
+        "id": 343,
+        "quant": 1671619.02
+      },
+      {
+        "height": 0.038305,
+        "id": 89,
+        "quant": 3292957.96
+      },
+      {
+        "height": 0.020717,
+        "id": 208,
+        "quant": 1780979.64
+      },
+      {
+        "height": 0.027517,
+        "id": 99,
+        "quant": 2365552.29
+      },
+      {
+        "height": 0.139756,
+        "id": 100,
+        "quant": 12014267.56
+      },
+      {
+        "height": 0.031501,
+        "id": 106,
+        "quant": 2708032.54
+      },
+      {
+        "height": 0.04313,
+        "id": 368,
+        "quant": 3707740.66
+      },
+      {
+        "height": 0.05713,
+        "id": 114,
+        "quant": 4911198.4
+      },
+      {
+        "height": 0.009568,
+        "id": 243,
+        "quant": 822496.29
+      },
+      {
+        "height": 0.111867,
+        "id": 247,
+        "quant": 9616688.69
+      },
+      {
+        "height": 0.013603,
+        "id": 2299,
+        "quant": 1169380.0
+      },
+      {
+        "height": 0.019018,
+        "id": 252,
+        "quant": 1634857.89
+      }
+    ],
+    "qual": {
+      "name": "Commodity"
+    },
+    "quant": {
+      "name": "Deforestation risk",
+      "unit": "Ha"
+    }
+  }
+}
