@@ -33,6 +33,11 @@
       right: 0;
       transform: translate(-50%, -50%) rotate(45deg);
     }
+
+    &.-small {
+      font-size: $font-size-medium;
+      font-weight: normal;
+    }
   }
 
   .dropdown-list {
