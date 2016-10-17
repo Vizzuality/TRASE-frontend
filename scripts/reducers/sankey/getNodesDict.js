@@ -17,7 +17,9 @@ export default function (rawNodes, columns, nodesMeta) {
       columnName: column.attributes.nodeType,
       inds: []
     };
-    if (node.isAggregated) newNode.isAggregated = true;
+    if (node.isAggregated === true || node.isAggregated === 'true') {
+      newNode.isAggregated = true;
+    }
 
     const nodeInds = node.inds;
     if (nodeInds) {
