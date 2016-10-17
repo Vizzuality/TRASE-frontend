@@ -25,6 +25,11 @@
       fill: $charcoal-grey;
     }
 
+    &.-isAggregated > .sankey-node-rect {
+      // the horizontal lines pattern is defined in the <defs> section of the SVG in flows.ejs
+      fill: url(#isAggregatedPattern);
+    }
+
     &.-selected {
       // transform: scale(1.1,1);
       // transform-origin: center;
