@@ -121,8 +121,7 @@ export default function (state = {}, action) {
       geoData: {
         municipalities: JSON.parse(action.payload[0]),
         states: JSON.parse(action.payload[1]),
-        biomes: JSON.parse(action.payload[2]),
-        currentLayer: state.selectedColumnsIds[0]
+        biomes: JSON.parse(action.payload[2])
       }
     });
 

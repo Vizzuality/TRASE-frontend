@@ -23,16 +23,24 @@ export default class {
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
   }
 
-  loadMap(geoData) {
+  loadMap(payload) {
+    console.log('loadMap')
+    const geoData = payload.geoData;
     this.vectorLayers = [
       this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality'),
       this._getVectorLayer(geoData.states, 'map-polygon-state'),
       this._getVectorLayer(geoData.biomes, 'map-polygon-biome')
     ];
-    this.selectVectorLayer([geoData.currentLayer]);
+    this.selectVectorLayer([payload.currentLayer]);
+    if (payload.selectedNodesGeoIds) {
+      this.selectPolygons(payload.selectedNodesGeoIds);
+    }
   }
 
   selectPolygons(geoIds) {
+    if (!this.currentLayer) {
+      return;
+    }
     document.querySelectorAll('.map-polygon').forEach(e => { e.classList.remove('-selected'); });
     this.currentLayer.eachLayer(layer => {
       if (geoIds.indexOf(layer.feature.properties.geoid) > - 1) {

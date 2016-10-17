@@ -104,14 +104,14 @@ export default class {
     nodesUpdate.select('.sankey-node-rect')
       .attr('height', d => d.renderedHeight);
 
-    const nodesExit = this.nodes.exit()
+    /*const nodesExit = */this.nodes.exit()
       .transition()
       .attr('transform', d => `translate(-100,${d.y})`)
       .remove();
 
-    console.log('update', nodesUpdate.size());
-    console.log('enter', nodesEnter.size());
-    console.log('exit', nodesExit.size());
+    // console.log('update', nodesUpdate.size());
+    // console.log('enter', nodesEnter.size());
+    // console.log('exit', nodesExit.size());
 
 
     this.linksContainer.selectAll('path').remove();
