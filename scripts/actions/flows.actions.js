@@ -116,7 +116,7 @@ export function loadNodes() {
       column_id: 2
     };
 
-    const url = getURLFromParams('/v1/get_map', params);
+    const url = getURLFromParams('/v1/get_nodes', params);
 
     fetch(url)
       .then(res => res.text())
