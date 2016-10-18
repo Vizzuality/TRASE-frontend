@@ -59,11 +59,11 @@
 
   .map-polygon {
     fill: $pale-grey;
+    fill-opacity: .6;
     stroke: $charcoal-grey;
     stroke-opacity: .5;
 
     &.-highlighted {
-      fill: $blue-map;
       fill-opacity: 1;
     }
 

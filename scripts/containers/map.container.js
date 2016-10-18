@@ -16,7 +16,8 @@ const mapMethodsToState = (state) => ({
     }
   },
   selectVectorLayer: state.flows.selectedColumnsIds,
-  selectPolygons: state.flows.selectedNodesGeoIds
+  selectPolygons: state.flows.selectedNodesGeoIds,
+  setChoropleth: state.flows.choropleth
 });
 
 const mapViewCallbacksToActions = () => ({

@@ -10,10 +10,11 @@ export default function(nodesDict, nodesMeta /*, layers*/) {
     const nodeWithMeta = _.cloneDeep(node);
 
     const nodeMeta = nodesMeta[nodeId];
+    nodeWithMeta.meta = null;
 
     if (nodeMeta) {
-      nodeWithMeta.meta = {};
       nodeMeta.layerValues.forEach(layerValue => {
+        if (!nodeWithMeta.meta) nodeWithMeta.meta = {};
         const uid = getNodeMetaUid(layerValue.type, layerValue.id);
         nodeWithMeta.meta[uid] = {
           rawValue: layerValue.rawValue,
