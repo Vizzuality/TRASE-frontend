@@ -26,9 +26,9 @@ export default class {
   loadMap(payload) {
     const geoData = payload.geoData;
     this.vectorLayers = [
-      this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality'),
+      this._getVectorLayer(geoData.biomes, 'map-polygon-biome'),
       this._getVectorLayer(geoData.states, 'map-polygon-state'),
-      this._getVectorLayer(geoData.biomes, 'map-polygon-biome')
+      this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality')
     ];
     this.selectVectorLayer([payload.currentLayer]);
     if (payload.selectedNodesGeoIds) {

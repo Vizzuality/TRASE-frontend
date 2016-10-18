@@ -23,12 +23,12 @@ const initialState = {
     selectedCountry: 'brazil',
     selectedCommodity: 'soy',
     selectedYears: [2012, 2014],
-    selectedQuant: 'Deforestation risk',
+    selectedQuant: 'Volume',
     selectedColor: 1,
     selectedView: 1,
     selectedQual: 'Commodity',
     selectedNodesIds: [],
-    selectedColumnsIds: [0, 3, 9, 11],
+    selectedColumnsIds: [2, 3, 5, 6],
     selectedVectorLayers: {
       horizontal: {
         layerSlug: null,
