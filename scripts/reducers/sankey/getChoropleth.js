@@ -18,7 +18,7 @@ export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
     if (isEmpty) {
       color = 'none';
     } else if (!node.meta) {
-      color = '#0f0';
+      color = '#0f0'; // no metadata on this node has been found (something missing in get_nodes)
     } else {
       let colors;
       let colorIndex;
@@ -40,7 +40,7 @@ export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
         const uid = (isHorizontal) ? horizontalLayer.uid : verticalLayer.uid;
         const value = node.meta[uid];
         if (!value) {
-          color = '#f0f';
+          color = '#f0f';  // no metadata on this node has been found for this layer
         } else {
           colors = (isHorizontal) ? allColors.horizontal : allColors.vertical;
           colorIndex = value.value5;

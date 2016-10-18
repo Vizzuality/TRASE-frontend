@@ -21,7 +21,7 @@ const mapMethodsToState = (state) => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  onPolygonClicked: geoId => selectNodeFromGeoId(geoId),
+  onPolygonClicked: geoId => { console.log(geoId); return selectNodeFromGeoId(geoId); },
   onToggleMap: () => toggleMap(),
   onToggleMapLayerMenu: () => toggleMapLayerMenu()
 });
