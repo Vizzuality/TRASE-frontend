@@ -32,9 +32,9 @@ export default class {
     }
 
     const settings = {
-      isBidimensional: horizontalLayer.layerSlug && verticalLayer.layerSlug ? true : false,
-      horizontal: horizontalLayer.layerSlug ? horizontalLayer : null,
-      vertical: verticalLayer.layerSlug ? verticalLayer : null
+      isBidimensional: horizontalLayer.uid && verticalLayer.uid ? true : false,
+      horizontal: horizontalLayer.uid ? horizontalLayer : null,
+      vertical: verticalLayer.uid ? verticalLayer : null
     };
 
     if (this.el.hasChildNodes()) {

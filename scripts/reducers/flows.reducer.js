@@ -11,6 +11,7 @@ import filterLinks from './sankey/filterLinks';
 import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
 import getSelectedNodesStillVisible from './sankey/getSelectedNodesStillVisible';
 import getSelectedNodesData from './sankey/getSelectedNodesData';
+import getMapLayers from './sankey/getMapLayers';
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -28,6 +29,14 @@ export default function (state = {}, action) {
 
   case actions.LOAD_LINKS:
     return Object.assign({}, state, { linksLoading: true });
+
+  case actions.GET_NODES: {
+    const jsonPayload = JSON.parse(action.payload);
+    const meta = jsonPayload.include;
+
+    const mapLayers = getMapLayers(meta.includedLayers);
+    return Object.assign({}, state, { mapLayers });
+  }
 
   case actions.GET_LINKS: {
     const jsonPayload = JSON.parse(action.payload);
@@ -130,11 +139,11 @@ export default function (state = {}, action) {
 
   case actions.SELECT_VECTOR_LAYERS: {
     const selectedVectorLayers = Object.assign({}, state.selectedVectorLayers);
-    const currentSlugForDirection = selectedVectorLayers[action.layerData.direction].layerSlug;
-    const nextSlug = action.layerData.layerSlug;
+    const currentUidForDirection = selectedVectorLayers[action.layerData.direction].uid;
+    const nextUid = action.layerData.uid;
     selectedVectorLayers[action.layerData.direction] = {
       title: action.layerData.title,
-      layerSlug: (currentSlugForDirection === nextSlug) ? null : nextSlug
+      uid: (currentUidForDirection === nextUid) ? null : nextUid
     };
     return Object.assign({}, state, { selectedVectorLayers });
   }

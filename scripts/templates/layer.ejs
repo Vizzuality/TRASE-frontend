@@ -1,11 +1,11 @@
 <li
   class="layer-item"
-  data-layer-slug="<%= id %>"
+  data-layer-uid="<%= uid %>"
 >
   <label class="layer-name"><%= name %>
     <ul class="layer-options-list">
       <li class="layer-option">
-        <svg class="icon icon-layer-info js-layer-info" data-description="<%= description %>">
+        <svg class="icon icon-layer-info js-layer-info" data-description="description/toolti` goes here">
           <use xlink:href="#icon-layer-info">
         </use></svg>
       </li>
@@ -15,7 +15,7 @@
     </ul>
   </label>
   <div class="radios">
-    <div class="c-radio-btn" data-group="vertical" value="<%= id %>"></div>
-    <div class="c-radio-btn" data-group="horizontal" value="<%= id %>"></div>
+    <div class="c-radio-btn" data-group="vertical" value="<%= uid %>"></div>
+    <div class="c-radio-btn" data-group="horizontal" value="<%= uid %>"></div>
   </div>
 </li>
