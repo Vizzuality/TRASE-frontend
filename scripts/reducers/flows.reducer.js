@@ -12,6 +12,7 @@ import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
 import getSelectedNodesStillVisible from './sankey/getSelectedNodesStillVisible';
 import getSelectedNodesData from './sankey/getSelectedNodesData';
 import getMapLayers from './sankey/getMapLayers';
+import setNodesMeta from './sankey/setNodesMeta';
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -32,10 +33,15 @@ export default function (state = {}, action) {
 
   case actions.GET_NODES: {
     const jsonPayload = JSON.parse(action.payload);
-    const meta = jsonPayload.include;
+    const nodesMeta = jsonPayload.data;
+    const rawLayers = jsonPayload.include.includedLayers;
 
-    const mapLayers = getMapLayers(meta.includedLayers).splice(0,3);
-    return Object.assign({}, state, { mapLayers });
+    const mapLayers = getMapLayers(rawLayers);
+
+    // store layer values in nodesDict as uid: layerValue
+    const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, rawLayers);
+
+    return Object.assign({}, state, { mapLayers, nodesDictWithMeta });
   }
 
   case actions.GET_LINKS: {
