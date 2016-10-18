@@ -28,7 +28,7 @@ const initialState = {
     selectedView: 1,
     selectedQual: 'Commodity',
     selectedNodesIds: [],
-    selectedColumnsIds: [0, 3, 9, 11],
+    selectedColumnsIds: [2, 3, 5, 6],
     selectedVectorLayers: {
       horizontal: {
         layerSlug: null,
