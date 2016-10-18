@@ -3,14 +3,15 @@
 .c-years-slider {
   padding: 20px;
 
-  .axis, .axisFront {
+  .axis, .axis-front {
     pointer-events: none;
   }
-  .axis .domain, .axisFront .domain, .axis text, .axisFront line {
+
+  .axis .domain, .axis-front .domain, .axis text, .axis-front line {
     display: none;
   }
 
-  .axisFront text {
+  .axis-front text {
     font-family: $font-family-1;
     font-size: $font-size-small;
   }
@@ -20,11 +21,11 @@
     stroke: $charcoal-grey;
   }
 
-  .selectionOverlay {
+  .selection-overlay {
     pointer-events: none;
   }
 
-  .selectionOverlayRect {
+  .selection-overlay-rect {
     transform: scaleY(1.2);
     transform-origin: center;
     fill: $white;
