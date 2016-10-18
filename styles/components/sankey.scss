@@ -11,7 +11,7 @@
     cursor: pointer;
 
     .sankey-node-rect {
-      fill: rgba($white, .5);
+      fill: $white-two;
       stroke: $pinkish-grey-two;
       stroke-width: 1px;
     }
