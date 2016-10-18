@@ -23,7 +23,7 @@ const initialState = {
     selectedCountry: 'brazil',
     selectedCommodity: 'soy',
     selectedYears: [2012, 2014],
-    selectedQuant: 'Deforestation risk',
+    selectedQuant: 'Volume',
     selectedColor: 1,
     selectedView: 1,
     selectedQual: 'Commodity',
