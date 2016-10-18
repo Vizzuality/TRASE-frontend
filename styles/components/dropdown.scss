@@ -64,9 +64,12 @@
       pointer-events: none;
     }
 
+    .dropdown-item-legend {
+      margin-top: 10px;
+    }
+
     .dropdown-item-legend > li {
       display: inline-block;
-      margin-top: 6px;
       margin-right: 10px;
       color: $charcoal-grey;
       font-family: $font-family-1;

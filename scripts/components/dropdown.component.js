@@ -12,7 +12,7 @@ export default class {
     this.title.addEventListener('click', this._onTitleClick.bind(this));
     this.list.addEventListener('click', (e) => {
       if (e.target.getAttribute('data-value')) {
-        this._onListClick(e.target.getAttribute('data-value'), e.target.innerHTML);
+        this._onListClick(e.target.getAttribute('data-value'));
       }
     });
   }
