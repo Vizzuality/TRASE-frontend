@@ -1,15 +1,44 @@
 import 'styles/components/map/map-layers.scss';
 import 'styles/components/shared/radio-btn.scss';
 import 'styles/components/shared/switcher.scss';
+import LayerTemplate from 'ejs!templates/layer.ejs';
 
 export default class {
 
   onCreated() {
-    this._setVars();
-    this._setEventListeners();
+    this.el = document.querySelector('.c-basemap-options');
+    this.layerList = this.el.querySelector('.js-layer-list');
+
+    this.loadLayers();
   }
 
-  selectedVectorLayers(layers) {
+  loadLayers() {
+    const layers = [
+      {
+        name: 'test layer',
+        id: 0,
+        description: 'sgfuqdjsz fiudjm svxc'
+      },
+      {
+        name: 'tessadsaddasdsat layer',
+        id: 1,
+        description: 'sgfuqdjsz fiudjm svxc'
+      },
+      {
+        name: 'tsdadest layer',
+        id: 3,
+        description: 'sgfuqdjsz fsdiudjm svxc'
+      }
+    ];
+
+    this.layerList.innerHTML = layers.map(layer => LayerTemplate(layer)).join('');
+
+    this._setVars();
+    this._setEventListeners();
+
+  }
+
+  selectVectorLayers(layers) {
     const mapVectorLayers =  {
       horizontal: layers.horizontal || null,
       vertical: layers.vertical || null
@@ -25,12 +54,9 @@ export default class {
   }
 
   _setVars() {
-    this.el = document.querySelector('.c-basemap-options');
-
-    this.layerList   = this.el.querySelector('.js-layer-list');
-    this.infoBtns    = this.layerList.querySelectorAll('.js-layer-info');
+    this.infoBtns     = this.layerList.querySelectorAll('.js-layer-info');
     this.downloadBtns = this.layerList.querySelectorAll('.js-layer-download');
-    this.radios      = this.layerList.querySelectorAll('.c-radio-btn');
+    this.radios       = this.layerList.querySelectorAll('.c-radio-btn');
 
     this.contextualLayerList = this.el.querySelector('.js-layer-contextual');
     this.switchers  = this.contextualLayerList.querySelectorAll('.c-switcher');
@@ -58,7 +84,6 @@ export default class {
   // used for incoming params
   _setActiveVectorLayers(layers) {
     const groups = Object.keys(layers);
-
 
     groups.forEach((group) => {
       const radios = this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`);

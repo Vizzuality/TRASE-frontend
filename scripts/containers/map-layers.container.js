@@ -3,7 +3,7 @@ import { selectVectorLayers, selectContextualLayers } from 'actions/flows.action
 import mapLayers from 'components/map-layers.component';
 
 const mapMethodsToState = (state) => ({
-  selectedVectorLayers: state.flows.selectedVectorLayers,
+  selectVectorLayers: state.flows.selectedVectorLayers,
   selectContextualLayers: state.flows.selectedContextualLayers
 });
 
