@@ -2,9 +2,10 @@ import _ from 'lodash';
 import actions from 'actions';
 import getNodesDict from './sankey/getNodesDict';
 import getVisibleNodes from './sankey/getVisibleNodes';
-import sortVisibleNodesByColumn from './sankey/sortVisibleNodesByColumn';
+import splitVisibleNodesByColumn from './sankey/splitVisibleNodesByColumn';
 import getVisibleColumns from './sankey/getVisibleColumns';
 import splitLinksByColumn from './sankey/splitLinksByColumn';
+import sortVisibleNodes from './sankey/sortVisibleNodes';
 import mergeLinks from './sankey/mergeLinks';
 import filterLinks from './sankey/filterLinks';
 import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
@@ -34,14 +35,15 @@ export default function (state = {}, action) {
     const nodesMeta = jsonPayload.include;
 
     const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, nodesMeta, state.selectedColumnsIds);
-    const visibleNodesByColumn = sortVisibleNodesByColumn(visibleNodes);
+    let visibleNodesByColumn = splitVisibleNodesByColumn(visibleNodes);
+    visibleNodesByColumn = sortVisibleNodes(visibleNodesByColumn);
 
     const visibleColumns = getVisibleColumns(state.columns, state.selectedColumnsIds);
 
     const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict);
     const links = mergeLinks(unmergedLinks);
 
-    // we also need to refresh nodes data, because values change when year or quant changes
+    // we also need to refresh nodes data (used in titles), because values change when year or quant changes
     const selectedNodesData = getSelectedNodesData(state.selectedNodesIds, visibleNodes);
 
     return Object.assign({}, state, {

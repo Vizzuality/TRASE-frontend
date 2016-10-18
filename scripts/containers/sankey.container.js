@@ -27,7 +27,7 @@ const mapMethodsToState = (state) => ({
 // and from here return an object with keys = callback name (someMethod),
 // and values = functions returning an action
 const mapViewCallbacksToActions = () => ({
-  onNodeClicked: id => selectNode(id),
+  onNodeClicked: (id, isAggregated) => selectNode(id, isAggregated),
   onNodeHighlighted: id => highlightNode(id)
 });
 

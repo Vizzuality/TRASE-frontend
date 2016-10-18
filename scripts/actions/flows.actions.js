@@ -157,16 +157,19 @@ const _loadMapVectorLayers = (urls, dispatch) => {
 };
 
 
-export function selectNode(nodeId) {
+export function selectNode(nodeId, isAggregated) {
   return dispatch => {
-    dispatch({
-      type: actions.SELECT_NODE,
-      nodeId
-    });
-    dispatch({
-      type: actions.FILTER_LINKS_BY_NODES
-    });
-    // dispatch(loadLinks());
+    if (isAggregated) {
+      console.log('switch to detailed mode!');
+    } else {
+      dispatch({
+        type: actions.SELECT_NODE,
+        nodeId
+      });
+      dispatch({
+        type: actions.FILTER_LINKS_BY_NODES
+      });
+    }
   };
 }
 

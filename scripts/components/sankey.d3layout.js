@@ -54,7 +54,6 @@ const sankeyLayout = function() {
     columns = linksPayload.visibleNodesByColumn;
     links = linksPayload.links;
 
-    _sortNodes();
     _computeNodeCoords();
     _computeLinksCoords();
 
@@ -106,17 +105,6 @@ const sankeyLayout = function() {
     }
 
     return link;
-  };
-
-
-  const _sortNodes = () => {
-    columns.forEach(column => {
-      column.values.sort(_sortNodesDesc);
-    });
-  };
-
-  const _sortNodesDesc = (a, b) => {
-    return (a.height > b.height) ? -1 : 1;
   };
 
   const _computeNodeCoords = () => {

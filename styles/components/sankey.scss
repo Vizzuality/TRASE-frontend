@@ -21,8 +21,14 @@
       font-size: $font-size-regular;
       text-transform: capitalize;
       text-anchor: middle;
-
       fill: $charcoal-grey;
+      pointer-events: none;
+    }
+
+    &.-is-aggregated > .sankey-node-rect {
+      // the horizontal lines pattern is defined in the <defs> section of the SVG in flows.ejs
+      cursor: row-resize;
+      fill: url('#isAggregatedPattern');
     }
 
     &.-selected {
