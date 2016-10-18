@@ -24,7 +24,6 @@ export default class {
   }
 
   loadMap(payload) {
-    console.log('loadMap')
     const geoData = payload.geoData;
     this.vectorLayers = [
       this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality'),

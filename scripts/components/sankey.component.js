@@ -10,8 +10,6 @@ export default class {
     this._build();
   }
   windowResized() {
-    // console.log(size);
-
     this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
 
     if (this.layout.relayout()) {
@@ -28,7 +26,6 @@ export default class {
   }
 
   linksLoaded(linksPayload) {
-    // console.log(linksPayload)
     this.layout.setLinksPayload(linksPayload);
     if (this.layout.relayout()) {
       this._render();
@@ -104,14 +101,10 @@ export default class {
     nodesUpdate.select('.sankey-node-rect')
       .attr('height', d => d.renderedHeight);
 
-    /*const nodesExit = */this.nodes.exit()
+    this.nodes.exit()
       .transition()
       .attr('transform', d => `translate(-100,${d.y})`)
       .remove();
-
-    // console.log('update', nodesUpdate.size());
-    // console.log('enter', nodesEnter.size());
-    // console.log('exit', nodesExit.size());
 
 
     this.linksContainer.selectAll('path').remove();
@@ -130,5 +123,4 @@ export default class {
         this.classList.remove('-hover');
       });
   }
-
 }
