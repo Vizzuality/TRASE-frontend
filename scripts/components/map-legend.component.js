@@ -1,5 +1,4 @@
 import { LEGEND_COLORS } from 'constants';
-import stringToHTML from 'utils/stringToHTML';
 import LegendTemplate from 'ejs!templates/map/legend.ejs';
 import 'style/components/map/map-legend.scss';
 
@@ -82,21 +81,20 @@ export default class {
       cssClass = '-horizontal';
     }
 
-    const legendHTML = stringToHTML(LegendTemplate({
+    const legendHTML = LegendTemplate({
       title,
       colors,
       cssClass,
       isBidimensional: settings.isBidimensional,
       isVertical: !settings.isBidimensional && settings.vertical
-    }));
+    });
 
     if (!settings.horizontal && !settings.vertical) {
       this._cleanLegend();
       return;
     }
 
-    for (var i = 0; i < legendHTML.length; i++) {
-      this.el.appendChild(legendHTML[i].cloneNode(true));
-    }
+    this.el.innerHTML = legendHTML;
+
   }
 }
