@@ -10,18 +10,7 @@ export default class {
     this.layerList = this.el.querySelector('.js-layer-list');
   }
 
-  _buildContextLayers() {
-    this.contextualLayerList = this.el.querySelector('.js-layer-contextual');
-    this.switchers  = this.contextualLayerList.querySelectorAll('.c-switcher');
-
-    this.switchers.forEach((switcher) => {
-      switcher.addEventListener('click', (e) => this._onToggleSwitcher(e));
-    });
-  }
-
   loadLayers(layers) {
-    console.log(layers)
-
     this.layerList.innerHTML = layers.map(layer => LayerTemplate(layer)).join('');
 
     this._setVars();
@@ -36,12 +25,6 @@ export default class {
     };
 
     this._setActiveVectorLayers(mapVectorLayers);
-  }
-
-  selectContextualLayers(layers) {
-    if (layers.length) {
-      this._setActiveContextualLayers(layers);
-    }
   }
 
   _setVars() {
@@ -65,8 +48,6 @@ export default class {
   }
 
   _setActiveVectorLayers(layers) {
-    console.log(layers);
-
     const directions = Object.keys(layers);
 
     directions.forEach((group) => {
@@ -82,30 +63,6 @@ export default class {
         partnerRadio.classList.add('-disabled');
       });
     });
-  }
-
-  // used for incoming params
-  _setActiveContextualLayers() {
-    // layers.forEach((layerSlug) => {
-    //   this.switchers.forEach((switcher) => {
-    //     if (switcher.getAttribute('data-layer-slug') !== layerSlug) return;
-    //     switcher.closest('.layer-item').classList.add('-selected');
-    //     switcher.classList.add('-enabled');
-    //   });
-    // });
-  }
-
-  _getActivelayers() {
-    const activeLayers = [];
-
-    this.switchers.forEach((switcher) => {
-      if(!switcher.classList.contains('-enabled')) return;
-
-      const layerSlug = switcher.getAttribute('data-layer-slug');
-      activeLayers.push(layerSlug);
-    });
-
-    return activeLayers;
   }
 
   _onToggleRadio(e) {
@@ -128,18 +85,6 @@ export default class {
       title,
       uid
     });
-  }
-
-  _onToggleSwitcher(e) {
-    var switcher = e && e.currentTarget;
-    if (!switcher) return;
-
-
-    switcher.closest('.layer-item').classList.toggle('-selected');
-    switcher.classList.toggle('-enabled');
-
-    const layers = this._getActivelayers();
-    this.callbacks.onContextualLayerSelected(layers);
   }
 
   _disableRadio(radio) {

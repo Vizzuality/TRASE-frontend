@@ -54,8 +54,11 @@ export function selectVectorLayers(layerData) {
   };
 }
 
-export function selectContextualLayers(contextualLayers, reloadLinks) {
-  return _reloadLinks('contextualLayers', contextualLayers, actions.SELECT_CONTEXTUAL_LAYERS, reloadLinks);
+export function selectContextualLayers(contextualLayers) {
+  return {
+    type: actions.SELECT_CONTEXTUAL_LAYERS,
+    contextualLayers
+  };
 }
 
 const _reloadLinks = (param, value, type, reloadLinks = true) => {

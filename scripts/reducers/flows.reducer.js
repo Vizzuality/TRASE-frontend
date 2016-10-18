@@ -34,7 +34,7 @@ export default function (state = {}, action) {
     const jsonPayload = JSON.parse(action.payload);
     const meta = jsonPayload.include;
 
-    const mapLayers = getMapLayers(meta.includedLayers);
+    const mapLayers = getMapLayers(meta.includedLayers).splice(0,3);
     return Object.assign({}, state, { mapLayers });
   }
 
