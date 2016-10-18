@@ -11,6 +11,7 @@
     "webpack:prod": "npm run webpack -- -p",
     "webpack:server": "webpack-dev-server --inline --port 8081 --content-base public/ --config config/webpack.js",
     "lint-js": "eslint -c .eslintrc.js src/sankey_page.js",
+    "lint-sass": "sass-lint -c .sass-lint.yml -v -q 'styles/**/*.scss'",
     "postinstall": "npm run build"
   },
   "repository": {
@@ -37,6 +38,7 @@
     "html-webpack-plugin": "^2.22.0",
     "node-sass": "^3.8.0",
     "postcss-loader": "^0.11.0",
+    "sass-lint": "^1.9.1",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",

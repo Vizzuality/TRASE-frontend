@@ -74,10 +74,10 @@ export default class {
     this._addAxis('axis', height);
 
 
-    this.selectionOverlay = this.slider.append('g').attr('class', 'selectionOverlay');
+    this.selectionOverlay = this.slider.append('g').attr('class', 'selection-overlay');
 
     this.selectionOverlayRect = this.selectionOverlay.append('rect')
-      .attr('class', 'selectionOverlayRect')
+      .attr('class', 'selection-overlay-rect')
       .attr('height', height)
       .style('filter', 'url(#drop-shadow)'); // defined by addSVGDropShadowDef
 
@@ -88,8 +88,8 @@ export default class {
       .html(ThumbTemplate());
 
 
-    this._addAxis('axisFront', height);
-    this.slider.selectAll('.axisFront .tick text')
+    this._addAxis('axis-front', height);
+    this.slider.selectAll('.axis-front .tick text')
       .attr('x', 19);
   }
 
