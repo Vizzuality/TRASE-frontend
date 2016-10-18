@@ -18,7 +18,10 @@ export default class {
   }
 
   selectValue(value) {
-    this.setTitle(this.list.querySelector(`[data-value="${value}"]`).innerHTML);
+    const valueTitle =
+      this.list.querySelector(`[data-value="${value}"] .js-dropdown-item-title`) ||
+      this.list.querySelector(`[data-value="${value}"]`);
+    this.setTitle(valueTitle.innerHTML);
   }
 
   setTitle(text) {

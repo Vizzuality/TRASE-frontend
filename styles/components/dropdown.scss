@@ -64,5 +64,9 @@
       color: rgba($charcoal-grey, .3);
       pointer-events: none;
     }
+
+    .dropdown-item-title, .dropdown-item-content {
+      pointer-events: none;
+    }
   }
 }
