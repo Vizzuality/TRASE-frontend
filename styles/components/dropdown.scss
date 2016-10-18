@@ -33,11 +33,6 @@
       right: 0;
       transform: translate(-50%, -50%) rotate(45deg);
     }
-
-    &.-small {
-      font-size: $font-size-medium;
-      font-weight: normal;
-    }
   }
 
   .dropdown-list {
@@ -53,7 +48,7 @@
     padding: 10px 25px;
     font-family: $font-family-2;
     font-size: $font-size-big;
-    font-weight: $font-weight-light;
+    font-weight: normal;
 
     &:hover {
       background-color: $manilla;
@@ -65,8 +60,38 @@
       pointer-events: none;
     }
 
-    .dropdown-item-title, .dropdown-item-content {
+    .dropdown-item-title, .dropdown-item-legend {
       pointer-events: none;
     }
+
+    .dropdown-item-legend > li {
+      display: inline-block;
+      margin-top: 6px;
+      margin-right: 10px;
+      color: $charcoal-grey;
+      font-family: $font-family-1;
+      font-size: $font-size-small;
+      text-transform: uppercase;
+
+      &::before {
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        margin-right: 4px;
+        border: 2px solid $white;
+        border-radius: 99px;
+        content: ' ';
+      }
+
+      &.-qual-soybeans       { &::before { background-color: $qual-soybeans; } }
+      &.-qual-soybeancake    { &::before { background-color: $qual-soybeancake; } }
+      &.-qual-soybeanoil     { &::before { background-color: $qual-soybeanoil; } }
+    }
+  }
+
+  &.-small .dropdown-title,
+  &.-small .dropdown-list > .dropdown-item {
+    font-size: $font-size-medium;
+    font-weight: normal;
   }
 }
