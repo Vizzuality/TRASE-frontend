@@ -33,6 +33,10 @@
       right: 0;
       transform: translate(-50%, -50%) rotate(45deg);
     }
+
+    &.-dimmed {
+      opacity: .5; 
+    }
   }
 
   .dropdown-list {
