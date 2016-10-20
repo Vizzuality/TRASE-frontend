@@ -3,9 +3,9 @@ import _ from 'lodash';
 export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
   const horizontalLayer = selectedVectorLayers.horizontal;
   const verticalLayer = selectedVectorLayers.vertical;
-  const isBidimensional = horizontalLayer.uid && verticalLayer.uid ? true : false;
-  const isEmpty = !horizontalLayer.uid && !verticalLayer.uid;
-  const isHorizontal = !!horizontalLayer.uid;
+  const isBidimensional = horizontalLayer.uid !== null && verticalLayer.uid !== null;
+  const isEmpty = horizontalLayer.uid === null && verticalLayer.uid === null;
+  const isHorizontal = horizontalLayer.uid !== null;
 
   const geoNodes = _.filter(nodesDictWithMeta, node => node.geoId !== undefined);
   const nodeIds = Object.keys(geoNodes);

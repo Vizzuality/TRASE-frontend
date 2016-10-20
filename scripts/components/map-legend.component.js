@@ -31,9 +31,9 @@ export default class {
     }
 
     const settings = {
-      isBidimensional: horizontalLayer.uid && verticalLayer.uid ? true : false,
-      horizontal: horizontalLayer.uid ? horizontalLayer : null,
-      vertical: verticalLayer.uid ? verticalLayer : null
+      isBidimensional: horizontalLayer.uid !== null && verticalLayer.uid !== null,
+      horizontal: horizontalLayer.uid !== null ? horizontalLayer : null,
+      vertical: verticalLayer.uid !== null ? verticalLayer : null
     };
 
     if (this.el.hasChildNodes()) {
