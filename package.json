@@ -56,7 +56,8 @@
     "pretty-error": "^2.0.0",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-    "topojson": "^1.6.27"
+    "topojson": "^1.6.27",
+    "whatwg-fetch": "^1.0.0"
   },
   "engines": {
     "node": "5.0.0"

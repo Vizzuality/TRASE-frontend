@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import actions from 'actions';
 import { NUM_NODES } from 'constants';
 import getURLFromParams from 'utils/getURLFromParams';
