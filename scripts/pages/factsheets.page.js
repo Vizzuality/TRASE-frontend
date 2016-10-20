@@ -1,23 +1,24 @@
-
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import IndexContainer from 'containers/factsheets/index.container';
-
-import AppReducer from 'reducers/app.reducer';
-import FactsheetsReducer from 'reducers/factsheets.reducer';
-
 import 'styles/factsheets.scss';
 
-// TODO: set proper initialState
-const initialState = {};
+import AreaStack from 'scripts/statics/factsheets/area-stack';
 
-const store = createStore(
-  combineReducers({
-    app: AppReducer,
-    factsheets: FactsheetsReducer
-  }),
-  initialState,
-  applyMiddleware(thunk)
-);
+class factsheetsIndex {
 
-new IndexContainer(store);
+  constructor() {
+    this._setVars();
+    this._renderAreaStack();
+  }
+
+  _renderAreaStack() {
+    new AreaStack({
+      el: this.municipalitiesGraph
+    });
+  }
+
+  _setVars() {
+    this.el = document.querySelector('.l-factsheets');
+    this.municipalitiesGraph = this.el.querySelector('.js-municipalities-top');
+  }
+}
+
+new factsheetsIndex();
