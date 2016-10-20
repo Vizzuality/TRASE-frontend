@@ -27,7 +27,7 @@ export default class {
   }
 
   selectYears(years) {
-    const title = (years[0] === years[1]) ? years[0] : years.join(' - ');
+    const title = (years[0] === years[1]) ? years[0] : years.join('&thinsp;-&thinsp;');
     this.yearsDropdown.setTitle(title);
     this.yearsMenu.setYears(years);
   }
