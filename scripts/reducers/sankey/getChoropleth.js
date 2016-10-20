@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { LEGEND_COLORS } from 'constants';
 
 export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
   const horizontalLayer = selectedVectorLayers.horizontal;
@@ -18,7 +19,7 @@ export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
     if (isEmpty) {
       color = 'none';
     } else if (!node.meta) {
-      color = '#0f0'; // no metadata on this node has been found (something missing in get_nodes)
+      color = LEGEND_COLORS.error_no_metadata; // no metadata on this node has been found (something missing in get_nodes)
     } else {
       let colors;
       let colorIndex;
@@ -28,7 +29,7 @@ export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
         const verticalLayerValue = node.meta[verticalLayer.uid];
 
         if (!horizontalLayerValue || !verticalLayerValue) {
-          color = '#f0f';
+          color = LEGEND_COLORS.error_no_metadata_layer;
         } else {
           const horizontalValue = horizontalLayerValue.value3;
           const verticalValue = verticalLayerValue.value3;
@@ -40,7 +41,7 @@ export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
         const uid = (isHorizontal) ? horizontalLayer.uid : verticalLayer.uid;
         const value = node.meta[uid];
         if (!value) {
-          color = '#f0f';  // no metadata on this node has been found for this layer
+          color = LEGEND_COLORS.error_no_metadata_layer;  // no metadata on this node has been found for this layer
         } else {
           colors = (isHorizontal) ? allColors.horizontal : allColors.vertical;
           colorIndex = value.value5;

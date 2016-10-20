@@ -8,4 +8,6 @@ export const LEGEND_COLORS = {
     '#f5f3ea', '#f6c7ad', '#f65e6e'], //9
   horizontal: ['#f5f3ea', '#f5dfd0', '#f6c7ad', '#fa898d', '#f65e6e'], // 5
   vertical: ['#F4F1E7', '#C8E1D8', '#A0D5CB', '#87B3C0', '#7297AA'], // 5
+  error_no_metadata: '#0f0',
+  error_no_metadata_for_layer: '#f0f',
 };
