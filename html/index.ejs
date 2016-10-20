@@ -19,34 +19,66 @@
           questions remain elusive:
         </p>
 
-        <div class="workflow-graphic"></div>
+        <div class="c-workflow-graphic">
+          <ul class="supply-chain-list">
+            <li class="supply-chain-item">
+              <span class="description -top paragraph -center">Where are they produced?</span>
+              <svg class="icon icon-supply icon-supply_chain_1"><use xlink:href="#icon-supply_chain_1"></use></svg>
+            </li>
+            <li class="supply-chain-item">
+              <svg class="icon icon-supply icon-supply_chain_2"><use xlink:href="#icon-supply_chain_2"></use></svg>
+              <span class="description -bottom paragraph -center">Who trades <br/>in them?</span>
+            </li>
+            <li class="supply-chain-item">
+              <span class="description -top paragraph -center">Where are they consumed?</span>
+              <svg class="icon icon-supply icon-supply_chain_3"><use xlink:href="#icon-supply_chain_3"></use></svg>
+            </li>
+            <li class="supply-chain-item">
+              <svg class="icon icon-supply icon-supply_chain_4"><use xlink:href="#icon-supply_chain_4"></use></svg>
+              <span class="description -bottom paragraph -center">What are the sustainability risks and opportunities?</span>
+            </li>
+            <li class="supply-chain-item">
+              <span class="description -top paragraph -center">And how can we <br/>make a difference?</span>
+              <svg class="icon icon-supply icon-supply_chain_5"><use xlink:href="#icon-supply_chain_5"></use></svg>
+            </li>
+          </ul>
+        </div>
 
-        <p class="paragraph -center">Transformative Transparency is a new kind of traceability platform.
+        <p class="paragraph -center"><span class="-bold">Transformative Transparency</span> is a new kind of traceability platform.
           It harnesses huge untapped data sets to see inside complex commodity supply chains,
           helping link production landscapes – and the social and environmental impacts
           and opportunities associated with them – to specific traders, manufacturers,
           retailers and investors worldwide.
         </p>
 
-        <a href="/flows.html" class="c-button -pink -bold">explore the tool</a>
+        <a href="/flows.html" class="c-button -big -pink -bold btn-explore">explore the tool</a>
 
-        <div class="map-selector">
-          <h3 class="intro">What are the sustainability risks associated with
+        <div class="c-map-risks">
+          <h3 class="title -big -center -light">What are the sustainability risks associated with
             the trading of
-            <select name="commodity" id="">Soy</select>
+            <div class="c-selector">
+              <select class="native-select"name="commodity">
+                <option value="soy">Soy</option>
+              </select>
+            </div>
             in
-            <select name="country_origin" id="">Brazil</select>
+            <div class="c-selector">
+              <select class="native-select" name="country_origin" id="">
+                <option value="BRA">Brazil</option>
+                <option value="COL">Colombia</option>
+              </select>
+            </div>
             ?
           </h3>
 
-          <div id="map"></div>
+          <div id="map" class="map"></div>
 
-          <a href="" class="btn">find out here</a>
+          <a href="#" class="c-button -big -transparent -bold btn-find-out">find out here</a>
         </div>
       </div>
     </section>
 
-    <section class="c-posts"></section>
+    <section class="c-posts-grid"></section>
 
     <%= htmlWebpackPlugin.options.footer %>
 

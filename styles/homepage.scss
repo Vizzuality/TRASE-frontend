@@ -2,10 +2,14 @@
 @import
 'base',
 'texts',
+'mixins',
 
 'components/button',
 
 'components/shared/nav',
 'components/shared/footer',
+'components/shared/selector',
 
-'components/homepage/introduction';
+'components/homepage/introduction',
+'components/homepage/workflow-graphic',
+'components/homepage/map-risks';

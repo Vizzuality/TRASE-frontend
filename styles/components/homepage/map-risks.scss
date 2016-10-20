@@ -1,0 +1,29 @@
+
+.c-map-risks {
+  display: flex;
+  flex-direction: column;
+  margin: 104px 0 0;
+
+  .c-selector {
+    display: inline-block;
+
+    > .native-select {
+      position: absolute;
+
+      font-family: $font-family-2;
+      font-size: $font-size-huge;
+      font-weight: $font-weight-bold;
+     }
+  }
+
+  > .map {
+    width: 100%;
+    height: 525px;
+    margin: 16px 0;
+  }
+
+
+  > .btn-find-out {
+    margin: 0 auto;
+  }
+}
