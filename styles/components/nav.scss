@@ -51,27 +51,21 @@
       border-left: 1px solid $pale-grey;
     }
 
-    .color-flag {
+    .dropdown-item-legend-summary {
       display: flex;
       position: absolute;
       bottom: 0;
-      left: 50%;
+      left: 0;
       width: 100%;
-      transform: translate(-50%, 0);
 
       > .color {
-        flex-basis: 50%;
         flex-grow: 1;
         height: 5px;
 
-        // sample colors
-        &.-left {
-          background-color: $orange;
-        }
+        &.-qual-soybeans       { background-color: $qual-soybeans; }
+        &.-qual-soybeancake    { background-color: $qual-soybeancake; }
+        &.-qual-soybeanoil     { background-color: $qual-soybeanoil; }
 
-        &.-right {
-          background-color: $medium-pink;
-        }
       }
     }
   }

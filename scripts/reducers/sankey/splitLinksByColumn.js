@@ -13,6 +13,7 @@ export default function(rawLinks, nodesDict) {
         targetColumnId: nodesDict[targetNodeId].columnId,
         height: link.height,
         quant: parseFloat(link.quant),
+        qual: (link.qual === undefined) ? 'none' : link.qual.replace(/\s/gi, '').toLowerCase(),
         originalPath: path
       });
     }

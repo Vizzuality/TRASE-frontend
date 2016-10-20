@@ -11,9 +11,6 @@ export function selectCommodity(commodity, reloadLinks) {
 export function selectQuant(quant, reloadLinks) {
   return _reloadLinks('quant', quant, actions.SELECT_QUANT, reloadLinks);
 }
-export function selectColor(color, reloadLinks) {
-  return _reloadLinks('color', color, actions.SELECT_COLOR, reloadLinks);
-}
 export function selectQual(qual, reloadLinks) {
   return _reloadLinks('qual', qual, actions.SELECT_QUAL, reloadLinks);
 }
@@ -142,10 +139,13 @@ export function loadLinks() {
       include_columns: getState().flows.selectedColumnsIds.join(','),
       n_nodes: NUM_NODES,
       flow_quant: getState().flows.selectedQuant,
-      flow_qual: getState().flows.selectedQual,
-      color: +getState().flows.selectedColor,
-      view: +getState().flows.selectedView
+      view: +getState().flows.selectedView,
     };
+
+    const selectedQual = getState().flows.selectedQual;
+    if (selectedQual !== 'none') {
+      params.flow_qual = selectedQual;
+    }
 
     // if (getState().flows.selectedNodesIds.length) {
     //   params.clicked_nodes = getState().flows.selectedNodesIds.join(',');

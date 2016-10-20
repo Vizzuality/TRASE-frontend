@@ -25,9 +25,8 @@ const initialState = {
     selectedCommodity: 'soy',
     selectedYears: [2012, 2014],
     selectedQuant: 'Deforestation risk',
-    selectedColor: 1,
     selectedView: 1,
-    selectedQual: 'Commodity',
+    selectedQual: 'none',
     selectedNodesIds: [],
     selectedColumnsIds: [2, 3, 5, 6],
     selectedVectorLayers: {
