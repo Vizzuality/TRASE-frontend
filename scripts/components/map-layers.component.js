@@ -1,15 +1,24 @@
 import 'styles/components/map/map-layers.scss';
 import 'styles/components/shared/radio-btn.scss';
 import 'styles/components/shared/switcher.scss';
+import LayerTemplate from 'ejs!templates/layer.ejs';
 
 export default class {
 
   onCreated() {
-    this._setVars();
-    this._setEventListeners();
+    this.el = document.querySelector('.c-basemap-options');
+    this.layerList = this.el.querySelector('.js-layer-list');
   }
 
-  selectedVectorLayers(layers) {
+  loadLayers(layers) {
+    this.layerList.innerHTML = layers.map(layer => LayerTemplate(layer)).join('');
+
+    this._setVars();
+    this._setEventListeners();
+
+  }
+
+  selectVectorLayers(layers) {
     const mapVectorLayers =  {
       horizontal: layers.horizontal || null,
       vertical: layers.vertical || null
@@ -18,26 +27,13 @@ export default class {
     this._setActiveVectorLayers(mapVectorLayers);
   }
 
-  selectContextualLayers(layers) {
-    if (layers.length) {
-      this._setActiveContextualLayers(layers);
-    }
-  }
-
   _setVars() {
-    this.el = document.querySelector('.c-basemap-options');
-
-    this.layerList   = this.el.querySelector('.js-layer-list');
-    this.infoBtns    = this.layerList.querySelectorAll('.js-layer-info');
+    this.infoBtns     = this.layerList.querySelectorAll('.js-layer-info');
     this.downloadBtns = this.layerList.querySelectorAll('.js-layer-download');
-    this.radios      = this.layerList.querySelectorAll('.c-radio-btn');
-
-    this.contextualLayerList = this.el.querySelector('.js-layer-contextual');
-    this.switchers  = this.contextualLayerList.querySelectorAll('.c-switcher');
+    this.radios       = this.layerList.querySelectorAll('.c-radio-btn');
   }
 
   _setEventListeners() {
-
     this.infoBtns.forEach((infoBtn) => {
       infoBtn.addEventListener('click', (e) => this._onInfo(e));
     });
@@ -49,21 +45,15 @@ export default class {
     this.radios.forEach((radio) => {
       radio.addEventListener('click', (e) => this._onToggleRadio(e));
     });
-
-    this.switchers.forEach((switcher) => {
-      switcher.addEventListener('click', (e) => this._onToggleSwitcher(e));
-    });
   }
 
-  // used for incoming params
   _setActiveVectorLayers(layers) {
-    const groups = Object.keys(layers);
+    const directions = Object.keys(layers);
 
-
-    groups.forEach((group) => {
+    directions.forEach((group) => {
       const radios = this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`);
       radios.forEach((radio) => {
-        if (radio.getAttribute('value') !== layers[group]['layerSlug']) return;
+        if (radio.getAttribute('value') !== layers[group]['uid']) return;
         const layerItem = radio.closest('.layer-item');
         const partnerRadio = radio.nextElementSibling ?
           radio.nextElementSibling : radio.previousElementSibling;
@@ -75,38 +65,13 @@ export default class {
     });
   }
 
-  // used for incoming params
-  _setActiveContextualLayers(layers) {
-    layers.forEach((layerSlug) => {
-      this.switchers.forEach((switcher) => {
-        if (switcher.getAttribute('data-layer-slug') !== layerSlug) return;
-        switcher.closest('.layer-item').classList.add('-selected');
-        switcher.classList.add('-enabled');
-      });
-    });
-  }
-
-  _getActivelayers() {
-    const activeLayers = [];
-
-    this.switchers.forEach((switcher) => {
-      if(!switcher.classList.contains('-enabled')) return;
-
-      const layerSlug = switcher.getAttribute('data-layer-slug');
-      activeLayers.push(layerSlug);
-    });
-
-    return activeLayers;
-  }
-
   _onToggleRadio(e) {
     var radio = e && e.currentTarget;
     if (!radio) return;
 
     const group = radio.getAttribute('data-group');
-    const layerSlug = radio.getAttribute('value');
-    const title = this.layerList.querySelector(`.layer-item[data-layer-slug="${layerSlug}"]`)
-      .querySelector('.layer-name').innerText;
+    const uid = radio.getAttribute('value');
+    const title = this.layerList.querySelector(`.layer-item[data-layer-uid="${uid}"] .layer-name`).innerText;
     const currentSelectedRadio = this.layerList.querySelector('.c-radio-btn.-enabled');
 
     if (radio === currentSelectedRadio) {
@@ -118,20 +83,8 @@ export default class {
     this.callbacks.onVectorLayersSelected({
       direction: group, // 'vertical' or 'horizontal'
       title,
-      layerSlug
+      uid
     });
-  }
-
-  _onToggleSwitcher(e) {
-    var switcher = e && e.currentTarget;
-    if (!switcher) return;
-
-
-    switcher.closest('.layer-item').classList.toggle('-selected');
-    switcher.classList.toggle('-enabled');
-
-    const layers = this._getActivelayers();
-    this.callbacks.onContextualLayerSelected(layers);
   }
 
   _disableRadio(radio) {
@@ -164,16 +117,16 @@ export default class {
   // TODO: develop info function once is clear how it works
   _onInfo(e) {
     const target = e && e.currentTarget;
-    const layerSlug = target.closest('.layer-item').getAttribute('data-layer-slug');
+    const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
 
-    console.info(`showing info of ${layerSlug}`);
+    console.info(`showing info of ${uid}`);
   }
 
   // TODO: develop download function once is clear how it works
   _onDownload(e) {
     const target = e && e.currentTarget;
-    const layerSlug = target.closest('.layer-item').getAttribute('data-layer-slug');
+    const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
 
-    console.info(`download of ${layerSlug}`);
+    console.info(`download of ${uid}`);
   }
 }

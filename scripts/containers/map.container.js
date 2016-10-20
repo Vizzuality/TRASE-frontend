@@ -16,11 +16,12 @@ const mapMethodsToState = (state) => ({
     }
   },
   selectVectorLayer: state.flows.selectedColumnsIds,
-  selectPolygons: state.flows.selectedNodesGeoIds
+  selectPolygons: state.flows.selectedNodesGeoIds,
+  setChoropleth: state.flows.choropleth
 });
 
 const mapViewCallbacksToActions = () => ({
-  onPolygonClicked: geoId => selectNodeFromGeoId(geoId),
+  onPolygonClicked: geoId => { console.log(geoId); return selectNodeFromGeoId(geoId); },
   onToggleMap: () => toggleMap(),
   onToggleMapLayerMenu: () => toggleMapLayerMenu()
 });

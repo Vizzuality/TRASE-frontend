@@ -26,6 +26,8 @@ export default function(links, nodesDict, nodesMeta, columnIndexes) {
   return nodes;
 }
 
+// TODO get data from get_nodes instead of flow meta (except for heights)
+// see setNodesMeta.js
 const _setNodesMeta = (nodesDict, nodesMeta) => {
 
   const nodesDictWithMeta = {};

@@ -6,6 +6,7 @@ import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columns-selector.container';
 import MapLayersContainer from 'containers/map-layers.container';
+import MapContextContainer from 'containers/map-context.container';
 import MapLegendContainer from 'containers/map-legend.container';
 import MapContainer from 'containers/map.container';
 import NavContainer from 'containers/nav.container';
@@ -30,12 +31,12 @@ const initialState = {
     selectedColumnsIds: [2, 3, 5, 6],
     selectedVectorLayers: {
       horizontal: {
-        layerSlug: null,
+        uid: null,
         title: null
       },
       vertical: {
-        layerSlug: 'deforestation',
-        title: 'Deforestation'
+        uid: null,
+        title: null
       }
     },
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
@@ -59,6 +60,7 @@ new SankeyContainer(store);
 new ColumnsSelectorContainer(store);
 new MapContainer(store);
 new MapLayersContainer(store);
+new MapContextContainer(store);
 new MapLegendContainer(store);
 new NavContainer(store);
 new TitlebarContainer(store);

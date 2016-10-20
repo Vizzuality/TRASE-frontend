@@ -1,5 +1,4 @@
 import { LEGEND_COLORS } from 'constants';
-import stringToHTML from 'utils/stringToHTML';
 import LegendTemplate from 'ejs!templates/map/legend.ejs';
 import 'style/components/map/map-legend.scss';
 
@@ -32,9 +31,9 @@ export default class {
     }
 
     const settings = {
-      isBidimensional: horizontalLayer.layerSlug && verticalLayer.layerSlug ? true : false,
-      horizontal: horizontalLayer.layerSlug ? horizontalLayer : null,
-      vertical: verticalLayer.layerSlug ? verticalLayer : null
+      isBidimensional: horizontalLayer.uid !== null && verticalLayer.uid !== null,
+      horizontal: horizontalLayer.uid !== null ? horizontalLayer : null,
+      vertical: verticalLayer.uid !== null ? verticalLayer : null
     };
 
     if (this.el.hasChildNodes()) {
@@ -82,21 +81,20 @@ export default class {
       cssClass = '-horizontal';
     }
 
-    const legendHTML = stringToHTML(LegendTemplate({
+    const legendHTML = LegendTemplate({
       title,
       colors,
       cssClass,
       isBidimensional: settings.isBidimensional,
       isVertical: !settings.isBidimensional && settings.vertical
-    }));
+    });
 
     if (!settings.horizontal && !settings.vertical) {
       this._cleanLegend();
       return;
     }
 
-    for (var i = 0; i < legendHTML.length; i++) {
-      this.el.appendChild(legendHTML[i].cloneNode(true));
-    }
+    this.el.innerHTML = legendHTML;
+
   }
 }

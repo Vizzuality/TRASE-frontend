@@ -8,9 +8,6 @@ export function selectCountry(country, reloadLinks) {
 export function selectCommodity(commodity, reloadLinks) {
   return _reloadLinks('commodity', commodity, actions.SELECT_COMMODITY, reloadLinks);
 }
-export function selectYears(years, reloadLinks) {
-  return _reloadLinks('years', years, actions.SELECT_YEARS, reloadLinks);
-}
 export function selectQuant(quant, reloadLinks) {
   return _reloadLinks('quant', quant, actions.SELECT_QUANT, reloadLinks);
 }
@@ -32,6 +29,17 @@ export function selectColumn(columnIndex, columnId) {
   };
 }
 
+export function selectYears(years) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_YEARS,
+      years
+    });
+    dispatch(loadNodes());
+    dispatch(loadLinks());
+  };
+}
+
 // we don't know at this moment waht to do with a vector layer.
 // this isan example of the implementation
 export function selectVectorLayers(layerData) {
@@ -43,8 +51,11 @@ export function selectVectorLayers(layerData) {
   };
 }
 
-export function selectContextualLayers(contextualLayers, reloadLinks) {
-  return _reloadLinks('contextualLayers', contextualLayers, actions.SELECT_CONTEXTUAL_LAYERS, reloadLinks);
+export function selectContextualLayers(contextualLayers) {
+  return {
+    type: actions.SELECT_CONTEXTUAL_LAYERS,
+    contextualLayers
+  };
 }
 
 const _reloadLinks = (param, value, type, reloadLinks = true) => {
@@ -71,10 +82,10 @@ export function loadInitialData() {
       country: getState().flows.selectedCountry,
       raw: getState().flows.selectedCommodity
     };
-    const nodesURL = getURLFromParams('/v1/get_all_nodes', params);
+    const allNodesURL = getURLFromParams('/v1/get_all_nodes', params);
     const columnsURL = getURLFromParams('/v1/get_columns', params);
 
-    Promise.all([nodesURL, columnsURL].map(url =>
+    Promise.all([allNodesURL, columnsURL].map(url =>
         fetch(url).then(resp => resp.text())
     )).then(payload => {
       // TODO do not wait for end of all promises/use another .all call
@@ -82,10 +93,36 @@ export function loadInitialData() {
         type: actions.GET_COLUMNS,
         payload: payload.slice(0,2),
       });
+      dispatch(loadNodes());
       dispatch(loadLinks());
     });
-
     dispatch(loadMapVectorLayers());
+  };
+}
+
+export function loadNodes() {
+  return (dispatch, getState) => {
+    dispatch({
+      type: actions.LOAD_NODES
+    });
+    const params = {
+      country: getState().flows.selectedCountry.toUpperCase(),
+      raw: getState().flows.selectedCommodity.toUpperCase(),
+      year_start: getState().flows.selectedYears[0],
+      year_end: getState().flows.selectedYears[1],
+      column_id: 2
+    };
+
+    const url = getURLFromParams('/v1/get_nodes', params);
+
+    fetch(url)
+      .then(res => res.text())
+      .then(payload => {
+        dispatch({
+          type: actions.GET_NODES,
+          payload
+        });
+      });
   };
 }
 
@@ -103,9 +140,6 @@ export function loadLinks() {
       n_nodes: NUM_NODES,
       flow_quant: getState().flows.selectedQuant,
       view: +getState().flows.selectedView,
-      layers: getState().flows.selectedLayers,
-      vectorLayers: getState().flows.selectedVectorLayers,
-      contextualLayers: getState().flows.selectedContextualLayers
     };
 
     const selectedQual = getState().flows.selectedQual;
@@ -134,6 +168,8 @@ export function loadLinks() {
       });
   };
 }
+
+
 
 export function loadMapVectorLayers() {
   return (dispatch) => {

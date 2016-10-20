@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import actions from 'actions';
+import { LEGEND_COLORS } from 'constants';
 import getNodesDict from './sankey/getNodesDict';
 import getVisibleNodes from './sankey/getVisibleNodes';
 import splitVisibleNodesByColumn from './sankey/splitVisibleNodesByColumn';
@@ -11,6 +12,9 @@ import filterLinks from './sankey/filterLinks';
 import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
 import getSelectedNodesStillVisible from './sankey/getSelectedNodesStillVisible';
 import getSelectedNodesData from './sankey/getSelectedNodesData';
+import getMapLayers from './sankey/getMapLayers';
+import setNodesMeta from './sankey/setNodesMeta';
+import getChoropleth from './sankey/getChoropleth';
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -28,6 +32,19 @@ export default function (state = {}, action) {
 
   case actions.LOAD_LINKS:
     return Object.assign({}, state, { linksLoading: true });
+
+  case actions.GET_NODES: {
+    const jsonPayload = JSON.parse(action.payload);
+    const nodesMeta = jsonPayload.data;
+    const rawLayers = jsonPayload.include.includedLayers;
+
+    const mapLayers = getMapLayers(rawLayers);
+
+    // store layer values in nodesDict as uid: layerValue
+    const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, rawLayers);
+
+    return Object.assign({}, state, { mapLayers, nodesDictWithMeta });
+  }
 
   case actions.GET_LINKS: {
     const jsonPayload = JSON.parse(action.payload);
@@ -127,13 +144,18 @@ export default function (state = {}, action) {
 
   case actions.SELECT_VECTOR_LAYERS: {
     const selectedVectorLayers = Object.assign({}, state.selectedVectorLayers);
-    const currentSlugForDirection = selectedVectorLayers[action.layerData.direction].layerSlug;
-    const nextSlug = action.layerData.layerSlug;
+    const currentUidForDirection = selectedVectorLayers[action.layerData.direction].uid;
+    const nextUid = action.layerData.uid;
     selectedVectorLayers[action.layerData.direction] = {
       title: action.layerData.title,
-      layerSlug: (currentSlugForDirection === nextSlug) ? null : nextSlug
+      uid: (currentUidForDirection === nextUid) ? null : nextUid
     };
-    return Object.assign({}, state, { selectedVectorLayers });
+
+    // get a geoId <-> color dict
+    const choropleth = getChoropleth(selectedVectorLayers, state.nodesDictWithMeta, LEGEND_COLORS);
+    console.log(choropleth);
+
+    return Object.assign({}, state, { selectedVectorLayers, choropleth });
   }
   case actions.SELECT_CONTEXTUAL_LAYERS: {
     return Object.assign({}, state, { selectedContextualLayers: action.contextualLayers});

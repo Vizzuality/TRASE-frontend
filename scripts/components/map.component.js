@@ -94,4 +94,15 @@ export default class {
       this.map.invalidateSize(true);
     }, 850);
   }
+
+  setChoropleth(choropleth) {
+    this.currentLayer.eachLayer(layer => {
+      const choroItem = choropleth[layer.feature.properties.geoid];
+      if (choroItem) {
+        layer._path.style.fill = choroItem;
+      } else {
+        layer._path.style.fill = 'none';
+      }
+    });
+  }
 }
