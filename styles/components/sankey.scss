@@ -42,18 +42,18 @@
   }
 
 
-
-  .sankey-link {
-    fill: none;
-  }
-
   .sankey-links .sankey-link {
     opacity: .3;
+    fill: none;
     stroke: $charcoal-grey;
 
     &.-hover {
       opacity: 1;
     }
+
+    &.-qual-soybeans { stroke: $qual-soybeans; }
+    &.-qual-soybeancake { stroke: $qual-soybeancake; }
+    &.-qual-soybeanoil { stroke: $qual-soybeanoil; }
   }
 
 }
