@@ -117,7 +117,7 @@ export default class {
   // TODO: develop info function once is clear how it works
   _onInfo(e) {
     const target = e && e.currentTarget;
-    const uid = target.closest('.layer-item').getAttribute('data-layer-slug');
+    const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
 
     console.info(`showing info of ${uid}`);
   }
@@ -125,7 +125,7 @@ export default class {
   // TODO: develop download function once is clear how it works
   _onDownload(e) {
     const target = e && e.currentTarget;
-    const uid = target.closest('.layer-item').getAttribute('data-layer-slug');
+    const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
 
     console.info(`download of ${uid}`);
   }
