@@ -7,6 +7,7 @@
   > .supply-chain-list {
     display: flex;
     position: relative;
+    align-items: center;
     justify-content: space-between;
     height: 69px;
 
@@ -35,19 +36,25 @@
 
       z-index: 1;
 
-      &:first-child {}
+      &:first-child > .icon-supply,
+      &:nth-child(4) > .icon-supply,
+      &:last-child > .icon-supply {
+        width: 58px;
+        height: 58px;
+      }
 
-      &:nth-child(2) {}
+      &:nth-child(2) > .icon-supply {
+        width: 58px;
+        height: 65px;
+      }
 
-      &:nth-child(3) {}
-
-      &:nth-child(4) {}
-
-      &:last-child {}
-
+      &:nth-child(3) > .icon-supply {
+        width: 61px;
+        height: 62px;
+      }
 
       > .icon-supply {
-        background-color: $white;
+        background-color: $pale-peach;
       }
 
       > .description {
