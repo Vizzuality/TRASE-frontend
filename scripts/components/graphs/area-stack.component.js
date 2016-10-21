@@ -102,7 +102,6 @@ export default class {
 
       // scale domains
       x.domain(d3_extent(data.metadata.includedYears, function(y) { return new Date(y, 0); }));
-      // z.domain(keys);
 
       // get max y value
       var maxYearValue = 0;
