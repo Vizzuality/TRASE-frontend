@@ -1,24 +1,13 @@
 import 'styles/factsheets.scss';
 
-import AreaStack from 'scripts/statics/factsheets/area-stack';
+import AreaStack from 'scripts/components/graphs/area-stack.component';
 
-class factsheetsIndex {
+const _renderAreaStack = () => {
+  const el = document.querySelector('.js-municipalities-top');
 
-  constructor() {
-    this._setVars();
-    this._renderAreaStack();
-  }
+  new AreaStack({
+    el
+  });
+};
 
-  _renderAreaStack() {
-    new AreaStack({
-      el: this.municipalitiesGraph
-    });
-  }
-
-  _setVars() {
-    this.el = document.querySelector('.l-factsheets');
-    this.municipalitiesGraph = this.el.querySelector('.js-municipalities-top');
-  }
-}
-
-new factsheetsIndex();
+_renderAreaStack();

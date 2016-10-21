@@ -1,9 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 import {
     scaleLinear as d3_scale_linear,
-    scaleTime as d3_scale_time,
-    scaleOrdinal as d3_scale_ordinal,
-    schemeCategory10 as d3_schemeCategory_10
+    scaleTime as d3_scale_time
   } from 'd3-scale';
 
 import {
@@ -20,6 +18,7 @@ import { json as d3_json } from 'd3-request';
 import { extent as d3_extent } from 'd3-array';
 
 import _ from 'lodash';
+import { STACK_AREA_COLORS } from 'constants';
 
 export default class {
 
@@ -61,7 +60,7 @@ export default class {
     // scales
     const x = d3_scale_time().range([0, width]);
     const y = d3_scale_linear().range([height, 0]);
-    const z = d3_scale_ordinal(d3_schemeCategory_10);
+    const z = STACK_AREA_COLORS;
 
 
     // stack initialization
@@ -103,7 +102,7 @@ export default class {
 
       // scale domains
       x.domain(d3_extent(data.metadata.includedYears, function(y) { return new Date(y, 0); }));
-      z.domain(keys);
+      // z.domain(keys);
 
       // get max y value
       var maxYearValue = 0;
@@ -125,16 +124,15 @@ export default class {
 
       layer.append('path')
         .attr('class', 'area')
-        .style('fill', function(d) { return z(d.key); })
+        .style('fill', function(c, i) { return z[i]; })
         .attr('d', area);
 
       layer.filter(function(d) { return d[d.length - 1][1] - d[d.length - 1][0] > 0.01; })
         .append('text')
+          .attr('class', 'tag')
           .attr('x', width - 6)
           .attr('y', function(d) { return y((d[d.length - 1][0] + d[d.length - 1][1]) / 2); })
           .attr('dy', '.35em')
-          .style('font', '10px sans-serif')
-          .style('text-anchor', 'end')
           .text(function(d) { return d.key; });
 
       // axis implementation
