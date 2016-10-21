@@ -46,8 +46,11 @@ export default class {
 
   selectQual(value) {
     const selectedQualLegend = this.qualDropdown.el.querySelector(`[data-value=${value}]`);
+    const selectedQualLegendItems = Array.prototype.slice.call(
+      selectedQualLegend.querySelectorAll('.js-dropdown-item-legend li'), 0);
+      
     const legendItems = [];
-    selectedQualLegend.querySelectorAll('.js-dropdown-item-legend li').forEach(legend =>
+    selectedQualLegendItems.forEach(legend =>
       legendItems.push(legend.className)
     );
     const legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
