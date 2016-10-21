@@ -75,7 +75,7 @@ export default class {
       .attr('class', 'sankey-node')
       .attr('transform', node => `translate(0,${node.y})`)
       .classed('-is-aggregated', node => node.isAggregated)
-      .on('mouseenter', node => { this.callbacks.onNodeHighlighted(node.id); } )
+      .on('mouseenter', node => { this.callbacks.onNodeHighlighted(node.id, node.isAggregated); } )
       .on('click', node => { this.callbacks.onNodeClicked(node.id, node.isAggregated); } );
 
     nodesEnter.append('rect')

@@ -99,12 +99,18 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { selectedColumnsIds });
   }
 
-  case actions.HIGHLIGHT_NODE:
-    return Object.assign({}, state, { highlightedNodeId: action.id });
+  case actions.HIGHLIGHT_NODE: {
+    const highlightedNodeMeta = getNodesMeta([action.nodeId], state.visibleNodes);
+    return Object.assign({}, state, {
+      highlightedNodeId: action.nodeId,
+      highlightedNodeData: highlightedNodeMeta.selectedNodesData  
+    });
+  }
 
   case actions.SELECT_NODE: {
     const selectedNodesIds = getSelectedNodesIds(action.nodeId, state.selectedNodesIds);
-    const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
+    const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
+    selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
@@ -114,14 +120,16 @@ export default function (state = {}, action) {
     if (nodeId === null) return state;
 
     const selectedNodesIds = getSelectedNodesIds(nodeId, state.selectedNodesIds);
-    const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
+    const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
+    selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
   // this is triggered when links are reloaded to keep track of selected node/links
   case actions.RESELECT_NODES: {
     const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
-    const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
+    const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
+    selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
     selectedNodesStateUpdates.links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
@@ -153,7 +161,6 @@ export default function (state = {}, action) {
 
     // get a geoId <-> color dict
     const choropleth = getChoropleth(selectedVectorLayers, state.nodesDictWithMeta, LEGEND_COLORS);
-    console.log(choropleth);
 
     return Object.assign({}, state, { selectedVectorLayers, choropleth });
   }
@@ -187,12 +194,11 @@ const getFilteredLinks = (unmergedLinks, selectedNodesIds) => {
   return links;
 };
 
-const getSelectedNodesStateUpdates = (selectedNodesIds, visibleNodes) => {
+const getNodesMeta = (selectedNodesIds, visibleNodes) => {
   const selectedNodesData = getSelectedNodesData(selectedNodesIds, visibleNodes);
   const selectedNodesGeoIds = selectedNodesData.map(node => node.geoId).filter(geoId => geoId !== undefined);
 
   return {
-    selectedNodesIds,
     selectedNodesData,
     selectedNodesGeoIds
   };

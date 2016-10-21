@@ -223,9 +223,11 @@ export function selectNodeFromGeoId(geoId) {
 }
 
 
-export function highlightNode(nodeId) {
+export function highlightNode(nodeId, isAggregated) {
   return (dispatch, getState) => {
+    if (isAggregated) return;
     if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) return;
+
     dispatch({
       type: actions.HIGHLIGHT_NODE,
       nodeId

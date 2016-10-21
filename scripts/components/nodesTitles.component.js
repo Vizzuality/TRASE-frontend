@@ -6,7 +6,15 @@ export default class {
     this.el = document.querySelector('.js-nodes-titles');
   }
 
-  update(nodesData) {
+  selectNodes(nodesData) {
+    this._update(nodesData);
+  }
+
+  highlightNode(nodesData) {
+    this._update(nodesData);
+  }
+
+  _update(nodesData) {
     if (nodesData.length === 0) return;
     this.el.innerHTML = NodeTitleTemplate({
       nodes: nodesData,
@@ -14,4 +22,5 @@ export default class {
       multiple: nodesData.length > 1
     });
   }
+
 }
