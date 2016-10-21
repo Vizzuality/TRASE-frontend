@@ -165,6 +165,9 @@ export function loadLinks() {
         dispatch({
           type: actions.RESELECT_NODES
         });
+        dispatch({
+          type: actions.FILTER_LINKS_BY_NODES
+        });
       });
   };
 }

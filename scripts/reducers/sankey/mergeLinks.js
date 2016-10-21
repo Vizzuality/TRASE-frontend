@@ -20,7 +20,7 @@ export default function(links) {
     }
   }
 
-  console.log(dict)
+  // console.log(dict)
 
   return mergedLinks;
 }
