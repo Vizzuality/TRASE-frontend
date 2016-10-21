@@ -37,16 +37,22 @@
       top: 16px;
       right: 8px;
 
+      &::before,
+      &::after {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+
+
       &::before {
         @include triangle(6px, rgba($charcoal-grey, .3), 'left');
-        position: absolute;
         left: 8px;
         content: '';
       }
 
       &::after {
         @include triangle(6px, $medium-pink, 'right');
-        position: absolute;
         right: 8px;
         content: '';
       }
