@@ -11,3 +11,5 @@ export const LEGEND_COLORS = {
   error_no_metadata: '#0f0',
   error_no_metadata_for_layer: '#f0f',
 };
+
+export const STACK_AREA_COLORS = ['#ef6a68', '#ffae4f', '#76c370', '#69a4d0', '#9d7dbf'];

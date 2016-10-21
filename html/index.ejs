@@ -4,12 +4,55 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  Welcome to TRASE :)
+  <%= htmlWebpackPlugin.options.icons %>
+  <div class="l-homepage">
 
-  <p>
-    <a href='./flows.html'>Bring me to the sankey page</a>
-  </p> 
+  <%= htmlWebpackPlugin.options.nav %>
 
-  <%= htmlWebpackPlugin.options.footer %>
+    <section class="c-introduction">
+      <div class="wrap">
+        <div class="trase-logo"></div>
+
+        <p class="paragraph -center">Production and international trade of "forest risk" commodities is driving
+          two-thirds of tropical deforestation and shaping the future of biodiversity,
+          climate change and rural development across the planet. Yet answers to basic
+          questions remain elusive:
+        </p>
+
+        <div class="workflow-graphic"></div>
+
+        <p class="paragraph -center">Transformative Transparency is a new kind of traceability platform.
+          It harnesses huge untapped data sets to see inside complex commodity supply chains,
+          helping link production landscapes – and the social and environmental impacts
+          and opportunities associated with them – to specific traders, manufacturers,
+          retailers and investors worldwide.
+        </p>
+
+        <a href="/flows.html" class="c-button -pink -bold">explore the tool</a>
+
+        <div class="map-selector">
+          <h3 class="intro">What are the sustainability risks associated with
+            the trading of
+            <select name="commodity" id="">Soy</select>
+            in
+            <select name="country_origin" id="">Brazil</select>
+            ?
+          </h3>
+
+          <div id="map"></div>
+
+          <a href="" class="btn">find out here</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="c-posts"></section>
+
+    <%= htmlWebpackPlugin.options.footer %>
+
+  </div>
+
+
+  <%= htmlWebpackPlugin.options.scripts %>
 </body>
 </html>
