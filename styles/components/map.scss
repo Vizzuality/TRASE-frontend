@@ -70,6 +70,7 @@
     stroke-opacity: .5;
 
     &.-highlighted {
+      fill: none;
       pointer-events: none;
       stroke-opacity: 1;
       stroke-width: 3px;

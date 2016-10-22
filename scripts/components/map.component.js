@@ -49,6 +49,25 @@ export default class {
     });
   }
 
+  highlightPolygon(geoIds) {
+    if (!this.currentLayer) {
+      return;
+    }
+
+    if (this.highlightedLayer) this.map.removeLayer(this.highlightedLayer);
+
+    if (geoIds.length > 0) {
+      const geoId = geoIds[0];
+      this.currentLayer.eachLayer(layer => {
+        if (geoId === layer.feature.properties.geoid) {
+          this.highlightedLayer = L.geoJSON(layer.feature);
+          this.highlightedLayer.setStyle(() => { return { className: 'map-polygon -highlighted'}; });
+          this.map.addLayer(this.highlightedLayer);
+        }
+      });
+    }
+  }
+
   selectVectorLayer(columnIds) {
     if (!this.vectorLayers) return;
     const id = columnIds[0];

@@ -103,7 +103,8 @@ export default function (state = {}, action) {
     const highlightedNodeMeta = getNodesMeta([action.nodeId], state.visibleNodes);
     return Object.assign({}, state, {
       highlightedNodeId: action.nodeId,
-      highlightedNodeData: highlightedNodeMeta.selectedNodesData  
+      highlightedNodeData: highlightedNodeMeta.selectedNodesData,
+      highlightedGeoIds: highlightedNodeMeta.selectedNodesGeoIds
     });
   }
 
