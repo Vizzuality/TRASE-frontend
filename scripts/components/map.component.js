@@ -70,14 +70,20 @@ export default class {
       topoLayer.addData(geojson);
     });
     topoLayer.setStyle(() => { return { className: `${polygonClassName} map-polygon`}; });
+
     topoLayer.eachLayer(layer => {
       const that = this;
       layer.on({
         mouseover: function() {
-          this._path.classList.add('-highlighted');
+          // polygon appears 'burried', and SVG does nto support z-indexes
+          // so we have to recreate the hover layer on top of all other polygons
+          if (that.highlightedLayer) that.map.removeLayer(that.highlightedLayer);
+          that.highlightedLayer = L.geoJSON(this.feature);
+          that.highlightedLayer.setStyle(() => { return { className: 'map-polygon -highlighted'}; });
+          that.map.addLayer(that.highlightedLayer);
         },
         mouseout: function() {
-          this._path.classList.remove('-highlighted');
+          if (that.highlightedLayer) that.map.removeLayer(that.highlightedLayer);
         },
         click: function() {
           that.callbacks.onPolygonClicked(this.feature.properties.geoid);
