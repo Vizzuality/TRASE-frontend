@@ -40,6 +40,13 @@ export default class {
       });
   }
 
+  highlightNodes(nodesIds) {
+    this.sankeyColumns.selectAll('.sankey-node')
+      .classed('-highlighted', node => {
+        return nodesIds.indexOf(node.id) > -1;
+      });
+  }
+
   _build() {
     this.layout = sankeyLayout()
       .columnWidth(100);
@@ -126,7 +133,7 @@ export default class {
   }
 
   _onNodeOver(selection, nodeId, isAggregated) {
-    selection.classed('-highlighted', true);
+    // selection.classed('-highlighted', true);
     this.callbacks.onNodeHighlighted(nodeId, isAggregated);
   }
 

@@ -18,7 +18,8 @@ const mapMethodsToState = (state) => ({
     }
   },
   windowResized: state.app.windowSize,
-  selectNodes: state.flows.selectedNodesIds
+  selectNodes: state.flows.selectedNodesIds,
+  highlightNodes: state.flows.highlightedNodesIds,
 });
 
 // maps component callbacks (ie user events) to redux actions

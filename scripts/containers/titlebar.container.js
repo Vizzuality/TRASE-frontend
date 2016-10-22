@@ -7,7 +7,12 @@ const mapMethodsToState = (state) => ({
   selectNodes: state.flows.selectedNodesData,
   highlightNode: {
     _comparedValue: (state) => state.flows.highlightedNodeData,
-    _returnedValue: (state) => (state.flows.highlightedNodeData.length === 0) ? state.flows.selectedNodesData : state.flows.highlightedNodeData
+    _returnedValue: (state) => {
+      if (state.flows.highlightedNodeData.length === 0) {
+        return state.flows.selectedNodesData.length > 0;
+      }
+      return state.flows.highlightedNodeData.length > 0;
+    }
   }
 });
 

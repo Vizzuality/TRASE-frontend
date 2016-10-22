@@ -102,9 +102,28 @@ export default function (state = {}, action) {
   case actions.HIGHLIGHT_NODE: {
     const highlightedNodeMeta = getNodesMeta([action.nodeId], state.visibleNodes);
     return Object.assign({}, state, {
-      highlightedNodeId: action.nodeId,
+      highlightedNodesIds: (action.nodeId === undefined) ? [] : [action.nodeId],
       highlightedNodeData: highlightedNodeMeta.selectedNodesData,
       highlightedGeoIds: highlightedNodeMeta.selectedNodesGeoIds
+    });
+  }
+
+  case actions.HIGHLIGHT_NODE_FROM_GEOID: {
+    const nodeId = getNodeIdFromGeoId(action.geoId, state.visibleNodes);
+    if (nodeId === null) {
+      return Object.assign({}, state, {
+        highlightedNodesIds: [],
+        // still send geoId even if nodeId not found, because we still want map polygon to highlight
+        highlightedGeoIds: [action.geoId],
+        highlightedNodeData: []
+      });
+    }
+
+    const highlightedNodeMeta = getNodesMeta([nodeId], state.visibleNodes);
+    return Object.assign({}, state, {
+      highlightedNodesIds: [nodeId],
+      highlightedNodeData: highlightedNodeMeta.selectedNodesData,
+      highlightedGeoIds: [action.geoId]
     });
   }
 

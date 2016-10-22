@@ -60,6 +60,8 @@ export default class {
       const geoId = geoIds[0];
       this.currentLayer.eachLayer(layer => {
         if (geoId === layer.feature.properties.geoid) {
+          // polygon appears 'burried', and SVG does nto support z-indexes
+          // so we have to recreate the hover layer on top of all other polygons
           this.highlightedLayer = L.geoJSON(layer.feature);
           this.highlightedLayer.setStyle(() => { return { className: 'map-polygon -highlighted'}; });
           this.map.addLayer(this.highlightedLayer);
@@ -94,15 +96,10 @@ export default class {
       const that = this;
       layer.on({
         mouseover: function() {
-          // polygon appears 'burried', and SVG does nto support z-indexes
-          // so we have to recreate the hover layer on top of all other polygons
-          if (that.highlightedLayer) that.map.removeLayer(that.highlightedLayer);
-          that.highlightedLayer = L.geoJSON(this.feature);
-          that.highlightedLayer.setStyle(() => { return { className: 'map-polygon -highlighted'}; });
-          that.map.addLayer(that.highlightedLayer);
+          that.callbacks.onPolygonHighlighted(this.feature.properties.geoid);
         },
         mouseout: function() {
-          if (that.highlightedLayer) that.map.removeLayer(that.highlightedLayer);
+          that.callbacks.onPolygonHighlighted();
         },
         click: function() {
           that.callbacks.onPolygonClicked(this.feature.properties.geoid);
