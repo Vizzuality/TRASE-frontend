@@ -1,5 +1,6 @@
 import { select as d3_select /*, selectAll as d3_selectAll*/ } from 'd3-selection';
 import  'd3-transition';
+import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import getComputedSize from 'utils/getComputedSize';
 import 'styles/components/sankey.scss';
@@ -39,11 +40,6 @@ export default class {
       });
   }
 
-  highlightNode() {
-    // console.log('highlight', nodeId);
-  }
-
-
   _build() {
     this.layout = sankeyLayout()
       .columnWidth(100);
@@ -53,7 +49,9 @@ export default class {
     this.sankeyColumns = this.svg.selectAll('.sankey-column');
     this.linksContainer = this.svg.select('.sankey-links');
 
-    this.sankeyColumns.on('mouseleave', () => { this.callbacks.onNodeHighlighted(null); } );
+    this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
+
+    addSVGDropShadowDef(this.svg);
   }
 
   _toggleLoading(loading) {
@@ -70,12 +68,14 @@ export default class {
       .selectAll('g.sankey-node')
       .data(column => column.values, node => node.id);
 
+    let that = this;
     const nodesEnter = this.nodes.enter()
       .append('g')
       .attr('class', 'sankey-node')
       .attr('transform', node => `translate(0,${node.y})`)
       .classed('-is-aggregated', node => node.isAggregated)
-      .on('mouseenter', node => { this.callbacks.onNodeHighlighted(node.id, node.isAggregated); } )
+      .on('mouseenter', function(node) { that._onNodeOver(d3_select(this), node.id, node.isAggregated); } )
+      .on('mouseleave', () => { this._onNodeOut(); } )
       .on('click', node => { this.callbacks.onNodeClicked(node.id, node.isAggregated); } );
 
     nodesEnter.append('rect')
@@ -123,5 +123,19 @@ export default class {
       .on('mouseout', function() {
         this.classList.remove('-hover');
       });
+  }
+
+  _onNodeOver(selection, nodeId, isAggregated) {
+    selection.classed('-highlighted', true);
+    this.callbacks.onNodeHighlighted(nodeId, isAggregated);
+  }
+
+  _onNodeOut() {
+    this.sankeyColumns.selectAll('.sankey-node').classed('-highlighted', false);
+  }
+
+  _onColumnOut() {
+    this._onNodeOut();
+    this.callbacks.onNodeHighlighted();
   }
 }
