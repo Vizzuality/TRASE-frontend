@@ -5,6 +5,11 @@
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
+
+  &.icon-supply {
+    width: 56px;
+    height: 56px;
+  }
 }
 
 .icon-legend-arrow {

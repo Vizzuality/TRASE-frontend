@@ -18,7 +18,14 @@
     border-color: transparent;
     background-color: $medium-pink;
 
-    color: $gray;
+    color: $white;
+  }
+
+  &.-transparent {
+    border-color: $medium-pink;
+    background-color: transparent;
+
+    color: $medium-pink;
   }
 
   &.-gray {
@@ -26,5 +33,9 @@
     background-color: $gray;
 
     color: $charcoal-grey;
+  }
+
+  &.-big {
+    padding: 16px 28px;
   }
 }
