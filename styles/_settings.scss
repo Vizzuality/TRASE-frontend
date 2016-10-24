@@ -60,6 +60,11 @@ $font-size-medium: 18px;
 $font-size-big: 24px;
 $font-size-huge: 48px;
 
+// Breakpoints
+$breakpoint-mobile:  425px;
+$breakpoint-tablet:  768px;
+$breakpoint-laptop: 1024px;
+
 
 // Animations
 $ease-in-out-sine:  cubic-bezier(.445, .05, .55, .95);

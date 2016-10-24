@@ -56,22 +56,36 @@
         <div class="c-map-risks">
           <h3 class="title -big -center -light">What are the sustainability risks associated with
             the trading <br/>of
-            <div class="c-selector">
-              <select class="native-select"name="commodity">
-                <option value="soy">Soy</option>
-              </select>
+            <div class="c-dropdown -homepage" data-dropdown="commodity">
+              <span class="js-dropdown-title dropdown-title">
+                -
+              </span>
+              <ul class="js-dropdown-list dropdown-list">
+                <li class="js-dropdown-item dropdown-item" data-value="Soy">Soy</li>
+                <li class="js-dropdown-item dropdown-item" data-value="Coffee">Coffee</li>
+              </ul>
             </div>
             in
-            <div class="c-selector">
-              <select class="native-select" name="country_origin" id="">
-                <option value="BRA">Brazil</option>
-                <option value="COL">Colombia</option>
-              </select>
+            <div class="c-dropdown -homepage" data-dropdown="country">
+              <span class="js-dropdown-title dropdown-title">
+                -
+              </span>
+              <ul class="js-dropdown-list dropdown-list">
+                <li class="js-dropdown-item dropdown-item" data-value="Brazil">Brazil</li>
+                <li class="js-dropdown-item dropdown-item" data-value="Colombia">Colombia</li>
+              </ul>
             </div>
             ?
           </h3>
 
-          <div id="map" class="map"></div>
+          <div id="map" class="map">
+            <ul class="map-gallery-list">
+              <li class="map-gallery-item is-hidden" data-image-name="map1"><img src="images/maps/map1.jpg" alt="map1"></li>
+              <li class="map-gallery-item is-hidden" data-image-name="map2"><img src="images/maps/map2.jpg" alt="map2"></li>
+              <li class="map-gallery-item is-hidden" data-image-name="map3"><img src="images/maps/map3.jpg" alt="map3"></li>
+              <li class="map-gallery-item is-hidden" data-image-name="map4"><img src="images/maps/map4.jpg" alt="map4"></li>
+            </ul>
+          </div>
 
           <a href="#" class="c-button -big -transparent -bold btn-find-out">find out here</a>
         </div>

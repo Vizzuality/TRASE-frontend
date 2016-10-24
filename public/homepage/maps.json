@@ -1,0 +1,19 @@
+{
+  "maps": [{
+    "commodity": "soy",
+    "country": "brazil",
+    "image_name": "map1"
+  }, {
+    "commodity": "soy",
+    "country": "colombia",
+    "image_name": "map2"
+  }, {
+    "commodity": "coffee",
+    "country": "brazil",
+    "image_name": "map3"
+  }, {
+    "commodity": "coffee",
+    "country": "colombia",
+    "image_name": "map4"
+  }]
+}
