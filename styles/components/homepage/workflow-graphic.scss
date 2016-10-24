@@ -36,25 +36,25 @@
 
       z-index: 1;
 
-      &:first-child > .icon-supply,
+      > .icon-supply {
+        background-color: $pale-peach;
+      }
+
+      > .icon-supply-chain-1,
       > .icon-supply-chain-4,
-      &:last-child > .icon-supply {
+      > .icon-supply-chain-5 {
         width: 58px;
         height: 58px;
       }
 
-      &:nth-child(2) > .icon-supply {
+      > .icon-supply-chain-2 {
         width: 58px;
         height: 65px;
       }
 
-      &:nth-child(3) > .icon-supply {
+      > .icon-supply-chain-3 {
         width: 61px;
         height: 62px;
-      }
-
-      > .icon-supply {
-        background-color: $pale-peach;
       }
 
       > .description {
