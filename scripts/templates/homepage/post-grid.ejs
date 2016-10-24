@@ -1,0 +1,147 @@
+<div class="row <% if(highlightPost) { %> <%= highlightPost.position %> <% } %>">
+  <!-- left col  -->
+  <div class="col">
+
+    <% if (highlightPost) {%>
+      <div class="post-item -highlight"
+        <% if (highlightPost.image) { %>
+          style="background-image: url('<%= highlightPost['image'] %>')"
+          <% } %>
+        >
+        <a class="link-wrapper" href="<%= highlightPost['post_url'] %>"></a>
+        <h3 class="post-title"><%= highlightPost.title %></h3>
+        <% if(highlightPost.description) { %>
+          <p class="description paragraph -white"><%= highlightPost.description %></p>
+        <% } %>
+      </div>
+
+    <% } else { %>
+
+      <% if(verticalLeft.leftSideVertical) { %>
+
+        <% verticalLeft.verticalPosts.forEach(function(verticalPost) { %>
+
+          <div class="inner-col">
+            <div class="post-item -vertical <% if (!verticalPost.title) { %> -empty <% }%>"
+              <% if (verticalPost.image) { %>
+                style="background-image: url('<%= verticalPost.image %>')"
+              <% } %>
+              >
+              <a class="link-wrapper" href="<%= verticalPost['post_url'] %>"></a>
+              <h3 class="post-title"><%= verticalPost.title %></h3>
+              <% if(verticalPost.description) { %>
+                <p class="description paragraph -white"><%= verticalPost.description %></p>
+              <% } %>
+            </div>
+          </div>
+
+        <% }) %>
+
+        <% if(verticalLeft.verticalPosts.length !== 2) { %>
+
+          <div class="inner-col">
+            <% posts.left.forEach(function(post) { %>
+              <% if (post) { %>
+                <div class="post-item <% if (!post.title) { %> -empty <% }%>"
+                  <% if (post.image) { %>
+                    style="background-image: url('<%= post.image %>')"
+                  <% } %>
+                  >
+                    <a class="link-wrapper" href="<%= post['post_url'] %>"></a>
+                    <h3 class="post-title"><%= post.title %></h3>
+                    <% if(post.description) { %>
+                      <p class="description paragraph -white"><%= post.description %></p>
+                    <% } %>
+                  </div>
+                <% } %>
+            <% }) %>
+          </div>
+
+        <% } %>
+
+      <% } else { %>
+
+        <% posts.left.forEach(function(post) { %>
+            <% if (post) { %>
+              <div class="post-item <% if (!post.title) { %> -empty <% }%> <% if (post.verticalPost) { %> -vertical <% }%>"
+              <% if (post.image) { %>
+                style="background-image: url('<%= post.image %>')"
+              <% } %>
+              >
+                <a class="link-wrapper" href="<%= post['post_url'] %>"></a>
+                <h3 class="post-title"><%= post.title %></h3>
+                <% if(post.description) { %>
+                  <p class="description paragraph -white"><%= post.description %></p>
+                <% } %>
+              </div>
+            <% } %>
+        <% }) %>
+      <% } %>
+    <% } %>
+  </div>
+  <!-- right col  -->
+  <div class="col <% if (!!verticalRight.verticalPost && verticalRight.verticalPost.position == 'right') {%> -reverse <% } %>">
+
+    <% if(verticalRight.rightSideVertical) { %>
+
+      <% verticalRight.verticalPosts.forEach(function(verticalPost) { %>
+
+        <div class="inner-col">
+          <div class="post-item -vertical <% if (!verticalPost.title) { %> -empty <% }%>"
+            <% if (verticalPost.image) { %>
+              style="background-image: url('<%= verticalPost.image %>')"
+            <% } %>
+            >
+            <a class="link-wrapper" href="<%= verticalPost['post_url'] %>"></a>
+            <h3 class="post-title"><%= verticalPost.title %></h3>
+            <% if(verticalPost.description) { %>
+              <p class="description paragraph -white"><%= verticalPost.description %></p>
+            <% } %>
+          </div>
+        </div>
+
+      <% }) %>
+
+      <% if(verticalRight.verticalPosts.length !== 2) { %>
+
+        <div class="inner-col">
+          <% posts.right.forEach(function(post) { %>
+            <% if (post) { %>
+              <div class="post-item <% if (!post.title) { %> -empty <% }%>"
+                <% if (post.image) { %>
+                  style="background-image: url('<%= post.image %>')"
+                <% } %>
+                >
+                  <a class="link-wrapper" href="<%= post['post_url'] %>"></a>
+                  <h3 class="post-title"><%= post.title %></h3>
+                  <% if(post.description) { %>
+                    <p class="description paragraph -white"><%= post.description %></p>
+                  <% } %>
+                </div>
+              <% } %>
+          <% }) %>
+        </div>
+
+      <% } %>
+
+    <% } else { %>
+
+      <% posts.right.forEach(function(post) { %>
+        <% if (post) { %>
+          <div class="post-item <% if (!post.title) { %> -empty <% }%>"
+            <% if (post.image) { %>
+              style="background-image: url('<%= post.image %>')"
+            <% } %>
+            >
+              <a class="link-wrapper" href="<%= post['post_url'] %>"></a>
+              <h3 class="post-title"><%= post.title %></h3>
+              <% if(post.description) { %>
+                <p class="description paragraph -white"><%= post.description %></p>
+              <% } %>
+            </div>
+          <% } %>
+      <% }) %>
+
+    <% } %>
+  </div>
+</div>

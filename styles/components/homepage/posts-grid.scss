@@ -1,0 +1,102 @@
+.c-posts-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: $max-width-grid;
+  margin: 0 auto;
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    &.-right {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .col {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+
+    @media screen and (min-width: $breakpoint-tablet) {
+      width: 50%;
+    }
+
+    &.-reverse {
+      flex-direction: row-reverse;
+    }
+
+    > .inner-col {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      @media screen and (min-width: $breakpoint-tablet) {
+        width: 50%;
+      }
+
+      > .post-item {
+        width: 100%;
+      }
+    }
+  }
+
+  .post-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 40px 24px 24px;
+
+    background-color: $medium-pink;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    @media screen and (min-width: $breakpoint-tablet) {
+      height: 320px;
+      max-height: 320px;
+    }
+
+    @media screen and (min-width: $breakpoint-tablet) {
+      width: 50%;
+    }
+
+
+    > .post-title {
+      color: $white;
+      font-family: $font-family-2;
+      font-size: $font-size-big;
+      font-weight: $font-weight-regular;
+      line-height: 1.3;
+    }
+
+    > .description {
+      margin: 16px 0 0;
+    }
+
+    &.-highlight {
+      width: 100%;
+      max-width: none;
+
+      @media screen and (min-width: $breakpoint-tablet) {
+        height: 640px;
+        max-height: none;
+      }
+    }
+
+    &.-vertical {
+      @media screen and (min-width: $breakpoint-tablet) {
+        height: 640px;
+        max-height: none;
+      }
+    }
+
+    &.-empty {
+      background-color: $pale-peach;
+    }
+  }
+}
