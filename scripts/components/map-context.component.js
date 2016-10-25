@@ -3,7 +3,7 @@ export default class {
   onCreated() {
     this.el = document.querySelector('.c-basemap-options');
     this.contextualLayerList = this.el.querySelector('.js-layer-contextual');
-    this.switchers  = this.contextualLayerList.querySelectorAll('.c-switcher');
+    this.switchers = Array.prototype.slice.call(this.contextualLayerList.querySelectorAll('.c-switcher'), 0);
 
     this.switchers.forEach(switcher => {
       switcher.addEventListener('click', (e) => this._onToggleSwitcher(e));

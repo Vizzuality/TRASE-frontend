@@ -72,7 +72,6 @@ module.exports = {
       style: 'styles',
       components: 'scripts/components',
       containers: 'scripts/containers',
-      statics: 'scripts/statics',
       utils: 'scripts/utils',
       constants: 'scripts/constants',
       connect: 'scripts/base/connect',

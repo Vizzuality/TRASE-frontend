@@ -35,7 +35,7 @@
     }
 
     &.-dimmed {
-      opacity: .5; 
+      opacity: .5;
     }
   }
 
@@ -100,5 +100,17 @@
   &.-small .dropdown-list > .dropdown-item {
     font-size: $font-size-medium;
     font-weight: normal;
+  }
+
+  &.-homepage {
+    display: inline-flex;
+
+    > .dropdown-title {
+      font-size: $font-size-huge;
+    }
+
+    > .dropdown-list {
+      top: 56px;
+    }
   }
 }

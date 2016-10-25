@@ -28,9 +28,9 @@ export default class {
   }
 
   _setVars() {
-    this.infoBtns     = this.layerList.querySelectorAll('.js-layer-info');
-    this.downloadBtns = this.layerList.querySelectorAll('.js-layer-download');
-    this.radios       = this.layerList.querySelectorAll('.c-radio-btn');
+    this.infoBtns     = Array.prototype.slice.call(this.layerList.querySelectorAll('.js-layer-info'), 0);
+    this.downloadBtns = Array.prototype.slice.call(this.layerList.querySelectorAll('.js-layer-download'), 0);
+    this.radios       = Array.prototype.slice.call(this.layerList.querySelectorAll('.c-radio-btn'), 0);
   }
 
   _setEventListeners() {
@@ -51,7 +51,9 @@ export default class {
     const directions = Object.keys(layers);
 
     directions.forEach((group) => {
-      const radios = this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`);
+      const radios = Array.prototype.slice.call(
+        this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`), 0);
+        
       radios.forEach((radio) => {
         if (radio.getAttribute('value') !== layers[group]['uid']) return;
         const layerItem = radio.closest('.layer-item');

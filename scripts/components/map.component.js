@@ -40,7 +40,8 @@ export default class {
     if (!this.currentLayer) {
       return;
     }
-    document.querySelectorAll('.map-polygon').forEach(e => { e.classList.remove('-selected'); });
+    const mapPolygons = Array.prototype.slice.call(document.querySelectorAll('.map-polygon'), 0);
+    mapPolygons.forEach(e => { e.classList.remove('-selected'); });
     this.currentLayer.eachLayer(layer => {
       if (geoIds.indexOf(layer.feature.properties.geoid) > - 1) {
         layer._path.classList.add('-selected');

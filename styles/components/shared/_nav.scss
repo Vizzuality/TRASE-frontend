@@ -6,6 +6,7 @@
   width: 100%;
   height: $nav-height;
 
+  background-color: $white;
   box-shadow: $box-shadow;
 
   > .left-side,
@@ -15,21 +16,16 @@
 
   > .left-side {
 
+    > .trase-logo-container {
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+
+      border-right: 1px solid $silver;
+    }
+
     > .page-section-list {
       display: flex;
-
-      > .trase-logo-container {
-        display: flex;
-        align-items: center;
-
-        border-right: 1px solid $silver;
-
-        > .trase-logo {
-          display: inline-block;
-
-          // > img {}
-        }
-      }
 
       > .page-section {
         display: inline-flex;

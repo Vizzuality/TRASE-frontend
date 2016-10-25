@@ -7,11 +7,11 @@ export default function(links) {
 
   for (var i = 0; i < links.length; i++) {
     var link = links[i];
-    // if (link.originalPath.indexOf(nodeId) === -1) continue;
 
     const key = '' + link.sourceNodeId + link.targetNodeId + link.qual;
     if (!dict[key]) {
       const mergedLink = _.cloneDeep(link);
+      mergedLink.id = key;
       mergedLinks.push(mergedLink);
       dict[key] = mergedLink;
     } else {
@@ -19,8 +19,6 @@ export default function(links) {
       dict[key].quant += link.quant;
     }
   }
-
-  // console.log(dict)
-
+  
   return mergedLinks;
 }

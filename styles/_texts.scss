@@ -1,16 +1,36 @@
 
 .paragraph {
+  max-width: 720px;
+
   color: $charcoal-grey;
   font-family: $font-family-1;
   font-size: $font-size-xx-regular;
   letter-spacing: -1.3px;
   line-height: 1.5;
 
-  &.-center {
-    text-align: center;
-  }
-
   &.-gray {
     color: $gray;
   }
+}
+
+.title {
+  color: $charcoal-grey;
+  font-family: $font-family-2;
+  line-height: 1.5;
+
+  &.-big {
+    font-size: $font-size-huge;
+  }
+}
+
+.-light {
+  font-weight: $font-weight-light;
+}
+
+.-bold {
+  font-weight: $font-weight-bold;
+}
+
+.-center {
+  text-align: center;
 }
