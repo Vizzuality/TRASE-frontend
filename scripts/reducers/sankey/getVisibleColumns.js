@@ -1,9 +1,9 @@
 export default function(columns, columnIndexes) {
   return columnIndexes.map(index => {
-    const column = columns.find(column => parseInt(column.id) === index);
+    const column = columns.find(column => column.id === index);
     return {
       index,
-      name: column.attributes.nodeType
+      name: column.name
     };
   });
 }

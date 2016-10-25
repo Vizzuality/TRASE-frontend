@@ -19,6 +19,6 @@ export default function(links) {
       dict[key].quant += link.quant;
     }
   }
-
+  
   return mergedLinks;
 }

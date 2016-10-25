@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import actions from 'actions';
-import { LEGEND_COLORS } from 'constants';
+import { LEGEND_COLORS, COLUMNS_POS } from 'constants';
+import getColumns from './sankey/getColumns';
 import getNodesDict from './sankey/getNodesDict';
 import getVisibleNodes from './sankey/getVisibleNodes';
 import splitVisibleNodesByColumn from './sankey/splitVisibleNodesByColumn';
@@ -26,8 +27,9 @@ export default function (state = {}, action) {
     const rawNodes = JSON.parse(action.payload[0]).data;
     const rawNodesMeta = JSON.parse(action.payload[0]).include;
     const rawColumns = JSON.parse(action.payload[1]).data;
-    const nodesDict = getNodesDict(rawNodes, rawColumns, rawNodesMeta);
-    return Object.assign({}, state, { columns: rawColumns, nodesDict, initialDataLoading: false });
+    const columns = getColumns(rawColumns, COLUMNS_POS);
+    const nodesDict = getNodesDict(rawNodes, columns, rawNodesMeta);
+    return Object.assign({}, state, { columns, nodesDict, initialDataLoading: false });
   }
 
   case actions.LOAD_LINKS:
@@ -122,13 +124,18 @@ export default function (state = {}, action) {
   case actions.RESELECT_NODES: {
     const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
     const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
-    selectedNodesStateUpdates.links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
 
   case actions.FILTER_LINKS_BY_NODES: {
-    const links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
+    let links;
+    if (state.selectedNodesIds.length > 0) {
+      const filteredLinks = filterLinks(state.unmergedLinks, state.selectedNodesIds, state.selectedNodesColumnsPos);
+      links = mergeLinks(filteredLinks);
+    } else {
+      links = mergeLinks(state.unmergedLinks);
+    }
     return Object.assign({}, state, { links });
   }
 
@@ -153,7 +160,6 @@ export default function (state = {}, action) {
 
     // get a geoId <-> color dict
     const choropleth = getChoropleth(selectedVectorLayers, state.nodesDictWithMeta, LEGEND_COLORS);
-    console.log(choropleth);
 
     return Object.assign({}, state, { selectedVectorLayers, choropleth });
   }
@@ -176,24 +182,16 @@ const getSelectedNodesIds = (addedNodeId, currentSelectedNodesIds) => {
   return selectedNodesIds;
 };
 
-const getFilteredLinks = (unmergedLinks, selectedNodesIds) => {
-  let links;
-  if (selectedNodesIds.length > 0) {
-    const filteredLinks = filterLinks(unmergedLinks, selectedNodesIds);
-    links = mergeLinks(filteredLinks);
-  } else {
-    links = mergeLinks(unmergedLinks);
-  }
-  return links;
-};
-
 const getSelectedNodesStateUpdates = (selectedNodesIds, visibleNodes) => {
+  // TODO use data from get_nodes API / state.nodesDictWithMeta along with get_flows / visibleNodes
   const selectedNodesData = getSelectedNodesData(selectedNodesIds, visibleNodes);
   const selectedNodesGeoIds = selectedNodesData.map(node => node.geoId).filter(geoId => geoId !== undefined);
+  const selectedNodesColumnsPos = selectedNodesData.map(node => node.columnPosition);
 
   return {
     selectedNodesIds,
     selectedNodesData,
-    selectedNodesGeoIds
+    selectedNodesGeoIds,
+    selectedNodesColumnsPos
   };
 };
