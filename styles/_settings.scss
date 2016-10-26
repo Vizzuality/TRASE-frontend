@@ -5,6 +5,7 @@ $titlebar-height: 64px;
 $flow-content-y: $nav-height + $titlebar-height;
 $layer-map-width: 320px;
 $content-max-width: 865px;
+$max-width-grid: 1280px;
 
 $padding-wrap: 24px;
 
@@ -81,12 +82,14 @@ $font-size-x-regular: 13px;
 $font-size-xx-regular: 16px;
 $font-size-medium: 18px;
 $font-size-big: 24px;
+$font-size-x-big: 32px;
 $font-size-huge: 48px;
 
 // Breakpoints
 $breakpoint-mobile:  425px;
 $breakpoint-tablet:  768px;
 $breakpoint-laptop: 1024px;
+$breakpoint-desktop: 1280px;
 
 
 // Animations
