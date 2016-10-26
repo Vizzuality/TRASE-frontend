@@ -1,7 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import 'styles/layouts/l-flows.scss';
-import 'styles/components/loading.scss';
+
 import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columns-selector.container';
@@ -16,6 +15,9 @@ import AppReducer from 'reducers/app.reducer';
 import FlowsReducer from 'reducers/flows.reducer';
 import { resize } from 'actions/app.actions';
 import { loadInitialData } from 'actions/flows.actions';
+
+import 'styles/layouts/l-flows.scss';
+import 'styles/components/loading.scss';
 
 
 // TODO: load from URL params (only flows)

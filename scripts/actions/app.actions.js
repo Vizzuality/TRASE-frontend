@@ -19,3 +19,9 @@ export function toggleMapLayerMenu() {
     type: actions.TOGGLE_MAP_LAYERS_MENU
   };
 }
+
+export function toggleAppMenu() {
+  return {
+    type: actions.TOGGLE_APP_MENU
+  };
+}
