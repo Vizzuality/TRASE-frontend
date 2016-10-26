@@ -1,34 +1,174 @@
+
 <div class="c-nav">
+  <div class="offset">
 
-  <div class="left-side">
     <% if(page !== 'index') { %>
-    <div class="trase-logo-container">
-      <a class="trase-logo" href="/">
-        <img src="images/logos/logo-trase-small.svg" alt="TRASE" />
-      </a>
-    </div>
-    <% } %>
-    <nav class="page-section-list">
-      <li class="<%= page === 'flows' ? 'page-section -selected' : 'page-section' %>"><a href="/flows.html">Tool</a></li>
-      <li class="<%= page === 'factsheets' ? 'page-section -selected' : 'page-section' %>"><a href="/factsheets.html">Factsheets</a></li>
-      <li class="<%= page === 'FAQ' ? 'page-section -selected' : 'page-section' %>"><a href="/FAQ.html">FAQ</a></li>
-      <li class="<%= page === 'contact' ? 'page-section -selected' : 'page-section' %>"><a href="/contact.html">Contact</a></li>
-    </nav>
+
+      <% if(page === 'flows') { %>
+
+        <div class="offset-container">
+          <div class="burger js-toggle-menu">
+            <span class="ingredient"></span>
+            <span class="ingredient"></span>
+            <span class="ingredient"></span>
+          </div>
+        </div>
+
+      <% } else { %>
+
+        <div class="offset-container">
+          <a class="trase-logo" href="/">
+            <img src="images/logos/logo-trase-small.svg" alt="TRASE" />
+          </a>
+        </div>
+
+      <% } %>
+
+    <% } %>
   </div>
 
-  <div class="right-side">
-    <% if(page === 'index') { %>
-    <ul class="logos-list">
-      <li class="logo-item">
-        <a class="logo-link" target="_blank" href="https://www.sei-international.org/"><img class="logo-img -sei" src="images/logos/SEI_0@2x.png" alt="SEI International"></a>
-      </li>
-      <li class="logo-item">
-        <a class="logo-link" target="_blank" href="http://globalcanopy.org/"><img class="logo-img -gcp" src="images/logos/GCP@2x.png" alt="Global Canopy Programme"></a></li>
-    </ul>
-    <% } %>
+  <div class="app-nav">
+    <div class="left-side">
+      <nav class="page-section-list">
+        <li class="<%= page === 'flows' ? 'page-section -selected' : 'page-section' %>"><a href="/flows.html">Tool</a></li>
+        <li class="<%= page === 'factsheets' ? 'page-section -selected' : 'page-section' %>"><a href="/factsheets.html">Factsheets</a></li>
+        <li class="<%= page === 'FAQ' ? 'page-section -selected' : 'page-section' %>"><a href="/FAQ.html">FAQ</a></li>
+        <li class="<%= page === 'contact' ? 'page-section -selected' : 'page-section' %>"><a href="/contact.html">Contact</a></li>
+      </nav>
+    </div>
 
-    <div class="share-menu">
-      <svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg>
+    <div class="right-side">
+      <% if(page === 'index') { %>
+      <ul class="logos-list">
+        <li class="logo-item">
+          <a class="logo-link" target="_blank" href="https://www.sei-international.org/"><img class="logo-img -sei" src="images/logos/SEI_0@2x.png" alt="SEI International"></a>
+        </li>
+        <li class="logo-item">
+          <a class="logo-link" target="_blank" href="http://globalcanopy.org/"><img class="logo-img -gcp" src="images/logos/GCP@2x.png" alt="Global Canopy Programme"></a></li>
+      </ul>
+      <% } %>
     </div>
   </div>
+
+  <% if(page === 'flows') { %>
+    <div class="flows-nav">
+      <div class="left-side">
+        <div class="nav-param">
+          <div class="c-dropdown" data-dropdown="country">
+            <span class="dropdown-label">Country</span>
+            <span class="js-dropdown-title dropdown-title">
+              -
+            </span>
+            <ul class="js-dropdown-list dropdown-list">
+              <li class="js-dropdown-item dropdown-item" data-value="brazil">Brazil</li>
+              <li class="js-dropdown-item dropdown-item">Columbia</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav-param">
+          <div class="c-dropdown" data-dropdown="commodity">
+            <span class="dropdown-label">Commodity</span>
+            <span class="js-dropdown-title dropdown-title">
+              -
+            </span>
+            <ul class="js-dropdown-list dropdown-list">
+              <li class="js-dropdown-item dropdown-item" data-value="soy">Soy</li>
+              <li class="js-dropdown-item dropdown-item">Coffee</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav-param">
+          <div class="c-dropdown" data-dropdown="years">
+            <span class="dropdown-label">years</span>
+            <span class="js-dropdown-title dropdown-title">
+              -
+            </span>
+            <ul class="js-dropdown-list dropdown-list">
+              <div class="js-years-slider c-years-slider"></div>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="right-side">
+        <div class="nav-param">
+          <div class="c-dropdown -small" data-dropdown="quant">
+            <span class="dropdown-label">Resize by</span>
+            <span class="js-dropdown-title dropdown-title">
+              -
+            </span>
+            <ul class="js-dropdown-list dropdown-list">
+              <li class="js-dropdown-item dropdown-item" data-value="Volume">Trade volume</li>
+              <li class="js-dropdown-item dropdown-item" data-value="Deforestation risk">Deforestation risk</li>
+              <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Water footprint</li>
+              <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Land-based emissions</li>
+              <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Financial flows</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav-param -color js-qual-dropdown">
+          <div class="c-dropdown -small" data-dropdown="qual">
+            <span class="dropdown-label">Recolour by</span>
+            <span class="js-dropdown-title dropdown-title">
+              -
+            </span>
+            <ul class="js-dropdown-list dropdown-list">
+              <li class="js-dropdown-item dropdown-item" data-value="none">None</li>
+              <li class="js-dropdown-item dropdown-item" data-value="Commodity">
+                <div class="js-dropdown-item-title dropdown-item-title">Commodity</div>
+                <ul class="dropdown-item-legend js-dropdown-item-legend">
+                  <li class='-qual-soybeans'>Soybeans</li>
+                  <li class='-qual-soybeancake'>Soybean cake</li>
+                  <li class='-qual-soybeanoil'>Soybean oil</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown-item-legend-summary js-dropdown-item-legend-summary">
+            <!-- legend summary is filled in in nav.component.selectQual -->
+          </div>
+        </div>
+
+        <div class="nav-param">
+          <div class="c-dropdown -small" data-dropdown="view">
+            <span class="dropdown-label">Change view</span>
+            <span class="js-dropdown-title dropdown-title">
+              -
+            </span>
+            <ul class="js-dropdown-list dropdown-list">
+              <li class="js-dropdown-item dropdown-item" data-value="1">Summary</li>
+              <li class="js-dropdown-item dropdown-item" data-value="2">Details</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% } %>
+
+  <ul class="miscellaneous-nav">
+    <% if(page === 'flows') { %>
+    <li class="miscellaneous-item -bookmark js-bookmark" data-dropdown="bookmark">
+      <div class="miscellaneous-item-title js-dropdown-title">
+        <svg class="icon icon-bookmark"><use xlink:href="#icon-bookmark"></use></svg>
+      </div>
+      <div class="c-bookmark-dropdown js-dropdown-list">
+        <ul class="bookmark-list"></ul>
+        <div class="bookmark-btn-container">
+          <button class="c-button add-bookmark">+ add a new bookmark</button>
+        </div>
+      </div>
+    </li>
+    <% } %>
+    <li class="miscellaneous-item js-share" data-dropdown="share">
+      <div class="miscellaneous-item-title js-dropdown-title">
+        <svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg>
+      </div>
+      <div class="c-share-dropdown js-dropdown-list"></div>
+    </li>
+  </ul>
+
 </div>

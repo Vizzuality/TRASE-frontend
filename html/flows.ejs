@@ -5,131 +5,9 @@
 </head>
 <body>
   <div class="l-flows">
-    <div id="nav" class="c-nav is-absolute">
-      <div class="menu">
-        <div class="burger">
-          <span class="burger-ingredient"></span>
-          <span class="burger-ingredient"></span>
-          <span class="burger-ingredient"></span>
-        </div>
-      </div>
 
-      <div class="left-side">
-        <div class="c-nav-param">
-          <div class="c-dropdown" data-dropdown="country">
-            <span class="dropdown-label">Country</span>
-            <span class="js-dropdown-title dropdown-title">
-              -
-            </span>
-            <ul class="js-dropdown-list dropdown-list">
-              <li class="js-dropdown-item dropdown-item" data-value="brazil">Brazil</li>
-              <li class="js-dropdown-item dropdown-item">Columbia</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="c-nav-param">
-          <div class="c-dropdown" data-dropdown="commodity">
-            <span class="dropdown-label">Commodity</span>
-            <span class="js-dropdown-title dropdown-title">
-              -
-            </span>
-            <ul class="js-dropdown-list dropdown-list">
-              <li class="js-dropdown-item dropdown-item" data-value="soy">Soy</li>
-              <li class="js-dropdown-item dropdown-item">Coffee</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="c-nav-param">
-          <div class="c-dropdown" data-dropdown="years">
-            <span class="dropdown-label">years</span>
-            <span class="js-dropdown-title dropdown-title">
-              -
-            </span>
-            <ul class="js-dropdown-list dropdown-list">
-              <div class="js-years-slider c-years-slider"></div>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="right-side">
-        <div class="c-nav-param">
-          <div class="c-dropdown -small" data-dropdown="quant">
-            <span class="dropdown-label">Resize by</span>
-            <span class="js-dropdown-title dropdown-title">
-              -
-            </span>
-            <ul class="js-dropdown-list dropdown-list">
-              <li class="js-dropdown-item dropdown-item" data-value="Volume">Trade volume</li>
-              <li class="js-dropdown-item dropdown-item" data-value="Deforestation risk">Deforestation risk</li>
-              <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Water footprint</li>
-              <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Land-based emissions</li>
-              <li class="js-dropdown-item dropdown-item dropdown-item--disabled">Financial flows</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="c-nav-param -color js-qual-dropdown">
-          <div class="c-dropdown -small" data-dropdown="qual">
-            <span class="dropdown-label">Recolour by</span>
-            <span class="js-dropdown-title dropdown-title">
-              -
-            </span>
-            <ul class="js-dropdown-list dropdown-list">
-              <li class="js-dropdown-item dropdown-item" data-value="none">None</li>
-              <li class="js-dropdown-item dropdown-item" data-value="Commodity">
-                <div class="js-dropdown-item-title dropdown-item-title">Commodity</div>
-                <ul class="dropdown-item-legend js-dropdown-item-legend">
-                  <li class='-qual-soybeans'>Soybeans</li>
-                  <li class='-qual-soybeancake'>Soybean cake</li>
-                  <li class='-qual-soybeanoil'>Soybean oil</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="dropdown-item-legend-summary js-dropdown-item-legend-summary">
-            <!-- legend summary is filled in in nav.component.selectQual -->
-          </div>
-        </div>
-
-        <div class="c-nav-param">
-          <div class="c-dropdown -small" data-dropdown="view">
-            <span class="dropdown-label">Change view</span>
-            <span class="js-dropdown-title dropdown-title">
-              -
-            </span>
-            <ul class="js-dropdown-list dropdown-list">
-              <li class="js-dropdown-item dropdown-item" data-value="1">Summary</li>
-              <li class="js-dropdown-item dropdown-item" data-value="2">Details</li>
-            </ul>
-          </div>
-        </div>
-
-        <ul class="miscellaneous-nav">
-          <li class="miscellaneous-item js-bookmark" data-dropdown="bookmark">
-            <div class="miscellaneous-item-title js-dropdown-title">
-              <svg class="icon icon-bookmark"><use xlink:href="#icon-bookmark"></use></svg>
-            </div>
-            <div class="c-bookmark-dropdown js-dropdown-list">
-              <ul class="bookmark-list"></ul>
-              <div class="bookmark-btn-container">
-                <button class="c-button add-bookmark">+ add a new bookmark</button>
-              </div>
-            </div>
-          </li>
-          <li class="miscellaneous-item js-share" data-dropdown="share">
-            <div class="miscellaneous-item-title js-dropdown-title">
-              <svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg>
-            </div>
-            <div class="c-share-dropdown js-dropdown-list"></div>
-          </li>
-        </ul>
-      </div>
-    </div>
-
+    <%= htmlWebpackPlugin.options.nav %>
+    
     <div class="c-titlebar">
       <div class="search js-search-container">
 
@@ -276,6 +154,6 @@
 
   <%= htmlWebpackPlugin.options.scripts %>
   <%= htmlWebpackPlugin.options.icons %>
-  
+
 </body>
 </html>
