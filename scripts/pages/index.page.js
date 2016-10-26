@@ -40,23 +40,6 @@ const _onSelect = function(value) {
   _setMap();
 };
 
-const _containsVerticalPost = (posts) => {
-  return posts.filter((post) => post.verticalPost).length > 0 ? true : false;
-};
-
-const _getVerticalPost = (posts) => {
-  return posts.filter((post) => post.verticalPost);
-};
-
-const _removeVerticalPosts = (posts) => {
-  posts.forEach((post) => {
-    if (post.verticalPost) {
-      const index = posts.indexOf(post);
-      posts.splice(index, 1);
-    }
-  });
-};
-
 const _getPosts = () => {
   const postList = document.querySelector('.js-posts-grid');
 
@@ -71,16 +54,12 @@ const _getPosts = () => {
 
       if (!totalPosts) return;
 
-      // get number of highlighted posts. This number indicates the number of rows;
       const highlightPosts = posts.filter((post) => post.highlighted);
-      const graphtPosts = posts.filter((post) => post.verticalPost);
 
       // remove highlighted and graph posts from post array.
-      posts.forEach((post) => {
-        if (post.highlighted) {
-          const index = posts.indexOf(post);
-          posts.splice(index, 1);
-        }
+      highlightPosts.forEach((post) => {
+        const index = posts.indexOf(post);
+        posts.splice(index, 1);
       });
 
       // sorts posts by date
@@ -94,14 +73,8 @@ const _getPosts = () => {
 
       for (let i = 0; i < rows; i++) {
         const highlightPost = highlightPosts[i];
-        const graphtPost = graphtPosts[i];
         let leftSidePosts = [];
         let rightSidePosts = [];
-        let leftVerticalPosts = [];
-        let rightVerticalPosts = [];
-
-        // set post number based on existence of graphPost
-        postsPerColumn = graphtPost !== undefined ? 3 : defaults.postsPerColumn;
 
         // left side
         // left side is only filled with posts if there's no highlighted post
@@ -128,41 +101,14 @@ const _getPosts = () => {
           }
         }
 
-        // finds out if there is some vertical post in every side
-        const leftSideVertical = _containsVerticalPost(leftSidePosts);
-        const rightSideVertical = _containsVerticalPost(rightSidePosts);
-
-        // Gets vertical posts
-        if (leftSideVertical) {
-          leftVerticalPosts = _getVerticalPost(leftSidePosts);
-        }
-
-        if (rightSideVertical) {
-          rightVerticalPosts = _getVerticalPost(rightSidePosts);
-        }
-
-        // Removes vertical posts from current post array
-        // Vertical post are instanced in another variable
-        // to allow control the grid
-        _removeVerticalPosts(leftSidePosts);
-        _removeVerticalPosts(rightSidePosts);
-
         // alternates the position of the highlighted post in every row
         if (highlightPost !== undefined) {
-          highlightPost.position = isLeft ? '-left' : '-right';
+          highlightPost.isLeft = isLeft;
           isLeft = !isLeft;
         }
-
+        
         const postsPerRow = PostGridTemplate({
           highlightPost,
-          verticalLeft: {
-            leftSideVertical,
-            verticalPosts: leftVerticalPosts
-          },
-          verticalRight: {
-            rightSideVertical,
-            verticalPosts: rightVerticalPosts
-          },
           posts: {
             left: leftSidePosts,
             right: rightSidePosts,
