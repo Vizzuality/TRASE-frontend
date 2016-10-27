@@ -25,6 +25,14 @@
   &.-big {
     font-size: $font-size-huge;
   }
+
+  &.-medium {
+    font-size: $font-size-x-big;
+  }
+
+  &.-pink {
+    color: $medium-pink;
+  }
 }
 
 .-light {

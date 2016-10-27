@@ -1,0 +1,22 @@
+
+.c-anchor-list {
+
+  > .anchor-list > .anchor-item {
+
+    > a {
+      color: $charcoal-grey;
+      font-family: $font-family-2;
+      font-size: $font-size-xx-regular;
+    }
+
+    &:not(:first-child) {
+      margin: 32px 0 0;
+    }
+
+    &.-selected {
+      > a {
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}

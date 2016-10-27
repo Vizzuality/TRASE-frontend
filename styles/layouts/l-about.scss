@@ -1,2 +1,24 @@
 
-.l-about {}
+.l-about {
+  padding: 88px 0 104px ;
+  background-color: $manilla;
+
+  > .wrap {
+    display: flex;
+
+    > .c-anchor-list {
+      width: calc(100% / 3);
+    }
+
+    .title {
+
+      &:not(:first-child) {
+        margin: 56px 0 0;
+      }
+    }
+
+    > .content {
+    }
+  }
+
+}
