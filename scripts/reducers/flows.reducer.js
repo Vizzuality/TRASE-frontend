@@ -152,19 +152,13 @@ export default function (state = {}, action) {
     const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
     const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
     selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
-    selectedNodesStateUpdates.links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
+    selectedNodesStateUpdates.links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, state.selectedNodesColumnsPos);
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
 
   case actions.FILTER_LINKS_BY_NODES: {
-    let links;
-    if (state.selectedNodesIds.length > 0) {
-      const filteredLinks = filterLinks(state.unmergedLinks, state.selectedNodesIds, state.selectedNodesColumnsPos);
-      links = mergeLinks(filteredLinks);
-    } else {
-      links = mergeLinks(state.unmergedLinks);
-    }
+    let links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, state.selectedNodesColumnsPos);
     return Object.assign({}, state, { links });
   }
 
@@ -223,3 +217,12 @@ const getNodesMeta = (selectedNodesIds, visibleNodes) => {
     selectedNodesColumnsPos
   };
 };
+
+const getFilteredLinksByNodeIds = (unmergedLinks, selectedNodesIds, selectedNodesColumnsPos) => {
+  if (selectedNodesIds.length > 0) {
+    const filteredLinks = filterLinks(unmergedLinks, selectedNodesIds, selectedNodesColumnsPos);
+    return mergeLinks(filteredLinks);
+  } else {
+    return mergeLinks(unmergedLinks);
+  }
+}
