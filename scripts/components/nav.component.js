@@ -10,6 +10,10 @@ export default class {
     this._setVars();
     this._setEventListeners();
 
+    this.state = {
+      visibilityAppMenu: false
+    };
+
     // left side
     this.countryDropdown = new Dropdown('country', this.callbacks.onCountrySelected);
     this.commodityDropdown = new Dropdown('commodity', this.callbacks.onCommoditySelected);
@@ -27,6 +31,8 @@ export default class {
     new Dropdown('bookmark', this.callbacks.onQuantSelected);
     new ShareMenu();
     new Dropdown('share');
+
+    this.setAppMenuVisibility();
   }
 
   _setVars() {
@@ -42,13 +48,15 @@ export default class {
   }
 
   onToggleMenu() {
+    Object.assign(this.state, {visibilityAppMenu: !this.state.visibilityAppMenu });
+    
     this.toggleBtn.classList.toggle('open');
-    this.callbacks.onToggleAppMenu();
+    this.setAppMenuVisibility();
   }
 
-  setAppMenuVisibility(visibility) {
-    this.AppNav.classList.toggle('is-hidden', !visibility);
-    this.FlowsNav.classList.toggle('is-hidden', visibility);
+  setAppMenuVisibility() {
+    this.AppNav.classList.toggle('is-hidden', !this.state.visibilityAppMenu);
+    this.FlowsNav.classList.toggle('is-hidden', this.state.visibilityAppMenu);
   }
 
   selectYears(years) {

@@ -19,9 +19,6 @@ export default function (state = initialState, action) {
   case actions.TOGGLE_MAP:
     return Object.assign({}, state, { isMapVisible: !state.isMapVisible });
 
-  case actions.TOGGLE_APP_MENU:
-    return Object.assign({}, state, { isAppMenuVisible: !state.isAppMenuVisible});
-
   default:
     return state;
   }

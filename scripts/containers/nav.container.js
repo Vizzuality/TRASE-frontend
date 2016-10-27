@@ -1,6 +1,5 @@
 // see sankey.container for details on how to use those containers
 import connect from 'connect';
-import { toggleAppMenu } from 'actions/app.actions';
 import { selectQuant, selectCountry, selectCommodity, selectYears, selectQual, selectView } from 'actions/flows.actions';
 import Nav from 'components/nav.component.js';
 
@@ -10,8 +9,7 @@ const mapMethodsToState = (state) => ({
   selectCommodity: state.flows.selectedCommodity,
   selectYears: state.flows.selectedYears,
   selectQual: state.flows.selectedQual,
-  selectView: state.flows.selectedView,
-  setAppMenuVisibility: state.app.isAppMenuVisible
+  selectView: state.flows.selectedView
 });
 
 const mapViewCallbacksToActions = () => ({
@@ -20,8 +18,7 @@ const mapViewCallbacksToActions = () => ({
   onCommoditySelected: commodity => selectCommodity(commodity),
   onYearsSelected: years => selectYears(years),
   onQualSelected: qual => selectQual(qual),
-  onViewSelected: view => selectView(view),
-  onToggleAppMenu: (visibility) => toggleAppMenu(visibility)
+  onViewSelected: view => selectView(view)
 });
 
 export default connect(Nav, mapMethodsToState, mapViewCallbacksToActions);
