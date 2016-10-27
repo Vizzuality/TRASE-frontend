@@ -6,7 +6,7 @@ import PostGridTemplate from 'ejs!templates/homepage/post-grid.ejs';
 
 import 'styles/homepage.scss';
 
-const mapDefaults = {
+const defaults = {
   commodity: 'Soy',
   country: 'Brazil',
   postsPerColumn: 4
@@ -14,8 +14,8 @@ const mapDefaults = {
 
 const _setMap = () => {
   const imagesItem = document.querySelectorAll('.map-gallery-item');
-  const commodity = mapDefaults.commodity.toLowerCase();
-  const country = mapDefaults.country.toLowerCase();
+  const commodity = defaults.commodity.toLowerCase();
+  const country = defaults.country.toLowerCase();
   const imageName = `${commodity}-${country}`;
 
   imagesItem.forEach((imageItem) => {
@@ -28,7 +28,7 @@ const _onSelect = function(value) {
   // updates dropdown's title with new value
   this.setTitle(value);
   // updates default values with incoming ones
-  mapDefaults[this.id] = value;
+  defaults[this.id] = value;
 
   // change map image based on new values
   _setMap();
@@ -100,7 +100,7 @@ const _getPosts = () => {
           highlightPost.isLeft = isLeft;
           isLeft = !isLeft;
         }
-        
+
         const postsPerRow = PostGridTemplate({
           highlightPost,
           posts: {
@@ -117,7 +117,7 @@ const _getPosts = () => {
 const commodityDropdown = new Dropdown('commodity', _onSelect);
 const countryDropdown = new Dropdown('country', _onSelect);
 
-commodityDropdown.setTitle(mapDefaults.commodity);
-countryDropdown.setTitle(mapDefaults.country);
+commodityDropdown.setTitle(defaults.commodity);
+countryDropdown.setTitle(defaults.country);
 _setMap();
 _getPosts();
