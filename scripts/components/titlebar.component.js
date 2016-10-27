@@ -13,12 +13,7 @@ export default class {
   }
 
   _toggle(showTitles) {
-    if (showTitles === true) {
-      this.search.classList.add('is-hidden');
-      this.nodesTitles.classList.remove('is-hidden');
-    } else {
-      this.search.classList.remove('is-hidden');
-      this.nodesTitles.classList.add('is-hidden');
-    }
+    this.search.classList.toggle('is-hidden', showTitles);
+    this.nodesTitles.classList.toggle('is-hidden', !showTitles);
   }
 }
