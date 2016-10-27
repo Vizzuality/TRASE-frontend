@@ -9,12 +9,13 @@ export default function (rawNodes, columns, nodesMeta) {
   const nodesDict = {};
   rawNodes.forEach(node => {
     const columnId = node.columnId;
-    const column = columns.find(column => parseInt(column.id) === columnId);
+    const column = columns.find(column => column.id === columnId);
     const newNode = {
       columnId: parseInt(node.columnId),
+      columnName: column.name,
+      columnPosition: column.position,
       name: node.name,
       geoId: node.geoId,
-      columnName: column.attributes.nodeType,
       inds: []
     };
     if (node.isAggregated === true || node.isAggregated === 'true') {

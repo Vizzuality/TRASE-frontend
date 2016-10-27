@@ -1,0 +1,59 @@
+<div class="row <% if(!!highlightPost && !highlightPost.isLeft) { %> -reverse <% } %>">
+  <!-- left col  -->
+  <div class="col">
+
+    <% if (highlightPost) {%>
+
+      <div class="post-item -highlight"
+        <% if (highlightPost.image) { %>
+          style="background-image: url('<%= highlightPost['image'] %>')"
+          <% } %>
+        >
+        <h3 class="post-title">
+          <a href="<%= highlightPost['post_url'] %>" target="_blank"><%= highlightPost.title %></a>
+        </h3>
+        <% if(highlightPost.description) { %>
+          <p class="description paragraph -white"><%= highlightPost.description %></p>
+        <% } %>
+      </div>
+
+    <% } else { %>
+
+      <% posts.left.forEach(function(post) { %>
+          <% if (post) { %>
+            <div class="post-item <% if (!post.title) { %> -empty <% }%>"
+            <% if (post.image) { %>
+              style="background-image: url('<%= post.image %>')"
+            <% } %>
+            >
+              <h3 class="post-title">
+                <a href="<%= post['post_url'] %>" target="_blank"><%= post.title %></a>
+              </h3>
+              <% if(post.description) { %>
+                <p class="description paragraph -white"><%= post.description %></p>
+              <% } %>
+            </div>
+          <% } %>
+      <% }) %>
+    <% } %>
+  </div>
+  <!-- right col  -->
+  <div class="col">
+    <% posts.right.forEach(function(post) { %>
+      <% if (post) { %>
+        <div class="post-item <% if (!post.title) { %> -empty <% }%>"
+          <% if (post.image) { %>
+            style="background-image: url('<%= post.image %>')"
+          <% } %>
+          >
+            <h3 class="post-title">
+              <a href="<%= post['post_url'] %>" target="_blank"><%= post.title %></a>
+            </h3>
+            <% if(post.description) { %>
+              <p class="description paragraph -white"><%= post.description %></p>
+            <% } %>
+          </div>
+        <% } %>
+    <% }) %>
+  </div>
+</div>

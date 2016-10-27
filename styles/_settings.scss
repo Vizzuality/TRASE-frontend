@@ -5,6 +5,7 @@ $titlebar-height: 64px;
 $flow-content-y: $nav-height + $titlebar-height;
 $layer-map-width: 320px;
 $content-max-width: 865px;
+$max-width-grid: 1280px;
 
 $padding-wrap: 24px;
 
@@ -33,16 +34,39 @@ $cloudy-blue: #aadad1;
 $light-grey-blue: #8db6ca;
 $warm-pink: #f65e6e;
 
-$qual-soybeans: #bcda59;
-$qual-soybeancake: #2f7fab;
-$qual-soybeanoil: $warm-pink;
+$qual-biome-0: #66c2a5;
+$qual-biome-1: #fc8d62;
+$qual-biome-2: #8da0cb;
+$qual-biome-3: #e78ac3;
+$qual-biome-4: #a6d854;
+$qual-biome-5: #ffd92f;
 
-$qual1: #66c2a5;
-$qual2: #fc8d62;
-$qual3: #8da0cb;
-$qual4: #e78ac3;
-$qual5: #a6d854;
-$qual6: #ffd92f;
+$qual-f500-0: #e3a9a9;
+$qual-f500-1: #f4bda5;
+$qual-f500-2: #c2b5af;
+$qual-f500-3: #92c5de;
+$qual-f500-4: #4996c3;
+
+$qual-zero-deforestation-true: #d6e3a9;
+$qual-zero-deforestation-false: #e3a9a9;
+
+$qual-water-scarcity-0: #d73027;
+$qual-water-scarcity-1: #fc8d59;
+$qual-water-scarcity-2: #fee090;
+$qual-water-scarcity-3: #ffffbf;
+$qual-water-scarcity-4: #e0f3f8;
+$qual-water-scarcity-5: #91bfdb;
+$qual-water-scarcity-6: #4575b4;
+
+$qual-green-0: #ffc;
+$qual-green-1: #c2e699;
+$qual-green-2: #78c679;
+$qual-green-3: #31a354;
+$qual-green-4: #006837;
+
+$qual-colors: $qual-biome-0, $qual-biome-1, $qual-biome-2, $qual-biome-3, $qual-biome-4, $qual-biome-5, $qual-f500-0, $qual-f500-1, $qual-f500-2, $qual-f500-3, $qual-f500-4, $qual-zero-deforestation-true, $qual-zero-deforestation-false, $qual-water-scarcity-0, $qual-water-scarcity-1, $qual-water-scarcity-2, $qual-water-scarcity-3, $qual-water-scarcity-4, $qual-water-scarcity-5, $qual-water-scarcity-6, $qual-green-0, $qual-green-1, $qual-green-2, $qual-green-3, $qual-green-4;
+
+$qual-colors-names: '-qual-biome-0', '-qual-biome-1', '-qual-biome-2', '-qual-biome-3', '-qual-biome-4', '-qual-biome-5', '-qual-f500-0', '-qual-f500-1', '-qual-f500-2', '-qual-f500-3', '-qual-f500-4', '-qual-zero-deforestation-true', '-qual-zero-deforestation-false', '-qual-water-scarcity-0', '-qual-water-scarcity-1', '-qual-water-scarcity-2', '-qual-water-scarcity-3', '-qual-water-scarcity-4', '-qual-water-scarcity-5', '-qual-water-scarcity-6', '-qual-green-0', '-qual-green-1', '-qual-green-2', '-qual-green-3', '-qual-green-4';
 
 // typography
 $font-family-1: 'DecimaMonoPro', sans-serif;
@@ -58,12 +82,14 @@ $font-size-x-regular: 13px;
 $font-size-xx-regular: 16px;
 $font-size-medium: 18px;
 $font-size-big: 24px;
+$font-size-x-big: 32px;
 $font-size-huge: 48px;
 
 // Breakpoints
 $breakpoint-mobile:  425px;
 $breakpoint-tablet:  768px;
 $breakpoint-laptop: 1024px;
+$breakpoint-desktop: 1280px;
 
 
 // Animations
