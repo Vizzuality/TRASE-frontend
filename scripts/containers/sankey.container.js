@@ -18,8 +18,8 @@ const mapMethodsToState = (state) => ({
     }
   },
   windowResized: state.app.windowSize,
-  highlightNode: state.flows.highlightedNodeId,
-  selectNodes: state.flows.selectedNodesIds
+  selectNodes: state.flows.selectedNodesIds,
+  highlightNodes: state.flows.highlightedNodesIds,
 });
 
 // maps component callbacks (ie user events) to redux actions
@@ -28,7 +28,7 @@ const mapMethodsToState = (state) => ({
 // and values = functions returning an action
 const mapViewCallbacksToActions = () => ({
   onNodeClicked: (id, isAggregated) => selectNode(id, isAggregated),
-  onNodeHighlighted: id => highlightNode(id)
+  onNodeHighlighted: (id, isAggregated) => highlightNode(id, isAggregated)
 });
 
 export default connect(Sankey, mapMethodsToState, mapViewCallbacksToActions);

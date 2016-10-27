@@ -1,6 +1,6 @@
 // see sankey.container for details on how to use those containers
 import { toggleMap, toggleMapLayerMenu } from 'actions/app.actions';
-import { selectNodeFromGeoId } from 'actions/flows.actions';
+import { selectNodeFromGeoId, highlightNodeFromGeoId } from 'actions/flows.actions';
 import connect from 'connect';
 import Map from 'components/map.component.js';
 
@@ -17,11 +17,13 @@ const mapMethodsToState = (state) => ({
   },
   selectVectorLayer: state.flows.selectedColumnsIds,
   selectPolygons: state.flows.selectedNodesGeoIds,
+  highlightPolygon: state.flows.highlightedGeoIds,
   setChoropleth: state.flows.choropleth
 });
 
 const mapViewCallbacksToActions = () => ({
-  onPolygonClicked: geoId => { console.log(geoId); return selectNodeFromGeoId(geoId); },
+  onPolygonClicked: geoId => selectNodeFromGeoId(geoId),
+  onPolygonHighlighted: geoId => highlightNodeFromGeoId(geoId),
   onToggleMap: () => toggleMap(),
   onToggleMapLayerMenu: () => toggleMapLayerMenu()
 });

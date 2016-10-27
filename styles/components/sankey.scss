@@ -32,8 +32,14 @@
     }
 
     &.-selected {
-      // transform: scale(1.1,1);
-      // transform-origin: center;
+      filter: url(#drop-shadow); //ignore sasslint warning here
+
+      .sankey-node-rect {
+        fill: $white;
+      }
+    }
+
+    &.-highlighted {
 
       .sankey-node-rect {
         fill: $white;

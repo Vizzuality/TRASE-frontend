@@ -225,13 +225,25 @@ export function selectNodeFromGeoId(geoId) {
   };
 }
 
-
-export function highlightNode(nodeId) {
+export function highlightNode(nodeId, isAggregated) {
   return (dispatch, getState) => {
+    if (isAggregated) return;
+
+    // TODO move this to reducer
     if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) return;
+
     dispatch({
       type: actions.HIGHLIGHT_NODE,
       nodeId
+    });
+  };
+}
+
+export function highlightNodeFromGeoId(geoId) {
+  return dispatch => {
+    dispatch({
+      type: actions.HIGHLIGHT_NODE_FROM_GEOID,
+      geoId
     });
   };
 }

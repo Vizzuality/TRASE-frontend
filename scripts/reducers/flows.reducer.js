@@ -101,12 +101,38 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { selectedColumnsIds });
   }
 
-  case actions.HIGHLIGHT_NODE:
-    return Object.assign({}, state, { highlightedNodeId: action.id });
+  case actions.HIGHLIGHT_NODE: {
+    const highlightedNodeMeta = getNodesMeta([action.nodeId], state.visibleNodes);
+    return Object.assign({}, state, {
+      highlightedNodesIds: (action.nodeId === undefined) ? [] : [action.nodeId],
+      highlightedNodeData: highlightedNodeMeta.selectedNodesData,
+      highlightedGeoIds: highlightedNodeMeta.selectedNodesGeoIds
+    });
+  }
+
+  case actions.HIGHLIGHT_NODE_FROM_GEOID: {
+    const nodeId = getNodeIdFromGeoId(action.geoId, state.visibleNodes);
+    if (nodeId === null) {
+      return Object.assign({}, state, {
+        highlightedNodesIds: [],
+        // still send geoId even if nodeId not found, because we still want map polygon to highlight
+        highlightedGeoIds: [action.geoId],
+        highlightedNodeData: []
+      });
+    }
+
+    const highlightedNodeMeta = getNodesMeta([nodeId], state.visibleNodes);
+    return Object.assign({}, state, {
+      highlightedNodesIds: [nodeId],
+      highlightedNodeData: highlightedNodeMeta.selectedNodesData,
+      highlightedGeoIds: [action.geoId]
+    });
+  }
 
   case actions.SELECT_NODE: {
     const selectedNodesIds = getSelectedNodesIds(action.nodeId, state.selectedNodesIds);
-    const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
+    const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
+    selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
@@ -116,14 +142,17 @@ export default function (state = {}, action) {
     if (nodeId === null) return state;
 
     const selectedNodesIds = getSelectedNodesIds(nodeId, state.selectedNodesIds);
-    const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
+    const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
+    selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
   // this is triggered when links are reloaded to keep track of selected node/links
   case actions.RESELECT_NODES: {
     const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
-    const selectedNodesStateUpdates = getSelectedNodesStateUpdates(selectedNodesIds, state.visibleNodes);
+    const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
+    selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
+    selectedNodesStateUpdates.links = getFilteredLinks(state.unmergedLinks, state.selectedNodesIds);
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
@@ -182,14 +211,13 @@ const getSelectedNodesIds = (addedNodeId, currentSelectedNodesIds) => {
   return selectedNodesIds;
 };
 
-const getSelectedNodesStateUpdates = (selectedNodesIds, visibleNodes) => {
+const getNodesMeta = (selectedNodesIds, visibleNodes) => {
   // TODO use data from get_nodes API / state.nodesDictWithMeta along with get_flows / visibleNodes
   const selectedNodesData = getSelectedNodesData(selectedNodesIds, visibleNodes);
   const selectedNodesGeoIds = selectedNodesData.map(node => node.geoId).filter(geoId => geoId !== undefined);
   const selectedNodesColumnsPos = selectedNodesData.map(node => node.columnPosition);
 
   return {
-    selectedNodesIds,
     selectedNodesData,
     selectedNodesGeoIds,
     selectedNodesColumnsPos

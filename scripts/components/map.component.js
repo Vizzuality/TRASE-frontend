@@ -49,6 +49,27 @@ export default class {
     });
   }
 
+  highlightPolygon(geoIds) {
+    if (!this.currentLayer) {
+      return;
+    }
+
+    if (this.highlightedLayer) this.map.removeLayer(this.highlightedLayer);
+
+    if (geoIds.length > 0) {
+      const geoId = geoIds[0];
+      this.currentLayer.eachLayer(layer => {
+        if (geoId === layer.feature.properties.geoid) {
+          // polygon appears 'burried', and SVG does nto support z-indexes
+          // so we have to recreate the hover layer on top of all other polygons
+          this.highlightedLayer = L.geoJSON(layer.feature);
+          this.highlightedLayer.setStyle(() => { return { className: 'map-polygon -highlighted'}; });
+          this.map.addLayer(this.highlightedLayer);
+        }
+      });
+    }
+  }
+
   selectVectorLayer(columnIds) {
     if (!this.vectorLayers) return;
     const id = columnIds[0];
@@ -70,14 +91,15 @@ export default class {
       topoLayer.addData(geojson);
     });
     topoLayer.setStyle(() => { return { className: `${polygonClassName} map-polygon`}; });
+
     topoLayer.eachLayer(layer => {
       const that = this;
       layer.on({
         mouseover: function() {
-          this._path.classList.add('-highlighted');
+          that.callbacks.onPolygonHighlighted(this.feature.properties.geoid);
         },
         mouseout: function() {
-          this._path.classList.remove('-highlighted');
+          that.callbacks.onPolygonHighlighted();
         },
         click: function() {
           that.callbacks.onPolygonClicked(this.feature.properties.geoid);
