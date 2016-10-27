@@ -110,26 +110,40 @@ export default class {
       .attr('height', d => d.renderedHeight);
 
     this.nodes.exit()
-      .transition()
-      .attr('transform', d => `translate(-100,${d.y})`)
       .remove();
 
 
-    this.linksContainer.selectAll('path').remove();
-    this.linksContainer
+    const linksData = this.layout.links();
+
+    const links = this.linksContainer
       .selectAll('path')
-      .data(this.layout.links())
-      .enter()
+      .data(linksData , link => link.id);
+
+    // update
+    links.transition()
+      .attr('stroke-width', d => d.renderedHeight)
+      .attr('d', this.layout.link());
+
+    // enter
+    links.enter()
       .append('path')
       .attr('class', link => `sankey-link -qual-${link.qual}`)
-      .attr('stroke-width', d => d.renderedHeight)
       .attr('d', this.layout.link())
       .on('mouseover', function() {
         this.classList.add('-hover');
       })
       .on('mouseout', function() {
         this.classList.remove('-hover');
-      });
+      })
+      .transition()
+      .attr('stroke-width', d => d.renderedHeight);
+
+    // exit
+    links.exit()
+      .transition()
+      .attr('stroke-width', 0)
+      .remove();
+
   }
 
   _onNodeOver(selection, nodeId, isAggregated) {

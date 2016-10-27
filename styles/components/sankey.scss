@@ -57,9 +57,11 @@
       opacity: 1;
     }
 
-    &.-qual-soybeans { stroke: $qual-soybeans; }
-    &.-qual-soybeancake { stroke: $qual-soybeancake; }
-    &.-qual-soybeanoil { stroke: $qual-soybeanoil; }
+    @for $i from 1 through length($qual-colors) {
+      &.#{nth($qual-colors-names, $i)} {
+        stroke: #{nth($qual-colors, $i)};
+      }
+    }
   }
 
 }

@@ -1,0 +1,24 @@
+
+.c-map-risks {
+  display: flex;
+  flex-direction: column;
+  margin: 104px 0 0;
+
+  > .map {
+    width: 100%;
+    height: 525px;
+    margin: 16px 0;
+
+    > .map-gallery-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-height: 400px;
+      overflow: hidden;
+    }
+  }
+
+  > .btn-find-out {
+    margin: 0 auto;
+  }
+}
