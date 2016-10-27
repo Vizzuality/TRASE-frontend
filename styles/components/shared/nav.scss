@@ -214,17 +214,11 @@
           flex-grow: 1;
           height: 5px;
 
-<<<<<<< HEAD
-          &.-qual-soybeans       { background-color: $qual-soybeans; }
-          &.-qual-soybeancake    { background-color: $qual-soybeancake; }
-          &.-qual-soybeanoil     { background-color: $qual-soybeanoil; }
-=======
           @for $i from 1 through length($qual-colors) {
             &.#{nth($qual-colors-names, $i)} {
               background-color: #{nth($qual-colors, $i)};
             }
           }
->>>>>>> 444f775199648458a2da6e27714e6826eeca8e84
         }
       }
     }
