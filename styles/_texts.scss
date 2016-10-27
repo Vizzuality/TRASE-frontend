@@ -8,6 +8,10 @@
   letter-spacing: -1.3px;
   line-height: 1.5;
 
+  & + & {
+    margin: 32px 0 0;
+  }
+
   &.-gray {
     color: $gray;
   }
