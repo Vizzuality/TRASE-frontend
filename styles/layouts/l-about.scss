@@ -1,13 +1,16 @@
 
 .l-about {
+  position: relative;
   padding: 88px 0 104px ;
   background-color: $manilla;
 
   > .wrap {
-    display: flex;
+    position: relative;
 
     > .c-anchor-list {
-      width: calc(100% / 3);
+      position: absolute;
+      top: 0;
+      width: $anchor-list-max-width;
     }
 
     .title {
@@ -18,6 +21,8 @@
     }
 
     > .content {
+      width: calc(100% - #{$anchor-list-max-width});
+      margin: 0 0 0 $anchor-list-max-width;
     }
   }
 

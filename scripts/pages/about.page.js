@@ -2,22 +2,22 @@ import 'styles/about.scss';
 
 import smoothScroll from 'utils/smoothScroll';
 
+const _toggleAnchors = (e) => {
+  const target = e && e.target.hash;
+  const anchorItems = document.querySelectorAll('.anchor-item > a');
 
-// const _doScroll = (e) => {
-//   e && e.preventDefault();
-//   const target = e.target;
-//
-// };
+  anchorItems.forEach((anchorItem) => {
+    anchorItem.parentElement.classList.toggle('-selected', anchorItem.hash === target);
+  });
+};
 
+const _setEventListeners = () => {
+  const anchorItems = document.querySelectorAll('.anchor-item > a');
 
-// const _setEventListeners = () => {
-//   const anchorItems = document.querySelectorAll('.anchor-item > a');
-//
-//   anchorItems.forEach((anchorItem) => {
-//     anchorItem.addEventListener('click', (e) => _doScroll(e));
-//   });
-//
-// };
+  smoothScroll(anchorItems);
+  anchorItems.forEach((anchorItem) => {
+    anchorItem.addEventListener('click', (e) => _toggleAnchors(e));
+  });
+};
 
-// _setEventListeners();
-smoothScroll();
+_setEventListeners();

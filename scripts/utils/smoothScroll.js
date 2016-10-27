@@ -1,5 +1,5 @@
 
-export default () => {
+export default (elems) => {
 
   // We do not want this script to be applied in browsers that do not support those
   // That means no smoothscroll on IE9 and below.
@@ -125,15 +125,21 @@ export default () => {
     }
   };
 
+  if (!elems.length) return;
+
+  elems.forEach((el) => {
+    el.addEventListener('click', linkHandler, false);
+  });
+
 
   // We look for all the internal links in the documents and attach the smoothscroll function
-  document.addEventListener('DOMContentLoaded', function() {
-    const internal = document.querySelectorAll('.anchor-item > a');
-
-    for (let i = internal.length; i--;) {
-      internal[i].addEventListener('click', linkHandler, false);
-    }
-  });
+  // document.addEventListener('DOMContentLoaded', function() {
+  //   const internal = document.querySelectorAll('.anchor-item > a');
+  //
+  //   for (let i = internal.length; i--;) {
+  //     internal[i].addEventListener('click', linkHandler, false);
+  //   }
+  // });
 
   // return smoothscroll API
   return smoothScroll;

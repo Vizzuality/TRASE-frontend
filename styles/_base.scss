@@ -37,4 +37,8 @@
   width: 100%;
   margin: 0 auto;
   padding: 0 $padding-wrap;
+
+  @media screen and (min-width: $breakpoint-desktop) {
+    padding: 0 $padding-wrap-desktop;
+  }
 }
