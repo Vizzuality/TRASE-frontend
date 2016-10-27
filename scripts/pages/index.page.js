@@ -37,7 +37,8 @@ const _onSelect = function(value) {
 const _getPosts = () => {
   const postList = document.querySelector('.js-posts-grid');
 
-  fetch('homepage/posts.json')
+
+  fetch('//traseplatform.org/content')
     .then(response => response.json())
     .then((data) => {
       let posts = data.posts;
