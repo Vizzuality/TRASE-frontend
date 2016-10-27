@@ -27,6 +27,12 @@
       transition: .5s ease-in-out;
       cursor: pointer;
 
+      &:hover {
+        > .ingredient {
+          background: $medium-pink;
+        }
+      }
+
       > .ingredient {
         display: block;
         position: absolute;
@@ -36,7 +42,7 @@
         transform: rotate(0deg);
         transition: .25s ease-in-out;
         border-radius: 3px;
-        background: $medium-pink;
+        background: $black;
         opacity: 1;
 
         &:first-child {
@@ -59,6 +65,12 @@
       }
 
       &.open {
+
+        &:hover {
+          > .ingredient {
+            background: $medium-pink;
+          }
+        }
 
         > .ingredient {
           border-radius: 0;
