@@ -102,9 +102,10 @@ export default function (state = {}, action) {
   }
 
   case actions.HIGHLIGHT_NODE: {
-    const highlightedNodeMeta = getNodesMeta([action.nodeId], state.visibleNodes);
+    const nodeIds = (action.nodeId === undefined) ? [] : [action.nodeId];
+    const highlightedNodeMeta = getNodesMeta(nodeIds, state.visibleNodes);
     return Object.assign({}, state, {
-      highlightedNodesIds: (action.nodeId === undefined) ? [] : [action.nodeId],
+      highlightedNodesIds: nodeIds,
       highlightedNodeData: highlightedNodeMeta.selectedNodesData,
       highlightedGeoIds: highlightedNodeMeta.selectedNodesGeoIds
     });
@@ -152,7 +153,6 @@ export default function (state = {}, action) {
     const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
     const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
     selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
-    selectedNodesStateUpdates.links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, state.selectedNodesColumnsPos);
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
