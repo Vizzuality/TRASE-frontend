@@ -2,24 +2,24 @@
 // add as many offsets you need
 function calculateOffsets(el) {
   const absoluteOffsetTop = el.getBoundingClientRect().top;
-  let top;
+  let top = 0;
 
-  if (!window.pageYOffset) {
-    top = Math.abs(absoluteOffsetTop);
-  } else {
-    top = window.pageYOffset > absoluteOffsetTop ?
-      window.pageYOffset + absoluteOffsetTop : window.pageYOffset + Math.abs(absoluteOffsetTop);
-  }
-  
+  top = window.pageYOffset > absoluteOffsetTop ?
+    window.pageYOffset + absoluteOffsetTop : window.pageYOffset + Math.abs(absoluteOffsetTop);
+
   return {
     top
   };
 }
 
-function scrollDocument (el, offsets) {
-  var scrollTop = window.pageYOffset;
+function scrollDocument (el, offsets, cutOffsets) {
+  const scrollTop = window.pageYOffset;
+  const elemHeight = el.getBoundingClientRect().height;
+  const cutTopPoint = cutOffsets.cutTopOffsets.top;
+  const cutBottomPoint = cutOffsets.cutBottomOffsets.top - elemHeight;
 
-  el.classList.toggle('is-fixed', scrollTop >= offsets.top);
+  el.classList.toggle('is-fixed', scrollTop >= cutTopPoint && scrollTop <= cutBottomPoint);
+  el.classList.toggle('-bottom', scrollTop > cutBottomPoint);
 }
 
 export { calculateOffsets, scrollDocument };
