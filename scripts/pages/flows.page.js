@@ -23,7 +23,7 @@ const initialState = {
   flows: {
     selectedCountry: 'brazil',
     selectedCommodity: 'soy',
-    selectedYears: [2012, 2014],
+    selectedYears: [2015, 2016],
     selectedQuant: 'Deforestation risk',
     selectedView: 1,
     selectedQual: 'none',

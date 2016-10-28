@@ -13,7 +13,7 @@ export default function(nodesDict, nodesMeta /*, layers*/) {
     nodeWithMeta.meta = null;
 
     if (nodeMeta) {
-      nodeMeta.layerValues.forEach(layerValue => {
+      nodeMeta.values.forEach(layerValue => {
         if (!nodeWithMeta.meta) nodeWithMeta.meta = {};
         const uid = getNodeMetaUid(layerValue.type, layerValue.id);
         nodeWithMeta.meta[uid] = {

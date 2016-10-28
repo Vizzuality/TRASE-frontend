@@ -111,7 +111,7 @@ export function loadNodes() {
       commodity: getState().flows.selectedCommodity.toUpperCase(),
       year_start: getState().flows.selectedYears[0],
       year_end: getState().flows.selectedYears[1],
-      column_id: 2
+      // column_id: 2
     };
 
     const url = getURLFromParams('/v1/get_nodes', params);
