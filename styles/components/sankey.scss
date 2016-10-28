@@ -64,7 +64,7 @@
     }
   }
 
-  .icon-expand {
+  .expand-button {
     display: none;
     position: absolute;
     width: 24px;
@@ -72,9 +72,24 @@
     border-radius: 99px;
     background-color: $medium-pink;
     color: $white;
+    box-shadow: $box-shadow-big;
+    cursor: pointer;
 
     &.-visible {
       display: block;
+    }
+
+    &::after {
+      display: block;
+      position: absolute;
+      top: 4px;
+      left: -1px;
+      transform: rotate(90deg) scaleX(.7);
+      font-family: Arial;
+      font-size: 17px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      content: '<>';
     }
   }
 
