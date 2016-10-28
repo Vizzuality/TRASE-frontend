@@ -131,7 +131,6 @@ export default function (state = {}, action) {
 
   case actions.SELECT_NODE: {
     const selectedNodesIds = getSelectedNodesIds(action.nodeId, state.selectedNodesIds);
-    console.log(selectedNodesIds)
     const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
     selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
     return Object.assign({}, state, selectedNodesStateUpdates);

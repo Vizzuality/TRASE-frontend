@@ -11,14 +11,14 @@ export default class {
     this._build();
   }
 
-  resizeViewport(selectedNodesIds) {
+  resizeViewport({selectedNodesIds, nodesExpanded}) {
     this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
 
     if (this.layout.relayout()) {
       this._render();
     }
 
-    this._placeExpandButton(selectedNodesIds);
+    this._placeExpandButton(selectedNodesIds, nodesExpanded);
   }
 
   initialDataLoadStarted(loading) {
@@ -36,12 +36,12 @@ export default class {
     }
   }
 
-  selectNodes(nodesIds) {
+  selectNodes({selectedNodesIds, nodesExpanded}) {
     // let minimumY = Infinity;
 
     this.sankeyColumns.selectAll('.sankey-node')
       .classed('-selected', node => {
-        const isSelected = nodesIds.indexOf(node.id) > -1;
+        const isSelected = selectedNodesIds.indexOf(node.id) > -1;
         // if (isSelected) {
         //   if (node.y < minimumY) {
         //     minimumY = node.y;
@@ -50,7 +50,7 @@ export default class {
         return isSelected;
       });
 
-    this._placeExpandButton(nodesIds);
+    this._placeExpandButton(selectedNodesIds, nodesExpanded);
 
   }
 
@@ -83,7 +83,7 @@ export default class {
     this.callbacks.onExpandClick();
   }
 
-  _placeExpandButton(nodesIds) {
+  _placeExpandButton(nodesIds, nodesExpanded) {
     // TODO split by columns
     if (nodesIds.length > 0) {
       this.expandButton.classList.add('-visible');
@@ -92,10 +92,11 @@ export default class {
         .filter(node => node.id === nodesIds[0])
         .data()[0];
 
-      console.log(lastSelectedNode)
-
-      this.expandButton.style.top = `${lastSelectedNode.y}px`;
+      let y = Math.max(0, lastSelectedNode.y - 12);
+      this.expandButton.style.top = `${y}px`;
       this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
+
+      this.expandButton.classList.toggle('.-expanded', nodesExpanded);
     } else {
       this.expandButton.classList.remove('-visible');
     }
