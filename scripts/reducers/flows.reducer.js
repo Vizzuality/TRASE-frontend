@@ -131,6 +131,7 @@ export default function (state = {}, action) {
 
   case actions.SELECT_NODE: {
     const selectedNodesIds = getSelectedNodesIds(action.nodeId, state.selectedNodesIds);
+    console.log(selectedNodesIds)
     const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
     selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
     return Object.assign({}, state, selectedNodesStateUpdates);
@@ -190,7 +191,9 @@ export default function (state = {}, action) {
   }
 
   case actions.TOGGLE_NODES_EXPAND: {
-    return Object.assign({}, state, { nodesExpanded: !state.nodesExpanded });
+    // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
+    const lastSelectedNodeId = state.selectedNodesIds[0];
+    return Object.assign({}, state, { nodesExpanded: !state.nodesExpanded, selectedNodesIds: [lastSelectedNodeId] });
   }
 
   default:

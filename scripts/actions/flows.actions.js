@@ -149,7 +149,9 @@ export function loadLinks() {
     }
 
     if (getState().flows.nodesExpanded) {
-      params.selected_nodes = getState().flows.selectedNodesIds.join(',');
+      // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
+      // params.selected_nodes = getState().flows.selectedNodesIds.join(',');
+      params.selected_nodes = getState().flows.selectedNodesIds[0];
     }
 
     const url = getURLFromParams('/v1/get_flows', params);

@@ -34,23 +34,31 @@ export default class {
   }
 
   selectNodes(nodesIds) {
-    let minimumY = Infinity;
+    // let minimumY = Infinity;
 
     this.sankeyColumns.selectAll('.sankey-node')
       .classed('-selected', node => {
         const isSelected = nodesIds.indexOf(node.id) > -1;
-        if (isSelected) {
-          if (node.y < minimumY) {
-            minimumY = node.y;
-          }
-        }
+        // if (isSelected) {
+        //   if (node.y < minimumY) {
+        //     minimumY = node.y;
+        //   }
+        // }
         return isSelected;
       });
 
     // TOD split by columns
     if (nodesIds.length > 0) {
       this.expandButton.classList.add('-visible');
-      this.expandButton.style.top = `${minimumY - 12}px`;
+
+      const lastSelectedNode = this.sankeyColumns.selectAll('.sankey-node')
+        .filter(node => node.id === nodesIds[0])
+        .data()[0];
+
+      console.log(lastSelectedNode)
+
+      this.expandButton.style.top = `${lastSelectedNode.y}px`;
+      this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
     } else {
       this.expandButton.classList.remove('-visible');
     }
