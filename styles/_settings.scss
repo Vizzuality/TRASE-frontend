@@ -5,7 +5,7 @@ $titlebar-height: 64px;
 $flow-content-y: $nav-height + $titlebar-height;
 $layer-map-width: 320px;
 $content-max-width: 865px;
-$anchor-list-max-width: 240px;
+$anchor-list-max-width: calc(100% / 3);
 $max-width-grid: 1280px;
 
 $padding-wrap: 24px;
