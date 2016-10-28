@@ -17,7 +17,14 @@ const mapMethodsToState = (state) => ({
       };
     }
   },
-  windowResized: state.app.windowSize,
+  resizeViewport: {
+    _comparedValue: (state) =>  state.app.windowSize,
+    _returnedValue: (state) => {
+      // we don't actually need state.app.windowSize, because a CSS computed cotainer size is used
+      // but we do need selectedNodesIds, to place the expand buttons correctly
+      return state.flows.selectedNodesIds;
+    }
+  },
   selectNodes: state.flows.selectedNodesIds,
   highlightNodes: state.flows.highlightedNodesIds,
 });

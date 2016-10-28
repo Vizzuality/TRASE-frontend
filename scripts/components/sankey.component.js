@@ -10,12 +10,15 @@ export default class {
   onCreated() {
     this._build();
   }
-  windowResized() {
+
+  resizeViewport(selectedNodesIds) {
     this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
 
     if (this.layout.relayout()) {
       this._render();
     }
+
+    this._placeExpandButton(selectedNodesIds);
   }
 
   initialDataLoadStarted(loading) {
@@ -47,21 +50,7 @@ export default class {
         return isSelected;
       });
 
-    // TOD split by columns
-    if (nodesIds.length > 0) {
-      this.expandButton.classList.add('-visible');
-
-      const lastSelectedNode = this.sankeyColumns.selectAll('.sankey-node')
-        .filter(node => node.id === nodesIds[0])
-        .data()[0];
-
-      console.log(lastSelectedNode)
-
-      this.expandButton.style.top = `${lastSelectedNode.y}px`;
-      this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
-    } else {
-      this.expandButton.classList.remove('-visible');
-    }
+    this._placeExpandButton(nodesIds);
 
   }
 
@@ -92,6 +81,24 @@ export default class {
 
   _onExpandClick() {
     this.callbacks.onExpandClick();
+  }
+
+  _placeExpandButton(nodesIds) {
+    // TODO split by columns
+    if (nodesIds.length > 0) {
+      this.expandButton.classList.add('-visible');
+
+      const lastSelectedNode = this.sankeyColumns.selectAll('.sankey-node')
+        .filter(node => node.id === nodesIds[0])
+        .data()[0];
+
+      console.log(lastSelectedNode)
+
+      this.expandButton.style.top = `${lastSelectedNode.y}px`;
+      this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
+    } else {
+      this.expandButton.classList.remove('-visible');
+    }
   }
 
   _toggleLoading(loading) {
