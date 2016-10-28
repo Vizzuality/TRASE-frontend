@@ -189,6 +189,11 @@ export default function (state = {}, action) {
   case actions.SELECT_CONTEXTUAL_LAYERS: {
     return Object.assign({}, state, { selectedContextualLayers: action.contextualLayers});
   }
+
+  case actions.TOGGLE_NODES_EXPAND: {
+    return Object.assign({}, state, { nodesExpanded: !state.nodesExpanded });
+  }
+
   default:
     return state;
   }

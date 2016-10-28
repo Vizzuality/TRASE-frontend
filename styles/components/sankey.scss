@@ -64,4 +64,18 @@
     }
   }
 
+  .icon-expand {
+    display: none;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 99px;
+    background-color: $medium-pink;
+    color: $white;
+
+    &.-visible {
+      display: block;
+    }
+  }
+
 }

@@ -148,6 +148,10 @@ export function loadLinks() {
       params.flow_qual = selectedQual;
     }
 
+    if (getState().flows.nodesExpanded) {
+      params.clicked_nodes = getState().flows.selectedNodesIds.join(',');
+      params.filter_mode = 2;
+    }
     // if (getState().flows.selectedNodesIds.length) {
     //   params.clicked_nodes = getState().flows.selectedNodesIds.join(',');
     //   params.filter_mode = 2;
@@ -245,5 +249,17 @@ export function highlightNodeFromGeoId(geoId) {
       type: actions.HIGHLIGHT_NODE_FROM_GEOID,
       geoId
     });
+  };
+}
+
+export function toggleNodesExpand(reloadLinks = true) {
+  return dispatch => {
+    const action = {
+      type: actions.TOGGLE_NODES_EXPAND
+    };
+    dispatch(action);
+    if (reloadLinks) {
+      dispatch(loadLinks());
+    }
   };
 }

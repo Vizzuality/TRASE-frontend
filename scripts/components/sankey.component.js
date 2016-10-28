@@ -34,10 +34,27 @@ export default class {
   }
 
   selectNodes(nodesIds) {
+    let minimumY = Infinity;
+
     this.sankeyColumns.selectAll('.sankey-node')
       .classed('-selected', node => {
-        return nodesIds.indexOf(node.id) > -1;
+        const isSelected = nodesIds.indexOf(node.id) > -1;
+        if (isSelected) {
+          if (node.y < minimumY) {
+            minimumY = node.y;
+          }
+        }
+        return isSelected;
       });
+
+    // TOD split by columns
+    if (nodesIds.length > 0) {
+      this.expandButton.classList.add('-visible');
+      this.expandButton.style.top = `${minimumY - 12}px`;
+    } else {
+      this.expandButton.classList.remove('-visible');
+    }
+
   }
 
   highlightNodes(nodesIds) {
@@ -59,6 +76,14 @@ export default class {
     this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
 
     addSVGDropShadowDef(this.svg);
+
+    this.expandButton = document.querySelector('.js-expand');
+    this.expandButton.addEventListener('click', this._onExpandClick.bind(this));
+
+  }
+
+  _onExpandClick() {
+    this.callbacks.onExpandClick();
   }
 
   _toggleLoading(loading) {
