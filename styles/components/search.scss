@@ -1,0 +1,18 @@
+@import '../settings';
+
+.c-search {
+  .awesomplete > ul > li {
+		position: relative;
+		padding: .2em .5em;
+		cursor: pointer;
+    text-transform: capitalize;
+
+    > .nodeName {
+      font-weight: bold;
+    }
+
+    > .nodeType {
+      
+    }
+	}
+}
