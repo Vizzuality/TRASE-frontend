@@ -199,10 +199,17 @@ const _loadMapVectorLayers = (urls, dispatch) => {
 
 
 export function selectNode(nodeId, isAggregated) {
-  return dispatch => {
+  return (dispatch, getState) => {
     if (isAggregated) {
       console.log('switch to detailed mode!');
     } else {
+      // unselecting the node that is currently expanded: just shrink it and bail 
+      const expandedNodesIds = getState().flows.expandedNodesIds;
+      if (expandedNodesIds && nodeId === expandedNodesIds[0]) {
+        dispatch(toggleNodesExpand());
+        return;
+      }
+
       dispatch({
         type: actions.SELECT_NODE,
         nodeId
