@@ -149,13 +149,8 @@ export function loadLinks() {
     }
 
     if (getState().flows.nodesExpanded) {
-      params.clicked_nodes = getState().flows.selectedNodesIds.join(',');
-      params.filter_mode = 2;
+      params.selected_nodes = getState().flows.selectedNodesIds.join(',');
     }
-    // if (getState().flows.selectedNodesIds.length) {
-    //   params.clicked_nodes = getState().flows.selectedNodesIds.join(',');
-    //   params.filter_mode = 2;
-    // }
 
     const url = getURLFromParams('/v1/get_flows', params);
 
