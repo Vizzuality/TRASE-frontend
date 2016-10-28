@@ -3,7 +3,8 @@ import actions from 'actions';
 const initialState = {
   windowSize: [window.innerWidth, window.innerHeight],
   isMapLayerVisible: false,
-  isMapVisible: false
+  isMapVisible: false,
+  isAppMenuVisible: false
 };
 
 export default function (state = initialState, action) {
