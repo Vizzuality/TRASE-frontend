@@ -81,7 +81,7 @@ export function loadInitialData() {
 
     const params = {
       country: getState().flows.selectedCountry,
-      raw: getState().flows.selectedCommodity
+      commodity: getState().flows.selectedCommodity
     };
     const allNodesURL = getURLFromParams('/v1/get_all_nodes', params);
     const columnsURL = getURLFromParams('/v1/get_columns', params);
@@ -108,7 +108,7 @@ export function loadNodes() {
     });
     const params = {
       country: getState().flows.selectedCountry.toUpperCase(),
-      raw: getState().flows.selectedCommodity.toUpperCase(),
+      commodity: getState().flows.selectedCommodity.toUpperCase(),
       year_start: getState().flows.selectedYears[0],
       year_end: getState().flows.selectedYears[1],
       column_id: 2
@@ -134,7 +134,7 @@ export function loadLinks() {
     });
     const params = {
       country: getState().flows.selectedCountry.toUpperCase(),
-      raw: getState().flows.selectedCommodity.toUpperCase(),
+      commodity: getState().flows.selectedCommodity.toUpperCase(),
       year_start: getState().flows.selectedYears[0],
       year_end: getState().flows.selectedYears[1],
       include_columns: getState().flows.selectedColumnsIds.join(','),

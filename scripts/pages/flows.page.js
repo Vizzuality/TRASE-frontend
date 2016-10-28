@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
@@ -44,14 +44,16 @@ const initialState = {
   }
 };
 
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 var store = createStore(
   combineReducers({
     app: AppReducer,
     flows: FlowsReducer
   }),
   initialState,
-  applyMiddleware(thunk)
+  composeEnhancers(
+    applyMiddleware(thunk)
+  )
 );
 
 
