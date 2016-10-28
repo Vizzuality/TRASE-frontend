@@ -76,7 +76,6 @@
     box-shadow: $box-shadow-big;
     cursor: pointer;
 
-
     &.-visible {
       display: block;
     }
@@ -95,7 +94,13 @@
     }
 
     &.-expanded {
-      content: '><';
+      &::after {
+        content: '><';
+      }
+    }
+
+    &:hover {
+      transform: scale(1.2);
     }
   }
 

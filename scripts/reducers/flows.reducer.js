@@ -191,8 +191,13 @@ export default function (state = {}, action) {
 
   case actions.TOGGLE_NODES_EXPAND: {
     // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
-    const lastSelectedNodeId = state.selectedNodesIds[0];
-    return Object.assign({}, state, { nodesExpanded: !state.nodesExpanded, selectedNodesIds: [lastSelectedNodeId] });
+    const expandedNodesIds = (state.nodesExpanded) ? []                           : [state.selectedNodesIds[0]];
+    const selectedNodesIds = (state.nodesExpanded) ? [state.expandedNodesIds[0]]  : [state.selectedNodesIds[0]];
+    return Object.assign({}, state, {
+      nodesExpanded: !state.nodesExpanded,
+      selectedNodesIds,
+      expandedNodesIds
+    });
   }
 
   default:

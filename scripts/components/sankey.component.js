@@ -11,14 +11,14 @@ export default class {
     this._build();
   }
 
-  resizeViewport({selectedNodesIds, nodesExpanded}) {
+  resizeViewport({selectedNodesIds, shouldRepositionExpandButton}) {
     this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
 
     if (this.layout.relayout()) {
       this._render();
     }
 
-    this._placeExpandButton(selectedNodesIds, nodesExpanded);
+    if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
   }
 
   initialDataLoadStarted(loading) {
@@ -36,7 +36,7 @@ export default class {
     }
   }
 
-  selectNodes({selectedNodesIds, nodesExpanded}) {
+  selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
     // let minimumY = Infinity;
 
     this.sankeyColumns.selectAll('.sankey-node')
@@ -50,7 +50,7 @@ export default class {
         return isSelected;
       });
 
-    this._placeExpandButton(selectedNodesIds, nodesExpanded);
+    if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
 
   }
 
@@ -83,7 +83,7 @@ export default class {
     this.callbacks.onExpandClick();
   }
 
-  _placeExpandButton(nodesIds, nodesExpanded) {
+  _repositionExpandButton(nodesIds) {
     // TODO split by columns
     if (nodesIds.length > 0) {
       this.expandButton.classList.add('-visible');
@@ -96,7 +96,7 @@ export default class {
       this.expandButton.style.top = `${y}px`;
       this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
 
-      this.expandButton.classList.toggle('.-expanded', nodesExpanded);
+      // this.expandButton.classList.toggle('-expanded', nodesExpanded);
     } else {
       this.expandButton.classList.remove('-visible');
     }
