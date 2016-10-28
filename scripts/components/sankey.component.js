@@ -54,6 +54,10 @@ export default class {
 
   }
 
+  toggleExpandButton(areNodesExpanded) {
+    this.expandButton.classList.toggle('-expanded', areNodesExpanded);
+  }
+
   highlightNodes(nodesIds) {
     this.sankeyColumns.selectAll('.sankey-node')
       .classed('-highlighted', node => {
@@ -95,8 +99,6 @@ export default class {
       let y = Math.max(0, lastSelectedNode.y - 12);
       this.expandButton.style.top = `${y}px`;
       this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
-
-      // this.expandButton.classList.toggle('-expanded', nodesExpanded);
     } else {
       this.expandButton.classList.remove('-visible');
     }

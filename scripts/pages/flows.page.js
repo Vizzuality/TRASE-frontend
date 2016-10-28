@@ -28,7 +28,7 @@ const initialState = {
     selectedView: 1,
     selectedQual: 'none',
     selectedNodesIds: [],
-    nodesExpanded: false,
+    areNodesExpanded: false,
     selectedNodesData: [],
     selectedColumnsIds: [2, 3, 5, 6],
     selectedVectorLayers: {

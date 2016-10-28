@@ -2,8 +2,8 @@ import { selectNode, highlightNode, toggleNodesExpand } from 'actions/flows.acti
 import connect from 'connect';
 import Sankey from 'components/sankey.component.js';
 
-const shouldRepositionExpandButton = (expandedNodesIds, selectedNodesIds, nodesExpanded) => {
-  return nodesExpanded === false ||
+const shouldRepositionExpandButton = (expandedNodesIds, selectedNodesIds, areNodesExpanded) => {
+  return areNodesExpanded === false ||
     expandedNodesIds === undefined ||
     expandedNodesIds[0] === selectedNodesIds[0];
 };
@@ -28,7 +28,7 @@ const mapMethodsToState = (state) => ({
     _returnedValue: (state) => {
       return {
         selectedNodesIds: state.flows.selectedNodesIds,
-        shouldRepositionExpandButton: shouldRepositionExpandButton(state.flows.expandedNodesIds, state.flows.selectedNodesIds, state.flows.nodesExpanded)
+        shouldRepositionExpandButton: shouldRepositionExpandButton(state.flows.expandedNodesIds, state.flows.selectedNodesIds, state.flows.areNodesExpanded)
       };
     }
   },
@@ -37,10 +37,11 @@ const mapMethodsToState = (state) => ({
     _returnedValue: (state) => {
       return {
         selectedNodesIds: state.flows.selectedNodesIds,
-        shouldRepositionExpandButton: shouldRepositionExpandButton(state.flows.expandedNodesIds, state.flows.selectedNodesIds, state.flows.nodesExpanded)
+        shouldRepositionExpandButton: shouldRepositionExpandButton(state.flows.expandedNodesIds, state.flows.selectedNodesIds, state.flows.areNodesExpanded)
       };
     }
   },
+  toggleExpandButton: state.flows.areNodesExpanded,
   highlightNodes: state.flows.highlightedNodesIds
 });
 

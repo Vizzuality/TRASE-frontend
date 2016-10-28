@@ -148,7 +148,7 @@ export function loadLinks() {
       params.flow_qual = selectedQual;
     }
 
-    if (getState().flows.nodesExpanded) {
+    if (getState().flows.areNodesExpanded) {
       // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
       // params.selected_nodes = getState().flows.selectedNodesIds.join(',');
       params.selected_nodes = getState().flows.selectedNodesIds[0];
