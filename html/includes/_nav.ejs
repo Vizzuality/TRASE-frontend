@@ -110,22 +110,81 @@
           </div>
         </div>
 
-        <div class="nav-param -color js-qual-dropdown">
+        <div class="c-nav-param -color js-qual-dropdown">
           <div class="c-dropdown -small" data-dropdown="qual">
             <span class="dropdown-label">Recolour by</span>
             <span class="js-dropdown-title dropdown-title">
               -
             </span>
-            <ul class="js-dropdown-list dropdown-list">
+            <ul class="js-dropdown-list dropdown-list -large">
               <li class="js-dropdown-item dropdown-item" data-value="none">None</li>
-              <li class="js-dropdown-item dropdown-item" data-value="Commodity">
-                <div class="js-dropdown-item-title dropdown-item-title">Commodity</div>
-                <ul class="dropdown-item-legend js-dropdown-item-legend">
-                  <li class='-qual-soybeans'>Soybeans</li>
-                  <li class='-qual-soybeancake'>Soybean cake</li>
-                  <li class='-qual-soybeanoil'>Soybean oil</li>
+              <li class="js-dropdown-item dropdown-item" data-value="Biome">
+                <div class="js-dropdown-item-title dropdown-item-title">Biome</div>
+                <ul class="dropdown-item-legend -qual js-dropdown-item-legend">
+                  <li class="-qual-biome-0">Amazon</li>
+                  <li class="-qual-biome-1">Cerrado</li>
+                  <li class="-qual-biome-2">Atlantic Forest</li>
+                  <li class="-qual-biome-3">Caatinga</li>
+                  <li class="-qual-biome-4">Pampa</li>
+                  <li class="-qual-biome-5">Pantanal</li>
                 </ul>
               </li>
+              <li class="js-dropdown-item dropdown-item" data-value="F500">
+                <div class="js-dropdown-item-title dropdown-item-title">F500 Score</div>
+                <ul class="dropdown-item-legend -stars js-dropdown-item-legend">
+                  <li class="-qual-f500-0"></li>
+                  <li class="-qual-f500-1"></li>
+                  <li class="-qual-f500-2"></li>
+                  <li class="-qual-f500-3"></li>
+                  <li class="-qual-f500-4"></li>
+                </ul>
+              </li>
+              <li class="js-dropdown-item dropdown-item" data-value="deforestation">
+                <div class="js-dropdown-item-title dropdown-item-title">Soy zero-deforestation commitment</div>
+                <ul class="dropdown-item-legend -qual js-dropdown-item-legend">
+                  <li class="-qual-zero-deforestation-true">Yes</li>
+                  <li class="-qual-zero-deforestation-false">No</li>
+                </ul>
+              </li>
+              <li class="js-dropdown-item dropdown-item" data-value="Water Scarcity">
+                <div class="js-dropdown-item-title dropdown-item-title">Water Scarcity</div>
+                <span class="dropdown-item-legend-unit">1</span>
+                <ul class="dropdown-item-legend -linear js-dropdown-item-legend">
+                  <li class="-qual-water-scarcity-0"></li><li
+                   class="-qual-water-scarcity-1"></li><li
+                   class="-qual-water-scarcity-2"></li><li
+                   class="-qual-water-scarcity-3"></li><li
+                   class="-qual-water-scarcity-4"></li><li
+                   class="-qual-water-scarcity-5"></li><li
+                   class="-qual-water-scarcity-6"></li>
+                </ul>
+                <span class="dropdown-item-legend-unit">7</span>
+              </li>
+              <li class="js-dropdown-item dropdown-item" data-value="Family farming dominance">
+                <div class="js-dropdown-item-title dropdown-item-title">Family farming dominance</div>
+                <span class="dropdown-item-legend-unit">0%</span>
+                <ul class="dropdown-item-legend -linear js-dropdown-item-legend">
+                  <li class="-qual-green-0"></li><li
+                   class="-qual-green-1"></li><li
+                   class="-qual-green-2"></li><li
+                   class="-qual-green-3"></li><li
+                   class="-qual-green-4"></li>
+                </ul>
+                <span class="dropdown-item-legend-unit">100%</span>
+              </li>
+              <li class="js-dropdown-item dropdown-item" data-value="Rural registry compliance (CAR)">
+                <div class="js-dropdown-item-title dropdown-item-title">Rural registry compliance (CAR)</div>
+                <span class="dropdown-item-legend-unit">0%</span>
+                <ul class="dropdown-item-legend -linear js-dropdown-item-legend">
+                  <li class="-qual-green-0"></li><li
+                   class="-qual-green-1"></li><li
+                   class="-qual-green-2"></li><li
+                   class="-qual-green-3"></li><li
+                   class="-qual-green-4"></li>
+                </ul>
+                <span class="dropdown-item-legend-unit">100%</span>
+              </li>
+
             </ul>
           </div>
           <div class="dropdown-item-legend-summary js-dropdown-item-legend-summary">
