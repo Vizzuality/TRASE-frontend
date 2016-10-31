@@ -18,8 +18,8 @@ export default function(nodesDict, nodesMeta /*, layers*/) {
         const uid = getNodeMetaUid(layerValue.type, layerValue.id);
         nodeWithMeta.meta[uid] = {
           rawValue: layerValue.rawValue,
-          value3: layerValue.rawValue3,
-          value5: layerValue.rawValue5
+          value3: layerValue.value3,
+          value5: layerValue.value5
           // also add layer name and unit
         };
       });
