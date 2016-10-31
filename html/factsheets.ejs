@@ -8,7 +8,52 @@
   <div class="l-factsheets js-factsheets">
     <%= htmlWebpackPlugin.options.nav %>
 
-    <div class="c-area-stack js-municipalities-top"></div>
+    <div class="c-area-select">
+      <div class="c-dropdown -factsheets" data-dropdown="exporter">
+        <span class="dropdown-label -big">Exporter</span>
+        <span class="js-dropdown-title dropdown-title">
+          -
+        </span>
+        <ul class="js-dropdown-list dropdown-list">
+          <li class="js-dropdown-item dropdown-item" data-value="Brazil">Brazil</li>
+          <li class="js-dropdown-item dropdown-item" data-value="Colombia">Colombia</li>
+        </ul>
+      </div>
+
+      <div class="c-dropdown -factsheets" data-dropdown="commodity">
+        <span class="dropdown-label -big">Commodity</span>
+        <span class="js-dropdown-title dropdown-title">
+          -
+        </span>
+        <ul class="js-dropdown-list dropdown-list">
+          <li class="js-dropdown-item dropdown-item" data-value="Brazil">Soy</li>
+          <li class="js-dropdown-item dropdown-item" data-value="Colombia">Colombia</li>
+        </ul>
+      </div>
+      <div class="contain-information">
+        <div>
+          <span class="title-information">
+            ZERO DEFORESTATION COMMITMENT
+          </span>
+          <span class="value-information">
+            Yes
+          <span>
+        </div>
+
+        <div>
+          <span class="title-information">
+            FOREST 500 SCORE
+          </span>
+          <span class="value-information -stars">
+            -
+          <span>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-area-stack js-municipalities-top">
+
+    </div>
 
     <%= htmlWebpackPlugin.options.footer %>
 

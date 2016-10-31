@@ -10,7 +10,16 @@
   height: 100%;
 
   .dropdown-label {
-    @include smallcaps();
+    color: rgba($charcoal-grey, .6);
+    font-family: $font-family-1;
+    font-size: $font-size-small;
+    letter-spacing: -.2px;
+    text-transform: uppercase;
+
+    &.-big {
+      margin-bottom: 10px;
+      font-size: $font-size-x-regular;
+    }
   }
 
   .dropdown-title {
@@ -23,7 +32,7 @@
     cursor: pointer;
 
     &::after {
-      @include arrow(8px, 2px, $medium-pink, 'down');
+      @include arrow(8px, 2px, $medium-pink, 'down'); //shoudl be more bigger than now, maybe 14px and border 3px or 4px
       position: absolute;
       top: 50%;
       right: 0;
@@ -142,4 +151,18 @@
       top: 56px;
     }
   }
+
+  &.-factsheets {
+    display: inline-flex;
+
+    > .dropdown-title {
+      font-size: $font-size-huge;
+    }
+
+    > .dropdown-list {
+      top: 85px;
+    }
+  }
+
+
 }
