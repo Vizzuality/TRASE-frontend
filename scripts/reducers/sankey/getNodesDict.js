@@ -6,6 +6,7 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
     const columnId = node.columnId;
     const column = columns.find(column => column.id === columnId);
     const newNode = {
+      id: node.id,
       columnId: parseInt(node.columnId),
       columnName: column.name,
       columnPosition: column.position,

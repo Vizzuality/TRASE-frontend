@@ -45,6 +45,7 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "awesomplete": "^1.1.1",
     "body-parser": "^1.15.2",
     "d3": "^4.2.2",
     "dotenv": "^2.0.0",

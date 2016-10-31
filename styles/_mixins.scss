@@ -46,3 +46,11 @@
     border-left: $size solid $color;
   }
 }
+
+@mixin smallcaps () {
+  color: rgba($charcoal-grey, .6);
+  font-family: $font-family-1;
+  font-size: $font-size-small;
+  letter-spacing: -.2px;
+  text-transform: uppercase;
+}
