@@ -10,12 +10,15 @@ export default class {
   onCreated() {
     this._build();
   }
-  windowResized() {
+
+  resizeViewport({selectedNodesIds, shouldRepositionExpandButton}) {
     this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
 
     if (this.layout.relayout()) {
       this._render();
     }
+
+    if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
   }
 
   initialDataLoadStarted(loading) {
@@ -33,11 +36,26 @@ export default class {
     }
   }
 
-  selectNodes(nodesIds) {
+  selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
+    // let minimumY = Infinity;
+
     this.sankeyColumns.selectAll('.sankey-node')
       .classed('-selected', node => {
-        return nodesIds.indexOf(node.id) > -1;
+        const isSelected = selectedNodesIds.indexOf(node.id) > -1;
+        // if (isSelected) {
+        //   if (node.y < minimumY) {
+        //     minimumY = node.y;
+        //   }
+        // }
+        return isSelected;
       });
+
+    if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
+
+  }
+
+  toggleExpandButton(areNodesExpanded) {
+    this.expandButton.classList.toggle('-expanded', areNodesExpanded);
   }
 
   highlightNodes(nodesIds) {
@@ -59,6 +77,31 @@ export default class {
     this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
 
     addSVGDropShadowDef(this.svg);
+
+    this.expandButton = document.querySelector('.js-expand');
+    this.expandButton.addEventListener('click', this._onExpandClick.bind(this));
+
+  }
+
+  _onExpandClick() {
+    this.callbacks.onExpandClick();
+  }
+
+  _repositionExpandButton(nodesIds) {
+    // TODO split by columns
+    if (nodesIds.length > 0) {
+      this.expandButton.classList.add('-visible');
+
+      const lastSelectedNode = this.sankeyColumns.selectAll('.sankey-node')
+        .filter(node => node.id === nodesIds[0])
+        .data()[0];
+
+      let y = Math.max(0, lastSelectedNode.y - 12);
+      this.expandButton.style.top = `${y}px`;
+      this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
+    } else {
+      this.expandButton.classList.remove('-visible');
+    }
   }
 
   _toggleLoading(loading) {

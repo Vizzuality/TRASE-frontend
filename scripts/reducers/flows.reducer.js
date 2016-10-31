@@ -188,6 +188,18 @@ export default function (state = {}, action) {
   case actions.SELECT_CONTEXTUAL_LAYERS: {
     return Object.assign({}, state, { selectedContextualLayers: action.contextualLayers});
   }
+
+  case actions.TOGGLE_NODES_EXPAND: {
+    // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
+    const expandedNodesIds = (state.areNodesExpanded) ? []                           : [state.selectedNodesIds[0]];
+    const selectedNodesIds = (state.areNodesExpanded) ? [state.expandedNodesIds[0]]  : [state.selectedNodesIds[0]];
+    return Object.assign({}, state, {
+      areNodesExpanded: !state.areNodesExpanded,
+      selectedNodesIds,
+      expandedNodesIds
+    });
+  }
+
   default:
     return state;
   }
