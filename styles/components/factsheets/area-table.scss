@@ -1,0 +1,17 @@
+@import '../../settings';
+
+.c-area-table {
+  max-width: 1280px;
+  margin: 53px auto 97px;
+
+  .title {
+    font-family: $font-family-1;
+    font-size: $font-size-x-regular;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+  }
+
+  .js-sustaninability-top {
+    margin-top: 25px;
+  }
+}

@@ -1,6 +1,7 @@
 import Dropdown from 'scripts/components/dropdown.component';
 import 'styles/factsheets.scss';
 import AreaStack from 'scripts/components/graphs/area-stack.component';
+import 'scripts/components/tables/area-tables';
 
 const _renderAreaStack = () => {
   const el = document.querySelector('.js-municipalities-top');
@@ -10,8 +11,16 @@ const _renderAreaStack = () => {
   });
 };
 
+const _renderAreaStackSecond = () => {
+  const el = document.querySelector('.js-destination-top');
+
+  new AreaStack({
+    el
+  });
+};
+
 const defaults = {
-  exporter: 'Amaggi',
+  exporter: 'Brazil',
   commodity: 'Soy',
 };
 
@@ -29,3 +38,4 @@ exporterDropdown.setTitle(defaults.exporter);
 commodityDropdown.setTitle(defaults.commodity);
 
 _renderAreaStack();
+_renderAreaStackSecond();

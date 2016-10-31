@@ -4,6 +4,10 @@
   max-width: 1280px;
   margin: 53px auto 0;
 
+  &.-second {
+    margin: 97px auto 0;
+  }
+
   .title {
     font-family: $font-family-1;
     font-size: $font-size-x-regular;
