@@ -11,4 +11,4 @@ dist
 
 tmp
 
-bin/cartodb-config.json
+bin/cartodb/cartodb-config.json
