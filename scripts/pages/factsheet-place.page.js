@@ -1,0 +1,27 @@
+import 'whatwg-fetch';
+
+import 'styles/factsheet-place.scss';
+import 'styles/_base.scss';
+import 'styles/_texts.scss';
+import 'styles/components/shared/nav.scss';
+import 'styles/components/shared/_footer.scss';
+
+import Line from 'components/graphs/line.component';
+import Chord from 'components/graphs/chord.component';
+import Top10 from 'components/graphs/top10.component';
+
+const nodeId = location.search.substr(1).replace('nodeId=','');
+
+fetch(`${API_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=BRAZIL&commodity=SOY`)
+  .then(response => response.json())
+  .then((data) => {
+    _build(data.data);
+  });
+
+const _build = data => {
+  new Line(document.querySelector('.js-line'), data.trajectory_deforestation, data.trajectory_production);
+  new Chord(document.querySelector('.js-chord-traders'), data.top_traders_matrix);
+  new Top10(document.querySelector('.js-top10-traders'), data.top_traders);
+  new Top10(document.querySelector('.js-top10-consumers'), data.top_consumers_matrix);
+  new Chord(document.querySelector('.js-chord-consumers'), data.top_consumers);
+};
