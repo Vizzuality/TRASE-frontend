@@ -21,8 +21,8 @@ fetch(`${API_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=BRAZIL&
 const _build = data => {
   console.log(data)
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
-  new Chord(document.querySelector('.js-chord-traders'), data.top_traders_matrix);
+  new Chord('.js-chord-traders', data.top_traders_matrix, data.top_traders, data.municip_name);
   new Top10(document.querySelector('.js-top10-traders'), 'Top traders', data.top_traders, 4);
   new Top10(document.querySelector('.js-top10-consumers'), 'Top consumers', data.top_consumers);
-  new Chord(document.querySelector('.js-chord-consumers'), data.top_consumers_matrix);
+  new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
 };
