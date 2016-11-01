@@ -1,0 +1,18 @@
+.c-line {
+  path {
+    stroke-width: 2px;
+    fill: none;
+  }
+  .line--deforestation {
+    stroke: red;
+  }
+  .line--production {
+    stroke: black;
+  }
+  .axis--deforestation text, .axis-title--deforestation {
+    fill: red;
+  }
+  .axis--production text, .axis-title--production {
+    fill: black;
+  }
+}
