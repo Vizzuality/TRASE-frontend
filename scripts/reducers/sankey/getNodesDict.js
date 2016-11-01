@@ -1,3 +1,5 @@
+import getFactSheetLink from 'utils/getFactSheetLink';
+
 export default function (rawNodes, columns /*, nodesMeta*/) {
 
   // store in node dict for use in getVisibleNodes
@@ -20,12 +22,7 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       newNode.isAggregated = true;
     }
 
-    // See https://github.com/sei-international/TRASE/issues/112
-    if ([0,1,2,4,5].indexOf(newNode.columnId) > -1) {
-      // TODO rename factsheets to factsheet-actor
-      const baseURL = ([0,1,2].indexOf(newNode.columnId) > -1) ? 'factsheet-place' : 'factsheets';
-      newNode.link = `./${baseURL}.html?nodeId=${newNode.id}`;
-    }
+    newNode.link = getFactSheetLink(newNode.id, newNode.columnId);
 
     nodesDict[parseInt(node.id)] = newNode;
   });
