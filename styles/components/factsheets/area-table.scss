@@ -1,0 +1,101 @@
+@import '../../settings';
+
+.c-area-table {
+  margin: 56px 0 0;
+
+  .title {
+    font-family: $font-family-1;
+    font-size: $font-size-x-regular;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 24px;
+
+    thead {
+      tr {
+        border-bottom: 1px solid $charcoal-grey;
+
+        th {
+          padding-bottom: 16px;
+          color: $charcoal-grey;
+          font-family: $font-family-1;
+          font-size: $font-size-x-regular;
+          font-weight: $font-weight-bold;
+          letter-spacing: -.6px;
+          line-height: 1.23;
+          text-align: right;
+          text-transform: uppercase;
+
+          &:first-of-type {
+            text-align: left;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid rgba($charcoal-grey, .2);
+
+        &:last-of-type {
+          border-bottom: 0;
+        }
+
+        td {
+          color: $charcoal-grey;
+          font-family: $font-family-1;
+          font-size: $font-size-xx-regular;
+          letter-spacing: -.8px;
+          line-height: 2.5;
+          text-align: right;
+
+          &:first-of-type {
+            display: flex;
+            align-items: center;
+            text-align: left;
+
+            .icon {
+              margin-left: 8px;
+              cursor: pointer;
+              opacity: .2;
+            }
+          }
+
+          &.tons-text {
+            &::after {
+              display: inline-block;
+              position: absolute;
+              content: 'tons';
+              opacity: .6;
+            }
+          }
+
+          &.ha-text {
+            &::after {
+              display: inline-block;
+              position: absolute;
+              content: 'ha';
+              opacity: .6;
+            }
+          }
+
+          &.mm-ha-text {
+            &::after {
+              display: inline-block;
+              position: absolute;
+              content: 'mm/ha';
+              opacity: .6;
+            }
+          }
+
+          span {
+            opacity: .6;
+          }
+        }
+      }
+    }
+  }
+}
