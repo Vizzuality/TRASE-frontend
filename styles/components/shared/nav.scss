@@ -2,11 +2,14 @@
 
 .c-nav {
   display: flex;
+  position: relative;
   width: 100%;
   height: $nav-height;
 
   background-color: $white;
   box-shadow: $box-shadow;
+
+  z-index: 1;
 
   > .offset {
     display: flex;
@@ -16,6 +19,13 @@
 
     > .offset-container {
       padding: 0 24px;
+
+      & + .offset-container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        border-left: 1px solid $silver;
+      }
     }
 
     .burger {
