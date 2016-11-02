@@ -15,7 +15,7 @@
 
   .dropdown-title {
     position: relative;
-    padding: 0 20px 0 0;
+    padding: 0 30px 0 0;
     color: $charcoal-grey;
     font-family: $font-family-2;
     font-size: $font-size-big;
@@ -23,7 +23,7 @@
     cursor: pointer;
 
     &::after {
-      @include arrow(8px, 2px, $medium-pink, 'down');
+      @include arrow(14px, 3px, $medium-pink, 'down');
       position: absolute;
       top: 50%;
       right: 0;
