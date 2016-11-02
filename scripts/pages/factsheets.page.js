@@ -1,7 +1,6 @@
 import Dropdown from 'scripts/components/dropdown.component';
 import 'styles/factsheets.scss';
 import AreaStack from 'scripts/components/graphs/area-stack.component';
-import 'scripts/components/tables/area-tables';
 
 const _renderAreaStack = () => {
   const el = document.querySelector('.js-municipalities-top');
