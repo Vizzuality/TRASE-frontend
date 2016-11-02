@@ -74,32 +74,27 @@
     width: 100%;
     margin-top: 56px;
 
-    div {
+    .contain-logos {
       flex-basis: calc(100% / 3);
       height: 0%;
       padding-left: 16px;
       border-left: 1px solid $white;
 
       ul {
-        list-style: none;
-
         li {
           display: block;
         }
       }
-    }
 
-    h4 {
-      margin-bottom: 32px;
-      color: $white;
-      font-family: $font-family-1;
-      font-size: $font-size-xx-regular;
-      font-weight: $font-weight-regular;
-      letter-spacing: -1.3px;
-      line-height: 1.5;
-    }
-
-    .partnership-logos {
+      h4 {
+        margin-bottom: 32px;
+        color: $white;
+        font-family: $font-family-1;
+        font-size: $font-size-xx-regular;
+        font-weight: $font-weight-regular;
+        letter-spacing: -1.3px;
+        line-height: 1.5;
+      }
 
       .sei-logo {
         margin-bottom: 48px;
@@ -114,9 +109,6 @@
           width: 112px;
         }
       }
-    }
-
-    .collaboration-logos {
 
       .vizzuality-logo {
         margin-bottom: 35px;
@@ -134,13 +126,6 @@
 
       .contain-text {
         margin-top: 20px;
-        padding: 0;
-        border-left: 0;
-        color: $gray;
-        font-family: $font-family-1;
-        font-size: $font-size-xx-regular;
-        letter-spacing: -1.3px;
-        line-height: 1.5;
 
         p {
           color: $gray;
@@ -148,59 +133,58 @@
         }
       }
 
-    }
+      &.-donors {
+        ul {
+          display: flex;
 
-    .donors-logos {
-      ul {
-        display: flex;
-
-        &:first-of-type {
-          margin-bottom: 24px;
+          &:first-of-type {
+            margin-bottom: 24px;
+          }
         }
-      }
 
-      .eustars-logo {
-        margin-right: 56px;
+        .eustars-logo {
+          margin-right: 56px;
 
-        img {
-          width: 80px;
+          img {
+            width: 80px;
+          }
         }
-      }
 
-      .ukaidsv-logo {
-        margin-right: 24px;
+        .ukaidsv-logo {
+          margin-right: 24px;
 
-        img {
-          width: 48px;
+          img {
+            width: 48px;
+          }
         }
-      }
 
-      .conservancy-logo {
-        img {
-          width: 120px;
+        .conservancy-logo {
+          img {
+            width: 120px;
+          }
         }
-      }
 
-      .sida-logo {
-        margin-right: 24px;
+        .sida-logo {
+          margin-right: 24px;
 
-        img {
-          width: 120px;
+          img {
+            width: 120px;
+          }
         }
-      }
 
-      .formas-logo {
-        margin-right: 32px;
+        .formas-logo {
+          margin-right: 32px;
 
-        img {
-          width: 40px;
+          img {
+            width: 40px;
+          }
         }
-      }
 
-      .moore-logo {
+        .moore-logo {
 
-        img {
-          width: 104px;
+          img {
+            width: 104px;
+          }
         }
       }
     }
