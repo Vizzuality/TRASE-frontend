@@ -29,6 +29,9 @@
       font-size: $font-size-x-regular;
       text-transform: capitalize;
 
+      &::placeholder {
+        text-transform: none;
+      }
 
       &:focus {
         border-width: 2px;
