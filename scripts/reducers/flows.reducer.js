@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import actions from 'actions';
-import { LEGEND_COLORS } from 'constants';
+import { LEGEND_COLORS, COLUMNS_POS } from 'constants';
+import getColumns from './sankey/getColumns';
 import getNodesDict from './sankey/getNodesDict';
 import getVisibleNodes from './sankey/getVisibleNodes';
 import splitVisibleNodesByColumn from './sankey/splitVisibleNodesByColumn';
@@ -24,7 +25,8 @@ export default function (state = {}, action) {
 
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
-    const columns = JSON.parse(action.payload[1]).data;
+    const rawColumns = JSON.parse(action.payload[1]).data;
+    const columns = getColumns(rawColumns, COLUMNS_POS);
     const nodesDict = getNodesDict(rawNodes, columns);
     return Object.assign({}, state, { columns, nodesDict, initialDataLoading: false });
   }
