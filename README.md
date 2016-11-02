@@ -44,6 +44,10 @@ npm run dev
 ```
 - [http://localhost:8081/](http://localhost:8081/)
 
+## Deploy
+
+Run `npm run build`, it will create a production-ready version of the project in /dist.
+
 
 ## LICENSE
 

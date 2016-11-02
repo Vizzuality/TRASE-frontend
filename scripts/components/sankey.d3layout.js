@@ -115,6 +115,7 @@ const sankeyLayout = function() {
       column.x = _getColumnX(i);
       let columnY = 0;
       column.values.forEach(node => {
+        node.x = column.x;
         node.y = columnY;
         node.renderedHeight = node.height * viewportHeight;
         columnY += node.renderedHeight;

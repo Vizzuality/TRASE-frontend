@@ -6,9 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run webpack:server",
-    "build": "npm run webpack:prod",
-    "webpack": "webpack --config config/webpack.js",
-    "webpack:prod": "npm run webpack -- -p",
+    "build": "npm run webpack:prod && cp -a public/. dist/",
+    "webpack:prod": "NODE_ENV='production' webpack --config config/webpack.js -p",
     "webpack:server": "webpack-dev-server --inline --port 8081 --content-base public/ --config config/webpack.js",
     "lint-js": "eslint -c .eslintrc.js src/sankey_page.js",
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q 'styles/**/*.scss'",
@@ -46,6 +45,7 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "awesomplete": "^1.1.1",
     "body-parser": "^1.15.2",
     "d3": "^4.2.2",
     "dotenv": "^2.0.0",

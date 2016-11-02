@@ -1,4 +1,4 @@
-import 'styles/FAQ.scss';
+import 'styles/about.scss';
 
 import smoothScroll from 'utils/smoothScroll';
 import { calculateOffsets, scrollDocument } from 'utils/fixedScroll';

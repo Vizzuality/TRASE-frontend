@@ -1,3 +1,4 @@
+@import 'settings';
 
 .paragraph {
   max-width: 720px;
@@ -8,6 +9,10 @@
   letter-spacing: -1.3px;
   line-height: 1.5;
 
+  & + & {
+    margin: 32px 0 0;
+  }
+
   &.-gray {
     color: $gray;
   }
@@ -17,6 +22,11 @@
   }
 }
 
+a {
+  color: $charcoal-grey;
+  text-decoration: none;
+ }
+
 .title {
   color: $charcoal-grey;
   font-family: $font-family-2;
@@ -24,6 +34,14 @@
 
   &.-big {
     font-size: $font-size-huge;
+  }
+
+  &.-medium {
+    font-size: $font-size-x-big;
+  }
+
+  &.-pink {
+    color: $medium-pink;
   }
 }
 

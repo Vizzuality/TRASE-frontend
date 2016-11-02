@@ -1,0 +1,74 @@
+@import '../settings';
+@import '../mixins';
+
+.c-search {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  margin: auto;
+  padding: 18px 0;
+  color: $charcoal-grey;
+  font-family: $font-family-1;
+  font-size: $font-size-x-regular;
+
+  label {
+    width: 30%;
+  }
+
+  .awesomplete {
+    width: 70%;
+
+    > input {
+      width: 100%;
+      height: 32px;
+      padding: 6px 10px;
+      border: 1px solid $medium-pink;
+      border-radius: 4px;
+      background: none;
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      text-transform: capitalize;
+
+
+      &:focus {
+        border-width: 2px;
+        outline: none;
+      }
+    }
+  }
+
+  .awesomplete > ul > li {
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+
+    > .node-name {
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    > .node-type {
+      @include smallcaps;
+      display: inline-block;
+      margin-left: 10px;
+    }
+	}
+
+  .awesomplete > ul > li:hover, .awesomplete > ul > li[aria-selected='true'] {
+    background: $manilla;
+    color: $charcoal-grey;
+  }
+
+  .awesomplete > ul > li[aria-selected='true'] {
+    border: 1px solid $charcoal-grey-faded;
+  }
+
+  .awesomplete mark {
+    background: $medium-pink-faded;
+  }
+
+  .awesomplete li:hover mark, .awesomplete > ul > li[aria-selected='true'] mark {
+    background: $medium-pink-faded;
+  }
+
+}

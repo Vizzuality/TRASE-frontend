@@ -4,14 +4,131 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  <%= htmlWebpackPlugin.options.icons %>
+  <%= htmlWebpackPlugin.options.nav %>
   <div class="l-faq">
-    <%= htmlWebpackPlugin.options.nav %>
-    <h1>FAQ page (WIP)</h1>
+    <div class="wrap">
+      <div class="cut -top"></div>
+      <div class="c-anchor-list js-anchor-nav">
+        <ul class="anchor-list">
+          <li class="anchor-item -selected">
+            <a href="#what-is-trase">What is Trase?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#trase-platform-do">What does the Trase platform do?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#countries-commmodities-future">Will you cover other countries and commodities in the future?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#trase-cover-exports">Does the Trase platform only cover exports?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#diagram-spaghetti">What is that diagram that looks like spaghetti?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#trase-work">How does the Trase platform  work?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#download-data">Can I download the Trase data?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#trase-evolving-capabilities">How do I find out more about Trase and its evolving capabilities?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#get-involved">How can I get involved?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#who-is-behind-trase">Who is behind Trase?</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <h2 id="what-is-trase" class="title -medium -pink">What is Trase?</h2>
+        <p class="paragraph">Trase (Transpareny for Sustainable Economies) is a platform bringing unprecedented transparency to
+          commodity supply chains, linking actors to places and revealing the pattern of material flows from the municipality
+          of production to the country of consumption. Trase as a program leverages the data surfaced on the platform to develop
+          improved methodologies and decision support capabilities for transitioning to a deforestation-free economy, from
+          approaches for assessing risk and measuring actor performance, to an annual review of progress in key sectors.
+        </p>
+        <p class="paragraph">Trase unites an array of leaders in the global arena of sustainable commodity production to build
+          alignment on key issues, and to find synergies among initiatives. Partners include the European Forestry Initiative,
+          Global Forest Watch, Vizzuality, BVRio, and many others.
+        </p>
 
-    <%= htmlWebpackPlugin.options.footer %>
-    
+        <h2 id="trase-platform-do" class="title -medium -pink">What does the Trase platform do?</h2>
+        <p class="paragraph">Using the Trase platform it is possible to track exports of commodities from the municipality of production,
+          via the local trader and the port of export, the importing company, to the country of consumption. These unique capabilities
+          allow users to “zoom out” to get an overview of the fate of a whole crop, from an entire producer country – not just the portion
+          that ends up in individual supply chains – and to “zoom in” right down to the level of individual municipalities, actors and
+          importing countries, and their related supply chains.
+        </p>
+        <p class="paragraph">Trase also allows you to cross-reference the supply chain data with site- or actor-specific information on,
+          for example, conservation status, biodiversity risks or zero deforestation commitments.
+        </p>
+        <p class="paragraph">For now data in the Trase beta platform covers soy exported from Brazil, Argentina, and Paraguay as well
+          as coffee exports from Colombia. The Trase data also includes all countries of import receiving the materials.
+        </p>
+
+        <h2 id="countries-commmodities-future" class="title -medium -pink">Will you cover other countries and commodities in the future?</h2>
+        <p class="paragraph">Absolutely. By 2018 we aim to include all soy production in Latin America, and all palm oil production in
+          Indonesia, Malaysia, and Thailand. By 2020 we aim to expand Trase to cover over 70% of all exports of forest-risk commodities
+          including cattle, palm oil, pulp and paper, and timber. The SEI-PCS model (see below) is unique to every country-commodity
+          combination, and each combination requires significant time to develop to a high standard of accuracy. The data used for
+          the model also varies for each country depending on the national or regional systems used, meaning that some country-commodity
+          combinations require more time to develop.
+        </p>
+
+        <h2 id="trase-cover-exports" class="title -medium -pink">Does the Trase platform only cover exports?</h2>
+        <p class="paragraph">For now Trase only accounts for commodity exports. We aim to cover domestic consumption in future years
+          through improved domestic traceability systems and partnerships with other transparency initiatives.</p>
+
+        <h2 id="diagram-spaghetti" class="title -medium -pink">What is that diagram that looks like spaghetti?</h2>
+        <p class="paragraph">The Trase platform represents flows of commodities using Sankey diagrams. Invented by an Irish ship captain,
+          Matthew Sankey, Sankey diagrams have been used for over 100 years. First used to show how steam flowed through steam engines
+          and points for improved efficiencies, they have also been used to map trade flows and even the loss of soldiers through a
+          series of battles in <a  class="-bold" target="_blank" href="https://en.wikipedia.org/wiki/Charles_Joseph_Minard#/media/File:Minard.png">Napoleon's Russian campaign</a>. We decided to use Sankey diagrams in Trase because they can show not
+          only directions but also sizes of flows between points in the supply chain in a way that is easy to grasp. The interactive
+          Sankeys were developed by researchers at the Stockholm Environment Institute in partnership with Vizzuality. They allow users to
+          customize the Sankey diagram to show material flows according to a particular node or set of nodes in the chain, or particular characteristics of the material flow
+        </p>
+
+        <h2 id="trase-work" class="title -medium -pink">How does the Trase platform  work?</h2>
+        <p class="paragraph">The Trase platform is based on a model called Spatially Explicit Information of Production to Consumption
+          Systems (SEI-PCS). SEI-PCS processes publically available tax, customs and shipping data, making it possible to to trace
+          material flows from the municipality of origin, through traders and exporters, to the country of consumption.
+        </p>
+        <p class="paragraph">SEI-PCS was developed by a team led by Trase’s Javier Godar. For full details on the data and methods
+          powering Trase, view our data and methods page here:</p>
+
+        <h2 id="download-data" class="title -medium -pink">Can I download the Trase data?</h2>
+        <p class="paragraph">The data outputs of the SEI-PCS model are available for download at:
+          We are continuing to build the downloading functionality so you can more easily sort and filter data prior to downloading.
+          If you sign up for the newsletter here we will let you know what that capability is available.
+        </p>
+
+        <h2 id="trase-evolving-capabilities" class="title -medium -pink">How do I find out more about Trase and its evolving capabilities?</h2>
+        <p class="paragraph">
+          Sign up for our newsletter here:
+          We promise not to send lots of emails, just the important ones.
+        </p>
+
+        <h2 id="get-involved" class="title -medium -pink">How can I get involved?</h2>
+        <p class="paragraph">We welcome the opportunity to collaborate with other organizations working on sustainable
+          commodity supply chains. Contact us at <a  class="-bold"href="mailto:info@trase.org">info@trase.org</a>.
+        </p>
+
+        <h2 id="who-is-behind-trase" class="title -medium -pink">Who is behind Trase?</h2>
+        <p class="paragraph">The Trase initiative was started by the Stockholm Environment Institute and
+          the Global Canopy Program. Since its inception in 2015, Trase has grown to be a partnership of many
+          organizations, including Vizzuality the key web developers behind the platform, and funders including
+          the European Forestry Institute, the Gordon and Betty Moore Foundation, The Nature Conservancy, and the
+          UK Department for International Development.
+        </p>
+      </div>
+    </div>
+    <div class="cut -bottom"></div>
   </div>
+  <%= htmlWebpackPlugin.options.footer %>
 
   <%= htmlWebpackPlugin.options.scripts %>
 </body>

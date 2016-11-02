@@ -1,0 +1,35 @@
+
+.l-faq {
+  position: relative;
+  padding: 88px 0 104px ;
+  background-color: $pale-peach;
+
+  > .wrap {
+    position: relative;
+
+    > .c-anchor-list {
+      position: absolute;
+      top: 0;
+      width: $anchor-list-max-width;
+
+      &.-bottom {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+      }
+    }
+
+    .title {
+      margin: 0 0 16px;
+
+      &:not(:first-child) {
+        margin: 56px 0 16px;
+      }
+    }
+
+    > .content {
+      width: calc(100% - #{$anchor-list-max-width});
+      margin: 0 0 0 $anchor-list-max-width;
+    }
+  }
+}

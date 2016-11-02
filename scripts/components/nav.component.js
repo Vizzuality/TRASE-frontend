@@ -78,7 +78,7 @@ export default class {
   }
 
   selectQual(value) {
-    const selectedQualLegend = this.qualDropdown.el.querySelector(`[data-value=${value}]`);
+    const selectedQualLegend = this.qualDropdown.el.querySelector(`[data-value="${value}"]`);
     const selectedQualLegendItems = Array.prototype.slice.call(
       selectedQualLegend.querySelectorAll('.js-dropdown-item-legend li'), 0);
 

@@ -148,10 +148,11 @@ export function loadLinks() {
       params.flow_qual = selectedQual;
     }
 
-    // if (getState().flows.selectedNodesIds.length) {
-    //   params.clicked_nodes = getState().flows.selectedNodesIds.join(',');
-    //   params.filter_mode = 2;
-    // }
+    if (getState().flows.areNodesExpanded) {
+      // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
+      // params.selected_nodes = getState().flows.selectedNodesIds.join(',');
+      params.selected_nodes = getState().flows.selectedNodesIds[0];
+    }
 
     const url = getURLFromParams('/v1/get_flows', params);
 
@@ -198,10 +199,17 @@ const _loadMapVectorLayers = (urls, dispatch) => {
 
 
 export function selectNode(nodeId, isAggregated) {
-  return dispatch => {
+  return (dispatch, getState) => {
     if (isAggregated) {
       console.log('switch to detailed mode!');
     } else {
+      // unselecting the node that is currently expanded: just shrink it and bail 
+      const expandedNodesIds = getState().flows.expandedNodesIds;
+      if (expandedNodesIds && nodeId === expandedNodesIds[0]) {
+        dispatch(toggleNodesExpand());
+        return;
+      }
+
       dispatch({
         type: actions.SELECT_NODE,
         nodeId
@@ -245,5 +253,17 @@ export function highlightNodeFromGeoId(geoId) {
       type: actions.HIGHLIGHT_NODE_FROM_GEOID,
       geoId
     });
+  };
+}
+
+export function toggleNodesExpand(reloadLinks = true) {
+  return dispatch => {
+    const action = {
+      type: actions.TOGGLE_NODES_EXPAND
+    };
+    dispatch(action);
+    if (reloadLinks) {
+      dispatch(loadLinks());
+    }
   };
 }

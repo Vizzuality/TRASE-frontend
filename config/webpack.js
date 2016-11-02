@@ -19,11 +19,14 @@ const pages = {
   factsheets: {
     title: 'TRASE factsheets'
   },
+  'factsheet-place': {
+    title: 'TRASE place factsheet'
+  },
   FAQ: {
     title: 'TRASE FAQ'
   },
-  contact: {
-    title: 'TRASE conctact'
+  about: {
+    title: 'TRASE About'
   }
 };
 
@@ -48,14 +51,16 @@ const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
 
 const pagePlugins = Object.keys(pages).map(id => getPagePlugin(id, pages[id].title));
 const entry = _.mapValues(pages, (page, id) => './scripts/pages/' + id + '.page.js' );
-module.exports = {
+
+const config = {
   entry: entry,
   devtool: 'source-map',
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ name: 'common' }),
     new webpack.DefinePlugin({
       NODE_ENV_DEV: process.env.NODE_ENV === 'development',
-      API_URL: JSON.stringify(process.env.API_URL)
+      API_URL: JSON.stringify(process.env.API_URL),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })
   ].concat(pagePlugins),
   output: {
@@ -99,3 +104,15 @@ module.exports = {
     return [autoprefixer];
   }
 };
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        screw_ie8: true
+      }
+    })
+  );
+}
+
+module.exports = config;
