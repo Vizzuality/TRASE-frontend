@@ -34,5 +34,23 @@
         }
       ]
     }
+  },
+  {
+    "version": "0.0.1",
+    "name": "silos",
+    "layergroup": {
+      "version": "1.0.1",
+      "layers": [
+        {
+          "type": "cartodb",
+          "options": {
+            "sql": "SELECT * FROM silos",
+            "cartocss": "#silos{  marker-line-color: #FFF;  marker-line-width: 1;  marker-width: 10;  marker-fill: #FF6600;  marker-allow-overlap: true;}",
+            "cartocss_version": "2.3.0",
+            "interactivity":["cartodb_id"]
+          }
+        }
+      ]
+    }
   }
 ]
