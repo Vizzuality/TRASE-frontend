@@ -147,9 +147,8 @@ export default class {
       g.selectAll('.axis--y > .tick')
         .select('line') //grab the tick line
         .attr('x2', width)
-        .attr('stroke', '#34444c')
-        .attr('class', 'tick-line') //style with a custom class and CSS
-        .style('stroke-width', 1); //or style directly with attributes or inline styles
+        .attr('class', 'tick-line');
+
 
       g.selectAll('.axis--y > .tick')
         .select('text')
@@ -157,10 +156,14 @@ export default class {
         .attr('x', -16);
 
       g.selectAll('.axis--x > .tick')
+        .select('line') //grab the tick line
+        .attr('class', 'tick-line') //style with a custom class and CSS
+        .attr('y2', 0);
+
+      g.selectAll('.axis--x > .tick')
         .select('text')
         .attr('class', 'tick-text')
         .attr('y', 16);
-
     });
   }
 }

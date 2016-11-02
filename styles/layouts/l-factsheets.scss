@@ -1,3 +1,7 @@
 .l-factsheets {
   background-color: $pale-peach;
+
+  .wrap {
+    max-width: $max-width-grid;
+  }
 }
