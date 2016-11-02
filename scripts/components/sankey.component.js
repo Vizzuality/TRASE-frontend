@@ -135,7 +135,7 @@ export default class {
 
     nodesEnter.append('text')
       .attr('class', 'sankey-node-labels')
-      .attr('transform', node => {return `translate(0,${ - 7 + node.renderedHeight/2 - ((node.label.length-1) * 7) })` })
+      .attr('transform', placeNodeText)
       .selectAll('tspan')
       .data(node => node.label)
       .enter()
@@ -151,6 +151,9 @@ export default class {
 
     nodesUpdate.select('.sankey-node-rect')
       .attr('height', d => d.renderedHeight);
+
+    nodesUpdate.select('.sankey-node-labels')
+    .attr('transform', placeNodeText)
 
     this.nodes.exit()
       .remove();
@@ -203,3 +206,5 @@ export default class {
     this.callbacks.onNodeHighlighted();
   }
 }
+
+const placeNodeText = node => `translate(0,${ - 7 + node.renderedHeight/2 - ((node.label.length-1) * 7) })`;
