@@ -1,3 +1,4 @@
+import wrapSVGText from 'utils/wrapSVGText';
 import { NUM_COLUMNS } from 'constants';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 
@@ -20,7 +21,7 @@ const sankeyLayout = function() {
   let _labelCharsPerLine;
   const _labelCharWidth = 9;
   const _labelCharHeight = 16;
-  const _labelMaxLines = 2;
+  const _labelMaxLines = 3;
 
   sankeyLayout.setViewportSize = (size) => {
     viewportWidth = size[0];
@@ -56,36 +57,14 @@ const sankeyLayout = function() {
 
     _computeNodeCoords();
     _computeLinksCoords();
+    _setNodeLabels();
 
     return true;
   };
 
-  // formats/create ellipsis nodes text using # of lines available, node width, etc
-  sankeyLayout.getNodeLabel = (name, nodeRenderedHeight) => {
-
-    var words = name.split(' ');
-    var currentLine = '';
-    const nodeNameLines = [];
-    words.forEach(word => {
-      var line = currentLine + ' ' + word;
-      if (line.length > _labelCharsPerLine) {
-        nodeNameLines.push(currentLine);
-        currentLine = word;
-      } else {
-        currentLine = line;
-      }
-    });
-    nodeNameLines.push(currentLine);
-
-    const maxLinesForNode = Math.max(1, Math.min(_labelMaxLines, Math.floor(nodeRenderedHeight / _labelCharHeight)));
-    const nodeNameLinesShown = nodeNameLines.slice(0, maxLinesForNode);
-
-    // ellipsis
-    if (nodeNameLines.length > maxLinesForNode) {
-      nodeNameLinesShown[maxLinesForNode - 1] = nodeNameLinesShown[maxLinesForNode - 1] + '…';
-    }
-    return nodeNameLinesShown;
-  };
+  // sankeyLayout.getNodeLabel = (name, nodeRenderedHeight) => {
+  //   return wrapSVGText(name, nodeRenderedHeight, _labelCharHeight, _labelCharsPerLine, _labelMaxLines);
+  // };
 
   // using precomputed dimensions on links objects, this will generate SVG paths for links
   sankeyLayout.link = function() {
@@ -119,6 +98,14 @@ const sankeyLayout = function() {
         node.y = columnY;
         node.renderedHeight = node.height * viewportHeight;
         columnY += node.renderedHeight;
+      });
+    });
+  };
+
+  const _setNodeLabels = () => {
+    columns.forEach(column => {
+      column.values.forEach(node => {
+        node.label = wrapSVGText(node.name, node.renderedHeight, _labelCharHeight, _labelCharsPerLine, _labelMaxLines);
       });
     });
   };

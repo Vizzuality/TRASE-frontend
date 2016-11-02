@@ -133,16 +133,16 @@ export default class {
       .attr('width', this.layout.columnWidth())
       .attr('height', d => d.renderedHeight);
 
-    nodesEnter.append('g')
+    nodesEnter.append('text')
       .attr('class', 'sankey-node-labels')
-      .attr('transform', d => `translate(0,${2 + d.renderedHeight/2})`)
-      .selectAll('text')
-      .data(node => { return this.layout.getNodeLabel(node.name, node.renderedHeight);})
+      .attr('transform', node => {return `translate(0,${ - 7 + node.renderedHeight/2 - ((node.label.length-1) * 7) })` })
+      .selectAll('tspan')
+      .data(node => node.label)
       .enter()
-      .append('text')
+      .append('tspan')
       .attr('class', 'sankey-node-label')
       .attr('x', this.layout.columnWidth()/2)
-      .attr('y', (d, i) => 2 + i * 12)
+      .attr('dy', 12)
       .text(d => d);
 
 
