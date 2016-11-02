@@ -1,0 +1,46 @@
+<% layers.forEach(function(layer) {%>
+  <li class="layer-item">
+    <span class="layer-name"><%= layer.name.replace('_', ' ') %></span>
+    <div
+      class="c-switcher"
+      data-layer-slug="<%= layer.name %>" data-layergroupid="<%= layer.layergroupid %>">
+    </div>
+  </li>
+<%});%>
+<!--
+<li
+  class="layer-item"
+>
+  <span class="layer-name">soy infrastructure</span>
+  <div
+    class="c-switcher"
+    data-layer-slug="soy_infrastructure">
+  </div>
+</li>
+<li
+  class="layer-item"
+>
+  <span class="layer-name">protected areas</span>
+  <div
+    class="c-switcher"
+    data-layer-slug="protected_areas">
+  </div>
+</li>
+<li
+  class="layer-item"
+>
+  <span class="layer-name">land conflicts</span>
+  <div
+    class="c-switcher"
+    data-layer-slug="land_conflicts">
+  </div>
+</li>
+<li
+  class="layer-item"
+>
+  <span class="layer-name">forest code compliance</span>
+  <div
+    class="c-switcher"
+    data-layer-slug="forest_code_compliance">
+  </div>
+</li> -->
