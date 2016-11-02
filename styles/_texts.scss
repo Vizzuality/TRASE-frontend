@@ -2,6 +2,7 @@
 
 .paragraph {
   max-width: 720px;
+  margin: 0 auto;
 
   color: $charcoal-grey;
   font-family: $font-family-1;
@@ -10,7 +11,7 @@
   line-height: 1.5;
 
   & + & {
-    margin: 32px 0 0;
+    margin: 32px auto 0;
   }
 
   &.-gray {
