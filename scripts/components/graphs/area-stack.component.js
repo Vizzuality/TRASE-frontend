@@ -158,8 +158,7 @@ export default class {
       g.selectAll('.axis--x > .tick')
         .select('line') //grab the tick line
         .attr('class', 'tick-line') //style with a custom class and CSS
-        .attr('y2', 0)
-        .style('stroke-width', 1); //or style directly with attributes or inline styles
+        .attr('y2', 0);
 
       g.selectAll('.axis--x > .tick')
         .select('text')

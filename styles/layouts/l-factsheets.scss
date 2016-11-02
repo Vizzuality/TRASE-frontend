@@ -1,7 +1,9 @@
 .l-factsheets {
+  // max-width: $max-width-grid;
+  padding: 64px 0 96px;
   background-color: $pale-peach;
 
-  .wrap {
+  .content {
     max-width: $max-width-grid;
   }
 }
