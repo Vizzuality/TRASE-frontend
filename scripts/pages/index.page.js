@@ -47,7 +47,18 @@ const _filterCountries = function() {
     dropdownItem.classList.toggle('is-hidden', !commodities.includes(commodity));
   });
 
-  countryDropdownView.setTitle('-');
+
+
+  const availableItems = countryDropdownElem.querySelectorAll('.js-dropdown-item:not(.is-hidden)');
+
+  // sets first item in the list if there's one available
+  if (availableItems.length) {
+    const value = availableItems[0].getAttribute('data-value');
+    countryDropdownView.setTitle(value);
+    _onSelectCountry.call(countryDropdownView, value);
+  } else {
+    countryDropdownView.setTitle('-');
+  }
 };
 
 
