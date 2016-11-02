@@ -1,5 +1,8 @@
 // formats/create ellipsis nodes text using # of lines available, node width, etc
 export default (name, height, _labelCharHeight, _labelCharsPerLine, _labelMaxLines) => {
+  if (height < _labelCharHeight - 6) {
+    return '';
+  }
   // console.log(name, height, _labelCharHeight, _labelCharsPerLine, _labelMaxLines)
   const maxLinesForNode = Math.max(1, Math.min(_labelMaxLines, Math.floor(height / _labelCharHeight)));
   const words = name.split(' ');
