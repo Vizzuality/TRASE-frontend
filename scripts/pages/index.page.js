@@ -75,11 +75,11 @@ const _onSelectCountry = function(value) {
 const _getPosts = () => {
   const postList = document.querySelector('.js-posts-grid');
 
-  fetch('homepage/posts.json')
+  fetch(API_CMS_URL)
     .then(response => response.json())
     .then((data) => {
-      let posts = data.posts;
-      const totalPosts = data['total_posts'];
+      let posts = data;
+      const totalPosts = posts.length;
       let postsPerColumn = defaults.postsPerColumn;
       let isLeft = true;
       let rows;
