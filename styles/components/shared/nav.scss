@@ -18,12 +18,12 @@
     border-right: 1px solid $silver;
 
     > .offset-container {
+      display: flex;
+      align-items: center;
+      height: 100%;
       padding: 0 24px;
 
       & + .offset-container {
-        display: flex;
-        align-items: center;
-        height: 100%;
         border-left: 1px solid $silver;
       }
     }
