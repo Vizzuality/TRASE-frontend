@@ -31,10 +31,22 @@
       }
 
       .value-information {
+        display: flex;
+        align-items: center;
         margin-top: 7px;
         font-family: $font-family-1;
         font-size: $font-size-medium;
         letter-spacing: -1px;
+
+        .star-icon {
+          width: 16px;
+          margin-right: 2px;
+        }
+
+        .icon-check {
+          width: 16px;
+          margin-right: 4px;
+        }
       }
 
       &:first-of-type {
