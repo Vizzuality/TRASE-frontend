@@ -18,7 +18,8 @@ const mapMethodsToState = (state) => ({
   selectVectorLayer: state.flows.selectedColumnsIds,
   selectPolygons: state.flows.selectedNodesGeoIds,
   highlightPolygon: state.flows.highlightedGeoIds,
-  setChoropleth: state.flows.choropleth
+  setChoropleth: state.flows.choropleth,
+  loadContextLayers: state.flows.selectedMapContextualLayersData
 });
 
 const mapViewCallbacksToActions = () => ({

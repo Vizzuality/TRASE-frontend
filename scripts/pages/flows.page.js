@@ -44,7 +44,7 @@ const initialState = {
         title: null
       }
     },
-    selectedMapContextualLayers: ['silos']
+    // selectedMapContextualLayers: ['silos']
   }
 };
 

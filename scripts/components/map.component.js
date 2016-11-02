@@ -2,6 +2,7 @@ import L from 'leaflet';
 import 'leaflet.utfgrid';
 import 'whatwg-fetch';
 import * as topojson from 'topojson';
+import { CARTO_BASE_URL } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/map.scss';
 import 'style/components/map/map-legend.scss';
@@ -13,38 +14,16 @@ export default class {
       zoomControl: false
     };
 
-    this.map = L.map('map', mapOptions).setView([-16.20639, -44.43333], 4);
+    this.map = L.map('map', mapOptions).setView([-16, -50], 4);
     var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' });
     this.map.addLayer(basemap);
 
+    this.map.createPane('main');
+    this.map.getPane('main').style.zIndex = 600;
+    this.map.createPane('context_above');
+    this.map.getPane('context_above').style.zIndex = 601;
 
-    const username = 'p2cs-sei';
-
-    function getUrl(format) {
-      let url = 'https://' + username +
-      '.cartodb.com/api/v1/map/p2cs-sei@b51d2edc@c176a73539feb243315ad0c0e6f30672:1448500494201' +
-      '/0/{z}/{x}/{y}.' + format;
-
-      if (format === 'grid.json') {
-        return url + '?callback={cb}';
-      }
-
-      return url;
-    }
-
-    const layer = new L.tileLayer(getUrl('png'));
-    const utfGrid = new L.UtfGrid(getUrl('grid.json'));
-    this.map.addLayer(layer);
-    this.map.addLayer(utfGrid, {
-      resolution: 2
-    });
-
-    utfGrid.on('mouseover', function (e) {
-      if (e.data && e.data.hasOwnProperty('cartodb_id')) {
-        console.log(e.data.cartodb_id);
-      }
-    });
-
+    this.contextLayers = [];
 
     this._setEventListeners();
   }
@@ -114,8 +93,54 @@ export default class {
     });
   }
 
+  loadContextLayers(selectedMapContextualLayersData) {
+    this.contextLayers.forEach(layer => {
+      this.map.removeLayer(layer);
+    });
+
+    selectedMapContextualLayersData.forEach((layerData, i) => {
+      const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/0/{z}/{x}/{y}`;
+      const layerUrl = `${baseUrl}.png`;
+      // console.log(layerUrl)
+      const layer = new L.tileLayer(layerUrl, {
+        pane: 'context_above'
+      });
+
+      this.contextLayers.push(layer);
+      this.map.addLayer(layer);
+
+      if (i === 0) {
+        const utfGridUrl = `${baseUrl}.grid.json?callback={cb}`;
+        const utfGrid = new L.UtfGrid(utfGridUrl);
+
+        this.contextLayers.push(utfGrid);
+        this.map.addLayer(utfGrid, {
+          resolution: 2
+        });
+
+        utfGrid.on('mouseover', function (e) {
+          if (e.data && e.data.hasOwnProperty('cartodb_id')) {
+            console.log(e.data.cartodb_id);
+          }
+        });
+      }
+    });
+
+    // disable main choropleth layer when there are context layers
+    // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
+    if (selectedMapContextualLayersData.length > 0) {
+      this.map.getPane('main').style.pointerEvents = 'none';
+      this.map.getPane('main').style.opacity = 0;
+    } else {
+      this.map.getPane('main').style.pointerEvents = 'auto';
+      this.map.getPane('main').style.opacity = 1;
+    }
+  }
+
   _getVectorLayer(geoData, polygonClassName) {
-    var topoLayer = new L.GeoJSON();
+    var topoLayer = new L.GeoJSON(null, {
+      pane: 'main'
+    });
     var keys = Object.keys(geoData.objects);
     keys.forEach(key => {
       const geojson = topojson.feature(geoData, geoData.objects[key]);
