@@ -22,8 +22,8 @@ const pages = {
   FAQ: {
     title: 'TRASE FAQ'
   },
-  contact: {
-    title: 'TRASE conctact'
+  about: {
+    title: 'TRASE About'
   }
 };
 

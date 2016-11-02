@@ -1,0 +1,83 @@
+
+.l-about {
+  position: relative;
+  padding: 88px 0 104px ;
+  background-color: $pale-peach;
+
+  > .wrap {
+    position: relative;
+
+    > .c-anchor-list {
+      position: absolute;
+      top: 0;
+      width: $anchor-list-max-width;
+    }
+
+    .title {
+      margin: 0 0 16px;
+
+      &:not(:first-child) {
+        margin: 56px 0 16px;
+      }
+    }
+
+    > .content {
+      width: calc(100% - #{$anchor-list-max-width});
+      margin: 0 0 0 $anchor-list-max-width;
+
+      > .logo-list {
+        display: flex;
+        align-items: center;
+        margin: 24px 0 0;
+
+        > .logo-item {
+          display: inline-block;
+
+          & + .logo-item {
+            margin: 0 0 0 50px;
+          }
+
+          &.-sei > img {
+            width: 167px;
+            height: 30px;
+          }
+
+          &.-gcp > img {
+            width: 102px;
+            height: 48px;
+          }
+
+          &.-vizzuality > img {
+            width: 119px;
+            height: 29px;
+          }
+
+          &.-efi > img {
+            width: 72px;
+            height: 78px;
+          }
+
+          &.-nature-conservancy > img {
+            width: 131px;
+            height: 38px;
+          }
+
+          &.-moore > img {
+            width: 117px;
+            height: 47px;
+          }
+
+          &.-formas > img {
+            width: 53px;
+            height: 86px;
+          }
+
+          &.-dfid > img {
+            width: 108px;
+            height: 75px;
+          }
+        }
+      }
+    }
+  }
+}
