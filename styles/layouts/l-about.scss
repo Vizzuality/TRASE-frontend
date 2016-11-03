@@ -22,7 +22,7 @@
     }
 
     > .content {
-      width: calc(100% - #{$anchor-list-max-width});
+      max-width: $content-max-width;
       margin: 0 0 0 $anchor-list-max-width;
 
       > .logo-list {
