@@ -30,14 +30,21 @@ export default class {
   }
 
   linksLoaded(linksPayload) {
-    this.layout.setLinksPayload(linksPayload);
-    if (this.layout.relayout()) {
-      this._render();
+    this.el.classList.toggle('-detailed', linksPayload.detailedView);
 
-      this.el.classList.toggle('-detailed', linksPayload.detailedView);
-      this.svg.style('height', linksPayload.detailedView ? this.layout.getMaxHeight() : '100%');
-
+    if (linksPayload.detailedView === false) {
+      this.svg.style('height', '100%');
     }
+    this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
+    this.layout.setLinksPayload(linksPayload);
+    this.layout.relayout();
+
+    if (linksPayload.detailedView === true) {
+      this.svg.style('height', this.layout.getMaxHeight());
+    }
+
+    this._render();
+
   }
 
   selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
