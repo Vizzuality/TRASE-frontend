@@ -36,7 +36,11 @@
 .wrap {
   width: 100%;
   margin: 0 auto;
-  padding: 0 $padding-wrap;
+  padding: 0 $padding-wrap-mobile;
+
+  @media screen and (min-width: $breakpoint-tablet) {
+    padding: 0 $padding-wrap-tablet;
+  }
 
   @media screen and (min-width: $breakpoint-desktop) {
     padding: 0 $padding-wrap-desktop;
