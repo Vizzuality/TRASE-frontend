@@ -16,6 +16,7 @@ const sankeyLayout = function() {
   let columns;
   let links;
   let detailedView;
+  let maxHeight;
 
   // layout
   let linksColumnWidth;
@@ -89,9 +90,15 @@ const sankeyLayout = function() {
     return link;
   };
 
+  sankeyLayout.getMaxHeight = () => {
+    return maxHeight;
+  };
+
   const _computeNodeCoords = () => {
     const availableLinkSpace = viewportWidth - NUM_COLUMNS * columnWidth;
     linksColumnWidth = availableLinkSpace/(NUM_COLUMNS - 1);
+
+    maxHeight = 0;
 
     columns.forEach((column, i) => {
       column.x = _getColumnX(i);
@@ -106,6 +113,9 @@ const sankeyLayout = function() {
         }
         columnY += node.renderedHeight;
       });
+      if (columnY > maxHeight) {
+        maxHeight = columnY;
+      }
     });
   };
 

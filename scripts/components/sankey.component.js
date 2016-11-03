@@ -35,7 +35,7 @@ export default class {
       this._render();
 
       this.el.classList.toggle('-detailed', linksPayload.detailedView);
-      this.svg.style('height', linksPayload.detailedView ? '2000px' : '100%');
+      this.svg.style('height', linksPayload.detailedView ? this.layout.getMaxHeight() : '100%');
 
     }
   }
