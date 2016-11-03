@@ -19,3 +19,13 @@ export function toggleMapLayerMenu() {
     type: actions.TOGGLE_MAP_LAYERS_MENU
   };
 }
+
+export function toggleModal(visibility, data) {
+  return {
+    type: actions.TOGGLE_MODAL_VISIBILITY,
+    modal: {
+      visibility,
+      data
+    }
+  };
+}
