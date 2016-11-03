@@ -1,6 +1,7 @@
-import Dropdown from 'scripts/components/dropdown.component';
+import Dropdown from 'components/dropdown.component';
 import 'styles/factsheets.scss';
-import AreaStack from 'scripts/components/graphs/area-stack.component';
+import AreaStack from 'components/graphs/area-stack.component';
+import Table from 'components/table/table.component';
 
 const _renderAreaStack = () => {
   const el = document.querySelector('.js-municipalities-top');
@@ -32,6 +33,7 @@ const _onSelect = function(value) {
 
 const exporterDropdown = new Dropdown('exporter', _onSelect);
 const commodityDropdown = new Dropdown('commodity', _onSelect);
+new Table();
 
 exporterDropdown.setTitle(defaults.exporter);
 commodityDropdown.setTitle(defaults.commodity);
