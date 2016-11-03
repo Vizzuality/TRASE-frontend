@@ -166,9 +166,12 @@ export function loadLinks() {
         dispatch({
           type: actions.RESELECT_NODES
         });
-        dispatch({
-          type: actions.FILTER_LINKS_BY_NODES
-        });
+
+        if (getState().flows.selectedNodesIds && getState().flows.selectedNodesIds.length > 0) {
+          dispatch({
+            type: actions.FILTER_LINKS_BY_NODES
+          });
+        }
       });
   };
 }

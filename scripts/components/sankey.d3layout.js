@@ -47,8 +47,12 @@ const sankeyLayout = function() {
     return links;
   };
 
+  sankeyLayout.isReady = () => {
+    return viewportWidth && linksPayload;
+  }
+
   sankeyLayout.relayout = () => {
-    if (!viewportWidth || !linksPayload) {
+    if (!sankeyLayout.isReady()) {
       console.warn('not ready');
       return false;
     }

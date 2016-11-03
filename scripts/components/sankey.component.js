@@ -16,9 +16,9 @@ export default class {
 
     if (this.layout.relayout()) {
       this._render();
+      if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
     }
 
-    if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
   }
 
   initialDataLoadStarted(loading) {
@@ -38,6 +38,9 @@ export default class {
 
   selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
     // let minimumY = Infinity;
+    if (!this.layout.isReady()) {
+      return;
+    }
 
     this.sankeyColumns.selectAll('.sankey-node')
       .classed('-selected', node => {
@@ -89,7 +92,7 @@ export default class {
 
   _repositionExpandButton(nodesIds) {
     // TODO split by columns
-    if (nodesIds.length > 0) {
+    if (nodesIds && nodesIds.length > 0) {
       this.expandButton.classList.add('-visible');
 
       const lastSelectedNode = this.sankeyColumns.selectAll('.sankey-node')

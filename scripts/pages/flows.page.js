@@ -30,9 +30,8 @@ const initialState = {
     selectedQuant: 'Deforestation risk',
     detailedView: true,
     selectedQual: 'none',
-    selectedNodesIds: [],
+    // selectedNodesIds: [2350],
     areNodesExpanded: false,
-    selectedNodesData: [],
     selectedColumnsIds: [2, 3, 5, 6],
     selectedVectorLayers: {
       horizontal: {
