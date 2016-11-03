@@ -1,0 +1,16 @@
+<!--
+[2,1,0],  //1. Municipality / State / Biome
+[3,4],    //2. Port of export / Exporter
+[5,?],   //3. Importer / Port of import
+[6, ?],   //4. Country of Import / Country of consumption (???)
+-->
+<% columnsByPosition.forEach((columns, i) => { %>
+  <div class="c-dropdown -column-selector" data-dropdown="column<%= i %>">
+    <span class="js-dropdown-title dropdown-title">select column</span>
+    <ul class="js-dropdown-list dropdown-list">
+      <% columns.forEach(column => { %>
+        <li class="dropdown-item" data-value="<%= column.id %>"><%= column.name %></li>
+      <%});%>
+    </ul>
+  </div>
+<%});%>
