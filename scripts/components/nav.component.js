@@ -92,11 +92,11 @@ export default class {
     legendContainer.innerHTML = legendItems.map(legendItem => `<div class="color ${legendItem}"></div>`).join('');
     this.qualDropdown.selectValue(value);
 
-    if (value === 'none') {
-      this.qualDropdown.title.classList.add('-dimmed');
-    } else {
-      this.qualDropdown.title.classList.remove('-dimmed');
-    }
+    // if (value === 'none') {
+    //   this.qualDropdown.title.classList.add('-dimmed');
+    // } else {
+    //   this.qualDropdown.title.classList.remove('-dimmed');
+    // }
   }
 
   selectView(value) {
