@@ -117,43 +117,9 @@
         <div class="expand-button js-expand"></div>
       </div>
 
-      <!--
-      [2,1,0],  //1. Municipality / State / Biome
-      [3,4],    //2. Port of export / Exporter
-      [5,?],   //3. Importer / Port of import
-      [6, ?],   //4. Country of Import / Country of consumption (???)
-      -->
-      <div class="c-columns-selector is-absolute">
-      <div class="c-dropdown -column-selector" data-dropdown="column0">
-        <span class="js-dropdown-title dropdown-title">select column</span>
-        <ul class="js-dropdown-list dropdown-list">
-          <li class="dropdown-item" data-value="2">Municipality</li>
-          <li class="dropdown-item" data-value="1">State</li>
-          <li class="dropdown-item" data-value="0">Biome</li>
-        </ul>
+      <div class="c-columns-selector is-absolute js-columns-selector">
+        <!-- this is rendered by columns-selector.component -->
       </div>
-      <div class="c-dropdown -column-selector" data-dropdown="column1">
-        <span class="js-dropdown-title dropdown-title">select column</span>
-        <ul class="js-dropdown-list dropdown-list">
-          <li class="dropdown-item" data-value="3">Port of export</li>
-          <li class="dropdown-item" data-value="4">Exporter</li>
-        </ul>
-      </div>
-      <div class="c-dropdown -column-selector" data-dropdown="column2">
-        <span class="js-dropdown-title dropdown-title">select column</span>
-        <ul class="js-dropdown-list dropdown-list">
-          <li class="dropdown-item" data-value="5">Importer</li>
-          <li class="dropdown-item">Port of import</li>
-        </ul>
-      </div>
-      <div class="c-dropdown -column-selector" data-dropdown="column3">
-        <span class="js-dropdown-title dropdown-title">select column</span>
-        <ul class="js-dropdown-list dropdown-list">
-          <li class="dropdown-item" data-value="6">Country of import</li>
-          <li class="dropdown-item">Country of consumption</li>
-        </ul>
-      </div>
-    </div>
     </div>
   </div>
 
