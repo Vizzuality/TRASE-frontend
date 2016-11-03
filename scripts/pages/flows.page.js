@@ -28,11 +28,10 @@ const initialState = {
     selectedCommodity: 'soy',
     selectedYears: [2015, 2016],
     selectedQuant: 'Deforestation risk',
-    selectedView: 1,
+    detailedView: false,
     selectedQual: 'none',
-    selectedNodesIds: [],
+    // selectedNodesIds: [2350],
     areNodesExpanded: false,
-    selectedNodesData: [],
     selectedColumnsIds: [2, 3, 5, 6],
     selectedVectorLayers: {
       horizontal: {

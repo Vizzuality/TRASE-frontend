@@ -9,7 +9,7 @@ const mapMethodsToState = (state) => ({
   selectCommodity: state.flows.selectedCommodity,
   selectYears: state.flows.selectedYears,
   selectQual: state.flows.selectedQual,
-  selectView: state.flows.selectedView
+  selectView: state.flows.detailedView
 });
 
 const mapViewCallbacksToActions = () => ({
@@ -18,7 +18,7 @@ const mapViewCallbacksToActions = () => ({
   onCommoditySelected: commodity => selectCommodity(commodity),
   onYearsSelected: years => selectYears(years),
   onQualSelected: qual => selectQual(qual),
-  onViewSelected: view => selectView(view)
+  onViewSelected: detailedView => selectView(detailedView === 'true')
 });
 
 export default connect(Nav, mapMethodsToState, mapViewCallbacksToActions);

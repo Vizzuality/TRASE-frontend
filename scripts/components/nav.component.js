@@ -100,6 +100,7 @@ export default class {
   }
 
   selectView(value) {
+    console.log(value)
     this.viewDropdown.selectValue(value);
   }
 }

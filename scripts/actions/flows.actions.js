@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 import actions from 'actions';
-import { NUM_NODES } from 'constants';
+import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED } from 'constants';
 import getURLFromParams from 'utils/getURLFromParams';
 
 export function selectCountry(country, reloadLinks) {
@@ -15,8 +15,8 @@ export function selectQuant(quant, reloadLinks) {
 export function selectQual(qual, reloadLinks) {
   return _reloadLinks('qual', qual, actions.SELECT_QUAL, reloadLinks);
 }
-export function selectView(view, reloadLinks) {
-  return _reloadLinks('view', view, actions.SELECT_VIEW, reloadLinks);
+export function selectView(detailedView, reloadLinks) {
+  return _reloadLinks('detailedView', detailedView, actions.SELECT_VIEW, reloadLinks);
 }
 
 export function selectColumn(columnIndex, columnId) {
@@ -138,9 +138,8 @@ export function loadLinks() {
       year_start: getState().flows.selectedYears[0],
       year_end: getState().flows.selectedYears[1],
       include_columns: getState().flows.selectedColumnsIds.join(','),
-      n_nodes: NUM_NODES,
-      flow_quant: getState().flows.selectedQuant,
-      view: +getState().flows.selectedView,
+      n_nodes: getState().flows.detailedView === true ? NUM_NODES_DETAILED : NUM_NODES_SUMMARY,
+      flow_quant: getState().flows.selectedQuant
     };
 
     const selectedQual = getState().flows.selectedQual;
@@ -167,9 +166,12 @@ export function loadLinks() {
         dispatch({
           type: actions.RESELECT_NODES
         });
-        dispatch({
-          type: actions.FILTER_LINKS_BY_NODES
-        });
+
+        if (getState().flows.selectedNodesIds && getState().flows.selectedNodesIds.length > 0) {
+          dispatch({
+            type: actions.FILTER_LINKS_BY_NODES
+          });
+        }
       });
   };
 }
@@ -201,7 +203,7 @@ const _loadMapVectorLayers = (urls, dispatch) => {
 export function selectNode(nodeId, isAggregated) {
   return (dispatch, getState) => {
     if (isAggregated) {
-      console.log('switch to detailed mode!');
+      dispatch(selectView(true));
     } else {
       // unselecting the node that is currently expanded: just shrink it and bail
       const expandedNodesIds = getState().flows.expandedNodesIds;
