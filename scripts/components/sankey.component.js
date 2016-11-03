@@ -1,5 +1,6 @@
 import { select as d3_select /*, selectAll as d3_selectAll*/ } from 'd3-selection';
 import  'd3-transition';
+import { DETAILED_VIEW_MIN_LINK_HEIGHT } from 'constants';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import getComputedSize from 'utils/getComputedSize';
@@ -18,7 +19,6 @@ export default class {
       this._render();
       if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
     }
-
   }
 
   initialDataLoadStarted(loading) {
@@ -33,6 +33,10 @@ export default class {
     this.layout.setLinksPayload(linksPayload);
     if (this.layout.relayout()) {
       this._render();
+
+      this.el.classList.toggle('-detailed', linksPayload.detailedView);
+      this.svg.style('height', linksPayload.detailedView ? '2000px' : '100%');
+
     }
   }
 
@@ -170,7 +174,7 @@ export default class {
 
     // update
     links.transition()
-      .attr('stroke-width', d => d.renderedHeight)
+      .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
     // enter
@@ -185,7 +189,7 @@ export default class {
         this.classList.remove('-hover');
       })
       .transition()
-      .attr('stroke-width', d => d.renderedHeight);
+      .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight));
 
     // exit
     links.exit()

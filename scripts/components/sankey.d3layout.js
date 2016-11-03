@@ -1,5 +1,5 @@
 import wrapSVGText from 'utils/wrapSVGText';
-import { NUM_COLUMNS } from 'constants';
+import { NUM_COLUMNS, DETAILED_VIEW_MIN_NODE_HEIGHT, DETAILED_VIEW_SCALE } from 'constants';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 
 
@@ -15,6 +15,7 @@ const sankeyLayout = function() {
   // data
   let columns;
   let links;
+  let detailedView;
 
   // layout
   let linksColumnWidth;
@@ -24,6 +25,7 @@ const sankeyLayout = function() {
   const _labelMaxLines = 3;
 
   sankeyLayout.setViewportSize = (size) => {
+    console.log(size)
     viewportWidth = size[0];
     viewportHeight = size[1];
   };
@@ -58,6 +60,7 @@ const sankeyLayout = function() {
     }
     columns = linksPayload.visibleNodesByColumn;
     links = linksPayload.links;
+    detailedView = linksPayload.detailedView;
 
     _computeNodeCoords();
     _computeLinksCoords();
@@ -65,10 +68,6 @@ const sankeyLayout = function() {
 
     return true;
   };
-
-  // sankeyLayout.getNodeLabel = (name, nodeRenderedHeight) => {
-  //   return wrapSVGText(name, nodeRenderedHeight, _labelCharHeight, _labelCharsPerLine, _labelMaxLines);
-  // };
 
   // using precomputed dimensions on links objects, this will generate SVG paths for links
   sankeyLayout.link = function() {
@@ -100,7 +99,11 @@ const sankeyLayout = function() {
       column.values.forEach(node => {
         node.x = column.x;
         node.y = columnY;
-        node.renderedHeight = node.height * viewportHeight;
+        if (detailedView === true) {
+          node.renderedHeight = Math.max(DETAILED_VIEW_MIN_NODE_HEIGHT, DETAILED_VIEW_SCALE * node.height);
+        } else {
+          node.renderedHeight = node.height * viewportHeight;
+        }
         columnY += node.renderedHeight;
       });
     });
@@ -122,7 +125,12 @@ const sankeyLayout = function() {
     links.forEach(link => {
       link.width = linksColumnWidth;
       link.x = columnWidth + _getColumnX(_getColumnIndex(link.sourceColumnId));
-      link.renderedHeight = link.height * viewportHeight;
+
+      if (detailedView === true) {
+        link.renderedHeight = link.height * DETAILED_VIEW_SCALE;
+      } else {
+        link.renderedHeight = link.height * viewportHeight;
+      }
 
       const sId = link.sourceNodeId;
       if (!stackedHeightsByNodeId.source[sId]) stackedHeightsByNodeId.source[sId] = _getNode(link.sourceColumnId, sId).y;
@@ -155,7 +163,6 @@ const sankeyLayout = function() {
     const column = columns[columnIndex];
     return column.values.find(node => node.id === nodeId);
   };
-
 
   return sankeyLayout;
 };

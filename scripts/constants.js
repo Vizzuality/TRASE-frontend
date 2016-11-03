@@ -1,7 +1,10 @@
 export const NUM_COLUMNS = 4;
 export const COLUMNS_POS = [[0, 1, 2], [3, 4], [5], [6]];
 export const NUM_NODES_SUMMARY = 10;
-export const NUM_NODES_DETAILED = 100;
+export const NUM_NODES_DETAILED = 999;
+export const DETAILED_VIEW_SCALE = 1200;
+export const DETAILED_VIEW_MIN_NODE_HEIGHT = 14;
+export const DETAILED_VIEW_MIN_LINK_HEIGHT = 1;
 export const AVAILABLE_YEARS = [2010, 2011, 2012, 2013, 2014, 2015, 2016];
 export const LEGEND_COLORS = {
   bidimensional: [
