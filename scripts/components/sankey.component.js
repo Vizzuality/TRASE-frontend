@@ -96,12 +96,14 @@ export default class {
         .filter(node => node.id === nodesIds[0])
         .data()[0];
 
-      let y = Math.max(0, lastSelectedNode.y - 12);
-      this.expandButton.style.top = `${y}px`;
-      this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
-    } else {
-      this.expandButton.classList.remove('-visible');
+      if (lastSelectedNode) {
+        let y = Math.max(0, lastSelectedNode.y - 12);
+        this.expandButton.style.top = `${y}px`;
+        this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
+        return;
+      }
     }
+    this.expandButton.classList.remove('-visible');
   }
 
   _toggleLoading(loading) {

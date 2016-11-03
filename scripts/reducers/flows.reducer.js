@@ -129,14 +129,14 @@ export default function (state = {}, action) {
     });
   }
 
-  case actions.SELECT_NODE: {
+  case actions.ADD_NODE_TO_SELECTION: {
     const selectedNodesIds = getSelectedNodesIds(action.nodeId, state.selectedNodesIds);
     const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
     selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
     return Object.assign({}, state, selectedNodesStateUpdates);
   }
 
-  case actions.SELECT_NODE_FROM_GEOID: {
+  case actions.ADD_NODE_TO_SELECTION_FROM_GEOID: {
     const nodeId = getNodeIdFromGeoId(action.geoId, state.visibleNodes);
     // node not found in visible nodes: abort
     if (nodeId === null) return state;
@@ -145,6 +145,10 @@ export default function (state = {}, action) {
     const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
     selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
     return Object.assign({}, state, selectedNodesStateUpdates);
+  }
+
+  case actions.SELECT_SINGLE_NODE: {
+    return Object.assign({}, state, { selectedNodesIds: [action.nodeId] });
   }
 
   // this is triggered when links are reloaded to keep track of selected node/links
