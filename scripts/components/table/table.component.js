@@ -1,28 +1,223 @@
 import TableTemplate from 'ejs!templates/table/table.ejs';
+import TableTopTemplate from 'ejs!templates/table/tableTop.ejs';
+// import { json as d3_json } from 'd3-request';
 
 export default class {
-  constructor() {
+  constructor(value) {
 
     var actors = [
-      {munici: 'Campo Novo', trade: '1,320', defo: '1,320'},
-      {munici: 'Maracaju', trade: '1,065', defo: '1,965'},
-      {munici: 'Barreiras', trade: '837', defo: '893'},
+      {
+        title: [
+          {
+            'name': 'municipallities',
+            'units': ''
+          },
+          {
+            'name': 'TRADE AMOUNT',
+            'units': 'tons'
+          },
+          {
+            'name': 'DEFORESTATION',
+            'units': 'ha'
+          },
+          {
+            'name': 'WATER SCARCITY',
+            'units': 'mm/ha'
+          },
+          {
+            'name': 'CONFLICTS',
+            'units': ''
+          },
+          {
+            'name': 'FIRES',
+            'units': ''
+          }
+        ]
+      },
+      {
+        data: [
+          {
+            'municipalities': [
+              {
+                'value': 'Quêrencia',
+                'unit': ''
+              }
+            ],
+            'trade': [
+              {
+                'value': '2,864',
+                'unit': 'tons'
+              }
+            ],
+            'deforastation': [
+              {
+                'value': '53',
+                'unit': 'ha'
+              }
+            ],
+            'water': [
+              {
+                'value': '53',
+                'unit': 'mm/ha'
+              }
+            ],
+            'conflict': [
+              {
+                'value': '53',
+                'unit': ''
+              }
+            ],
+            'fire': [
+              {
+                'value': '53',
+                'unit': ''
+              }
+            ]
+          },
+          {
+            'municipalities': [
+              {
+                'value': 'Quêrencia',
+                'unit': ''
+              }
+            ],
+            'trade': [
+              {
+                'value': '2,863',
+                'unit': 'tons'
+              }
+            ],
+            'deforastation': [
+              {
+                'value': '53',
+                'unit': 'ha'
+              }
+            ],
+            'water': [
+              {
+                'value': '53',
+                'unit': 'mm/ha'
+              }
+            ],
+            'conflict': [
+              {
+                'value': '53',
+                'unit': ''
+              }
+            ],
+            'fire': [
+              {
+                'value': '53',
+                'unit': ''
+              }
+            ]
+          },
+          {
+            'municipalities': [
+              {
+                'value': 'Quêrencia',
+                'unit': ''
+              }
+            ],
+            'trade': [
+              {
+                'value': '2,863',
+                'unit': 'tons'
+              }
+            ],
+            'deforastation': [
+              {
+                'value': '53',
+                'unit': 'ha'
+              }
+            ],
+            'water': [
+              {
+                'value': '53',
+                'unit': 'mm/ha'
+              }
+            ],
+            'conflict': [
+              {
+                'value': '53',
+                'unit': ''
+              }
+            ],
+            'fire': [
+              {
+                'value': '53',
+                'unit': ''
+              }
+            ]
+          },
+          {
+            'municipalities': [
+              {
+                'value': 'Quêrencia',
+                'unit': ''
+              }
+            ],
+            'trade': [
+              {
+                'value': '2,863',
+                'unit': 'tons'
+              }
+            ],
+            'deforastation': [
+              {
+                'value': '53',
+                'unit': 'ha'
+              }
+            ],
+            'water': [
+              {
+                'value': '53',
+                'unit': 'mm/ha'
+              }
+            ],
+            'conflict': [
+              {
+                'value': '53',
+                'unit': ''
+              }
+            ],
+            'fire': [
+              {
+                'value': '53',
+                'unit': ''
+              }
+            ]
+          }
+        ]
+      }
     ];
 
-    this.data = actors;
+    var consumers = [
+      {
+        trader:[
+          {
+            'name': 'Craig',
+            'value' : '33'
+          }
+        ]
+      }];
 
-    this.render();
+    if(value === 'top'){
+      this.data = consumers;
+    }
+    else {
+      this.data = actors;
+    }
+    this.render(value);
   }
 
-  onCreated() {
-    debugger
-    this.render();
-  }
-
-  render() {
-
-    // const template = new TableTemplate({actors: this.data});
-    // debugger
-    console.log(new TableTemplate());
+  render(value) {
+    if(value === 'top'){
+      const template = TableTopTemplate({actors: this.data});
+      document.querySelector('.contain-table').innerHTML = template;
+    }else {
+      const template = TableTemplate({actors: this.data});
+      document.querySelector('.contain-table').innerHTML = template;
+    }
   }
 }

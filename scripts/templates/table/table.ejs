@@ -1,3 +1,31 @@
-<p>
-  test
-</p>
+<table>
+  <h1> </h1>
+<thead>
+  <tr>
+    <% for(var i=0; i<actors[0]['title'].length; i++) {%>
+      <th><%= actors[0]['title'][i]['name'] %></th>
+    <% } %>
+  </tr>
+</thead>
+<tbody>
+  <% for(var i=0; i<actors[1]['data'].length; i++) {%>
+    <tr>
+      <% if(i==0) { %>
+      <td data-unit="<%= actors[1]['data'][i]['municipalities'][0]['unit'] %>"><%= actors[1]['data'][i]['municipalities'][0]['value'] %></td>
+      <td data-unit="<%= actors[1]['data'][i]['trade'][0]['unit'] %>"><%= actors[1]['data'][i]['trade'][0]['value']  %></td>
+      <td data-unit="<%= actors[1]['data'][i]['deforastation'][0]['unit'] %>"><%= actors[1]['data'][i]['deforastation'][0]['value']  %></td>
+      <td data-unit="<%= actors[1]['data'][i]['water'][0]['unit'] %>"><%= actors[1]['data'][i]['water'][0]['value']  %></td>
+      <td data-unit="<%= actors[1]['data'][i]['conflict'][0]['unit'] %>"><%= actors[1]['data'][i]['conflict'][0]['value']  %></td>
+      <td data-unit="<%= actors[1]['data'][i]['fire'][0]['unit'] %>"><%= actors[1]['data'][i]['fire'][0]['value']  %></td>
+      <% } else{ %>
+        <td><%= actors[1]['data'][i]['municipalities'][0]['value'] %></td>
+        <td><%= actors[1]['data'][i]['trade'][0]['value']  %></td>
+        <td><%= actors[1]['data'][i]['deforastation'][0]['value']  %></td>
+        <td><%= actors[1]['data'][i]['water'][0]['value']  %></td>
+        <td><%= actors[1]['data'][i]['conflict'][0]['value']  %></td>
+        <td><%= actors[1]['data'][i]['fire'][0]['value']  %></td>
+        <% } %>
+    </tr>
+  <% } %>
+</tbody>
+</table>

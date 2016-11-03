@@ -64,31 +64,11 @@
             }
           }
 
-          &.tons-text {
-            &::after {
-              display: inline-block;
-              position: absolute;
-              content: 'tons';
-              opacity: .6;
-            }
-          }
-
-          &.ha-text {
-            &::after {
-              display: inline-block;
-              position: absolute;
-              content: 'ha';
-              opacity: .6;
-            }
-          }
-
-          &.mm-ha-text {
-            &::after {
-              display: inline-block;
-              position: absolute;
-              content: 'mm/ha';
-              opacity: .6;
-            }
+          &::after {
+            display: inline-block;
+            position: absolute;
+            content: attr(data-unit);
+            opacity: .6;
           }
 
           span {

@@ -33,7 +33,7 @@ const _onSelect = function(value) {
 
 const exporterDropdown = new Dropdown('exporter', _onSelect);
 const commodityDropdown = new Dropdown('commodity', _onSelect);
-new Table();
+new Table('municipalities');
 
 exporterDropdown.setTitle(defaults.exporter);
 commodityDropdown.setTitle(defaults.commodity);
