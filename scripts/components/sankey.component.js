@@ -1,5 +1,6 @@
 import { select as d3_select /*, selectAll as d3_selectAll*/ } from 'd3-selection';
 import  'd3-transition';
+import { DETAILED_VIEW_MIN_LINK_HEIGHT } from 'constants';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import getComputedSize from 'utils/getComputedSize';
@@ -16,9 +17,8 @@ export default class {
 
     if (this.layout.relayout()) {
       this._render();
+      if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
     }
-
-    if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
   }
 
   initialDataLoadStarted(loading) {
@@ -30,14 +30,28 @@ export default class {
   }
 
   linksLoaded(linksPayload) {
-    this.layout.setLinksPayload(linksPayload);
-    if (this.layout.relayout()) {
-      this._render();
+    this.el.classList.toggle('-detailed', linksPayload.detailedView);
+
+    if (linksPayload.detailedView === false) {
+      this.svg.style('height', '100%');
     }
+    this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
+    this.layout.setLinksPayload(linksPayload);
+    this.layout.relayout();
+
+    if (linksPayload.detailedView === true) {
+      this.svg.style('height', this.layout.getMaxHeight());
+    }
+
+    this._render();
+
   }
 
   selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
     // let minimumY = Infinity;
+    if (!this.layout.isReady()) {
+      return;
+    }
 
     this.sankeyColumns.selectAll('.sankey-node')
       .classed('-selected', node => {
@@ -89,7 +103,7 @@ export default class {
 
   _repositionExpandButton(nodesIds) {
     // TODO split by columns
-    if (nodesIds.length > 0) {
+    if (nodesIds && nodesIds.length > 0) {
       this.expandButton.classList.add('-visible');
 
       const lastSelectedNode = this.sankeyColumns.selectAll('.sankey-node')
@@ -153,7 +167,7 @@ export default class {
       .attr('height', d => d.renderedHeight);
 
     nodesUpdate.select('.sankey-node-labels')
-    .attr('transform', placeNodeText)
+    .attr('transform', placeNodeText);
 
     this.nodes.exit()
       .remove();
@@ -167,7 +181,7 @@ export default class {
 
     // update
     links.transition()
-      .attr('stroke-width', d => d.renderedHeight)
+      .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
     // enter
@@ -182,7 +196,7 @@ export default class {
         this.classList.remove('-hover');
       })
       .transition()
-      .attr('stroke-width', d => d.renderedHeight);
+      .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight));
 
     // exit
     links.exit()

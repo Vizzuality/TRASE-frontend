@@ -92,7 +92,7 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { selectedQuant: action.quant });
 
   case actions.SELECT_VIEW:
-    return Object.assign({}, state, { selectedView: action.view });
+    return Object.assign({}, state, { detailedView: action.detailedView });
 
   case actions.SELECT_COLUMN: {
     const selectedColumnsIds = [].concat(state.selectedColumnsIds);
