@@ -1,21 +1,22 @@
 @import '../../settings';
 
 .c-footer {
-  display: flex;
-  height: 465px;
+  // display: flex;
+  // height: 465px;
   padding: 48px 0 56px;
 
   background-color: $charcoal-grey;
 
-  > .wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
+  // > .wrap {
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  //   justify-content: space-between;
+  // }
 
   .signup {
     max-width: 345px;
+    margin: 0 auto;
 
     > .sign-up-form {
       display: flex;
@@ -29,6 +30,7 @@
     > .sign-up-form > .email-field {
       width: 100%;
       padding: 0 16px;
+      outline: 0;
 
       background-color: transparent;
 
@@ -59,20 +61,144 @@
       flex-basis: calc(100% / 3);
       height: 100%;
       padding: 0 16px;
-
       border-radius: 0;
+      background-color: $gray;
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      text-transform: uppercase;
     }
   }
 
-  .links-list {
+  .contain-logos-footer {
     display: flex;
+    width: 100%;
+    margin-top: 56px;
 
-    .separator {
-      display: inline-flex;
-      align-items: center;
-      margin: 0 8px;
+    .contain-logos {
+      flex-basis: calc(100% / 3);
+      height: 0%;
+      padding-left: 16px;
+      border-left: 1px solid $white;
 
-      color: $gray;
+      ul {
+        li {
+          display: block;
+        }
+      }
+
+      h4 {
+        margin-bottom: 32px;
+        color: $white;
+      }
+
+      .sei-logo {
+        margin-bottom: 48px;
+
+        img {
+          width: 168px;
+        }
+      }
+
+      .gcp-logo {
+        img {
+          width: 112px;
+        }
+      }
+
+      .vizzuality-logo {
+        margin-bottom: 35px;
+
+        img {
+          width: 116px;
+        }
+      }
+
+      .efi-logo {
+        img {
+          width: 64px;
+        }
+      }
+
+      .contain-text {
+        margin-top: 20px;
+
+        p {
+          color: $gray;
+          opacity: .5;
+        }
+      }
+
+      &.-donors {
+        ul {
+          display: flex;
+
+          &:first-of-type {
+            margin-bottom: 24px;
+          }
+        }
+
+        .eustars-logo {
+          margin-right: 56px;
+
+          img {
+            width: 80px;
+          }
+        }
+
+        .ukaidsv-logo {
+          margin-right: 24px;
+
+          img {
+            width: 48px;
+          }
+        }
+
+        .conservancy-logo {
+          img {
+            width: 120px;
+          }
+        }
+
+        .sida-logo {
+          margin-right: 24px;
+
+          img {
+            width: 120px;
+          }
+        }
+
+        .formas-logo {
+          margin-right: 32px;
+
+          img {
+            width: 40px;
+          }
+        }
+
+        .moore-logo {
+
+          img {
+            width: 104px;
+          }
+        }
+      }
+    }
+  }
+
+  .contain-link-list {
+    margin-top: 54px;
+
+    .links-list {
+      display: flex;
+      justify-content: center;
+
+      .separator {
+        display: inline-flex;
+        align-items: center;
+        margin: 0 8px;
+
+        color: $gray;
+      }
     }
   }
 }
