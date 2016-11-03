@@ -287,6 +287,7 @@ export function searchNode(nodeId) {
       if (currentColumnAtPos !== node.columnId) {
         dispatch(selectColumn(columnPos, node.columnId));
       }
+      dispatch(selectView(true));
       dispatch({
         type: actions.SELECT_SINGLE_NODE,
         nodeId
