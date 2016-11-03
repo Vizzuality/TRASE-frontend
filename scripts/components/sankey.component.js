@@ -167,7 +167,7 @@ export default class {
       .attr('height', d => d.renderedHeight);
 
     nodesUpdate.select('.sankey-node-labels')
-    .attr('transform', placeNodeText)
+    .attr('transform', placeNodeText);
 
     this.nodes.exit()
       .remove();

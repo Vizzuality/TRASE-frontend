@@ -28,7 +28,7 @@ const initialState = {
     selectedCommodity: 'soy',
     selectedYears: [2015, 2016],
     selectedQuant: 'Deforestation risk',
-    detailedView: true,
+    detailedView: false,
     selectedQual: 'none',
     // selectedNodesIds: [2350],
     areNodesExpanded: false,

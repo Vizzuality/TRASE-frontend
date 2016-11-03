@@ -203,7 +203,7 @@ const _loadMapVectorLayers = (urls, dispatch) => {
 export function selectNode(nodeId, isAggregated) {
   return (dispatch, getState) => {
     if (isAggregated) {
-      dispatch(selectView('detailed'));
+      dispatch(selectView(true));
     } else {
       // unselecting the node that is currently expanded: just shrink it and bail
       const expandedNodesIds = getState().flows.expandedNodesIds;
