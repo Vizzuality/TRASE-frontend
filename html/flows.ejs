@@ -4,6 +4,8 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
+  <div class="loading-wrapper">
+  <%= htmlWebpackPlugin.options.icons %>
   <div class="l-flows">
 
     <%= htmlWebpackPlugin.options.nav %>
@@ -122,9 +124,8 @@
       </div>
     </div>
   </div>
-
+  </div>
   <%= htmlWebpackPlugin.options.scripts %>
-  <%= htmlWebpackPlugin.options.icons %>
 
 </body>
 </html>
