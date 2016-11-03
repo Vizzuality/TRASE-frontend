@@ -1,6 +1,7 @@
 export const NUM_COLUMNS = 4;
 export const COLUMNS_POS = [[0, 1, 2], [3, 4], [5], [6]];
-export const NUM_NODES = 10;
+export const NUM_NODES_SUMMARY = 10;
+export const NUM_NODES_DETAILED = 100;
 export const AVAILABLE_YEARS = [2010, 2011, 2012, 2013, 2014, 2015, 2016];
 export const LEGEND_COLORS = {
   bidimensional: [
