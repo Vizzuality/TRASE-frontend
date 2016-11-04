@@ -74,10 +74,11 @@
   }
 
   .map-polygon {
-    fill: $pale-grey;
-    fill-opacity: .6;
+    fill: $pinkish-grey;
+    fill-opacity: 1;
     stroke: $charcoal-grey;
-    stroke-opacity: .5;
+    stroke-width: 1px;
+    stroke-opacity: 1;
 
     &.-highlighted {
       fill: none;
