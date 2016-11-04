@@ -15,12 +15,14 @@ import getSelectedNodesData from './sankey/getSelectedNodesData';
 import getMapLayers from './sankey/getMapLayers';
 import setNodesMeta from './sankey/setNodesMeta';
 import getChoropleth from './sankey/getChoropleth';
+import mapContextualLayers from './map/context_layers';
 
 export default function (state = {}, action) {
   switch (action.type) {
 
-  case actions.LOAD_INITIAL_DATA:
-    return Object.assign({}, state, { initialDataLoading: true });
+  case actions.LOAD_INITIAL_DATA: {
+    return Object.assign({}, state, { mapContextualLayers, initialDataLoading: true });
+  }
 
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
@@ -94,6 +96,7 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { detailedView: action.detailedView });
 
   case actions.SELECT_COLUMN: {
+    // TODO also update choropleth with default selected indicators
     const selectedColumnsIds = [].concat(state.selectedColumnsIds);
     selectedColumnsIds[action.columnIndex] = action.columnId;
     return Object.assign({}, state, { selectedColumnsIds });
@@ -189,7 +192,14 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { selectedVectorLayers, choropleth });
   }
   case actions.SELECT_CONTEXTUAL_LAYERS: {
-    return Object.assign({}, state, { selectedContextualLayers: action.contextualLayers});
+    const mapContextualLayersDict = _.keyBy(state.mapContextualLayers, 'name');
+    const selectedMapContextualLayersData = action.contextualLayers.map(layerSlug => {
+      return _.cloneDeep(mapContextualLayersDict[layerSlug]);
+    });
+    return Object.assign({}, state, {
+      selectedMapContextualLayers: action.contextualLayers,
+      selectedMapContextualLayersData
+    });
   }
 
   case actions.TOGGLE_NODES_EXPAND: {
@@ -207,6 +217,8 @@ export default function (state = {}, action) {
     return state;
   }
 }
+
+
 
 const getSelectedNodesIds = (addedNodeId, currentSelectedNodesIds) => {
   const currentIndex = currentSelectedNodesIds.indexOf(addedNodeId);

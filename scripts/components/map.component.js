@@ -1,5 +1,9 @@
 import L from 'leaflet';
+import _ from 'lodash';
+import 'leaflet.utfgrid';
+import 'whatwg-fetch';
 import * as topojson from 'topojson';
+import { CARTO_BASE_URL } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/map.scss';
 import 'style/components/map/map-legend.scss';
@@ -11,9 +15,16 @@ export default class {
       zoomControl: false
     };
 
-    this.map = L.map('map', mapOptions).setView([-16.20639, -44.43333], 4);
-    var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' });
-    this.map.addLayer(layer);
+    this.map = L.map('map', mapOptions).setView([-16, -50], 4);
+    var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' });
+    this.map.addLayer(basemap);
+
+    this.map.createPane('main');
+    this.map.getPane('main').style.zIndex = 600;
+    this.map.createPane('context_above');
+    this.map.getPane('context_above').style.zIndex = 601;
+
+    this.contextLayers = [];
 
     this._setEventListeners();
   }
@@ -83,8 +94,79 @@ export default class {
     });
   }
 
+  loadContextLayers(selectedMapContextualLayersData) {
+    this.contextLayers.forEach(layer => {
+      this.map.removeLayer(layer);
+    });
+
+    let forceZoom = 0;
+
+    selectedMapContextualLayersData.forEach((layerData, i) => {
+      if (layerData.rasterURL) {
+        this._createRasterLayer(layerData);
+      } else {
+        this._createCartoLayer(layerData, i);
+      }
+
+      if (_.isNumber(layerData.forceZoom)) {
+        forceZoom = Math.max(layerData.forceZoom, forceZoom);
+      }
+    });
+
+    console.log(forceZoom)
+    if (forceZoom && this.map.getZoom() < forceZoom) {
+      this.map.setZoom(forceZoom);
+    }
+
+    // disable main choropleth layer when there are context layers
+    // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
+    this.map.getPane('main').classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
+
+  }
+
+  _createRasterLayer(layerData) {
+    // const url = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
+    const url = `${layerData.rasterURL}{z}/{x}/{y}.png`;
+    console.log(url);
+    var layer = L.tileLayer(url, {
+      pane: 'context_above'
+    });
+    this.contextLayers.push(layer);
+    this.map.addLayer(layer);
+  }
+
+  _createCartoLayer(layerData, i) {
+    const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/0/{z}/{x}/{y}`;
+    const layerUrl = `${baseUrl}.png`;
+    // console.log(layerUrl)
+    const layer = new L.tileLayer(layerUrl, {
+      pane: 'context_above'
+    });
+
+    this.contextLayers.push(layer);
+    this.map.addLayer(layer);
+
+    if (i === 0) {
+      const utfGridUrl = `${baseUrl}.grid.json?callback={cb}`;
+      const utfGrid = new L.UtfGrid(utfGridUrl);
+
+      this.contextLayers.push(utfGrid);
+      this.map.addLayer(utfGrid, {
+        resolution: 2
+      });
+
+      utfGrid.on('mouseover', function (e) {
+        if (e.data && e.data.hasOwnProperty('cartodb_id')) {
+          console.log(e.data.cartodb_id);
+        }
+      });
+    }
+  }
+
   _getVectorLayer(geoData, polygonClassName) {
-    var topoLayer = new L.GeoJSON();
+    var topoLayer = new L.GeoJSON(null, {
+      pane: 'main'
+    });
     var keys = Object.keys(geoData.objects);
     keys.forEach(key => {
       const geojson = topojson.feature(geoData, geoData.objects[key]);

@@ -1,9 +1,15 @@
+import ContextLayersTemplate from 'ejs!templates/map/map-context.ejs';
+
 export default class {
 
   onCreated() {
-    this.el = document.querySelector('.c-basemap-options');
-    this.contextualLayerList = this.el.querySelector('.js-layer-contextual');
-    this.switchers = Array.prototype.slice.call(this.contextualLayerList.querySelectorAll('.c-switcher'), 0);
+    this.el = document.querySelector('.js-layer-contextual');
+
+  }
+
+  buildLayers(layers) {
+    this.el.innerHTML = ContextLayersTemplate({layers});
+    this.switchers = Array.prototype.slice.call(this.el.querySelectorAll('.c-switcher'), 0);
 
     this.switchers.forEach(switcher => {
       switcher.addEventListener('click', (e) => this._onToggleSwitcher(e));

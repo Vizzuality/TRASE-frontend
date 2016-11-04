@@ -43,7 +43,7 @@ const initialState = {
         title: null
       }
     },
-    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
+    // selectedMapContextualLayers: ['silos']
   }
 };
 

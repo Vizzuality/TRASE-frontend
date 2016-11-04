@@ -17,7 +17,7 @@ export default class {
     return fetch('factsheets/table.json');
   }
 
-  render(value) {
+  render() {
     var areamunicipalities = document.querySelector('.js-municipalities-table');
     const template = TableTemplate({actors: this.data});
     areamunicipalities.innerHTML = template;

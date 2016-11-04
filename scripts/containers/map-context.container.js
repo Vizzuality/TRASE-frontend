@@ -3,7 +3,8 @@ import { selectContextualLayers } from 'actions/flows.actions';
 import mapContext from 'components/map-context.component';
 
 const mapMethodsToState = (state) => ({
-  selectContextualLayers: state.flows.selectedContextualLayers
+  buildLayers: state.flows.mapContextualLayers,
+  selectContextualLayers: state.flows.selectedMapContextualLayers
 });
 
 const mapViewCallbacksToActions = () => ({

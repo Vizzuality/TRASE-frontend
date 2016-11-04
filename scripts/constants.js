@@ -18,3 +18,4 @@ export const LEGEND_COLORS = {
 };
 
 export const STACK_AREA_COLORS = ['#ef6a68', '#ffae4f', '#76c370', '#69a4d0', '#9d7dbf'];
+export const CARTO_BASE_URL = 'https://p2cs-sei.cartodb.com/api/v1/map/';
