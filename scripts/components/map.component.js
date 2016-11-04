@@ -129,7 +129,8 @@ export default class {
     const url = `${layerData.rasterURL}{z}/{x}/{y}.png`;
     console.log(url);
     var layer = L.tileLayer(url, {
-      pane: 'context_above'
+      pane: 'context_above',
+      tms: true
     });
     this.contextLayers.push(layer);
     this.map.addLayer(layer);
