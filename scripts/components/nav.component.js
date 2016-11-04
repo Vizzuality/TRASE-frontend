@@ -27,10 +27,10 @@ export default class {
     this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
 
 
-    new BookmarkMenu();
-    new Dropdown('bookmark', this.callbacks.onQuantSelected);
-    new ShareMenu();
-    new Dropdown('share');
+    // new BookmarkMenu();
+    // new Dropdown('bookmark', this.callbacks.onQuantSelected);
+    // new ShareMenu();
+    // new Dropdown('share');
 
     this.setAppMenuVisibility();
   }
