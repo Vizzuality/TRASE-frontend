@@ -63,13 +63,16 @@
     pointer-events: auto;
     opacity: 1;
 
-    &.-dimmed {
+    &.-dimmed, &.-hidden {
       pointer-events: none;
       opacity: .8;
 
       path {
         pointer-events: none;
       }
+    }
+    &.-hidden {
+      opacity: 0
     }
   }
 

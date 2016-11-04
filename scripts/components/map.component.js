@@ -100,9 +100,10 @@ export default class {
     });
 
     let forceZoom = 0;
-
+    let hideMain = false;
     selectedMapContextualLayersData.forEach((layerData, i) => {
       if (layerData.rasterURL) {
+        hideMain = true;
         this._createRasterLayer(layerData);
       } else {
         this._createCartoLayer(layerData, i);
@@ -113,7 +114,6 @@ export default class {
       }
     });
 
-    console.log(forceZoom)
     if (forceZoom && this.map.getZoom() < forceZoom) {
       this.map.setZoom(forceZoom);
     }
@@ -121,16 +121,24 @@ export default class {
     // disable main choropleth layer when there are context layers
     // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
     this.map.getPane('main').classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
-
+    this.map.getPane('main').classList.toggle('-hidden', hideMain);
   }
 
   _createRasterLayer(layerData) {
     // const url = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
     const url = `${layerData.rasterURL}{z}/{x}/{y}.png`;
-    console.log(url);
+
+    // TODO add those params in layer configuration
+    const southWest = L.latLng(-36, -76);
+    const northEast = L.latLng(18, -28);
+    const bounds = L.latLngBounds(southWest, northEast);
+
     var layer = L.tileLayer(url, {
       pane: 'context_above',
-      tms: true
+      tms: true,
+      // TODO add those params in layer configuration
+      maxZoom: 11,
+      bounds
     });
     this.contextLayers.push(layer);
     this.map.addLayer(layer);
