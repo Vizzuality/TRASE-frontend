@@ -59,6 +59,20 @@
     }
   }
 
+  .leaflet-main-pane {
+    pointer-events: auto;
+    opacity: 1;
+
+    &.-dimmed {
+      pointer-events: none;
+      opacity: .8;
+
+      path {
+        pointer-events: none;
+      }
+    }
+  }
+
   .map-polygon {
     fill: $pale-grey;
     fill-opacity: .6;

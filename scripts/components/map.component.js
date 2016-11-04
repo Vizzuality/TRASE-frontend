@@ -128,13 +128,8 @@ export default class {
 
     // disable main choropleth layer when there are context layers
     // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
-    if (selectedMapContextualLayersData.length > 0) {
-      this.map.getPane('main').style.pointerEvents = 'none';
-      this.map.getPane('main').style.opacity = 0;
-    } else {
-      this.map.getPane('main').style.pointerEvents = 'auto';
-      this.map.getPane('main').style.opacity = 1;
-    }
+    this.map.getPane('main').classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
+
   }
 
   _getVectorLayer(geoData, polygonClassName) {
