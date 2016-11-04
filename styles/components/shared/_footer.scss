@@ -15,13 +15,14 @@
   // }
 
   .signup {
-    max-width: 345px;
+    max-width: 400px;
     margin: 0 auto;
 
     > .sign-up-form {
       display: flex;
+      max-width: 330px;
       height: 40px;
-      margin: 16px 0 0;
+      margin: 16px auto 0;
 
       border: 1px solid $gray;
       border-radius: 4px;
