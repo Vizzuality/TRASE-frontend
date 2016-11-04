@@ -9,6 +9,9 @@ export function selectCountry(country, reloadLinks) {
 export function selectCommodity(commodity, reloadLinks) {
   return _reloadLinks('commodity', commodity, actions.SELECT_COMMODITY, reloadLinks);
 }
+export function selectBiomeFilter(biomeFilter, reloadLinks) {
+  return _reloadLinks('biomeFilter', biomeFilter, actions.SELECT_BIOME_FILTER, reloadLinks);
+}
 export function selectQuant(quant, reloadLinks) {
   return _reloadLinks('quant', quant, actions.SELECT_QUANT, reloadLinks);
 }
@@ -145,6 +148,11 @@ export function loadLinks() {
     const selectedQual = getState().flows.selectedQual;
     if (selectedQual !== 'none') {
       params.flow_qual = selectedQual;
+    }
+
+    const selectedBiomeFilter = getState().flows.selectedBiomeFilter;
+    if (selectedBiomeFilter !== 'none') {
+      params.biome_filter = selectedBiomeFilter;
     }
 
     if (getState().flows.areNodesExpanded) {

@@ -26,7 +26,6 @@ const sankeyLayout = function() {
   const _labelMaxLines = 3;
 
   sankeyLayout.setViewportSize = (size) => {
-    console.log(size)
     viewportWidth = size[0];
     viewportHeight = size[1];
   };
