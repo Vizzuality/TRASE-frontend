@@ -1,0 +1,122 @@
+{
+	"title": [{
+		"name": "municipallities",
+		"units": ""
+	}, {
+		"name": "TRADE AMOUNT",
+		"units": "tons"
+	}, {
+		"name": "DEFORESTATION",
+		"units": "ha"
+	}, {
+		"name": "WATER SCARCITY",
+		"units": "mm/ha"
+	}, {
+		"name": "CONFLICTS",
+		"units": ""
+	}, {
+		"name": "FIRES",
+		"units": ""
+	}],
+	"data": [{
+		"municipalities": [{
+			"value": "Quêrencia",
+			"unit": ""
+		}],
+		"trade": [{
+			"value": "2,864",
+			"unit": "tons"
+		}],
+		"deforastation": [{
+			"value": "53",
+			"unit": "ha"
+		}],
+		"water": [{
+			"value": "53",
+			"unit": "mm/ha"
+		}],
+		"conflict": [{
+			"value": "53",
+			"unit": ""
+		}],
+		"fire": [{
+			"value": "53",
+			"unit": ""
+		}]
+	}, {
+		"municipalities": [{
+			"value": "Quêrencia",
+			"unit": ""
+		}],
+		"trade": [{
+			"value": "2,864",
+			"unit": "tons"
+		}],
+		"deforastation": [{
+			"value": "53",
+			"unit": "ha"
+		}],
+		"water": [{
+			"value": "53",
+			"unit": "mm/ha"
+		}],
+		"conflict": [{
+			"value": "53",
+			"unit": ""
+		}],
+		"fire": [{
+			"value": "53",
+			"unit": ""
+		}]
+	}, {
+		"municipalities": [{
+			"value": "Quêrencia",
+			"unit": ""
+		}],
+		"trade": [{
+			"value": "2,864",
+			"unit": "tons"
+		}],
+		"deforastation": [{
+			"value": "53",
+			"unit": "ha"
+		}],
+		"water": [{
+			"value": "53",
+			"unit": "mm/ha"
+		}],
+		"conflict": [{
+			"value": "53",
+			"unit": ""
+		}],
+		"fire": [{
+			"value": "53",
+			"unit": ""
+		}]
+	}, {
+		"municipalities": [{
+			"value": "Quêrencia",
+			"unit": ""
+		}],
+		"trade": [{
+			"value": "2,864",
+			"unit": "tons"
+		}],
+		"deforastation": [{
+			"value": "53",
+			"unit": "ha"
+		}],
+		"water": [{
+			"value": "53",
+			"unit": "mm/ha"
+		}],
+		"conflict": [{
+			"value": "53",
+			"unit": ""
+		}],
+		"fire": [{
+			"value": "53",
+			"unit": ""
+		}]
+	}]
+}

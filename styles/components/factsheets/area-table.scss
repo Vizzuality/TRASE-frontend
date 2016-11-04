@@ -67,8 +67,8 @@
           &::after {
             display: inline-block;
             position: absolute;
+            color: rgba($charcoal-grey, .6);
             content: attr(data-unit);
-            opacity: .6;
           }
 
           span {
