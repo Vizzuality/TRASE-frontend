@@ -1,5 +1,10 @@
 [
   {
+    "name": "landcover",
+    "human_name": "Land cover",
+    "rasterURL": "https://s3-eu-west-1.amazonaws.com/lulc/landcover_brazil_2015/"
+  },
+  {
     "version": "0.0.1",
     "name": "indigenous_areas",
     "human_name": "Indigenous Areas",

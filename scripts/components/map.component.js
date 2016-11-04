@@ -99,44 +99,68 @@ export default class {
       this.map.removeLayer(layer);
     });
 
+    let forceZoom = 0;
+
     selectedMapContextualLayersData.forEach((layerData, i) => {
-      const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/0/{z}/{x}/{y}`;
-      const layerUrl = `${baseUrl}.png`;
-      // console.log(layerUrl)
-      const layer = new L.tileLayer(layerUrl, {
-        pane: 'context_above'
-      });
-
-      this.contextLayers.push(layer);
-      this.map.addLayer(layer);
-
-      if (i === 0) {
-        const utfGridUrl = `${baseUrl}.grid.json?callback={cb}`;
-        const utfGrid = new L.UtfGrid(utfGridUrl);
-
-        this.contextLayers.push(utfGrid);
-        this.map.addLayer(utfGrid, {
-          resolution: 2
-        });
-
-        utfGrid.on('mouseover', function (e) {
-          if (e.data && e.data.hasOwnProperty('cartodb_id')) {
-            console.log(e.data.cartodb_id);
-          }
-        });
+      if (layerData.rasterURL) {
+        this._createRasterLayer(layerData);
+      } else {
+        this._createCartoLayer(layerData, i);
       }
 
       if (_.isNumber(layerData.forceZoom)) {
-        if (this.map.getZoom() < layerData.forceZoom) {
-          this.map.setZoom(layerData.forceZoom);
-        }
+        forceZoom = Math.max(layerData.forceZoom, forceZoom);
       }
     });
+
+    console.log(forceZoom)
+    if (forceZoom && this.map.getZoom() < forceZoom) {
+      this.map.setZoom(forceZoom);
+    }
 
     // disable main choropleth layer when there are context layers
     // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
     this.map.getPane('main').classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
 
+  }
+
+  _createRasterLayer(layerData) {
+    // const url = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
+    const url = `${layerData.rasterURL}{z}/{x}/{y}.png`;
+    console.log(url);
+    var layer = L.tileLayer(url, {
+      pane: 'context_above'
+    });
+    this.contextLayers.push(layer);
+    this.map.addLayer(layer);
+  }
+
+  _createCartoLayer(layerData, i) {
+    const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/0/{z}/{x}/{y}`;
+    const layerUrl = `${baseUrl}.png`;
+    // console.log(layerUrl)
+    const layer = new L.tileLayer(layerUrl, {
+      pane: 'context_above'
+    });
+
+    this.contextLayers.push(layer);
+    this.map.addLayer(layer);
+
+    if (i === 0) {
+      const utfGridUrl = `${baseUrl}.grid.json?callback={cb}`;
+      const utfGrid = new L.UtfGrid(utfGridUrl);
+
+      this.contextLayers.push(utfGrid);
+      this.map.addLayer(utfGrid, {
+        resolution: 2
+      });
+
+      utfGrid.on('mouseover', function (e) {
+        if (e.data && e.data.hasOwnProperty('cartodb_id')) {
+          console.log(e.data.cartodb_id);
+        }
+      });
+    }
   }
 
   _getVectorLayer(geoData, polygonClassName) {

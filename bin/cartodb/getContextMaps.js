@@ -19,6 +19,10 @@ createTemplate();
 function createTemplate() {
   var template = templates[currentTemplateIndex];
   // console.log(template)
+  if (template.rasterURL) {
+    nextTemplate({}, template);
+    return;
+  }
 
   namedMaps.update({
     template: template
@@ -57,6 +61,7 @@ function nextTemplate(res, template) {
     name: template.name,
     human_name: template.human_name,
     forceZoom: template.forceZoom,
+    rasterURL: template.rasterURL,
     layergroupid: res.layergroupid
   });
   currentTemplateIndex++;
