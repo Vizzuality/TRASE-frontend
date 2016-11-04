@@ -81,6 +81,9 @@ export default function (state = {}, action) {
   case actions.SELECT_COMMODITY:
     return Object.assign({}, state, { selectedCommodity: action.commodity });
 
+  case actions.SELECT_BIOME_FILTER:
+    return Object.assign({}, state, { selectedBiomeFilter: action.biomeFilter });
+
   case actions.SELECT_YEARS:
     return Object.assign({}, state, { selectedYears: action.years });
 

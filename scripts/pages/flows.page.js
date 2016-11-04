@@ -26,6 +26,7 @@ const initialState = {
   flows: {
     selectedCountry: 'brazil',
     selectedCommodity: 'soy',
+    selectedBiomeFilter: 'none',
     selectedYears: [2015, 2016],
     selectedQuant: 'Volume',
     detailedView: false,
