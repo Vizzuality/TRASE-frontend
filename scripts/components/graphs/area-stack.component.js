@@ -30,7 +30,7 @@ export default class {
         top: 20,
         right: 20,
         bottom: 30,
-        left: 50
+        left: 100
       }
     };
 
@@ -41,7 +41,7 @@ export default class {
   _setupData() {
 
     this.options = {
-      width: this.el.clientWidth,
+      width: this.el.clientWidth - 100,
       height: 380//this.el.clientHeight
     };
 
@@ -52,9 +52,8 @@ export default class {
     const margins = this.options.margin;
     const width = this.options.width - margins.left - margins.right;
     const height = this.options.height - margins.top - margins.bottom;
-
     const svg = d3_select(this.el).append('svg')
-      .attr('width', width + margins.left + margins.right)
+      .attr('width', width + 200) // margins.left + margins.right
       .attr('height', height + margins.top + margins.bottom);
 
     // scales
