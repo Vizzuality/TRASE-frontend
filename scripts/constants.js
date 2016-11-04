@@ -18,6 +18,16 @@ export const LEGEND_COLORS = {
   error_no_metadata_for_layer: '#f0f',
 };
 
+
+export const APP_DEFAULT_STATE = {
+  app: {
+    modal: {
+      visibility: false,
+      modalParams: null
+    }
+  }
+};
+
 export const FLOWS_DEFAULT_STATE = {
   flows: {
     selectedCountry: 'brazil',
@@ -30,7 +40,7 @@ export const FLOWS_DEFAULT_STATE = {
     selectedNodesIds: [],
     areNodesExpanded: false,
     selectedNodesData: [],
-    selectedColumnsIds: [2, 3, 5, 6],
+    selectedColumnsIds: [2, 4, 6, 7],
     selectedVectorLayers: {
       horizontal: {
         uid: null,

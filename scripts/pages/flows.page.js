@@ -2,6 +2,8 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import 'whatwg-fetch';
 
+
+
 import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columns-selector.container';
@@ -19,36 +21,16 @@ import FlowsReducer from 'reducers/flows.reducer';
 import { resize } from 'actions/app.actions';
 import { loadInitialData } from 'actions/flows.actions';
 import { getStateFromURLHash } from 'utils/stateURL';
-import { FLOWS_DEFAULT_STATE } from 'constants';
+import { APP_DEFAULT_STATE, FLOWS_DEFAULT_STATE } from 'constants';
 
 import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
 
 const paramsURL = window.location.search.slice(1).split('=');
 
-if (paramsURL[0] === 'story') {
-  // load config JSON
-  // TODO move mockup to real service
-  // TODO display loading state while loading service
-  fetch(`./getStory.json?id=${paramsURL[1]}`)
-    .then(resp => resp.text())
-    .then(resp => JSON.parse(resp))
-    .then(data => {
-      console.log(data);
-      // TODO show modal with data.content (plus title etc I dunno)
-      // TODO get real state hash
-      // start(getStateFromURLHash(data.state));
-      start(FLOWS_DEFAULT_STATE);
-    });
-} else if (paramsURL[0] === 'state') {
-  // load app from state
-  start(getStateFromURLHash(paramsURL[1]));
-} else {
-  start(FLOWS_DEFAULT_STATE);
-}
-
 const start = (initialState) => {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
   var store = createStore(
     combineReducers({
       app: AppReducer,
@@ -79,4 +61,36 @@ const start = (initialState) => {
   window.addEventListener('resize', () => {
     store.dispatch(resize(window.innerWidth, window.innerHeight));
   });
+};
+
+if (paramsURL[0] === 'story') {
+  // load config JSON
+  // TODO move mockup to real service
+  // TODO display loading state while loading service
+  const storyId = paramsURL[1];
+
+  fetch(`${API_STORY_CONTENT}/${storyId}`)
+    .then(resp => resp.text())
+    .then(resp => JSON.parse(resp))
+    .then(modalParams => {
+
+      const modalState = {
+        visibility: true,
+        modalParams
+      };
+
+      // TODO get real state hash
+      // start(getStateFromURLHash(data.state));
+
+      Object.assign(APP_DEFAULT_STATE.app, { modal: modalState });
+      const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
+
+      start(globalState);
+    });
+} else if (paramsURL[0] === 'state') {
+  // load app from state
+  start(getStateFromURLHash(paramsURL[1]));
+} else {
+  const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
+  start(globalState);
 }
