@@ -1,5 +1,6 @@
 import { select as d3_select /*, selectAll as d3_selectAll*/ } from 'd3-selection';
 import  'd3-transition';
+import { DETAILED_VIEW_MIN_LINK_HEIGHT } from 'constants';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import getComputedSize from 'utils/getComputedSize';
@@ -16,9 +17,8 @@ export default class {
 
     if (this.layout.relayout()) {
       this._render();
+      if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
     }
-
-    if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
   }
 
   initialDataLoadStarted(loading) {
@@ -30,14 +30,31 @@ export default class {
   }
 
   linksLoaded(linksPayload) {
-    this.layout.setLinksPayload(linksPayload);
-    if (this.layout.relayout()) {
-      this._render();
+    this.el.classList.toggle('-detailed', linksPayload.detailedView);
+
+    if (linksPayload.detailedView === false) {
+      this.svg.style('height', '100%');
     }
+    this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
+    this.layout.setLinksPayload(linksPayload);
+    this.layout.relayout();
+
+    if (linksPayload.detailedView === true) {
+      this.svg.style('height', this.layout.getMaxHeight());
+    }
+
+    // hide expoand button in detailed mapMethodsToState
+    this.expandButton.classList.toggle('-visible', !linksPayload.detailedView);
+
+    this._render();
+
   }
 
   selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
     // let minimumY = Infinity;
+    if (!this.layout.isReady()) {
+      return;
+    }
 
     this.sankeyColumns.selectAll('.sankey-node')
       .classed('-selected', node => {
@@ -89,19 +106,21 @@ export default class {
 
   _repositionExpandButton(nodesIds) {
     // TODO split by columns
-    if (nodesIds.length > 0) {
+    if (nodesIds && nodesIds.length > 0) {
       this.expandButton.classList.add('-visible');
 
       const lastSelectedNode = this.sankeyColumns.selectAll('.sankey-node')
         .filter(node => node.id === nodesIds[0])
         .data()[0];
 
-      let y = Math.max(0, lastSelectedNode.y - 12);
-      this.expandButton.style.top = `${y}px`;
-      this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
-    } else {
-      this.expandButton.classList.remove('-visible');
+      if (lastSelectedNode) {
+        let y = Math.max(0, lastSelectedNode.y - 12);
+        this.expandButton.style.top = `${y}px`;
+        this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
+        return;
+      }
     }
+    this.expandButton.classList.remove('-visible');
   }
 
   _toggleLoading(loading) {
@@ -133,16 +152,16 @@ export default class {
       .attr('width', this.layout.columnWidth())
       .attr('height', d => d.renderedHeight);
 
-    nodesEnter.append('g')
+    nodesEnter.append('text')
       .attr('class', 'sankey-node-labels')
-      .attr('transform', d => `translate(0,${2 + d.renderedHeight/2})`)
-      .selectAll('text')
-      .data(node => { return this.layout.getNodeLabel(node.name, node.renderedHeight);})
+      .attr('transform', placeNodeText)
+      .selectAll('tspan')
+      .data(node => node.label)
       .enter()
-      .append('text')
+      .append('tspan')
       .attr('class', 'sankey-node-label')
       .attr('x', this.layout.columnWidth()/2)
-      .attr('y', (d, i) => 2 + i * 12)
+      .attr('dy', 12)
       .text(d => d);
 
 
@@ -151,6 +170,9 @@ export default class {
 
     nodesUpdate.select('.sankey-node-rect')
       .attr('height', d => d.renderedHeight);
+
+    nodesUpdate.select('.sankey-node-labels')
+    .attr('transform', placeNodeText);
 
     this.nodes.exit()
       .remove();
@@ -164,7 +186,7 @@ export default class {
 
     // update
     links.transition()
-      .attr('stroke-width', d => d.renderedHeight)
+      .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
     // enter
@@ -179,7 +201,7 @@ export default class {
         this.classList.remove('-hover');
       })
       .transition()
-      .attr('stroke-width', d => d.renderedHeight);
+      .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight));
 
     // exit
     links.exit()
@@ -203,3 +225,5 @@ export default class {
     this.callbacks.onNodeHighlighted();
   }
 }
+
+const placeNodeText = node => `translate(0,${ - 7 + node.renderedHeight/2 - ((node.label.length-1) * 7) })`;

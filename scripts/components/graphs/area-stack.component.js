@@ -30,7 +30,7 @@ export default class {
         top: 20,
         right: 20,
         bottom: 30,
-        left: 50
+        left: 100
       }
     };
 
@@ -41,8 +41,8 @@ export default class {
   _setupData() {
 
     this.options = {
-      width: this.el.clientWidth,
-      height: this.el.clientHeight
+      width: this.el.clientWidth - 100,
+      height: 380//this.el.clientHeight
     };
 
     _.extend(this.options, this.defaults);
@@ -52,9 +52,8 @@ export default class {
     const margins = this.options.margin;
     const width = this.options.width - margins.left - margins.right;
     const height = this.options.height - margins.top - margins.bottom;
-
     const svg = d3_select(this.el).append('svg')
-      .attr('width', width + margins.left + margins.right)
+      .attr('width', width + 200) // margins.left + margins.right
       .attr('height', height + margins.top + margins.bottom);
 
     // scales
@@ -126,10 +125,10 @@ export default class {
         .style('fill', function(c, i) { return z[i]; })
         .attr('d', area);
 
-      layer.filter(function(d) { return d[d.length - 1][1] - d[d.length - 1][0] > 0.01; })
+      layer.filter(function(d) { return d[d.length - 1][1] - d[d.length - 1][0] > 0.01; }) //right text
         .append('text')
           .attr('class', 'tag')
-          .attr('x', width - 6)
+          .attr('x', width + 7)
           .attr('y', function(d) { return y((d[d.length - 1][0] + d[d.length - 1][1]) / 2); })
           .attr('dy', '.35em')
           .text(function(d) { return d.key; });
@@ -143,6 +142,27 @@ export default class {
       g.append('g')
           .attr('class', 'axis axis--y')
           .call(d3_axis_left(y).ticks(5, 's'));
+
+      g.selectAll('.axis--y > .tick')
+        .select('line') //grab the tick line
+        .attr('x2', width)
+        .attr('class', 'tick-line');
+
+
+      g.selectAll('.axis--y > .tick')
+        .select('text')
+        .attr('class', 'tick-text')
+        .attr('x', -16);
+
+      g.selectAll('.axis--x > .tick')
+        .select('line') //grab the tick line
+        .attr('class', 'tick-line') //style with a custom class and CSS
+        .attr('y2', 0);
+
+      g.selectAll('.axis--x > .tick')
+        .select('text')
+        .attr('class', 'tick-text')
+        .attr('y', 16);
     });
   }
 }

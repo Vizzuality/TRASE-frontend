@@ -1,3 +1,5 @@
+import niceNumber from 'utils/niceNumber';
+
 export default function(links, nodesDict, nodesMeta, columnIndexes) {
   const nodeIdsList = [];
   const nodes = [];
@@ -44,7 +46,7 @@ const _setNodesMeta = (nodesDict, nodesMeta) => {
       node.quant = Math.round(node.quant);
     }
 
-    node.quantNice = node.quant.toLocaleString();
+    node.quantNice = niceNumber(node.quant);
 
     nodesDictWithMeta[nodeId] = node;
   });

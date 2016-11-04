@@ -4,7 +4,7 @@
 .c-search {
   display: flex;
   align-items: center;
-  width: 400px;
+  width: 450px;
   margin: auto;
   padding: 18px 0;
   color: $charcoal-grey;
@@ -12,11 +12,11 @@
   font-size: $font-size-x-regular;
 
   label {
-    width: 30%;
+    width: 25%;
   }
 
   .awesomplete {
-    width: 70%;
+    width: 75%;
 
     > input {
       width: 100%;
@@ -29,6 +29,9 @@
       font-size: $font-size-x-regular;
       text-transform: capitalize;
 
+      &::placeholder {
+        text-transform: none;
+      }
 
       &:focus {
         border-width: 2px;

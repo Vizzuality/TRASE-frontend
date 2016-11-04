@@ -23,8 +23,46 @@ const _setMap = () => {
   });
 };
 
+const _onSelectCommodity = function(value) {
+  // updates dropdown's title with new value
+  this.setTitle(value);
+  // updates default values with incoming ones
+  defaults[this.id] = value;
 
-const _onSelect = function(value) {
+  // filters country options based on the commodity selected
+  _filterCountries(value);
+};
+
+const _filterCountries = function() {
+  const countryDropdownView = defaults.countryDropdown;
+  const countryDropdownElem = countryDropdownView.el;
+  const dropdownItems = countryDropdownElem.querySelectorAll('.js-dropdown-item');
+  const commodity = defaults.commodity.toLowerCase();
+
+  // checks if the commodity belongs to the country
+  dropdownItems.forEach((dropdownItem) => {
+    let commodities = dropdownItem.getAttribute('data-commodity');
+    commodities = commodities.split(',');
+
+    dropdownItem.classList.toggle('is-hidden', !commodities.includes(commodity));
+  });
+
+
+
+  const availableItems = countryDropdownElem.querySelectorAll('.js-dropdown-item:not(.is-hidden)');
+
+  // sets first item in the list if there's one available
+  if (availableItems.length) {
+    const value = availableItems[0].getAttribute('data-value');
+    countryDropdownView.setTitle(value);
+    _onSelectCountry.call(countryDropdownView, value);
+  } else {
+    countryDropdownView.setTitle('-');
+  }
+};
+
+
+const _onSelectCountry = function(value) {
   // updates dropdown's title with new value
   this.setTitle(value);
   // updates default values with incoming ones
@@ -37,11 +75,11 @@ const _onSelect = function(value) {
 const _getPosts = () => {
   const postList = document.querySelector('.js-posts-grid');
 
-  fetch('homepage/posts.json')
+  fetch(API_CMS_URL)
     .then(response => response.json())
     .then((data) => {
-      let posts = data.posts;
-      const totalPosts = data['total_posts'];
+      let posts = data;
+      const totalPosts = posts.length;
       let postsPerColumn = defaults.postsPerColumn;
       let isLeft = true;
       let rows;
@@ -114,10 +152,25 @@ const _getPosts = () => {
     });
 };
 
-const commodityDropdown = new Dropdown('commodity', _onSelect);
-const countryDropdown = new Dropdown('country', _onSelect);
+const _init = () => {
 
-commodityDropdown.setTitle(defaults.commodity);
-countryDropdown.setTitle(defaults.country);
-_setMap();
-_getPosts();
+  const commodityDropdown = new Dropdown('commodity', _onSelectCommodity);
+  const countryDropdown = new Dropdown('country', _onSelectCountry);
+
+  Object.assign(defaults, {
+    commodityDropdown,
+    countryDropdown
+  });
+
+  commodityDropdown.setTitle(defaults.commodity);
+  countryDropdown.setTitle(defaults.country);
+
+  // set initial dropdown values
+  _onSelectCommodity.call(commodityDropdown, defaults.commodity);
+  _onSelectCountry.call(countryDropdown, defaults.country);
+
+  _setMap();
+  _getPosts();
+};
+
+_init();

@@ -1,4 +1,5 @@
-import { NUM_COLUMNS } from 'constants';
+import wrapSVGText from 'utils/wrapSVGText';
+import { NUM_COLUMNS, DETAILED_VIEW_MIN_NODE_HEIGHT, DETAILED_VIEW_SCALE } from 'constants';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 
 
@@ -14,15 +15,18 @@ const sankeyLayout = function() {
   // data
   let columns;
   let links;
+  let detailedView;
+  let maxHeight;
 
   // layout
   let linksColumnWidth;
   let _labelCharsPerLine;
   const _labelCharWidth = 9;
   const _labelCharHeight = 16;
-  const _labelMaxLines = 2;
+  const _labelMaxLines = 3;
 
   sankeyLayout.setViewportSize = (size) => {
+    console.log(size)
     viewportWidth = size[0];
     viewportHeight = size[1];
   };
@@ -46,45 +50,24 @@ const sankeyLayout = function() {
     return links;
   };
 
+  sankeyLayout.isReady = () => {
+    return viewportWidth && linksPayload;
+  }
+
   sankeyLayout.relayout = () => {
-    if (!viewportWidth || !linksPayload) {
+    if (!sankeyLayout.isReady()) {
       console.warn('not ready');
       return false;
     }
     columns = linksPayload.visibleNodesByColumn;
     links = linksPayload.links;
+    detailedView = linksPayload.detailedView;
 
     _computeNodeCoords();
     _computeLinksCoords();
+    _setNodeLabels();
 
     return true;
-  };
-
-  // formats/create ellipsis nodes text using # of lines available, node width, etc
-  sankeyLayout.getNodeLabel = (name, nodeRenderedHeight) => {
-
-    var words = name.split(' ');
-    var currentLine = '';
-    const nodeNameLines = [];
-    words.forEach(word => {
-      var line = currentLine + ' ' + word;
-      if (line.length > _labelCharsPerLine) {
-        nodeNameLines.push(currentLine);
-        currentLine = word;
-      } else {
-        currentLine = line;
-      }
-    });
-    nodeNameLines.push(currentLine);
-
-    const maxLinesForNode = Math.max(1, Math.min(_labelMaxLines, Math.floor(nodeRenderedHeight / _labelCharHeight)));
-    const nodeNameLinesShown = nodeNameLines.slice(0, maxLinesForNode);
-
-    // ellipsis
-    if (nodeNameLines.length > maxLinesForNode) {
-      nodeNameLinesShown[maxLinesForNode - 1] = nodeNameLinesShown[maxLinesForNode - 1] + '…';
-    }
-    return nodeNameLinesShown;
   };
 
   // using precomputed dimensions on links objects, this will generate SVG paths for links
@@ -107,9 +90,15 @@ const sankeyLayout = function() {
     return link;
   };
 
+  sankeyLayout.getMaxHeight = () => {
+    return maxHeight;
+  };
+
   const _computeNodeCoords = () => {
     const availableLinkSpace = viewportWidth - NUM_COLUMNS * columnWidth;
     linksColumnWidth = availableLinkSpace/(NUM_COLUMNS - 1);
+
+    maxHeight = 0;
 
     columns.forEach((column, i) => {
       column.x = _getColumnX(i);
@@ -117,8 +106,23 @@ const sankeyLayout = function() {
       column.values.forEach(node => {
         node.x = column.x;
         node.y = columnY;
-        node.renderedHeight = node.height * viewportHeight;
+        if (detailedView === true) {
+          node.renderedHeight = Math.max(DETAILED_VIEW_MIN_NODE_HEIGHT, DETAILED_VIEW_SCALE * node.height);
+        } else {
+          node.renderedHeight = node.height * viewportHeight;
+        }
         columnY += node.renderedHeight;
+      });
+      if (columnY > maxHeight) {
+        maxHeight = columnY;
+      }
+    });
+  };
+
+  const _setNodeLabels = () => {
+    columns.forEach(column => {
+      column.values.forEach(node => {
+        node.label = wrapSVGText(node.name, node.renderedHeight, _labelCharHeight, _labelCharsPerLine, _labelMaxLines);
       });
     });
   };
@@ -131,7 +135,12 @@ const sankeyLayout = function() {
     links.forEach(link => {
       link.width = linksColumnWidth;
       link.x = columnWidth + _getColumnX(_getColumnIndex(link.sourceColumnId));
-      link.renderedHeight = link.height * viewportHeight;
+
+      if (detailedView === true) {
+        link.renderedHeight = link.height * DETAILED_VIEW_SCALE;
+      } else {
+        link.renderedHeight = link.height * viewportHeight;
+      }
 
       const sId = link.sourceNodeId;
       if (!stackedHeightsByNodeId.source[sId]) stackedHeightsByNodeId.source[sId] = _getNode(link.sourceColumnId, sId).y;
@@ -164,7 +173,6 @@ const sankeyLayout = function() {
     const column = columns[columnIndex];
     return column.values.find(node => node.id === nodeId);
   };
-
 
   return sankeyLayout;
 };

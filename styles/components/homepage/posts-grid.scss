@@ -54,6 +54,7 @@
 
     background-color: $medium-pink;
     background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
 
     @media screen and (min-width: $breakpoint-tablet) {
@@ -72,6 +73,7 @@
       font-size: $font-size-big;
       font-weight: $font-weight-regular;
       line-height: 1.3;
+
       > a {
         color: $white;
       }
@@ -79,11 +81,23 @@
 
     > .description {
       margin: 16px 0 0;
+
+      > * {
+        color: $white;
+        font-family: $font-family-1;
+        font-size: $font-size-xx-regular;
+        letter-spacing: -1.3;
+        line-height: 1.5;
+      }
     }
 
     &.-highlight {
       width: 100%;
       max-width: none;
+
+      > .post-title {
+        font-size: $font-size-x-big;
+      }
 
       @media screen and (min-width: $breakpoint-tablet) {
         height: 640px;

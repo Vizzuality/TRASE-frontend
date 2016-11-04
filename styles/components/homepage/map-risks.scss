@@ -6,19 +6,24 @@
 
   > .map {
     width: 100%;
-    height: 525px;
     margin: 16px 0;
 
     > .map-gallery-list {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      max-width: $content-max-width;
       max-height: 400px;
       overflow: hidden;
+
+      > .map-gallery-item > img {
+        width: 100%;
+        height: auto;
+      }
     }
   }
 
   > .btn-find-out {
-    margin: 0 auto;
+    margin: 16px auto 0;
   }
 }

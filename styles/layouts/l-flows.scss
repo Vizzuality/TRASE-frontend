@@ -38,7 +38,6 @@ body, html {
 
     transform: translate(-$layer-map-width, 0);
     transition: transform .15s $ease-in-out-sine, width .15s $ease-in-out-sine;
-    background-color: $gray;
 
     overflow: hidden;
 
@@ -91,6 +90,11 @@ body, html {
       .sankey {
         width: 100%;
         height: 100%;
+      }
+
+      &.-detailed {
+        overflow-y: scroll;
+        overflow-x: hidden;
       }
     }
 

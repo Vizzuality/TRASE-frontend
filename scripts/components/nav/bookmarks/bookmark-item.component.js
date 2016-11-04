@@ -22,6 +22,8 @@ export default class {
   }
 
   render() {
+
+
     var bookmarkHTML = stringToHTML(BookmarkTemplate({
       bookmark: this.bookmark,
       actions: this.actions

@@ -1,8 +1,6 @@
 @import 'settings';
 
 .paragraph {
-  max-width: 720px;
-
   color: $charcoal-grey;
   font-family: $font-family-1;
   font-size: $font-size-xx-regular;
@@ -10,7 +8,7 @@
   line-height: 1.5;
 
   & + & {
-    margin: 32px 0 0;
+    margin: 32px auto 0;
   }
 
   &.-gray {
@@ -49,10 +47,27 @@ a {
   font-weight: $font-weight-light;
 }
 
+strong,
 .-bold {
   font-weight: $font-weight-bold;
 }
 
 .-center {
   text-align: center;
+}
+
+sup,
+sub {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -.5em;
+}
+
+sub {
+  bottom: -.25em;
 }

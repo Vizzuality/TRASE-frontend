@@ -60,7 +60,8 @@ const config = {
     new webpack.DefinePlugin({
       NODE_ENV_DEV: process.env.NODE_ENV === 'development',
       API_URL: JSON.stringify(process.env.API_URL),
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      API_CMS_URL: JSON.stringify(process.env.API_CMS_URL)
     })
   ].concat(pagePlugins),
   output: {
