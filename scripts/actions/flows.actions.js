@@ -213,7 +213,7 @@ export function selectNode(nodeId, isAggregated) {
       }
 
       dispatch({
-        type: actions.SELECT_NODE,
+        type: actions.ADD_NODE_TO_SELECTION,
         nodeId
       });
       dispatch({
@@ -226,7 +226,7 @@ export function selectNode(nodeId, isAggregated) {
 export function selectNodeFromGeoId(geoId) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_NODE_FROM_GEOID,
+      type: actions.ADD_NODE_TO_SELECTION_FROM_GEOID,
       geoId
     });
     dispatch({
@@ -267,5 +267,35 @@ export function toggleNodesExpand(reloadLinks = true) {
     if (reloadLinks) {
       dispatch(loadLinks());
     }
+  };
+}
+
+export function searchNode(nodeId) {
+  return (dispatch, getState) => {
+    const currentVisibleNodesIds = getState().flows.visibleNodes.map(node => node.id);
+    if (currentVisibleNodesIds.indexOf(nodeId) === -1) {
+
+      // check if we need to swap column
+      const node = getState().flows.nodesDict[nodeId];
+      const columnPos = node.columnPosition;
+      const currentColumnAtPos = getState().flows.selectedColumnsIds[columnPos];
+
+      if (!node) {
+        console.warn(`requested node ${nodeId} does not exist in nodesDict`);
+        return;
+      }
+      if (currentColumnAtPos !== node.columnId) {
+        dispatch(selectColumn(columnPos, node.columnId));
+      }
+      dispatch(selectView(true));
+      dispatch({
+        type: actions.SELECT_SINGLE_NODE,
+        nodeId
+      });
+    } else {
+      dispatch(selectNode(nodeId, false));
+    }
+
+
   };
 }
