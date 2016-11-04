@@ -1,6 +1,6 @@
 import Dropdown from 'components/dropdown.component';
-import BookmarkMenu from 'components/nav/bookmarks/bookmark-menu.component';
-import ShareMenu from 'components/nav/share/share-menu.component';
+// import BookmarkMenu from 'components/nav/bookmarks/bookmark-menu.component';
+// import ShareMenu from 'components/nav/share/share-menu.component';
 import YearsMenu from 'components/nav/years-brush/years-slider.component';
 import 'styles/components/shared/nav.scss';
 
@@ -17,6 +17,7 @@ export default class {
     // left side
     this.countryDropdown = new Dropdown('country', this.callbacks.onCountrySelected);
     this.commodityDropdown = new Dropdown('commodity', this.callbacks.onCommoditySelected);
+    this.biomeFilterDropdown = new Dropdown('biomeFilter', this.callbacks.onBiomeFilterSelected);
 
     this.yearsDropdown = new Dropdown('years', null);
     this.yearsMenu = new YearsMenu('js-years-slider', this.callbacks.onYearsSelected);
@@ -27,10 +28,10 @@ export default class {
     this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
 
 
-    new BookmarkMenu();
-    new Dropdown('bookmark', this.callbacks.onQuantSelected);
-    new ShareMenu();
-    new Dropdown('share');
+    // new BookmarkMenu();
+    // new Dropdown('bookmark', this.callbacks.onQuantSelected);
+    // new ShareMenu();
+    // new Dropdown('share');
 
     this.setAppMenuVisibility();
   }
@@ -67,6 +68,10 @@ export default class {
     this.yearsMenu.setYears(years);
   }
 
+  selectBiomeFilter(value) {
+    this.biomeFilterDropdown.selectValue(value);
+  }
+
   selectCountry(value) {
     this.countryDropdown.selectValue(value);
   }
@@ -100,7 +105,6 @@ export default class {
   }
 
   selectView(value) {
-    console.log(value)
     this.viewDropdown.selectValue(value);
   }
 }

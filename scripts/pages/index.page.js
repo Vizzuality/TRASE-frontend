@@ -75,7 +75,7 @@ const _onSelectCountry = function(value) {
 const _getPosts = () => {
   const postList = document.querySelector('.js-posts-grid');
 
-  fetch(API_CMS_URL)
+  fetch(API_CMS_URL + '/posts')
     .then(response => response.json())
     .then((data) => {
       let posts = data;
