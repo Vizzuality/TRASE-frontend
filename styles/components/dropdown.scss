@@ -86,6 +86,12 @@
     font-size: $font-size-big;
     font-weight: normal;
 
+    &.-separator {
+      height: 1px;
+      padding: 0;
+      background: $pinkish-grey;
+    }
+
     &:hover {
       background-color: $manilla;
       cursor: pointer;
