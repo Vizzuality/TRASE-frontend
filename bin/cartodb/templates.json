@@ -2,6 +2,7 @@
   {
     "version": "0.0.1",
     "name": "indigenous_areas",
+    "human_name": "Indigenous Areas",
     "layergroup": {
       "version": "1.0.1",
       "layers": [
@@ -19,6 +20,7 @@
   },
   {
     "version": "0.0.1",
+    "human_name": "Brazil protected areas",
     "name": "brazil_protected",
     "layergroup": {
       "version": "1.0.1",
@@ -38,6 +40,8 @@
   {
     "version": "0.0.1",
     "name": "silos",
+    "human_name": "silos",
+    "forceZoom": 5,
     "layergroup": {
       "version": "1.0.1",
       "layers": [

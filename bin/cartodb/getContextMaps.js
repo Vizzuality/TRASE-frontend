@@ -18,33 +18,45 @@ createTemplate();
 
 function createTemplate() {
   var template = templates[currentTemplateIndex];
+  // console.log(template)
 
   namedMaps.update({
     template: template
   }).on('done', function() {
+    // console.log('update ok')
     instantiateTemplate(template, nextTemplate);
   }).error(function() {
+    // console.log('update err ', arguments)
     namedMaps.create({
       template: template
     }).on('done', function() {
-      instantiateTemplate(template, nextTemplate);
+      // console.log('create ok ')
+        instantiateTemplate(template, nextTemplate);
+    }).error(function() {
+      // console.log('create err')
     });
   });
 }
 
 function instantiateTemplate(template, callback) {
-  var templateName = template.name;
+  // console.log('instanciate')
   namedMaps.instantiate({
-    template_id: templateName,
+    template_id: template.name,
     auth_token: 'auth_token1',
   }).on('done', function(res) {
-    callback(res, templateName);
+    // console.log(template)
+    callback(res, template);
+  }).error(function() {
+    // console.log(arguments)
   });
 }
 
-function nextTemplate(res, templateName) {
+function nextTemplate(res, template) {
+  // console.log(template)
   finalJSON.push({
-    name: templateName,
+    name: template.name,
+    human_name: template.human_name,
+    forceZoom: template.forceZoom,
     layergroupid: res.layergroupid
   });
   currentTemplateIndex++;

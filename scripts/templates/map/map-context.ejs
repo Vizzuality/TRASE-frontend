@@ -1,6 +1,6 @@
 <% layers.forEach(function(layer) {%>
   <li class="layer-item">
-    <span class="layer-name"><%= layer.name.replace('_', ' ') %></span>
+    <span class="layer-name"><%= layer.human_name %></span>
     <div
       class="c-switcher"
       data-layer-slug="<%= layer.name %>">
