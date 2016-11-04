@@ -33,7 +33,7 @@ const initialState = {
     selectedQual: 'none',
     // selectedNodesIds: [2350],
     areNodesExpanded: false,
-    selectedColumnsIds: [2, 3, 5, 6],
+    selectedColumnsIds: [3, 4, 6, 7],
     selectedVectorLayers: {
       horizontal: {
         uid: null,
