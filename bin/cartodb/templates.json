@@ -41,7 +41,7 @@
     "version": "0.0.1",
     "name": "silos",
     "human_name": "silos",
-    "forceZoom": 5,
+    "forceZoom": 6,
     "layergroup": {
       "version": "1.0.1",
       "layers": [

@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import _ from 'lodash';
 import 'leaflet.utfgrid';
 import 'whatwg-fetch';
 import * as topojson from 'topojson';
@@ -123,6 +124,12 @@ export default class {
             console.log(e.data.cartodb_id);
           }
         });
+      }
+
+      if (_.isNumber(layerData.forceZoom)) {
+        if (this.map.getZoom() < layerData.forceZoom) {
+          this.map.setZoom(layerData.forceZoom);
+        }
       }
     });
 
