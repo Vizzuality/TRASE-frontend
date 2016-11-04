@@ -1,0 +1,22 @@
+<table>
+  <h1> </h1>
+<thead>
+  <tr>
+    <% for(var i=0; i<actors['title'].length; i++) {%>
+      <th><%= actors['title'][i]['name'] %></th>
+    <% } %>
+  </tr>
+</thead>
+<tbody>
+  <% for(var i=0; i<actors['data'].length; i++) {%>
+    <tr>
+      <td data-unit="<%= i == 0 ? actors['data'][i]['municipalities'][0]['unit'] : ''  %>"><%= actors['data'][i]['municipalities'][0]['value'] %></td>
+      <td data-unit="<%= i == 0 ? actors['data'][i]['trade'][0]['unit'] : ''  %>"><%= actors['data'][i]['trade'][0]['value']  %></td>
+      <td data-unit="<%= i == 0 ? actors['data'][i]['deforastation'][0]['unit'] : ''  %>"><%= actors['data'][i]['deforastation'][0]['value']  %></td>
+      <td data-unit="<%= i == 0 ? actors['data'][i]['water'][0]['unit']: ''  %>"><%= actors['data'][i]['water'][0]['value']  %></td>
+      <td data-unit="<%= i == 0 ? actors['data'][i]['conflict'][0]['unit'] : ''  %>"><%= actors['data'][i]['conflict'][0]['value']  %></td>
+      <td data-unit="<%= i == 0 ? actors['data'][i]['fire'][0]['unit'] : ''  %>"><%= actors['data'][i]['fire'][0]['value']  %></td>
+    </tr>
+  <% } %>
+</tbody>
+</table>
