@@ -45,6 +45,10 @@
     font-size: $font-size-big;
     font-weight: $font-weight-bold;
     cursor: pointer;
+    white-space: nowrap;
+    max-width: 16vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &::after {
       @include arrow(8px, 2px, $medium-pink, 'down'); //shoudl be more bigger than now, maybe 14px and border 3px or 4px
