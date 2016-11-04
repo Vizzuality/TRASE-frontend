@@ -9,6 +9,9 @@ const mapMethodsToState = (state) => ({
     _comparedValue: (state) => state.flows.highlightedNodeData,
     _returnedValue: (state) => {
       if (state.flows.highlightedNodeData.length === 0) {
+        if (!state.flows.selectedNodesData) {
+          return false;
+        }
         return state.flows.selectedNodesData.length > 0;
       }
       return state.flows.highlightedNodeData.length > 0;

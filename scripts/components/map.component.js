@@ -36,10 +36,13 @@ export default class {
 
   loadMap(payload) {
     const geoData = payload.geoData;
+    // TODO this statically maps vectorLayers indexes to column indexes, it should be dynamic
+    const municipLayer = this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality');
     this.vectorLayers = [
       this._getVectorLayer(geoData.biomes, 'map-polygon-biome'),
       this._getVectorLayer(geoData.states, 'map-polygon-state'),
-      this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality')
+      municipLayer,
+      municipLayer
     ];
     this.selectVectorLayer([payload.currentLayer]);
     if (payload.selectedNodesGeoIds) {
