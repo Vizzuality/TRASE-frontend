@@ -9,9 +9,12 @@ import ModalTemplate from 'ejs!templates/shared/modal.ejs';
 export default class {
 
   onCreated() {
-    this.state = {};
+    this.state = {
+      visibility: false,
+      modalParams: null
+    };
+
     this._setVars();
-    this._setEventListeners();
   }
 
   _setVars() {
@@ -20,7 +23,10 @@ export default class {
   }
 
   _setEventListeners() {
+    const closeButton = this.el.querySelector('.js-close');
+
     this.veil.addEventListener('click', () => this._toggleVisibility());
+    closeButton.addEventListener('click', () => this._toggleVisibility());
     document.onkeydown = (e) => this._onKeyDown(e);
   }
 
@@ -37,16 +43,15 @@ export default class {
     this._setVisibility();
   }
 
-  getModal(modalParams) {
-    // compares data object to determinate if modal should render new content
-    if (!(_.isEqual(modalParams.data, this.state.data))) {
-      Object.assign(this.state, modalParams);
-      this.render();
+  getModal(modal) {
 
+    if (_.isEqual(modal.modalParams, this.state.modalParams)) {
+      Object.assign(this.state, {visibility: modal.visibility });
     } else {
-      // if data is the same as before, just toggle ths visibility of the modal
-      this._toggleVisibility();
+      Object.assign(this.state, modal);
+      this.render();
     }
+    this._setVisibility();
   }
 
   _setVisibility() {
@@ -55,21 +60,10 @@ export default class {
   }
 
   render() {
-    // sample data. TO DELETE.
-    const data = {
-      title: 'Will Cerrado forest survive the soy boom?',
-      description: 'Production and international trade of "forest risk" commodities is driving \
-        two-thirds of tropical deforestation and shaping the future of biodiversity, climate change and  \
-        rural development across the planet.',
-      link: {
-        name: 'explore the supply chain',
-        url: 'url_link'
-      }
-    };
-
-    const modalContent = ModalTemplate({ data });
+    const modalContent = ModalTemplate({ data: this.state.modalParams });
 
     this.el.innerHTML = modalContent;
-    this._setVisibility();
+
+    this._setEventListeners();
   }
 }
