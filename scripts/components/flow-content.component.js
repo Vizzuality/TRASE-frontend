@@ -3,10 +3,6 @@ export default class {
 
   onCreated() {
     this._setVars();
-
-
-    // At some moment modal is invoked
-    // this.callbacks.onToggleModal(true, {});
   }
 
   _setVars() {

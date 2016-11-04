@@ -4,11 +4,7 @@ const initialState = {
   windowSize: [window.innerWidth, window.innerHeight],
   isMapLayerVisible: false,
   isMapVisible: false,
-  isAppMenuVisible: false,
-  modal: {
-    visibility: false,
-    data: null
-  }
+  isAppMenuVisible: false
 };
 
 export default function (state = initialState, action) {
@@ -22,8 +18,6 @@ export default function (state = initialState, action) {
 
   case actions.TOGGLE_MAP:
     return Object.assign({}, state, { isMapVisible: !state.isMapVisible });
-  case actions.TOGGLE_MODAL_VISIBILITY:
-    return Object.assign({}, state, { modal: action.modal });
   default:
     return state;
   }
