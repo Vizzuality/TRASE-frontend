@@ -1,6 +1,6 @@
 import Dropdown from 'components/dropdown.component';
-import BookmarkMenu from 'components/nav/bookmarks/bookmark-menu.component';
-import ShareMenu from 'components/nav/share/share-menu.component';
+// import BookmarkMenu from 'components/nav/bookmarks/bookmark-menu.component';
+// import ShareMenu from 'components/nav/share/share-menu.component';
 import YearsMenu from 'components/nav/years-brush/years-slider.component';
 import 'styles/components/shared/nav.scss';
 

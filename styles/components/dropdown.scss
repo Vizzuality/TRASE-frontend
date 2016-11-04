@@ -73,6 +73,11 @@
     &.-large {
       width: 296px;
     }
+
+    &.-right {
+      right: 0;
+      left: auto;
+    }
   }
 
   .dropdown-list > .dropdown-item {
