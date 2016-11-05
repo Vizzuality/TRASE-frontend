@@ -20,13 +20,18 @@ import AppReducer from 'reducers/app.reducer';
 import FlowsReducer from 'reducers/flows.reducer';
 import { resize } from 'actions/app.actions';
 import { loadInitialData } from 'actions/flows.actions';
-import { getStateFromURLHash } from 'utils/stateURL';
+import { getUrlParams, decodeState } from 'utils/stateURL';
 import { APP_DEFAULT_STATE, FLOWS_DEFAULT_STATE } from 'constants';
 
 import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
 
-const paramsURL = window.location.search.slice(1).split('=');
+const objParams = getUrlParams(window.location.search);
+
+let modalState = {
+  visibility: false,
+  modalParams: null
+};
 
 const start = (initialState) => {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -63,34 +68,55 @@ const start = (initialState) => {
   });
 };
 
-if (paramsURL[0] === 'story') {
-  // load config JSON
-  // TODO move mockup to real service
+if (objParams.story) {
+
   // TODO display loading state while loading service
-  const storyId = paramsURL[1];
+
+  const storyId = objParams.story;
 
   fetch(`${API_STORY_CONTENT}/${storyId}`)
     .then(resp => resp.text())
     .then(resp => JSON.parse(resp))
     .then(modalParams => {
 
-      const modalState = {
+      modalState = {
         visibility: true,
         modalParams
       };
 
-      // TODO get real state hash
-      // start(getStateFromURLHash(data.state));
-
       Object.assign(APP_DEFAULT_STATE.app, { modal: modalState });
+
+      if (objParams.state) {
+        const newState = decodeState(objParams.state);
+        Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
+      }
+
       const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
 
       start(globalState);
+    })
+    // if the API call fails, let the app flow continues
+    .catch(() => {
+
+      if (objParams.state) {
+        const newState = decodeState(objParams.state);
+        Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
+      }
+
+      const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
+      start(globalState);
     });
-} else if (paramsURL[0] === 'state') {
-  // load app from state
-  start(getStateFromURLHash(paramsURL[1]));
+
 } else {
+
+  Object.assign(APP_DEFAULT_STATE.app, { modal: modalState });
+
+  if (objParams.state) {
+    const newState = decodeState(objParams.state);
+    Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
+  }
+
   const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
+
   start(globalState);
 }
