@@ -89,8 +89,6 @@ export default class {
       isVertical: !settings.isBidimensional && settings.vertical
     });
 
-    debugger
-
     if (!settings.horizontal && !settings.vertical) {
       this._cleanLegend();
       return;
