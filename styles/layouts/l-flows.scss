@@ -110,10 +110,12 @@ body, html {
     justify-content: space-between;
 
     .contain-button-discard {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
       padding: 16px;
 
       span {
-        display: block;
         color: rgba($charcoal-grey, .6);
         font-family: $font-family-1;
         font-size: $font-size-small;
@@ -125,7 +127,6 @@ body, html {
         width: 20px;
         height: 20px;
         margin-top: 8px;
-        float: right;
       }
     }
   }
