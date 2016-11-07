@@ -6,6 +6,24 @@
   },
   {
     "version": "0.0.1",
+    "name": "water_scarcity",
+    "human_name": "Water scarcity",
+    "layergroup": {
+      "version": "1.0.1",
+      "layers": [
+        {
+          "type": "cartodb",
+          "options": {
+            "sql": "SELECT * FROM ana_dissolve",
+            "cartocss": "#ana_dissolve{  polygon-fill: transparent;  polygon-opacity: 1;  polygon-pattern-file: url(http://com.cartodb.users-assets.production.s3.amazonaws.com/patterns/diagonal_1px_fast.png);  line-color: #000000;  line-width: 0.1;  line-opacity: .5;} #ana_dissolve [ cat <= 7] {  polygon-pattern-opacity: 1;} #ana_dissolve [ cat <= 5.5] {  polygon-pattern-opacity: .66;} #ana_dissolve [ cat <= 3.5] {  polygon-pattern-opacity: .33;} #ana_dissolve [ cat <= 1.5] {  polygon-pattern-opacity: 0;}",
+            "cartocss_version": "2.3.0"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "version": "0.0.1",
     "name": "indigenous_areas",
     "human_name": "Indigenous Areas",
     "layergroup": {
