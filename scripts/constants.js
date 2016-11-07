@@ -33,7 +33,7 @@ export const FLOWS_DEFAULT_STATE = {
     selectedCountry: 'brazil',
     selectedCommodity: 'soy',
     selectedYears: [2015, 2016],
-    selectedQuant: 'Volume',
+    selectedQuant: 'volume',
     detailedView: false,
     selectedView: 1,
     selectedQual: 'none',
