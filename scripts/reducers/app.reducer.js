@@ -18,7 +18,6 @@ export default function (state = initialState, action) {
 
   case actions.TOGGLE_MAP:
     return Object.assign({}, state, { isMapVisible: !state.isMapVisible });
-
   default:
     return state;
   }

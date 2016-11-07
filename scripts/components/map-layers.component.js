@@ -53,7 +53,7 @@ export default class {
     directions.forEach((group) => {
       const radios = Array.prototype.slice.call(
         this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`), 0);
-        
+
       radios.forEach((radio) => {
         if (radio.getAttribute('value') !== layers[group]['uid']) return;
         const layerItem = radio.closest('.layer-item');
@@ -121,7 +121,7 @@ export default class {
     const target = e && e.currentTarget;
     const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
 
-    console.info(`showing info of ${uid}`);
+    this.callbacks.onToggleModal(true, uid);
   }
 
   // TODO: develop download function once is clear how it works

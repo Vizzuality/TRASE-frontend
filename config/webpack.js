@@ -61,7 +61,8 @@ const config = {
       NODE_ENV_DEV: process.env.NODE_ENV === 'development',
       API_URL: JSON.stringify(process.env.API_URL),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-      API_CMS_URL: JSON.stringify(process.env.API_CMS_URL)
+      API_CMS_URL: JSON.stringify(process.env.API_CMS_URL),
+      API_STORY_CONTENT: JSON.stringify(process.env.API_STORY_CONTENT)
     })
   ].concat(pagePlugins),
   output: {
