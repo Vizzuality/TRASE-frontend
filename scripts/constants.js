@@ -37,6 +37,7 @@ export const FLOWS_DEFAULT_STATE = {
     detailedView: false,
     selectedView: 1,
     selectedQual: 'none',
+    selectedBiomeFilter: 'none',
     selectedNodesIds: [],
     areNodesExpanded: false,
     selectedNodesData: [],
