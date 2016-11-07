@@ -104,4 +104,29 @@ body, html {
       width: calc(100% - 640px);
     }
   }
+
+  .js-nodes-titles-container {
+    display: flex;
+    justify-content: space-between;
+
+    .contain-button-discard {
+      padding: 16px;
+
+      span {
+        display: block;
+        color: rgba($charcoal-grey, .6);
+        font-family: $font-family-1;
+        font-size: $font-size-small;
+        letter-spacing: -.5px;
+        text-transform: uppercase;
+      }
+
+      .icon {
+        width: 20px;
+        height: 20px;
+        margin-top: 8px;
+        float: right;
+      }
+    }
+  }
 }
