@@ -43,9 +43,6 @@ export default class {
       this.svg.style('height', this.layout.getMaxHeight());
     }
 
-    // hide expoand button in detailed mapMethodsToState
-    this.expandButton.classList.toggle('-visible', !linksPayload.detailedView);
-
     this._render();
 
   }
