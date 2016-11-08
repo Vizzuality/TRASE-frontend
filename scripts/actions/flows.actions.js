@@ -290,11 +290,19 @@ export function highlightNodeFromGeoId(geoId) {
 }
 
 export function toggleNodesExpand(reloadLinks = true) {
-  return dispatch => {
-    const action = {
+  return (dispatch, getState) => {
+    dispatch({
       type: actions.TOGGLE_NODES_EXPAND
-    };
-    dispatch(action);
+    });
+
+    // if in detailed mode, and if expanding, toggle to overview mode
+    if (getState().flows.detailedView === true && getState().flows.areNodesExpanded) {
+      dispatch({
+        type: actions.SELECT_VIEW,
+        detailedView: false
+      });
+    }
+
     if (reloadLinks) {
       dispatch(loadLinks());
     }
