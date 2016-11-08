@@ -59,4 +59,4 @@ export const FLOWS_DEFAULT_STATE = {
 // fact sheets
 export const STACK_AREA_COLORS = ['#ef6a68', '#ffae4f', '#76c370', '#69a4d0', '#9d7dbf'];
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';
-export const CARTO_NAMED_MAPS_BASE_URL = 'http://p2cs-sei.carto.com/api/v1/map/named/';
+export const CARTO_NAMED_MAPS_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/named/';
