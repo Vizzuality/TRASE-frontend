@@ -78,4 +78,26 @@
       }
     }
   }
+
+  &.-top-table {
+    width: 50%;
+
+    h1 {
+      text-transform: uppercase;
+    }
+
+    table {
+      margin-top: 8px;
+
+      thead {
+        display: none;
+      }
+
+      tbody {
+        tr {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
 }
