@@ -1,5 +1,4 @@
 export const NUM_COLUMNS = 4;
-export const COLUMNS_POS = [[0, 1, 2], [3, 4], [5], [6]];
 export const NUM_NODES_SUMMARY = 10;
 export const NUM_NODES_DETAILED = 999;
 export const DETAILED_VIEW_SCALE = 1200;

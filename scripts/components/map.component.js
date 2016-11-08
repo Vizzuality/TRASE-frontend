@@ -115,7 +115,6 @@ export default class {
       }
     });
 
-    console.log(forceZoom)
     if (forceZoom && this.map.getZoom() < forceZoom) {
       this.map.setZoom(forceZoom);
     }
@@ -129,7 +128,6 @@ export default class {
   _createRasterLayer(layerData) {
     // const url = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
     const url = `${layerData.rasterURL}{z}/{x}/{y}.png`;
-    console.log(url);
     var layer = L.tileLayer(url, {
       pane: 'context_above'
     });
@@ -159,7 +157,7 @@ export default class {
 
       utfGrid.on('mouseover', function (e) {
         if (e.data && e.data.hasOwnProperty('cartodb_id')) {
-          console.log(e.data.cartodb_id);
+          // console.log(e.data.cartodb_id);
         }
       });
     }
