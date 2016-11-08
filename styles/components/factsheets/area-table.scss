@@ -1,14 +1,6 @@
 @import '../../settings';
 
 .c-area-table {
-  margin: 56px 0 0;
-
-  .title {
-    font-family: $font-family-1;
-    font-size: $font-size-x-regular;
-    font-weight: $font-weight-bold;
-    text-transform: uppercase;
-  }
 
   table {
     width: 100%;
@@ -99,5 +91,9 @@
         }
       }
     }
+  }
+
+  &.-actors {
+    margin-top: 56px;
   }
 }
