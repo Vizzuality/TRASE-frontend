@@ -165,12 +165,6 @@ export default class {
       this.map.addLayer(utfGrid, {
         resolution: 2
       });
-
-      utfGrid.on('mouseover', function (e) {
-        if (e.data && e.data.hasOwnProperty('cartodb_id')) {
-          // console.log(e.data.cartodb_id);
-        }
-      });
     }
   }
 

@@ -142,9 +142,6 @@ export default class {
   }
 
   // TODO: develop download function once is clear how it works
-  _onDownload(e) {
-    const target = e && e.currentTarget;
-    const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
-    console.info(`download of ${uid}`);
+  _onDownload() {
   }
 }

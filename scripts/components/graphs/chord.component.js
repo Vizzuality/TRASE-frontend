@@ -61,7 +61,7 @@ export default class {
       .enter().append('path')
       .attr('d', ribbon)
       .style('fill', 'blue')
-      .style('fill-opacity', .5 /* function(d) { return color(d.target.index); }*/)
+      .style('fill-opacity', .5 /* function(d) { return color(d.target.index); }*/);
       // .style("stroke", function(d) { return d3.rgb(color(d.target.index)).darker(); });
 
 
