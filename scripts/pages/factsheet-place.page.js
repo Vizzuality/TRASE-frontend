@@ -23,7 +23,7 @@ const defaults = {
 };
 
 const _build = data => {
-  new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
+  // new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
   new Chord('.js-chord-traders', data.top_traders_matrix, data.top_traders, data.municip_name);
   new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
   new Table({
