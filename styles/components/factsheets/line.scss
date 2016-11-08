@@ -1,18 +1,23 @@
+@import '../../settings';
+
 .c-line {
   path {
     stroke-width: 2px;
     fill: none;
   }
+
+  .axis {
+    > text {
+      font-family: $font-family-2;
+      font-size: $font-size-x-regular;
+    }
+  }
+
   .line--deforestation {
-    stroke: red;
+    stroke: $medium-pink;
   }
+
   .line--production {
-    stroke: black;
-  }
-  .axis--deforestation text, .axis-title--deforestation {
-    fill: red;
-  }
-  .axis--production text, .axis-title--production {
-    fill: black;
+    stroke: $charcoal-grey;
   }
 }

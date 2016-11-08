@@ -5,6 +5,9 @@
   background-color: $pale-peach;
 
   .overall-map {
+    max-width: $content-max-width;
+    margin: 0 auto;
+
     > .map-list {
       display: flex;
     }
@@ -29,6 +32,7 @@
         }
 
         > .name {
+          color: $charcoal-grey;
           font-family: $font-family-2;
           font-size: $font-size-big;
           font-weight: $font-weight-bold;
@@ -36,7 +40,6 @@
       }
     }
   }
-
 
   .overall-info {
     display: flex;
@@ -106,6 +109,17 @@
     }
   }
 
+  .title {
+    font-family: $font-family-1;
+    font-weight: $font-weight-bold;
+    letter-spacing: -.6px;
+    text-transform: uppercase;
+  }
+
+  .deforestation {
+    max-width: $content-max-width;
+    margin: 80px auto 64px;
+  }
 
   .chords-container {
     display: flex;
@@ -117,6 +131,7 @@
 
     &.-consumers {
       flex-direction: row-reverse;
+      margin: 24px 0 0;
     }
   }
 }
