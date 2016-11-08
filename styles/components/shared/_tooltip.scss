@@ -1,7 +1,7 @@
   .tooltip-layout {
   display: none;
   position: absolute;
-  width: 300px;
+  width: 100%;
   max-width: 300px;
   padding: 8px;
   border-radius: 4px;
@@ -9,7 +9,7 @@
   color: rgba($charcoal-grey, .5);
   font-family: $font-family-1;
   font-size: $font-size-x-regular;
-  letter-spacing: -1.4;
+  letter-spacing: -1.4px;
   line-height: 1.54;
   box-shadow: 0 3px 6px 0 rgba($black, .16), 0 3px 6px 0 rgba($black, .23);
   z-index: 10;
