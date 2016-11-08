@@ -145,7 +145,7 @@ export default class {
   }
 
   _createCartoLayer(layerData, i) {
-    const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/0/{z}/{x}/{y}`;
+    const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/{z}/{x}/{y}`;
     const layerUrl = `${baseUrl}.png`;
     // console.log(layerUrl)
     const layer = new L.tileLayer(layerUrl, {
