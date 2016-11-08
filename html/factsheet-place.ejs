@@ -9,94 +9,95 @@
   <%= htmlWebpackPlugin.options.nav %>
   <div class="l-factsheets-place js-factsheets">
     <div class="wrap">
+      <div class="container">
+        <div class="overall-map">
+          <ul class="map-list">
+            <li class="map-item">
+              <div class="map-shape js-shape-country"></div>
+              <div class="meta-info">
+                <div class="legend">country</div>
+                <div class="name">Brazil</div>
+              </div>
+            </li>
+            <li class="map-item">
+              <div class="map-shape js-shape-state"></div>
+              <div class="meta-info">
+                <div class="legend">state</div>
+                <div class="name">Mato Grosso</div>
+              </div>
+            </li>
+            <li class="map-item">
+              <div class="map-shape js-shape-biome"></div>
+              <div class="meta-info">
+                <div class="legend">biome</div>
+                <div class="name">Amazon</div>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-      <div class="overall-map">
-        <ul class="map-list">
-          <li class="map-item">
-            <div class="map-shape js-shape-country"></div>
-            <div class="meta-info">
-              <div class="legend">country</div>
-              <div class="name">Brazil</div>
+        <div class="overall-info">
+          <div class="municipality-map js-municipality-map"></div>
+          <div class="municipality-data">
+            <div class="selectors">
+              <div class="c-dropdown" data-dropdown="municipality">
+                <span class="dropdown-label">Municipality</span>
+                <span class="js-dropdown-title dropdown-title">Querência</span>
+                <ul class="js-dropdown-list dropdown-list is-hidden">
+                  <li class="js-dropdown-item dropdown-item" data-value="Querência">Querência</li>
+                  <li class="js-dropdown-item dropdown-item" data-value="Altamira">Altamira</li>
+                </ul>
+              </div>
+              <div class="c-dropdown" data-dropdown="commodity">
+                <span class="dropdown-label">Commodity</span>
+                <span class="js-dropdown-title dropdown-title">Soy</span>
+                <ul class="js-dropdown-list dropdown-list is-hidden">
+                  <li class="js-dropdown-item dropdown-item" data-value="soy">Soy</li>
+                  <li class="js-dropdown-item dropdown-item">Coffee</li>
+                </ul>
+              </div>
             </div>
-          </li>
-          <li class="map-item">
-            <div class="map-shape js-shape-state"></div>
-            <div class="meta-info">
-              <div class="legend">state</div>
-              <div class="name">Mato Grosso</div>
-            </div>
-          </li>
-          <li class="map-item">
-            <div class="map-shape js-shape-biome"></div>
-            <div class="meta-info">
-              <div class="legend">biome</div>
-              <div class="name">Amazon</div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="overall-info">
-        <div class="municipality-map js-municipality-map"></div>
-        <div class="municipality-data">
-          <div class="selectors">
-            <div class="c-dropdown" data-dropdown="municipality">
-              <span class="dropdown-label">Municipality</span>
-              <span class="js-dropdown-title dropdown-title">Querência</span>
-              <ul class="js-dropdown-list dropdown-list is-hidden">
-                <li class="js-dropdown-item dropdown-item" data-value="Querência">Querência</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Altamira">Altamira</li>
-              </ul>
-            </div>
-            <div class="c-dropdown" data-dropdown="commodity">
-              <span class="dropdown-label">Commodity</span>
-              <span class="js-dropdown-title dropdown-title">Soy</span>
-              <ul class="js-dropdown-list dropdown-list is-hidden">
-                <li class="js-dropdown-item dropdown-item" data-value="soy">Soy</li>
-                <li class="js-dropdown-item dropdown-item">Coffee</li>
+            <div class="stats">
+              <ul class="stat-list">
+                <li class="stat-item">
+                  <div class="legend">area</div>
+                  <div class="value">17.7</div>
+                  <div class="unit">km<sup>2</sup></div>
+                </li>
+                <li class="stat-item">
+                  <div class="legend">agriculture land</div>
+                  <div class="value">43.3</div>
+                  <div class="unit">%</div>
+                </li>
+                <li class="stat-item">
+                  <div class="legend">soy land</div>
+                  <div class="value">68.4</div>
+                  <div class="unit">%</div>
+                </li>
               </ul>
             </div>
           </div>
-          <div class="stats">
-            <ul class="stat-list">
-              <li class="stat-item">
-                <div class="legend">area</div>
-                <div class="value">17.7</div>
-                <div class="unit">km<sup>2</sup></div>
-              </li>
-              <li class="stat-item">
-                <div class="legend">agriculture land</div>
-                <div class="value">43.3</div>
-                <div class="unit">%</div>
-              </li>
-              <li class="stat-item">
-                <div class="legend">soy land</div>
-                <div class="value">68.4</div>
-                <div class="unit">%</div>
-              </li>
-            </ul>
+
+          <div class="score-table js-score-table">
+            <!-- table content here  -->
           </div>
         </div>
 
-        <div class="score-table js-score-table">
-          <!-- table content here  -->
-        </div>
+        <section class="deforestation">
+          <h3 class="title -small">deforestation trajectory</h3>
+          <div class="js-line c-line"></div>
+        </section>
+
+        <section class="chords-container -traders">
+          <div class="js-chord-traders c-chord"></div>
+          <div class="js-top10-traders c-top -traders"></div>
+        </section>
+
+        <section class="chords-container -consumers">
+          <div class="js-chord-consumers c-chord"></div>
+          <div class="js-top10-consumers c-top -consumers"></div>
+        </section>
       </div>
-
-      <section class="deforestation">
-        <h3 class="title -small">deforestation trajectory</h3>
-        <div class="js-line c-line"></div>
-      </section>
-
-      <section class="chords-container -traders">
-        <div class="js-chord-traders c-chord"></div>
-        <div class="js-top10-traders c-top10-traders"></div>
-      </section>
-
-      <section class="chords-container -consumers">
-        <div class="js-top10-consumers c-top10-consumers"></div>
-        <div class="js-chord-consumers c-chord"></div>
-      </section>
 
     </div>
   </div>

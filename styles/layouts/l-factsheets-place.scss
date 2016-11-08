@@ -4,9 +4,12 @@
   padding: 64px 0 96px;
   background-color: $pale-peach;
 
-  .overall-map {
+  .container {
     max-width: $content-max-width;
     margin: 0 auto;
+  }
+
+  .overall-map {
 
     > .map-list {
       display: flex;
@@ -125,13 +128,21 @@
     display: flex;
     align-items: center;
 
+    > .c-chord {
+      flex-basis: 60%;
+    }
+
+    > .c-top {
+      flex-basis: 40%;
+    }
+
     &.-traders {
-      margin: 32px 0 0;
+      margin: 32px auto 0;
     }
 
     &.-consumers {
       flex-direction: row-reverse;
-      margin: 24px 0 0;
+      margin: 24px auto 0;
     }
   }
 }
