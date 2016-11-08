@@ -258,4 +258,4 @@ const getFilteredLinksByNodeIds = (unmergedLinks, selectedNodesIds, selectedNode
   } else {
     return mergeLinks(unmergedLinks);
   }
-}
+};

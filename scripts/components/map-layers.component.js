@@ -129,6 +129,6 @@ export default class {
     const target = e && e.currentTarget;
     const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
 
-    console.info(`download of ${uid}`);
+    console.warn(`download of ${uid}`);
   }
 }

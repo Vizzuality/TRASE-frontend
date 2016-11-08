@@ -166,7 +166,7 @@ export default class {
 
       utfGrid.on('mouseover', function (e) {
         if (e.data && e.data.hasOwnProperty('cartodb_id')) {
-          console.log(e.data.cartodb_id);
+          // console.log(e.data.cartodb_id);
         }
       });
     }

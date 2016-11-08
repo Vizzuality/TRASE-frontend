@@ -103,7 +103,7 @@ export function loadInitialData() {
       dispatch(loadLinks());
     });
     dispatch(loadMapVectorLayers());
-    dispatch(loadMapContextLayers())
+    dispatch(loadMapContextLayers());
   };
 }
 
