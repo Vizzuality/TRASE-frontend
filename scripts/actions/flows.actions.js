@@ -5,6 +5,18 @@ import getURLFromParams from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
 
 
+export function resetState() {
+  return (dispatch) => {
+    dispatch({
+      type: actions.RESET_SELECTION
+    });
+    dispatch({
+      type: actions.FILTER_LINKS_BY_NODES
+    });
+    selectView(false, true);
+    dispatch(loadLinks());
+  };
+}
 export function selectCountry(country, reloadLinks) {
   return _reloadLinks('country', country, actions.SELECT_COUNTRY, reloadLinks);
 }
@@ -92,12 +104,12 @@ export function loadInitialData() {
     const columnsURL = getURLFromParams('/v1/get_columns', params);
 
     Promise.all([allNodesURL, columnsURL].map(url =>
-        fetch(url).then(resp => resp.text())
+      fetch(url).then(resp => resp.text())
     )).then(payload => {
       // TODO do not wait for end of all promises/use another .all call
       dispatch({
         type: actions.GET_COLUMNS,
-        payload: payload.slice(0,2),
+        payload: payload.slice(0, 2),
       });
       dispatch(loadNodes());
       dispatch(loadLinks());
@@ -188,7 +200,6 @@ export function loadLinks() {
 }
 
 
-
 export function loadMapVectorLayers() {
   return (dispatch) => {
     _loadMapVectorLayers([
@@ -201,7 +212,7 @@ export function loadMapVectorLayers() {
 
 const _loadMapVectorLayers = (urls, dispatch) => {
   Promise.all(urls.map(url =>
-      fetch(url).then(resp => resp.text())
+    fetch(url).then(resp => resp.text())
   )).then(payload => {
     dispatch({
       type: actions.GET_GEO_DATA,
@@ -268,10 +279,14 @@ export function selectNodeFromGeoId(geoId) {
 
 export function highlightNode(nodeId, isAggregated) {
   return (dispatch, getState) => {
-    if (isAggregated) return;
+    if (isAggregated) {
+      return;
+    }
 
     // TODO move this to reducer
-    if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) return;
+    if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) {
+      return;
+    }
 
     dispatch({
       type: actions.HIGHLIGHT_NODE,

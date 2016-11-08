@@ -17,10 +17,23 @@ import setNodesMeta from './sankey/setNodesMeta';
 import getChoropleth from './sankey/getChoropleth';
 
 export default function (state = {}, action) {
+  console.log(action.type);
   switch (action.type) {
 
   case actions.LOAD_INITIAL_DATA: {
     return Object.assign({}, state, { initialDataLoading: true });
+  }
+
+  case actions.RESET_SELECTION: {
+    return Object.assign({}, state, {
+      highlightedNodesIds: [],
+      highlightedNodeData: [],
+      highlightedGeoIds: [],
+      selectedNodesIds: [],
+      expandedNodesIds: [],
+      areNodesExpanded: false,
+      selectedBiomeFilter: 'none'
+    });
   }
 
   case actions.GET_COLUMNS: {
@@ -180,8 +193,6 @@ export default function (state = {}, action) {
   case actions.GET_CONTEXT_LAYERS: {
     return Object.assign({}, state, { mapContextualLayers: action.mapContextualLayers });
   }
-
-
 
   case actions.SELECT_VECTOR_LAYERS: {
     const selectedVectorLayers = Object.assign({}, state.selectedVectorLayers);
