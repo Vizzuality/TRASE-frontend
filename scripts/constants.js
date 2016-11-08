@@ -40,7 +40,7 @@ export const FLOWS_DEFAULT_STATE = {
     selectedNodesIds: [],
     areNodesExpanded: false,
     selectedNodesData: [],
-    selectedColumnsIds: [2, 4, 6, 7],
+    selectedColumnsIds: [3, 4, 6, 7],
     selectedVectorLayers: {
       horizontal: {
         uid: null,
