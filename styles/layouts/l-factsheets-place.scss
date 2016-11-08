@@ -110,5 +110,13 @@
   .chords-container {
     display: flex;
     align-items: center;
+
+    &.-traders {
+      margin: 32px 0 0;
+    }
+
+    &.-consumers {
+      flex-direction: row-reverse;
+    }
   }
 }
