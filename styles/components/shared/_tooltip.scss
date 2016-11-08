@@ -1,0 +1,30 @@
+  .tooltip-layout {
+  display: none;
+  position: absolute;
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: $white;
+  color: rgba($charcoal-grey, .5);
+  font-family: $font-family-1;
+  font-size: $font-size-x-regular;
+  letter-spacing: -1.4px;
+  line-height: 1.54;
+  box-shadow: 0 3px 6px 0 rgba($black, .16), 0 3px 6px 0 rgba($black, .23);
+  z-index: 10;
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: 0;
+    height: 0;
+    margin-top: -8px;
+    border: solid transparent;
+    border-width: 8px;
+    border-right-color: $white;
+    content: '';
+    pointer-events: none;
+  }
+}

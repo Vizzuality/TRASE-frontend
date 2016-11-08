@@ -8,6 +8,7 @@ export default class {
   onCreated() {
     this.el = document.querySelector('.c-basemap-options');
     this.layerList = this.el.querySelector('.js-layer-list');
+    this.tooltip = document.querySelector('.tooltip-layout');
   }
 
   loadLayers(layers) {
@@ -35,7 +36,8 @@ export default class {
 
   _setEventListeners() {
     this.infoBtns.forEach((infoBtn) => {
-      infoBtn.addEventListener('click', (e) => this._onInfo(e));
+      infoBtn.addEventListener('mouseenter', (e) => this._onInfo(e));
+      infoBtn.addEventListener('mouseleave', () => this._outInfo());
     });
 
     this.downloadBtns.forEach((downloadBtn) => {
@@ -118,17 +120,28 @@ export default class {
 
   // TODO: develop info function once is clear how it works
   _onInfo(e) {
-    const target = e && e.currentTarget;
+    const target = e && e.currentTarget; //the information icon
+    const bounds = target.getBoundingClientRect(); //position of the icon
+    const top = bounds.top; // top
+    const left = bounds.left + 24; //left
     const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
 
-    this.callbacks.onToggleModal(true, uid);
+    this.tooltip.classList.remove('is-hidden');
+    this.tooltip.classList.add('is-visible');
+
+    const topTooltip = top - (this.tooltip.getBoundingClientRect().height/2) + 8;
+
+    this.tooltip.style.top = `${topTooltip}px`;
+    this.tooltip.style.left = `${left}px`;
+    this.tooltip.innerHTML = `showing info of ${uid}`;
+  }
+
+  _outInfo() {
+    this.tooltip.classList.remove('is-visible');
+    this.tooltip.classList.add('is-hidden');
   }
 
   // TODO: develop download function once is clear how it works
-  _onDownload(e) {
-    const target = e && e.currentTarget;
-    const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
-
-    console.warn(`download of ${uid}`);
+  _onDownload() {
   }
 }
