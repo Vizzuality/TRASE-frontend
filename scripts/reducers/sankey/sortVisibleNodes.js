@@ -1,7 +1,7 @@
 const byHeightOthersLast = (nodeA, nodeB) => {
-  if (nodeA.isAggregated) {
+  if (nodeA.isAggregated || nodeA.isUnknown) {
     return 1;
-  } else if (nodeB.isAggregated) {
+  } else if (nodeB.isAggregated || nodeB.isUnknown) {
     return -1;
   }
   return byHeight(nodeA, nodeB);

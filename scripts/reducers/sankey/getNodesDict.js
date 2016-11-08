@@ -21,6 +21,10 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       newNode.isAggregated = true;
     }
 
+    if (node.isUnknown === true || node.isUnknown === 'true') {
+      newNode.isUnknown = true;
+    }
+
     newNode.link = getFactSheetLink(newNode.id, newNode.columnId);
 
     nodesDict[parseInt(node.id)] = newNode;
