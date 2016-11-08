@@ -36,9 +36,11 @@ export default class {
 
   loadMap(payload) {
     const geoData = payload.geoData;
+    // TODO this statically maps vectorLayers indexes to column indexes, it should be dynamic
     this.vectorLayers = [
       this._getVectorLayer(geoData.biomes, 'map-polygon-biome'),
       this._getVectorLayer(geoData.states, 'map-polygon-state'),
+      this._getVectorLayer(geoData.municipalities, 'map-polygon-logistics-hub'),
       this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality')
     ];
     this.selectVectorLayer([payload.currentLayer]);
@@ -215,7 +217,7 @@ export default class {
       if (choroItem) {
         layer._path.style.fill = choroItem;
       } else {
-        layer._path.style.fill = 'none';
+        layer._path.style.fill = 'auto';
       }
     });
   }

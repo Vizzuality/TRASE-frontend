@@ -1,6 +1,5 @@
 // flows
 export const NUM_COLUMNS = 4;
-export const COLUMNS_POS = [[0, 1, 2], [3, 4], [5], [6]];
 export const NUM_NODES_SUMMARY = 10;
 export const NUM_NODES_DETAILED = 999;
 export const DETAILED_VIEW_SCALE = 1200;
@@ -14,8 +13,8 @@ export const LEGEND_COLORS = {
     '#f5f3ea', '#f6c7ad', '#f65e6e'], //9
   horizontal: ['#f5f3ea', '#f5dfd0', '#f6c7ad', '#fa898d', '#f65e6e'], // 5
   vertical: ['#F4F1E7', '#C8E1D8', '#A0D5CB', '#87B3C0', '#7297AA'], // 5
-  error_no_metadata: '#0f0',
-  error_no_metadata_for_layer: '#f0f',
+  error_no_metadata: '#c7c7c7',
+  error_no_metadata_for_layer: '#c7c7c7',
 };
 
 
