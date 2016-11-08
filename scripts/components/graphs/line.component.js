@@ -1,8 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 import {
   axisBottom as d3_axis_bottom,
-  axisLeft as d3_axis_left,
-  axisRight as d3_axis_right
+  axisLeft as d3_axis_left
 } from 'd3-axis';
 import {
     scaleLinear as d3_scale_linear,
@@ -16,8 +15,9 @@ import 'styles/components/factsheets/line.scss';
 
 export default class {
   constructor(className, trajectory_deforestation, trajectory_production) {
+    const elem = document.querySelector(className);
     const margin = {top: 30, right: 40, bottom: 30, left: 50};
-    const width = 600 - margin.left - margin.right;
+    const width = elem.clientWidth - margin.left - margin.right;
     const height = 270 - margin.top - margin.bottom;
 
     var x = d3_scale_time().range([0, width]);
@@ -25,7 +25,10 @@ export default class {
     var y0 = d3_scale_linear().rangeRound([height, 0]);
     var y1 = d3_scale_linear().rangeRound([height, 0]);
 
-    var container = d3_select(className)
+    const xAxis = d3_axis_bottom(x).tickSize(0).tickPadding(8);
+    const yAxis = d3_axis_left(y0).tickSize(0).tickPadding(8);
+
+    var container = d3_select(elem)
       .append('svg')
           .attr('width', width + margin.left + margin.right)
           .attr('height', height + margin.top + margin.bottom)
@@ -70,25 +73,25 @@ export default class {
     container.append('g')
       .attr('transform', `translate(0, ${height} )`)
       .attr('class', 'axis axis--x')
-      .call(d3_axis_bottom(x));
+      .call(xAxis);
 
     container.append('g')
       .attr('class', 'axis axis--y axis--deforestation')
-      .call(d3_axis_left(y0));
+      .call(yAxis);
 
-    container.append('text')
-      .attr('class', 'axis-title axis-title--deforestation')
-      .html(trajectory_deforestation.lines[0].name);
-
-    container.append('g')
-      .attr('transform', `translate(${width}, 0)`)
-      .attr('class', 'axis axis--y axis--production')
-      .call(d3_axis_right(y1));
-
-    container.append('text')
-      .attr('transform', `translate(${width - 100}, 0)`)
-      .attr('class', 'axis-title axis-title--production')
-      .html(trajectory_production.lines[0].name);
+    // container.append('text')
+    //   .attr('class', 'axis-title axis-title--deforestation')
+    //   .html(trajectory_deforestation.lines[0].name);
+    //
+    // container.append('g')
+    //   .attr('transform', `translate(${width}, 0)`)
+    //   .attr('class', 'axis axis--y axis--production')
+    //   .call(d3_axis_right(y1));
+    //
+    // container.append('text')
+    //   .attr('transform', `translate(${width - 100}, 0)`)
+    //   .attr('class', 'axis-title axis-title--production')
+    //   .html(trajectory_production.lines[0].name);
   }
 }
 

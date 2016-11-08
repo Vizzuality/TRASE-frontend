@@ -38,6 +38,10 @@ a {
     font-size: $font-size-x-big;
   }
 
+  &.-small {
+    font-size: $font-size-x-regular;
+  }
+
   &.-pink {
     color: $medium-pink;
   }
