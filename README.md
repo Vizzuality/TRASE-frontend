@@ -34,6 +34,10 @@ python API/server.py
 
 ### frontend
 - Checkout develop branch
+- copy default env parameters
+```
+cp .env.sample.json .env
+```
 - install dependencies:
 ```
 npm i
@@ -43,6 +47,20 @@ npm i
 npm run dev
 ```
 - [http://localhost:8081/](http://localhost:8081/)
+
+### generate CARTO named maps
+
+- copy CARTO credentials:
+```
+cp cp ./bin/cartodb/cartodb-config.sample.json ./bin/cartodb/cartodb-config.json
+```
+- in cartodb-config.sample.json, replace api_key value
+- to update or instanciate context layers run
+```
+./bin/getContextMaps.sh
+```
+This will use the layers configuration stored in `./bin/cartodb/templates.json` 
+
 
 ## Deploy
 

@@ -1,7 +1,9 @@
 import 'whatwg-fetch';
 import actions from 'actions';
-import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED } from 'constants';
+import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
 import getURLFromParams from 'utils/getURLFromParams';
+import mapContextualLayers from './map/context_layers';
+
 
 export function selectCountry(country, reloadLinks) {
   return _reloadLinks('country', country, actions.SELECT_COUNTRY, reloadLinks);
@@ -101,6 +103,7 @@ export function loadInitialData() {
       dispatch(loadLinks());
     });
     dispatch(loadMapVectorLayers());
+    dispatch(loadMapContextLayers());
   };
 }
 
@@ -207,6 +210,26 @@ const _loadMapVectorLayers = (urls, dispatch) => {
   });
 };
 
+export function loadMapContextLayers() {
+  return dispatch => {
+    const namedMapsURLs = mapContextualLayers.map(layer => {
+      if (layer.rasterURL) return null;
+      return `${CARTO_NAMED_MAPS_BASE_URL}${layer.name}/jsonp?callback=cb`;
+    }).filter(url => url !== null);
+
+    Promise.all(namedMapsURLs.map(url =>
+        fetch(url).then(resp => resp.text())
+    )).then(() => {
+      // we actually don't care about layergroupids because we already have them pregenerated
+      // this is just about reinstanciating named maps, you know, because CARTO
+      dispatch({
+        type: actions.GET_CONTEXT_LAYERS,
+        mapContextualLayers
+      });
+    });
+
+  };
+}
 
 export function selectNode(nodeId, isAggregated) {
   return (dispatch, getState) => {

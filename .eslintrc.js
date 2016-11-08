@@ -33,6 +33,7 @@ module.exports = {
     "globals": {
       NODE_ENV_DEV: true,
       API_URL: true,
-      API_CMS_URL: true
+      API_CMS_URL: true,
+      API_STORY_CONTENT: true
     }
 };

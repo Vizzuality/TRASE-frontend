@@ -1,3 +1,4 @@
+// flows
 export const NUM_COLUMNS = 4;
 export const NUM_NODES_SUMMARY = 10;
 export const NUM_NODES_DETAILED = 999;
@@ -16,5 +17,46 @@ export const LEGEND_COLORS = {
   error_no_metadata_for_layer: '#c7c7c7',
 };
 
+
+export const APP_DEFAULT_STATE = {
+  app: {
+    modal: {
+      visibility: false,
+      modalParams: null
+    }
+  }
+};
+
+export const FLOWS_DEFAULT_STATE = {
+  flows: {
+    selectedCountry: 'brazil',
+    selectedCommodity: 'soy',
+    selectedYears: [2015, 2016],
+    selectedQuant: 'volume',
+    detailedView: false,
+    selectedView: 1,
+    selectedQual: 'none',
+    selectedBiomeFilter: 'none',
+    selectedNodesIds: [],
+    areNodesExpanded: false,
+    selectedNodesData: [],
+    selectedColumnsIds: [2, 4, 6, 7],
+    selectedVectorLayers: {
+      horizontal: {
+        uid: null,
+        title: null
+      },
+      vertical: {
+        uid: null,
+        title: null
+      }
+    },
+    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
+  }
+};
+
+
+// fact sheets
 export const STACK_AREA_COLORS = ['#ef6a68', '#ffae4f', '#76c370', '#69a4d0', '#9d7dbf'];
-export const CARTO_BASE_URL = 'https://p2cs-sei.cartodb.com/api/v1/map/';
+export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';
+export const CARTO_NAMED_MAPS_BASE_URL = 'http://p2cs-sei.carto.com/api/v1/map/named/';

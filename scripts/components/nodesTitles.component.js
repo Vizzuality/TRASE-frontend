@@ -15,7 +15,7 @@ export default class {
   }
 
   _update(nodesData) {
-    if (nodesData.length === 0) return;
+    if (nodesData === undefined || nodesData.length === 0) return;
     this.el.innerHTML = NodeTitleTemplate({
       nodes: nodesData,
       node: nodesData[0],

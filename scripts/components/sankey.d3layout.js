@@ -51,7 +51,7 @@ const sankeyLayout = function() {
 
   sankeyLayout.isReady = () => {
     return viewportWidth && linksPayload;
-  }
+  };
 
   sankeyLayout.relayout = () => {
     if (!sankeyLayout.isReady()) {

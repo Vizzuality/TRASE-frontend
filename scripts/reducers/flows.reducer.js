@@ -15,13 +15,12 @@ import getSelectedNodesData from './sankey/getSelectedNodesData';
 import getMapLayers from './sankey/getMapLayers';
 import setNodesMeta from './sankey/setNodesMeta';
 import getChoropleth from './sankey/getChoropleth';
-import mapContextualLayers from './map/context_layers';
 
 export default function (state = {}, action) {
   switch (action.type) {
 
   case actions.LOAD_INITIAL_DATA: {
-    return Object.assign({}, state, { mapContextualLayers, initialDataLoading: true });
+    return Object.assign({}, state, { initialDataLoading: true });
   }
 
   case actions.GET_COLUMNS: {
@@ -178,6 +177,11 @@ export default function (state = {}, action) {
       }
     });
 
+  case actions.GET_CONTEXT_LAYERS: {
+    return Object.assign({}, state, { mapContextualLayers: action.mapContextualLayers });
+  }
+
+
 
   case actions.SELECT_VECTOR_LAYERS: {
     const selectedVectorLayers = Object.assign({}, state.selectedVectorLayers);
@@ -253,4 +257,4 @@ const getFilteredLinksByNodeIds = (unmergedLinks, selectedNodesIds, selectedNode
   } else {
     return mergeLinks(unmergedLinks);
   }
-}
+};
