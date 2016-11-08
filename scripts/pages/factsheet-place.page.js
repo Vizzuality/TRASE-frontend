@@ -35,6 +35,8 @@ const _onSelect = function(value) {
 
 const _init = () => {
   const nodeId = location.search.substr(1).replace('nodeId=','');
+  const country = defaults.exporter.toLowerCase();
+  const commodity = defaults.commodity.toLowerCase();
 
   const municipalityDropdown = new Dropdown('municipality', _onSelect);
   const commodityDropdown = new Dropdown('commodity', _onSelect);
@@ -42,12 +44,11 @@ const _init = () => {
   municipalityDropdown.setTitle(defaults.exporter);
   commodityDropdown.setTitle(defaults.commodity);
 
-  fetch(`${API_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=BRAZIL&commodity=SOY`)
+  fetch(`${API_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=${country}&commodity=${commodity}`)
     .then(response => response.json())
-    .then((data) => {
-      _build(data.data);
+    .then((result) => {
+      _build(result.data);
     });
-
 };
 
 _init();
