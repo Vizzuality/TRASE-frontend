@@ -7,19 +7,25 @@ export default class {
   constructor(settings) {
     this.el = settings.el; //place to show the table
     this.type = settings.type;
+    this.data = settings.data;
 
-    if(this.type === 'table_actors'){
-      fetch('factsheets/table.json')
-        .then(response => response.json())
-        .then((json) => {
-          this.data = json;
-          this.render();
-        });
-    } else {
-      this.data = settings.data;
-      // console.log(this.data['includedColumns']);
-      this.render();
+    if(this.type === 'top'){
+      for(let i=0; i<this.data.length; i++) {
+        this.data[i]['value'] = (this.data[i]['value']*100).toFixed(2);
+      }
     }
+
+    if(this.type === 't_head') {
+      for(let i=0; i<this.data['rows'].length; i++) {
+        for(let j=0; j<this.data['rows'][i]['values'].length; j++){
+          if(this.data['rows'][i]['values'][j] == null){
+            this.data['rows'][i]['values'][j] = '0';
+          }
+        }
+      }
+    }
+
+    this.render();
   }
 
   render() {

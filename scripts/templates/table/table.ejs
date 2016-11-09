@@ -8,38 +8,13 @@
       </tr>
     </thead>
   <% } %>
-  <% if(type === 'table_actors'){ %>
-    <thead>
-      <tr>
-        <% for(let i=0; i<actors['title']['value'].length; i++) { %>
-          <th><%= actors['title']['value'][i] %></th>
-        <% } %>
-      </tr>
-    </thead>
-  <% } %>
-  <% if(type === 'table_actors'){ %>
-    <tbody>
-      <% for(let i=0; i<actors['data'][actors['title']['value'][0]].length; i++) { %>
-        <tr>
-        <%  for(let j=0; j<actors['title']['value'].length; j++){%>
-          <td data-unit="<%= i == 0 ? actors['title']['units'][j] : ''  %>">
-            <%= actors['data'][actors['title']['value'][j]][i] %>
-            <% if(j == 0){ %> <svg class="icon icon-check"><use xlink:href="#icon-outside-link"/></svg> <% } %>
-          </td>
-        <% } %>
-        </tr>
-      <% } %>
-    </tbody>
-  <% }%>
   <% if(type === 't_head'){ %>
     <tbody>
       <% for(let i=0; i<actors['rows'].length; i++) { %>
         <tr>
           <%  for(let j=0; j<actors['rows'][i]['values'].length; j++){%>
             <td data-unit="<%= i == 0 ? actors['includedColumns'][j]['unit'] : ''  %>">
-              <% if(actors['rows'][i]['values'][j] != null){  %>
                 <%= actors['rows'][i]['values'][j] %>
-              <% } else {%>na<% }%>
             </td>
           <% } %>
         </tr>
@@ -50,7 +25,7 @@
       <% for(let i=0; i<actors.length; i++) { %>
         <tr>
           <td><%=i+1%>.<%= actors[i]['name'] %> <svg class="icon icon-check"><use xlink:href="#icon-outside-link"/></svg></td>
-          <td data-unit="<%= i == 0 ? '%' : ''  %>"><%= (actors[i]['value'] * 100).toFixed(2) %></td>
+          <td data-unit="<%= i == 0 ? '%' : ''  %>"><%= actors[i]['value'] %></td>
         </tr>
       <% } %>
     </tbody>
