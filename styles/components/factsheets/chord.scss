@@ -1,0 +1,19 @@
+@import '../../settings';
+
+.c-chord {
+
+  > svg {
+
+    .links {
+      fill: rgba($medium-pink, .2);
+    }
+
+    .text-legend {
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      text-transform: uppercase;
+
+      fill: rgba($charcoal-grey, .8);
+    }
+  }
+}

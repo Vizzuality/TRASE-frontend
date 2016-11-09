@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%= htmlWebpackPlugin.options.head %>
+</head>
+<body>
+  <div class="loading-wrapper"></div>
+  <%= htmlWebpackPlugin.options.icons %>
+  <div class="js-factsheets">
+    <%= htmlWebpackPlugin.options.nav %>
+    <div class="l-factsheet-actor">
+      <div class="content ">
+        <div class="wrap">
+          <div class="c-area-select">
+            <div class="c-dropdown -factsheets" data-dropdown="exporter">
+              <span class="dropdown-label -big">Exporter</span>
+              <span class="js-dropdown-title dropdown-title">
+                -
+              </span>
+              <ul class="js-dropdown-list dropdown-list">
+                <li class="js-dropdown-item dropdown-item" data-value="Colombia">Colombia</li>
+                <li class="js-dropdown-item dropdown-item" data-value="Brazil">Brazil</li>
+              </ul>
+            </div>
+
+            <div class="c-dropdown -factsheets" data-dropdown="commodity">
+              <span class="dropdown-label -big">Commodity</span>
+              <span class="js-dropdown-title dropdown-title">
+                -
+              </span>
+              <ul class="js-dropdown-list dropdown-list">
+                <li class="js-dropdown-item dropdown-item" data-value="Soy">Soy</li>
+              </ul>
+            </div>
+
+            <div class="search js-search-container">
+              <div class="c-search js-search">
+                <label for="search-input">Search for:</label>
+                <input class="js-search-input" id="search-input" placeholder="producer, trader or country of import" />
+              </div>
+            </div>
+
+            <div class="contain-information">
+              <div>
+                <span class="title-information">
+                  ZERO DEFORESTATION COMMITMENT
+                </span>
+                <span class="value-information">
+                  <svg class="icon icon-check"><use xlink:href="#icon-check-circle"/></svg>
+                  <span>Yes</span>
+                <span>
+              </div>
+
+              <div>
+                <span class="title-information">
+                  FOREST 500 SCORE
+                </span>
+                <span class="value-information -stars">
+                  <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
+                  <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
+                  <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
+                  <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
+                  <svg class="icon star-icon"><use xlink:href="#icon-star-white"/></svg>
+                <span>
+              </div>
+            </div>
+          </div>
+
+          <div class="c-area-stacked-chart">
+            <span class="title">TOP Source Municipalities</span>
+            <div class="js-municipalities-top">
+            </div>
+          </div>
+
+          <div class="c-area-stacked-chart -second ">
+            <span class="title">TOP destination COUNTRIES</span>
+            <div class="js-destination-top">
+            </div>
+          </div>
+
+          <div class="c-area-table ">
+            <span class="title">Sustainability of source municipalities IN 2015</span>
+            <div class="js-municipalities-table">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <%= htmlWebpackPlugin.options.footer %>
+
+  </div>
+  </div>
+  <%= htmlWebpackPlugin.options.scripts %>
+</body>
+</html>

@@ -1,0 +1,148 @@
+@import '../settings';
+
+.l-factsheet-place {
+  padding: 64px 0 96px;
+  background-color: $pale-peach;
+
+  .container {
+    max-width: $content-max-width;
+    margin: 0 auto;
+  }
+
+  .overall-map {
+
+    > .map-list {
+      display: flex;
+    }
+
+    > .map-list > .map-item {
+      display: flex;
+      flex-basis: calc(100% / 3);
+      align-items: center;
+
+      > .map-shape {}
+
+      > .meta-info {
+        display: flex;
+        flex-direction: column;
+
+        > .legend {
+          color: rgba($charcoal-grey, .6);
+          font-family: $font-family-1;
+          font-size: $font-size-x-regular;
+          letter-spacing: -.6px;
+          text-transform: uppercase;
+        }
+
+        > .name {
+          color: $charcoal-grey;
+          font-family: $font-family-2;
+          font-size: $font-size-big;
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+  }
+
+  .overall-info {
+    display: flex;
+    margin: 56px 0 0;
+
+    > .municipality-map {
+      flex-basis: calc(100% / 3);
+    }
+
+    > .municipality-data {
+
+      > .selectors  {
+        display: flex;
+
+        .c-dropdown {
+          &:not(:first-child) {
+            margin: 0 0 0 40px;
+          }
+
+          > .dropdown-title {
+            font-size: $font-size-huge;
+          }
+        }
+      }
+
+      > .stats {
+        margin: 24px 0 0;
+
+        > .stat-list {
+          display: flex;
+        }
+
+        > .stat-list > .stat-item {
+          &:not(:first-child) {
+            margin: 0 0 0 40px;
+          }
+
+          > .legend {
+            margin: 0 0 4px;
+
+            color: $charcoal-grey;
+            font-family: $font-family-1;
+            font-size: $font-size-x-regular;
+            font-weight: $font-weight-bold;
+            letter-spacing: -.6px;
+            line-height: 1.2;
+            text-transform: uppercase;
+          }
+
+          > .value {
+            display: inline-block;
+
+            color: $charcoal-grey;
+            font-family: $font-family-1;
+            font-size: $font-size-medium;
+            letter-spacing: -1px;
+          }
+
+          > .unit {
+            display: inline-block;
+            color: rgba($charcoal-grey, .6);
+            font-family: $font-family-1;
+            font-size: $font-size-medium;
+          }
+        }
+      }
+    }
+  }
+
+  .title {
+    font-family: $font-family-1;
+    font-weight: $font-weight-bold;
+    letter-spacing: -.6px;
+    text-transform: uppercase;
+  }
+
+  .deforestation {
+    max-width: $content-max-width;
+    margin: 80px auto 64px;
+  }
+
+  .chords-container {
+    display: flex;
+    align-items: center;
+
+    > .c-chord {
+      flex-basis: 60%;
+    }
+
+    > .c-top {
+      flex-basis: 40%;
+    }
+
+    &.-traders {
+      margin: 32px auto 0;
+    }
+
+    &.-consumers {
+      flex-direction: row-reverse;
+      margin: 24px auto 0;
+    }
+  }
+}
