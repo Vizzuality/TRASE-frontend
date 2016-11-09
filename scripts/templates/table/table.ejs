@@ -1,23 +1,24 @@
 <table>
-  <% if(type === 't_head'){ %>
+  <% if(type === 't_head_places'){ %>
     <thead>
       <tr>
-        <% for(let i=0; i<actors['includedColumns'].length; i++) { %>
-          <th><%= actors['includedColumns'][i]['name'] %></th>
-        <% } %>
+        <th>Key sustainability indicators</th>
+        <th>Score</th>
+        <!-- <th>State Ranking</th> -->
       </tr>
     </thead>
   <% } %>
-  <% if(type === 't_head'){ %>
+  <% if(type === 't_head_places'){ %>
     <tbody>
       <% for(let i=0; i<actors['rows'].length; i++) { %>
+        <%  for(let j=0; j<actors['rows'][i]['values'].length; j++){%>
         <tr>
-          <%  for(let j=0; j<actors['rows'][i]['values'].length; j++){%>
-            <td data-unit="<%= i == 0 ? actors['includedColumns'][j]['unit'] : ''  %>">
-                <%= actors['rows'][i]['values'][j] %>
-            </td>
-          <% } %>
+          <td> <%= actors['includedColumns'][j]['name'] %> </td>
+          <td data-unit="<%= i == 0 ? actors['includedColumns'][j]['unit'] : ''  %>">
+              <%= actors['rows'][i]['values'][j] %>
+          </td>
         </tr>
+        <% } %>
       <% } %>
     </tbody>
   <% } else {%>

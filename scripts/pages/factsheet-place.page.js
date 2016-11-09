@@ -41,7 +41,7 @@ const _build = data => {
   new Table({
     el:document.querySelector('.js-score-table'),
     data: data.sustainability_indicators, // example
-    type: 't_head'
+    type: 't_head_places'
   });
 };
 
