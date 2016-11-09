@@ -8,6 +8,34 @@
       </tr>
     </thead>
   <% } %>
+  <% if(type === 't_head_actors'){ %>
+    <thead>
+      <tr>
+        <% for(let i=0; i<actors['includedColumns'].length; i++) { %>
+          <th> <%= actors['includedColumns'][i]['name'] %> </th>
+        <% } %>
+      </tr>
+    </thead>
+  <% } %>
+
+  <% if(type === 't_head_actors'){ %>
+    <tbody>
+      <% for(let i=0; i<actors['rows'].length; i++) { %>
+      <tr>
+        <%  for(let j=0; j<actors['rows'][i]['values'].length; j++){%>
+          <td data-unit="<%= i == 0 ? actors['includedColumns'][j]['unit'] : ''  %>">
+            <% if(actors['rows'][i]['values'][j] != null){ %>
+              <%= actors['rows'][i]['values'][j]['value'] %>
+            <% } else{ %>
+              0
+            <% } %>
+          </td>
+          <% } %>
+      </tr>
+      <% } %>
+    </tbody>
+  <% } %>
+
   <% if(type === 't_head_places'){ %>
     <tbody>
       <% for(let i=0; i<actors['rows'].length; i++) { %>

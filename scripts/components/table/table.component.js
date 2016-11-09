@@ -25,6 +25,10 @@ export default class {
       }
     }
 
+    if(this.type === 't_head_actors') {
+      console.log(this.data);
+    }
+
     this.render();
   }
 

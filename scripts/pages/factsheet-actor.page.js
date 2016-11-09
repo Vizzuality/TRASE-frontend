@@ -36,14 +36,16 @@ const _renderAreaStackSecond = () => {
   });
 };
 
-const _renderTable = () => {
-  new Table('municipalities');
+const _renderTable = (data) => {
+  new Table({
+    el:document.querySelector('.js-municipalities-table'),
+    data: data.risk_indicators_municip, // example
+    type: 't_head_actors'
+  });
 };
 
 const _onSelect = function(value) {
-  // updates dropdown's title with new value
   this.setTitle(value);
-  // updates default values with incoming ones
   defaults[this.id] = value;
 };
 
@@ -70,7 +72,7 @@ const _init = ()  => {
 
       _renderAreaStack();
       _renderAreaStackSecond();
-      _renderTable();
+      _renderTable(data);
     });
 
 };
