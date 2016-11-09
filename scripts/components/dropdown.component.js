@@ -12,7 +12,7 @@ export default class {
     this.title.addEventListener('click', this._onTitleClick.bind(this));
     this.list.addEventListener('click', (e) => {
       if (e.target.getAttribute('data-value')) {
-        this._onListClick(e.target.getAttribute('data-value'));
+        this._onListClick(e.target.dataset);
       }
     });
   }
@@ -54,8 +54,12 @@ export default class {
     this.list.classList.add('is-hidden');
   }
 
-  _onListClick(value) {
-    this.callback(value, this.id);
+  _onListClick(data) {
+    if (Object.keys(data).length > 1) {
+      this.callback(data, this.id);
+    } else {
+      this.callback(data.value, this.id);
+    }
     this._close();
   }
 }

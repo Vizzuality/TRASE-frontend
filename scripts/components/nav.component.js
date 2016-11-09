@@ -24,7 +24,7 @@ export default class {
 
     // right side
     this.quantDropdown = new Dropdown('quant', this.callbacks.onQuantSelected);
-    this.qualDropdown = new Dropdown('qual', this.callbacks.onQualSelected);
+    this.recolorByDropdown = new Dropdown('recolor-by', this.callbacks.onRecolorBySelected);
     this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
 
 
@@ -84,23 +84,23 @@ export default class {
     this.quantDropdown.selectValue(value);
   }
 
-  selectQual(value) {
-    const selectedQualLegend = this.qualDropdown.el.querySelector(`[data-value="${value}"]`);
-    const selectedQualLegendItems = Array.prototype.slice.call(
-      selectedQualLegend.querySelectorAll('.js-dropdown-item-legend li'), 0);
+  selectRecolorBy(data) {
+    const selectedRecolorByLegend = this.recolorByDropdown.el.querySelector(`[data-value="${data.value}"]`);
+    const selectedRecolorByLegendItems = Array.prototype.slice.call(
+      selectedRecolorByLegend.querySelectorAll('.js-dropdown-item-legend li'), 0);
 
     const legendItems = [];
-    selectedQualLegendItems.forEach(legend =>
+    selectedRecolorByLegendItems.forEach(legend =>
       legendItems.push(legend.className)
     );
     const legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
     legendContainer.innerHTML = legendItems.map(legendItem => `<div class="color ${legendItem}"></div>`).join('');
-    this.qualDropdown.selectValue(value);
+    this.recolorByDropdown.selectValue(data.value);
 
     // if (value === 'none') {
-    //   this.qualDropdown.title.classList.add('-dimmed');
+    //   this.recolorByDropdown.title.classList.add('-dimmed');
     // } else {
-    //   this.qualDropdown.title.classList.remove('-dimmed');
+    //   this.recolorByDropdown.title.classList.remove('-dimmed');
     // }
   }
 

@@ -35,7 +35,7 @@ export const FLOWS_DEFAULT_STATE = {
     selectedQuant: 'volume',
     detailedView: false,
     selectedView: 1,
-    selectedQual: 'none',
+    selectedRecolorBy: { value: 'none', value_type: 'none' },
     selectedBiomeFilter: 'none',
     selectedNodesIds: [],
     areNodesExpanded: false,

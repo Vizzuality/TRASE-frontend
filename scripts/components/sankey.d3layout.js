@@ -16,6 +16,7 @@ const sankeyLayout = function() {
   let columns;
   let links;
   let detailedView;
+  let selectedRecolorBy;
   let maxHeight;
 
   // layout
@@ -49,6 +50,10 @@ const sankeyLayout = function() {
     return links;
   };
 
+  sankeyLayout.selectedRecolorBy = () => {
+    return selectedRecolorBy;
+  };
+
   sankeyLayout.isReady = () => {
     return viewportWidth && linksPayload;
   };
@@ -61,6 +66,7 @@ const sankeyLayout = function() {
     columns = linksPayload.visibleNodesByColumn;
     links = linksPayload.links;
     detailedView = linksPayload.detailedView;
+    selectedRecolorBy = linksPayload.selectedRecolorBy;
 
     _computeNodeCoords();
     _computeLinksCoords();

@@ -167,6 +167,7 @@ export default class {
 
 
     const linksData = this.layout.links();
+    const selectedRecolorBy = this.layout.selectedRecolorBy();
 
     const links = this.linksContainer
       .selectAll('path')
@@ -180,7 +181,15 @@ export default class {
     // enter
     links.enter()
       .append('path')
-      .attr('class', link => `sankey-link -qual-${link.qual}`)
+      .attr('class', function(link) {
+        if (selectedRecolorBy.type === 'qual') {
+          return `sankey-link -qual-${selectedRecolorBy.value}-${link.qual}`;
+        } else if (selectedRecolorBy.type === 'ind') {
+          return `sankey-link -ind-${selectedRecolorBy.value}-${link.ind}`;
+        } else {
+          return 'sankey-link';
+        }
+      })
       .attr('d', this.layout.link())
       .on('mouseover', function() {
         this.classList.add('-hover');
