@@ -8,21 +8,18 @@ export default class {
     this.el = settings.el; //place to show the table
     this.type = settings.type;
 
-    if(this.type === 'table_header'){
-      this.getData()
+    if(this.type === 'table_actors'){
+      fetch('factsheets/table.json')
         .then(response => response.json())
         .then((json) => {
           this.data = json;
           this.render();
         });
     } else {
-      this.data = settings.data; //now a json next API
+      this.data = settings.data;
+      // console.log(this.data['includedColumns']);
       this.render();
     }
-  }
-
-  getData() {
-    return fetch('factsheets/table.json');
   }
 
   render() {

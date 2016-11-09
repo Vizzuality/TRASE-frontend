@@ -37,6 +37,12 @@ const _build = data => {
     data: data.top_consumers, // example
     type: 'top'
   });
+
+  new Table({
+    el:document.querySelector('.js-score-table'),
+    data: data.sustainability_indicators, // example
+    type: 't_head'
+  });
 };
 
 const _onSelect = function(value) {
