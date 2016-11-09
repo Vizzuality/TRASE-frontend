@@ -15,7 +15,8 @@ export default class {
   }
 
   _update(nodesData) {
-    if (nodesData === undefined || nodesData.length === 0) return;
+    // TODO nodesData[0] === undefined should never happen, this is a smell form the reducer
+    if (nodesData === undefined || nodesData.length === 0 || nodesData[0] === undefined) return;
     this.el.innerHTML = NodeTitleTemplate({
       nodes: nodesData,
       node: nodesData[0],
