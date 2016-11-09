@@ -5,14 +5,10 @@
 
   > .supply-chain-list {
     display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: space-between;
     height: 69px;
 
     > .supply-chain-item {
       display: flex;
-      position: relative;
       flex-basis: 20%;
       flex-direction: column;
       align-items: center;
@@ -20,24 +16,9 @@
 
       z-index: 1;
 
-      > .icon-supply {
-        background-color: $pale-peach;
-      }
-
       > .description {
-        position: absolute;
-
-
         color: $medium-pink;
         line-height: 1;
-
-        &.-top {
-          bottom: 72px;
-        }
-
-        &.-bottom {
-          top: 72px;
-        }
       }
     }
   }
