@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 
 import 'styles/_base.scss';
 import 'styles/_texts.scss';
-import 'styles/layouts/l-factsheets-place.scss';
+import 'styles/layouts/l-factsheet-place.scss';
 import 'styles/components/dropdown.scss';
 import 'styles/components/button.scss';
 import 'styles/components/shared/nav.scss';

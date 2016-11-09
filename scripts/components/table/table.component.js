@@ -2,6 +2,8 @@ import TableTemplate from 'ejs!templates/table/table.ejs';
 // import TableTopTemplate from 'ejs!templates/table/tableTop.ejs';
 import 'whatwg-fetch';
 
+import 'styles/components/factsheets/area-table.scss';
+
 export default class {
   constructor(value) {
     this.data = null;

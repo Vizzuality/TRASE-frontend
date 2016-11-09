@@ -1,0 +1,11 @@
+@import '../settings';
+
+.l-factsheet-actor {
+  padding: 64px 0 96px;
+  background-color: $pale-peach;
+
+  .content {
+    max-width: $max-width-grid;
+    margin: 0 auto;
+  }
+}
