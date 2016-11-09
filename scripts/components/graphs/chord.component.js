@@ -11,9 +11,9 @@ export default class {
   constructor(className, orgMatrix, list, placeName) {
     const allNames = [placeName].concat(list.map(node => node.name)).slice(0, orgMatrix.length);
 
-    const margin = {top: 40, right: 40, bottom: 0, left: 40};
-    const width = 600 - margin.left - margin.right;
-    const height = 600 - margin.top - margin.bottom;
+    const margin = {top: 40, right: 50, bottom: 0, left: 50};
+    const width = 550 - margin.left - margin.right;
+    const height = 550 - margin.top - margin.bottom;
 
     const outerRadius = Math.min(width, height) * 0.5 - 40;
     const innerRadius = outerRadius - 15;
