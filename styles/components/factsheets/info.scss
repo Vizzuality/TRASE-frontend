@@ -1,0 +1,27 @@
+@import '../../settings';
+
+.c-info {
+  display: inline-flex;
+  flex-direction: column;
+  max-width: 300px;
+
+  > .legend {
+    margin: 0 0 10px;
+    color: rgba($charcoal-grey, .6);
+    font-family: $font-family-1;
+    font-size: $font-size-x-regular;
+    letter-spacing: -.6px;
+    text-transform: uppercase;
+  }
+
+  > .name {
+    color: $charcoal-grey;
+    font-family: $font-family-2;
+    font-size: $font-size-huge;
+    font-weight: $font-weight-bold;
+
+    &.-medium {
+      font-size: $font-size-big;
+    }
+  }
+}

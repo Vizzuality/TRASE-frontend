@@ -7,10 +7,18 @@ import 'styles/components/button.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/area-select.scss';
+import 'styles/components/factsheets/info.scss';
 
 import Dropdown from 'components/dropdown.component';
 import AreaStack from 'components/graphs/area-stack.component';
 import Table from 'components/table/table.component';
+
+import { getUrlParams } from 'utils/stateURL';
+import _ from 'lodash';
+
+const defaults = {
+  commodity: 'soy',
+};
 
 const _renderAreaStack = () => {
   const el = document.querySelector('.js-municipalities-top');
@@ -28,9 +36,8 @@ const _renderAreaStackSecond = () => {
   });
 };
 
-const defaults = {
-  exporter: 'Brazil',
-  commodity: 'Soy',
+const _renderTable = () => {
+  new Table('municipalities');
 };
 
 const _onSelect = function(value) {
@@ -40,13 +47,32 @@ const _onSelect = function(value) {
   defaults[this.id] = value;
 };
 
+const _setInfo = (type, name) => {
+  document.querySelector('.js-legend').innerHTML = type || '-';
+  document.querySelector('.js-name').innerHTML = name ? _.capitalize(name) : '-';
+};
 
-const exporterDropdown = new Dropdown('exporter', _onSelect);
-const commodityDropdown = new Dropdown('commodity', _onSelect);
-new Table('municipalities');
+const _init = ()  => {
+  const url = window.location.search;
+  const urlParams = getUrlParams(url);
+  const nodeId = urlParams.nodeId;
+  const commodity = urlParams.commodity || defaults.commodity;
 
-exporterDropdown.setTitle(defaults.exporter);
-commodityDropdown.setTitle(defaults.commodity);
 
-_renderAreaStack();
-_renderAreaStackSecond();
+  fetch(`${API_URL}/v1/get_actor_node_attributes?node_id=${nodeId}&country=Brazil&commodity=soy`)
+    .then(response => response.json())
+    .then((result) => {
+      const data = result.data;
+      _setInfo(data.column_name, data.municip_name);
+
+      const commodityDropdown = new Dropdown('commodity', _onSelect);
+      commodityDropdown.setTitle(_.capitalize(commodity));
+
+      _renderAreaStack();
+      _renderAreaStackSecond();
+      _renderTable();
+    });
+
+};
+
+_init();

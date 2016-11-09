@@ -7,15 +7,19 @@ import 'styles/components/dropdown.scss';
 import 'styles/components/button.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
+import 'styles/components/factsheets/info.scss';
 
 import Dropdown from 'components/dropdown.component';
 import Line from 'components/graphs/line.component';
 import Chord from 'components/graphs/chord.component';
 import Top10 from 'components/graphs/top10.component';
 
+import { getUrlParams } from 'utils/stateURL';
+import _ from 'lodash';
+
 const defaults = {
-  exporter: 'Brazil',
-  commodity: 'Soy',
+  country: 'brazil',
+  commodity: 'soy'
 };
 
 const _build = data => {
@@ -33,21 +37,40 @@ const _onSelect = function(value) {
   defaults[this.id] = value;
 };
 
-const _init = () => {
-  const nodeId = location.search.substr(1).replace('nodeId=','');
-  const country = defaults.exporter.toLowerCase();
-  const commodity = defaults.commodity.toLowerCase();
+const _setInfo = (info) => {
+  document.querySelector('.js-country-name').innerHTML = info.country ? _.capitalize(info.country) : '-';
+  document.querySelector('.js-state-name').innerHTML = info.state ?  _.capitalize(info.state) : '-';
+  document.querySelector('.js-biome-name').innerHTML = info.biome ? _.capitalize(info.biome) : '-';
+  document.querySelector('.js-legend').innerHTML = info.type || '-';
+  document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
+};
 
-  const municipalityDropdown = new Dropdown('municipality', _onSelect);
+const _init = () => {
+  const url = window.location.search;
+  const urlParams = getUrlParams(url);
+  const nodeId = urlParams.nodeId;
+  const country = urlParams.country || defaults.country;
+  const commodity = urlParams.commodity || defaults.commodity;
+
   const commodityDropdown = new Dropdown('commodity', _onSelect);
 
-  municipalityDropdown.setTitle(defaults.exporter);
   commodityDropdown.setTitle(defaults.commodity);
 
   fetch(`${API_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=${country}&commodity=${commodity}`)
     .then(response => response.json())
     .then((result) => {
-      _build(result.data);
+      const data = result.data;
+      const info = {
+        biome: data.biome_name,
+        country: data.country_name,
+        municipality: data.municip_name,
+        state: data.state_name,
+        type: data.column_name
+      };
+
+      _setInfo(info);
+
+      _build(data);
     });
 };
 

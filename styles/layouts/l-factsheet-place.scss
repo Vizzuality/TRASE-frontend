@@ -19,28 +19,6 @@
       display: flex;
       flex-basis: calc(100% / 3);
       align-items: center;
-
-      > .map-shape {}
-
-      > .meta-info {
-        display: flex;
-        flex-direction: column;
-
-        > .legend {
-          color: rgba($charcoal-grey, .6);
-          font-family: $font-family-1;
-          font-size: $font-size-x-regular;
-          letter-spacing: -.6px;
-          text-transform: uppercase;
-        }
-
-        > .name {
-          color: $charcoal-grey;
-          font-family: $font-family-2;
-          font-size: $font-size-big;
-          font-weight: $font-weight-bold;
-        }
-      }
     }
   }
 
@@ -60,6 +38,12 @@
         .c-dropdown {
           &:not(:first-child) {
             margin: 0 0 0 40px;
+          }
+
+          > .dropdown-label {
+            margin: 0 0 10px;
+
+            font-size: $font-size-x-regular;
           }
 
           > .dropdown-title {
