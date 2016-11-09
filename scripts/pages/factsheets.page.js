@@ -7,12 +7,13 @@ import 'styles/components/shared/_footer.scss';
 import _ from 'lodash';
 
 import Search from 'components/search.component.js';
+import { FACT_SHEET_NODE_TYPE_WHITELIST } from 'constants';
 
 const _setSearch = () => {
 
   const loadNodes = function(nodesDict) {
     const nodesArray = _.values(nodesDict).filter(node =>
-      node.isAggregated !== true && node.type !== 'COUNTRY' && node.type !== 'LOGISTICS HUB'
+      node.isUnknown !== true && node.isAggregated !== true && FACT_SHEET_NODE_TYPE_WHITELIST.indexOf(node.type) != -1
     );
 
     this.autocomplete.list = nodesArray;
