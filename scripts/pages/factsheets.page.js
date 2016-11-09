@@ -30,7 +30,7 @@ const _setSearch = () => {
   };
 
   const onNodeSelected =function() {
-    let url = null;
+    let url = '';
     const nodeId = parseInt(JSON.parse(event.text.value).id);
     const type = JSON.parse(event.text.value).columnName;
 
@@ -39,8 +39,6 @@ const _setSearch = () => {
     } else {
       url = `factsheet-place.html?nodeId=${nodeId}`;
     }
-
-    if (!url) return;
 
     window.location.href = url;
   };
