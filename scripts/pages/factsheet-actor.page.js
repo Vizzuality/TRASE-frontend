@@ -10,7 +10,8 @@ import 'styles/components/factsheets/area-select.scss';
 import 'styles/components/factsheets/info.scss';
 
 import Dropdown from 'components/dropdown.component';
-import AreaStack from 'components/graphs/area-stack.component';
+import 'styles/factsheets.scss';
+// import AreaStack from 'components/graphs/area-stack.component';  stack area future
 import Table from 'components/table/table.component';
 
 import { getUrlParams } from 'utils/stateURL';
@@ -18,30 +19,6 @@ import _ from 'lodash';
 
 const defaults = {
   commodity: 'soy',
-};
-
-const _renderAreaStack = () => {
-  const el = document.querySelector('.js-municipalities-top');
-
-  new AreaStack({
-    el
-  });
-};
-
-const _renderAreaStackSecond = () => {
-  const el = document.querySelector('.js-destination-top');
-
-  new AreaStack({
-    el
-  });
-};
-
-const _renderTable = (data) => {
-  new Table({
-    el:document.querySelector('.js-municipalities-table'),
-    data: data.risk_indicators_municip, // example
-    type: 't_head_actors'
-  });
 };
 
 const _onSelect = function(value) {
@@ -52,6 +29,24 @@ const _onSelect = function(value) {
 const _setInfo = (type, name) => {
   document.querySelector('.js-legend').innerHTML = type || '-';
   document.querySelector('.js-name').innerHTML = name ? _.capitalize(name) : '-';
+};
+
+const _build = data => {
+  // new AreaStack({
+  //   el: document.querySelector('.js-municipalities-top'),
+  //   data: data.op_municipalities
+  // });
+  //
+  // new AreaStack({
+  //   el: document.querySelector('.js-destination-top'),
+  //   data: data.top_countries
+  // });
+
+  new Table({
+    el:document.querySelector('.js-municipalities-table'),
+    data: data.risk_indicators_municip,
+    type: 't_head_actors'
+  });
 };
 
 const _init = ()  => {
@@ -70,9 +65,7 @@ const _init = ()  => {
       const commodityDropdown = new Dropdown('commodity', _onSelect);
       commodityDropdown.setTitle(_.capitalize(commodity));
 
-      _renderAreaStack();
-      _renderAreaStackSecond();
-      _renderTable(data);
+      _build(data);
     });
 
 };
