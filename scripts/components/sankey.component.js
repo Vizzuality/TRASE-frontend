@@ -40,7 +40,7 @@ export default class {
     this.layout.relayout();
 
     if (linksPayload.detailedView === true) {
-      this.svg.style('height', this.layout.getMaxHeight());
+      this.svg.style('height', this.layout.getMaxHeight() + 'px');
     }
 
     this._render();
