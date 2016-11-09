@@ -20,6 +20,8 @@ import { extent as d3_extent } from 'd3-array';
 import _ from 'lodash';
 import { STACK_AREA_COLORS } from 'constants';
 
+import 'styles/components/factsheets/area-stacked-chart.scss';
+
 export default class {
 
   constructor(settings) {

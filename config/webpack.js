@@ -19,6 +19,9 @@ const pages = {
   factsheets: {
     title: 'TRASE factsheets'
   },
+  'factsheet-actor': {
+    title: 'TRASE actor factsheet'
+  },
   'factsheet-place': {
     title: 'TRASE place factsheet'
   },
