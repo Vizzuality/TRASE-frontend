@@ -295,13 +295,24 @@ export function toggleNodesExpand(reloadLinks = true) {
       type: actions.TOGGLE_NODES_EXPAND
     });
 
-    // if in detailed mode, and if expanding, toggle to overview mode
-    if (getState().flows.detailedView === true && getState().flows.areNodesExpanded) {
+    // if expanding, and if in detailed mode, toggle to overview mode
+    if (getState().flows.areNodesExpanded === true && getState().flows.detailedView === true) {
       dispatch({
         type: actions.SELECT_VIEW,
-        detailedView: false
+        detailedView: false,
+        forcedOverview: true
       });
     }
+
+    // if shrinking, and if overview was previously forced, go back to detailed
+    else if (getState().flows.areNodesExpanded === false && getState().flows.forcedOverview === true) {
+      dispatch({
+        type: actions.SELECT_VIEW,
+        detailedView: true,
+        forcedOverview: false
+      });
+    }
+
 
     if (reloadLinks) {
       dispatch(loadLinks());
