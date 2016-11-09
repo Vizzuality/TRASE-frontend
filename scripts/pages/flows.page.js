@@ -14,6 +14,7 @@ import MapContainer from 'containers/map.container';
 import NavContainer from 'containers/nav.container';
 import TitlebarContainer from 'containers/titlebar.container';
 import NodesTitlesContainer from 'containers/nodesTitles.container';
+import ClearContainer from 'containers/clear.container';
 import SearchContainer from 'containers/search.container';
 import ModalContainer from 'containers/shared/modal.container';
 import AppReducer from 'reducers/app.reducer';
@@ -57,6 +58,7 @@ const start = (initialState) => {
   new NavContainer(store);
   new TitlebarContainer(store);
   new NodesTitlesContainer(store);
+  new ClearContainer(store);
   new SearchContainer(store);
   new ModalContainer(store);
 

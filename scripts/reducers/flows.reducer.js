@@ -23,6 +23,18 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { initialDataLoading: true });
   }
 
+  case actions.RESET_SELECTION: {
+    return Object.assign({}, state, {
+      highlightedNodesIds: [],
+      highlightedNodeData: [],
+      highlightedGeoIds: [],
+      selectedNodesIds: [],
+      expandedNodesIds: [],
+      areNodesExpanded: false,
+      selectedBiomeFilter: 'none'
+    });
+  }
+
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
     const columns = JSON.parse(action.payload[1]).data;
@@ -180,8 +192,6 @@ export default function (state = {}, action) {
   case actions.GET_CONTEXT_LAYERS: {
     return Object.assign({}, state, { mapContextualLayers: action.mapContextualLayers });
   }
-
-
 
   case actions.SELECT_VECTOR_LAYERS: {
     const selectedVectorLayers = Object.assign({}, state.selectedVectorLayers);
