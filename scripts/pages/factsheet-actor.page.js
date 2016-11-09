@@ -10,7 +10,6 @@ import 'styles/components/factsheets/area-select.scss';
 import 'styles/components/factsheets/info.scss';
 
 import Dropdown from 'components/dropdown.component';
-import 'styles/factsheets.scss';
 // import AreaStack from 'components/graphs/area-stack.component';  stack area future
 import Table from 'components/table/table.component';
 
@@ -46,6 +45,19 @@ const _build = data => {
     el:document.querySelector('.js-municipalities-table'),
     data: data.risk_indicators_municip,
     type: 't_head_actors'
+  });
+
+
+  new Table({
+    el:document.querySelector('.js-municipalities-top'),
+    data: data.top_countries, // example
+    type: 'top_municipalities'
+  });
+
+  new Table({
+    el:document.querySelector('.js-destination-top'),
+    data: data.top_municipalities, // example
+    type: 'top_destination'
   });
 };
 

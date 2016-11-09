@@ -18,6 +18,17 @@
     </thead>
   <% } %>
 
+  <% if(type === 'top_municipalities' || type === 'top_destination'){ %>
+    <tbody>
+      <% for(let i=0; i<actors['lines'].length; i++) { %>
+        <tr>
+          <td><%= actors['lines'][i]['name'] %></td>
+          <td><%= actors['lines'][i]['values'] %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  <% } %>
+
   <% if(type === 't_head_actors'){ %>
     <tbody>
       <% for(let i=0; i<actors['rows'].length; i++) { %>

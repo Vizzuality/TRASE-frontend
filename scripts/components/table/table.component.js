@@ -15,6 +15,8 @@ export default class {
       }
     }
 
+    console.log(this.data);
+
     if(this.type === 't_head_places') {
       for(let i=0; i<this.data['rows'].length; i++) {
         for(let j=0; j<this.data['rows'][i]['values'].length; j++){
