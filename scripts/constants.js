@@ -6,6 +6,7 @@ export const DETAILED_VIEW_SCALE = 1200;
 export const DETAILED_VIEW_MIN_NODE_HEIGHT = 14;
 export const DETAILED_VIEW_MIN_LINK_HEIGHT = 1;
 export const AVAILABLE_YEARS = [2010, 2011, 2012, 2013, 2014, 2015, 2016];
+export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
 export const LEGEND_COLORS = {
   bidimensional: [
     '#8db6ca', '#8f8d94', '#694d52',

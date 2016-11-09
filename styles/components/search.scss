@@ -3,6 +3,7 @@
 
 .c-search {
   display: flex;
+  position: relative;
   align-items: center;
   width: 450px;
   margin: auto;
@@ -12,7 +13,12 @@
   font-size: $font-size-x-regular;
 
   label {
-    width: 25%;
+    width: 20%;
+  }
+
+  > .icon-search {
+    position: absolute;
+    right: 32px;
   }
 
   .awesomplete {
