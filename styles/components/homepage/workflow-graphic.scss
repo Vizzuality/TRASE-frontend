@@ -1,8 +1,7 @@
 
 .c-workflow-graphic {
   width: 100%;
-  margin: 40px 0;
-  padding: 64px 0 56px;
+  padding: 40px 0 56px;
 
   > .supply-chain-list {
     display: flex;
@@ -10,21 +9,6 @@
     align-items: center;
     justify-content: space-between;
     height: 69px;
-
-
-    &::before {
-      display: inline-block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 710px;
-
-      transform: translate(-50%, -50%);
-      border-top: 2px solid $medium-pink;
-
-      content: '';
-      z-index: 0;
-    }
 
     > .supply-chain-item {
       display: flex;
@@ -38,23 +22,6 @@
 
       > .icon-supply {
         background-color: $pale-peach;
-      }
-
-      > .icon-supply-chain-1,
-      > .icon-supply-chain-4,
-      > .icon-supply-chain-5 {
-        width: 58px;
-        height: 58px;
-      }
-
-      > .icon-supply-chain-2 {
-        width: 58px;
-        height: 65px;
-      }
-
-      > .icon-supply-chain-3 {
-        width: 61px;
-        height: 62px;
       }
 
       > .description {
