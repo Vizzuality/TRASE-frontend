@@ -17,7 +17,6 @@ import setNodesMeta from './sankey/setNodesMeta';
 import getChoropleth from './sankey/getChoropleth';
 
 export default function (state = {}, action) {
-  console.log(action.type);
   switch (action.type) {
 
   case actions.LOAD_INITIAL_DATA: {
