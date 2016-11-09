@@ -94,7 +94,7 @@ export default function (state = {}, action) {
     return Object.assign({}, state, { selectedQuant: action.quant });
 
   case actions.SELECT_VIEW:
-    return Object.assign({}, state, { detailedView: action.detailedView });
+    return Object.assign({}, state, { detailedView: action.detailedView, forcedOverview: action.forcedOverview });
 
   case actions.SELECT_COLUMN: {
     // TODO also update choropleth with default selected indicators
@@ -212,6 +212,7 @@ export default function (state = {}, action) {
     // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
     const expandedNodesIds = (state.areNodesExpanded) ? []                           : [state.selectedNodesIds[0]];
     const selectedNodesIds = (state.areNodesExpanded) ? [state.expandedNodesIds[0]]  : [state.selectedNodesIds[0]];
+
     return Object.assign({}, state, {
       areNodesExpanded: !state.areNodesExpanded,
       selectedNodesIds,

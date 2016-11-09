@@ -290,11 +290,30 @@ export function highlightNodeFromGeoId(geoId) {
 }
 
 export function toggleNodesExpand(reloadLinks = true) {
-  return dispatch => {
-    const action = {
+  return (dispatch, getState) => {
+    dispatch({
       type: actions.TOGGLE_NODES_EXPAND
-    };
-    dispatch(action);
+    });
+
+    // if expanding, and if in detailed mode, toggle to overview mode
+    if (getState().flows.areNodesExpanded === true && getState().flows.detailedView === true) {
+      dispatch({
+        type: actions.SELECT_VIEW,
+        detailedView: false,
+        forcedOverview: true
+      });
+    }
+
+    // if shrinking, and if overview was previously forced, go back to detailed
+    else if (getState().flows.areNodesExpanded === false && getState().flows.forcedOverview === true) {
+      dispatch({
+        type: actions.SELECT_VIEW,
+        detailedView: true,
+        forcedOverview: false
+      });
+    }
+
+
     if (reloadLinks) {
       dispatch(loadLinks());
     }

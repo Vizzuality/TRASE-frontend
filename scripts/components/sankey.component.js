@@ -43,9 +43,6 @@ export default class {
       this.svg.style('height', this.layout.getMaxHeight());
     }
 
-    // hide expoand button in detailed mapMethodsToState
-    this.expandButton.classList.toggle('-visible', !linksPayload.detailedView);
-
     this._render();
 
   }
@@ -152,18 +149,10 @@ export default class {
       .attr('width', this.layout.columnWidth())
       .attr('height', d => d.renderedHeight);
 
-    nodesEnter.append('text')
-      .attr('class', 'sankey-node-labels')
-      .attr('transform', placeNodeText)
-      .selectAll('tspan')
-      .data(node => node.label)
-      .enter()
-      .append('tspan')
-      .attr('class', 'sankey-node-label')
-      .attr('x', this.layout.columnWidth()/2)
-      .attr('dy', 12)
-      .text(d => d);
+    this._renderTitles(nodesEnter);
 
+    this.nodes.selectAll('text').remove();
+    this._renderTitles(this.nodes);
 
     const nodesUpdate = this.nodes.transition()
       .attr('transform', d => `translate(0,${d.y})`);
@@ -171,8 +160,7 @@ export default class {
     nodesUpdate.select('.sankey-node-rect')
       .attr('height', d => d.renderedHeight);
 
-    nodesUpdate.select('.sankey-node-labels')
-    .attr('transform', placeNodeText);
+
 
     this.nodes.exit()
       .remove();
@@ -209,6 +197,20 @@ export default class {
       .attr('stroke-width', 0)
       .remove();
 
+  }
+
+  _renderTitles(selection) {
+    selection.append('text')
+      .attr('class', 'sankey-node-labels')
+      .attr('transform', placeNodeText)
+      .selectAll('tspan')
+      .data(node => node.label)
+      .enter()
+      .append('tspan')
+      .attr('class', 'sankey-node-label')
+      .attr('x', this.layout.columnWidth()/2)
+      .attr('dy', 12)
+      .text(d => d);
   }
 
   _onNodeOver(selection, nodeId, isAggregated) {
