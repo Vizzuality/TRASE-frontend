@@ -4,20 +4,19 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  <div class="loading-wrapper"></div>
-  <%= htmlWebpackPlugin.options.icons %>
-  <div class="js-factsheets">
-    <%= htmlWebpackPlugin.options.nav %>
-    <div class="l-factsheet-actor">
-      <div class="content ">
-        <div class="wrap">
-          <div class="c-area-select">
-            <div class="c-info">
-              <div class="legend js-legend"> - </div>
-              <div class="name js-name"> - </div>
-            </div>
-
-            <div class="c-dropdown -factsheets -big" data-dropdown="commodity">
+  <div class="loading-wrapper">
+    <%= htmlWebpackPlugin.options.icons %>
+    <div class="js-factsheets">
+      <%= htmlWebpackPlugin.options.nav %>
+      <div class="l-factsheet-actor">
+        <div class="content">
+          <div class="wrap is-hidden">
+            <div class="c-area-select">
+              <div class="c-info">
+                <div class="legend js-legend"> - </div>
+                <div class="name js-name"> - </div>
+              </div>
+            <div class="c-dropdown -factsheets" data-dropdown="commodity">
               <span class="dropdown-label -big">Commodity</span>
               <span class="js-dropdown-title dropdown-title">
                 -
@@ -34,30 +33,32 @@
             </div>
 
             <div class="contain-information">
-              <div>
-                <span class="title-information">
-                  ZERO DEFORESTATION COMMITMENT
-                </span>
-                <span class="value-information">
-                  <svg class="icon icon-check"><use xlink:href="#icon-check-circle"/></svg>
-                  <span>Yes</span>
-                <span>
-              </div>
 
-              <div>
-                <span class="title-information">
-                  FOREST 500 SCORE
-                </span>
-                <span class="value-information -stars">
-                  <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
-                  <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
-                  <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
-                  <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
-                  <svg class="icon star-icon"><use xlink:href="#icon-star-white"/></svg>
-                <span>
+              <div class="contain-information">
+                <div>
+                  <span class="title-information">
+                    ZERO DEFORESTATION COMMITMENT
+                  </span>
+                  <span class="value-information">
+                    <svg class="icon icon-check"><use xlink:href="#icon-check-circle"/></svg>
+                    <span>Yes</span>
+                  <span>
+                </div>
+
+                <div>
+                  <span class="title-information">
+                    FOREST 500 SCORE
+                  </span>
+                  <span class="value-information -stars">
+                    <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
+                    <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
+                    <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
+                    <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
+                    <svg class="icon star-icon"><use xlink:href="#icon-star-white"/></svg>
+                  <span>
+                </div>
               </div>
             </div>
-          </div>
 
           <div class="container-top-tables">
 
@@ -81,16 +82,18 @@
 
           <div class="c-area-table ">
             <span class="title -small">Sustainability of source municipalities IN 2015</span>
-            <div class="js-municipalities-table">
-            </div>
+            <div class="js-municipalities-table"></div>
+          </div>
+          <div class="c-error-message js-error-message is-hidden">
+            <p class="message">Node info not found!</p>
           </div>
         </div>
       </div>
+
+
     </div>
-
+    </div>
     <%= htmlWebpackPlugin.options.footer %>
-
-  </div>
   </div>
   <%= htmlWebpackPlugin.options.scripts %>
 </body>

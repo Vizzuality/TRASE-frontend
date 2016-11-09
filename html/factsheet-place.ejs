@@ -4,90 +4,86 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  <div class="loading-wrapper"></div>
-  <%= htmlWebpackPlugin.options.icons %>
-  <%= htmlWebpackPlugin.options.nav %>
-  <div class="l-factsheet-place js-factsheets">
-    <div class="wrap">
-      <div class="container">
-        <div class="overall-map">
-          <ul class="map-list">
-            <li class="map-item">
-              <div class="map-shape js-shape-country"></div>
-              <div class="c-info">
-                <div class="legend">country</div>
-                <div class="name -medium js-country-name"> - </div>
-              </div>
-            </li>
-            <li class="map-item">
-              <div class="map-shape js-shape-state"></div>
-              <div class="c-info">
-                <div class="legend">state</div>
-                <div class="name -medium js-state-name"> - </div>
-              </div>
-            </li>
-            <li class="map-item">
-              <div class="map-shape js-shape-biome"></div>
-              <div class="c-info">
-                <div class="legend">biome</div>
-                <div class="name -medium js-biome-name"> - </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+  <div class="loading-wrapper">
+    <%= htmlWebpackPlugin.options.icons %>
+    <%= htmlWebpackPlugin.options.nav %>
+    <div class="l-factsheet-place js-factsheets">
+      <div class="wrap is-hidden">
+        <div class="container">
+          <div class="overall-map">
+            <ul class="map-list">
+              <li class="map-item">
+                <div class="map-shape js-shape-country"></div>
+                <div class="c-info">
+                  <div class="legend">country</div>
+                  <div class="name -medium js-country-name"> - </div>
+                </div>
+              </li>
+              <li class="map-item">
+                <div class="map-shape js-shape-state"></div>
+                <div class="c-info">
+                  <div class="legend">state</div>
+                  <div class="name -medium js-state-name"> - </div>
+                </div>
+              </li>
+              <li class="map-item">
+                <div class="map-shape js-shape-biome"></div>
+                <div class="c-info">
+                  <div class="legend">biome</div>
+                  <div class="name -medium js-biome-name"> - </div>
+                </div>
+              </li>
+            </ul>
+          </div>
 
-        <div class="overall-info">
-          <div class="municipality-map js-municipality-map"></div>
-          <div class="municipality-data">
-            <div class="selectors">
-              <div class="c-info">
-                <div class="legend js-legend"> - </div>
-                <div class="name js-municipality"> - </div>
+          <div class="overall-info">
+            <div class="municipality-map js-municipality-map"></div>
+            <div class="municipality-data">
+              <div class="selectors">
+                <div class="c-info">
+                  <div class="legend js-legend"> - </div>
+                  <div class="name js-municipality"> - </div>
+                </div>
+                <div class="c-dropdown" data-dropdown="commodity">
+                  <span class="dropdown-label">Commodity</span>
+                  <span class="js-dropdown-title dropdown-title">Soy</span>
+                  <ul class="js-dropdown-list dropdown-list is-hidden">
+                    <li class="js-dropdown-item dropdown-item" data-value="soy">Soy</li>
+                    <li class="js-dropdown-item dropdown-item">Coffee</li>
+                  </ul>
+                </div>
               </div>
-              <div class="c-dropdown -big" data-dropdown="commodity">
-                <span class="dropdown-label">Commodity</span>
-                <span class="js-dropdown-title dropdown-title">Soy</span>
-                <ul class="js-dropdown-list dropdown-list is-hidden">
-                  <li class="js-dropdown-item dropdown-item" data-value="Soy">Soy</li>
-                  <li class="js-dropdown-item dropdown-item">Coffee</li>
-                  <li class="js-dropdown-item dropdown-item">Cocoa</li>
-                  <li class="js-dropdown-item dropdown-item">Cotton</li>
-                  <li class="js-dropdown-item dropdown-item">Oilpalm</li>
-                  <li class="js-dropdown-item dropdown-item">Sugar</li>
-                  <li class="js-dropdown-item dropdown-item">Beef</li>
+              <div class="stats">
+                <ul class="stat-list">
+                  <li class="stat-item">
+                    <div class="legend">area</div>
+                    <div class="value">17.7</div>
+                    <div class="unit">km<sup>2</sup></div>
+                  </li>
+                  <li class="stat-item">
+                    <div class="legend">agriculture land</div>
+                    <div class="value">43.3</div>
+                    <div class="unit">%</div>
+                  </li>
+                  <li class="stat-item">
+                    <div class="legend">soy land</div>
+                    <div class="value">68.4</div>
+                    <div class="unit">%</div>
+                  </li>
                 </ul>
               </div>
             </div>
-            <div class="stats">
-              <ul class="stat-list">
-                <li class="stat-item">
-                  <div class="legend">area</div>
-                  <div class="value">17.7</div>
-                  <div class="unit">km<sup>2</sup></div>
-                </li>
-                <li class="stat-item">
-                  <div class="legend">agriculture land</div>
-                  <div class="value">43.3</div>
-                  <div class="unit">%</div>
-                </li>
-                <li class="stat-item">
-                  <div class="legend">soy land</div>
-                  <div class="value">68.4</div>
-                  <div class="unit">%</div>
-                </li>
-              </ul>
-            </div>
           </div>
-        </div>
+
 
         <div class="c-area-table score-table js-score-table">
           <!-- table content here  -->
         </div>
 
-        <section class="deforestation">
-          <h3 class="title -small">deforestation trajectory</h3>
-          <div class="js-line c-line"></div>
-        </section>
+          <section class="deforestation">
+            <h3 class="title -small">deforestation trajectory</h3>
+            <div class="js-line c-line"></div>
+          </section>
 
         <section class="chords-container -traders">
           <div class="js-chord-traders c-chord"></div>
@@ -104,8 +100,11 @@
             <div class="js-table-consumers"></div>
           </div>
         </section>
+        </div>
       </div>
-
+      <div class="c-error-message js-error-message is-hidden">
+        <p class="message">Node info not found!</p>
+      </div>
     </div>
   </div>
   <%= htmlWebpackPlugin.options.footer %>

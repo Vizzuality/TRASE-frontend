@@ -60,6 +60,14 @@ const _setInfo = (info) => {
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
 };
 
+const _showErrorMessage = () => {
+  const el = document.querySelector('.l-factsheet-place');
+  el.classList.add('-error');
+
+  el.querySelector('.wrap').classList.add('is-hidden');
+  el.querySelector('.js-error-message').classList.remove('is-hidden');
+};
+
 const _init = () => {
   const url = window.location.search;
   const urlParams = getURLParams(url);
@@ -72,8 +80,21 @@ const _init = () => {
   commodityDropdown.setTitle(defaults.commodity);
 
   fetch(`${API_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=${country}&commodity=${commodity}`)
-    .then(response => response.json())
+    .then((response) => {
+      if (response.status === 500) {
+        _showErrorMessage();
+        return null;
+      }
+
+      if (response.status === 200) {
+        return response.json();
+      }
+    })
     .then((result) => {
+      if (!result) return;
+
+      document.querySelector('.wrap').classList.remove('is-hidden');
+
       const data = result.data;
       const info = {
         biome: data.biome_name,
