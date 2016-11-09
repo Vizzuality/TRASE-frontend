@@ -128,10 +128,10 @@ export default class {
     this.brush.transition()
       .call(d3_event.target.move, pixelSelection);
 
-    var startYear = new Date (d1[0]).getFullYear();
-    var endYear = new Date (d1[1]).getFullYear() - 1;
+    // var startYear = new Date (d1[0]).getFullYear();
+    // var endYear = new Date (d1[1]).getFullYear() - 1;
 
-    this.callback([startYear, endYear]);
+    this.callback([2015, 2015]);
   }
 
   _moveBrushOverlay(pixelSelection) {
