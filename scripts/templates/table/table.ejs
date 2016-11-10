@@ -11,7 +11,7 @@
   <% if(type === 't_head_actors'){ %>
     <thead>
       <tr>
-        <% for(let i=0; i<data['includedColumns'].length; i++) { %>
+        <% for(var i=0; i<data['includedColumns'].length; i++) { %>
           <th> <%= data['includedColumns'][i]['name'] %> </th>
         <% } %>
       </tr>
@@ -20,7 +20,7 @@
 
   <% if(type === 'top_municipalities' || type === 'top_destination'){ %>
     <tbody>
-      <% for(let i=0; i<data['lines'].length; i++) { %>
+      <% for(var i=0; i<data['lines'].length; i++) { %>
         <tr>
           <td><%= data['lines'][i]['name'] %></td>
           <td><%= data['lines'][i]['values'] %></td>
@@ -31,9 +31,9 @@
 
   <% if(type === 't_head_actors'){ %>
     <tbody>
-      <% for(let i=0; i<data['rows'].length; i++) { %>
+      <% for(var i=0; i<data['rows'].length; i++) { %>
       <tr>
-        <%  for(let j=0; j<data['rows'][i]['values'].length; j++){%>
+        <%  for(var j=0; j<data['rows'][i]['values'].length; j++){%>
           <td data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : ''  %>">
             <% if(data['rows'][i]['values'][j] != null){ %>
               <%= data['rows'][i]['values'][j]['value'] %>
@@ -49,8 +49,8 @@
 
   <% if(type === 't_head_places'){ %>
     <tbody>
-      <% for(let i=0; i<data['rows'].length; i++) { %>
-        <%  for(let j=0; j<data['rows'][i]['values'].length; j++){%>
+      <% for(var i=0; i<data['rows'].length; i++) { %>
+        <%  for(var j=0; j<data['rows'][i]['values'].length; j++){%>
         <tr>
           <td> <%= data['includedColumns'][j]['name'] %> </td>
           <td data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : ''  %>">
@@ -62,7 +62,7 @@
     </tbody>
   <% } else {%>
     <tbody>
-      <% for(let i=0; i<data.length; i++) { %>
+      <% for(var i=0; i<data.length; i++) { %>
         <tr>
           <td><%=i+1%>.<%= data[i]['name'] %> <svg class="icon icon-check"><use xlink:href="#icon-outside-link"/></svg></td>
           <td data-unit="<%= i == 0 ? '%' : ''  %>"><%= data[i]['value'] %></td>

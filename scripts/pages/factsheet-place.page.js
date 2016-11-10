@@ -14,7 +14,7 @@ import Line from 'components/graphs/line.component';
 import Chord from 'components/graphs/chord.component';
 import Table from 'components/table/table.component';
 
-import { getUrlParams } from 'utils/stateURL';
+import { getURLParams } from 'utils/stateURL';
 import _ from 'lodash';
 
 const defaults = {
@@ -62,7 +62,7 @@ const _setInfo = (info) => {
 
 const _init = () => {
   const url = window.location.search;
-  const urlParams = getUrlParams(url);
+  const urlParams = getURLParams(url);
   const nodeId = urlParams.nodeId;
   const country = urlParams.country || defaults.country;
   const commodity = urlParams.commodity || defaults.commodity;
