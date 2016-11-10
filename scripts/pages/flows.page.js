@@ -121,7 +121,5 @@ if (objParams.story) {
 
   const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
 
-  console.log(globalState);
-
   start(globalState);
 }

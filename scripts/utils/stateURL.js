@@ -25,9 +25,7 @@ export const getURLParams = url => {
 
 export const encodeStateToURL = state => {
   const urlProps = JSON.stringify(_.pick(state, URL_STATE_PROPS));
-  console.log(urlProps);
   const encoded = btoa(urlProps);
-  console.log(encoded);
   window.history.pushState({}, 'Title', `?state=${encoded}`);
   return encoded;
 };
