@@ -4,19 +4,21 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  <div class="loading-wrapper">
-    <%= htmlWebpackPlugin.options.icons %>
-    <div class="js-factsheets">
-      <%= htmlWebpackPlugin.options.nav %>
-      <div class="l-factsheet-actor">
-        <div class="content">
-          <div class="wrap is-hidden">
-            <div class="c-area-select">
-              <div class="c-info">
-                <div class="legend js-legend"> - </div>
-                <div class="name js-name"> - </div>
-              </div>
-
+  <div class="loading-wrapper"></div>
+  <div class="c-loading js-loading -secondary -visible">
+    Loading...
+  </div>
+  <%= htmlWebpackPlugin.options.icons %>
+  <div class="js-factsheets">
+    <%= htmlWebpackPlugin.options.nav %>
+    <div class="l-factsheet-actor">
+      <div class="content ">
+        <div class="wrap">
+          <div class="c-area-select">
+            <div class="c-info">
+              <div class="legend js-legend"> - </div>
+              <div class="name js-name"> - </div>
+            </div>
             <div class="c-dropdown -factsheets" data-dropdown="commodity">
               <span class="dropdown-label -big">Commodity</span>
               <span class="js-dropdown-title dropdown-title">-</span>
@@ -30,8 +32,6 @@
                 <li class="js-dropdown-item dropdown-item">Beef</li>
               </ul>
             </div>
-
-
             <div class="contain-information">
               <div>
                 <span class="title-information">

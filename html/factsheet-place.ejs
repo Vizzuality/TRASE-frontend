@@ -4,38 +4,40 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  <div class="loading-wrapper">
-    <%= htmlWebpackPlugin.options.icons %>
-    <%= htmlWebpackPlugin.options.nav %>
-    <div class="l-factsheet-place js-factsheets">
-      <div class="wrap is-hidden">
-        <div class="container">
-          <div class="overall-map">
-            <ul class="map-list">
-              <li class="map-item">
-                <div class="map-shape js-shape-country"></div>
-                <div class="c-info">
-                  <div class="legend">country</div>
-                  <div class="name -medium js-country-name"> - </div>
-                </div>
-              </li>
-              <li class="map-item">
-                <div class="map-shape js-shape-state"></div>
-                <div class="c-info">
-                  <div class="legend">state</div>
-                  <div class="name -medium js-state-name"> - </div>
-                </div>
-              </li>
-              <li class="map-item">
-                <div class="map-shape js-shape-biome"></div>
-                <div class="c-info">
-                  <div class="legend">biome</div>
-                  <div class="name -medium js-biome-name"> - </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
+  <div class="loading-wrapper"></div>
+  <div class="c-loading js-loading -secondary -visible">
+    Loading...
+  </div>
+  <%= htmlWebpackPlugin.options.icons %>
+  <%= htmlWebpackPlugin.options.nav %>
+  <div class="l-factsheet-place js-factsheets">
+    <div class="wrap is-hidden">
+      <div class="container">
+        <div class="overall-map">
+          <ul class="map-list">
+            <li class="map-item">
+              <div class="map-shape js-shape-country"></div>
+              <div class="c-info">
+                <div class="legend">country</div>
+                <div class="name -medium js-country-name"> - </div>
+              </div>
+            </li>
+            <li class="map-item">
+              <div class="map-shape js-shape-state"></div>
+              <div class="c-info">
+                <div class="legend">state</div>
+                <div class="name -medium js-state-name"> - </div>
+              </div>
+            </li>
+            <li class="map-item">
+              <div class="map-shape js-shape-biome"></div>
+              <div class="c-info">
+                <div class="legend">biome</div>
+                <div class="name -medium js-biome-name"> - </div>
+              </div>
+            </li>
+          </ul>
+        </div>
           <div class="overall-info">
             <div class="municipality-map js-municipality-map"></div>
             <div class="municipality-data">

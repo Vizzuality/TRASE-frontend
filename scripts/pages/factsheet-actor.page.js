@@ -4,6 +4,7 @@ import 'styles/_base.scss';
 import 'styles/_texts.scss';
 import 'styles/layouts/l-factsheet-actor.scss';
 import 'styles/components/button.scss';
+import 'styles/components/loading.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/area-select.scss';
@@ -94,6 +95,10 @@ const _init = ()  => {
       if (!result) return;
 
       document.querySelector('.content >.wrap').classList.remove('is-hidden');
+
+      //here loader
+      document.querySelector('.js-loading').classList.remove('-visible');
+
       const data = result.data;
 
       _setInfo(data.column_name, data.node_name);
