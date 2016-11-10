@@ -9,6 +9,10 @@ export default class {
     this.type = settings.type;
     this.data = settings.data;
 
+    console.log(settings);
+
+    if (!!this.data.rows && !this.data.rows.length) return;
+
     if(this.type === 'top'){
       for(let i=0; i<this.data.length; i++) {
         this.data[i]['value'] = (this.data[i]['value']*100).toFixed(2);
@@ -30,5 +34,7 @@ export default class {
   render() {
     const template = TableTemplate({data: this.data, type: this.type});
     this.el.innerHTML = template;
+
+    this.el.classList.remove('is-hidden');
   }
 }
