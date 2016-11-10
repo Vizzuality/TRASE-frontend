@@ -51,13 +51,13 @@ const _build = data => {
 
   new Table({
     el:document.querySelector('.js-municipalities-top'),
-    data: data.top_countries, // example
+    data: data.top_countries,
     type: 'top_municipalities'
   });
 
   new Table({
     el:document.querySelector('.js-destination-top'),
-    data: data.top_municipalities, // example
+    data: data.top_municipalities,
     type: 'top_destination'
   });
 };
