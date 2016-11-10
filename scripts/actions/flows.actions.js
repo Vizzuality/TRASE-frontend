@@ -30,6 +30,9 @@ export function selectQuant(quant, reloadLinks) {
   return _reloadLinks('quant', quant, actions.SELECT_QUANT, reloadLinks);
 }
 export function selectRecolorBy(data) {
+  if (data.active !== undefined && data.active === 'false') {
+    return () => {};
+  }
   return dispatch => {
     dispatch({
       type: actions.SELECT_RECOLOR_BY,
