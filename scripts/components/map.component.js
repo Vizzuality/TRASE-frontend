@@ -53,13 +53,23 @@ export default class {
     if (!this.currentLayer) {
       return;
     }
-    const mapPolygons = Array.prototype.slice.call(document.querySelectorAll('.map-polygon'), 0);
-    mapPolygons.forEach(e => { e.classList.remove('-selected'); });
+
+    if (this.selectedLayer) this.map.removeLayer(this.selectedLayer);
+
+    const selectedFeatures = [];
     this.currentLayer.eachLayer(layer => {
       if (geoIds.indexOf(layer.feature.properties.geoid) > - 1) {
-        layer._path.classList.add('-selected');
+        selectedFeatures.push(layer.feature);
       }
     });
+
+    // polygon appears 'burried', and SVG does nto support z-indexes
+    // so we have to recreate the clicked layers on top of all other polygons
+    if (selectedFeatures.length > 0) {
+      this.selectedLayer = L.geoJSON(selectedFeatures, { pane: 'main' });
+      this.selectedLayer.setStyle(() => { return { className: 'map-polygon -selected'}; });
+      this.map.addLayer(this.selectedLayer);
+    }
   }
 
   highlightPolygon(geoIds) {
@@ -75,7 +85,7 @@ export default class {
         if (geoId === layer.feature.properties.geoid) {
           // polygon appears 'burried', and SVG does nto support z-indexes
           // so we have to recreate the hover layer on top of all other polygons
-          this.highlightedLayer = L.geoJSON(layer.feature);
+          this.highlightedLayer = L.geoJSON(layer.feature, { pane: 'main' });
           this.highlightedLayer.setStyle(() => { return { className: 'map-polygon -highlighted'}; });
           this.map.addLayer(this.highlightedLayer);
         }
