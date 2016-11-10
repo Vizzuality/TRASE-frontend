@@ -14,6 +14,8 @@ var numTemplates = templates.length;
 var currentTemplateIndex = 0;
 var finalJSON = [];
 
+var debug = false;
+
 createTemplate();
 
 function createTemplate() {
@@ -27,23 +29,23 @@ function createTemplate() {
   namedMaps.update({
     template: template
   }).on('done', function() {
-    // console.log('update ok')
+    if (debug) console.log('update ok');
     instantiateTemplate(template, nextTemplate);
   }).error(function() {
-    // console.log('update err ', arguments)
+    if (debug) console.log('update err ', arguments);
     namedMaps.create({
       template: template
     }).on('done', function() {
-      // console.log('create ok ')
-        instantiateTemplate(template, nextTemplate);
+      if (debug) console.log('create ok ');
+      instantiateTemplate(template, nextTemplate);
     }).error(function() {
-      // console.log('create err')
+      if (debug) console.log('create err');
     });
   });
 }
 
 function instantiateTemplate(template, callback) {
-  // console.log('instanciate')
+  if (debug) console.log('instanciate', template.name);
   namedMaps.instantiate({
     template_id: template.name,
     auth_token: 'auth_token1',
@@ -51,7 +53,7 @@ function instantiateTemplate(template, callback) {
     // console.log(template)
     callback(res, template);
   }).error(function() {
-    // console.log(arguments)
+    if (debug) console.log(arguments);
   });
 }
 
@@ -66,8 +68,8 @@ function nextTemplate(res, template) {
   });
   currentTemplateIndex++;
   if (currentTemplateIndex === numTemplates) {
-    console.log(finalJSON)
+    console.log(finalJSON);
   } else {
-    createTemplate()
+    createTemplate();
   }
 }
