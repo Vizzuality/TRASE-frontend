@@ -321,10 +321,12 @@ export function highlightNodeFromGeoId(geoId) {
   };
 }
 
-export function toggleNodesExpand(reloadLinks = true) {
+export function toggleNodesExpand(reloadLinks = true, forceExpand = false, forceExpandNodeId) {
   return (dispatch, getState) => {
     dispatch({
-      type: actions.TOGGLE_NODES_EXPAND
+      type: actions.TOGGLE_NODES_EXPAND,
+      forceExpand,
+      forceExpandNodeId
     });
 
     // if expanding, and if in detailed mode, toggle to overview mode
@@ -369,7 +371,10 @@ export function searchNode(nodeId) {
       if (currentColumnAtPos !== node.columnId) {
         dispatch(selectColumn(columnPos, node.columnId));
       }
-      dispatch(selectView(true));
+      // 1. before: go to detailed mode and select
+      // dispatch(selectView(true));
+      // 2. as per SEI request: go to expanded node
+      dispatch(toggleNodesExpand(true, true, nodeId));
       dispatch({
         type: actions.SELECT_SINGLE_NODE,
         nodeId
