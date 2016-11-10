@@ -28,6 +28,10 @@ body, html {
     position: absolute;
     top: $nav-height;
     width: 100%;
+
+    .search {
+      padding-top: 16px;
+    }
   }
 
   > .flow-content {
