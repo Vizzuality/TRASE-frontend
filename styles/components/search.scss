@@ -17,8 +17,9 @@
 
   > .icon-search {
     position: absolute;
-    top: 10px;
+    top: 50%;
     right: 32px;
+    transform: translate(0, -50%);
   }
 
   .awesomplete {
