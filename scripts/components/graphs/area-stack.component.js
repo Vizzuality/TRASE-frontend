@@ -28,6 +28,8 @@ export default class {
     this.el = settings.el;
     this.data = settings.data;
 
+    if (!!this.data.lines && !this.data.lines.length) return;
+
     this.defaults = {
       margin: {
         top: 20,
@@ -161,5 +163,9 @@ export default class {
       .select('text')
       .attr('class', 'tick-text')
       .attr('y', 16);
+
+
+    console.log(this.el);
+    this.el.classList.remove('is-hidden');
   }
 }

@@ -64,7 +64,15 @@
     <tbody>
       <% for(var i=0; i<data.length; i++) { %>
         <tr>
-          <td><%=i+1%>.<%= data[i]['name'] %> <svg class="icon icon-check"><use xlink:href="#icon-outside-link"/></svg></td>
+            <td><%= i+1 %>.<%= data[i]['name'] %>
+                <% if (link !== null) {%>
+                <a href="<%= link + data[i]['id'] %>">
+                    <svg class="icon icon-check">
+                        <use xlink:href="#icon-outside-link" />
+                    </svg>
+                </a>
+                <% } %>
+            </td>
           <td data-unit="<%= i == 0 ? '%' : ''  %>"><%= data[i]['value'] %></td>
         </tr>
       <% } %>

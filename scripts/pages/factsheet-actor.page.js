@@ -8,12 +8,13 @@ import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/area-select.scss';
 import 'styles/components/factsheets/info.scss';
+import 'styles/components/factsheets/error.scss';
 
 import Dropdown from 'components/dropdown.component';
 // import AreaStack from 'components/graphs/area-stack.component';  stack area future
 import Table from 'components/table/table.component';
 
-import { getUrlParams } from 'utils/stateURL';
+import { getURLParams } from 'utils/stateURL';
 import _ from 'lodash';
 
 const defaults = {
@@ -44,35 +45,58 @@ const _build = data => {
   new Table({
     el:document.querySelector('.js-municipalities-table'),
     data: data.risk_indicators_municip,
-    type: 't_head_actors'
+    type: 't_head_actors',
+    target: 'actor'
   });
 
 
   new Table({
     el:document.querySelector('.js-municipalities-top'),
-    data: data.top_countries, // example
-    type: 'top_municipalities'
+    data: data.top_municipalities,
+    type: 'top_municipalities',
+    target: 'place'
   });
 
   new Table({
     el:document.querySelector('.js-destination-top'),
-    data: data.top_municipalities, // example
+    data: data.top_countries,
     type: 'top_destination'
   });
 };
 
+const _showErrorMessage = () => {
+  const el = document.querySelector('.l-factsheet-actor');
+  el.classList.add('-error');
+
+  el.querySelector('.content >.wrap').classList.add('is-hidden');
+  el.querySelector('.js-error-message').classList.remove('is-hidden');
+};
+
 const _init = ()  => {
   const url = window.location.search;
-  const urlParams = getUrlParams(url);
+  const urlParams = getURLParams(url);
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
 
   fetch(`${API_URL}/v1/get_actor_node_attributes?node_id=${nodeId}&country=Brazil&commodity=soy`)
-    .then(response => response.json())
+    .then((response) => {
+      if (response.status === 404) {
+        _showErrorMessage();
+        return null;
+      }
+
+      if (response.status === 200) {
+        return response.json();
+      }
+    })
     .then((result) => {
+      if (!result) return;
+
+      document.querySelector('.content >.wrap').classList.remove('is-hidden');
       const data = result.data;
-      _setInfo(data.column_name, data.municip_name);
+
+      _setInfo(data.column_name, data.node_name);
 
       const commodityDropdown = new Dropdown('commodity', _onSelect);
       commodityDropdown.setTitle(_.capitalize(commodity));

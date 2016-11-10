@@ -15,6 +15,11 @@ import 'styles/components/factsheets/line.scss';
 
 export default class {
   constructor(className, trajectory_deforestation, trajectory_production) {
+    if (!trajectory_deforestation.length || !trajectory_production.length) {
+      document.querySelector('.deforestation').classList.add('is-hidden');
+      return;
+    }
+
     const elem = document.querySelector(className);
     const margin = {top: 30, right: 40, bottom: 30, left: 50};
     const width = elem.clientWidth - margin.left - margin.right;

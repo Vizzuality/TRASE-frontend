@@ -4,6 +4,18 @@
   padding: 64px 0 96px;
   background-color: $pale-peach;
 
+  &.-error {
+    position: relative;
+    min-height: 400px;
+
+    .c-error-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
   .content {
     max-width: $max-width-grid;
     margin: 0 auto;
@@ -19,6 +31,7 @@
 
     .c-area-stacked-chart {
       flex-basis: 50%;
+      padding-right: 20px;
     }
 
   }

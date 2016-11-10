@@ -2,7 +2,7 @@ import Top10Template from 'ejs!templates/graphs/top10.ejs';
 import getFactSheetLink from 'utils/getFactSheetLink';
 
 export default class {
-  constructor(el, title, list, columnId = -1) {
+  constructor(el, title, list, columnId = -1) {    
     list.forEach(node => {
       node.link = getFactSheetLink(node.id, columnId);
       node.formattedValue = parseFloat(node.value) * 100;

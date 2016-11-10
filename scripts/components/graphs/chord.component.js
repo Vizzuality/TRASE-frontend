@@ -9,6 +9,10 @@ import 'styles/components/factsheets/chord.scss';
 
 export default class {
   constructor(className, orgMatrix, list, placeName) {
+    if (!orgMatrix.length || !list.length) return;
+
+    document.querySelector(className).classList.remove('is-hidden');
+
     const allNames = [placeName].concat(list.map(node => node.name)).slice(0, orgMatrix.length);
 
     const margin = {top: 40, right: 50, bottom: 0, left: 50};
