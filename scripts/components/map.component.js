@@ -16,6 +16,8 @@ export default class {
     };
 
     this.map = L.map('map', mapOptions).setView([-16, -50], 4);
+    new L.Control.Zoom({ position: 'bottomleft' }).addTo(this.map);
+
     var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' });
     this.map.addLayer(basemap);
 
