@@ -2,7 +2,11 @@
   class="layer-item"
   data-layer-uid="<%= uid %>"
 >
-  <label class="layer-name"><%= name %> (<%= unit %>)
+  <label class="layer-name">
+    <%= name %>
+    <% if (unit) { %>
+      (<%= unit %>)
+    <% } %>
     <ul class="layer-options-list">
       <li class="layer-option c-tooltip">
         <svg class="icon icon-layer-info js-layer-info" data-description="description/tooltip goes here">
