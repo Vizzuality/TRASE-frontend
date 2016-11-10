@@ -11,8 +11,8 @@
   <% if(type === 't_head_actors'){ %>
     <thead>
       <tr>
-        <% for(let i=0; i<actors['includedColumns'].length; i++) { %>
-          <th> <%= actors['includedColumns'][i]['name'] %> </th>
+        <% for(let i=0; i<data['includedColumns'].length; i++) { %>
+          <th> <%= data['includedColumns'][i]['name'] %> </th>
         <% } %>
       </tr>
     </thead>
@@ -20,10 +20,10 @@
 
   <% if(type === 'top_municipalities' || type === 'top_destination'){ %>
     <tbody>
-      <% for(let i=0; i<actors['lines'].length; i++) { %>
+      <% for(let i=0; i<data['lines'].length; i++) { %>
         <tr>
-          <td><%= actors['lines'][i]['name'] %></td>
-          <td><%= actors['lines'][i]['values'] %></td>
+          <td><%= data['lines'][i]['name'] %></td>
+          <td><%= data['lines'][i]['values'] %></td>
         </tr>
       <% } %>
     </tbody>
@@ -31,12 +31,12 @@
 
   <% if(type === 't_head_actors'){ %>
     <tbody>
-      <% for(let i=0; i<actors['rows'].length; i++) { %>
+      <% for(let i=0; i<data['rows'].length; i++) { %>
       <tr>
-        <%  for(let j=0; j<actors['rows'][i]['values'].length; j++){%>
-          <td data-unit="<%= i == 0 ? actors['includedColumns'][j]['unit'] : ''  %>">
-            <% if(actors['rows'][i]['values'][j] != null){ %>
-              <%= actors['rows'][i]['values'][j]['value'] %>
+        <%  for(let j=0; j<data['rows'][i]['values'].length; j++){%>
+          <td data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : ''  %>">
+            <% if(data['rows'][i]['values'][j] != null){ %>
+              <%= data['rows'][i]['values'][j]['value'] %>
             <% } else{ %>
               0
             <% } %>
@@ -49,12 +49,12 @@
 
   <% if(type === 't_head_places'){ %>
     <tbody>
-      <% for(let i=0; i<actors['rows'].length; i++) { %>
-        <%  for(let j=0; j<actors['rows'][i]['values'].length; j++){%>
+      <% for(let i=0; i<data['rows'].length; i++) { %>
+        <%  for(let j=0; j<data['rows'][i]['values'].length; j++){%>
         <tr>
-          <td> <%= actors['includedColumns'][j]['name'] %> </td>
-          <td data-unit="<%= i == 0 ? actors['includedColumns'][j]['unit'] : ''  %>">
-              <%= actors['rows'][i]['values'][j] %>
+          <td> <%= data['includedColumns'][j]['name'] %> </td>
+          <td data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : ''  %>">
+              <%= data['rows'][i]['values'][j] %>
           </td>
         </tr>
         <% } %>
@@ -62,10 +62,10 @@
     </tbody>
   <% } else {%>
     <tbody>
-      <% for(let i=0; i<actors.length; i++) { %>
+      <% for(let i=0; i<data.length; i++) { %>
         <tr>
-          <td><%=i+1%>.<%= actors[i]['name'] %> <svg class="icon icon-check"><use xlink:href="#icon-outside-link"/></svg></td>
-          <td data-unit="<%= i == 0 ? '%' : ''  %>"><%= actors[i]['value'] %></td>
+          <td><%=i+1%>.<%= data[i]['name'] %> <svg class="icon icon-check"><use xlink:href="#icon-outside-link"/></svg></td>
+          <td data-unit="<%= i == 0 ? '%' : ''  %>"><%= data[i]['value'] %></td>
         </tr>
       <% } %>
     </tbody>

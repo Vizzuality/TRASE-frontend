@@ -78,7 +78,6 @@ export default class {
         .attr('transform', `translate(${margins.left}, ${margins.top})`);
 
     const years = [];
-    console.log(this.data.includedYears)
     this.data.includedYears.forEach((year, yearIndex) => {
       var yearObject = {
         date: new Date(year, 0),
