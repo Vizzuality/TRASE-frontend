@@ -30,6 +30,9 @@ const pages = {
   },
   about: {
     title: 'TRASE About'
+  },
+  'terms-of-use': {
+    title: 'TRASE Terms of use'
   }
 };
 
