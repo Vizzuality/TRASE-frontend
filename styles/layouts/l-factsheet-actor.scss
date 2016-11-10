@@ -7,5 +7,9 @@
   .content {
     max-width: $max-width-grid;
     margin: 0 auto;
+
+    .c-area-select > .c-dropdown {
+      margin: 0 0 0 72px;
+    }
   }
 }
