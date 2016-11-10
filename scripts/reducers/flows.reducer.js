@@ -234,7 +234,9 @@ export default function (state = {}, action) {
     };
 
     // get a geoId <-> color dict
-    const choropleth = getChoropleth(selectedVectorLayers, state.nodesDictWithMeta, LEGEND_COLORS);
+    const choropleth = (selectedVectorLayers.horizontal.uid === null && selectedVectorLayers.vertical.uid === null) ?
+      {} :
+      getChoropleth(selectedVectorLayers, state.nodesDictWithMeta, LEGEND_COLORS);
 
     newState = Object.assign({}, state, { selectedVectorLayers, choropleth });
     break;

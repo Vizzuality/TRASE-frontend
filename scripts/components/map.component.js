@@ -208,10 +208,11 @@ export default class {
   setChoropleth(choropleth) {
     this.currentLayer.eachLayer(layer => {
       const choroItem = choropleth[layer.feature.properties.geoid];
+      // TODO use CSS classes instead
       if (choroItem) {
         layer._path.style.fill = choroItem;
       } else {
-        layer._path.style.fill = 'auto';
+        layer._path.style.fill = '#c7c7c7';
       }
     });
   }
