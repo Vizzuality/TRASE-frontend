@@ -15,7 +15,7 @@
           "type": "cartodb",
           "options": {
             "sql": "SELECT * FROM ana_dissolve",
-            "cartocss": "#ana_dissolve{  polygon-fill: transparent;  polygon-opacity: 1;  polygon-pattern-file: url(http://com.cartodb.users-assets.production.s3.amazonaws.com/patterns/diagonal_1px_fast.png);  line-color: #000000;  line-width: 0.1;  line-opacity: .5;} #ana_dissolve [ cat <= 7] {  polygon-pattern-opacity: 1;} #ana_dissolve [ cat <= 5.5] {  polygon-pattern-opacity: .66;} #ana_dissolve [ cat <= 3.5] {  polygon-pattern-opacity: .33;} #ana_dissolve [ cat <= 1.5] {  polygon-pattern-opacity: 0;}",
+            "cartocss": "#ana_dissolve{   polygon-fill:  #4575b4;   polygon-opacity: 0.8;   line-color: #FFF;   line-width: 0;   line-opacity: 1; } #ana_dissolve [ cat <= 7] {    polygon-fill:#d73027; } #ana_dissolve [ cat <= 6.5] {    polygon-fill: #fc8d59; } #ana_dissolve [ cat <= 5.5] {    polygon-fill: #fee090; } #ana_dissolve [ cat <= 4.5] {    polygon-fill: #ffffbf; } #ana_dissolve [ cat <= 3.5] {    polygon-fill:  #e0f3f8; } #ana_dissolve [ cat <= 2.5] {    polygon-fill: #91bfdb; } #ana_dissolve [ cat <= 1] {    polygon-fill: #4575b4; }",
             "cartocss_version": "2.3.0"
           }
         }
@@ -79,5 +79,25 @@
         }
       ]
     }
+  },
+  {
+    "version": "0.0.1",
+    "human_name": "Deforestation Alerts",
+    "name": "brazil_protected",
+    "layergroup": {
+      "version": "1.0.1",
+      "layers": [
+        {
+          "type": "cartodb",
+          "options": {
+            "sql": "SELECT the_geom, '2009' as year FROM deforestation_alerts_2009 union all SELECT the_geom, '2010' as year FROM deforestation_alerts_2010 union all SELECT the_geom, '2011' as year FROM deforestation_alerts_2011 union all SELECT the_geom, '2012' as year FROM deforestation_alerts_2012 union all SELECT the_geom, '2013' as year FROM deforestation_alerts_2013 union all SELECT the_geom, '2014' as year FROM deforestation_alerts_2014 union all SELECT the_geom, '2015' as year FROM deforestation_alerts_2015",
+            "cartocss": "#deforestation_alerts_2013{ polygon-fill: #B40903;   polygon-opacity: 1;   line-color: #B40903;   line-width: 0.2;   line-opacity: 1; }",
+            "cartocss_version": "2.3.0",
+            "interactivity":["year"]
+          }
+        }
+      ]
+    }
   }
 ]
+
