@@ -33,6 +33,7 @@ export default class {
     const template = TableTemplate({data: this.data, type: this.type});
     this.el.innerHTML = template;
 
-    this.el.classList.remove('is-hidden');
+
+    this.el.parentElement.classList.remove('is-hidden');
   }
 }
