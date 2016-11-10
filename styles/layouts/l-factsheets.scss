@@ -2,7 +2,7 @@
 
 .l-factsheets {
   position: relative;
-  min-height: 800px;
+  min-height: calc(100vh - #{$nav-height});
   padding: 64px 0 96px;
   background-color: $pale-peach;
 
