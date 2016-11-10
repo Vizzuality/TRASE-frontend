@@ -1,4 +1,7 @@
-function getUrlParams (url){
+import _ from 'lodash';
+import { URL_STATE_PROPS } from 'constants';
+
+export const getURLParams = url => {
   let objParams = {};
 
   // removes '?' character from URL
@@ -18,14 +21,15 @@ function getUrlParams (url){
   });
 
   return objParams;
-}
+};
 
-function encodeState(state) {
-  return btoa(JSON.stringify(state));
-}
+export const encodeStateToURL = state => {
+  const urlProps = JSON.stringify(_.pick(state, URL_STATE_PROPS));
+  const encoded = btoa(urlProps);
+  window.history.pushState({}, 'Title', `?state=${encoded}`);
+  return encoded;
+};
 
-function decodeState(urlHash) {
+export const decodeStateFromURL = urlHash => {
   return JSON.parse(atob(urlHash));
-}
-
-export { getUrlParams, encodeState, decodeState };
+};

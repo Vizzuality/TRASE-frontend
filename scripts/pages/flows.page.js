@@ -21,13 +21,13 @@ import AppReducer from 'reducers/app.reducer';
 import FlowsReducer from 'reducers/flows.reducer';
 import { resize } from 'actions/app.actions';
 import { loadInitialData } from 'actions/flows.actions';
-import { getUrlParams, decodeState } from 'utils/stateURL';
+import { getURLParams, decodeStateFromURL } from 'utils/stateURL';
 import { APP_DEFAULT_STATE, FLOWS_DEFAULT_STATE } from 'constants';
 
 import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
 
-const objParams = getUrlParams(window.location.search);
+const objParams = getURLParams(window.location.search);
 
 let modalState = {
   visibility: false,
@@ -70,6 +70,7 @@ const start = (initialState) => {
   });
 };
 
+
 if (objParams.story) {
 
   // TODO display loading state while loading service
@@ -89,7 +90,7 @@ if (objParams.story) {
       Object.assign(APP_DEFAULT_STATE.app, { modal: modalState });
 
       if (objParams.state) {
-        const newState = decodeState(objParams.state);
+        const newState = decodeStateFromURL(objParams.state);
         Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
       }
 
@@ -101,7 +102,7 @@ if (objParams.story) {
     .catch(() => {
 
       if (objParams.state) {
-        const newState = decodeState(objParams.state);
+        const newState = decodeStateFromURL(objParams.state);
         Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
       }
 
@@ -114,7 +115,7 @@ if (objParams.story) {
   Object.assign(APP_DEFAULT_STATE.app, { modal: modalState });
 
   if (objParams.state) {
-    const newState = decodeState(objParams.state);
+    const newState = decodeStateFromURL(objParams.state);
     Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
   }
 
