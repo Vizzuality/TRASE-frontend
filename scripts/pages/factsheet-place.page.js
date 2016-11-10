@@ -8,6 +8,7 @@ import 'styles/components/button.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/info.scss';
+import 'styles/components/factsheets/error.scss';
 
 import Dropdown from 'components/dropdown.component';
 import Line from 'components/graphs/line.component';
