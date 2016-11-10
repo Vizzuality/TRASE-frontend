@@ -162,6 +162,26 @@
         }
       }
     }
+
+    &.-no-active {
+      .dropdown-item-title {
+        color: $gray;
+      }
+
+      .dropdown-item-legend-unit {
+        color: $gray;
+      }
+
+      .dropdown-item-legend {
+        li {
+          background-color: $gray !important;
+        }
+      }
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
   }
 
   &.-small .dropdown-title,
