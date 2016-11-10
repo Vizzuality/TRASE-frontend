@@ -21,15 +21,15 @@ export default class {
     }
   }
 
-  initialDataLoadStarted(loading) {
+  showLoaderAtInitialLoad(loading) {
     this._toggleLoading(loading);
   }
 
-  linksLoadStarted(loading) {
+  showLoader(loading) {
     this._toggleLoading(loading);
   }
 
-  linksLoaded(linksPayload) {
+  showLoadedLinks(linksPayload) {
     this.el.classList.toggle('-detailed', linksPayload.detailedView);
 
     if (linksPayload.detailedView === false) {

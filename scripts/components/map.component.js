@@ -34,7 +34,7 @@ export default class {
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
   }
 
-  loadMap(payload) {
+  showLoadedMap(payload) {
     const geoData = payload.geoData;
     // TODO this statically maps vectorLayers indexes to column indexes, it should be dynamic
     this.vectorLayers = [

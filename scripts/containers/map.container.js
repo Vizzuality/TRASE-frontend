@@ -5,7 +5,7 @@ import connect from 'connect';
 import Map from 'components/map.component.js';
 
 const mapMethodsToState = (state) => ({
-  loadMap: {
+  showLoadedMap: {
     _comparedValue: (state) => state.flows.geoData,
     _returnedValue: (state) => {
       return {
