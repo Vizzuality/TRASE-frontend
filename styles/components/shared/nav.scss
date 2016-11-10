@@ -125,12 +125,12 @@
       > .page-section-list {
         display: flex;
 
-        > .page-section {
+        .page-section {
           display: inline-flex;
+          position: relative;
           align-items: flex-end;
           padding: 0 24px 13px;
 
-          border-right: 1px solid $silver;
 
           > a {
             color: $charcoal-grey;
@@ -138,6 +138,32 @@
             font-family: $font-family-2;
             font-size: $font-size-xx-regular;
           }
+
+          > .submenu {
+            display: none;
+            position: absolute;
+            top: $nav-height;
+            left: 0;
+
+            > .page-section {
+              padding: 13px 24px;
+              background-color: $white;
+              white-space: nowrap;
+              box-shadow: $box-shadow;
+            }
+          }
+
+          &.-has-menu {
+            &:hover {
+              > .submenu {
+                display: block;
+              }
+            }
+          }
+        }
+
+        > .page-section {
+          border-right: 1px solid $silver;
         }
 
         > .page-section.-selected {
