@@ -3,7 +3,7 @@
     "name": "landcover",
     "human_name": "Land cover",
     "rasterURL": "https://s3-eu-west-1.amazonaws.com/lulc/landcover_brazil_2015/",
-    "legend":""
+    "legend":"<div class='cartodb-legend custom'><ul><li><div class=\" bullet\"style=\" background:#008156\" ></div>Forest</li><li><div class=\" bullet\"style=\" background:#556B2F\" ></div>Forest plantations</li>	<li><div class=\" bullet\"style=\" background:#E1E196\" ></div>	Pastures</li><li><div class=\" bullet\"style=\" background:#E1A500\" ></div>Agriculture	</li><li><div class=\" bullet\"style=\" background:#00FFFF\" ></div>Coastal forest	</li><li><div class=\" bullet\"style=\" background:#00AFFF\" ></div>	Water</li><li><div class=\" bullet\"style=\" background:#F5F5F3\" ></div>Other vegetation</li><li><div class=\" bullet\"style=\" background:#3E3F40\" ></div>	Not observed</li></ul></div>"
   },
   {
     "version": "0.0.1",
@@ -28,7 +28,7 @@
     "version": "0.0.1",
     "name": "indigenous_areas",
     "human_name": "Indigenous Areas",
-    "legend":"<div class='cartodb-legend custom'> <ul><li class=\"bkg\"><div class=\"bullet\" style=\"background:url(http://com.cartodb.users-assets.production.s3.amazonaws.com/patterns/donuts_4px_med.png)\"></div>Indigenous areas</li></ul></div>",
+    "legend":"<div class='cartodb-legend custom'> <ul><li class=\"bkg\"><div class=\"bullet\" style=\"background-color:#ECC35F\"></div>Indigenous areas</li></ul></div>",
     "layergroup": {
       "version": "1.0.1",
       "layers": [
@@ -36,7 +36,7 @@
           "type": "cartodb",
           "options": {
             "sql": "SELECT * FROM indigenous_areas",
-            "cartocss": "#indigenous_areas{   polygon-opacity: 1;   polygon-fill:transparent;   line-color: #000000;   line-width: 0.4;   line-opacity: 1;   polygon-pattern-file: url(http://com.cartodb.users-assets.production.s3.amazonaws.com/patterns/donuts_4px_med.png);   polygon-pattern-opacity: 1; }",
+            "cartocss": "#indigenous_areas{   polygon-opacity: 1;   polygon-fill:transparent;   line-color:  #ECC35F;   line-width: 1;   line-opacity: 1;}",
             "cartocss_version": "2.3.0",
             "interactivity":[ "cartodb_id", "situacao13", "populaa_a_8", "nome_are22", "grupos9", "datadoc16","areaetno7"]
           }
@@ -48,7 +48,7 @@
     "version": "0.0.1",
     "human_name": "Brazil protected areas",
     "name": "brazil_protected",
-    "legend":"<div class='cartodb-legend custom'> <ul><li class=\"bkg\"><div class=\"bullet\" style=\"background:url(http://com.cartodb.users-assets.production.s3.amazonaws.com/patterns/dots_2px_med.png)\"></div>Protected areas</li></ul></div>",
+    "legend":"<div class='cartodb-legend custom'> <ul><li class=\"bkg\"><div class=\"bullet\" style=\"background-color:#B4D84F\"></div>Protected areas</li></ul></div>",
     "layergroup": {
       "version": "1.0.1",
       "layers": [
@@ -56,7 +56,7 @@
           "type": "cartodb",
           "options": {
             "sql": "SELECT * FROM brazil_protected",
-            "cartocss": "#brazil_protected{   polygon-opacity:1;   polygon-fill:transparent;   line-color: #000000;   line-width: 0.1;   line-opacity: 1;   polygon-pattern-file: url(http://com.cartodb.users-assets.production.s3.amazonaws.com/patterns/dots_2px_med.png);   polygon-pattern-opacity: 0.7; }",
+            "cartocss": "#brazil_protected{   polygon-opacity:1;   polygon-fill:transparent;   line-color: #B4D84F;   line-width: 1;   line-opacity: 1;}",
             "cartocss_version": "2.3.0",
             "interactivity":["cartodb_id", "type"]
           }
