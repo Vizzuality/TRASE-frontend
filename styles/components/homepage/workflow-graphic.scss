@@ -1,7 +1,7 @@
 
 .c-workflow-graphic {
   width: 100%;
-  padding: 40px 0 56px;
+  padding: 56px 0;
 
   > .supply-chain-list {
     display: flex;
@@ -13,11 +13,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
+      padding: 8px;
       z-index: 1;
 
       > .description {
         color: $medium-pink;
+        font-family: $font-family-1;
+        font-size: $font-size-xx-regular;
+        letter-spacing: -1.3px;
         line-height: 1;
       }
     }
