@@ -83,14 +83,14 @@
   {
     "version": "0.0.1",
     "human_name": "Deforestation Alerts",
-    "name": "brazil_protected",
+    "name": "brazil_defor_alerts",
     "layergroup": {
       "version": "1.0.1",
       "layers": [
         {
           "type": "cartodb",
           "options": {
-            "sql": "SELECT the_geom, '2009' as year FROM deforestation_alerts_2009 union all SELECT the_geom, '2010' as year FROM deforestation_alerts_2010 union all SELECT the_geom, '2011' as year FROM deforestation_alerts_2011 union all SELECT the_geom, '2012' as year FROM deforestation_alerts_2012 union all SELECT the_geom, '2013' as year FROM deforestation_alerts_2013 union all SELECT the_geom, '2014' as year FROM deforestation_alerts_2014 union all SELECT the_geom, '2015' as year FROM deforestation_alerts_2015",
+            "sql": "SELECT the_geom_webmercator, '2009' as year FROM deforestation_alerts_2009 union all SELECT the_geom_webmercator, '2010' as year FROM deforestation_alerts_2010 union all SELECT the_geom_webmercator, '2011' as year FROM deforestation_alerts_2011 union all SELECT the_geom_webmercator, '2012' as year FROM deforestation_alerts_2012 union all SELECT the_geom_webmercator, '2013' as year FROM deforestation_alerts_2013 union all SELECT the_geom_webmercator, '2014' as year FROM deforestation_alerts_2014 union all SELECT the_geom_webmercator, '2015' as year FROM deforestation_alerts_2015",
             "cartocss": "#deforestation_alerts_2013{ polygon-fill: #B40903;   polygon-opacity: 1;   line-color: #B40903;   line-width: 0.2;   line-opacity: 1; }",
             "cartocss_version": "2.3.0",
             "interactivity":["year"]
