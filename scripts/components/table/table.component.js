@@ -9,8 +9,6 @@ export default class {
     this.type = settings.type;
     this.data = settings.data;
 
-    console.log(settings);
-
     if (!!this.data.rows && !this.data.rows.length) return;
 
     if(this.type === 'top'){
