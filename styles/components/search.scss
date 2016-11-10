@@ -7,7 +7,6 @@
   align-items: center;
   width: 450px;
   margin: auto;
-  padding: 18px 0;
   color: $charcoal-grey;
   font-family: $font-family-1;
   font-size: $font-size-x-regular;
@@ -18,7 +17,9 @@
 
   > .icon-search {
     position: absolute;
+    top: 50%;
     right: 32px;
+    transform: translate(0, -50%);
   }
 
   .awesomplete {
