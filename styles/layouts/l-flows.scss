@@ -87,9 +87,9 @@ body, html {
 
     > .c-sankey {
       left: 640px;
-      width: calc(100% - #{640 + 96}px);
+      width: calc(100% - #{640 + $sankey-x-padding * 2});
       height: calc(100% - 50px);
-      margin: 0 48px;
+      margin: 0 $sankey-x-padding;
       transition: left .45s $ease-in-out-sine;
 
       .sankey {
