@@ -19,8 +19,8 @@ import { getURLParams } from 'utils/stateURL';
 import _ from 'lodash';
 
 const defaults = {
-  country: 'brazil',
-  commodity: 'soy'
+  country: 'Brazil',
+  commodity: 'Soy'
 };
 
 const _build = data => {
@@ -30,7 +30,8 @@ const _build = data => {
   new Table({
     el:document.querySelector('.js-table-traders'),
     data: data.top_traders, // example
-    type: 'top'
+    type: 'top',
+    target: 'actor'
   });
 
   new Table({

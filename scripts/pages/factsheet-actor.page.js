@@ -45,14 +45,16 @@ const _build = data => {
   new Table({
     el:document.querySelector('.js-municipalities-table'),
     data: data.risk_indicators_municip,
-    type: 't_head_actors'
+    type: 't_head_actors',
+    target: 'actor'
   });
 
 
   new Table({
     el:document.querySelector('.js-municipalities-top'),
     data: data.top_municipalities,
-    type: 'top_municipalities'
+    type: 'top_municipalities',
+    target: 'place'
   });
 
   new Table({
@@ -94,7 +96,7 @@ const _init = ()  => {
       document.querySelector('.content >.wrap').classList.remove('is-hidden');
       const data = result.data;
 
-      _setInfo(data.column_name, data.municip_name);
+      _setInfo(data.column_name, data.node_name);
 
       const commodityDropdown = new Dropdown('commodity', _onSelect);
       commodityDropdown.setTitle(_.capitalize(commodity));

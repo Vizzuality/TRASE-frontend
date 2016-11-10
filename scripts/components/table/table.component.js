@@ -8,8 +8,16 @@ export default class {
     this.el = settings.el; //place to show the table
     this.type = settings.type;
     this.data = settings.data;
+    this.target = settings.target;
 
-
+    if (this.target === 'actor') {
+      this.link = 'factsheet-actor.html?nodeId=';
+    } else if (this.target === 'place') {
+      this.link = 'factsheet-place.html?nodeId=';
+    } else {
+      this.link = null;
+    }
+debugger
     if (this.type === 'top') {
 
       if (this.data === 'undefined' || !this.data.length) return;
@@ -44,7 +52,7 @@ export default class {
   }
 
   render() {
-    const template = TableTemplate({data: this.data, type: this.type});
+    const template = TableTemplate({data: this.data, type: this.type, link: this.link});
     this.el.innerHTML = template;
 
     this.el.parentElement.classList.remove('is-hidden');
