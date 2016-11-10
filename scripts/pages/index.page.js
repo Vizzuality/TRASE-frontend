@@ -1,9 +1,6 @@
-
 import Dropdown from 'scripts/components/dropdown.component';
-
 import 'whatwg-fetch';
 import PostGridTemplate from 'ejs!templates/homepage/post-grid.ejs';
-
 import 'styles/homepage.scss';
 
 const defaults = {
@@ -23,7 +20,7 @@ const _setMap = () => {
   });
 };
 
-const _onSelectCommodity = function(value) {
+const _onSelectCommodity = function (value) {
   // updates dropdown's title with new value
   this.setTitle(value);
   // updates default values with incoming ones
@@ -33,7 +30,7 @@ const _onSelectCommodity = function(value) {
   _filterCountries(value);
 };
 
-const _filterCountries = function() {
+const _filterCountries = function () {
   const countryDropdownView = defaults.countryDropdown;
   const countryDropdownElem = countryDropdownView.el;
   const dropdownItems = countryDropdownElem.querySelectorAll('.js-dropdown-item');
@@ -48,25 +45,24 @@ const _filterCountries = function() {
   });
 
 
-
   const availableItems = countryDropdownElem.querySelectorAll('.js-dropdown-item:not(.is-hidden)');
 
   // sets first item in the list if there's one available
   if (availableItems.length) {
     const value = availableItems[0].getAttribute('data-value');
     countryDropdownView.setTitle(value);
-    _onSelectCountry.call(countryDropdownView, value);
+    _onSelectCountry.call(countryDropdownView, { value });
   } else {
     countryDropdownView.setTitle('-');
   }
 };
 
 
-const _onSelectCountry = function(value) {
+const _onSelectCountry = function (data) {
   // updates dropdown's title with new value
-  this.setTitle(value);
+  this.setTitle(data.value);
   // updates default values with incoming ones
-  defaults[this.id] = value;
+  defaults[this.id] = data.value;
 
   // change map image based on new values
   _setMap();
@@ -84,7 +80,9 @@ const _getPosts = () => {
       let isLeft = true;
       let rows;
 
-      if (!totalPosts) return;
+      if (!totalPosts) {
+        return;
+      }
 
       const highlightPosts = posts.filter((post) => post.highlighted);
 
@@ -167,7 +165,7 @@ const _init = () => {
 
   // set initial dropdown values
   _onSelectCommodity.call(commodityDropdown, defaults.commodity);
-  _onSelectCountry.call(countryDropdown, defaults.country);
+  _onSelectCountry.call(countryDropdown, { value: defaults.country });
 
   _setMap();
   _getPosts();
