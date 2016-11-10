@@ -25,6 +25,11 @@
       max-width: $content-max-width;
       margin: 0 0 0 $anchor-list-max-width;
 
+      ul {
+        margin: 32px 0;
+        padding-left: 24px;
+      }
+
       > .logo-list {
         display: flex;
         align-items: center;
