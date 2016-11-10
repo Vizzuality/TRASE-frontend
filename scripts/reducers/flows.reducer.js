@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import actions from 'actions';
+import { encodeStateToURL } from 'utils/stateURL';
 import { LEGEND_COLORS } from 'constants';
 import getNodesDict from './sankey/getNodesDict';
 import getVisibleNodes from './sankey/getVisibleNodes';
@@ -17,14 +18,17 @@ import setNodesMeta from './sankey/setNodesMeta';
 import getChoropleth from './sankey/getChoropleth';
 
 export default function (state = {}, action) {
+  let newState;
+
   switch (action.type) {
 
   case actions.LOAD_INITIAL_DATA: {
-    return Object.assign({}, state, { initialDataLoading: true });
+    newState = Object.assign({}, state, { initialDataLoading: true });
+    break;
   }
 
   case actions.RESET_SELECTION: {
-    return Object.assign({}, state, {
+    newState = Object.assign({}, state, {
       highlightedNodesIds: [],
       highlightedNodeData: [],
       highlightedGeoIds: [],
@@ -33,17 +37,20 @@ export default function (state = {}, action) {
       areNodesExpanded: false,
       selectedBiomeFilter: 'none'
     });
+    break;
   }
 
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
     const columns = JSON.parse(action.payload[1]).data;
     const nodesDict = getNodesDict(rawNodes, columns);
-    return Object.assign({}, state, { columns, nodesDict, initialDataLoading: false });
+    newState = Object.assign({}, state, { columns, nodesDict, initialDataLoading: false });
+    break;
   }
 
   case actions.LOAD_LINKS:
-    return Object.assign({}, state, { linksLoading: true });
+    newState = Object.assign({}, state, { linksLoading: true });
+    break;
 
   case actions.GET_NODES: {
     const jsonPayload = JSON.parse(action.payload);
@@ -55,7 +62,8 @@ export default function (state = {}, action) {
     // store layer values in nodesDict as uid: layerValue
     const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, rawLayers);
 
-    return Object.assign({}, state, { mapLayers, nodesDictWithMeta });
+    newState = Object.assign({}, state, { mapLayers, nodesDictWithMeta });
+    break;
   }
 
   case actions.GET_LINKS: {
@@ -75,7 +83,7 @@ export default function (state = {}, action) {
     // we also need to refresh nodes data (used in titles), because values change when year or quant changes
     const selectedNodesData = getSelectedNodesData(state.selectedNodesIds, visibleNodes);
 
-    return Object.assign({}, state, {
+    newState = Object.assign({}, state, {
       links,
       unmergedLinks,
       visibleNodes,
@@ -84,86 +92,104 @@ export default function (state = {}, action) {
       selectedNodesData,
       linksLoading: false
     });
+    break;
   }
 
 
   case actions.SELECT_COUNTRY:
-    return Object.assign({}, state, { selectedCountry: action.country });
+    newState = Object.assign({}, state, { selectedCountry: action.country });
+    break;
 
   case actions.SELECT_COMMODITY:
-    return Object.assign({}, state, { selectedCommodity: action.commodity });
+    newState = Object.assign({}, state, { selectedCommodity: action.commodity });
+    break;
 
   case actions.SELECT_BIOME_FILTER:
-    return Object.assign({}, state, { selectedBiomeFilter: action.biomeFilter });
+    newState = Object.assign({}, state, { selectedBiomeFilter: action.biomeFilter });
+    break;
 
   case actions.SELECT_YEARS:
-    return Object.assign({}, state, { selectedYears: action.years });
+    newState = Object.assign({}, state, { selectedYears: action.years });
+    break;
 
   case actions.SELECT_RECOLOR_BY:
-    return Object.assign({}, state, { selectedRecolorBy: { value: action.value, type: action.value_type} });
+    newState = Object.assign({}, state, { selectedRecolorBy: { value: action.value, type: action.value_type} });
+    break;
 
   case actions.SELECT_QUANT:
-    return Object.assign({}, state, { selectedQuant: action.quant });
+    newState = Object.assign({}, state, { selectedQuant: action.quant });
+    break;
 
   case actions.SELECT_VIEW:
-    return Object.assign({}, state, { detailedView: action.detailedView, forcedOverview: action.forcedOverview });
+    newState = Object.assign({}, state, { detailedView: action.detailedView, forcedOverview: action.forcedOverview });
+    break;
 
   case actions.SELECT_COLUMN: {
     // TODO also update choropleth with default selected indicators
     const selectedColumnsIds = [].concat(state.selectedColumnsIds);
     selectedColumnsIds[action.columnIndex] = action.columnId;
-    return Object.assign({}, state, { selectedColumnsIds });
+    newState = Object.assign({}, state, { selectedColumnsIds });
+    break;
   }
 
   case actions.HIGHLIGHT_NODE: {
     const nodeIds = (action.nodeId === undefined) ? [] : [action.nodeId];
     const highlightedNodeMeta = getNodesMeta(nodeIds, state.visibleNodes);
-    return Object.assign({}, state, {
+    newState = Object.assign({}, state, {
       highlightedNodesIds: nodeIds,
       highlightedNodeData: highlightedNodeMeta.selectedNodesData,
       highlightedGeoIds: highlightedNodeMeta.selectedNodesGeoIds
     });
+    break;
   }
 
   case actions.HIGHLIGHT_NODE_FROM_GEOID: {
     const nodeId = getNodeIdFromGeoId(action.geoId, state.visibleNodes);
     if (nodeId === null) {
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         highlightedNodesIds: [],
         // still send geoId even if nodeId not found, because we still want map polygon to highlight
         highlightedGeoIds: [action.geoId],
         highlightedNodeData: []
       });
+      break;
     }
 
     const highlightedNodeMeta = getNodesMeta([nodeId], state.visibleNodes);
-    return Object.assign({}, state, {
+    newState = Object.assign({}, state, {
       highlightedNodesIds: [nodeId],
       highlightedNodeData: highlightedNodeMeta.selectedNodesData,
       highlightedGeoIds: [action.geoId]
     });
+    break;
   }
 
   case actions.ADD_NODE_TO_SELECTION: {
     const selectedNodesIds = getSelectedNodesIds(action.nodeId, state.selectedNodesIds);
     const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
     selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
-    return Object.assign({}, state, selectedNodesStateUpdates);
+    newState = Object.assign({}, state, selectedNodesStateUpdates);
+    break;
   }
 
   case actions.ADD_NODE_TO_SELECTION_FROM_GEOID: {
     const nodeId = getNodeIdFromGeoId(action.geoId, state.visibleNodes);
     // node not found in visible nodes: abort
-    if (nodeId === null) return state;
+    if (nodeId === null) {
+      newState = state;
+      break;
+    }
 
     const selectedNodesIds = getSelectedNodesIds(nodeId, state.selectedNodesIds);
     const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
     selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
-    return Object.assign({}, state, selectedNodesStateUpdates);
+    newState = Object.assign({}, state, selectedNodesStateUpdates);
+    break;
   }
 
   case actions.SELECT_SINGLE_NODE: {
-    return Object.assign({}, state, { selectedNodesIds: [action.nodeId] });
+    newState = Object.assign({}, state, { selectedNodesIds: [action.nodeId] });
+    break;
   }
 
   // this is triggered when links are reloaded to keep track of selected node/links
@@ -171,26 +197,31 @@ export default function (state = {}, action) {
     const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
     const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
     selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
-    return Object.assign({}, state, selectedNodesStateUpdates);
+    newState = Object.assign({}, state, selectedNodesStateUpdates);
+    break;
   }
 
 
   case actions.FILTER_LINKS_BY_NODES: {
     let links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, state.selectedNodesColumnsPos);
-    return Object.assign({}, state, { links });
+    newState = Object.assign({}, state, { links });
+    break;
   }
 
-  case actions.GET_GEO_DATA:
-    return Object.assign({}, state, {
+  case actions.GET_GEO_DATA: {
+    newState = Object.assign({}, state, {
       geoData: {
         municipalities: JSON.parse(action.payload[0]),
         states: JSON.parse(action.payload[1]),
         biomes: JSON.parse(action.payload[2])
       }
     });
+    break;
+  }
 
   case actions.GET_CONTEXT_LAYERS: {
-    return Object.assign({}, state, { mapContextualLayers: action.mapContextualLayers });
+    newState = Object.assign({}, state, { mapContextualLayers: action.mapContextualLayers });
+    break;
   }
 
   case actions.SELECT_VECTOR_LAYERS: {
@@ -205,17 +236,19 @@ export default function (state = {}, action) {
     // get a geoId <-> color dict
     const choropleth = getChoropleth(selectedVectorLayers, state.nodesDictWithMeta, LEGEND_COLORS);
 
-    return Object.assign({}, state, { selectedVectorLayers, choropleth });
+    newState = Object.assign({}, state, { selectedVectorLayers, choropleth });
+    break;
   }
   case actions.SELECT_CONTEXTUAL_LAYERS: {
     const mapContextualLayersDict = _.keyBy(state.mapContextualLayers, 'name');
     const selectedMapContextualLayersData = action.contextualLayers.map(layerSlug => {
       return _.cloneDeep(mapContextualLayersDict[layerSlug]);
     });
-    return Object.assign({}, state, {
+    newState = Object.assign({}, state, {
       selectedMapContextualLayers: action.contextualLayers,
       selectedMapContextualLayersData
     });
+    break;
   }
 
   case actions.TOGGLE_NODES_EXPAND: {
@@ -223,16 +256,21 @@ export default function (state = {}, action) {
     const expandedNodesIds = (state.areNodesExpanded) ? []                           : [state.selectedNodesIds[0]];
     const selectedNodesIds = (state.areNodesExpanded) ? [state.expandedNodesIds[0]]  : [state.selectedNodesIds[0]];
 
-    return Object.assign({}, state, {
+    newState = Object.assign({}, state, {
       areNodesExpanded: !state.areNodesExpanded,
       selectedNodesIds,
       expandedNodesIds
     });
+    break;
   }
 
   default:
-    return state;
+    newState = state;
+    break;
   }
+
+  encodeStateToURL(newState);
+  return newState;
 }
 
 

@@ -35,13 +35,14 @@ export const FLOWS_DEFAULT_STATE = {
     selectedYears: [2015, 2015],
     selectedQuant: 'volume',
     detailedView: false,
-    selectedView: 1,
+    // TODO value_type should be inferred from the value, not kept in state
     selectedRecolorBy: { value: 'none', value_type: 'none' },
     selectedBiomeFilter: 'none',
     selectedNodesIds: [],
     areNodesExpanded: false,
     selectedNodesData: [],
     selectedColumnsIds: [3, 4, 6, 7],
+    // TODO title should be inferred from the uid, not kept in state
     selectedVectorLayers: {
       horizontal: {
         uid: null,
@@ -55,6 +56,19 @@ export const FLOWS_DEFAULT_STATE = {
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
   }
 };
+
+export const URL_STATE_PROPS = [
+  'selectedCountry',
+  'selectedCommodity',
+  'selectedYears',
+  'selectedQuant',
+  'detailedView',
+  'selectedRecolorBy',
+  'selectedBiomeFilter',
+  'selectedNodesIds',
+  'areNodesExpanded',
+  'selectedColumnsIds'
+];
 
 
 // fact sheets
