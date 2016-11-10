@@ -29,8 +29,15 @@ export function selectBiomeFilter(biomeFilter, reloadLinks) {
 export function selectQuant(quant, reloadLinks) {
   return _reloadLinks('quant', quant, actions.SELECT_QUANT, reloadLinks);
 }
-export function selectQual(qual, reloadLinks) {
-  return _reloadLinks('qual', qual, actions.SELECT_QUAL, reloadLinks);
+export function selectRecolorBy(data) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_RECOLOR_BY,
+      value: data.value,
+      value_type: data.type
+    });
+    dispatch(loadLinks());
+  };
 }
 export function selectView(detailedView, reloadLinks) {
   return _reloadLinks('detailedView', detailedView, actions.SELECT_VIEW, reloadLinks);
@@ -160,9 +167,14 @@ export function loadLinks() {
       flow_quant: getState().flows.selectedQuant
     };
 
-    const selectedQual = getState().flows.selectedQual;
-    if (selectedQual !== 'none') {
-      params.flow_qual = selectedQual;
+    const selectRecolorByType = getState().flows.selectedRecolorBy.type;
+    const selectRecolorByValue = getState().flows.selectedRecolorBy.value;
+    if (selectRecolorByValue !== 'none') {
+      if (selectRecolorByType === 'qual') {
+        params.flow_qual = selectRecolorByValue;
+      } else if (selectRecolorByType === 'ind') {
+        params.flow_ind = selectRecolorByValue;
+      }
     }
 
     const selectedBiomeFilter = getState().flows.selectedBiomeFilter;
@@ -224,12 +236,14 @@ const _loadMapVectorLayers = (urls, dispatch) => {
 export function loadMapContextLayers() {
   return dispatch => {
     const namedMapsURLs = mapContextualLayers.map(layer => {
-      if (layer.rasterURL) return null;
+      if (layer.rasterURL) {
+        return null;
+      }
       return `${CARTO_NAMED_MAPS_BASE_URL}${layer.name}/jsonp?callback=cb`;
     }).filter(url => url !== null);
 
     Promise.all(namedMapsURLs.map(url =>
-        fetch(url).then(resp => resp.text())
+      fetch(url).then(resp => resp.text())
     )).then(() => {
       // we actually don't care about layergroupids because we already have them pregenerated
       // this is just about reinstanciating named maps, you know, because CARTO

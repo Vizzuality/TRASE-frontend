@@ -99,8 +99,8 @@ export default function (state = {}, action) {
   case actions.SELECT_YEARS:
     return Object.assign({}, state, { selectedYears: action.years });
 
-  case actions.SELECT_QUAL:
-    return Object.assign({}, state, { selectedQual: action.qual });
+  case actions.SELECT_RECOLOR_BY:
+    return Object.assign({}, state, { selectedRecolorBy: { value: action.value, type: action.value_type} });
 
   case actions.SELECT_QUANT:
     return Object.assign({}, state, { selectedQuant: action.quant });

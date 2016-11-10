@@ -14,6 +14,7 @@ export default function(rawLinks, nodesDict) {
         height: link.height,
         quant: parseFloat(link.quant),
         qual: (link.qual === undefined || link.qual === null) ? 'none' : link.qual.replace(/\s/gi, '').toLowerCase(),
+        ind: (link.ind === undefined || link.ind === null) ? 'none' : link.ind,
         originalPath: path
       });
     }

@@ -20,7 +20,8 @@ const mapMethodsToState = (state) => ({
         links: state.flows.links,
         visibleNodes: state.flows.visibleNodes,
         visibleNodesByColumn: state.flows.visibleNodesByColumn,
-        detailedView: state.flows.detailedView
+        detailedView: state.flows.detailedView,
+        selectedRecolorBy: state.flows.selectedRecolorBy,
       };
     }
   },

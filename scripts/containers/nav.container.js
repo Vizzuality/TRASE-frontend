@@ -1,6 +1,6 @@
 // see sankey.container for details on how to use those containers
 import connect from 'connect';
-import { selectQuant, selectCountry, selectCommodity, selectBiomeFilter, selectYears, selectQual, selectView } from 'actions/flows.actions';
+import { selectQuant, selectCountry, selectCommodity, selectBiomeFilter, selectYears, selectRecolorBy, selectView } from 'actions/flows.actions';
 import Nav from 'components/nav.component.js';
 
 const mapMethodsToState = (state) => ({
@@ -9,7 +9,7 @@ const mapMethodsToState = (state) => ({
   selectCommodity: state.flows.selectedCommodity,
   selectBiomeFilter: state.flows.selectedBiomeFilter,
   selectYears: state.flows.selectedYears,
-  selectQual: state.flows.selectedQual,
+  selectRecolorBy: state.flows.selectedRecolorBy,
   selectView: state.flows.detailedView
 });
 
@@ -19,7 +19,7 @@ const mapViewCallbacksToActions = () => ({
   onCommoditySelected: commodity => selectCommodity(commodity),
   onBiomeFilterSelected: biomeFilter => selectBiomeFilter(biomeFilter),
   onYearsSelected: years => selectYears(years),
-  onQualSelected: qual => selectQual(qual),
+  onRecolorBySelected: value => selectRecolorBy(value),
   onViewSelected: detailedView => selectView(detailedView === 'true')
 });
 

@@ -40,39 +40,39 @@ $cloudy-blue: #aadad1;
 $light-grey-blue: #8db6ca;
 $warm-pink: #f65e6e;
 
-$qual-amazonia: #66c2a5;
-$qual-cerrado: #fc8d62;
-$qual-mataatlantica: #8da0cb;
-$qual-caatinga: #e78ac3;
-$qual-pampa: #a6d854;
-$qual-pantanal: #ffd92f;
+$qual-biome-amazonia: #66c2a5;
+$qual-biome-cerrado: #fc8d62;
+$qual-biome-mataatlantica: #8da0cb;
+$qual-biome-caatinga: #e78ac3;
+$qual-biome-pampa: #a6d854;
+$qual-biome-pantanal: #ffd92f;
 
-$qual-f500-0: #e3a9a9;
-$qual-f500-1: #f4bda5;
-$qual-f500-2: #c2b5af;
-$qual-f500-3: #92c5de;
-$qual-f500-4: #4996c3;
+$ind-forest_500-0: #e3a9a9;
+$ind-forest_500-1: #f4bda5;
+$ind-forest_500-2: #c2b5af;
+$ind-forest_500-3: #92c5de;
+$ind-forest_500-4: #4996c3;
 
-$qual-yes: #a4e332;
-$qual-no: #e36845;
+$qual-zero_deforestation-yes: #a4e332;
+$qual-zero_deforestation-no: #e36845;
 
-$qual-water-scarcity-0: #d73027;
-$qual-water-scarcity-1: #fc8d59;
-$qual-water-scarcity-2: #fee090;
-$qual-water-scarcity-3: #ffffbf;
-$qual-water-scarcity-4: #e0f3f8;
-$qual-water-scarcity-5: #91bfdb;
-$qual-water-scarcity-6: #4575b4;
+$ind-water_scarcity-0: #d73027;
+$ind-water_scarcity-1: #fc8d59;
+$ind-water_scarcity-2: #fee090;
+$ind-water_scarcity-3: #ffffbf;
+$ind-water_scarcity-4: #e0f3f8;
+$ind-water_scarcity-5: #91bfdb;
+$ind-water_scarcity-6: #4575b4;
 
-$qual-green-0: #ffc;
-$qual-green-1: #c2e699;
-$qual-green-2: #78c679;
-$qual-green-3: #31a354;
-$qual-green-4: #006837;
+$ind-smallholders-0: #ffc;
+$ind-smallholders-1: #c2e699;
+$ind-smallholders-2: #78c679;
+$ind-smallholders-3: #31a354;
+$ind-smallholders-4: #006837;
 
-$qual-colors: $qual-amazonia, $qual-cerrado, $qual-mataatlantica, $qual-caatinga, $qual-pampa, $qual-pantanal, $qual-f500-0, $qual-f500-1, $qual-f500-2, $qual-f500-3, $qual-f500-4, $qual-yes, $qual-no, $qual-water-scarcity-0, $qual-water-scarcity-1, $qual-water-scarcity-2, $qual-water-scarcity-3, $qual-water-scarcity-4, $qual-water-scarcity-5, $qual-water-scarcity-6, $qual-green-0, $qual-green-1, $qual-green-2, $qual-green-3, $qual-green-4;
+$qual-colors: $qual-biome-amazonia, $qual-biome-cerrado, $qual-biome-mataatlantica, $qual-biome-caatinga, $qual-biome-pampa, $qual-biome-pantanal, $ind-forest_500-0, $ind-forest_500-1, $ind-forest_500-2, $ind-forest_500-3, $ind-forest_500-4, $qual-zero_deforestation-yes, $qual-zero_deforestation-no, $ind-water_scarcity-0, $ind-water_scarcity-1, $ind-water_scarcity-2, $ind-water_scarcity-3, $ind-water_scarcity-4, $ind-water_scarcity-5, $ind-water_scarcity-6, $ind-smallholders-0, $ind-smallholders-1, $ind-smallholders-2, $ind-smallholders-3, $ind-smallholders-4;
 
-$qual-colors-names: '-qual-amazonia', '-qual-cerrado', '-qual-mataatlantica', '-qual-caatinga', '-qual-pampa', '-qual-pantanal', '-qual-f500-0', '-qual-f500-1', '-qual-f500-2', '-qual-f500-3', '-qual-f500-4', '-qual-yes', '-qual-no', '-qual-water-scarcity-0', '-qual-water-scarcity-1', '-qual-water-scarcity-2', '-qual-water-scarcity-3', '-qual-water-scarcity-4', '-qual-water-scarcity-5', '-qual-water-scarcity-6', '-qual-green-0', '-qual-green-1', '-qual-green-2', '-qual-green-3', '-qual-green-4';
+$qual-colors-names: '-qual-biome-amazonia', '-qual-biome-cerrado', '-qual-biome-mataatlantica', '-qual-biome-caatinga', '-qual-biome-pampa', '-qual-biome-pantanal', '-ind-forest_500-0', '-ind-forest_500-1', '-ind-forest_500-2', '-ind-forest_500-3', '-ind-forest_500-4', '-qual-zero_deforestation-yes', '-qual-zero_deforestation-no', '-ind-water_scarcity-0', '-ind-water_scarcity-1', '-ind-water_scarcity-2', '-ind-water_scarcity-3', '-ind-water_scarcity-4', '-ind-water_scarcity-5', '-ind-water_scarcity-6', '-ind-smallholders-0', '-ind-smallholders-1', '-ind-smallholders-2', '-ind-smallholders-3', '-ind-smallholders-4';
 
 // typography
 $font-family-1: 'DecimaMonoPro', sans-serif;
