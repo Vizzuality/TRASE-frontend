@@ -79,7 +79,7 @@ const _init = ()  => {
 
   fetch(`${API_URL}/v1/get_actor_node_attributes?node_id=${nodeId}&country=Brazil&commodity=soy`)
     .then((response) => {
-      if (response.status === 500) {
+      if (response.status === 404) {
         _showErrorMessage();
         return null;
       }

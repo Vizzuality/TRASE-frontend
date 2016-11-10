@@ -81,7 +81,7 @@ const _init = () => {
 
   fetch(`${API_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=${country}&commodity=${commodity}`)
     .then((response) => {
-      if (response.status === 500) {
+      if (response.status === 404) {
         _showErrorMessage();
         return null;
       }
