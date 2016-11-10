@@ -1,22 +1,73 @@
 <table>
-  <h1> </h1>
-<thead>
-  <tr>
-    <% for(var i=0; i<actors['title'].length; i++) {%>
-      <th><%= actors['title'][i]['name'] %></th>
-    <% } %>
-  </tr>
-</thead>
-<tbody>
-  <% for(var i=0; i<actors['data'].length; i++) {%>
-    <tr>
-      <td data-unit="<%= i == 0 ? actors['data'][i]['municipalities'][0]['unit'] : ''  %>"><%= actors['data'][i]['municipalities'][0]['value'] %></td>
-      <td data-unit="<%= i == 0 ? actors['data'][i]['trade'][0]['unit'] : ''  %>"><%= actors['data'][i]['trade'][0]['value']  %></td>
-      <td data-unit="<%= i == 0 ? actors['data'][i]['deforastation'][0]['unit'] : ''  %>"><%= actors['data'][i]['deforastation'][0]['value']  %></td>
-      <td data-unit="<%= i == 0 ? actors['data'][i]['water'][0]['unit']: ''  %>"><%= actors['data'][i]['water'][0]['value']  %></td>
-      <td data-unit="<%= i == 0 ? actors['data'][i]['conflict'][0]['unit'] : ''  %>"><%= actors['data'][i]['conflict'][0]['value']  %></td>
-      <td data-unit="<%= i == 0 ? actors['data'][i]['fire'][0]['unit'] : ''  %>"><%= actors['data'][i]['fire'][0]['value']  %></td>
-    </tr>
+  <% if(type === 't_head_places'){ %>
+    <thead>
+      <tr>
+        <th>Key sustainability indicators</th>
+        <th>Score</th>
+        <!-- <th>State Ranking</th> -->
+      </tr>
+    </thead>
   <% } %>
-</tbody>
+  <% if(type === 't_head_actors'){ %>
+    <thead>
+      <tr>
+        <% for(let i=0; i<data['includedColumns'].length; i++) { %>
+          <th> <%= data['includedColumns'][i]['name'] %> </th>
+        <% } %>
+      </tr>
+    </thead>
+  <% } %>
+
+  <% if(type === 'top_municipalities' || type === 'top_destination'){ %>
+    <tbody>
+      <% for(let i=0; i<data['lines'].length; i++) { %>
+        <tr>
+          <td><%= data['lines'][i]['name'] %></td>
+          <td><%= data['lines'][i]['values'] %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  <% } %>
+
+  <% if(type === 't_head_actors'){ %>
+    <tbody>
+      <% for(let i=0; i<data['rows'].length; i++) { %>
+      <tr>
+        <%  for(let j=0; j<data['rows'][i]['values'].length; j++){%>
+          <td data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : ''  %>">
+            <% if(data['rows'][i]['values'][j] != null){ %>
+              <%= data['rows'][i]['values'][j]['value'] %>
+            <% } else{ %>
+              0
+            <% } %>
+          </td>
+          <% } %>
+      </tr>
+      <% } %>
+    </tbody>
+  <% } %>
+
+  <% if(type === 't_head_places'){ %>
+    <tbody>
+      <% for(let i=0; i<data['rows'].length; i++) { %>
+        <%  for(let j=0; j<data['rows'][i]['values'].length; j++){%>
+        <tr>
+          <td> <%= data['includedColumns'][j]['name'] %> </td>
+          <td data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : ''  %>">
+              <%= data['rows'][i]['values'][j] %>
+          </td>
+        </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  <% } else {%>
+    <tbody>
+      <% for(let i=0; i<data.length; i++) { %>
+        <tr>
+          <td><%=i+1%>.<%= data[i]['name'] %> <svg class="icon icon-check"><use xlink:href="#icon-outside-link"/></svg></td>
+          <td data-unit="<%= i == 0 ? '%' : ''  %>"><%= data[i]['value'] %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  <% } %>
 </table>

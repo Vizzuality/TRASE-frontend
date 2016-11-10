@@ -14,7 +14,7 @@ import {
   axisLeft as d3_axis_left
 } from 'd3-axis';
 
-import { json as d3_json } from 'd3-request';
+// import { json as d3_json } from 'd3-request';
 import { extent as d3_extent } from 'd3-array';
 
 import _ from 'lodash';
@@ -26,6 +26,7 @@ export default class {
 
   constructor(settings) {
     this.el = settings.el;
+    this.data = settings.data;
 
     this.defaults = {
       margin: {
@@ -76,95 +77,89 @@ export default class {
     const g = svg.append('g')
         .attr('transform', `translate(${margins.left}, ${margins.top})`);
 
+    const years = [];
+    this.data.includedYears.forEach((year, yearIndex) => {
+      var yearObject = {
+        date: new Date(year, 0),
+        year
+      };
 
-    // change this
-    d3_json('factsheets/sample.json', (error, data)  => {
-
-      if (error) throw error;
-      const years = [];
-      data.metadata.includedYears.forEach((year, yearIndex) => {
-        var yearObject = {
-          date: new Date(year, 0),
-          year
-        };
-
-        data.data.forEach(municipality => {
-          yearObject[municipality.name] = municipality.values[yearIndex];
-        });
-
-        years.push(yearObject);
+      this.data.lines.forEach(municipality => {
+        yearObject[municipality.name] = municipality.values[yearIndex];
       });
 
-      const keys = data.data.map(municip => municip.name);
-
-      stack.keys(keys);
-
-      const stacked = stack(years);
-
-      // scale domains
-      x.domain(d3_extent(data.metadata.includedYears, function(y) { return new Date(y, 0); }));
-
-      // get max y value
-      var maxYearValue = 0;
-
-      data.metadata.includedYears.forEach((year, yearIndex) => {
-        var yearStackedValue = 0;
-        data.data.forEach(municipality => {
-          yearStackedValue += municipality.values[yearIndex];
-        });
-        if (yearStackedValue > maxYearValue) maxYearValue = yearStackedValue;
-      });
-
-      y.domain([0, maxYearValue]);
-
-      const layer = g.selectAll('.layer')
-        .data(stacked)
-        .enter().append('g')
-          .attr('class', 'layer');
-
-      layer.append('path')
-        .attr('class', 'area')
-        .style('fill', function(c, i) { return z[i]; })
-        .attr('d', area);
-
-      layer.filter(function(d) { return d[d.length - 1][1] - d[d.length - 1][0] > 0.01; }) //right text
-        .append('text')
-          .attr('class', 'tag')
-          .attr('x', width + 7)
-          .attr('y', function(d) { return y((d[d.length - 1][0] + d[d.length - 1][1]) / 2); })
-          .attr('dy', '.35em')
-          .text(function(d) { return d.key; });
-
-      // axis implementation
-      g.append('g')
-        .attr('class', 'axis axis--x')
-        .attr('transform', `translate(0, ${height} )`)
-        .call(d3_axis_bottom(x));
-
-      g.append('g')
-          .attr('class', 'axis axis--y')
-          .call(d3_axis_left(y).ticks(5, 's'));
-
-      g.selectAll('.axis--y > .tick')
-        .select('line') //grab the tick line
-        .attr('x2', width)
-        .attr('class', 'tick-line');
-
-
-      g.selectAll('.axis--y > .tick')
-        .select('text')
-        .attr('class', 'tick-text')
-        .attr('x', -16);
-
-      g.selectAll('.axis--x > .tick')
-        .select('line') //grab the tick line
-        .attr('class', 'tick-line') //style with a custom class and CSS
-        .attr('y2', 0);
-
-      g.selectAll('.axis--x > .tick')
-        .select('text')
-        .attr('class', 'tick-text')
-        .attr('y', 16);
+      years.push(yearObject);
     });
+
+    const keys = this.data.lines.map(municip => municip.name);
+
+    stack.keys(keys);
+
+    const stacked = stack(years);
+
+    // scale domains
+    x.domain(d3_extent(this.data.includedYears, function(y) { return new Date(y, 0); }));
+
+    // get max y value
+    var maxYearValue = 0;
+
+    this.data.includedYears.forEach((year, yearIndex) => {
+      var yearStackedValue = 0;
+      this.data.lines.forEach(municipality => {
+        yearStackedValue += municipality.values[yearIndex];
+      });
+      if (yearStackedValue > maxYearValue) maxYearValue = yearStackedValue;
+    });
+
+    y.domain([0, maxYearValue]);
+
+    const layer = g.selectAll('.layer')
+      .data(stacked)
+      .enter().append('g')
+        .attr('class', 'layer');
+
+    layer.append('path')
+      .attr('class', 'area')
+      .style('fill', function(c, i) { return z[i]; })
+      .attr('d', area);
+
+    layer.filter(function(d) { return d[d.length - 1][1] - d[d.length - 1][0] > 0.01; }) //right text
+      .append('text')
+        .attr('class', 'tag')
+        .attr('x', width + 7)
+        .attr('y', function(d) { return y((d[d.length - 1][0] + d[d.length - 1][1]) / 2); })
+        .attr('dy', '.35em')
+        .text(function(d) { return d.key; });
+
+    // axis implementation
+    g.append('g')
+      .attr('class', 'axis axis--x')
+      .attr('transform', `translate(0, ${height} )`)
+      .call(d3_axis_bottom(x));
+
+    g.append('g')
+        .attr('class', 'axis axis--y')
+        .call(d3_axis_left(y).ticks(5, 's'));
+
+    g.selectAll('.axis--y > .tick')
+      .select('line') //grab the tick line
+      .attr('x2', width)
+      .attr('class', 'tick-line');
+
+
+    g.selectAll('.axis--y > .tick')
+      .select('text')
+      .attr('class', 'tick-text')
+      .attr('x', -16);
+
+    g.selectAll('.axis--x > .tick')
+      .select('line') //grab the tick line
+      .attr('class', 'tick-line') //style with a custom class and CSS
+      .attr('y2', 0);
+
+    g.selectAll('.axis--x > .tick')
+      .select('text')
+      .attr('class', 'tick-text')
+      .attr('y', 16);
   }
 }

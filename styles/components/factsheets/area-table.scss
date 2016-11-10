@@ -1,14 +1,6 @@
 @import '../../settings';
 
 .c-area-table {
-  margin: 56px 0 0;
-
-  .title {
-    font-family: $font-family-1;
-    font-size: $font-size-x-regular;
-    font-weight: $font-weight-bold;
-    text-transform: uppercase;
-  }
 
   table {
     width: 100%;
@@ -53,8 +45,6 @@
           text-align: right;
 
           &:first-of-type {
-            display: flex;
-            align-items: center;
             text-align: left;
 
             .icon {
@@ -73,6 +63,35 @@
 
           span {
             opacity: .6;
+          }
+        }
+      }
+    }
+  }
+
+  &.-top-table {
+    width: 50%;
+
+    h1 {
+      text-transform: uppercase;
+    }
+
+    table {
+      margin-top: 8px;
+
+      thead {
+        display: none;
+      }
+
+      tbody {
+        tr {
+          border-bottom: 0;
+
+          td {
+            max-width: 300px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
           }
         }
       }

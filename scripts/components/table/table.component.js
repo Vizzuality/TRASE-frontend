@@ -1,27 +1,34 @@
 import TableTemplate from 'ejs!templates/table/table.ejs';
-// import TableTopTemplate from 'ejs!templates/table/tableTop.ejs';
 import 'whatwg-fetch';
 
 import 'styles/components/factsheets/area-table.scss';
 
 export default class {
-  constructor(value) {
-    this.data = null;
-    this.getData()
-      .then(response => response.json())
-      .then((json) => {
-        this.data = json;
-        this.render(value);
-      });
-  }
+  constructor(settings) {
+    this.el = settings.el; //place to show the table
+    this.type = settings.type;
+    this.data = settings.data;
 
-  getData() {
-    return fetch('factsheets/table.json');
+    if(this.type === 'top'){
+      for(let i=0; i<this.data.length; i++) {
+        this.data[i]['value'] = (this.data[i]['value']*100).toFixed(2);
+      }
+    }
+
+    if(this.type === 't_head_places') {
+      for(let i=0; i<this.data['rows'].length; i++) {
+        for(let j=0; j<this.data['rows'][i]['values'].length; j++){
+          if(this.data['rows'][i]['values'][j] == null){
+            this.data['rows'][i]['values'][j] = '0';
+          }
+        }
+      }
+    }
+    this.render();
   }
 
   render() {
-    var areamunicipalities = document.querySelector('.js-municipalities-table');
-    const template = TableTemplate({actors: this.data});
-    areamunicipalities.innerHTML = template;
+    const template = TableTemplate({data: this.data, type: this.type});
+    this.el.innerHTML = template;
   }
 }

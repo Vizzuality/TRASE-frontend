@@ -10,7 +10,7 @@ import 'styles/components/factsheets/area-select.scss';
 import 'styles/components/factsheets/info.scss';
 
 import Dropdown from 'components/dropdown.component';
-import AreaStack from 'components/graphs/area-stack.component';
+// import AreaStack from 'components/graphs/area-stack.component';  stack area future
 import Table from 'components/table/table.component';
 
 import { getUrlParams } from 'utils/stateURL';
@@ -20,36 +20,45 @@ const defaults = {
   commodity: 'soy',
 };
 
-const _renderAreaStack = () => {
-  const el = document.querySelector('.js-municipalities-top');
-
-  new AreaStack({
-    el
-  });
-};
-
-const _renderAreaStackSecond = () => {
-  const el = document.querySelector('.js-destination-top');
-
-  new AreaStack({
-    el
-  });
-};
-
-const _renderTable = () => {
-  new Table('municipalities');
-};
-
 const _onSelect = function(value) {
-  // updates dropdown's title with new value
   this.setTitle(value);
-  // updates default values with incoming ones
   defaults[this.id] = value;
 };
 
 const _setInfo = (type, name) => {
   document.querySelector('.js-legend').innerHTML = type || '-';
   document.querySelector('.js-name').innerHTML = name ? _.capitalize(name) : '-';
+};
+
+const _build = data => {
+  // new AreaStack({
+  //   el: document.querySelector('.js-municipalities-top'),
+  //   data: data.op_municipalities
+  // });
+  //
+  // new AreaStack({
+  //   el: document.querySelector('.js-destination-top'),
+  //   data: data.top_countries
+  // });
+
+  new Table({
+    el:document.querySelector('.js-municipalities-table'),
+    data: data.risk_indicators_municip,
+    type: 't_head_actors'
+  });
+
+
+  new Table({
+    el:document.querySelector('.js-municipalities-top'),
+    data: data.top_countries, // example
+    type: 'top_municipalities'
+  });
+
+  new Table({
+    el:document.querySelector('.js-destination-top'),
+    data: data.top_municipalities, // example
+    type: 'top_destination'
+  });
 };
 
 const _init = ()  => {
@@ -68,9 +77,7 @@ const _init = ()  => {
       const commodityDropdown = new Dropdown('commodity', _onSelect);
       commodityDropdown.setTitle(_.capitalize(commodity));
 
-      _renderAreaStack();
-      _renderAreaStackSecond();
-      _renderTable();
+      _build(data);
     });
 
 };

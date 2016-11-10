@@ -12,4 +12,21 @@
       margin: 0 0 0 72px;
     }
   }
+
+  .container-top-tables {
+    display: flex;
+    margin: 56px 0 112px;
+
+    .c-area-stacked-chart {
+      flex-basis: 50%;
+    }
+
+  }
+
+  .title {
+    font-family: $font-family-1;
+    font-weight: $font-weight-bold;
+    letter-spacing: -.6px;
+    text-transform: uppercase;
+  }
 }

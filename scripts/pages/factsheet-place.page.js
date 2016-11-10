@@ -12,7 +12,7 @@ import 'styles/components/factsheets/info.scss';
 import Dropdown from 'components/dropdown.component';
 import Line from 'components/graphs/line.component';
 import Chord from 'components/graphs/chord.component';
-import Top10 from 'components/graphs/top10.component';
+import Table from 'components/table/table.component';
 
 import { getUrlParams } from 'utils/stateURL';
 import _ from 'lodash';
@@ -25,9 +25,24 @@ const defaults = {
 const _build = data => {
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
   new Chord('.js-chord-traders', data.top_traders_matrix, data.top_traders, data.municip_name);
-  new Top10(document.querySelector('.js-top10-traders'), 'Top traders', data.top_traders, 4);
-  new Top10(document.querySelector('.js-top10-consumers'), 'Top consumers', data.top_consumers);
   new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
+  new Table({
+    el:document.querySelector('.js-table-traders'),
+    data: data.top_traders, // example
+    type: 'top'
+  });
+
+  new Table({
+    el:document.querySelector('.js-table-consumers'),
+    data: data.top_consumers, // example
+    type: 'top'
+  });
+
+  new Table({
+    el:document.querySelector('.js-score-table'),
+    data: data.sustainability_indicators, // example
+    type: 't_head_places'
+  });
 };
 
 const _onSelect = function(value) {
