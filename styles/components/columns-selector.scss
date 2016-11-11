@@ -3,18 +3,17 @@
 
 .c-columns-selector {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 32px;
 
   > .c-dropdown {
-    flex-grow: 1;
-    width: 25%;
-    padding: 0 50px;
+    width: 100px;
 
     &.-column-selector > .dropdown-title {
       padding: 0;
       font-family: $font-family-1;
       font-size: $font-size-regular;
-      text-align: center;
+      text-align: left;
       text-transform: uppercase;
 
       &::after {
