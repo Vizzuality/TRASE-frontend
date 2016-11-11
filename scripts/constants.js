@@ -6,7 +6,6 @@ export const DETAILED_VIEW_SCALE = 1200;
 export const DETAILED_VIEW_MIN_NODE_HEIGHT = 14;
 export const DETAILED_VIEW_MIN_LINK_HEIGHT = 1;
 export const AVAILABLE_YEARS = [2010, 2011, 2012, 2013, 2014, 2015, 2016];
-export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
 export const LEGEND_COLORS = {
   bidimensional: [
     '#8db6ca', '#8f8d94', '#694d52',
@@ -70,8 +69,13 @@ export const URL_STATE_PROPS = [
   'selectedColumnsIds'
 ];
 
+// index
+export const HOMEPAGE_COMMODITY_WHITELIST = ['SOY'];
+export const HOMEPAGE_COUNTRY_WHITELIST = ['BRAZIL'];
+
 
 // fact sheets
+export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
 export const STACK_AREA_COLORS = ['#ef6a68', '#ffae4f', '#76c370', '#69a4d0', '#9d7dbf'];
 export const CHORD_COLORS = ['#ea6869', '#34444c'];
 
