@@ -94,7 +94,7 @@ export default class {
     this.linksContainer = this.svg.select('.sankey-links');
 
     this.linkTooltip = document.querySelector('.js-sankey-tooltip');
-    this.linkTooltipHideDebounced = _.debounce(function() { document.querySelector('.js-sankey-tooltip').classList.add('is-hidden'); }, 100);
+    this.linkTooltipHideDebounced = _.debounce(function() { document.querySelector('.js-sankey-tooltip').classList.add('is-hidden'); }, 10);
 
     this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
 
@@ -210,6 +210,7 @@ export default class {
       })
       .attr('d', this.layout.link())
       .on('mouseover', function(link) {
+        that.linkTooltipHideDebounced.cancel();
         that.linkTooltip.innerHTML = LinkTooltipTemplate({link});
         that.linkTooltip.classList.remove('is-hidden');
         that.linkTooltip.style.left = d3_event.offsetX + 'px';
