@@ -1,5 +1,4 @@
 export default (number, type)  => {
-
   let numberChange;
 
   if(number != null){
@@ -20,5 +19,5 @@ export default (number, type)  => {
     numberChange = 'N/A';
   }
 
-  return numberChange;
+  return numberChange.toLocaleString();
 };
