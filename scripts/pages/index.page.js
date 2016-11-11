@@ -67,6 +67,11 @@ const _setButton = () => {
   const isValid = (HOMEPAGE_COMMODITY_WHITELIST.indexOf(defaults.commodity.toUpperCase()) !== -1) &&
   (HOMEPAGE_COUNTRY_WHITELIST.indexOf(defaults.country.toUpperCase()) !== -1);
 
+  if (isValid) {
+    findOutButton.innerHTML = 'FIND OUT HERE';
+  } else {
+    findOutButton.innerHTML = 'COMMING SOON';
+  }
 
   findOutButton.classList.toggle('-disabled', !isValid);
 };
