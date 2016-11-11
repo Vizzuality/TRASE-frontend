@@ -1,32 +1,36 @@
 import { LEGEND_COLORS } from 'constants';
-import LegendTemplate from 'ejs!templates/map/legend.ejs';
+import LegendChoroTemplate from 'ejs!templates/map/legend-choro.ejs';
+import LegendContextTemplate from 'ejs!templates/map/legend-context.ejs';
 import 'style/components/map/map-legend.scss';
 
 export default class {
 
   onCreated() {
-    this._setVars();
-    this._setEventListeners();
+    this.el = document.querySelector('.js-map-legend');
+    this.el.addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
+    this.choro = document.querySelector('.js-map-legend-choro');
+    this.context = document.querySelector('.js-map-legend-context');
   }
 
-  selectedVectorLayers(vectorLayers) {
-    this._setupLegend(vectorLayers);
+  selectVectorLayers({selectedVectorLayers, selectedMapContextualLayersData}) {
+    this._setupChoro(selectedVectorLayers, selectedMapContextualLayersData);
+  }
+
+  loadContextLayers({selectedVectorLayers, selectedMapContextualLayersData}) {
+    this._toggleLegend(selectedVectorLayers, selectedMapContextualLayersData);
+    this._renderContext(selectedMapContextualLayersData);
   }
 
   _setVars() {
     this.el = document.querySelector('.js-map-legend');
   }
 
-  _setEventListeners() {
-    this.el.addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
-  }
-
-  _setupLegend(vectorLayers) {
+  _setupChoro(vectorLayers, selectedMapContextualLayersData) {
     const horizontalLayer = vectorLayers['horizontal'];
     const verticalLayer = vectorLayers['vertical'];
 
     // Error handling
-    if(horizontalLayer === 'undefined' && verticalLayer === 'undefined') {
+    if (horizontalLayer === 'undefined' && verticalLayer === 'undefined') {
       throw ('At least one selected layer has to have colour palette');
     }
 
@@ -37,18 +41,27 @@ export default class {
     };
 
     if (this.el.hasChildNodes()) {
-      this._cleanLegend();
+      this._cleanChoro();
     }
 
-    if (!!settings.horizontal || !!settings.vertical) {
-      if (this.el.classList.contains('is-hidden')) {
-        this._showLegend();
-      }
+    this._toggleLegend(vectorLayers, selectedMapContextualLayersData);
 
-      this._renderLegend(settings);
+    if (!!settings.horizontal || !!settings.vertical) {
+      this._renderChoro(settings);
+    }
+  }
+
+  _toggleLegend(vectorLayers, selectedMapContextualLayersData) {
+    if ( (vectorLayers && vectorLayers['horizontal'] && vectorLayers['horizontal'].uid) ||
+         (vectorLayers && vectorLayers['vertical'] && vectorLayers['vertical'].uid) ||
+         (selectedMapContextualLayersData && selectedMapContextualLayersData.length > 0)
+       )
+    {
+      this._showLegend();
     } else {
       this._hideLegend();
     }
+
   }
 
   _showLegend() {
@@ -59,11 +72,11 @@ export default class {
     this.el.classList.add('is-hidden');
   }
 
-  _cleanLegend() {
-    this.el.innerHTML = '';
+  _cleanChoro() {
+    this.choro.innerHTML = '';
   }
 
-  _renderLegend(settings) {
+  _renderChoro(settings) {
     let colors = LEGEND_COLORS['horizontal'];
     let title = [];
     let cssClass = '';
@@ -81,7 +94,7 @@ export default class {
       cssClass = '-horizontal';
     }
 
-    const legendHTML = LegendTemplate({
+    const html = LegendChoroTemplate({
       title,
       colors,
       cssClass,
@@ -94,7 +107,14 @@ export default class {
       return;
     }
 
-    this.el.innerHTML = legendHTML;
+    this.choro.innerHTML = html;
 
+  }
+
+  _renderContext(layers) {
+    const html = LegendContextTemplate({
+      layers
+    });
+    this.context.innerHTML = html;
   }
 }

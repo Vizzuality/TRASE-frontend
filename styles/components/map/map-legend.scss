@@ -9,6 +9,10 @@
   cursor: pointer;
   z-index: 401;
 
+}
+
+.c-map-legend-choro {
+  margin-bottom: 10px;;
   > .bucket-container {
     display: flex;
     position: relative;
@@ -140,5 +144,48 @@
         }
       }
     }
+  }
+}
+
+.c-map-legend-context {
+  color: rgba($charcoal-grey, .5);
+  font-family: $font-family-1;
+  font-size: $font-size-small;
+  letter-spacing: -.5px;
+  text-transform: uppercase;
+
+  .cartodb-legend {
+    padding: 10px 0;
+  }
+
+  .cartodb-legend:not(:only-child):not(:last-child) {
+    border-bottom: 1px solid $pinkish-grey;
+  }
+
+  .bullet, .quartile {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+  }
+
+  .bullet {
+    margin-right: 5px;
+    border-radius: 99px;
+  }
+
+  .bullet-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 0;
+    background-size: contain;
+  }
+
+  .max, .min, .graph {
+    display: inline-block;
+    margin-right: 4px;
+  }
+
+  ul {
+    position: relative;
   }
 }
