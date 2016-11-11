@@ -40,3 +40,21 @@
 <script src="/webpack-dev-server.js"></script>
 <% } %>
 <style>.loading-wrapper { display: none }</style>
+<% if (!dev) { %>
+<!-- Google Analytics start -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-87285243-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- Google Analytics end -->
+<!-- Crazy Egg start -->
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0057/8220.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+<!-- Crazy Egg end -->
+<% } %>
