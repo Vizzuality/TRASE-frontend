@@ -1,5 +1,6 @@
 import TableTemplate from 'ejs!templates/table/table.ejs';
 import 'whatwg-fetch';
+import changeNumber from 'utils/changeNumber';
 
 import 'styles/components/factsheets/area-table.scss';
 
@@ -35,16 +36,14 @@ export default class {
 
     if(this.type === 'top'){
       for(let i=0; i<this.data.length; i++) {
-        this.data[i]['value'] = (this.data[i]['value']*100).toFixed(2);
+        this.data[i]['value'] = changeNumber(this.data[i]['value'], 'top');
       }
     }
 
     if(this.type === 't_head_places') {
       for(let i=0; i<this.data['rows'].length; i++) {
         for(let j=0; j<this.data['rows'][i]['values'].length; j++){
-          if(this.data['rows'][i]['values'][j] == null){
-            this.data['rows'][i]['values'][j] = 'N/A';
-          }
+          this.data['rows'][i]['values'][j] = changeNumber(this.data['rows'][i]['values'][j]);
         }
       }
     }
@@ -54,7 +53,6 @@ export default class {
   render() {
     const template = TableTemplate({data: this.data, type: this.type, link: this.link});
     this.el.innerHTML = template;
-
     this.el.parentElement.classList.remove('is-hidden');
   }
 }
