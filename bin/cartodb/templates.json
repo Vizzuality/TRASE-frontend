@@ -9,7 +9,7 @@
     "version": "0.0.1",
     "name": "water_scarcity",
     "human_name": "Water scarcity",
-    "legend":"<div class='cartodb-legend choropleth'> <ul><li class=\" min\" >Less</li><li class=\" max\" >More</li><li class=\" graph count_441\" ><div class=\" colors\" ><div class=\" quartile\"  style=\" background-color:#4575b4\" ></div><div class=\" quartile\"  style=\" background-color:#91bfdb\" ></div><div class=\" quartile\"  style=\" background-color:#e0f3f8\" ></div><div class=\" quartile\"  style=\" background-color:#ffffbf\" ></div><div class=\" quartile\"  style=\" background-color:#fee090\" ></div><div class=\" quartile\"  style=\" background-color:#fc8d59\" ></div><div class=\" quartile\"  style=\" background-color:#d73027\" ></div></div></li></ul></div>",
+    "legend":"<div class='cartodb-legend choropleth'> <ul><li class=\" min\" >Less</li><li class=\" graph count_441\" ><div class=\" colors\" ><div class=\" quartile\"  style=\" background-color:#4575b4\" ></div><div class=\" quartile\"  style=\" background-color:#91bfdb\" ></div><div class=\" quartile\"  style=\" background-color:#e0f3f8\" ></div><div class=\" quartile\"  style=\" background-color:#ffffbf\" ></div><div class=\" quartile\"  style=\" background-color:#fee090\" ></div><div class=\" quartile\"  style=\" background-color:#fc8d59\" ></div><div class=\" quartile\"  style=\" background-color:#d73027\" ></div></div></li><li class=\" max\" >More</li></ul></div>",
     "layergroup": {
       "version": "1.0.1",
       "layers": [
@@ -68,7 +68,7 @@
     "version": "0.0.1",
     "name": "silos",
     "human_name": "silos",
-    "legend":"<div class='cartodb-legend choropleth'><ul> <div class=\"bullet\" style=\"background:url(http://com.cartodb.users-assets.production.s3.amazonaws.com/simpleicon/building22.svg)\"></div> <li class=\"min\"> 0 - 1.5 tons </li> <li class=\"max\"> 31.5 - 6000.0 tons </li> <li class=\"graph count_441\"> <div class=\"colors\"> <div class=\"quartile\" style=\"background-color: #5CA2D1\"></div> <div class=\"quartile\" style=\"background-color:#3E7BB6\"></div> <div class=\"quartile\" style=\"background-color:#2167AB\"></div> <div class=\"quartile\" style=\"background-color:#0F3B82\"></div> <div class=\"quartile\" style=\"background-color:#081B47\"></div> </div> </li> </ul> </div>",
+    "legend":"<div class='cartodb-legend choropleth'><ul><li class=\"bullet bullet-icon\" style=\"background-image:url(http://com.cartodb.users-assets.production.s3.amazonaws.com/simpleicon/building22.svg)\"></li><li class=\"min\">0</li><li class=\"graph count_441\"><div class=\"colors\"><div class=\"quartile\" style=\"background-color: #5CA2D1\"></div><div class=\"quartile\" style=\"background-color:#3E7BB6\"></div><div class=\"quartile\" style=\"background-color:#2167AB\"></div><div class=\"quartile\" style=\"background-color:#0F3B82\"></div><div class=\"quartile\" style=\"background-color:#081B47\"></div></div></li><li class=\"max\"> > 30 tons </li> </ul> </div>",
     "forceZoom": 6,
     "layergroup": {
       "version": "1.0.1",
