@@ -11,28 +11,28 @@ require('dotenv').config({silent: true});
 // as well as webpack entry points
 const pages = {
   index: {
-    title: 'TRASE index'
+    title: 'TRASE'
   },
   flows: {
     title: 'TRASE flows'
   },
   factsheets: {
-    title: 'TRASE factsheets'
+    title: 'TRASE - Factsheets'
   },
   'factsheet-actor': {
-    title: 'TRASE actor factsheet'
+    title: 'TRASE - Factsheet'
   },
   'factsheet-place': {
-    title: 'TRASE place factsheet'
+    title: 'TRASE - Factsheet'
   },
   FAQ: {
-    title: 'TRASE FAQ'
+    title: 'TRASE - FAQ'
   },
   about: {
-    title: 'TRASE About'
+    title: 'TRASE - About'
   },
   'terms-of-use': {
-    title: 'TRASE Terms of use'
+    title: 'TRASE - Terms of use'
   }
 };
 
@@ -41,21 +41,26 @@ const htmlNavTemplate = _.template(fs.readFileSync('./html/includes/_nav.ejs', '
 const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
 
 const htmlScriptsTemplate = _.template(fs.readFileSync('./html/includes/_scripts.ejs', 'utf8'));
-const getPagePlugin = (id, title) => new HtmlWebpackPlugin({
-  inject: false,
-  head: htmlHeadTemplate({
-    title,
-    dev: process.env.NODE_ENV === 'development'
-  }),
-  nav: htmlNavTemplate({page: id}),
-  footer: htmlFooterTemplate(),
-  scripts: htmlScriptsTemplate({bundle: id}),
-  icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
-  filename: id+'.html',
-  template: './html/'+id+'.ejs',
-});
+const getPagePlugin = (id, params) => {
+  const title = params.title || 'TRASE';
+  const description = params.description || 'Trase brings unprecedented transparency to commodity supply chains revealing new pathways towards achieving a deforestation-free economy.';
+  return new HtmlWebpackPlugin({
+    inject: false,
+    head: htmlHeadTemplate({
+      title,
+      description,
+      dev: process.env.NODE_ENV === 'development'
+    }),
+    nav: htmlNavTemplate({page: id}),
+    footer: htmlFooterTemplate(),
+    scripts: htmlScriptsTemplate({bundle: id}),
+    icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
+    filename: id+'.html',
+    template: './html/'+id+'.ejs',
+  });
+};
 
-const pagePlugins = Object.keys(pages).map(id => getPagePlugin(id, pages[id].title));
+const pagePlugins = Object.keys(pages).map(id => getPagePlugin(id, pages[id]));
 const entry = _.mapValues(pages, (page, id) => './scripts/pages/' + id + '.page.js' );
 
 const config = {
