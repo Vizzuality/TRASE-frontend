@@ -17,7 +17,6 @@ export default class {
     } else {
       this.link = null;
     }
-debugger
     if (this.type === 'top') {
 
       if (this.data === 'undefined' || !this.data.length) return;
