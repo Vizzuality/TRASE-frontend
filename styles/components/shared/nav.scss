@@ -99,7 +99,6 @@
   .offset-container {
     display: flex;
     align-items: center;
-    height: 100%;
     padding: 0 $nav-padding;
 
     & + .offset-container,
@@ -233,6 +232,7 @@
     > .left-side,
     > .right-side {
       display: flex;
+      align-items: stretch;
     }
 
     > .left-side {
