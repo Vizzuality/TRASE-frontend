@@ -16,7 +16,7 @@ export default (number, type)  => {
       }
     }
   } else{ // if is null
-    numberChange = 'N/A';
+    numberChange = 0;
   }
 
   return numberChange.toLocaleString();

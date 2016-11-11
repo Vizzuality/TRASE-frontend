@@ -24,21 +24,11 @@ export default class {
       if (this.data === 'undefined' || !this.data.length) return;
 
     } else if(this.type === 'top_municipalities' || this.type ==='top_destination') {
-      for(let i=0; i<this.data['lines'].length; i++) {
-        this.data['lines'][i]['values'][0] = changeNumber(this.data['lines'][i]['values'][0]);
-      }
 
       if (!!this.data.includedYears && !this.data.includedYears.length ||
         !!this.data.lines && !this.data.lines.length) return;
 
-    } else if(this.type === 't_head_actors') {
-      for(var i=0; i<this.data['rows'].length; i++){
-        for(var j=1; j<this.data['rows'][i]['values'].length; j++){
-          if(this.data['rows'][i]['values'][j] != null){
-            this.data['rows'][i]['values'][j]['value'] = changeNumber(this.data['rows'][i]['values'][j]['value']);
-          }
-        }
-      }
+    } else {
 
       if (!!this.data.includedColumns && !this.data.includedColumns.length ||
         !!this.data.rows && !this.data.rows.length) return;
@@ -53,7 +43,11 @@ export default class {
     if(this.type === 't_head_places') {
       for(let i=0; i<this.data['rows'].length; i++) {
         for(let j=0; j<this.data['rows'][i]['values'].length; j++){
-          this.data['rows'][i]['values'][j] = changeNumber(this.data['rows'][i]['values'][j]);
+          if(this.data['rows'][i]['values'][j] == null){
+            this.data['rows'][i]['values'][j] = 'N/A';
+          } else {
+            this.data['rows'][i]['values'][j] = changeNumber(this.data['rows'][i]['values'][j]);
+          }
         }
       }
     }
