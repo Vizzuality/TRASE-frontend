@@ -102,12 +102,9 @@
     height: 100%;
     padding: 0 $nav-padding;
 
-    & + .offset-container {
-      border-left: 1px solid $silver;
-    }
-
+    & + .offset-container,
     & + .nav-param {
-      border-right: 1px solid $silver;
+      border-left: 1px solid $silver;
     }
   }
 
