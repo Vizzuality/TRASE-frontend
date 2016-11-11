@@ -1,5 +1,4 @@
 import 'styles/components/search.scss';
-import _ from 'lodash';
 import Awesomplete from 'awesomplete';
 import 'awesomplete/awesomplete.css';
 
@@ -46,9 +45,8 @@ export default class {
     this.input.addEventListener('awesomplete-selectcomplete', this._onAutocompleteSelected.bind(this));
   }
 
-  loadNodes(nodesDict) {
-    const nodesArray = _.values(nodesDict).filter(node => node.isAggregated !== true);
-    this.autocomplete.list = nodesArray;
+  loadNodes(nodes) {
+    this.autocomplete.list = nodes;
   }
 
   _onAutocompleteSelected(event) {

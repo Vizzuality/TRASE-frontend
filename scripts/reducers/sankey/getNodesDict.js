@@ -25,6 +25,10 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       newNode.isUnknown = true;
     }
 
+    if (node.hasFlows === true || node.hasFlows === 'true') {
+      newNode.hasFlows = true;
+    }
+
     newNode.link = getFactSheetLink(newNode.id, newNode.columnId);
 
     nodesDict[parseInt(node.id)] = newNode;
