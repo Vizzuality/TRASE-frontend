@@ -3,7 +3,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   max-width: $max-width-grid;
-  margin: 0 auto;
+  margin: 0 auto calc(40px - 3px);
 
   .row {
     display: flex;
@@ -52,10 +52,14 @@
     height: auto;
     padding: 40px 24px 24px;
 
+    border-bottom: 3px solid $pale-peach;
+    border-left: 3px solid $pale-peach;
+
     background-color: $medium-pink;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+
 
     @media screen and (min-width: $breakpoint-tablet) {
       height: 320px;
