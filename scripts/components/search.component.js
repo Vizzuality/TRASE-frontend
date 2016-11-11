@@ -50,8 +50,8 @@ export default class {
   }
 
   _onAutocompleteSelected(event) {
-    const nodeId = parseInt(JSON.parse(event.text.value).id);
-    this.callbacks.onNodeSelected(nodeId);
+    const node = JSON.parse(event.text.value);
+    this.callbacks.onNodeSelected(node.id, node.columnName);
   }
 
 }

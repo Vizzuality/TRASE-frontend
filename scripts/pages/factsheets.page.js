@@ -32,11 +32,8 @@ const _setSearch = () => {
     };
   };
 
-  const onNodeSelected =function() {
+  const onNodeSelected = function(nodeId, type) {
     let url = '';
-    const nodeId = parseInt(JSON.parse(event.text.value).id);
-    const type = JSON.parse(event.text.value).columnName;
-
     if (type === 'exporter' || type === 'importer') {
       url = `factsheet-actor.html?nodeId=${nodeId}`;
     } else {
