@@ -175,6 +175,16 @@ export default class {
 
     // update
     links.transition()
+      // TODO this should not bee needed becaus id is based on qual and ind
+      .attr('class', function(link) {
+        if (selectedRecolorBy.type === 'qual') {
+          return `sankey-link -qual-${selectedRecolorBy.value}-${link.qual}`;
+        } else if (selectedRecolorBy.type === 'ind') {
+          return `sankey-link -ind-${selectedRecolorBy.value}-${link.ind}`;
+        } else {
+          return 'sankey-link';
+        }
+      })
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
