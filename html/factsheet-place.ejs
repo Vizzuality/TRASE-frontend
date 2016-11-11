@@ -4,38 +4,38 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  <div class="loading-wrapper"></div>
-  <%= htmlWebpackPlugin.options.icons %>
-  <%= htmlWebpackPlugin.options.nav %>
-  <div class="l-factsheet-place js-factsheets">
-    <div class="c-loading -visible">Loading...</div>
-    <div class="wrap is-hidden">
-      <div class="container">
-        <div class="overall-map">
-          <ul class="map-list">
-            <li class="map-item">
-              <div class="map-shape js-shape-country"></div>
-              <div class="c-info">
-                <div class="legend">country</div>
-                <div class="name -medium js-country-name"> - </div>
-              </div>
-            </li>
-            <li class="map-item">
-              <div class="map-shape js-shape-state"></div>
-              <div class="c-info">
-                <div class="legend">state</div>
-                <div class="name -medium js-state-name"> - </div>
-              </div>
-            </li>
-            <li class="map-item">
-              <div class="map-shape js-shape-biome"></div>
-              <div class="c-info">
-                <div class="legend">biome</div>
-                <div class="name -medium js-biome-name"> - </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+  <div class="loading-wrapper">
+    <%= htmlWebpackPlugin.options.icons %>
+    <%= htmlWebpackPlugin.options.nav %>
+    <div class="l-factsheet-place js-factsheets">
+      <div class="c-loading -visible">Loading...</div>
+      <div class="wrap is-hidden">
+        <div class="container">
+          <div class="overall-map">
+            <ul class="map-list">
+              <li class="map-item">
+                <div class="map-shape js-shape-country"></div>
+                <div class="c-info">
+                  <div class="legend">country</div>
+                  <div class="name -medium js-country-name"> - </div>
+                </div>
+              </li>
+              <li class="map-item">
+                <div class="map-shape js-shape-state"></div>
+                <div class="c-info">
+                  <div class="legend">state</div>
+                  <div class="name -medium js-state-name"> - </div>
+                </div>
+              </li>
+              <li class="map-item">
+                <div class="map-shape js-shape-biome"></div>
+                <div class="c-info">
+                  <div class="legend">biome</div>
+                  <div class="name -medium js-biome-name"> - </div>
+                </div>
+              </li>
+            </ul>
+          </div>
           <div class="overall-info">
             <div class="municipality-map js-municipality-map"></div>
             <div class="municipality-data">
@@ -80,39 +80,38 @@
             </div>
           </div>
 
-
-        <div class="c-area-table score-table js-score-table">
-          <!-- table content here  -->
-        </div>
+          <div class="c-area-table score-table js-score-table">
+            <!-- table content here  -->
+          </div>
 
           <section class="deforestation">
             <h3 class="title -small">deforestation trajectory</h3>
             <div class="js-line c-line"></div>
           </section>
 
-        <section class="chords-container -traders">
-          <div class="js-chord-traders c-chord is-hidden"></div>
-          <div class="js-top10-traders c-top -traders c-area-table -top-table is-hidden">
-            <h3 class="title -small">Top Traders</h3>
-            <div class="js-table-traders"></div>
-          </div>
-        </section>
+          <section class="chords-container -traders">
+            <div class="js-chord-traders c-chord is-hidden"></div>
+            <div class="js-top10-traders c-top -traders c-area-table -top-table is-hidden">
+              <h3 class="title -small">Top Traders</h3>
+              <div class="js-table-traders"></div>
+            </div>
+          </section>
 
-        <section class="chords-container -consumers">
-          <div class="js-chord-consumers c-chord is-hidden"></div>
-          <div class="js-top10-consumers c-top -consumers c-area-table -top-table is-hidden">
-            <h3 class="title -small">Top Consumers</h3>
-            <div class="js-table-consumers"></div>
-          </div>
-        </section>
+          <section class="chords-container -consumers">
+            <div class="js-chord-consumers c-chord is-hidden"></div>
+            <div class="js-top10-consumers c-top -consumers c-area-table -top-table is-hidden">
+              <h3 class="title -small">Top Consumers</h3>
+              <div class="js-table-consumers"></div>
+            </div>
+          </section>
+        </div>
+        </div>
+        <div class="c-error-message js-error-message is-hidden">
+          <p class="message">Data not found</p>
         </div>
       </div>
-      <div class="c-error-message js-error-message is-hidden">
-        <p class="message">Data not found</p>
-      </div>
+      <%= htmlWebpackPlugin.options.footer %>
     </div>
-  </div>
-  <%= htmlWebpackPlugin.options.footer %>
   <%= htmlWebpackPlugin.options.scripts %>
 </body>
 </html>
