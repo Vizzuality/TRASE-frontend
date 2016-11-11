@@ -43,7 +43,7 @@ export default class {
       for(let i=0; i<this.data['rows'].length; i++) {
         for(let j=0; j<this.data['rows'][i]['values'].length; j++){
           if(this.data['rows'][i]['values'][j] == null){
-            this.data['rows'][i]['values'][j] = '0';
+            this.data['rows'][i]['values'][j] = 'N/A';
           }
         }
       }
