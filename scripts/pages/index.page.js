@@ -12,7 +12,7 @@ const defaults = {
 };
 
 const _setMap = () => {
-  const imagesItem = document.querySelectorAll('.map-gallery-item');
+  const imagesItem = Array.prototype.slice.call(document.querySelectorAll('.map-gallery-item'), 0);
   const commodity = defaults.commodity.toLowerCase();
   const country = defaults.country.toLowerCase();
   const imageName = `${commodity}-${country}`;
@@ -36,7 +36,7 @@ const _onSelectCommodity = function (value) {
 const _filterCountries = function () {
   const countryDropdownView = defaults.countryDropdown;
   const countryDropdownElem = countryDropdownView.el;
-  const dropdownItems = countryDropdownElem.querySelectorAll('.js-dropdown-item');
+  const dropdownItems = Array.prototype.slice.call(countryDropdownElem.querySelectorAll('.js-dropdown-item'), 0);
   const commodity = defaults.commodity.toLowerCase();
 
   // checks if the commodity belongs to the country
