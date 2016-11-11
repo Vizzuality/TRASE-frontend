@@ -85,7 +85,13 @@ export default class {
   }
 
   selectRecolorBy(data) {
-    const selectedRecolorByLegend = this.recolorByDropdown.el.querySelector(`[data-value="${data.value}"]`);
+    // TODO friday hack, this should not happen
+    let value = data.value;
+    if (value === undefined) {
+      value = 'none';
+    }
+
+    const selectedRecolorByLegend = this.recolorByDropdown.el.querySelector(`[data-value="${value}"]`);
     const selectedRecolorByLegendItems = Array.prototype.slice.call(
       selectedRecolorByLegend.querySelectorAll('.js-dropdown-item-legend li'), 0);
 
