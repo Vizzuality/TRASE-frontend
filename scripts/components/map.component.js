@@ -158,7 +158,7 @@ export default class {
     this.map.addLayer(layer);
   }
 
-  _createCartoLayer(layerData, i) {
+  _createCartoLayer(layerData /*, i */  ) {
     const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/{z}/{x}/{y}`;
     const layerUrl = `${baseUrl}.png`;
     // console.log(layerUrl)
@@ -169,15 +169,16 @@ export default class {
     this.contextLayers.push(layer);
     this.map.addLayer(layer);
 
-    if (i === 0) {
-      const utfGridUrl = `${baseUrl}.grid.json?callback={cb}`;
-      const utfGrid = new L.UtfGrid(utfGridUrl);
-
-      this.contextLayers.push(utfGrid);
-      this.map.addLayer(utfGrid, {
-        resolution: 2
-      });
-    }
+    // TODO enable again and make it work
+    // if (i === 0) {
+    //   const utfGridUrl = `${baseUrl}.grid.json?callback={cb}`;
+    //   const utfGrid = new L.UtfGrid(utfGridUrl);
+    //
+    //   this.contextLayers.push(utfGrid);
+    //   this.map.addLayer(utfGrid, {
+    //     resolution: 2
+    //   });
+    // }
   }
 
   _getVectorLayer(geoData, polygonClassName) {

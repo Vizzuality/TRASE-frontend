@@ -3,7 +3,7 @@
     "name": "landcover",
     "human_name": "Land cover",
     "rasterURL": "https://s3-eu-west-1.amazonaws.com/lulc/landcover_brazil_2015/",
-    "legend":"<div class='cartodb-legend custom'><ul><li><div class=\" bullet\"style=\" background:#008156\" ></div>Forest</li><li><div class=\" bullet\"style=\" background:#556B2F\" ></div>Forest plantations</li>	<li><div class=\" bullet\"style=\" background:#E1E196\" ></div>	Pastures</li><li><div class=\" bullet\"style=\" background:#E1A500\" ></div>Agriculture	</li><li><div class=\" bullet\"style=\" background:#00FFFF\" ></div>Coastal forest	</li><li><div class=\" bullet\"style=\" background:#00AFFF\" ></div>	Water</li><li><div class=\" bullet\"style=\" background:#F5F5F3\" ></div>Other vegetation</li><li><div class=\" bullet\"style=\" background:#3E3F40\" ></div>	Not observed</li></ul></div>"
+    "legend": "<div class='cartodb-legend custom'><ul><li><div class=\" bullet\"style=\" background:#008156\" ></div>Forest</li><li><div class=\" bullet\"style=\" background:#556B2F\" ></div>Forest plantations</li><li><div class=\" bullet\"style=\" background:#E1E196\" ></div>Pastures</li><li><div class=\" bullet\"style=\" background:#E1A500\" ></div>Agriculture</li><li><div class=\" bullet\"style=\" background:#00FFFF\" ></div>Coastal forest</li><li><div class=\" bullet\"style=\" background:#00AFFF\" ></div>Water</li><li><div class=\" bullet\"style=\" background:#F5F5F3\" ></div>Other vegetation</li><li><div class=\" bullet\"style=\" background:#3E3F40\" ></div>Not observed</li></ul></div>"
   },
   {
     "version": "0.0.1",
@@ -106,4 +106,3 @@
     }
   }
 ]
-

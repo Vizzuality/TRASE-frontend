@@ -64,6 +64,7 @@ function nextTemplate(res, template) {
     human_name: template.human_name,
     forceZoom: template.forceZoom,
     rasterURL: template.rasterURL,
+    legend: template.legend,
     layergroupid: res.layergroupid
   });
   currentTemplateIndex++;
