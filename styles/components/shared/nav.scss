@@ -157,6 +157,12 @@
             &:hover {
               > .submenu {
                 display: block;
+
+                .page-section {
+                  &:hover {
+                    background-color: $manilla;
+                  }
+                }
               }
             }
           }
