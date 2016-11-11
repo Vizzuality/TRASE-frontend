@@ -17,17 +17,6 @@
 
     border-right: 1px solid $silver;
 
-    > .offset-container {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      padding: 0 $nav-padding;
-
-      & + .offset-container {
-        border-left: 1px solid $silver;
-      }
-    }
-
     .burger {
       position: relative;
       width: 20px;
@@ -37,10 +26,8 @@
       transition: .5s ease-in-out;
       cursor: pointer;
 
-      &:hover {
-        > .ingredient {
-          background: $medium-pink;
-        }
+      &:hover > .ingredient {
+        background: $medium-pink;
       }
 
       > .ingredient {
@@ -106,6 +93,18 @@
           }
         }
       }
+    }
+  }
+
+  .offset-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 $nav-padding;
+
+    & + .offset-container,
+    & + .nav-param {
+      border-left: 1px solid $silver;
     }
   }
 
