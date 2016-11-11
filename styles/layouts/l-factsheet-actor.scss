@@ -33,7 +33,14 @@
 
     .c-area-stacked-chart {
       flex-basis: 50%;
-      padding-right: 20px;
+
+      &:first-of-type {
+        padding-right: 24px;
+      }
+
+      &:last-of-type {
+        padding-left: 24px;
+      }
     }
 
   }
