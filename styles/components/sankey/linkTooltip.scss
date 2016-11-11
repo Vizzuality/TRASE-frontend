@@ -1,0 +1,22 @@
+@import '../../settings';
+
+.c-sankey-tooltip {
+  position: absolute;
+  width: 200px;
+  box-shadow: $box-shadow-big;
+
+  > .title {
+    padding: 10px;
+    background-color: $manilla;
+    font-family: $font-family-1;
+    letter-spacing: -1px;
+
+  }
+
+  > .body {
+    padding: 10px;
+    background-color: $white;
+    font-family: $font-family-1;
+
+  }
+}

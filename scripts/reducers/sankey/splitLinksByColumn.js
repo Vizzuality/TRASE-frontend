@@ -6,11 +6,15 @@ export default function(rawLinks, nodesDict) {
     for (var i = 0; i < path.length-1; i++) {
       const sourceNodeId = path[i];
       const targetNodeId = path[i + 1];
+      const sourceNode = nodesDict[sourceNodeId];
+      const targetNode = nodesDict[targetNodeId];
       links.push({
         sourceNodeId,
         targetNodeId,
-        sourceColumnId: nodesDict[sourceNodeId].columnId,
-        targetColumnId: nodesDict[targetNodeId].columnId,
+        sourceColumnId: sourceNode.columnId,
+        targetColumnId: targetNode.columnId,
+        sourceNodeName: sourceNode.name,
+        targetNodeName: targetNode.name,
         height: link.height,
         quant: parseFloat(link.quant),
         qual: (link.qual === undefined || link.qual === null) ? 'none' : link.qual.replace(/\s/gi, '').toLowerCase(),
