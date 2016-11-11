@@ -144,6 +144,7 @@
             left: 0;
 
             > .page-section {
+              min-width: 192px;
               padding: 13px 24px;
               background-color: $white;
               white-space: nowrap;
