@@ -12,13 +12,22 @@
             <span class="ingredient"></span>
           </div>
         </div>
-      <% } %>
 
-      <div class="offset-container js-logo">
-        <a class="trase-logo" href="/">
-          <img src="images/logos/logo-trase-small.svg" alt="TRASE" />
-        </a>
-      </div>
+        <div class="offset-container js-logo">
+          <a class="trase-logo" href="/">
+            <img src="images/logos/logo-trase-beta.svg" alt="TRASE" />
+          </a>
+        </div>
+
+      <% } else { %>
+
+        <div class="offset-container js-logo">
+          <a class="trase-logo" href="/">
+            <img src="images/logos/logo-trase-small.svg" alt="TRASE" />
+          </a>
+        </div>
+
+      <% } %>
 
     <% } %>
   </div>
@@ -29,7 +38,14 @@
         <li class="<%= page === 'flows' ? 'page-section -selected' : 'page-section' %>"><a href="/flows.html">Tool</a></li>
         <li class="<%= page === 'factsheets' || page === 'factsheet-actor' || page === 'factsheet-place' ? 'page-section -selected' : 'page-section' %>"><a href="/factsheets.html">Factsheets</a></li>
         <li class="<%= page === 'FAQ' ? 'page-section -selected' : 'page-section' %>"><a href="/FAQ.html">FAQ</a></li>
-        <li class="<%= page === 'about' ? 'page-section -selected' : 'page-section' %>"><a href="/about.html">About</a></li>
+        <li class="<%= page === 'about' ? 'page-section -selected -has-menu' : 'page-section -has-menu' %>">
+          <a href="/about.html">About</a>
+          <ul class="submenu">
+            <li class="page-section">
+              <a href="/terms-of-use.html">Terms of use</a>
+            </li>
+          </ul>
+        </li>
       </nav>
     </div>
 
@@ -49,10 +65,15 @@
   <% if(page === 'flows') { %>
     <div class="flows-nav">
       <div class="left-side">
+        <div class="offset-container js-logo">
+          <a class="trase-logo" href="/">
+            <img src="images/logos/logo-trase-beta.svg" alt="TRASE" />
+          </a>
+        </div>
         <div class="nav-param">
           <div class="c-dropdown" data-dropdown="country">
             <span class="dropdown-label">Country</span>
-            <span class="js-dropdown-title dropdown-title">
+            <span class="js-dropdown-title dropdown-title -small">
               -
             </span>
             <ul class="js-dropdown-list dropdown-list">
@@ -68,7 +89,7 @@
         <div class="nav-param">
           <div class="c-dropdown" data-dropdown="commodity">
             <span class="dropdown-label">Commodity</span>
-            <span class="js-dropdown-title dropdown-title">
+            <span class="js-dropdown-title dropdown-title -small">
               -
             </span>
             <ul class="js-dropdown-list dropdown-list">
@@ -83,7 +104,7 @@
         <div class="nav-param">
           <div class="c-dropdown" data-dropdown="biomeFilter">
             <span class="dropdown-label">Biome</span>
-            <span class="js-dropdown-title dropdown-title">
+            <span class="js-dropdown-title dropdown-title -small">
               -
             </span>
             <ul class="js-dropdown-list dropdown-list">
@@ -101,7 +122,7 @@
         <div class="nav-param">
           <div class="c-dropdown" data-dropdown="years">
             <span class="dropdown-label">years</span>
-            <span class="js-dropdown-title dropdown-title">
+            <span class="js-dropdown-title dropdown-title -small">
               -
             </span>
             <ul class="js-dropdown-list dropdown-list">
@@ -116,7 +137,7 @@
         <div class="nav-param">
           <div class="c-dropdown -small" data-dropdown="quant">
             <span class="dropdown-label">Resize by</span>
-            <span class="js-dropdown-title dropdown-title">
+            <span class="js-dropdown-title dropdown-title -small">
               -
             </span>
             <ul class="js-dropdown-list dropdown-list -right">
@@ -135,7 +156,7 @@
         <div class="nav-param -color js-qual-dropdown">
           <div class="c-dropdown -small" data-dropdown="recolor-by">
             <span class="dropdown-label">Recolour by</span>
-            <span class="js-dropdown-title dropdown-title">
+            <span class="js-dropdown-title dropdown-title -small">
               -
             </span>
             <ul class="js-dropdown-list dropdown-list -large -right">
@@ -218,7 +239,7 @@
         <div class="nav-param">
           <div class="c-dropdown -small" data-dropdown="view">
             <span class="dropdown-label">Change view</span>
-            <span class="js-dropdown-title dropdown-title">
+            <span class="js-dropdown-title dropdown-title -small">
               -
             </span>
             <ul class="js-dropdown-list dropdown-list -right">

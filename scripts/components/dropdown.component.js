@@ -18,6 +18,10 @@ export default class {
   }
 
   selectValue(value) {
+    // TODO friday hack, this should not happen
+    if (value === undefined) {
+      value = 'none';
+    }
     const valueTitle =
       this.list.querySelector(`[data-value="${value}"] .js-dropdown-item-title`) ||
       this.list.querySelector(`[data-value="${value}"]`);

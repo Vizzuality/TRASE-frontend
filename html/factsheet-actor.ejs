@@ -9,19 +9,17 @@
   <div class="js-factsheets">
     <%= htmlWebpackPlugin.options.nav %>
     <div class="l-factsheet-actor">
+      <div class="c-loading -visible">Loading...</div>
       <div class="content ">
-        <div class="wrap">
+        <div class="wrap is-hidden">
           <div class="c-area-select">
             <div class="c-info">
               <div class="legend js-legend"> - </div>
               <div class="name js-name"> - </div>
             </div>
-
             <div class="c-dropdown -factsheets" data-dropdown="commodity">
               <span class="dropdown-label -big">Commodity</span>
-              <span class="js-dropdown-title dropdown-title">
-                -
-              </span>
+              <span class="js-dropdown-title dropdown-title">-</span>
               <ul class="js-dropdown-list dropdown-list">
                 <li class="js-dropdown-item dropdown-item" data-value="Soy">Soy</li>
                 <li class="js-dropdown-item dropdown-item">Coffee</li>
@@ -32,7 +30,6 @@
                 <li class="js-dropdown-item dropdown-item">Beef</li>
               </ul>
             </div>
-            
             <div class="contain-information">
               <div>
                 <span class="title-information">
@@ -41,7 +38,7 @@
                 <span class="value-information">
                   <svg class="icon icon-check"><use xlink:href="#icon-check-circle"/></svg>
                   <span>Yes</span>
-                <span>
+                </span>
               </div>
 
               <div>
@@ -54,45 +51,38 @@
                   <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
                   <svg class="icon star-icon"><use xlink:href="#icon-star"/></svg>
                   <svg class="icon star-icon"><use xlink:href="#icon-star-white"/></svg>
-                <span>
+                </span>
               </div>
             </div>
           </div>
 
           <div class="container-top-tables">
 
-            <div class="c-area-stacked-chart">
+            <div class="c-area-stacked-chart c-area-table -top-table is-hidden">
               <span class="title -small">TOP Source Municipalities in 2015</span>
-              <div class="c-area-table -top-table">
-                <div class="js-municipalities-top">
-                </div>
-              </div>
+              <div class="js-municipalities-top"></div>
             </div>
 
-            <div class="c-area-stacked-chart ">
+            <div class="c-area-stacked-chart c-area-table -top-table is-hidden">
               <span class="title -small">TOP destination Countries in 2015</span>
-              <div class="c-area-table -top-table">
-                <div class="js-destination-top">
-                </div>
-              </div>
+              <div class="js-destination-top"></div>
             </div>
 
           </div>
 
-          <div class="c-area-table ">
+          <div class="c-area-table is-hidden">
             <span class="title -small">Sustainability of source municipalities IN 2015</span>
-            <div class="js-municipalities-table">
-            </div>
+            <div class="js-municipalities-table"></div>
           </div>
-        </div>
+      </div>
+      <div class="c-error-message js-error-message is-hidden">
+        <p class="message">Data not found</p>
       </div>
     </div>
-
-
-    <%= htmlWebpackPlugin.options.footer %>
-
+    </div>
+    </div>
   </div>
-  </div>
+  <%= htmlWebpackPlugin.options.footer %>
   <%= htmlWebpackPlugin.options.scripts %>
 </body>
 </html>

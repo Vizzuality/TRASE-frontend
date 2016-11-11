@@ -1,8 +1,22 @@
 @import '../settings';
 
 .l-factsheet-actor {
+  position: relative;
+  min-height: calc(100vh - #{$nav-height});
   padding: 64px 0 96px;
   background-color: $pale-peach;
+
+  &.-error {
+    position: relative;
+    min-height: calc(100vh - #{$nav-height});
+
+    .c-error-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 
   .content {
     max-width: $max-width-grid;
@@ -19,6 +33,14 @@
 
     .c-area-stacked-chart {
       flex-basis: 50%;
+
+      &:first-of-type {
+        padding-right: 24px;
+      }
+
+      &:last-of-type {
+        padding-left: 24px;
+      }
     }
 
   }

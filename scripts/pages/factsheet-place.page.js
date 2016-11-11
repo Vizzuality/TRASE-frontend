@@ -5,9 +5,12 @@ import 'styles/_texts.scss';
 import 'styles/layouts/l-factsheet-place.scss';
 import 'styles/components/dropdown.scss';
 import 'styles/components/button.scss';
+import 'styles/components/loading.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/info.scss';
+import 'styles/components/factsheets/error.scss';
+import 'styles/components/loading.scss';
 
 import Dropdown from 'components/dropdown.component';
 import Line from 'components/graphs/line.component';
@@ -18,8 +21,8 @@ import { getURLParams } from 'utils/stateURL';
 import _ from 'lodash';
 
 const defaults = {
-  country: 'brazil',
-  commodity: 'soy'
+  country: 'Brazil',
+  commodity: 'Soy'
 };
 
 const _build = data => {
@@ -29,7 +32,8 @@ const _build = data => {
   new Table({
     el:document.querySelector('.js-table-traders'),
     data: data.top_traders, // example
-    type: 'top'
+    type: 'top',
+    target: 'actor'
   });
 
   new Table({
@@ -60,6 +64,14 @@ const _setInfo = (info) => {
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
 };
 
+const _showErrorMessage = () => {
+  const el = document.querySelector('.l-factsheet-place');
+  document.querySelector('.c-loading').classList.add('is-hidden');
+  el.classList.add('-error');
+  el.querySelector('.wrap').classList.add('is-hidden');
+  el.querySelector('.js-error-message').classList.remove('is-hidden');
+};
+
 const _init = () => {
   const url = window.location.search;
   const urlParams = getURLParams(url);
@@ -72,8 +84,22 @@ const _init = () => {
   commodityDropdown.setTitle(defaults.commodity);
 
   fetch(`${API_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=${country}&commodity=${commodity}`)
-    .then(response => response.json())
+    .then((response) => {
+      if (response.status === 404) {
+        _showErrorMessage();
+        return null;
+      }
+
+      if (response.status === 200) {
+        return response.json();
+      }
+    })
     .then((result) => {
+      if (!result) return;
+
+      document.querySelector('.c-loading').classList.add('is-hidden');
+      document.querySelector('.wrap').classList.remove('is-hidden');
+
       const data = result.data;
       const info = {
         biome: data.biome_name,

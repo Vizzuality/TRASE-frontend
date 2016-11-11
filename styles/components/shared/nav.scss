@@ -17,17 +17,6 @@
 
     border-right: 1px solid $silver;
 
-    > .offset-container {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      padding: 0 $nav-padding;
-
-      & + .offset-container {
-        border-left: 1px solid $silver;
-      }
-    }
-
     .burger {
       position: relative;
       width: 20px;
@@ -37,10 +26,8 @@
       transition: .5s ease-in-out;
       cursor: pointer;
 
-      &:hover {
-        > .ingredient {
-          background: $medium-pink;
-        }
+      &:hover > .ingredient {
+        background: $medium-pink;
       }
 
       > .ingredient {
@@ -109,6 +96,17 @@
     }
   }
 
+  .offset-container {
+    display: flex;
+    align-items: center;
+    padding: 0 $nav-padding;
+
+    & + .offset-container,
+    & + .nav-param {
+      border-left: 1px solid $silver;
+    }
+  }
+
   > .app-nav {
     display: flex;
     justify-content: space-between;
@@ -125,12 +123,12 @@
       > .page-section-list {
         display: flex;
 
-        > .page-section {
+        .page-section {
           display: inline-flex;
+          position: relative;
           align-items: flex-end;
           padding: 0 24px 13px;
 
-          border-right: 1px solid $silver;
 
           > a {
             color: $charcoal-grey;
@@ -138,6 +136,38 @@
             font-family: $font-family-2;
             font-size: $font-size-xx-regular;
           }
+
+          > .submenu {
+            display: none;
+            position: absolute;
+            top: $nav-height;
+            left: 0;
+
+            > .page-section {
+              padding: 13px 24px;
+              background-color: $white;
+              white-space: nowrap;
+              box-shadow: $box-shadow;
+            }
+          }
+
+          &.-has-menu {
+            &:hover {
+              > .submenu {
+                display: block;
+
+                .page-section {
+                  &:hover {
+                    background-color: $manilla;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        > .page-section {
+          border-right: 1px solid $silver;
         }
 
         > .page-section.-selected {
@@ -202,6 +232,7 @@
     > .left-side,
     > .right-side {
       display: flex;
+      align-items: stretch;
     }
 
     > .left-side {

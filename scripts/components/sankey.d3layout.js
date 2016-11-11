@@ -2,6 +2,8 @@ import wrapSVGText from 'utils/wrapSVGText';
 import { NUM_COLUMNS, DETAILED_VIEW_MIN_NODE_HEIGHT, DETAILED_VIEW_SCALE } from 'constants';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 
+const PADDING_X = 16;
+const PADDING_Y = 16;
 
 const sankeyLayout = function() {
   const sankeyLayout = {};
@@ -100,21 +102,21 @@ const sankeyLayout = function() {
   };
 
   const _computeNodeCoords = () => {
-    const availableLinkSpace = viewportWidth - NUM_COLUMNS * columnWidth;
+    const availableLinkSpace = viewportWidth - NUM_COLUMNS * columnWidth - PADDING_X * 2;
     linksColumnWidth = availableLinkSpace/(NUM_COLUMNS - 1);
 
     maxHeight = 0;
 
     columns.forEach((column, i) => {
       column.x = _getColumnX(i);
-      let columnY = 0;
+      let columnY = PADDING_Y;
       column.values.forEach(node => {
         node.x = column.x;
         node.y = columnY;
         if (detailedView === true) {
           node.renderedHeight = Math.max(DETAILED_VIEW_MIN_NODE_HEIGHT, DETAILED_VIEW_SCALE * node.height);
         } else {
-          node.renderedHeight = node.height * viewportHeight;
+          node.renderedHeight = node.height * (viewportHeight - PADDING_Y * 2);
         }
         columnY += node.renderedHeight;
       });
@@ -144,7 +146,7 @@ const sankeyLayout = function() {
       if (detailedView === true) {
         link.renderedHeight = link.height * DETAILED_VIEW_SCALE;
       } else {
-        link.renderedHeight = link.height * viewportHeight;
+        link.renderedHeight = link.height * (viewportHeight - PADDING_Y * 2);
       }
 
       const sId = link.sourceNodeId;
@@ -169,7 +171,7 @@ const sankeyLayout = function() {
     });
   };
 
-  const _getColumnX = (columnIndex) => columnIndex * (columnWidth + linksColumnWidth);
+  const _getColumnX = (columnIndex) => PADDING_X + columnIndex * (columnWidth + linksColumnWidth);
 
   const _getColumnIndex = (columnId) => columns.findIndex(column => column.columnId === columnId);
 
