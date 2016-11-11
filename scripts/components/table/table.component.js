@@ -31,9 +31,7 @@ export default class {
       if (!!this.data.includedYears && !this.data.includedYears.length ||
         !!this.data.lines && !this.data.lines.length) return;
 
-    } else {
-
-
+    } else if(this.type === 't_head_actors') {
       for(var i=0; i<this.data['rows'].length; i++){
         for(var j=1; j<this.data['rows'][i]['values'].length; j++){
           if(this.data['rows'][i]['values'][j] != null){

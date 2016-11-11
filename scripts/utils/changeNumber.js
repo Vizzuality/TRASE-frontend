@@ -10,7 +10,7 @@ export default (number, type)  => {
       }
     } else {
       if(number != 0){
-        numberChange = number.toFixed(10);
+        numberChange = number.toFixed(4);
       } else {
         numberChange = 0;
       }
