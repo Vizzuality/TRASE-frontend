@@ -1,6 +1,7 @@
 @import '../settings';
 
 .l-factsheet-actor {
+  min-height: calc(100vh - #{$nav-height});
   padding: 64px 0 96px;
   background-color: $pale-peach;
 
