@@ -22,7 +22,15 @@
     <tbody>
       <% for(var i=0; i<data['lines'].length; i++) { %>
         <tr>
-          <td><%= data['lines'][i]['name'] %></td>
+          <td><%= data['lines'][i]['name'] %>
+              <% if (link !== null) {%>
+              <a href="<%= link + data['lines'][i]['id'] %>">
+                  <svg class="icon icon-check">
+                      <use xlink:href="#icon-outside-link" />
+                  </svg>
+              </a>
+              <% } %>
+          </td>
           <td><%= data['lines'][i]['values'] %></td>
         </tr>
       <% } %>
