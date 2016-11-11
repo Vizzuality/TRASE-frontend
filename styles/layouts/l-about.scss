@@ -33,7 +33,7 @@
       > .logo-list {
         display: flex;
         align-items: center;
-        margin: 24px 0 0;
+        margin: 24px 0;
 
         > .logo-item {
           display: inline-block;
@@ -81,6 +81,22 @@
             width: 108px;
             height: 75px;
           }
+
+          &.-european-union > img {
+            width: 81px;
+            height: 51px;
+          }
+
+          &.-uk > img {
+            width: 51px;
+            height: 56px;
+          }
+
+          &.-sida > img {
+            width: 116px;
+            height: 46px;
+          }
+
         }
       }
     }
