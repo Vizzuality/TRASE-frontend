@@ -10,7 +10,7 @@
           <% } %>
         >
         <h3 class="post-title">
-          <a href="<%= highlightPost['post_url'] %>" target="_blank"><%= highlightPost.title %></a>
+          <a href="<%= highlightPost['complete_post_url'] %>" target="_blank"><%= highlightPost.title %></a>
         </h3>
         <% if(highlightPost.description) { %>
           <div class="description paragraph -white">
@@ -29,7 +29,7 @@
             <% } %>
             >
               <h3 class="post-title">
-                <a href="<%= post['post_url'] %>" target="_blank"><%= post.title %></a>
+                <a href="<%= post['complete_post_url'] %>" target="_blank"><%= post.title %></a>
               </h3>
               <% if(post.description) { %>
                 <div class="description paragraph -white">
@@ -52,7 +52,7 @@
           >
             <h3 class="post-title">
                 <a <% if(post['title_color']) { %> style="color:<%= post.title['title_color'] %>"<% } %>
-                   href="<%= post['post_url'] %>" target="_blank"><%= post.title %></a>
+                   href="<%= post['complete_post_url'] %>" target="_blank"><%= post.title %></a>
             </h3>
             <% if(post.description) { %>
               <div class="description paragraph -white">
