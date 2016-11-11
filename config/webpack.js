@@ -33,6 +33,9 @@ const pages = {
   },
   'terms-of-use': {
     title: 'TRASE - Terms of use'
+  },
+  'data-methods': {
+    title: 'TRASE - Data and methods'
   }
 };
 

@@ -1,0 +1,35 @@
+@import '../settings';
+
+.l-data-methods {
+  position: relative;
+  padding: 88px 0 104px ;
+  background-color: $pale-peach;
+
+  > .wrap {
+    position: relative;
+
+    > .c-anchor-list {
+      position: absolute;
+      top: 0;
+      width: $anchor-list-max-width;
+    }
+
+    .title {
+      margin: 0 0 16px;
+
+      &:not(:first-child) {
+        margin: 56px 0 16px;
+      }
+    }
+
+    > .content {
+      max-width: $content-max-width;
+      margin: 0 0 0 $anchor-list-max-width;
+
+      ul {
+        margin: 32px 0;
+        padding-left: 24px;
+      }
+    }
+  }
+}
