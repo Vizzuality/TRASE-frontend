@@ -66,8 +66,8 @@ const _setInfo = (info) => {
 
 const _showErrorMessage = () => {
   const el = document.querySelector('.l-factsheet-place');
+  document.querySelector('.c-loading').classList.add('is-hidden');
   el.classList.add('-error');
-
   el.querySelector('.wrap').classList.add('is-hidden');
   el.querySelector('.js-error-message').classList.remove('is-hidden');
 };

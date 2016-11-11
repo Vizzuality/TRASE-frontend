@@ -69,7 +69,7 @@ const _build = data => {
 const _showErrorMessage = () => {
   const el = document.querySelector('.l-factsheet-actor');
   el.classList.add('-error');
-
+  document.querySelector('.c-loading').classList.add('is-hidden');
   el.querySelector('.content >.wrap').classList.add('is-hidden');
   el.querySelector('.js-error-message').classList.remove('is-hidden');
 };

@@ -1,13 +1,14 @@
 @import '../settings';
 
 .l-factsheet-actor {
+  position: relative;
   min-height: calc(100vh - #{$nav-height});
   padding: 64px 0 96px;
   background-color: $pale-peach;
 
   &.-error {
     position: relative;
-    min-height: 400px;
+    min-height: calc(100vh - #{$nav-height});
 
     .c-error-message {
       position: absolute;
