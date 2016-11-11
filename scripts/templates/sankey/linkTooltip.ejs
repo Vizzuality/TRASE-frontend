@@ -1,0 +1,10 @@
+<div class="title">
+  <%= link.sourceNodeName %> > <%= link.targetNodeName %>
+</div>
+
+<div class="body">
+  <%= link.quant.toLocaleString(undefined, {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1
+  }) %>
+</div>

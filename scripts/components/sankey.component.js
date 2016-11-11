@@ -1,10 +1,14 @@
 import { select as d3_select /*, selectAll as d3_selectAll*/ } from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
 import  'd3-transition';
 import { DETAILED_VIEW_MIN_LINK_HEIGHT } from 'constants';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import getComputedSize from 'utils/getComputedSize';
 import 'styles/components/sankey.scss';
+import LinkTooltipTemplate from 'ejs!templates/sankey/linkTooltip.ejs';
+import 'styles/components/sankey/linkTooltip.scss';
+
 
 export default class {
 
@@ -87,6 +91,8 @@ export default class {
     this.svg = d3_select('.js-sankey-canvas');
     this.sankeyColumns = this.svg.selectAll('.sankey-column');
     this.linksContainer = this.svg.select('.sankey-links');
+
+    this.linkTooltip = document.querySelector('.js-sankey-tooltip');
 
     this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
 
@@ -201,7 +207,10 @@ export default class {
         }
       })
       .attr('d', this.layout.link())
-      .on('mouseover', function() {
+      .on('mouseover', function(link) {
+        that.linkTooltip.innerHTML = LinkTooltipTemplate({link});
+        that.linkTooltip.style.left = d3_event.offsetX + 'px';
+        that.linkTooltip.style.top = d3_event.offsetY + 'px';
         this.classList.add('-hover');
       })
       .on('mouseout', function() {
