@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { select as d3_select /*, selectAll as d3_selectAll*/ } from 'd3-selection';
 import { event as d3_event } from 'd3-selection';
 import  'd3-transition';
@@ -93,6 +94,7 @@ export default class {
     this.linksContainer = this.svg.select('.sankey-links');
 
     this.linkTooltip = document.querySelector('.js-sankey-tooltip');
+    this.linkTooltipHideDebounced = _.debounce(function() { document.querySelector('.js-sankey-tooltip').classList.add('is-hidden'); }, 100);
 
     this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
 
@@ -209,11 +211,13 @@ export default class {
       .attr('d', this.layout.link())
       .on('mouseover', function(link) {
         that.linkTooltip.innerHTML = LinkTooltipTemplate({link});
+        that.linkTooltip.classList.remove('is-hidden');
         that.linkTooltip.style.left = d3_event.offsetX + 'px';
         that.linkTooltip.style.top = d3_event.offsetY + 'px';
         this.classList.add('-hover');
       })
       .on('mouseout', function() {
+        that.linkTooltipHideDebounced();
         this.classList.remove('-hover');
       })
       .transition()
