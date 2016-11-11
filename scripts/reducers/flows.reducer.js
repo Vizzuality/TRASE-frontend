@@ -19,6 +19,7 @@ import getChoropleth from './sankey/getChoropleth';
 
 export default function (state = {}, action) {
   let newState;
+  let updateURLState = true;
 
   switch (action.type) {
 
@@ -133,6 +134,8 @@ export default function (state = {}, action) {
   }
 
   case actions.HIGHLIGHT_NODE: {
+    // TODO this prevents spamming browser history, but we should avoid touching it when changed state props are not on th url whitelist (constants.URL_STATE_PROPS)
+    updateURLState = false;
     const nodeIds = (action.nodeId === undefined) ? [] : [action.nodeId];
     const highlightedNodeMeta = getNodesMeta(nodeIds, state.visibleNodes);
     newState = Object.assign({}, state, {
@@ -144,6 +147,7 @@ export default function (state = {}, action) {
   }
 
   case actions.HIGHLIGHT_NODE_FROM_GEOID: {
+    updateURLState = false;
     const nodeId = getNodeIdFromGeoId(action.geoId, state.visibleNodes);
     if (nodeId === null) {
       newState = Object.assign({}, state, {
@@ -278,7 +282,9 @@ export default function (state = {}, action) {
     break;
   }
 
-  encodeStateToURL(newState);
+  if (updateURLState) {
+    encodeStateToURL(newState);
+  }
   return newState;
 }
 
