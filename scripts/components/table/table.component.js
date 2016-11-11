@@ -17,6 +17,7 @@ export default class {
     } else {
       this.link = null;
     }
+
     if (this.type === 'top') {
 
       if (this.data === 'undefined' || !this.data.length) return;

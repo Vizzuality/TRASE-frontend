@@ -5,6 +5,7 @@ import 'styles/_texts.scss';
 import 'styles/layouts/l-factsheet-place.scss';
 import 'styles/components/dropdown.scss';
 import 'styles/components/button.scss';
+import 'styles/components/loading.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/info.scss';
@@ -96,6 +97,9 @@ const _init = () => {
       if (!result) return;
 
       document.querySelector('.wrap').classList.remove('is-hidden');
+
+      // here loader
+      document.querySelector('.js-loading').classList.remove('-visible');
 
       const data = result.data;
       const info = {
