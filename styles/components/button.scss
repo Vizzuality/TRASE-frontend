@@ -42,4 +42,10 @@
   &.-big {
     padding: 16px 28px;
   }
+
+  &.-disabled {
+    border-color: rgba($charcoal-grey, .3);
+    color: rgba($charcoal-grey, .3);
+    pointer-events: none;
+  }
 }
