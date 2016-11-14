@@ -28,9 +28,19 @@ const _onSelect = function(value) {
   defaults[this.id] = value;
 };
 
-const _setInfo = (type, name) => {
+const _setInfo = (type, name, forest_500, zero_deforestation) => {
   document.querySelector('.js-legend').innerHTML = type || '-';
   document.querySelector('.js-name').innerHTML = name ? _.capitalize(name) : '-';
+  if (forest_500 > 0) document.querySelector('.forest-500-score .star-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (forest_500 > 1) document.querySelector('.forest-500-score .star-icon[data-value="2"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (forest_500 > 2) document.querySelector('.forest-500-score .star-icon[data-value="3"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (forest_500 > 3) document.querySelector('.forest-500-score .star-icon[data-value="4"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (forest_500 > 4) document.querySelector('.forest-500-score .star-icon[data-value="5"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (zero_deforestation === 'YES') {
+    document.querySelector('.zero-deforestation-commitment span[data-value="yes"]').classList.remove('is-hidden');
+  } else {
+    document.querySelector('.zero-deforestation-commitment span[data-value="no"]').classList.remove('is-hidden');
+  }
 };
 
 const _build = data => {
@@ -100,7 +110,7 @@ const _init = ()  => {
 
       const data = result.data;
 
-      _setInfo(data.column_name, data.node_name);
+      _setInfo(data.column_name, data.node_name, data.forest_500, data.zero_deforestation);
 
       const commodityDropdown = new Dropdown('commodity', _onSelect);
       commodityDropdown.setTitle(_.capitalize(commodity));
