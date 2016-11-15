@@ -2,20 +2,18 @@ import _ from 'lodash';
 import actions from 'actions';
 import { encodeStateToURL } from 'utils/stateURL';
 import { LEGEND_COLORS } from 'constants';
-import getNodesDict from './sankey/getNodesDict';
-import getVisibleNodes from './sankey/getVisibleNodes';
-import splitVisibleNodesByColumn from './sankey/splitVisibleNodesByColumn';
-import getVisibleColumns from './sankey/getVisibleColumns';
-import splitLinksByColumn from './sankey/splitLinksByColumn';
-import sortVisibleNodes from './sankey/sortVisibleNodes';
-import mergeLinks from './sankey/mergeLinks';
-import filterLinks from './sankey/filterLinks';
-import getNodeIdFromGeoId from './sankey/getNodeIdFromGeoId';
-import getSelectedNodesStillVisible from './sankey/getSelectedNodesStillVisible';
-import getSelectedNodesData from './sankey/getSelectedNodesData';
-import getMapLayers from './sankey/getMapLayers';
-import setNodesMeta from './sankey/setNodesMeta';
-import getChoropleth from './sankey/getChoropleth';
+import getNodesDict from './helpers/getNodesDict';
+import getVisibleNodes from './helpers/getVisibleNodes';
+import splitVisibleNodesByColumn from './helpers/splitVisibleNodesByColumn';
+import getVisibleColumns from './helpers/getVisibleColumns';
+import splitLinksByColumn from './helpers/splitLinksByColumn';
+import sortVisibleNodes from './helpers/sortVisibleNodes';
+import mergeLinks from './helpers/mergeLinks';
+import filterLinks from './helpers/filterLinks';
+import getSelectedNodesData from './helpers/getSelectedNodesData';
+import getMapLayers from './helpers/getMapLayers';
+import setNodesMeta from './helpers/setNodesMeta';
+import getChoropleth from './helpers/getChoropleth';
 
 export default function (state = {}, action) {
   let newState;
@@ -133,78 +131,26 @@ export default function (state = {}, action) {
     break;
   }
 
+  case actions.UPDATE_NODE_SELECTION: {
+    newState = Object.assign({}, state, {
+      selectedNodesIds: action.ids,
+      selectedNodesData: action.data,
+      selectedNodesGeoIds: action.geoIds,
+      selectedNodesColumnsPos: action.columnsPos
+    });
+    break;
+  }
+
   case actions.HIGHLIGHT_NODE: {
     // TODO this prevents spamming browser history, but we should avoid touching it when changed state props are not on th url whitelist (constants.URL_STATE_PROPS)
     updateURLState = false;
-    const nodeIds = (action.nodeId === undefined) ? [] : [action.nodeId];
-    const highlightedNodeMeta = getNodesMeta(nodeIds, state.visibleNodes);
     newState = Object.assign({}, state, {
-      highlightedNodesIds: nodeIds,
-      highlightedNodeData: highlightedNodeMeta.selectedNodesData,
-      highlightedGeoIds: highlightedNodeMeta.selectedNodesGeoIds
+      highlightedNodesIds: action.ids,
+      highlightedNodeData: action.data,
+      highlightedGeoIds: action.geoIds
     });
     break;
   }
-
-  case actions.HIGHLIGHT_NODE_FROM_GEOID: {
-    updateURLState = false;
-    const nodeId = getNodeIdFromGeoId(action.geoId, state.visibleNodes);
-    if (nodeId === null) {
-      newState = Object.assign({}, state, {
-        highlightedNodesIds: [],
-        // still send geoId even if nodeId not found, because we still want map polygon to highlight
-        highlightedGeoIds: [action.geoId],
-        highlightedNodeData: []
-      });
-      break;
-    }
-
-    const highlightedNodeMeta = getNodesMeta([nodeId], state.visibleNodes);
-    newState = Object.assign({}, state, {
-      highlightedNodesIds: [nodeId],
-      highlightedNodeData: highlightedNodeMeta.selectedNodesData,
-      highlightedGeoIds: [action.geoId]
-    });
-    break;
-  }
-
-  case actions.ADD_NODE_TO_SELECTION: {
-    const selectedNodesIds = getSelectedNodesIds(action.nodeId, state.selectedNodesIds);
-    const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
-    selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
-    newState = Object.assign({}, state, selectedNodesStateUpdates);
-    break;
-  }
-
-  case actions.ADD_NODE_TO_SELECTION_FROM_GEOID: {
-    const nodeId = getNodeIdFromGeoId(action.geoId, state.visibleNodes);
-    // node not found in visible nodes: abort
-    if (nodeId === null) {
-      newState = state;
-      break;
-    }
-
-    const selectedNodesIds = getSelectedNodesIds(nodeId, state.selectedNodesIds);
-    const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
-    selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
-    newState = Object.assign({}, state, selectedNodesStateUpdates);
-    break;
-  }
-
-  case actions.SELECT_SINGLE_NODE: {
-    newState = Object.assign({}, state, { selectedNodesIds: [action.nodeId] });
-    break;
-  }
-
-  // this is triggered when links are reloaded to keep track of selected node/links
-  case actions.RESELECT_NODES: {
-    const selectedNodesIds = getSelectedNodesStillVisible(state.visibleNodes, state.selectedNodesIds);
-    const selectedNodesStateUpdates = getNodesMeta(selectedNodesIds, state.visibleNodes);
-    selectedNodesStateUpdates.selectedNodesIds = selectedNodesIds;
-    newState = Object.assign({}, state, selectedNodesStateUpdates);
-    break;
-  }
-
 
   case actions.FILTER_LINKS_BY_NODES: {
     let links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, state.selectedNodesColumnsPos);
@@ -287,32 +233,6 @@ export default function (state = {}, action) {
   }
   return newState;
 }
-
-
-
-const getSelectedNodesIds = (addedNodeId, currentSelectedNodesIds) => {
-  const currentIndex = currentSelectedNodesIds.indexOf(addedNodeId);
-  let selectedNodesIds;
-  if (currentIndex > -1) {
-    selectedNodesIds = _.without(currentSelectedNodesIds, addedNodeId);
-  } else {
-    selectedNodesIds = [addedNodeId].concat(currentSelectedNodesIds);
-  }
-  return selectedNodesIds;
-};
-
-const getNodesMeta = (selectedNodesIds, visibleNodes) => {
-  // TODO use data from get_nodes API / state.nodesDictWithMeta along with get_flows / visibleNodes
-  const selectedNodesData = getSelectedNodesData(selectedNodesIds, visibleNodes);
-  const selectedNodesGeoIds = selectedNodesData.map(node => node.geoId).filter(geoId => geoId !== undefined);
-  const selectedNodesColumnsPos = selectedNodesData.map(node => node.columnPosition);
-
-  return {
-    selectedNodesData,
-    selectedNodesGeoIds,
-    selectedNodesColumnsPos
-  };
-};
 
 const getFilteredLinksByNodeIds = (unmergedLinks, selectedNodesIds, selectedNodesColumnsPos) => {
   if (selectedNodesIds.length > 0) {

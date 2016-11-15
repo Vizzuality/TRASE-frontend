@@ -1,8 +1,12 @@
 import 'whatwg-fetch';
+import _ from 'lodash';
 import actions from 'actions';
 import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
 import getURLFromParams from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
+import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
+import getNodesSelectionAction from './helpers/getNodesSelectionAction';
+import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible';
 
 
 export function resetState() {
@@ -201,10 +205,12 @@ export function loadLinks() {
           type: actions.GET_LINKS,
           payload
         });
-        dispatch({
-          type: actions.RESELECT_NODES
-        });
 
+        // reselect nodes
+        const selectedNodesIds = getSelectedNodesStillVisible(getState().flows.visibleNodes, getState().flows.selectedNodesIds);
+        const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta);
+        action.type = actions.UPDATE_NODE_SELECTION;
+        dispatch(action);
         if (getState().flows.selectedNodesIds && getState().flows.selectedNodesIds.length > 0) {
           dispatch({
             type: actions.FILTER_LINKS_BY_NODES
@@ -217,24 +223,20 @@ export function loadLinks() {
 
 export function loadMapVectorLayers() {
   return (dispatch) => {
-    _loadMapVectorLayers([
+    Promise.all([
       'municip.topo.hi.json',
       'states.topo.json',
       'biomes.topo.json'
-    ], dispatch);
+    ].map(url =>
+      fetch(url).then(resp => resp.text())
+    )).then(payload => {
+      dispatch({
+        type: actions.GET_GEO_DATA,
+        payload
+      });
+    });
   };
 }
-
-const _loadMapVectorLayers = (urls, dispatch) => {
-  Promise.all(urls.map(url =>
-    fetch(url).then(resp => resp.text())
-  )).then(payload => {
-    dispatch({
-      type: actions.GET_GEO_DATA,
-      payload
-    });
-  });
-};
 
 export function loadMapContextLayers() {
   return dispatch => {
@@ -259,22 +261,34 @@ export function loadMapContextLayers() {
   };
 }
 
-export function selectNode(nodeId, isAggregated) {
+export function selectNode(nodeId, isAggregated = false, replaceSelection = false) {
   return (dispatch, getState) => {
     if (isAggregated) {
       dispatch(selectView(true));
     } else {
-      // unselecting the node that is currently expanded: just shrink it and bail
       const expandedNodesIds = getState().flows.expandedNodesIds;
+      // we are unselecting the node that is currently expanded: just shrink it and bail
       if (expandedNodesIds && nodeId === expandedNodesIds[0]) {
         dispatch(toggleNodesExpand());
         return;
       }
 
-      dispatch({
-        type: actions.ADD_NODE_TO_SELECTION,
-        nodeId
-      });
+      let selectedNodesIds;
+      if (replaceSelection) {
+        selectedNodesIds = [nodeId];
+      } else {
+        const currentSelectedNodesIds = getState().flows.selectedNodesIds;
+        const currentIndex = currentSelectedNodesIds.indexOf(nodeId);
+        if (currentIndex > -1) {
+          selectedNodesIds = _.without(currentSelectedNodesIds, nodeId);
+        } else {
+          selectedNodesIds = [nodeId].concat(currentSelectedNodesIds);
+        }
+      }
+
+      const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta);
+      action.type = actions.UPDATE_NODE_SELECTION;
+      dispatch(action);
       dispatch({
         type: actions.FILTER_LINKS_BY_NODES
       });
@@ -283,14 +297,12 @@ export function selectNode(nodeId, isAggregated) {
 }
 
 export function selectNodeFromGeoId(geoId) {
-  return dispatch => {
-    dispatch({
-      type: actions.ADD_NODE_TO_SELECTION_FROM_GEOID,
-      geoId
-    });
-    dispatch({
-      type: actions.FILTER_LINKS_BY_NODES
-    });
+  return (dispatch, getState) => {
+    const nodeId = getNodeIdFromGeoId(geoId, getState().flows.nodesDict, getState().flows.selectedColumnsIds);
+
+    // TODO node not in visible Nodes ---> expand node (same behavior as search)
+
+    dispatch(selectNode(nodeId, false));
   };
 }
 
@@ -300,24 +312,20 @@ export function highlightNode(nodeId, isAggregated) {
       return;
     }
 
-    // TODO move this to reducer
     if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) {
       return;
     }
 
-    dispatch({
-      type: actions.HIGHLIGHT_NODE,
-      nodeId
-    });
+    const action = getNodesSelectionAction([nodeId], getState().flows.visibleNodes, getState().flows.nodesDictWithMeta);
+    action.type = actions.HIGHLIGHT_NODE;
+    dispatch(action);
   };
 }
 
 export function highlightNodeFromGeoId(geoId) {
-  return dispatch => {
-    dispatch({
-      type: actions.HIGHLIGHT_NODE_FROM_GEOID,
-      geoId
-    });
+  return (dispatch, getState) => {
+    const nodeId = getNodeIdFromGeoId(geoId, getState().flows.nodesDict, getState().flows.selectedColumnsIds);
+    dispatch(highlightNode(nodeId, false));
   };
 }
 
@@ -375,14 +383,12 @@ export function searchNode(nodeId) {
       // dispatch(selectView(true));
       // 2. as per SEI request: go to expanded node
       dispatch(toggleNodesExpand(true, true, nodeId));
-      dispatch({
-        type: actions.SELECT_SINGLE_NODE,
-        nodeId
-      });
+
+      // TODO Fix expanded mode appears with no node selected
+      //                                 // replace selection
+      dispatch(selectNode(nodeId, false, true));
     } else {
       dispatch(selectNode(nodeId, false));
     }
-
-
   };
 }
