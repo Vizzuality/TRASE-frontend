@@ -39,11 +39,12 @@ export default class {
   showLoadedMap(payload) {
     const geoData = payload.geoData;
     // TODO this statically maps vectorLayers indexes to column indexes, it should be dynamic
+    let municipalitiesLayer = this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality');
     this.vectorLayers = [
       this._getVectorLayer(geoData.biomes, 'map-polygon-biome'),
       this._getVectorLayer(geoData.states, 'map-polygon-state'),
-      this._getVectorLayer(geoData.municipalities, 'map-polygon-logistics-hub'),
-      this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality')
+      municipalitiesLayer, // logistics hubs
+      municipalitiesLayer // municipalities
     ];
     this.selectVectorLayer([payload.currentLayer]);
     if (payload.selectedNodesGeoIds) {
@@ -98,14 +99,14 @@ export default class {
   selectVectorLayer(columnIds) {
     if (!this.vectorLayers) return;
     const id = columnIds[0];
-    this.vectorLayers.forEach((layer, i) => {
-      if (id === i) {
-        this.currentLayer = layer;
-        this.map.addLayer(layer);
-      } else {
-        this.map.removeLayer(layer);
-      }
-    });
+    if (this.currentLayer) {
+      this.map.removeLayer(this.currentLayer);
+    }
+
+    this.currentLayer = this.vectorLayers[id];
+    // console.time('show');
+    this.map.addLayer(this.currentLayer);
+    // console.timeEnd('show');
   }
 
   loadContextLayers(selectedMapContextualLayersData) {
@@ -190,7 +191,9 @@ export default class {
       const geojson = topojson.feature(geoData, geoData.objects[key]);
       topoLayer.addData(geojson);
     });
+
     topoLayer.setStyle(() => { return { className: `${polygonClassName} map-polygon`}; });
+
 
     topoLayer.eachLayer(layer => {
       const that = this;
