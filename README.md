@@ -1,10 +1,25 @@
-# TRASE-frontend
+# TRASE
 
-Original prototype:
-https://ttp.sei-international.org/
+![TRASE](trase-screenshot.png)
 
-This project mainly uses D3 and Leaflet, plus Redux for managing app state. More on the stack:
-https://github.com/Vizzuality/TRASE-frontend/issues/9
+Source code for the [TRASE](https://trase.earth) front end.
+
+## About TRASE
+
+Trase brings unprecedented transparency to commodity supply chains revealing new pathways towards achieving a 
+deforestation-free economy.
+
+## About this project
+
+This project consists of only the frontend application for the TRASE website.
+All data displayed is loaded through requests to the TRASE API.
+
+This project mainly uses D3 and Leaflet, plus Redux for managing app state. 
+More on the stack [here](https://github.com/Vizzuality/TRASE-frontend/issues/9)
+
+Besides the frontend code, the project also includes a standalone nodejs web server, which should be used only for 
+development purposes
+
 
 ## Lexicon
 
@@ -23,48 +38,50 @@ https://github.com/Vizzuality/TRASE-frontend/issues/9
 
 ```
 
-## Run locally
+## Configuration
 
-### backend
-- Import Postgre database from this dump: https://github.com/sei-international/TRASE/tree/master/DB
-- Clone [the backend](https://github.com/sei-international/TRASE) and run the API server:
-```
-python API/server.py
-```
+The project's main configuration values can be set using [environment variables](https://en.wikipedia.org/wiki/Environment_variable)
 
-### frontend
-- Checkout develop branch
-- copy default env parameters
-```
-cp .env.sample.json .env
-```
-- install dependencies:
+* PORT: port used by the development web server. defaults to 8081
+* NODE_ENV: environment used by the nodejs tasks
+* AUTH_USER + AUTH_PASSWORD: if set, an auth wall is used by the nodejs development web server 
+* API_URL: URL of the data API
+* API_CMS_URL: URL of the homepage stories API
+* API_STORY_CONTENT: URL of the deep dive stories API
+
+If you are using the included development server, you can set those variables in the `.env` file (use the included `
+.env.sample` as an example)
+ 
+## Development set up
+- Check out the code from [github](github.com/Vizzuality/TRASE-frontend)
+
+- Install dependencies:
 ```
 npm i
 ```
-- and run:
+- Start the development server:
 ```
 npm run dev
 ```
 - [http://localhost:8081/](http://localhost:8081/)
 
-### generate CARTO named maps
+#### generate CARTO named maps
 
-- copy CARTO credentials:
+- Copy CARTO credentials:
 ```
 cp cp ./bin/cartodb/cartodb-config.sample.json ./bin/cartodb/cartodb-config.json
 ```
-- in cartodb-config.sample.json, replace api_key value
-- to update or instanciate context layers run
+- Replace api_key value in `cartodb-config.json` 
+- To update or instantiate context layers run
 ```
 ./bin/getContextMaps.sh
 ```
 This will use the layers configuration stored in `./bin/cartodb/templates.json` 
 
 
-## Deploy
+## Production
 
-Run `npm run build`, it will create a production-ready version of the project in /dist.
+Run `npm run build`, it will create a production-ready version of the project in `/dist`.
 
 
 ## LICENSE
