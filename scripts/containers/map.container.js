@@ -19,7 +19,8 @@ const mapMethodsToState = (state) => ({
   selectPolygons: state.flows.selectedNodesGeoIds,
   highlightPolygon: state.flows.highlightedGeoIds,
   setChoropleth: state.flows.choropleth,
-  loadContextLayers: state.flows.selectedMapContextualLayersData
+  loadContextLayers: state.flows.selectedMapContextualLayersData,
+  showLinkedGeoIds: state.flows.linkedGeoIds
 });
 
 const mapViewCallbacksToActions = () => ({

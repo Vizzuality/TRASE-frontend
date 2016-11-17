@@ -17,7 +17,7 @@ import getChoropleth from './helpers/getChoropleth';
 export default function (state = {}, action) {
   let newState;
   let updateURLState = true;
-console.log(action.type)
+
   switch (action.type) {
 
   case actions.LOAD_INITIAL_DATA: {
@@ -89,6 +89,14 @@ console.log(action.type)
     break;
   }
 
+  case actions.GET_LINKED_GEOIDS: {
+    const linkedGeoIds = action.payload.data;
+    // for now just flatten geoids, later we can remove this and dispaly different stules depending on 1st one, 2nd selected one, etc
+    const flattenedLinkedGeoIds = _.flatten(Object.keys(linkedGeoIds).map(nodeId => linkedGeoIds[nodeId]));
+
+    newState = Object.assign({}, state, { linkedGeoIds: flattenedLinkedGeoIds });
+    break;
+  }
 
   case actions.SELECT_COUNTRY:
     newState = Object.assign({}, state, { selectedCountry: action.country });

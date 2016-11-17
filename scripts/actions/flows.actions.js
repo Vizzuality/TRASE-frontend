@@ -227,6 +227,9 @@ export function loadLinks() {
             type: actions.FILTER_LINKS_BY_NODES
           });
         }
+
+        // load related geoIds to show on the map
+        dispatch(loadLinkedGeoIDs());
       });
   };
 }
@@ -298,10 +301,13 @@ export function selectNode(nodeId, isAggregated = false) {
       action.type = actions.UPDATE_NODE_SELECTION;
       dispatch(action);
 
-      // refilter links by selected nodes 
+      // refilter links by selected nodes
       dispatch({
         type: actions.FILTER_LINKS_BY_NODES
       });
+
+      // load related geoIds to show on the map
+      dispatch(loadLinkedGeoIDs());
     }
   };
 }
@@ -369,6 +375,8 @@ export function toggleNodesExpand(forceExpand = false, forceExpandNodeId) {
     }
 
     dispatch(loadLinks());
+    // load related geoIds to show on the map
+    dispatch(loadLinkedGeoIDs());
   };
 }
 
@@ -396,6 +404,37 @@ export function searchNode(nodeId) {
     } else {
       dispatch(selectNode(nodeId, false));
     }
+  };
+}
+
+export function loadLinkedGeoIDs() {
+  return (dispatch, getState) => {
+    const selectedNodesIds = getState().flows.selectedNodesIds;
+    if (selectedNodesIds.length === 0) {
+      dispatch({
+        type: actions.GET_LINKED_GEOIDS,
+        payload: {data:{}}
+      });
+      return;
+    }
+    dispatch({
+      type: actions.LOAD_MAP
+    });
+    const params = {
+      node_ids: selectedNodesIds.join(','),
+      column_id: getState().flows.selectedColumnsIds[0]
+    };
+    // const url = getURLFromParams('/v1/get_linked_geoids', params);
+    const url = 'get_linked_geoids.json';
+
+    fetch(url)
+      .then(res => res.text())
+      .then(payload => {
+        dispatch({
+          type: actions.GET_LINKED_GEOIDS,
+          payload: JSON.parse(payload)
+        });
+      });
   };
 }
 
