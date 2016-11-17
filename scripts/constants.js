@@ -1,6 +1,7 @@
 // flows
 export const NUM_COLUMNS = 4;
 export const NUM_NODES_SUMMARY = 10;
+export const NUM_NODES_EXPANDED = 100;
 export const NUM_NODES_DETAILED = 999;
 export const DETAILED_VIEW_SCALE = 1200;
 export const DETAILED_VIEW_MIN_NODE_HEIGHT = 14;

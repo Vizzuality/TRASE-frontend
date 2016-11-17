@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import _ from 'lodash';
 import actions from 'actions';
-import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
+import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
 import getURLFromParams from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
 import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
@@ -163,8 +163,6 @@ export function loadNodes() {
 
 export function loadLinks() {
   return (dispatch, getState) => {
-    console.log('links queried' + Math.random())
-
     dispatch({
       type: actions.LOAD_LINKS
     });
@@ -174,9 +172,17 @@ export function loadLinks() {
       year_start: getState().flows.selectedYears[0],
       year_end: getState().flows.selectedYears[1],
       include_columns: getState().flows.selectedColumnsIds.join(','),
-      n_nodes: getState().flows.detailedView === true ? NUM_NODES_DETAILED : NUM_NODES_SUMMARY,
       flow_quant: getState().flows.selectedQuant
     };
+
+    if (getState().flows.detailedView === true) {
+      params.n_nodes = NUM_NODES_DETAILED;
+    } else if (getState().flows.areNodesExpanded === true) {
+      params.n_nodes = NUM_NODES_EXPANDED;
+    } else {
+      params.n_nodes = NUM_NODES_SUMMARY;
+
+    }
 
     const selectRecolorByType = getState().flows.selectedRecolorBy.type;
     const selectRecolorByValue = getState().flows.selectedRecolorBy.value;
@@ -204,7 +210,6 @@ export function loadLinks() {
     fetch(url)
       .then(res => res.text())
       .then(payload => {
-        console.log('links fetched' + Math.random())
         dispatch({
           type: actions.GET_LINKS,
           payload
