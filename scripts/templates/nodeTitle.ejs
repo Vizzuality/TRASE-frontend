@@ -19,7 +19,7 @@
 
   <div class="column">
     <div class="column-title"><%= node.columnName %></div>
-    <div class="column-content"><%= node.name %></div>
+    <div class="column-content"><%= node.name %><!-- <%= node.id %> <%= node.geoId %> --></div>
   </div>
 
   <div class="column">
@@ -27,18 +27,13 @@
     <div class="column-content"><%= node.quantNice %>&thinsp;<span class="unit"><%= node.quantUnit %></span></div>
   </div>
 
-  <% if (node.meta) { %>
-  <% Object.keys(node.meta).forEach(function(metaUid) { %>
+  <% node.selectedMetas.forEach(function(meta) { %>
     <div class="column">
-      <div class="column-title"><%= node.meta[metaUid].name %></div>
-      <div class="column-content"><%= node.meta[metaUid].rawValue %>
-        <% if (node.meta[metaUid].unit) { %>
-          &thinsp;<span class="unit"><%= node.quantUnit %></span>
-        <% } %>
+      <div class="column-title"><%= meta.name %></div>
+      <div class="column-content"><span class="value"><%= meta.rawValueNice %></span><% if (meta.unit) { %>&thinsp;<span class="unit"><%= meta.unit %></span><% } %>
       </div>
     </div>
   <% }) %>
-  <% } %>
 
   <% if (node.link) { %>
     <div class="column">

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import niceNumber from 'utils/niceNumber';
 import getNodeMetaUid from './getNodeMetaUid';
 
 export default function(nodesDict, nodesMeta, layers) {
@@ -19,6 +20,7 @@ export default function(nodesDict, nodesMeta, layers) {
         const uid = getNodeMetaUid(layerValue.type, layerValue.id);
         nodeWithMeta.meta[uid] = {
           rawValue: layerValue.rawValue,
+          rawValueNice: niceNumber(layerValue.rawValue),
           value3: layerValue.value3,
           value5: layerValue.value5,
           name: layersByUID[uid].name,

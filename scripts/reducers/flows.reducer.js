@@ -10,7 +10,6 @@ import splitLinksByColumn from './helpers/splitLinksByColumn';
 import sortVisibleNodes from './helpers/sortVisibleNodes';
 import mergeLinks from './helpers/mergeLinks';
 import filterLinks from './helpers/filterLinks';
-import getSelectedNodesData from './helpers/getSelectedNodesData';
 import getMapLayers from './helpers/getMapLayers';
 import setNodesMeta from './helpers/setNodesMeta';
 import getChoropleth from './helpers/getChoropleth';
@@ -79,16 +78,12 @@ export default function (state = {}, action) {
     const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict);
     const links = mergeLinks(unmergedLinks);
 
-    // we also need to refresh nodes data (used in titles), because values change when year or quant changes
-    const selectedNodesData = getSelectedNodesData(state.selectedNodesIds, visibleNodes);
-
     newState = Object.assign({}, state, {
       links,
       unmergedLinks,
       visibleNodes,
       visibleNodesByColumn,
       visibleColumns,
-      selectedNodesData,
       linksLoading: false
     });
     break;

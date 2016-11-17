@@ -208,7 +208,7 @@ export function loadLinks() {
 
         // reselect nodes
         const selectedNodesIds = getSelectedNodesStillVisible(getState().flows.visibleNodes, getState().flows.selectedNodesIds);
-        const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta);
+        const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta,getState().flows.selectedVectorLayers);
         action.type = actions.UPDATE_NODE_SELECTION;
         dispatch(action);
         if (getState().flows.selectedNodesIds && getState().flows.selectedNodesIds.length > 0) {
@@ -286,7 +286,7 @@ export function selectNode(nodeId, isAggregated = false, replaceSelection = fals
         }
       }
 
-      const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta);
+      const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta, getState().flows.selectedVectorLayers);
       action.type = actions.UPDATE_NODE_SELECTION;
       dispatch(action);
       dispatch({
@@ -316,7 +316,7 @@ export function highlightNode(nodeId, isAggregated) {
       return;
     }
 
-    const action = getNodesSelectionAction([nodeId], getState().flows.visibleNodes, getState().flows.nodesDictWithMeta);
+    const action = getNodesSelectionAction([nodeId], getState().flows.visibleNodes, getState().flows.nodesDictWithMeta, getState().flows.selectedVectorLayers);
     action.type = actions.HIGHLIGHT_NODE;
     dispatch(action);
   };
