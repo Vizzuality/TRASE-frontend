@@ -272,7 +272,7 @@ export function loadMapContextLayers() {
   };
 }
 
-export function selectNode(nodeId, isAggregated = false, replaceSelection = false) {
+export function selectNode(nodeId, isAggregated = false) {
   return (dispatch, getState) => {
     if (isAggregated) {
       dispatch(selectView(true));
@@ -284,22 +284,21 @@ export function selectNode(nodeId, isAggregated = false, replaceSelection = fals
         return;
       }
 
+      // remove or add nodeId from selectedNodesIds
+      const currentSelectedNodesIds = getState().flows.selectedNodesIds;
       let selectedNodesIds;
-      if (replaceSelection) {
-        selectedNodesIds = [nodeId];
+      if (currentSelectedNodesIds.indexOf(nodeId) > -1) {
+        selectedNodesIds = _.without(currentSelectedNodesIds, nodeId);
       } else {
-        const currentSelectedNodesIds = getState().flows.selectedNodesIds;
-        const currentIndex = currentSelectedNodesIds.indexOf(nodeId);
-        if (currentIndex > -1) {
-          selectedNodesIds = _.without(currentSelectedNodesIds, nodeId);
-        } else {
-          selectedNodesIds = [nodeId].concat(currentSelectedNodesIds);
-        }
+        selectedNodesIds = [nodeId].concat(currentSelectedNodesIds);
       }
 
+      // send to state the new node selection allong with new data, geoIds, etc
       const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta, getState().flows.selectedVectorLayers);
       action.type = actions.UPDATE_NODE_SELECTION;
       dispatch(action);
+
+      // refilter links by selected nodes 
       dispatch({
         type: actions.FILTER_LINKS_BY_NODES
       });
@@ -313,7 +312,7 @@ export function selectNodeFromGeoId(geoId) {
 
     // node not in visible Nodes ---> expand node (same behavior as search)
     if (!_isNodeVisible(getState, nodeId)) {
-      dispatch(toggleNodesExpand(true, true, nodeId));
+      dispatch(toggleNodesExpand(true, nodeId));
     } else {
       dispatch(selectNode(nodeId, false));
     }
@@ -343,7 +342,7 @@ export function highlightNodeFromGeoId(geoId) {
   };
 }
 
-export function toggleNodesExpand(reloadLinks = true, forceExpand = false, forceExpandNodeId) {
+export function toggleNodesExpand(forceExpand = false, forceExpandNodeId) {
   return (dispatch, getState) => {
     dispatch({
       type: actions.TOGGLE_NODES_EXPAND,
@@ -369,10 +368,7 @@ export function toggleNodesExpand(reloadLinks = true, forceExpand = false, force
       });
     }
 
-
-    if (reloadLinks) {
-      dispatch(loadLinks());
-    }
+    dispatch(loadLinks());
   };
 }
 
@@ -395,7 +391,7 @@ export function searchNode(nodeId) {
       // 1. before: go to detailed mode and select
       // dispatch(selectView(true));
       // 2. as per SEI request: go to expanded node
-      dispatch(toggleNodesExpand(true, true, nodeId));
+      dispatch(toggleNodesExpand(true, nodeId));
 
     } else {
       dispatch(selectNode(nodeId, false));
