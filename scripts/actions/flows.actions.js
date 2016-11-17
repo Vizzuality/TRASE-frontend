@@ -50,14 +50,16 @@ export function selectView(detailedView, reloadLinks) {
   return _reloadLinks('detailedView', detailedView, actions.SELECT_VIEW, reloadLinks);
 }
 
-export function selectColumn(columnIndex, columnId) {
+export function selectColumn(columnIndex, columnId, reloadLinks = true) {
   return dispatch => {
     dispatch({
       type: actions.SELECT_COLUMN,
       columnIndex,
       columnId
     });
-    dispatch(loadLinks());
+    if (reloadLinks) {
+      dispatch(loadLinks());
+    }
   };
 }
 
@@ -161,6 +163,8 @@ export function loadNodes() {
 
 export function loadLinks() {
   return (dispatch, getState) => {
+    console.log('links queried' + Math.random())
+
     dispatch({
       type: actions.LOAD_LINKS
     });
@@ -200,17 +204,19 @@ export function loadLinks() {
     fetch(url)
       .then(res => res.text())
       .then(payload => {
-
+        console.log('links fetched' + Math.random())
         dispatch({
           type: actions.GET_LINKS,
           payload
         });
 
-        // reselect nodes
+        // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
         const selectedNodesIds = getSelectedNodesStillVisible(getState().flows.visibleNodes, getState().flows.selectedNodesIds);
+
         const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta,getState().flows.selectedVectorLayers);
         action.type = actions.UPDATE_NODE_SELECTION;
         dispatch(action);
+
         if (getState().flows.selectedNodesIds && getState().flows.selectedNodesIds.length > 0) {
           dispatch({
             type: actions.FILTER_LINKS_BY_NODES
@@ -300,9 +306,12 @@ export function selectNodeFromGeoId(geoId) {
   return (dispatch, getState) => {
     const nodeId = getNodeIdFromGeoId(geoId, getState().flows.nodesDict, getState().flows.selectedColumnsIds);
 
-    // TODO node not in visible Nodes ---> expand node (same behavior as search)
-
-    dispatch(selectNode(nodeId, false));
+    // node not in visible Nodes ---> expand node (same behavior as search)
+    if (!_isNodeVisible(getState, nodeId)) {
+      dispatch(toggleNodesExpand(true, true, nodeId));
+    } else {
+      dispatch(selectNode(nodeId, false));
+    }
   };
 }
 
@@ -364,8 +373,7 @@ export function toggleNodesExpand(reloadLinks = true, forceExpand = false, force
 
 export function searchNode(nodeId) {
   return (dispatch, getState) => {
-    const currentVisibleNodesIds = getState().flows.visibleNodes.map(node => node.id);
-    if (currentVisibleNodesIds.indexOf(nodeId) === -1) {
+    if (!_isNodeVisible(getState, nodeId)) {
 
       // check if we need to swap column
       const node = getState().flows.nodesDict[nodeId];
@@ -377,18 +385,17 @@ export function searchNode(nodeId) {
         return;
       }
       if (currentColumnAtPos !== node.columnId) {
-        dispatch(selectColumn(columnPos, node.columnId));
+        dispatch(selectColumn(columnPos, node.columnId, false));
       }
       // 1. before: go to detailed mode and select
       // dispatch(selectView(true));
       // 2. as per SEI request: go to expanded node
       dispatch(toggleNodesExpand(true, true, nodeId));
 
-      // TODO Fix expanded mode appears with no node selected
-      //                                 // replace selection
-      dispatch(selectNode(nodeId, false, true));
     } else {
       dispatch(selectNode(nodeId, false));
     }
   };
 }
+
+const _isNodeVisible = (getState, nodeId) => getState().flows.visibleNodes.map(node => node.id).indexOf(nodeId) > -1;

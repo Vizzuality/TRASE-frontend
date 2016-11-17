@@ -50,6 +50,7 @@ export default class {
 
     this._render();
 
+    this.selectNodes(linksPayload)
   }
 
   selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {

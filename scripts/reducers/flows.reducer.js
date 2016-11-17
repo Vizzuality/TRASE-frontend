@@ -17,7 +17,7 @@ import getChoropleth from './helpers/getChoropleth';
 export default function (state = {}, action) {
   let newState;
   let updateURLState = true;
-
+console.log(action.type)
   switch (action.type) {
 
   case actions.LOAD_INITIAL_DATA: {

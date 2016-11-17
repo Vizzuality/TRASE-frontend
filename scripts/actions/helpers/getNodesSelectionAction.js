@@ -27,21 +27,27 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
 
   return selectedNodesIds.map(nodeId => {
     const visibleNode = visibleNodes.find(node => node.id === nodeId);
-    const node = _.cloneDeep(nodesDictWithMeta[nodeId]);
+    let node = {};
 
-    // add metas from the map layers to the selected nodes data
-    node.selectedMetas = [];
-    let meta;
-    if (selectedVectorLayers.horizontal.uid) {
-      meta = node.meta[selectedVectorLayers.horizontal.uid];
-      if (meta) node.selectedMetas.push(meta);
+    // get_nodes might still be loading at this point, in this case just skip adding metadata
+    if (nodesDictWithMeta) {
+      node = Object.assign(node, nodesDictWithMeta[nodeId]);
+      // add metas from the map layers to the selected nodes data
+      node.selectedMetas = [];
+      let meta;
+      if (selectedVectorLayers.horizontal.uid) {
+        meta = node.meta[selectedVectorLayers.horizontal.uid];
+        if (meta) node.selectedMetas.push(meta);
+      }
+      if (selectedVectorLayers.vertical.uid) {
+        meta = node.meta[selectedVectorLayers.vertical.uid];
+        if (meta) node.selectedMetas.push(meta);
+      }
     }
-    if (selectedVectorLayers.vertical.uid) {
-      meta = node.meta[selectedVectorLayers.vertical.uid];
-      if (meta) node.selectedMetas.push(meta);
+
+    if (visibleNode) {
+      node = Object.assign(node, visibleNode);
     }
-
-    return Object.assign(node, visibleNode);
-
+    return node;
   });
-}
+};

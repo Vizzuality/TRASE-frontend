@@ -27,13 +27,13 @@
     <div class="column-content"><%= node.quantNice %>&thinsp;<span class="unit"><%= node.quantUnit %></span></div>
   </div>
 
-  <% node.selectedMetas.forEach(function(meta) { %>
+  <% if (node.selectedMetas) { node.selectedMetas.forEach(function(meta) { %>
     <div class="column">
       <div class="column-title"><%= meta.name %></div>
       <div class="column-content"><span class="value"><%= meta.rawValueNice %></span><% if (meta.unit) { %>&thinsp;<span class="unit"><%= meta.unit %></span><% } %>
       </div>
     </div>
-  <% }) %>
+  <% })} %>
 
   <% if (node.link) { %>
     <div class="column">
