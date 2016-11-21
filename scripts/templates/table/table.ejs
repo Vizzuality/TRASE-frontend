@@ -1,87 +1,94 @@
 <table>
   <% if(type === 't_head_places'){ %>
     <thead>
-      <tr>
-        <th>Key sustainability indicators</th>
-        <th>Score</th>
+      <tr class="row">
+        <th class="header-cell">Key sustainability indicators</th>
+        <th class="header-cell _text-align-right">Score</th>
         <!-- <th>State Ranking</th> -->
       </tr>
     </thead>
-  <% } %>
-  <% if(type === 't_head_actors'){ %>
+    <tbody>
+      <% for(var i = 0; i < data['rows'].length; i++) { %>
+        <%  for(var j = 0; j < data['rows'][i]['values'].length; j++){%>
+        <tr class="row">
+          <td class="cell-name">
+            <span class="node-name"><%= data['includedColumns'][j]['name'] %></span>
+          </td>
+          <td class="cell-score _text-align-right">
+            <span class="unit" data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : null  %>">
+              <%= data['rows'][i]['values'][j] %>
+            </span>
+          </td>
+        </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  <% } else if(type === 't_head_actors'){ %>
     <thead>
-      <tr>
-        <% for(var i=0; i<data['includedColumns'].length; i++) { %>
-          <th> <%= data['includedColumns'][i]['name'] %> </th>
+      <tr class="row">
+        <% for(var i = 0; i < data['includedColumns'].length; i++) { %>
+          <th class="header-cell <% if(i > 0) { %> _text-align-right <% } %>">
+            <%= data['includedColumns'][i]['name'] %>
+          </th>
         <% } %>
       </tr>
     </thead>
-  <% } %>
-
-  <% if(type === 'top_municipalities' || type === 'top_destination'){ %>
     <tbody>
-      <% for(var i=0; i<data['lines'].length; i++) { %>
-        <tr>
-          <td><%= data['lines'][i]['name'] %>
-              <% if (link !== null) {%>
-              <a href="<%= link + data['lines'][i]['id'] %>">
-                  <svg class="icon icon-check">
-                      <use xlink:href="#icon-outside-link" />
-                  </svg>
-              </a>
-              <% } %>
-          </td>
-          <td><%= data['lines'][i]['values'] %></td>
-        </tr>
-      <% } %>
-    </tbody>
-  <% } %>
-
-  <% if(type === 't_head_actors'){ %>
-    <tbody>
-      <% for(var i=0; i<data['rows'].length; i++) { %>
-      <tr>
-        <%  for(var j=0; j<data['rows'][i]['values'].length; j++){%>
-          <td data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : ''  %>">
+      <% for(var i = 0; i < data['rows'].length; i++) { %>
+      <tr class="row">
+        <% for(var j = 0; j < data['rows'][i]['values'].length; j++){%>
+          <td class="cell-score <% if(j > 0) { %> _text-align-right <% } %>">
             <% if(data['rows'][i]['values'][j] != null){ %>
-              <%= data['rows'][i]['values'][j]['value'] %>
+              <span class="unit" data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : null  %>">
+                <%= data['rows'][i]['values'][j]['value'] %>
+              </span>
             <% } else{ %>
-              0
+              <span class="unit">N/A</span>
             <% } %>
           </td>
-          <% } %>
+        <% } %>
       </tr>
       <% } %>
     </tbody>
-  <% } %>
-
-  <% if(type === 't_head_places'){ %>
+  <% } else if (type === 'top_municipalities' || type === 'top_destination') { %>
     <tbody>
-      <% for(var i=0; i<data['rows'].length; i++) { %>
-        <%  for(var j=0; j<data['rows'][i]['values'].length; j++){%>
-        <tr>
-          <td> <%= data['includedColumns'][j]['name'] %> </td>
-          <td data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : ''  %>">
-              <%= data['rows'][i]['values'][j] %>
+      <% for(var i = 0; i < data['lines'].length; i++) { %>
+        <tr class="row">
+          <td class="cell-name">
+            <span class="node-name"><%= data['lines'][i]['name'] %></span>
+              <% if (link !== null) {%>
+              <a class="node-link" href="<%= link + data['lines'][i]['id'] %>">
+                <svg class="icon icon-check">
+                  <use xlink:href="#icon-outside-link" />
+                </svg>
+              </a>
+              <% } %>
+          </td>
+          <td class="cell-score _text-align-right">
+            <%= data['lines'][i]['values'] %>
           </td>
         </tr>
-        <% } %>
       <% } %>
     </tbody>
   <% } else {%>
     <tbody>
-      <% for(var i=0; i<data.length; i++) { %>
-        <tr>
-            <td><%= i+1 %>.<%= data[i]['name'] %>
-                <% if (link !== null) {%>
-                <a href="<%= link + data[i]['id'] %>">
-                    <svg class="icon icon-check">
-                        <use xlink:href="#icon-outside-link" />
-                    </svg>
-                </a>
-                <% } %>
-            </td>
-          <td data-unit="<%= i == 0 ? '%' : ''  %>"><%= data[i]['value'] %></td>
+      <% for(var i = 0; i < data.length; i++) { %>
+        <tr class="row">
+          <td class="cell-name">
+            <span class="node-name"><%= i+1 %>.<%= data[i]['name'] %></span>
+            <% if (link !== null) {%>
+            <a class="node-link" href="<%= link + data[i]['id'] %>">
+              <svg class="icon icon-check">
+                  <use xlink:href="#icon-outside-link" />
+              </svg>
+            </a>
+            <% } %>
+          </td>
+          <td class="cell-score _text-align-right">
+            <span class="unit" data-unit="<%= i == 0 ? '%' : null  %>">
+              <%= data[i]['value'] %>
+            </span>
+          </td>
         </tr>
       <% } %>
     </tbody>
