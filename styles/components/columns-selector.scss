@@ -19,6 +19,12 @@
         @include arrow(8px, 2px, $charcoal-grey, 'down');
         top: 0;
       }
+
+      &.-is-open {
+        &::after {
+          transform: rotate(225deg);
+        }
+      }
     }
 
     .dropdown-list {

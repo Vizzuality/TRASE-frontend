@@ -14,7 +14,12 @@ export default class {
   }
 
   _setEventListeners() {
-    this.title.addEventListener('click',this._onTitleClick.bind(this));
+    this.title.addEventListener('click', () => {
+      if (this.el.classList.contains('-column-selector')) {
+        this.title.classList.add('-is-open');
+      }
+      this._onTitleClick();
+    });
 
     this.list.addEventListener('click', (e) => {
       if (e.target.getAttribute('data-value')) {
@@ -73,6 +78,10 @@ export default class {
 
   _close() {
     this.list.classList.add('is-hidden');
+
+    if (this.el.classList.contains('-column-selector')) {
+      this.title.classList.remove('-is-open');
+    }
   }
 
   _onListClick(data) {
