@@ -1,19 +1,27 @@
 
 .c-map-risks {
-  display: flex;
-  flex-direction: column;
   margin: 104px 0 0;
 
-  > .map {
+  .map-container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    margin: 16px 0;
 
-    > .map-gallery-list {
+    > .title {
+      max-width: 865px;
+      margin: 0 auto;
+    }
+
+    > .map {
+      margin: 16px 0 0;
+    }
+
+    > .map > .map-gallery-list {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       max-width: $content-max-width;
-      max-height: 400px;
+      max-height: 450px;
       overflow: hidden;
 
       > .map-gallery-item > img {
@@ -24,6 +32,8 @@
   }
 
   > .btn-find-out {
+    display: inline-block;
     margin: 16px auto 0;
+    padding: 16px 42px;
   }
 }

@@ -57,55 +57,57 @@
         <a href="/flows.html" class="c-button -big -pink -bold btn-explore">explore the tool</a>
 
         <div class="c-map-risks">
-          <h3 class="title -big -center -light">What are the sustainability risks associated with
-            the trade <br/>of
-            <div class="c-dropdown -homepage -big" data-dropdown="commodity">
-              <span class="js-dropdown-title dropdown-title">
-                -
-              </span>
-              <ul class="js-dropdown-list dropdown-list js-commodity-dropdown">
-                <li class="js-dropdown-item dropdown-item" data-value="Soy">Soy</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Coffee">Coffee</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Cocoa">Cocoa</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Cotton">Cotton</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Oilpalm">Oilpalm</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Sugar">Sugar</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Beef">Beef</li>
-              </ul>
-            </div>
-            in
-            <div class="c-dropdown -homepage -big" data-dropdown="country">
-              <span class="js-dropdown-title dropdown-title">
-                -
-              </span>
-              <ul class="js-dropdown-list dropdown-list js-country-dropdown">
-                <li class="js-dropdown-item dropdown-item" data-commodity="beef" data-value="Argentina">Argentina</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="beef,cotton,soy,sugar" data-value="Brazil">Brazil</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="coffee" data-value="Colombia">Colombia</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="oilpalm" data-value="Indonesia">Indonesia</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="beef,soy" data-value="Paraguay">Paraguay</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="cocoa" data-value="Peru">Peru</li>
-              </ul>
-            </div>
-            ?
-          </h3>
+          <div class="map-container">
+            <h3 class="title -big -center -light">What are the sustainability risks associated with
+              the trade <br/>of
+              <div class="c-dropdown -homepage -big" data-dropdown="commodity">
+                <span class="js-dropdown-title dropdown-title">
+                  -
+                </span>
+                <ul class="js-dropdown-list dropdown-list js-commodity-dropdown">
+                  <li class="js-dropdown-item dropdown-item" data-value="Soy">Soy</li>
+                  <li class="js-dropdown-item dropdown-item" data-value="Coffee">Coffee</li>
+                  <li class="js-dropdown-item dropdown-item" data-value="Cocoa">Cocoa</li>
+                  <li class="js-dropdown-item dropdown-item" data-value="Cotton">Cotton</li>
+                  <li class="js-dropdown-item dropdown-item" data-value="Oilpalm">Oilpalm</li>
+                  <li class="js-dropdown-item dropdown-item" data-value="Sugar">Sugar</li>
+                  <li class="js-dropdown-item dropdown-item" data-value="Beef">Beef</li>
+                </ul>
+              </div>
+              in
+              <div class="c-dropdown -homepage -big" data-dropdown="country">
+                <span class="js-dropdown-title dropdown-title">
+                  -
+                </span>
+                <ul class="js-dropdown-list dropdown-list js-country-dropdown">
+                  <li class="js-dropdown-item dropdown-item" data-commodity="beef" data-value="Argentina">Argentina</li>
+                  <li class="js-dropdown-item dropdown-item" data-commodity="beef,cotton,soy,sugar" data-value="Brazil">Brazil</li>
+                  <li class="js-dropdown-item dropdown-item" data-commodity="coffee" data-value="Colombia">Colombia</li>
+                  <li class="js-dropdown-item dropdown-item" data-commodity="oilpalm" data-value="Indonesia">Indonesia</li>
+                  <li class="js-dropdown-item dropdown-item" data-commodity="beef,soy" data-value="Paraguay">Paraguay</li>
+                  <li class="js-dropdown-item dropdown-item" data-commodity="cocoa" data-value="Peru">Peru</li>
+                </ul>
+              </div>
+              ?
+            </h3>
 
-          <div id="map" class="map">
-            <ul class="map-gallery-list">
-              <li class="map-gallery-item is-hidden" data-image-name="soy-brazil"><img src="images/maps/soy-brazil.jpg" alt="soy-brazil"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="soy-paraguay"><img src="images/maps/soy-paraguay.jpg" alt="soy-paraguay"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="coffee-colombia"><img src="images/maps/coffee-colombia.jpg" alt="coffee-colombia"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="cotton-brazil"><img src="images/maps/cotton-brazil.jpg" alt="cotton-brazil"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="sugar-brazil"><img src="images/maps/sugar-brazil.jpg" alt="sugar-brazil"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="oilpalm-indonesia"><img src="images/maps/oilpalm-indonesia.jpg" alt="oilpalm-indonesia"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="cocoa-peru"><img src="images/maps/cocoa-peru.jpg" alt="cocoa-peru"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="beef-argentina"><img src="images/maps/beef-argentina.jpg" alt="beef-argentina"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="beef-brazil"><img src="images/maps/beef-brazil.jpg" alt="beef-brazil"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="beef-paraguay"><img src="images/maps/beef-paraguay.jpg" alt="beef-paraguay"></li>
-            </ul>
+            <div id="map" class="map">
+              <ul class="map-gallery-list">
+                <li class="map-gallery-item is-hidden" data-image-name="soy-brazil"><img src="images/maps/soy-brazil.jpg" alt="soy-brazil"></li>
+                <li class="map-gallery-item is-hidden" data-image-name="soy-paraguay"><img src="images/maps/soy-paraguay.jpg" alt="soy-paraguay"></li>
+                <li class="map-gallery-item is-hidden" data-image-name="coffee-colombia"><img src="images/maps/coffee-colombia.jpg" alt="coffee-colombia"></li>
+                <li class="map-gallery-item is-hidden" data-image-name="cotton-brazil"><img src="images/maps/cotton-brazil.jpg" alt="cotton-brazil"></li>
+                <li class="map-gallery-item is-hidden" data-image-name="sugar-brazil"><img src="images/maps/sugar-brazil.jpg" alt="sugar-brazil"></li>
+                <li class="map-gallery-item is-hidden" data-image-name="oilpalm-indonesia"><img src="images/maps/oilpalm-indonesia.jpg" alt="oilpalm-indonesia"></li>
+                <li class="map-gallery-item is-hidden" data-image-name="cocoa-peru"><img src="images/maps/cocoa-peru.jpg" alt="cocoa-peru"></li>
+                <li class="map-gallery-item is-hidden" data-image-name="beef-argentina"><img src="images/maps/beef-argentina.jpg" alt="beef-argentina"></li>
+                <li class="map-gallery-item is-hidden" data-image-name="beef-brazil"><img src="images/maps/beef-brazil.jpg" alt="beef-brazil"></li>
+                <li class="map-gallery-item is-hidden" data-image-name="beef-paraguay"><img src="images/maps/beef-paraguay.jpg" alt="beef-paraguay"></li>
+              </ul>
+            </div>
           </div>
 
-          <a href="#" class="c-button -big -transparent -bold btn-find-out js-find-out">find out here</a>
+          <a href="/flows.html" class="c-button -big -transparent -bold btn-find-out js-find-out">find out here</a>
         </div>
     </section>
   </div>
