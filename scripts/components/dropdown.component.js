@@ -9,11 +9,40 @@ export default class {
     this.title = this.el.querySelector('.js-dropdown-title');
     this.list = this.el.querySelector('.js-dropdown-list');
     this.list.classList.add('is-hidden');
-    this.title.addEventListener('click', this._onTitleClick.bind(this));
-    this.list.addEventListener('click', (e) => {
+
+    this._setEventListeners();
+  }
+
+  _bindMultipleEvents(eventArray, el, fn) {
+    eventArray.forEach((event) => {
+      el.addEventListener(event, fn);
+    });
+  }
+
+  _setEventListeners() {
+    this.title.addEventListener('click', () => {
+      if (this.el.classList.contains('-column-selector')) {
+        this.title.classList.add('-is-open');
+      }
+      this._onTitleClick();
+    });
+
+    this._bindMultipleEvents(['click', 'touchstart'], this.list, (e) => {
+      e.preventDefault();
       if (e.target.getAttribute('data-value')) {
         this._onListClick(e.target.dataset);
       }
+    });
+
+    window.addEventListener('keyup', (event) => {
+      if (event.keyCode === 27 && !this.list.classList.contains('is-hidden')) {
+        this._close();
+      }
+    });
+
+    this._bindMultipleEvents(['mouseup', 'touchstart'], window, (event) => {
+      if (event.target === this.list) return;
+      this._close();
     });
   }
 
@@ -56,6 +85,10 @@ export default class {
 
   _close() {
     this.list.classList.add('is-hidden');
+
+    if (this.el.classList.contains('-column-selector')) {
+      this.title.classList.remove('-is-open');
+    }
   }
 
   _onListClick(data) {
