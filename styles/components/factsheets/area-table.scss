@@ -4,65 +4,85 @@
 
   table {
     width: 100%;
-    margin-top: 24px;
 
-    thead {
-      tr {
+    > thead {
+      > .row {
         border-bottom: 1px solid $charcoal-grey;
+      }
 
-        th {
-          padding-bottom: 16px;
-          color: $charcoal-grey;
-          font-family: $font-family-1;
-          font-size: $font-size-x-regular;
-          font-weight: $font-weight-bold;
-          letter-spacing: -.6px;
-          line-height: 1.23;
-          text-align: right;
-          text-transform: uppercase;
+      > .row > .header-cell {
+        padding: 0 0 8px;
 
-          &:first-of-type {
-            text-align: left;
-          }
-        }
+        color: $charcoal-grey;
+        font-family: $font-family-1;
+        font-size: $font-size-x-regular;
+        font-weight: $font-weight-bold;
+        letter-spacing: -.6px;
+        line-height: 1.23;
+        text-align: left;
+        text-transform: uppercase;
       }
     }
 
-    tbody {
-      tr {
-        border-bottom: 1px solid rgba($charcoal-grey, .2);
+    > tbody {
+      > .row {
 
-        &:last-of-type {
-          border-bottom: 0;
+        &:not(:last-child) {
+          border-bottom: 1px solid rgba($charcoal-grey, .2);
         }
 
-        td {
+        > .cell-name,
+        > .cell-score {
           color: $charcoal-grey;
           font-family: $font-family-1;
           font-size: $font-size-xx-regular;
           letter-spacing: -.8px;
           line-height: 2.5;
-          text-align: right;
+        }
 
-          &:first-of-type {
-            text-align: left;
+        > .cell-name {
+          position: relative;
+          line-height: $font-size-xx-regular;
 
-            .icon {
-              margin-left: 8px;
-              cursor: pointer;
-              opacity: .2;
+          > .node-name {
+            display: inline-block;
+            max-width: 80%;
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            opacity: 1;
+            overflow: hidden;
+          }
+
+          > .node-link {
+            display: inline-flex;
+            position: absolute;
+          }
+
+          > .node-link > .icon {
+            margin: 0 0 0 8px;
+            cursor: pointer;
+            fill: rgba($charcoal-grey, .2);
+
+            &:hover {
+              fill: $charcoal-grey;
             }
           }
+        }
 
-          &::after {
-            display: inline-block;
-            position: absolute;
-            color: rgba($charcoal-grey, .6);
-            content: attr(data-unit);
-          }
+        > .cell-score  {
+          position: relative;
 
-          span {
-            opacity: .6;
+          > .unit {
+
+            &::after {
+              position: absolute;
+              top: 0;
+
+              color: rgba($charcoal-grey, .6);
+              content: attr(data-unit);
+            }
           }
         }
       }
@@ -70,29 +90,10 @@
   }
 
   &.-top-table {
-    width: 50%;
-
-    h1 {
-      text-transform: uppercase;
-    }
-
     table {
-      margin-top: 8px;
-
-      thead {
-        display: none;
-      }
-
-      tbody {
-        tr {
+      > tbody {
+        > .row {
           border-bottom: 0;
-
-          td {
-            max-width: 300px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-          }
         }
       }
     }
