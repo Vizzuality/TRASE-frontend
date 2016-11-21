@@ -13,6 +13,12 @@ export default class {
     this._setEventListeners();
   }
 
+  _bindMultipleEvents(eventArray, el, fn) {
+    eventArray.forEach((event) => {
+      el.addEventListener(event, fn);
+    });
+  }
+
   _setEventListeners() {
     this.title.addEventListener('click', () => {
       if (this.el.classList.contains('-column-selector')) {
@@ -21,7 +27,8 @@ export default class {
       this._onTitleClick();
     });
 
-    this.list.addEventListener('click', (e) => {
+    this._bindMultipleEvents(['click', 'touchstart'], this.list, (e) => {
+      e.preventDefault();
       if (e.target.getAttribute('data-value')) {
         this._onListClick(e.target.dataset);
       }
@@ -33,7 +40,7 @@ export default class {
       }
     });
 
-    window.addEventListener('mouseup', (event) => {
+    this._bindMultipleEvents(['mouseup', 'touchstart'], window, (event) => {
       if (event.target === this.list) return;
       this._close();
     });
