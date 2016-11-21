@@ -9,11 +9,28 @@ export default class {
     this.title = this.el.querySelector('.js-dropdown-title');
     this.list = this.el.querySelector('.js-dropdown-list');
     this.list.classList.add('is-hidden');
-    this.title.addEventListener('click', this._onTitleClick.bind(this));
+
+    this._setEventListeners();
+  }
+
+  _setEventListeners() {
+    this.title.addEventListener('click',this._onTitleClick.bind(this));
+
     this.list.addEventListener('click', (e) => {
       if (e.target.getAttribute('data-value')) {
         this._onListClick(e.target.dataset);
       }
+    });
+
+    window.addEventListener('keyup', (event) => {
+      if (event.keyCode === 27 && !this.list.classList.contains('is-hidden')) {
+        this._close();
+      }
+    });
+
+    window.addEventListener('mouseup', (event) => {
+      if (event.target === this.list) return;
+      this._close();
     });
   }
 
