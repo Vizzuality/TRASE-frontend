@@ -105,6 +105,12 @@
     & + .nav-param {
       border-left: 1px solid $silver;
     }
+
+    // this is because of BETA literal added. Once removed, please
+    // remove this properties.
+    > .trase-logo {
+      transform: translate(0, 3px);
+    }
   }
 
   > .app-nav {
