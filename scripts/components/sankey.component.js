@@ -141,8 +141,8 @@ export default class {
       classPath = `${classPath} -qual-${selectedRecolorBy.value}-${link.qual}`;
     } else if (selectedRecolorBy.type === 'ind') {
       classPath = `${classPath} -ind-${selectedRecolorBy.value}-${link.ind}`;
-    } else if (link.linkMatch) {
-      classPath = `${classPath} -flow-${link.linkMatch}`;
+    } else if (link.recolourGroup) {
+      classPath = `${classPath} -flow-${link.recolourGroup}`;
     }
 
     return classPath;

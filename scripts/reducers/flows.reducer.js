@@ -33,7 +33,8 @@ export default function (state = {}, action) {
       selectedNodesIds: [],
       expandedNodesIds: [],
       areNodesExpanded: false,
-      selectedBiomeFilter: 'none'
+      selectedBiomeFilter: 'none',
+      recolourByNodeIds: []
     });
     break;
   }
@@ -156,8 +157,16 @@ export default function (state = {}, action) {
   }
 
   case actions.FILTER_LINKS_BY_NODES: {
-    let links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, state.selectedNodesColumnsPos);
-    newState = Object.assign({}, state, { links });
+    const selectedNodesPerColumns = getSelectedNodesPerColumn(state.selectedNodesIds, state.selectedNodesColumnsPos);
+    const recolourByNodeIds = getHighlightedNodes(selectedNodesPerColumns);
+
+    let links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, selectedNodesPerColumns, recolourByNodeIds);
+    let mapNodeColors = [];
+    if (recolourByNodeIds && recolourByNodeIds.length !== 0) {
+      //TODO: finish this so that we can color the map too
+      mapNodeColors = getMapColorsFromLinks(links);
+    }
+    newState = Object.assign({}, state, { links, recolourByNodeIds, mapNodeColors });
     break;
   }
 
@@ -237,11 +246,46 @@ export default function (state = {}, action) {
   return newState;
 }
 
-const getFilteredLinksByNodeIds = (unmergedLinks, selectedNodesIds, selectedNodesColumnsPos) => {
+const getFilteredLinksByNodeIds = (unmergedLinks, selectedNodesIds, selectedNodesColumnsPos, recolourByNodeIds) => {
   if (selectedNodesIds.length > 0) {
-    const filteredLinks = filterLinks(unmergedLinks, selectedNodesIds, selectedNodesColumnsPos);
+    const filteredLinks = filterLinks(unmergedLinks, selectedNodesIds, selectedNodesColumnsPos, recolourByNodeIds);
     return mergeLinks(filteredLinks);
   } else {
     return mergeLinks(unmergedLinks);
   }
+};
+
+const getMapColorsFromLinks = (links) => {
+  const geoColorMap = [];
+  for (let i = 0; i < links.length; i++) {
+    let link = links[i];
+    geoColorMap[link.originalPath[0]] = link.recolourGroup;
+  }
+
+  return geoColorMap;
+};
+
+const getSelectedNodesPerColumn = (selectedNodesIds, selectedNodesColumnsPos) => {
+  const nodesAtColumns = [];
+  selectedNodesColumnsPos.forEach((columnPosition, index) => {
+    const nodeId = selectedNodesIds[index];
+    const column = nodesAtColumns[columnPosition];
+    if (column !== undefined) {
+      column.push(nodeId);
+    } else {
+      nodesAtColumns[columnPosition] = [nodeId];
+    }
+  });
+
+  return nodesAtColumns;
+};
+
+const getHighlightedNodes = (selectedNodesPerColumns) => {
+  let mostSelectedNodesColumn = 0;
+  for (let i = 0, nodesAtColumnsLen = selectedNodesPerColumns.length; i < nodesAtColumnsLen; i++) {
+    if (!selectedNodesPerColumns[mostSelectedNodesColumn] || (selectedNodesPerColumns[i] && selectedNodesPerColumns[i].length > selectedNodesPerColumns[mostSelectedNodesColumn].length)) {
+      mostSelectedNodesColumn = i;
+    }
+  }
+  return selectedNodesPerColumns[mostSelectedNodesColumn];
 };

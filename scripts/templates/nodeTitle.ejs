@@ -1,9 +1,7 @@
 <% if (multiple) { %>
   <% nodes.forEach(function(node, i) { %>
     <div class="column">
-      <% if (i === 0) { %>
-        <div class="column-title"><%= node.columnName %></div>
-      <% } %>
+      <div class="column-title"><%= node.columnName %></div>
       <div class="column-content">
         <%= node.name %>
         <% if (node.link) { %>
