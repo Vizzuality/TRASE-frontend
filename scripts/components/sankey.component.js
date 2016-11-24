@@ -133,6 +133,21 @@ export default class {
     this.el.querySelector('.js-loading').classList.toggle('-visible', loading);
   }
 
+  _color_class(link) {
+    let classPath = 'sankey-link';
+    const selectedRecolorBy = this.layout.selectedRecolorBy();
+
+    if (selectedRecolorBy.type === 'qual') {
+      classPath = `${classPath} -qual-${selectedRecolorBy.value}-${link.qual}`;
+    } else if (selectedRecolorBy.type === 'ind') {
+      classPath = `${classPath} -ind-${selectedRecolorBy.value}-${link.ind}`;
+    } else if (link.linkMatch) {
+      classPath = `${classPath} -flow-${link.linkMatch}`;
+    }
+
+    return classPath;
+  }
+
   _render() {
     this.sankeyColumns
       .data(this.layout.columns());
@@ -176,39 +191,20 @@ export default class {
 
 
     const linksData = this.layout.links();
-    const selectedRecolorBy = this.layout.selectedRecolorBy();
-
     const links = this.linksContainer
       .selectAll('path')
       .data(linksData , link => link.id);
 
     // update
     links.transition()
-      // TODO this should not bee needed becaus id is based on qual and ind
-      .attr('class', function(link) {
-        if (selectedRecolorBy.type === 'qual') {
-          return `sankey-link -qual-${selectedRecolorBy.value}-${link.qual}`;
-        } else if (selectedRecolorBy.type === 'ind') {
-          return `sankey-link -ind-${selectedRecolorBy.value}-${link.ind}`;
-        } else {
-          return 'sankey-link';
-        }
-      })
+      .attr('class', (link) => {return this._color_class(link) } )
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
     // enter
     links.enter()
       .append('path')
-      .attr('class', function(link) {
-        if (selectedRecolorBy.type === 'qual') {
-          return `sankey-link -qual-${selectedRecolorBy.value}-${link.qual}`;
-        } else if (selectedRecolorBy.type === 'ind') {
-          return `sankey-link -ind-${selectedRecolorBy.value}-${link.ind}`;
-        } else {
-          return 'sankey-link';
-        }
-      })
+      .attr('class', (link) => {return this._color_class(link) } )
       .attr('d', this.layout.link())
       .on('mouseover', function(link) {
         that.linkTooltipHideDebounced.cancel();

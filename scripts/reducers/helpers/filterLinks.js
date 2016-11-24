@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 // filter links using node Ids. Makes a copy of the original links object
-export default function(links, selectedNodesIds, selectedNodesColumnsPos) {
+export default function (links, selectedNodesIds, selectedNodesColumnsPos) {
 
   const nodesAtColumns = [];
   selectedNodesColumnsPos.forEach((columnPosition, index) => {
@@ -14,13 +14,24 @@ export default function(links, selectedNodesIds, selectedNodesColumnsPos) {
     }
   });
 
+  let mostSelectedNodesColumn = 0;
+  for (let i = 0, nodesAtColumnsLen = nodesAtColumns.length; i < nodesAtColumnsLen; i++) {
+    if (!nodesAtColumns[mostSelectedNodesColumn] || (nodesAtColumns[i] && nodesAtColumns[i].length > nodesAtColumns[mostSelectedNodesColumn].length)) {
+      mostSelectedNodesColumn = i;
+    }
+  }
   const filteredLinks = [];
 
   for (let i = 0, linksLen = links.length; i < linksLen; i++) {
     const link = links[i];
     const linkPasses = filterPath(link.originalPath, nodesAtColumns);
     if (linkPasses) {
-      filteredLinks.push(_.cloneDeep(link));
+      let clonedLink = _.cloneDeep(link);
+      const linkMatch = findLinkMatch(link.originalPath, nodesAtColumns, mostSelectedNodesColumn);
+      if (linkMatch) {
+        clonedLink.linkMatch = nodesAtColumns[mostSelectedNodesColumn].length - nodesAtColumns[mostSelectedNodesColumn].indexOf(linkMatch);
+      }
+      filteredLinks.push(clonedLink);
     }
   }
 
@@ -40,4 +51,15 @@ const filterPath = (path, nodesAtColumns) => {
     }
     return true;
   });
+}
+
+// check which of the link's nodes matches the currently selected nodes
+const findLinkMatch = (path, nodesAtColumns, topColumn) => {
+  const selectedNodesAtColumn = nodesAtColumns[topColumn];
+
+  if (selectedNodesAtColumn.indexOf(path[topColumn]) !== -1) {
+    return path[topColumn];
+  } else {
+    return false;
+  }
 };

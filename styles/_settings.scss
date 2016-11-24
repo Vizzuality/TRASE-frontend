@@ -41,6 +41,11 @@ $cloudy-blue: #aadad1;
 $light-grey-blue: #8db6ca;
 $warm-pink: #f65e6e;
 
+$flow-1: #66c2a5;
+$flow-2: #fc8d62;
+$flow-3: #8da0cb;
+$flow-4: #e78ac3;
+
 $qual-biome-amazonia: #66c2a5;
 $qual-biome-cerrado: #fc8d62;
 $qual-biome-mataatlantica: #8da0cb;
@@ -75,6 +80,9 @@ $qual-colors: $qual-biome-amazonia, $qual-biome-cerrado, $qual-biome-mataatlanti
 
 $qual-colors-names: '-qual-biome-amazonia', '-qual-biome-cerrado', '-qual-biome-mataatlantica', '-qual-biome-caatinga', '-qual-biome-pampa', '-qual-biome-pantanal', '-ind-forest_500-0', '-ind-forest_500-1', '-ind-forest_500-2', '-ind-forest_500-3', '-ind-forest_500-4', '-qual-zero_deforestation-yes', '-qual-zero_deforestation-no', '-ind-water_scarcity-0', '-ind-water_scarcity-1', '-ind-water_scarcity-2', '-ind-water_scarcity-3', '-ind-water_scarcity-4', '-ind-water_scarcity-5', '-ind-water_scarcity-6', '-ind-smallholders-0', '-ind-smallholders-1', '-ind-smallholders-2', '-ind-smallholders-3', '-ind-smallholders-4';
 
+$flow-colors: $flow-1, $flow-2, $flow-3, $flow-4;
+
+$flow-colors-names: '-flow-1', '-flow-2', '-flow-3', '-flow-4';
 // typography
 $font-family-1: 'DecimaMonoPro', sans-serif;
 $font-family-2: 'Merriweather', serif;
