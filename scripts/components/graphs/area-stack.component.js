@@ -165,7 +165,6 @@ export default class {
       .attr('y', 16);
 
 
-    console.log(this.el);
     this.el.classList.remove('is-hidden');
   }
 }
