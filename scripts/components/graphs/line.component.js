@@ -25,15 +25,15 @@ export default class {
     const width = elem.clientWidth - margin.left - margin.right;
     const height = 270 - margin.top - margin.bottom;
 
-    var x = d3_scale_time().range([0, width]);
+    let x = d3_scale_time().range([0, width]);
 
-    var y0 = d3_scale_linear().rangeRound([height, 0]);
-    var y1 = d3_scale_linear().rangeRound([height, 0]);
+    let y0 = d3_scale_linear().rangeRound([height, 0]);
+    let y1 = d3_scale_linear().rangeRound([height, 0]);
 
     const xAxis = d3_axis_bottom(x).tickSize(0).tickPadding(8);
     const yAxis = d3_axis_left(y0).tickSize(0).tickPadding(8);
 
-    var container = d3_select(elem)
+    let container = d3_select(elem)
       .append('svg')
           .attr('width', width + margin.left + margin.right)
           .attr('height', height + margin.top + margin.bottom)

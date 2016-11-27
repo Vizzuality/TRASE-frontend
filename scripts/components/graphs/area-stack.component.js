@@ -81,7 +81,7 @@ export default class {
 
     const years = [];
     this.data.includedYears.forEach((year, yearIndex) => {
-      var yearObject = {
+      let yearObject = {
         date: new Date(year, 0),
         year
       };
@@ -93,7 +93,7 @@ export default class {
       years.push(yearObject);
     });
 
-    const keys = this.data.lines.map(municip => municip.name);
+    const keys = this.data.lines.map(municipality => municipality.name);
 
     stack.keys(keys);
 
@@ -103,10 +103,10 @@ export default class {
     x.domain(d3_extent(this.data.includedYears, function(y) { return new Date(y, 0); }));
 
     // get max y value
-    var maxYearValue = 0;
+    let maxYearValue = 0;
 
     this.data.includedYears.forEach((year, yearIndex) => {
-      var yearStackedValue = 0;
+      let yearStackedValue = 0;
       this.data.lines.forEach(municipality => {
         yearStackedValue += municipality.values[yearIndex];
       });

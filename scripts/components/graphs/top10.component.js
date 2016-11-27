@@ -14,11 +14,9 @@ export default class {
       }
     });
 
-    const top10HTML = Top10Template({
+    el.innerHTML = Top10Template({
       list,
       title
     });
-
-    el.innerHTML = top10HTML;
   }
 }
