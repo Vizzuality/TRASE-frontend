@@ -148,9 +148,10 @@
             position: absolute;
             top: $nav-height;
             left: 0;
+            min-width: 200px;
 
             > .page-section {
-              min-width: 192px;
+              width: 100%;
               padding: 13px 24px;
               background-color: $white;
               white-space: nowrap;
@@ -159,15 +160,13 @@
           }
 
           &.-has-menu {
-            &:hover {
-              > .submenu {
-                display: block;
+            &:hover > .submenu {
+              display: block;
+            }
 
-                .page-section {
-                  &:hover {
-                    background-color: $manilla;
-                  }
-                }
+            &:hover > .submenu > .page-section {
+              &:hover {
+                background-color: $manilla;
               }
             }
           }
