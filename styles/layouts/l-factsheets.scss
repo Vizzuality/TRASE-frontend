@@ -6,10 +6,56 @@
   padding: 64px 0 96px;
   background-color: $pale-peach;
 
-  .search-container {
+  .container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    > .search-container {
+      width: 512px;
+      margin: 0 auto;
+
+      > .c-search {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      > .c-search > label {
+        width: auto;
+        margin: 0 0 0 12px;
+
+        font-size: $font-size-medium;
+      }
+
+      > .c-search > .awesomplete {
+        width: 100%;
+        height: 52px;
+        margin: 8px 0 0;
+
+        > input {
+          height: 100%;
+          padding: 12px 10px 6px;
+
+          font-size: $font-size-medium;
+        }
+
+        > ul {
+          background: $white;
+        }
+      }
+
+      > .c-search > .icon-search {
+        top: auto;
+        bottom: 15px;
+        width: 20px;
+        height: 20px;
+        transform: translate(0, 0);
+      }
+    }
+
+    > .explanatory-text {
+      margin: 40px 0 0;
+    }
   }
 }
