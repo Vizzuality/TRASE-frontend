@@ -33,6 +33,8 @@ export default class {
     }
 
     this.data.forEach(d => {
+      // this verification shouldn't exist. All list must have same data format.
+      // Though this is a temporal patch.
       d.value = _.isArray(d.values) ? d.values[0] : formatNumber(d.value, 'percentage');
       d.link = baseUrlLink ? `${baseUrlLink}${d.id}` : null;
     });
