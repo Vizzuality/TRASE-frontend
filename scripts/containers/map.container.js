@@ -11,7 +11,8 @@ const mapMethodsToState = (state) => ({
       return {
         geoData: state.flows.geoData,
         currentLayer: state.flows.selectedColumnsIds[0],
-        selectedNodesGeoIds: state.flows.selectedNodesGeoIds
+        selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
+        recolourByNodeIds: state.flows.recolourByNodeIds
       };
     }
   },

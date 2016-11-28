@@ -18,6 +18,8 @@ export const LEGEND_COLORS = {
   error_no_metadata_for_layer: '#c7c7c7',
 };
 
+export const NODE_SELECTION_LINKS_NUM_COLORS = 3;
+
 
 export const APP_DEFAULT_STATE = {
   app: {
@@ -39,6 +41,7 @@ export const FLOWS_DEFAULT_STATE = {
     selectedRecolorBy: { value: 'none', value_type: 'none' },
     selectedBiomeFilter: 'none',
     selectedNodesIds: [],
+    selectedNodesColorGroups: [],
     areNodesExpanded: false,
     selectedNodesData: [],
     selectedColumnsIds: [3, 4, 6, 7],

@@ -1,4 +1,4 @@
-export default (nodesIds, visibleNodes, nodesDictWithMeta, selectedVectorLayers) => {
+export default (nodesIds, state) => {
   if (!nodesIds || !nodesIds[0]) {
     return {
       ids: [],
@@ -8,7 +8,7 @@ export default (nodesIds, visibleNodes, nodesDictWithMeta, selectedVectorLayers)
     };
   }
 
-  const data = getSelectedNodesData(nodesIds, visibleNodes, nodesDictWithMeta, selectedVectorLayers);
+  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedVectorLayers);
   const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined);
   const columnsPos = data.map(node => node.columnPosition);
 

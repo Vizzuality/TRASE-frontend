@@ -13,6 +13,9 @@ import filterLinks from './helpers/filterLinks';
 import getMapLayers from './helpers/getMapLayers';
 import setNodesMeta from './helpers/setNodesMeta';
 import getChoropleth from './helpers/getChoropleth';
+import getNodesAtColumns from './helpers/getNodesAtColumns';
+import getNodesColoredBySelection from './helpers/getNodesColoredBySelection';
+import getRecolorGroups from './helpers/getRecolorGroups';
 
 export default function (state = {}, action) {
   let newState;
@@ -33,7 +36,8 @@ export default function (state = {}, action) {
       selectedNodesIds: [],
       expandedNodesIds: [],
       areNodesExpanded: false,
-      selectedBiomeFilter: 'none'
+      selectedBiomeFilter: 'none',
+      recolourByNodeIds: []
     });
     break;
   }
@@ -139,8 +143,10 @@ export default function (state = {}, action) {
       selectedNodesIds: action.ids,
       selectedNodesData: action.data,
       selectedNodesGeoIds: action.geoIds,
-      selectedNodesColumnsPos: action.columnsPos
+      selectedNodesColumnsPos: action.columnsPos,
+      selectedNodesColorGroups: action.colorGroups,
     });
+    // console.log(newState.selectedNodesColorGroups)
     break;
   }
 
@@ -156,8 +162,25 @@ export default function (state = {}, action) {
   }
 
   case actions.FILTER_LINKS_BY_NODES: {
-    let links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, state.selectedNodesColumnsPos);
-    newState = Object.assign({}, state, { links });
+    const selectedNodesAtColumns = getNodesAtColumns(state.selectedNodesIds, state.selectedNodesColumnsPos);
+
+    const nodesColoredBySelection = getNodesColoredBySelection(selectedNodesAtColumns);
+    let recolorGroups = getRecolorGroups(state.nodesColoredBySelection, nodesColoredBySelection, state.recolorGroups);
+
+    let links;
+    if (state.selectedNodesIds.length > 0) {
+      const filteredLinks = filterLinks(state.unmergedLinks, state.selectedNodesIds, selectedNodesAtColumns, nodesColoredBySelection, recolorGroups);
+      links =  mergeLinks(filteredLinks);
+    } else {
+      links = mergeLinks(state.unmergedLinks);
+    }
+
+    let mapNodeColors = [];
+    if (nodesColoredBySelection && nodesColoredBySelection.length !== 0) {
+      //TODO: finish this so that we can color the map too
+      mapNodeColors = getMapColorsFromLinks(links);
+    }
+    newState = Object.assign({}, state, { links, nodesColoredBySelection, recolorGroups, mapNodeColors });
     break;
   }
 
@@ -237,11 +260,12 @@ export default function (state = {}, action) {
   return newState;
 }
 
-const getFilteredLinksByNodeIds = (unmergedLinks, selectedNodesIds, selectedNodesColumnsPos) => {
-  if (selectedNodesIds.length > 0) {
-    const filteredLinks = filterLinks(unmergedLinks, selectedNodesIds, selectedNodesColumnsPos);
-    return mergeLinks(filteredLinks);
-  } else {
-    return mergeLinks(unmergedLinks);
+const getMapColorsFromLinks = (links) => {
+  const geoColorMap = [];
+  for (let i = 0; i < links.length; i++) {
+    let link = links[i];
+    geoColorMap[link.originalPath[0]] = link.recolourGroup;
   }
+
+  return geoColorMap;
 };
