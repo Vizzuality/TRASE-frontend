@@ -11,7 +11,8 @@ const mapMethodsToState = (state) => ({
       return {
         geoData: state.flows.geoData,
         currentLayer: state.flows.selectedColumnsIds[0],
-        selectedNodesGeoIds: state.flows.selectedNodesGeoIds
+        selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
+        recolourByNodeIds: state.flows.recolourByNodeIds
       };
     }
   },
@@ -19,7 +20,8 @@ const mapMethodsToState = (state) => ({
   selectPolygons: state.flows.selectedNodesGeoIds,
   highlightPolygon: state.flows.highlightedGeoIds,
   setChoropleth: state.flows.choropleth,
-  loadContextLayers: state.flows.selectedMapContextualLayersData
+  loadContextLayers: state.flows.selectedMapContextualLayersData,
+  showLinkedGeoIds: state.flows.linkedGeoIds
 });
 
 const mapViewCallbacksToActions = () => ({

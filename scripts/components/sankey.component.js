@@ -17,11 +17,11 @@ export default class {
     this._build();
   }
 
-  resizeViewport({selectedNodesIds, shouldRepositionExpandButton}) {
+  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy}) {
     this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
 
     if (this.layout.relayout()) {
-      this._render();
+      this._render(selectedRecolorBy);
       if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
     }
   }
@@ -48,8 +48,9 @@ export default class {
       this.svg.style('height', this.layout.getMaxHeight() + 'px');
     }
 
-    this._render();
+    this._render(linksPayload.selectedRecolorBy);
 
+    this.selectNodes(linksPayload);
   }
 
   selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
@@ -132,7 +133,21 @@ export default class {
     this.el.querySelector('.js-loading').classList.toggle('-visible', loading);
   }
 
-  _render() {
+  _getLinkColor(link, selectedRecolorBy) {
+    let classPath = 'sankey-link';
+
+    if (selectedRecolorBy.type === 'qual') {
+      classPath = `${classPath} -qual-${selectedRecolorBy.value}-${link.qual}`;
+    } else if (selectedRecolorBy.type === 'ind') {
+      classPath = `${classPath} -ind-${selectedRecolorBy.value}-${link.ind}`;
+    } else if (link.recolourGroup) {
+      classPath = `${classPath} -flow-${link.recolourGroup}`;
+    }
+
+    return classPath;
+  }
+
+  _render(selectedRecolorBy) {
     this.sankeyColumns
       .data(this.layout.columns());
 
@@ -175,39 +190,20 @@ export default class {
 
 
     const linksData = this.layout.links();
-    const selectedRecolorBy = this.layout.selectedRecolorBy();
-
     const links = this.linksContainer
       .selectAll('path')
       .data(linksData , link => link.id);
 
     // update
+    links.attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } ); // apply color from CSS class immediately
     links.transition()
-      // TODO this should not bee needed becaus id is based on qual and ind
-      .attr('class', function(link) {
-        if (selectedRecolorBy.type === 'qual') {
-          return `sankey-link -qual-${selectedRecolorBy.value}-${link.qual}`;
-        } else if (selectedRecolorBy.type === 'ind') {
-          return `sankey-link -ind-${selectedRecolorBy.value}-${link.ind}`;
-        } else {
-          return 'sankey-link';
-        }
-      })
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
     // enter
     links.enter()
       .append('path')
-      .attr('class', function(link) {
-        if (selectedRecolorBy.type === 'qual') {
-          return `sankey-link -qual-${selectedRecolorBy.value}-${link.qual}`;
-        } else if (selectedRecolorBy.type === 'ind') {
-          return `sankey-link -ind-${selectedRecolorBy.value}-${link.ind}`;
-        } else {
-          return 'sankey-link';
-        }
-      })
+      .attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } )
       .attr('d', this.layout.link())
       .on('mouseover', function(link) {
         that.linkTooltipHideDebounced.cancel();

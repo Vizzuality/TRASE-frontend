@@ -8,7 +8,8 @@ export default function(links) {
   for (var i = 0; i < links.length; i++) {
     var link = links[i];
 
-    const key = '' + link.sourceNodeId + link.targetNodeId + link.qual + link.ind;
+    let key = `${link.sourceNodeId}-${link.targetNodeId}-${link.qual}-${link.ind}`;
+
     if (!dict[key]) {
       const mergedLink = _.cloneDeep(link);
       mergedLink.id = key;

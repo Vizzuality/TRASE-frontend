@@ -22,6 +22,8 @@ const mapMethodsToState = (state) => ({
         visibleNodesByColumn: state.flows.visibleNodesByColumn,
         detailedView: state.flows.detailedView,
         selectedRecolorBy: state.flows.selectedRecolorBy,
+        selectedNodesIds: state.flows.selectedNodesIds,
+        shouldRepositionExpandButton: shouldRepositionExpandButton(state.flows.expandedNodesIds, state.flows.selectedNodesIds, state.flows.areNodesExpanded)
       };
     }
   },
@@ -29,6 +31,7 @@ const mapMethodsToState = (state) => ({
     _comparedValue: (state) => state.app.windowSize,
     _returnedValue: (state) => {
       return {
+        selectedRecolorBy: state.flows.selectedRecolorBy,
         selectedNodesIds: state.flows.selectedNodesIds,
         shouldRepositionExpandButton: shouldRepositionExpandButton(state.flows.expandedNodesIds, state.flows.selectedNodesIds, state.flows.areNodesExpanded)
       };

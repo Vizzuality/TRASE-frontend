@@ -1,31 +1,28 @@
 import _ from 'lodash';
 
 // filter links using node Ids. Makes a copy of the original links object
-export default function(links, selectedNodesIds, selectedNodesColumnsPos) {
-
-  const nodesAtColumns = [];
-  selectedNodesColumnsPos.forEach((columnPosition, index) => {
-    const nodeId = selectedNodesIds[index];
-    const column = nodesAtColumns[columnPosition];
-    if (column !== undefined) {
-      column.push(nodeId);
-    } else {
-      nodesAtColumns[columnPosition] = [nodeId];
-    }
-  });
-
+export default function(links, selectedNodesIds, selectedNodesAtColumns, nodesColoredBySelection, recolorGroups) {
   const filteredLinks = [];
 
   for (let i = 0, linksLen = links.length; i < linksLen; i++) {
     const link = links[i];
-    const linkPasses = filterPath(link.originalPath, nodesAtColumns);
+    const linkPasses = filterPath(link.originalPath, selectedNodesAtColumns);
     if (linkPasses) {
-      filteredLinks.push(_.cloneDeep(link));
+      let clonedLink = _.cloneDeep(link);
+      const nodeIds = _.intersection(link.originalPath, nodesColoredBySelection);
+      if (nodeIds) {
+        let nodeId = nodeIds[0];
+        // clonedLink.recolourGroup = nodesColoredBySelection.length - nodesColoredBySelection.indexOf(nodeId);
+        clonedLink.recolourGroup = recolorGroups[nodeId];
+      }
+      filteredLinks.push(clonedLink);
     }
   }
 
   return filteredLinks;
 }
+
+
 
 // keep link if path passes test:
 // at each column, path should pass by one of the selected nodes for the column

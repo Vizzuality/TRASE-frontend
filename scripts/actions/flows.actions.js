@@ -1,8 +1,11 @@
 import 'whatwg-fetch';
 import actions from 'actions';
-import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
+import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
 import getURLFromParams from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
+import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
+import getNodesSelectionAction from './helpers/getNodesSelectionAction';
+import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible';
 
 
 export function resetState() {
@@ -46,14 +49,16 @@ export function selectView(detailedView, reloadLinks) {
   return _reloadLinks('detailedView', detailedView, actions.SELECT_VIEW, reloadLinks);
 }
 
-export function selectColumn(columnIndex, columnId) {
+export function selectColumn(columnIndex, columnId, reloadLinks = true) {
   return dispatch => {
     dispatch({
       type: actions.SELECT_COLUMN,
       columnIndex,
       columnId
     });
-    dispatch(loadLinks());
+    if (reloadLinks) {
+      dispatch(loadLinks());
+    }
   };
 }
 
@@ -166,9 +171,17 @@ export function loadLinks() {
       year_start: getState().flows.selectedYears[0],
       year_end: getState().flows.selectedYears[1],
       include_columns: getState().flows.selectedColumnsIds.join(','),
-      n_nodes: getState().flows.detailedView === true ? NUM_NODES_DETAILED : NUM_NODES_SUMMARY,
       flow_quant: getState().flows.selectedQuant
     };
+
+    if (getState().flows.detailedView === true) {
+      params.n_nodes = NUM_NODES_DETAILED;
+    } else if (getState().flows.areNodesExpanded === true) {
+      params.n_nodes = NUM_NODES_EXPANDED;
+    } else {
+      params.n_nodes = NUM_NODES_SUMMARY;
+
+    }
 
     const selectRecolorByType = getState().flows.selectedRecolorBy.type;
     const selectRecolorByValue = getState().flows.selectedRecolorBy.value;
@@ -196,20 +209,26 @@ export function loadLinks() {
     fetch(url)
       .then(res => res.text())
       .then(payload => {
-
         dispatch({
           type: actions.GET_LINKS,
           payload
         });
-        dispatch({
-          type: actions.RESELECT_NODES
-        });
+
+        // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
+        const selectedNodesIds = getSelectedNodesStillVisible(getState().flows.visibleNodes, getState().flows.selectedNodesIds);
+
+        const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
+        action.type = actions.UPDATE_NODE_SELECTION;
+        dispatch(action);
 
         if (getState().flows.selectedNodesIds && getState().flows.selectedNodesIds.length > 0) {
           dispatch({
             type: actions.FILTER_LINKS_BY_NODES
           });
         }
+
+        // load related geoIds to show on the map
+        dispatch(loadLinkedGeoIDs());
       });
   };
 }
@@ -217,24 +236,20 @@ export function loadLinks() {
 
 export function loadMapVectorLayers() {
   return (dispatch) => {
-    _loadMapVectorLayers([
+    Promise.all([
       'municip.topo.hi.json',
       'states.topo.json',
       'biomes.topo.json'
-    ], dispatch);
+    ].map(url =>
+      fetch(url).then(resp => resp.text())
+    )).then(payload => {
+      dispatch({
+        type: actions.GET_GEO_DATA,
+        payload
+      });
+    });
   };
 }
-
-const _loadMapVectorLayers = (urls, dispatch) => {
-  Promise.all(urls.map(url =>
-    fetch(url).then(resp => resp.text())
-  )).then(payload => {
-    dispatch({
-      type: actions.GET_GEO_DATA,
-      payload
-    });
-  });
-};
 
 export function loadMapContextLayers() {
   return dispatch => {
@@ -259,38 +274,57 @@ export function loadMapContextLayers() {
   };
 }
 
-export function selectNode(nodeId, isAggregated) {
+export function selectNode(nodeId, isAggregated = false) {
   return (dispatch, getState) => {
     if (isAggregated) {
       dispatch(selectView(true));
     } else {
-      // unselecting the node that is currently expanded: just shrink it and bail
       const expandedNodesIds = getState().flows.expandedNodesIds;
+      // we are unselecting the node that is currently expanded: just shrink it and bail
       if (expandedNodesIds && nodeId === expandedNodesIds[0]) {
         dispatch(toggleNodesExpand());
         return;
       }
 
-      dispatch({
-        type: actions.ADD_NODE_TO_SELECTION,
-        nodeId
-      });
+      // remove or add nodeId from selectedNodesIds
+      const currentSelectedNodesIds = getState().flows.selectedNodesIds;
+      let selectedNodesIds;
+      let nodeIndex = currentSelectedNodesIds.indexOf(nodeId);
+      if (nodeIndex > -1) {
+        selectedNodesIds = [].concat(currentSelectedNodesIds);
+        selectedNodesIds.splice(nodeIndex, 1);
+      } else {
+        selectedNodesIds = [nodeId].concat(currentSelectedNodesIds);
+      }
+
+
+
+      // send to state the new node selection allong with new data, geoIds, etc
+      const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
+      action.type = actions.UPDATE_NODE_SELECTION;
+      dispatch(action);
+
+      // refilter links by selected nodes
       dispatch({
         type: actions.FILTER_LINKS_BY_NODES
       });
+
+      // load related geoIds to show on the map
+      dispatch(loadLinkedGeoIDs());
     }
   };
 }
 
 export function selectNodeFromGeoId(geoId) {
-  return dispatch => {
-    dispatch({
-      type: actions.ADD_NODE_TO_SELECTION_FROM_GEOID,
-      geoId
-    });
-    dispatch({
-      type: actions.FILTER_LINKS_BY_NODES
-    });
+  return (dispatch, getState) => {
+    const nodeId = getNodeIdFromGeoId(geoId, getState().flows.nodesDict, getState().flows.selectedColumnsIds);
+
+    // node not in visible Nodes ---> expand node (same behavior as search)
+    if (!_isNodeVisible(getState, nodeId)) {
+      dispatch(toggleNodesExpand(true, nodeId));
+    } else {
+      dispatch(selectNode(nodeId, false));
+    }
   };
 }
 
@@ -300,28 +334,24 @@ export function highlightNode(nodeId, isAggregated) {
       return;
     }
 
-    // TODO move this to reducer
     if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) {
       return;
     }
 
-    dispatch({
-      type: actions.HIGHLIGHT_NODE,
-      nodeId
-    });
+    const action = getNodesSelectionAction([nodeId], getState().flows);
+    action.type = actions.HIGHLIGHT_NODE;
+    dispatch(action);
   };
 }
 
 export function highlightNodeFromGeoId(geoId) {
-  return dispatch => {
-    dispatch({
-      type: actions.HIGHLIGHT_NODE_FROM_GEOID,
-      geoId
-    });
+  return (dispatch, getState) => {
+    const nodeId = getNodeIdFromGeoId(geoId, getState().flows.nodesDict, getState().flows.selectedColumnsIds);
+    dispatch(highlightNode(nodeId, false));
   };
 }
 
-export function toggleNodesExpand(reloadLinks = true, forceExpand = false, forceExpandNodeId) {
+export function toggleNodesExpand(forceExpand = false, forceExpandNodeId) {
   return (dispatch, getState) => {
     dispatch({
       type: actions.TOGGLE_NODES_EXPAND,
@@ -347,17 +377,15 @@ export function toggleNodesExpand(reloadLinks = true, forceExpand = false, force
       });
     }
 
-
-    if (reloadLinks) {
-      dispatch(loadLinks());
-    }
+    dispatch(loadLinks());
+    // load related geoIds to show on the map
+    dispatch(loadLinkedGeoIDs());
   };
 }
 
 export function searchNode(nodeId) {
   return (dispatch, getState) => {
-    const currentVisibleNodesIds = getState().flows.visibleNodes.map(node => node.id);
-    if (currentVisibleNodesIds.indexOf(nodeId) === -1) {
+    if (!_isNodeVisible(getState, nodeId)) {
 
       // check if we need to swap column
       const node = getState().flows.nodesDict[nodeId];
@@ -369,20 +397,49 @@ export function searchNode(nodeId) {
         return;
       }
       if (currentColumnAtPos !== node.columnId) {
-        dispatch(selectColumn(columnPos, node.columnId));
+        dispatch(selectColumn(columnPos, node.columnId, false));
       }
       // 1. before: go to detailed mode and select
       // dispatch(selectView(true));
       // 2. as per SEI request: go to expanded node
-      dispatch(toggleNodesExpand(true, true, nodeId));
-      dispatch({
-        type: actions.SELECT_SINGLE_NODE,
-        nodeId
-      });
+      dispatch(toggleNodesExpand(true, nodeId));
+
     } else {
       dispatch(selectNode(nodeId, false));
     }
-
-
   };
 }
+
+export function loadLinkedGeoIDs() {
+  return (dispatch, getState) => {
+    return;
+    const selectedNodesIds = getState().flows.selectedNodesIds;
+    if (selectedNodesIds.length === 0) {
+      dispatch({
+        type: actions.GET_LINKED_GEOIDS,
+        payload: {data:{}}
+      });
+      return;
+    }
+    dispatch({
+      type: actions.LOAD_MAP
+    });
+    const params = {
+      node_ids: selectedNodesIds.join(','),
+      column_id: getState().flows.selectedColumnsIds[0]
+    };
+    // const url = getURLFromParams('/v1/get_linked_geoids', params);
+    const url = 'get_linked_geoids.json';
+
+    fetch(url)
+      .then(res => res.text())
+      .then(payload => {
+        dispatch({
+          type: actions.GET_LINKED_GEOIDS,
+          payload: JSON.parse(payload)
+        });
+      });
+  };
+}
+
+const _isNodeVisible = (getState, nodeId) => getState().flows.visibleNodes.map(node => node.id).indexOf(nodeId) > -1;

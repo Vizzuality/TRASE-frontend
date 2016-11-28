@@ -28,7 +28,18 @@
   }
 
   .unit {
+    display: inline-block;
+    max-width: 110px;
     color: $charcoal-grey;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+
+  .value {
+    display: inline-block;
+    vertical-align: bottom;
   }
 
   .outside-link {

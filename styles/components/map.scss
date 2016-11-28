@@ -97,6 +97,14 @@
       stroke-opacity: 1;
       stroke-width: 2.5px;
     }
+
+    &.-linked {
+      fill: none;
+      stroke-opacity: 1;
+      stroke-width: 1.5px;
+      stroke-dasharray: 2px 3px;
+      stroke-linecap: butt;
+    }
   }
 
   .map-polygon-municipality, .map-polygon-logistics-hub {

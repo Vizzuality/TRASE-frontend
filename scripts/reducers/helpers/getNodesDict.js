@@ -13,8 +13,8 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       columnName: column.name,
       columnPosition: column.position,
       name: node.name,
-      geoId: node.geoId,
-      inds: []
+      geoId: node.geoId
+      // inds: []
     };
 
     if (node.isAggregated === true || node.isAggregated === 'true') {

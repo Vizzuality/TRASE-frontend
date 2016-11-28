@@ -1,6 +1,7 @@
 // flows
 export const NUM_COLUMNS = 4;
 export const NUM_NODES_SUMMARY = 10;
+export const NUM_NODES_EXPANDED = 100;
 export const NUM_NODES_DETAILED = 999;
 export const DETAILED_VIEW_SCALE = 1200;
 export const DETAILED_VIEW_MIN_NODE_HEIGHT = 14;
@@ -16,6 +17,8 @@ export const LEGEND_COLORS = {
   error_no_metadata: '#c7c7c7',
   error_no_metadata_for_layer: '#c7c7c7',
 };
+
+export const NODE_SELECTION_LINKS_NUM_COLORS = 3;
 
 
 export const APP_DEFAULT_STATE = {
@@ -38,6 +41,7 @@ export const FLOWS_DEFAULT_STATE = {
     selectedRecolorBy: { value: 'none', value_type: 'none' },
     selectedBiomeFilter: 'none',
     selectedNodesIds: [],
+    selectedNodesColorGroups: [],
     areNodesExpanded: false,
     selectedNodesData: [],
     selectedColumnsIds: [3, 4, 6, 7],

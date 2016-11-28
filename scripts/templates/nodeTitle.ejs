@@ -1,9 +1,7 @@
 <% if (multiple) { %>
   <% nodes.forEach(function(node, i) { %>
     <div class="column">
-      <% if (i === 0) { %>
-        <div class="column-title"><%= node.columnName %></div>
-      <% } %>
+      <div class="column-title"><%= node.columnName %></div>
       <div class="column-content">
         <%= node.name %>
         <% if (node.link) { %>
@@ -19,7 +17,7 @@
 
   <div class="column">
     <div class="column-title"><%= node.columnName %></div>
-    <div class="column-content"><%= node.name %></div>
+    <div class="column-content"><%= node.name %><!-- <%= node.id %> <%= node.geoId %> --></div>
   </div>
 
   <div class="column">
@@ -27,13 +25,13 @@
     <div class="column-content"><%= node.quantNice %>&thinsp;<span class="unit"><%= node.quantUnit %></span></div>
   </div>
 
-  <% node.inds.forEach(function(ind) { %>
+  <% if (node.selectedMetas) { node.selectedMetas.forEach(function(meta) { %>
     <div class="column">
-      <div class="column-title"><%= ind.name %></div>
-      <div class="column-content"><%= ind.values[0] %></div>
-      <!-- <span class="unit"><%= ind.unit %></span> -->
+      <div class="column-title"><%= meta.name %></div>
+      <div class="column-content"><span class="value"><%= meta.rawValueNice %></span><% if (meta.unit) { %>&thinsp;<span class="unit"><%= meta.unit %></span><% } %>
+      </div>
     </div>
-  <% }) %>
+  <% })} %>
 
   <% if (node.link) { %>
     <div class="column">

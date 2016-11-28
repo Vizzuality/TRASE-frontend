@@ -28,10 +28,6 @@ export default class {
 
     this.contextLayers = [];
 
-    this._setEventListeners();
-  }
-
-  _setEventListeners() {
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
   }
@@ -53,11 +49,19 @@ export default class {
   }
 
   selectPolygons(geoIds) {
+    this.selectedNodesLayer = this._paintPolygons(geoIds, this.selectedNodesLayer, '-selected');
+  }
+
+  showLinkedGeoIds(linkedGeoIds) {
+    this.linkedLayer = this._paintPolygons(linkedGeoIds, this.linkedLayer, '-linked');
+  }
+
+  _paintPolygons(geoIds, targetLayer, className) {
     if (!this.currentLayer) {
       return;
     }
 
-    if (this.selectedLayer) this.map.removeLayer(this.selectedLayer);
+    if (targetLayer) this.map.removeLayer(targetLayer);
 
     const selectedFeatures = [];
     this.currentLayer.eachLayer(layer => {
@@ -68,13 +72,16 @@ export default class {
 
     // polygon appears 'burried', and SVG does nto support z-indexes
     // so we have to recreate the clicked layers on top of all other polygons
+    let layer;
     if (selectedFeatures.length > 0) {
-      this.selectedLayer = L.geoJSON(selectedFeatures, { pane: 'main' });
-      this.selectedLayer.setStyle(() => { return { className: 'map-polygon -selected'}; });
-      this.map.addLayer(this.selectedLayer);
+      layer = L.geoJSON(selectedFeatures, { pane: 'main' });
+      layer.setStyle(() => { return { className: `map-polygon ${className}`}; });
+      this.map.addLayer(layer);
     }
+    return layer;
   }
 
+  // TODO use _paintPolygons
   highlightPolygon(geoIds) {
     if (!this.currentLayer) {
       return;
@@ -232,4 +239,6 @@ export default class {
       }
     });
   }
+
+
 }
