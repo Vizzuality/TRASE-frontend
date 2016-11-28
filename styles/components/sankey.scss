@@ -27,7 +27,7 @@
 
     &.-is-aggregated > .sankey-node-rect {
       // the horizontal lines pattern is defined in the <defs> section of the SVG in flows.ejs
-      cursor: row-resize;
+      cursor: zoom-in;
       fill: url('#isAggregatedPattern');
     }
 
