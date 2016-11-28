@@ -133,7 +133,7 @@ export default class {
     this.el.querySelector('.js-loading').classList.toggle('-visible', loading);
   }
 
-  _color_class(link, selectedRecolorBy) {
+  _getLinkColor(link, selectedRecolorBy) {
     let classPath = 'sankey-link';
 
     if (selectedRecolorBy.type === 'qual') {
@@ -195,15 +195,15 @@ export default class {
       .data(linksData , link => link.id);
 
     // update
+    links.attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } ); // apply color from CSS class immediately
     links.transition()
-      .attr('class', (link) => {return this._color_class(link, selectedRecolorBy); } )
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
     // enter
     links.enter()
       .append('path')
-      .attr('class', (link) => {return this._color_class(link, selectedRecolorBy); } )
+      .attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } )
       .attr('d', this.layout.link())
       .on('mouseover', function(link) {
         that.linkTooltipHideDebounced.cancel();
