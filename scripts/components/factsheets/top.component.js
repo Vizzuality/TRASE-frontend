@@ -19,18 +19,8 @@ export default class {
   }
 
   _parseData() {
-    let baseUrlLink;
-
-    switch (this.targetLink) {
-    case 'place':
-      baseUrlLink = '/factsheet-place.html?nodeId=';
-      break;
-    case 'actor':
-      baseUrlLink = '/factsheet-actor.html?nodeId=';
-      break;
-    default:
-      baseUrlLink = null;
-    }
+    const baseUrlLink = this.targetLink ?
+      `/factsheet-${this.targetLink}.html?nodeId=` : null;
 
     this.data.forEach(d => {
       // this verification shouldn't exist. All list must have same data format.
