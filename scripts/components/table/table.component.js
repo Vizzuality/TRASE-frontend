@@ -19,27 +19,6 @@ export default class {
       this.link = null;
     }
 
-    if (this.type === 'top') {
-
-      if (this.data === 'undefined' || !this.data.length) return;
-
-    } else if(this.type === 'top_municipalities' || this.type ==='top_destination') {
-
-      if (!!this.data.includedYears && !this.data.includedYears.length ||
-        !!this.data.lines && !this.data.lines.length) return;
-
-    } else {
-
-      if (!!this.data.includedColumns && !this.data.includedColumns.length ||
-        !!this.data.rows && !this.data.rows.length) return;
-    }
-
-    if(this.type === 'top'){
-      for(let i=0; i<this.data.length; i++) {
-        this.data[i]['value'] = changeNumber(this.data[i]['value'], 'top');
-      }
-    }
-
     if(this.type === 't_head_places') {
       for(let i=0; i<this.data['rows'].length; i++) {
         for(let j=0; j<this.data['rows'][i]['values'].length; j++){
@@ -51,6 +30,7 @@ export default class {
         }
       }
     }
+
     this.render();
   }
 

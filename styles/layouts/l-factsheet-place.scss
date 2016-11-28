@@ -127,11 +127,11 @@
     align-items: center;
 
     > .c-chord {
-      flex-basis: 60%;
+      width: 60%;
     }
 
     > .c-top {
-      flex-basis: 40%;
+      width: 40%;
     }
 
     &.-traders {
@@ -145,11 +145,6 @@
   }
 
   .score-table {
-    margin-top: 72px;
-  }
-
-  .js-table-consumers,
-  .js-table-traders {
-    padding-left: 8px;
+    margin: 72px 0 0;
   }
 }

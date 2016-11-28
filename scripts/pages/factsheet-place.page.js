@@ -15,6 +15,7 @@ import 'styles/components/loading.scss';
 import Dropdown from 'components/dropdown.component';
 import Line from 'components/graphs/line.component';
 import Chord from 'components/graphs/chord.component';
+import Top from 'components/factsheets/top.component';
 import Table from 'components/table/table.component';
 
 import { getURLParams } from 'utils/stateURL';
@@ -26,25 +27,34 @@ const defaults = {
 };
 
 const _build = data => {
+  const renderCallback = function() {
+    this.el.classList.toggle('is-hidden', !this.el.classList.contains('is-hidden'));
+  };
+
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
   new Chord('.js-chord-traders', data.top_traders_matrix, data.top_traders, data.municip_name);
   new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
-  new Table({
-    el:document.querySelector('.js-table-traders'),
-    data: data.top_traders, // example
-    type: 'top',
-    target: 'actor'
-  });
 
-  new Table({
-    el:document.querySelector('.js-table-consumers'),
-    data: data.top_consumers, // example
-    type: 'top'
-  });
+
+  new Top({
+    el: document.querySelector('.js-top-trader'),
+    data: data.top_traders,
+    targetLink: 'actor',
+    title: 'top traders',
+    unit: '%'
+  }).render(renderCallback);
+
+
+  new Top({
+    el: document.querySelector('.js-top-consumer'),
+    data: data.top_consumers,
+    title: 'top consumers',
+    unit: '%'
+  }).render(renderCallback);
 
   new Table({
     el:document.querySelector('.js-score-table'),
-    data: data.sustainability_indicators, // example
+    data: data.sustainability_indicators,
     type: 't_head_places'
   });
 };

@@ -3,7 +3,7 @@ export default (number, type)  => {
 
   if(number != null){
     if(number > 0) {
-      if(type === 'top') {
+      if(type === 'percentage') {
         numberChange = (number * 100).toFixed(1);
       } else{
         numberChange = number.toFixed(1);

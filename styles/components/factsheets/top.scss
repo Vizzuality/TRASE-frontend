@@ -1,0 +1,68 @@
+@import '../../settings';
+
+.c-top {
+
+  > .title {
+    margin: 0 0 24px;
+  }
+
+  > .top-list {
+    padding: 0 0 0 8px;
+  }
+
+  > .top-list > .top-item {
+    display: flex;
+    justify-content: space-between;
+
+    &:not(:first-child) {
+      margin: 16px 0 0;
+    }
+
+    > .item-name,
+    > .item-value {
+      color: $charcoal-grey;
+      font-family: $font-family-1;
+      font-size: $font-size-xx-regular;
+      letter-spacing: -.8px;
+    }
+
+    > .item-name {
+      display: flex;
+      align-items: center;
+      max-width: 80%;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      overflow: hidden;
+
+
+      .outside-link {
+        display: inline-flex;
+      }
+
+      .outside-link > .icon-outside-link {
+        margin: 0 0 0 8px;
+
+        cursor: pointer;
+        fill: rgba($charcoal-grey, .2);
+
+        &:hover {
+          fill: $charcoal-grey;
+        }
+      }
+    }
+
+    > .item-value {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        top: 0;
+
+        color: rgba($charcoal-grey, .6);
+        content: attr(data-unit);
+      }
+    }
+  }
+}

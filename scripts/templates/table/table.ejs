@@ -50,26 +50,6 @@
       </tr>
       <% } %>
     </tbody>
-  <% } else if (type === 'top_municipalities' || type === 'top_destination') { %>
-    <tbody>
-      <% for(var i = 0; i < data['lines'].length; i++) { %>
-        <tr class="row">
-          <td class="cell-name">
-            <span class="node-name"><%= data['lines'][i]['name'] %></span>
-              <% if (link !== null) {%>
-              <a class="node-link" href="<%= link + data['lines'][i]['id'] %>">
-                <svg class="icon icon-check">
-                  <use xlink:href="#icon-outside-link" />
-                </svg>
-              </a>
-              <% } %>
-          </td>
-          <td class="cell-score _text-align-right">
-            <%= data['lines'][i]['values'] %>
-          </td>
-        </tr>
-      <% } %>
-    </tbody>
   <% } else {%>
     <tbody>
       <% for(var i = 0; i < data.length; i++) { %>
