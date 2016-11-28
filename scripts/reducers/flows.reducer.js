@@ -13,6 +13,8 @@ import filterLinks from './helpers/filterLinks';
 import getMapLayers from './helpers/getMapLayers';
 import setNodesMeta from './helpers/setNodesMeta';
 import getChoropleth from './helpers/getChoropleth';
+import getNodesAtColumns from './helpers/getNodesAtColumns';
+import getNodesColoredBySelection from './helpers/getNodesColoredBySelection';
 
 export default function (state = {}, action) {
   let newState;
@@ -157,16 +159,16 @@ export default function (state = {}, action) {
   }
 
   case actions.FILTER_LINKS_BY_NODES: {
-    const selectedNodesPerColumns = getSelectedNodesPerColumn(state.selectedNodesIds, state.selectedNodesColumnsPos);
-    const recolourByNodeIds = getHighlightedNodes(selectedNodesPerColumns);
+    const selectedNodesAtColumns = getNodesAtColumns(state.selectedNodesIds, state.selectedNodesColumnsPos);
+    const nodesColoredBySelection = getNodesColoredBySelection(selectedNodesAtColumns);
 
-    let links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, selectedNodesPerColumns, recolourByNodeIds);
+    let links = getFilteredLinksByNodeIds(state.unmergedLinks, state.selectedNodesIds, selectedNodesAtColumns, nodesColoredBySelection);
     let mapNodeColors = [];
-    if (recolourByNodeIds && recolourByNodeIds.length !== 0) {
+    if (nodesColoredBySelection && nodesColoredBySelection.length !== 0) {
       //TODO: finish this so that we can color the map too
       mapNodeColors = getMapColorsFromLinks(links);
     }
-    newState = Object.assign({}, state, { links, recolourByNodeIds, mapNodeColors });
+    newState = Object.assign({}, state, { links, nodesColoredBySelection, mapNodeColors });
     break;
   }
 
@@ -246,9 +248,9 @@ export default function (state = {}, action) {
   return newState;
 }
 
-const getFilteredLinksByNodeIds = (unmergedLinks, selectedNodesIds, selectedNodesColumnsPos, recolourByNodeIds) => {
+const getFilteredLinksByNodeIds = (unmergedLinks, selectedNodesIds, selectedNodesAtColumns, nodesColoredBySelection) => {
   if (selectedNodesIds.length > 0) {
-    const filteredLinks = filterLinks(unmergedLinks, selectedNodesIds, selectedNodesColumnsPos, recolourByNodeIds);
+    const filteredLinks = filterLinks(unmergedLinks, selectedNodesIds, selectedNodesAtColumns, nodesColoredBySelection);
     return mergeLinks(filteredLinks);
   } else {
     return mergeLinks(unmergedLinks);
@@ -263,29 +265,4 @@ const getMapColorsFromLinks = (links) => {
   }
 
   return geoColorMap;
-};
-
-const getSelectedNodesPerColumn = (selectedNodesIds, selectedNodesColumnsPos) => {
-  const nodesAtColumns = [];
-  selectedNodesColumnsPos.forEach((columnPosition, index) => {
-    const nodeId = selectedNodesIds[index];
-    const column = nodesAtColumns[columnPosition];
-    if (column !== undefined) {
-      column.push(nodeId);
-    } else {
-      nodesAtColumns[columnPosition] = [nodeId];
-    }
-  });
-
-  return nodesAtColumns;
-};
-
-const getHighlightedNodes = (selectedNodesPerColumns) => {
-  let mostSelectedNodesColumn = 0;
-  for (let i = 0, nodesAtColumnsLen = selectedNodesPerColumns.length; i < nodesAtColumnsLen; i++) {
-    if (!selectedNodesPerColumns[mostSelectedNodesColumn] || (selectedNodesPerColumns[i] && selectedNodesPerColumns[i].length > selectedNodesPerColumns[mostSelectedNodesColumn].length)) {
-      mostSelectedNodesColumn = i;
-    }
-  }
-  return selectedNodesPerColumns[mostSelectedNodesColumn];
 };

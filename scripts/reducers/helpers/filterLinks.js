@@ -1,17 +1,17 @@
 import _ from 'lodash';
 
 // filter links using node Ids. Makes a copy of the original links object
-export default function(links, selectedNodesIds, selectedNodesPerColumns, recolourByNodeIds) {
+export default function(links, selectedNodesIds, selectedNodesAtColumns, nodesColoredBySelection) {
   const filteredLinks = [];
 
   for (let i = 0, linksLen = links.length; i < linksLen; i++) {
     const link = links[i];
-    const linkPasses = filterPath(link.originalPath, selectedNodesPerColumns);
+    const linkPasses = filterPath(link.originalPath, selectedNodesAtColumns);
     if (linkPasses) {
       let clonedLink = _.cloneDeep(link);
-      const highlightLinkNodes = _.intersection(link.originalPath, recolourByNodeIds);
+      const highlightLinkNodes = _.intersection(link.originalPath, nodesColoredBySelection);
       if (highlightLinkNodes) {
-        clonedLink.recolourGroup = recolourByNodeIds.length - recolourByNodeIds.indexOf(highlightLinkNodes[0]);
+        clonedLink.recolourGroup = nodesColoredBySelection.length - nodesColoredBySelection.indexOf(highlightLinkNodes[0]);
       }
       filteredLinks.push(clonedLink);
     }
