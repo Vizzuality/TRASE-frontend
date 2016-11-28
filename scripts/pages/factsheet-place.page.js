@@ -28,7 +28,7 @@ const defaults = {
 
 const _build = data => {
   const renderCallback = function() {
-    this.el.classList.toggle('is-hidden', !this.el.classList.contains('is-hidden'));
+    this.el.parentElement.classList.toggle('is-hidden', !this.el.parentElement.classList.contains('is-hidden'));
   };
 
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
