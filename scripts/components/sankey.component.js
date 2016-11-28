@@ -17,11 +17,11 @@ export default class {
     this._build();
   }
 
-  resizeViewport({selectedNodesIds, shouldRepositionExpandButton}) {
+  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy}) {
     this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
 
     if (this.layout.relayout()) {
-      this._render();
+      this._render(selectedRecolorBy);
       if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
     }
   }
@@ -48,9 +48,9 @@ export default class {
       this.svg.style('height', this.layout.getMaxHeight() + 'px');
     }
 
-    this._render();
+    this._render(linksPayload.selectedRecolorBy);
 
-    this.selectNodes(linksPayload)
+    this.selectNodes(linksPayload);
   }
 
   selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
@@ -133,9 +133,8 @@ export default class {
     this.el.querySelector('.js-loading').classList.toggle('-visible', loading);
   }
 
-  _color_class(link) {
+  _color_class(link, selectedRecolorBy) {
     let classPath = 'sankey-link';
-    const selectedRecolorBy = this.layout.selectedRecolorBy();
 
     if (selectedRecolorBy.type === 'qual') {
       classPath = `${classPath} -qual-${selectedRecolorBy.value}-${link.qual}`;
@@ -148,7 +147,7 @@ export default class {
     return classPath;
   }
 
-  _render() {
+  _render(selectedRecolorBy) {
     this.sankeyColumns
       .data(this.layout.columns());
 
@@ -197,14 +196,14 @@ export default class {
 
     // update
     links.transition()
-      .attr('class', (link) => {return this._color_class(link) } )
+      .attr('class', (link) => {return this._color_class(link, selectedRecolorBy); } )
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
     // enter
     links.enter()
       .append('path')
-      .attr('class', (link) => {return this._color_class(link) } )
+      .attr('class', (link) => {return this._color_class(link, selectedRecolorBy); } )
       .attr('d', this.layout.link())
       .on('mouseover', function(link) {
         that.linkTooltipHideDebounced.cancel();
