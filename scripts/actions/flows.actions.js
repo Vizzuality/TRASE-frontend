@@ -1,5 +1,4 @@
 import 'whatwg-fetch';
-import _ from 'lodash';
 import actions from 'actions';
 import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
 import getURLFromParams from 'utils/getURLFromParams';

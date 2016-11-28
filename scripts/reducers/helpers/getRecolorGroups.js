@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { NODE_SELECTION_LINKS_NUM_COLORS } from 'constants';
 
 export default (previousNodesColoredBySelection, nextColoredBySelection, recolorGroups) => {
   let nextRecolorGroups = _.cloneDeep(recolorGroups) || {};
@@ -26,7 +27,7 @@ export default (previousNodesColoredBySelection, nextColoredBySelection, recolor
 const getNextNodeColorGroup = currentSelectedNodesColorGroups => {
   let nextColorGroup;
   let minCount = Infinity;
-  for (let i = 4; i >= 1; i--) {
+  for (let i = NODE_SELECTION_LINKS_NUM_COLORS; i >= 1; i--) {
     let numTimesColorGroupUsed = currentSelectedNodesColorGroups.filter(colorGroup => colorGroup === i).length;
     if (numTimesColorGroupUsed <= minCount) {
       minCount = numTimesColorGroupUsed;
