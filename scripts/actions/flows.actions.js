@@ -412,6 +412,7 @@ export function searchNode(nodeId) {
 
 export function loadLinkedGeoIDs() {
   return (dispatch, getState) => {
+    return;
     const selectedNodesIds = getState().flows.selectedNodesIds;
     if (selectedNodesIds.length === 0) {
       dispatch({
