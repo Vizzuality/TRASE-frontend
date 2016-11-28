@@ -27,30 +27,29 @@ const defaults = {
 };
 
 const _build = data => {
-  const renderCallback = function() {
-    this.el.parentElement.classList.toggle('is-hidden', !this.el.parentElement.classList.contains('is-hidden'));
-  };
 
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
-  new Chord('.js-chord-traders', data.top_traders_matrix, data.top_traders, data.municip_name);
-  new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
 
+  if (data.top_traders.length) {
+    new Chord('.js-chord-traders', data.top_traders_matrix, data.top_traders, data.municip_name);
+    new Top({
+      el: document.querySelector('.js-top-trader'),
+      data: data.top_traders,
+      targetLink: 'actor',
+      title: 'top traders',
+      unit: '%'
+    });
+  }
 
-  new Top({
-    el: document.querySelector('.js-top-trader'),
-    data: data.top_traders,
-    targetLink: 'actor',
-    title: 'top traders',
-    unit: '%'
-  }).render(renderCallback);
-
-
-  new Top({
-    el: document.querySelector('.js-top-consumer'),
-    data: data.top_consumers,
-    title: 'top consumers',
-    unit: '%'
-  }).render(renderCallback);
+  if (data.top_consumers.length) {
+    new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
+    new Top({
+      el: document.querySelector('.js-top-consumer'),
+      data: data.top_consumers,
+      title: 'top consumers',
+      unit: '%'
+    });
+  }
 
   new Table({
     el:document.querySelector('.js-score-table'),

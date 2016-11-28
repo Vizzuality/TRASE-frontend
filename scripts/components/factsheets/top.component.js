@@ -16,6 +16,7 @@ export default class {
     this.unit = settings.unit;
 
     this._parseData();
+    this._render();
   }
 
   _parseData() {
@@ -30,17 +31,11 @@ export default class {
     });
   }
 
-  render(renderCallback) {
-    if (!this.data.length) return;
-
+  _render() {
     this.el.innerHTML = TopTemplate({
       list: this.data,
       title: this.title,
       unit: this.unit
     });
-
-    if (renderCallback && typeof renderCallback === 'function') {
-      renderCallback.apply(this);
-    }
   }
 }

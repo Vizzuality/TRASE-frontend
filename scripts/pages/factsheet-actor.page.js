@@ -45,23 +45,22 @@ const _setInfo = (type, name, forest_500, zero_deforestation) => {
 };
 
 const _build = data => {
+  if (data.top_municipalities.lines.length) {
+    new Top({
+      el: document.querySelector('.js-top-municipalities'),
+      data: data.top_municipalities.lines,
+      targetLink: 'place',
+      title: 'top source municipalities in 2015'
+    });
+  }
 
-  const renderCallback = function() {
-    this.el.classList.toggle('is-hidden', !this.el.classList.contains('is-hidden'));
-  };
-
-  new Top({
-    el: document.querySelector('.js-top-municipalities'),
-    data: data.top_municipalities.lines,
-    targetLink: 'place',
-    title: 'top source municipalities in 2015'
-  }).render(renderCallback);
-
-  new Top({
-    el:document.querySelector('.js-top-destination'),
-    data: data.top_countries.lines,
-    title: 'top destination countries in 2015'
-  }).render(renderCallback);
+  if (data.top_countries.lines.length) {
+    new Top({
+      el:document.querySelector('.js-top-destination'),
+      data: data.top_countries.lines,
+      title: 'top destination countries in 2015'
+    });
+  }
 
   // new AreaStack({
   //   el: document.querySelector('.js-municipalities-top'),
