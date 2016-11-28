@@ -12,6 +12,7 @@
 
   > .top-list > .top-item {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 
     &:not(:first-child) {
@@ -29,13 +30,14 @@
     > .item-name {
       display: flex;
       align-items: center;
-      max-width: 80%;
+      max-width: 85%;
 
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      > .node-name {
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
-      overflow: hidden;
-
+        overflow: hidden;
+      }
 
       .outside-link {
         display: inline-flex;
