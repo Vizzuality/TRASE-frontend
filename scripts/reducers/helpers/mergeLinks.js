@@ -9,9 +9,6 @@ export default function(links) {
     var link = links[i];
 
     let key = `${link.sourceNodeId}-${link.targetNodeId}-${link.qual}-${link.ind}`;
-    if (link.recolourGroup) {
-      key = `${key}-${link.recolourGroup}`;
-    }
 
     if (!dict[key]) {
       const mergedLink = _.cloneDeep(link);
