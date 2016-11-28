@@ -1,190 +1,133 @@
 @import '../../settings';
 
 .c-footer {
-  // display: flex;
-  // height: 465px;
   padding: 48px 0 56px;
 
   background-color: $charcoal-grey;
 
-  // > .wrap {
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: center;
-  //   justify-content: space-between;
-  // }
-
-  .signup {
-    max-width: 400px;
-    margin: 0 auto;
-
-    > .sign-up-form {
-      display: flex;
-      max-width: 330px;
-      height: 40px;
-      margin: 16px auto 0;
-
-      border: 1px solid $gray;
-      border-radius: 4px;
-    }
-
-    > .sign-up-form > .email-field {
-      width: 100%;
-      padding: 0 16px;
-      outline: 0;
-
-      background-color: transparent;
-
-      color: $gray;
-      font-family: $font-family-1;
-      font-size: $font-size-x-regular;
-
-      &::placeholder {
-        color: $gray;
-        font-family: $font-family-1;
-        font-size: $font-size-x-regular;
-      }
-
-      &::-webkit-input-placeholder {
-        color: $gray;
-        font-family: $font-family-1;
-        font-size: $font-size-x-regular;
-      }
-
-      &::-ms-input-placeholder {
-        color: $gray;
-        font-family: $font-family-1;
-        font-size: $font-size-x-regular;
-      }
-    }
-
-    > .sign-up-form > .c-button {
-      flex-basis: calc(100% / 3);
-      height: 100%;
-      padding: 0 16px;
-      border-radius: 0;
-      background-color: $gray;
-      font-family: $font-family-1;
-      font-size: $font-size-x-regular;
-      text-transform: uppercase;
-    }
-    
-    .sign-up-link {
-      color: $white;
-    }
+  .signup .sign-up-link {
+    color: $white;
   }
 
   .contain-logos-footer {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    margin-top: 56px;
+    margin: 56px 0 0;
 
-    .contain-logos {
-      flex-basis: calc(100% / 3);
-      height: 0%;
-      padding-left: 16px;
-      border-left: 1px solid $white;
+    @media screen and (min-width: $breakpoint-tablet) {
+      flex-direction: row;
+    }
 
-      ul {
-        li {
-          display: block;
+    > .contain-logos {
+      width: 100%;
+
+      &:not(:first-child) {
+        margin: 24px 0 0;
+      }
+
+      @media screen and (min-width: $breakpoint-tablet) {
+        width: calc(100% / 3);
+        padding: 0 0 0 16px;
+
+        border-left: 1px solid $white;
+
+        &:not(:first-child) {
+          margin: 0;
         }
       }
 
-      h4 {
-        margin-bottom: 32px;
+      > .title {
+        margin: 0 0 32px;
         color: $white;
       }
 
-      .sei-logo {
-        margin-bottom: 48px;
+      > .logo-list {
 
-        img {
-          width: 168px;
+        &:not(:first-of-type) {
+          margin: 8px 0 0;
+        }
+
+        > .logo-item {
+          display: inline-block;
+
+          &:not(:first-child) {
+            margin: 0 0 0 16px;
+          }
+
+          @media screen and (min-width: $breakpoint-tablet) {
+            display: block;
+
+            &:not(:first-child) {
+              margin: 16px 0 0;
+            }
+          }
+
+          &.sei-logo > img {
+            width: 167px;
+          }
+
+          &.gcp-logo > img {
+            width: 112px;
+          }
+
+          &.vizzuality-logo > img {
+            width: 116px;
+          }
+
+          &.efi-logo >img {
+            width: 64px;
+          }
+        }
+
+        &.-donors {
+
+          @media screen and (min-width: $breakpoint-laptop) {
+            display: flex;
+          }
+
+          > .logo-item {
+
+            &.eustars-logo > img {
+              width: 80px;
+            }
+
+            &.ukaidsv-logo > img {
+              width: 48px;
+            }
+
+            &.conservancy-logo > img {
+              width: 120px;
+            }
+
+            &.sida-logo > img {
+              width: 120px;
+            }
+
+            &.formas-logo > img {
+              width: 40px;
+            }
+
+            &.moore-logo > img {
+              width: 104px;
+            }
+
+            @media screen and (min-width: $breakpoint-laptop) {
+              display: inline-block;
+
+              &:not(:first-child) {
+                margin: 0 0 0 16px;
+              }
+            }
+          }
         }
       }
 
-      .gcp-logo {
-        img {
-          width: 112px;
-        }
-      }
+      > .contain-text {
+        margin: 16px 0 0;
 
-      .vizzuality-logo {
-        margin-bottom: 35px;
-
-        img {
-          width: 116px;
-        }
-      }
-
-      .efi-logo {
-        img {
-          width: 64px;
-        }
-      }
-
-      .contain-text {
-        margin-top: 20px;
-
-        p {
-          color: $gray;
-          opacity: .5;
-        }
-      }
-
-      &.-donors {
-        ul {
-          display: flex;
-
-          &:first-of-type {
-            margin-bottom: 24px;
-          }
-        }
-
-        .eustars-logo {
-          margin-right: 56px;
-
-          img {
-            width: 80px;
-          }
-        }
-
-        .ukaidsv-logo {
-          margin-right: 24px;
-
-          img {
-            width: 48px;
-          }
-        }
-
-        .conservancy-logo {
-          img {
-            width: 120px;
-          }
-        }
-
-        .sida-logo {
-          margin-right: 24px;
-
-          img {
-            width: 120px;
-          }
-        }
-
-        .formas-logo {
-          margin-right: 32px;
-
-          img {
-            width: 40px;
-          }
-        }
-
-        .moore-logo {
-
-          img {
-            width: 104px;
-          }
+        > p {
+          color: rgba($gray, .5);
         }
       }
     }
