@@ -39,8 +39,9 @@ const _build = data => {
       title: 'top traders',
       unit: '%'
     });
+    document.querySelector('.js-traders').classList.toggle('is-hidden', false);
   }
-
+  
   if (data.top_consumers.length) {
     new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
     new Top({
@@ -49,6 +50,8 @@ const _build = data => {
       title: 'top consumers',
       unit: '%'
     });
+    document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
+
   }
 
   new Table({
