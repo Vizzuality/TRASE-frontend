@@ -6,5 +6,5 @@ export default selectedNodesPerColumns => {
       mostSelectedNodesColumn = i;
     }
   }
-  return selectedNodesPerColumns[mostSelectedNodesColumn];
+  return selectedNodesPerColumns[mostSelectedNodesColumn] || [];
 };

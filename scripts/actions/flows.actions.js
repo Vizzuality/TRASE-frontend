@@ -218,7 +218,7 @@ export function loadLinks() {
         // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
         const selectedNodesIds = getSelectedNodesStillVisible(getState().flows.visibleNodes, getState().flows.selectedNodesIds);
 
-        const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta,getState().flows.selectedVectorLayers);
+        const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
         action.type = actions.UPDATE_NODE_SELECTION;
         dispatch(action);
 
@@ -290,14 +290,18 @@ export function selectNode(nodeId, isAggregated = false) {
       // remove or add nodeId from selectedNodesIds
       const currentSelectedNodesIds = getState().flows.selectedNodesIds;
       let selectedNodesIds;
-      if (currentSelectedNodesIds.indexOf(nodeId) > -1) {
-        selectedNodesIds = _.without(currentSelectedNodesIds, nodeId);
+      let nodeIndex = currentSelectedNodesIds.indexOf(nodeId);
+      if (nodeIndex > -1) {
+        selectedNodesIds = [].concat(currentSelectedNodesIds);
+        selectedNodesIds.splice(nodeIndex, 1);
       } else {
         selectedNodesIds = [nodeId].concat(currentSelectedNodesIds);
       }
 
+
+
       // send to state the new node selection allong with new data, geoIds, etc
-      const action = getNodesSelectionAction(selectedNodesIds, getState().flows.visibleNodes, getState().flows.nodesDictWithMeta, getState().flows.selectedVectorLayers);
+      const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
       action.type = actions.UPDATE_NODE_SELECTION;
       dispatch(action);
 
@@ -335,7 +339,7 @@ export function highlightNode(nodeId, isAggregated) {
       return;
     }
 
-    const action = getNodesSelectionAction([nodeId], getState().flows.visibleNodes, getState().flows.nodesDictWithMeta, getState().flows.selectedVectorLayers);
+    const action = getNodesSelectionAction([nodeId], getState().flows);
     action.type = actions.HIGHLIGHT_NODE;
     dispatch(action);
   };
