@@ -19,6 +19,7 @@ import Top from 'components/factsheets/top.component';
 import Table from 'components/table/table.component';
 
 import { getURLParams } from 'utils/stateURL';
+import changeNumber from 'utils/changeNumber';
 import _ from 'lodash';
 
 const defaults = {
@@ -41,7 +42,7 @@ const _build = data => {
     });
     document.querySelector('.js-traders').classList.toggle('is-hidden', false);
   }
-  
+
   if (data.top_consumers.length) {
     new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
     new Top({
@@ -74,6 +75,9 @@ const _setInfo = (info) => {
   document.querySelector('.js-biome-name').innerHTML = info.biome ? _.capitalize(info.biome) : '-';
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
+  document.querySelector('.js-area').innerHTML = info.area !== null ? info.area : '-';
+  document.querySelector('.js-soy-land').innerHTML = info.soy_land !== null ? changeNumber(info.soy_land, 'percentage') : '-';
+  document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? changeNumber(info.agriculture_land, 'percentage') : '-';
 };
 
 const _showErrorMessage = () => {
@@ -113,10 +117,14 @@ const _init = () => {
       document.querySelector('.wrap').classList.remove('is-hidden');
 
       const data = result.data;
+
       const info = {
+        area: data.area,
+        agriculture_land: data.farming_GDP,
         biome: data.biome_name,
         country: data.country_name,
         municipality: data.municip_name,
+        soy_land: data.soy_farmland,
         state: data.state_name,
         type: data.column_name
       };
