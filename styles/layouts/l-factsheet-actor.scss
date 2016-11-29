@@ -27,25 +27,19 @@
     }
   }
 
-  .container-top-tables {
+  .container-top {
     display: flex;
+    justify-content: space-between;
     margin: 56px 0 112px;
 
-    .c-area-stacked-chart {
-      flex-basis: 50%;
-
-      &:first-of-type {
-        padding-right: 24px;
-      }
-
-      &:last-of-type {
-        padding-left: 24px;
-      }
+    > .c-top {
+      width: calc(50% - 24px);
     }
-
   }
 
   .title {
+    margin: 0 0 24px;
+
     font-family: $font-family-1;
     font-weight: $font-weight-bold;
     letter-spacing: -.6px;

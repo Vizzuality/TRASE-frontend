@@ -14,6 +14,7 @@ import 'styles/components/loading.scss';
 
 import Dropdown from 'components/dropdown.component';
 // import AreaStack from 'components/graphs/area-stack.component';  stack area future
+import Top from 'components/factsheets/top.component';
 import Table from 'components/table/table.component';
 
 import { getURLParams } from 'utils/stateURL';
@@ -44,6 +45,23 @@ const _setInfo = (type, name, forest_500, zero_deforestation) => {
 };
 
 const _build = data => {
+  if (data.top_municipalities.lines.length) {
+    new Top({
+      el: document.querySelector('.js-top-municipalities'),
+      data: data.top_municipalities.lines,
+      targetLink: 'place',
+      title: 'top source municipalities in 2015'
+    });
+  }
+
+  if (data.top_countries.lines.length) {
+    new Top({
+      el:document.querySelector('.js-top-destination'),
+      data: data.top_countries.lines,
+      title: 'top destination countries in 2015'
+    });
+  }
+
   // new AreaStack({
   //   el: document.querySelector('.js-municipalities-top'),
   //   data: data.op_municipalities
@@ -59,20 +77,6 @@ const _build = data => {
     data: data.risk_indicators_municip,
     type: 't_head_actors',
     target: 'actor'
-  });
-
-
-  new Table({
-    el:document.querySelector('.js-municipalities-top'),
-    data: data.top_municipalities,
-    type: 'top_municipalities',
-    target: 'place'
-  });
-
-  new Table({
-    el:document.querySelector('.js-destination-top'),
-    data: data.top_countries,
-    type: 'top_destination'
   });
 };
 
