@@ -72,12 +72,15 @@ const _build = data => {
   //   data: data.top_countries
   // });
 
-  new Table({
-    el:document.querySelector('.js-municipalities-table'),
-    data: data.risk_indicators_municip,
-    type: 't_head_actors',
-    target: 'actor'
-  });
+  if (data.risk_indicators_municip.rows.length) {
+    new Table({
+      el: document.querySelector('.js-municipalities-table'),
+      data: data.risk_indicators_municip,
+      type: 't_head_actors',
+      target: 'actor'
+    });
+  }
+
 };
 
 const _showErrorMessage = () => {

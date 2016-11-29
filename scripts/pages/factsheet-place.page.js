@@ -32,6 +32,7 @@ const _build = data => {
 
   if (data.top_traders.length) {
     new Chord('.js-chord-traders', data.top_traders_matrix, data.top_traders, data.municip_name);
+
     new Top({
       el: document.querySelector('.js-top-trader'),
       data: data.top_traders,
@@ -39,26 +40,30 @@ const _build = data => {
       title: 'top traders',
       unit: '%'
     });
+
     document.querySelector('.js-traders').classList.toggle('is-hidden', false);
   }
-  
+
   if (data.top_consumers.length) {
     new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
+
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers,
       title: 'top consumers',
       unit: '%'
     });
-    document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
 
+    document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
   }
 
-  new Table({
-    el:document.querySelector('.js-score-table'),
-    data: data.sustainability_indicators,
-    type: 't_head_places'
-  });
+  if (data.sustainability_indicators.rows.length) {
+    new Table({
+      el: document.querySelector('.js-score-table'),
+      data: data.sustainability_indicators,
+      type: 't_head_places'
+    });
+  }
 };
 
 const _onSelect = function(value) {
