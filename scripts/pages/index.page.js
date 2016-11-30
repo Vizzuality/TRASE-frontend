@@ -1,5 +1,4 @@
 import Dropdown from 'scripts/components/dropdown.component';
-import 'whatwg-fetch';
 import PostGridTemplate from 'ejs!templates/homepage/post-grid.ejs';
 import 'styles/homepage.scss';
 

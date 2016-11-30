@@ -1,5 +1,3 @@
-import 'whatwg-fetch';
-
 import 'styles/_base.scss';
 import 'styles/_texts.scss';
 import 'styles/layouts/l-factsheet-actor.scss';
