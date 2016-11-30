@@ -1,5 +1,6 @@
 ### 1.0.2
 - Extracted Google Analytics key to ENV variable
+- sankey: renamed color by 'None' to 'Node selection'
 
 ### 1.0.1
 - Added recolour by selected node
