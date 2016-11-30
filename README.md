@@ -48,6 +48,7 @@ The project's main configuration values can be set using [environment variables]
 * API_URL: URL of the data API
 * API_CMS_URL: URL of the homepage stories API
 * API_STORY_CONTENT: URL of the deep dive stories API
+* GOOGLE_ANALYTICS_KEY: API key for Google Analytics
 
 If you are using the included development server, you can set those variables in the `.env` file (use the included `
 .env.sample` as an example)

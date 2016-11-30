@@ -1,3 +1,6 @@
+### 1.0.2
+- Extracted Google Analytics key to ENV variable
+
 ### 1.0.1
 - Added recolour by selected node
 - Improve cross browser compatibility

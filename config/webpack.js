@@ -52,7 +52,8 @@ const getPagePlugin = (id, params) => {
     head: htmlHeadTemplate({
       title,
       description,
-      dev: process.env.NODE_ENV === 'development'
+      dev: process.env.NODE_ENV === 'development',
+      GOOGLE_ANALYTICS_KEY: JSON.stringify(process.env.GOOGLE_ANALYTICS_KEY),
     }),
     nav: htmlNavTemplate({page: id}),
     footer: htmlFooterTemplate(),
