@@ -40,11 +40,10 @@
 <script src="/webpack-dev-server.js"></script>
 <% } %>
 <style>.loading-wrapper { display: none }</style>
-<% if (!dev) { %>
 <!-- Google Analytics start -->
 <script>
 window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', <%= GOOGLE_ANALYTICS_KEY %>, 'auto');
+ga('create', <%= GOOGLE_ANALYTICS_KEY ? GOOGLE_ANALYTICS_KEY : '' %>, 'auto');
 ga('send', 'pageview');
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
@@ -57,4 +56,3 @@ a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0057/8220.
 a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 </script>
 <!-- Crazy Egg end -->
-<% } %>
