@@ -1,5 +1,5 @@
 import TableTemplate from 'ejs!templates/table/table.ejs';
-import changeNumber from 'utils/changeNumber';
+import formatNumber from 'utils/formatNumber';
 
 import 'styles/components/factsheets/area-table.scss';
 
@@ -18,14 +18,25 @@ export default class {
       this.link = null;
     }
 
-    if(this.type === 't_head_places') {
-      for(let i=0; i<this.data['rows'].length; i++) {
-        for(let j=0; j<this.data['rows'][i]['values'].length; j++){
-          if(this.data['rows'][i]['values'][j] == null){
-            this.data['rows'][i]['values'][j] = 'N/A';
-          } else {
-            this.data['rows'][i]['values'][j] = changeNumber(this.data['rows'][i]['values'][j]);
+    // this parse would not exist in the future.
+    if (this.type === 't_head_actors') {
+      for (let i = 0; i < this.data.rows.length; i++) {
+        if (this.data.rows[i] !== null && this.data.rows[i].hasOwnProperty('values')) {
+          for (let j = 0; j < this.data.rows[i].values.length; j++) {
+            if (this.data.rows[i].values[j] !== null && this.data.rows[i].values[j].hasOwnProperty('value')) {
+              // there are string values, this way we avoid parse them.
+              if (typeof this.data.rows[i].values[j].value !== 'number') continue;
+              this.data.rows[i].values[j].value = formatNumber(this.data.rows[i].values[j].value);
+            }
           }
+        }
+      }
+    }
+
+    if(this.type === 't_head_places') {
+      for(let i = 0; i < this.data.rows.length; i++) {
+        for(let j = 0; j < this.data.rows[i].values.length; j++){
+          this.data.rows[i].values[j] = formatNumber(this.data.rows[i].values[j]);
         }
       }
     }

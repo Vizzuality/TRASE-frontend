@@ -17,7 +17,7 @@ import Top from 'components/factsheets/top.component';
 import Table from 'components/table/table.component';
 
 import { getURLParams } from 'utils/stateURL';
-import changeNumber from 'utils/changeNumber';
+import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
 
 const defaults = {
@@ -79,8 +79,8 @@ const _setInfo = (info) => {
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
   document.querySelector('.js-area').innerHTML = info.area !== null ? info.area : '-';
-  document.querySelector('.js-soy-land').innerHTML = info.soy_land !== null ? changeNumber(info.soy_land, 'percentage') : '-';
-  document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? changeNumber(info.agriculture_land, 'percentage') : '-';
+  document.querySelector('.js-soy-land').innerHTML = info.soy_land !== null ? formatNumber(info.soy_land, 'percentage') : '-';
+  document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? formatNumber(info.agriculture_land, 'percentage') : '-';
 };
 
 const _showErrorMessage = () => {

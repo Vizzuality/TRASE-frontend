@@ -1,6 +1,6 @@
 
 import _ from 'lodash';
-import formatNumber from 'utils/changeNumber';
+import formatNumber from 'utils/formatNumber';
 
 import TopTemplate from 'ejs!templates/factsheets/top.ejs';
 
@@ -26,7 +26,7 @@ export default class {
     this.data.forEach(d => {
       // this verification shouldn't exist. All list must have same data format.
       // Though this is a temporal patch.
-      d.value = _.isArray(d.values) ? d.values[0] : formatNumber(d.value, 'percentage');
+      d.value = _.isArray(d.values) ? formatNumber(d.values[0]) : formatNumber(d.value, true);
       d.link = baseUrlLink ? `${baseUrlLink}${d.id}` : null;
     });
   }
