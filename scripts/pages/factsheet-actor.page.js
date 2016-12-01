@@ -79,6 +79,14 @@ const _build = data => {
     });
   }
 
+  if (data.risk_indicators_biome.rows.length) {
+    new Table({
+      el: document.querySelector('.js-biome-table'),
+      data: data.risk_indicators_biome,
+      type: 't_head_actors',
+      target: 'actor'
+    });
+  }
 };
 
 const _showErrorMessage = () => {

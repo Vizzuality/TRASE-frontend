@@ -2,6 +2,10 @@
 
 .c-area-table {
 
+  > .title {
+    margin: 0 0 24px;
+  }
+
   table {
     width: 100%;
 
@@ -87,5 +91,9 @@
         }
       }
     }
+  }
+
+  & + .c-area-table {
+    margin: 56px 0 0;
   }
 }

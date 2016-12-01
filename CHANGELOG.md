@@ -3,6 +3,7 @@
 - sankey: renamed color by 'None' to 'Node selection'
 - support and various bugfixes for IE11
 - sankey: node selection coloring improvements
+- actor fact sheet: rendered biome data
 
 ### 1.0.1
 - Added recolour by selected node
