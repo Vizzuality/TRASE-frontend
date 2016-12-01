@@ -6,13 +6,15 @@
 @font-face {
   font-family: 'DecimaMonoPro';
   font-weight: $font-weight-regular;
-  src: url('/fonts/DecimaMonoPro.otf') format('embedded-opentype');
+  src: url('/fonts/DecimaMonoPro.otf') format('embedded-opentype'),
+  url('/fonts/DecimaMonoPro.otf');
 }
 
 @font-face {
   font-family: 'DecimaMonoPro';
   font-weight: $font-weight-bold;
-  src: url('/fonts/DecimaMonoPro-Bold.otf') format('embedded-opentype');
+  src: url('/fonts/DecimaMonoPro-Bold.otf') format('embedded-opentype'),
+  url('/fonts/DecimaMonoPro-Bold.otf');
 }
 
 @font-face {
