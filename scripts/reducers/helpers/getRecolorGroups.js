@@ -23,16 +23,13 @@ export default (previousNodesColoredBySelection, nextColoredBySelection, recolor
   return nextRecolorGroups;
 };
 
-// gets the next available color group, cycling if none still available
+// gets the next available color group
 const getNextNodeColorGroup = currentSelectedNodesColorGroups => {
-  let nextColorGroup;
-  let minCount = Infinity;
-  for (let i = NODE_SELECTION_LINKS_NUM_COLORS; i >= 1; i--) {
-    let numTimesColorGroupUsed = currentSelectedNodesColorGroups.filter(colorGroup => colorGroup === i).length;
-    if (numTimesColorGroupUsed <= minCount) {
-      minCount = numTimesColorGroupUsed;
-      nextColorGroup = i;
+  for (let i = 1; i < NODE_SELECTION_LINKS_NUM_COLORS + 1; i++) {
+    if (currentSelectedNodesColorGroups.indexOf(i) === -1) {
+      return i;
     }
   }
-  return nextColorGroup;
+  // just use standard link light gray after allowed NODE_SELECTION_LINKS_NUM_COLORS
+  return -1;
 };

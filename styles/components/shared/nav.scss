@@ -278,6 +278,12 @@
               background-color: #{nth($qual-colors, $i)};
             }
           }
+
+          @for $i from 1 through length($flow-colors) {
+            &.#{nth($flow-colors-names, $i)} {
+              background-color: #{nth($flow-colors, $i)};
+            }
+          }
         }
       }
     }
