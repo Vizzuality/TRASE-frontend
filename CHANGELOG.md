@@ -1,6 +1,7 @@
 ### 1.0.2
 - Extracted Google Analytics key to ENV variable
 - sankey: renamed color by 'None' to 'Node selection'
+- support and various bugfixes for IE11
 
 ### 1.0.1
 - Added recolour by selected node

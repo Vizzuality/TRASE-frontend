@@ -4,8 +4,6 @@ import 'styles/layouts/l-factsheets.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 
-
-import 'whatwg-fetch';
 import _ from 'lodash';
 
 import Search from 'components/search.component.js';

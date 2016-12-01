@@ -1,7 +1,6 @@
 import L from 'leaflet';
 import _ from 'lodash';
 import 'leaflet.utfgrid';
-import 'whatwg-fetch';
 import * as topojson from 'topojson';
 import { CARTO_BASE_URL } from 'constants';
 import 'leaflet/dist/leaflet.css';

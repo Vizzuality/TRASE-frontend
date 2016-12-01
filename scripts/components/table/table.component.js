@@ -1,5 +1,4 @@
 import TableTemplate from 'ejs!templates/table/table.ejs';
-import 'whatwg-fetch';
 import changeNumber from 'utils/changeNumber';
 
 import 'styles/components/factsheets/area-table.scss';

@@ -1,8 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import 'whatwg-fetch';
-
-
 
 import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
