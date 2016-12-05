@@ -1,3 +1,6 @@
+### 1.0.3
+- Change cloropleth rendering to match new API data
+
 ### 1.0.2
 - Extracted Google Analytics key to ENV variable
 - sankey: renamed color by 'None' to 'Node selection'
