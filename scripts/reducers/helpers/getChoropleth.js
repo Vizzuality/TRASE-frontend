@@ -34,7 +34,7 @@ export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
           const horizontalValue = horizontalLayerValue.value3;
           const verticalValue = verticalLayerValue.value3;
           colors = allColors.bidimensional;
-          colorIndex = (2 - verticalValue) * 3 + horizontalValue;
+          colorIndex = (2 - Math.max(0, verticalValue-1)) * 3 + Math.max(0, horizontalValue-1);
           color = colors[colorIndex];
         }
       } else {
@@ -45,7 +45,7 @@ export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
         } else {
           colors = (isHorizontal) ? allColors.horizontal : allColors.vertical;
           colorIndex = value.value5;
-          color = colors[colorIndex];
+          color = colors[Math.max(0, colorIndex-1)];
         }
       }
     }
