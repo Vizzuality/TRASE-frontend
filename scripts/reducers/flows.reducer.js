@@ -169,8 +169,8 @@ export default function (state = {}, action) {
 
     let links;
     if (state.selectedNodesIds.length > 0) {
-      const filteredLinks = filterLinks(state.unmergedLinks, state.selectedNodesIds, selectedNodesAtColumns, nodesColoredBySelection, recolorGroups);
-      links =  mergeLinks(filteredLinks);
+      const filteredLinks = filterLinks(state.unmergedLinks, selectedNodesAtColumns, nodesColoredBySelection, recolorGroups);
+      links =  mergeLinks(filteredLinks, true);
     } else {
       links = mergeLinks(state.unmergedLinks);
     }
