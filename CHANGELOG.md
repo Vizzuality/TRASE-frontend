@@ -1,3 +1,6 @@
+### 1.0.4
+- sankey: Fixed issue with wrong merging of links coloured by node selection
+
 ### 1.0.3
 - Change cloropleth rendering to match new API data
 
