@@ -1,3 +1,9 @@
+### 1.0.5
+- map: fixes a major issue where user was able to query a node without links by clicking a polygon on the map
+
+### 1.0.4
+- sankey: Fixed issue with wrong merging of links coloured by node selection
+
 ### 1.0.3
 - Change cloropleth rendering to match new API data
 

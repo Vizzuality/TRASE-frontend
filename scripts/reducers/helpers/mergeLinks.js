@@ -1,14 +1,19 @@
 import _ from 'lodash';
 
 // merges same origin / same destination / same qual links
-export default function(links) {
+export default function(links, useRecolourGroups) {
   const mergedLinks = [];
   let dict = {};
 
   for (var i = 0; i < links.length; i++) {
     var link = links[i];
 
-    let key = `${link.sourceNodeId}-${link.targetNodeId}-${link.qual}-${link.ind}`;
+    let key = `${link.sourceNodeId}-${link.targetNodeId}`;
+    if (useRecolourGroups === true) {
+      key = `${key}-colourGroup${link.recolourGroup}`;
+    } else {
+      key = `${key}--${link.qual}-${link.ind}`;
+    }
 
     if (!dict[key]) {
       const mergedLink = _.cloneDeep(link);

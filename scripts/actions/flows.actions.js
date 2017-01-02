@@ -1,10 +1,12 @@
 import actions from 'actions';
+import * as topojson from 'topojson';
 import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
 import getURLFromParams from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
 import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
 import getNodesSelectionAction from './helpers/getNodesSelectionAction';
 import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible';
+import setGeoJSONMeta from './helpers/setGeoJSONMeta';
 
 
 export function resetState() {
@@ -127,9 +129,9 @@ export function loadInitialData() {
       });
       dispatch(loadNodes());
       dispatch(loadLinks());
+      dispatch(loadMapVectorLayers());
+      dispatch(loadMapContextLayers());
     });
-    dispatch(loadMapVectorLayers());
-    dispatch(loadMapContextLayers());
   };
 }
 
@@ -234,17 +236,28 @@ export function loadLinks() {
 
 
 export function loadMapVectorLayers() {
-  return (dispatch) => {
-    Promise.all([
-      'municip.topo.hi.json',
-      'states.topo.json',
-      'biomes.topo.json'
-    ].map(url =>
+  return (dispatch, getState) => {
+    // get columns at position 0
+    // exclude logistics hubs which doesnt have its own topojson
+    const geoColumns = getState().flows.columns.filter(column => column.position === 0);
+    const geoColumnsWithTopoJSON = geoColumns.filter(column => column.id !== 2);
+    const geoJSONUrls = geoColumnsWithTopoJSON.map(geoColumn => `${geoColumn.name}.topo.json`);
+    Promise.all(geoJSONUrls.map(url =>
       fetch(url).then(resp => resp.text())
     )).then(payload => {
+      const geoData = {};
+      geoColumnsWithTopoJSON.forEach((geoColumn, i) => {
+        const layerPayload = payload[i];
+        const topoJSON = JSON.parse(layerPayload);
+        const key = Object.keys(topoJSON.objects)[0];
+        const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
+        setGeoJSONMeta(geoJSON, getState().flows.nodesDict, geoColumn.id);
+        geoData[geoColumn.name] = geoJSON;
+      });
+
       dispatch({
         type: actions.GET_GEO_DATA,
-        payload
+        geoData
       });
     });
   };
@@ -316,7 +329,7 @@ export function selectNode(nodeId, isAggregated = false) {
 
 export function selectNodeFromGeoId(geoId) {
   return (dispatch, getState) => {
-    const nodeId = getNodeIdFromGeoId(geoId, getState().flows.nodesDict, getState().flows.selectedColumnsIds);
+    const nodeId = getNodeIdFromGeoId(geoId, getState().flows.nodesDict, getState().flows.selectedColumnsIds[0]);
 
     // node not in visible Nodes ---> expand node (same behavior as search)
     if (!_isNodeVisible(getState, nodeId)) {
@@ -345,7 +358,7 @@ export function highlightNode(nodeId, isAggregated) {
 
 export function highlightNodeFromGeoId(geoId) {
   return (dispatch, getState) => {
-    const nodeId = getNodeIdFromGeoId(geoId, getState().flows.nodesDict, getState().flows.selectedColumnsIds);
+    const nodeId = getNodeIdFromGeoId(geoId, getState().flows.nodesDict, getState().flows.selectedColumnsIds[0]);
     dispatch(highlightNode(nodeId, false));
   };
 }

@@ -169,8 +169,8 @@ export default function (state = {}, action) {
 
     let links;
     if (state.selectedNodesIds.length > 0) {
-      const filteredLinks = filterLinks(state.unmergedLinks, state.selectedNodesIds, selectedNodesAtColumns, nodesColoredBySelection, recolorGroups);
-      links =  mergeLinks(filteredLinks);
+      const filteredLinks = filterLinks(state.unmergedLinks, selectedNodesAtColumns, nodesColoredBySelection, recolorGroups);
+      links =  mergeLinks(filteredLinks, true);
     } else {
       links = mergeLinks(state.unmergedLinks);
     }
@@ -185,13 +185,7 @@ export default function (state = {}, action) {
   }
 
   case actions.GET_GEO_DATA: {
-    newState = Object.assign({}, state, {
-      geoData: {
-        municipalities: JSON.parse(action.payload[0]),
-        states: JSON.parse(action.payload[1]),
-        biomes: JSON.parse(action.payload[2])
-      }
-    });
+    newState = Object.assign({}, state, { geoData: action.geoData });
     break;
   }
 

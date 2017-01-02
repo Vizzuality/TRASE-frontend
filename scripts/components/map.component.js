@@ -1,7 +1,6 @@
 import L from 'leaflet';
 import _ from 'lodash';
 import 'leaflet.utfgrid';
-import * as topojson from 'topojson';
 import { CARTO_BASE_URL } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/map.scss';
@@ -34,10 +33,10 @@ export default class {
   showLoadedMap(payload) {
     const geoData = payload.geoData;
     // TODO this statically maps vectorLayers indexes to column indexes, it should be dynamic
-    let municipalitiesLayer = this._getVectorLayer(geoData.municipalities, 'map-polygon-municipality');
+    let municipalitiesLayer = this._getVectorLayer(geoData.MUNICIPALITY, 'map-polygon-municipality');
     this.vectorLayers = [
-      this._getVectorLayer(geoData.biomes, 'map-polygon-biome'),
-      this._getVectorLayer(geoData.states, 'map-polygon-state'),
+      this._getVectorLayer(geoData.BIOME, 'map-polygon-biome'),
+      this._getVectorLayer(geoData.STATE, 'map-polygon-state'),
       municipalitiesLayer, // logistics hubs
       municipalitiesLayer // municipalities
     ];
@@ -74,7 +73,7 @@ export default class {
     let layer;
     if (selectedFeatures.length > 0) {
       layer = L.geoJSON(selectedFeatures, { pane: 'main' });
-      layer.setStyle(() => { return { className: `map-polygon ${className}`}; });
+      layer.setStyle(feature => this._getPolygonSyle(className, feature));
       this.map.addLayer(layer);
     }
     return layer;
@@ -95,7 +94,7 @@ export default class {
           // polygon appears 'burried', and SVG does nto support z-indexes
           // so we have to recreate the hover layer on top of all other polygons
           this.highlightedLayer = L.geoJSON(layer.feature, { pane: 'main' });
-          this.highlightedLayer.setStyle(() => { return { className: 'map-polygon -highlighted'}; });
+          this.highlightedLayer.setStyle(feature => this._getPolygonSyle(null, feature, true));
           this.map.addLayer(this.highlightedLayer);
         }
       });
@@ -188,18 +187,12 @@ export default class {
     // }
   }
 
-  _getVectorLayer(geoData, polygonClassName) {
-    var topoLayer = new L.GeoJSON(null, {
+  _getVectorLayer(geoJSON, polygonClassName) {
+    var topoLayer = new L.GeoJSON(geoJSON, {
       pane: 'main'
     });
-    var keys = Object.keys(geoData.objects);
-    keys.forEach(key => {
-      const geojson = topojson.feature(geoData, geoData.objects[key]);
-      topoLayer.addData(geojson);
-    });
 
-    topoLayer.setStyle(() => { return { className: `${polygonClassName} map-polygon`}; });
-
+    topoLayer.setStyle(feature => this._getPolygonSyle(polygonClassName, feature));
 
     topoLayer.eachLayer(layer => {
       const that = this;
@@ -211,11 +204,27 @@ export default class {
           that.callbacks.onPolygonHighlighted();
         },
         click: function() {
-          that.callbacks.onPolygonClicked(this.feature.properties.geoid);
+          if (this.feature.properties.hasFlows === true) {
+            that.callbacks.onPolygonClicked(this.feature.properties.geoid);
+          }
         }
       });
     });
     return topoLayer;
+  }
+
+  _getPolygonSyle(polygonClassName, feature, highlighted) {
+    let classNames = ['map-polygon'];
+    if (polygonClassName) {
+      classNames.push(polygonClassName);
+    }
+    if (!feature.properties.hasFlows) {
+      classNames.push('-disabled');
+    }
+    if (highlighted === true) {
+      classNames.push('-highlighted')
+    }
+    return {className: classNames.join(' ')};
   }
 
   _onToggleMap () {
