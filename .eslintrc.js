@@ -35,6 +35,7 @@ module.exports = {
       API_URL: true,
       API_CMS_URL: true,
       API_STORY_CONTENT: true,
-      GOOGLE_ANALYTICS_KEY: true
+      GOOGLE_ANALYTICS_KEY: true,
+      ga: true
     }
 };
