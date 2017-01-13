@@ -252,7 +252,7 @@ export default function (state = {}, action) {
     encodeStateToURL(newState);
   }
 
-  if (ga) {
+  if (typeof ga !== 'undefined') {
     const gaAction = GA_ACTION_WHITELIST.find(whitelistAction => action.type === whitelistAction.type);
     if (gaAction) {
       const gaEvent = {
