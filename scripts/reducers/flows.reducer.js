@@ -252,17 +252,19 @@ export default function (state = {}, action) {
     encodeStateToURL(newState);
   }
 
-  const gaAction = GA_ACTION_WHITELIST.find(whitelistAction => action.type === whitelistAction.type);
-  if (gaAction) {
-    const gaEvent = {
-      hitType: 'event',
-      eventCategory: 'Sankey',
-      eventAction: gaAction.type
-    };
-    if (gaAction.getPayload) {
-      gaEvent.eventLabel  = gaAction.getPayload(action, state);
+  if (ga) {
+    const gaAction = GA_ACTION_WHITELIST.find(whitelistAction => action.type === whitelistAction.type);
+    if (gaAction) {
+      const gaEvent = {
+        hitType: 'event',
+        eventCategory: 'Sankey',
+        eventAction: gaAction.type
+      };
+      if (gaAction.getPayload) {
+        gaEvent.eventLabel  = gaAction.getPayload(action, state);
+      }
+      ga('send', gaEvent);
     }
-    ga('send', gaEvent);
   }
 
   return newState;
