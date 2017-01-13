@@ -1,3 +1,5 @@
+Fix google analytics detection on devel envs
+
 ### 1.0.5
 - map: fixes a major issue where user was able to query a node without links by clicking a polygon on the map
 - sankey: Implemented Google Analytics events
