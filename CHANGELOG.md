@@ -1,3 +1,5 @@
+### 1.0.6
+Add homepage anchors
 Fix google analytics detection on devel envs
 
 ### 1.0.5
