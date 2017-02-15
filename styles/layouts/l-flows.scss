@@ -28,6 +28,7 @@ body, html {
     position: absolute;
     top: $nav-height;
     width: 100%;
+    z-index: 1;
 
     .search {
       padding-top: 16px;
@@ -43,8 +44,7 @@ body, html {
 
     transform: translate(-$layer-map-width, 0);
     transition: transform .15s $ease-in-out-sine, width .15s $ease-in-out-sine;
-
-    overflow: hidden;
+    z-index: 2;
 
     &.-center-map {
       transform: translate(-310px, 0);
@@ -68,9 +68,9 @@ body, html {
     }
 
     > .c-map {
-      left: $layer-map-width;
+      left: $layer-map-width + 8px;
       width: 320px;
-      height: 100%;
+      height: calc(100% - 8px);
 
       transition: width .45s $ease-in-out-sine;
 
@@ -86,10 +86,11 @@ body, html {
     }
 
     > .c-sankey {
-      left: 640px;
-      width: calc(100% - #{640 + $sankey-x-padding * 2});
-      height: calc(100% - 40px);
-      margin: 0 $sankey-x-padding;
+      top: -15px;
+      left: 648px;
+      width: calc(100% - #{648px + 10px});
+      height: calc(100% - 38px);
+      margin-left: $sankey-x-padding;
       transition: left .45s $ease-in-out-sine;
 
       .sankey {
@@ -105,8 +106,8 @@ body, html {
 
     > .c-columns-selector {
       bottom: 12px;
-      left: 640px;
-      width: calc(100% - 640px);
+      left: 648px;
+      width: calc(100% - 648px);
     }
   }
 
