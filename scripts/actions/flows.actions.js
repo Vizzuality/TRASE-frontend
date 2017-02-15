@@ -251,7 +251,7 @@ export function loadMapVectorLayers() {
         const topoJSON = JSON.parse(layerPayload);
         const key = Object.keys(topoJSON.objects)[0];
         const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
-        setGeoJSONMeta(geoJSON, getState().flows.nodesDict, geoColumn.id);
+        setGeoJSONMeta(geoJSON, getState().flows.nodesDict, getState().flows.geoIdsDict, geoColumn.id);
         geoData[geoColumn.name] = geoJSON;
       });
 

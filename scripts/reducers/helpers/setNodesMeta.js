@@ -2,7 +2,6 @@ import _ from 'lodash';
 import getNodeMetaUid from './getNodeMetaUid';
 
 export default function(nodesDict, nodesMeta, layers) {
-
   const layersByUID =_.keyBy(layers, 'uid');
   const nodesDictWithMeta = {};
 
@@ -21,7 +20,7 @@ export default function(nodesDict, nodesMeta, layers) {
         unit: layersByUID[uid].unit,
       };
     });
+    nodesDictWithMeta[nodeId] = nodeWithMeta;
   });
-
   return nodesDictWithMeta;
 }
