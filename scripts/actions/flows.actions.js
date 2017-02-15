@@ -289,15 +289,16 @@ export function selectNode(nodeId, isAggregated = false) {
     if (isAggregated) {
       dispatch(selectView(true));
     } else {
-      const expandedNodesIds = getState().flows.expandedNodesIds;
+      const currentSelectedNodesIds = getState().flows.selectedNodesIds;
       // we are unselecting the node that is currently expanded: just shrink it and bail
-      if (expandedNodesIds.length === 1 && expandedNodesIds.indexOf(nodeId) > -1) {
+      if (getState().flows.areNodesExpanded &&
+        currentSelectedNodesIds.length === 1 &&
+        currentSelectedNodesIds.indexOf(nodeId) > -1
+      ) {
         dispatch(toggleNodesExpand());
-        return;
       }
 
       // remove or add nodeId from selectedNodesIds
-      const currentSelectedNodesIds = getState().flows.selectedNodesIds;
       let selectedNodesIds;
       let nodeIndex = currentSelectedNodesIds.indexOf(nodeId);
       if (nodeIndex > -1) {
@@ -306,8 +307,6 @@ export function selectNode(nodeId, isAggregated = false) {
       } else {
         selectedNodesIds = [nodeId].concat(currentSelectedNodesIds);
       }
-
-
 
       // send to state the new node selection allong with new data, geoIds, etc
       const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
