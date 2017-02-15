@@ -230,9 +230,8 @@ export default function (state = {}, action) {
       expandedNodesIds = [action.forceExpandNodeId];
       selectedNodesIds = [action.forceExpandNodeId];
     } else {
-      // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
-      expandedNodesIds = (state.areNodesExpanded && action.forceExpand !== true) ? []                           : [state.selectedNodesIds[0]];
-      selectedNodesIds = (state.areNodesExpanded && action.forceExpand !== true) ? [state.expandedNodesIds[0]]  : [state.selectedNodesIds[0]];
+      expandedNodesIds = (state.areNodesExpanded) ? [] : state.selectedNodesIds;
+      selectedNodesIds = state.selectedNodesIds;
     }
 
     newState = Object.assign({}, state, {

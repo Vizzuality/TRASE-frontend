@@ -43,6 +43,7 @@ export const FLOWS_DEFAULT_STATE = {
     selectedRecolorBy: { value: 'none', value_type: 'none' },
     selectedBiomeFilter: 'none',
     selectedNodesIds: [],
+    expandedNodesIds: [],
     selectedNodesColorGroups: [],
     areNodesExpanded: false,
     selectedNodesData: [],
@@ -71,6 +72,7 @@ export const URL_STATE_PROPS = [
   'selectedRecolorBy',
   'selectedBiomeFilter',
   'selectedNodesIds',
+  'expandedNodesIds',
   'areNodesExpanded',
   'selectedColumnsIds'
 ];

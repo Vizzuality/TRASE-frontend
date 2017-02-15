@@ -200,9 +200,7 @@ export function loadLinks() {
     }
 
     if (getState().flows.areNodesExpanded) {
-      // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
-      // params.selected_nodes = getState().flows.selectedNodesIds.join(',');
-      params.selected_nodes = getState().flows.selectedNodesIds[0];
+      params.selected_nodes = getState().flows.expandedNodesIds.join(',');
     }
 
     const url = getURLFromParams('/v1/get_flows', params);
@@ -293,7 +291,7 @@ export function selectNode(nodeId, isAggregated = false) {
     } else {
       const expandedNodesIds = getState().flows.expandedNodesIds;
       // we are unselecting the node that is currently expanded: just shrink it and bail
-      if (expandedNodesIds && nodeId === expandedNodesIds[0]) {
+      if (expandedNodesIds.length === 1 && expandedNodesIds.indexOf(nodeId) > -1) {
         dispatch(toggleNodesExpand());
         return;
       }
