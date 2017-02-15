@@ -222,7 +222,7 @@ export default class {
       classNames.push('-disabled');
     }
     if (highlighted === true) {
-      classNames.push('-highlighted')
+      classNames.push('-highlighted');
     }
     return {className: classNames.join(' ')};
   }
