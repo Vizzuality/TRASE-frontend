@@ -2,7 +2,8 @@ node_modules
 npm-debug.log
 
 # ENV variables
-.env
+.env*
+!.env.sample
 
 public/js
 dist
