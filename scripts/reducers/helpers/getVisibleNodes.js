@@ -1,5 +1,3 @@
-import niceNumber from 'utils/niceNumber';
-
 export default function(links, nodesDict, nodesMeta, columnIndexes) {
   const nodeIdsList = [];
   const nodes = [];
@@ -31,7 +29,6 @@ export default function(links, nodesDict, nodesMeta, columnIndexes) {
 // TODO get data from get_nodes instead of flow meta (except for heights)
 // see setNodesMeta.js
 const _setNodesMeta = (nodesDict, nodesMeta) => {
-
   const nodesDictWithMeta = {};
 
   nodesMeta.nodeHeights.forEach(nodeHeight => {
@@ -46,7 +43,7 @@ const _setNodesMeta = (nodesDict, nodesMeta) => {
       node.quant = Math.round(node.quant);
     }
 
-    node.quantNice = niceNumber(node.quant);
+    node.quantNice = node.quant.toFixed(1);
 
     nodesDictWithMeta[nodeId] = node;
   });

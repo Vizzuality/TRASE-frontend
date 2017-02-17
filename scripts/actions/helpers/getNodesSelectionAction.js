@@ -35,13 +35,15 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
       // add metas from the map layers to the selected nodes data
       node.selectedMetas = [];
       let meta;
-      if (selectedVectorLayers.horizontal.uid) {
-        meta = node.meta[selectedVectorLayers.horizontal.uid];
-        if (meta) node.selectedMetas.push(meta);
-      }
-      if (selectedVectorLayers.vertical.uid) {
-        meta = node.meta[selectedVectorLayers.vertical.uid];
-        if (meta) node.selectedMetas.push(meta);
+      if (node.meta) {
+        if (selectedVectorLayers.horizontal.uid) {
+          meta = node.meta[selectedVectorLayers.horizontal.uid];
+          if (meta) node.selectedMetas.push(meta);
+        }
+        if (selectedVectorLayers.vertical.uid) {
+          meta = node.meta[selectedVectorLayers.vertical.uid];
+          if (meta) node.selectedMetas.push(meta);
+        }
       }
     }
 

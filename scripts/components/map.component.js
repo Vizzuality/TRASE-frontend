@@ -109,9 +109,7 @@ export default class {
     }
 
     this.currentLayer = this.vectorLayers[id];
-    // console.time('show');
     this.map.addLayer(this.currentLayer);
-    // console.timeEnd('show');
   }
 
   loadContextLayers(selectedMapContextualLayersData) {

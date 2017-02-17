@@ -1,9 +1,9 @@
 import getFactSheetLink from 'utils/getFactSheetLink';
 
 export default function (rawNodes, columns /*, nodesMeta*/) {
-
   // store in node dict for use in getVisibleNodes
   const nodesDict = {};
+  const geoIdsDict = {};
   rawNodes.forEach(node => {
     const columnId = node.columnId;
     const column = columns.find(column => column.id === columnId);
@@ -32,7 +32,7 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
     newNode.link = getFactSheetLink(newNode.id, newNode.columnId);
 
     nodesDict[parseInt(node.id)] = newNode;
+    geoIdsDict[`${columnId}-${node.geoId}`] = node.id;
   });
-
-  return nodesDict;
+  return { nodesDict, geoIdsDict};
 }

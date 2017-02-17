@@ -1,9 +1,7 @@
-import getNodeIdFromGeoId from 'actions/helpers/getNodeIdFromGeoId';
-
-export default (geoJSON, nodesDict, columnId) => {
+export default (geoJSON, nodesDict, geoIdsDict, columnId) => {
   geoJSON.features.forEach(feature => {
     const geoId = feature.properties.geoid;
-    const nodeId = getNodeIdFromGeoId(geoId, nodesDict, columnId);
+    const nodeId = geoIdsDict[`${columnId}-${geoId}`];
     const node = nodesDict[nodeId];
     if (node) {
       feature.properties.hasFlows = node.hasFlows;
