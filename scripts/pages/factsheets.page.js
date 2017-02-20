@@ -41,7 +41,7 @@ const _setSearch = () => {
     window.location.href = url;
   };
 
-  fetch(`${API_URL}/v1/get_all_nodes?&country=brazil&commodity=soy`)
+  fetch(`${API_V1_URL}/v1/get_all_nodes?&country=brazil&commodity=soy`)
     .then(response => response.json())
     .then((result) => {
 
