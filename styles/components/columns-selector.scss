@@ -26,8 +26,9 @@
       letter-spacing: -0.5px;
 
       &::after {
-        @include arrow(8px, 2px, $charcoal-grey, 'down');
+        @include arrow(7px, 2px, $medium-pink, 'down');
         top: 0;
+        right: 1px;
       }
 
       &.-is-open {
@@ -40,13 +41,14 @@
     .dropdown-list {
       top: auto;
       bottom: 40px;
+      width: 100%;
+      padding: 0;
     }
 
     .dropdown-list > .dropdown-item {
-      padding: 10px 25px;
+      padding: 10px 7px;
       font-family: $font-family-1;
       font-size: $font-size-regular;
-      text-align: center;
       text-transform: uppercase;
     }
   }
