@@ -50,7 +50,7 @@
     "d3": "^4.2.2",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
-    "leaflet": "^1.0.0-rc.3",
+    "leaflet": "^1.0.3",
     "leaflet.utfgrid": "git+https://github.com/danzel/Leaflet.utfgrid.git",
     "lodash": "^4.15.0",
     "morgan": "^1.7.0",
