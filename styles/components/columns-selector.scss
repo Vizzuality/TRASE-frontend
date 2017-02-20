@@ -4,20 +4,31 @@
 .c-columns-selector {
   display: flex;
   justify-content: space-between;
-  padding: 0 32px;
+  padding: 0 8px 0 23px;
 
   > .c-dropdown {
     width: 100px;
+    height: 32px;
+    padding: 0 7px;
+    border-radius: 4px;
+    border: solid 1px $medium-pink;
+
+    &:first-child {
+      width: 111px;
+      left: 4px;
+    }
 
     &.-column-selector > .dropdown-title {
       padding: 0;
       font-family: $font-family-1;
       font-size: $font-size-regular;
       text-transform: uppercase;
+      letter-spacing: -0.5px;
 
       &::after {
-        @include arrow(8px, 2px, $charcoal-grey, 'down');
+        @include arrow(7px, 2px, $medium-pink, 'down');
         top: 0;
+        right: 1px;
       }
 
       &.-is-open {
@@ -30,13 +41,14 @@
     .dropdown-list {
       top: auto;
       bottom: 40px;
+      width: 100%;
+      padding: 0;
     }
 
     .dropdown-list > .dropdown-item {
-      padding: 10px 25px;
+      padding: 10px 7px;
       font-family: $font-family-1;
       font-size: $font-size-regular;
-      text-align: center;
       text-transform: uppercase;
     }
   }
