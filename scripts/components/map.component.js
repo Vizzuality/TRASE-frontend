@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import _ from 'lodash';
 import 'leaflet.utfgrid';
-import { CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z } from 'constants';
+import { CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, BASEMAPS } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/map.scss';
 import 'style/components/map/map-legend.scss';
@@ -16,19 +16,40 @@ export default class {
     this.map = L.map('map', mapOptions).setView([-16, -50], 4);
     new L.Control.Zoom({ position: 'bottomleft' }).addTo(this.map);
 
-    this.paneLayers = {};
     Object.keys(MAP_PANES).forEach(paneKey => {
       this.map.createPane(paneKey);
       this.map.getPane(paneKey).style.zIndex = MAP_PANES_Z[paneKey];
     });
 
-    var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' });
-    this.map.addLayer(basemap, { pane: MAP_PANES.basemap });
+    this.loadBasemap('positron');
 
     this.contextLayers = [];
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
+  }
+
+  loadBasemap(basemapId) {
+    if (this.basemap) {
+      this.map.removeLayer(this.basemap);
+    }
+    if (this.basemapLabels) {
+      this.map.removeLayer(this.basemapLabels);
+    }
+
+    const basemap = BASEMAPS[basemapId];
+    this.basemap = L.tileLayer(basemap.url, {
+      attribution: basemap.attribution,
+      pane: MAP_PANES.basemap
+    });
+    this.map.addLayer(this.basemap);
+
+    if (basemap.labelsUrl !== undefined) {
+      this.basemapLabels = L.tileLayer(basemap.labelsUrl, {
+        pane: MAP_PANES.basemapLabels
+      });
+      this.map.addLayer(this.basemapLabels);
+    }
   }
 
   showLoadedMap(payload) {
