@@ -3,15 +3,7 @@ import connect from 'connect';
 import ColumnsSelector from 'components/columns-selector.component.js';
 
 const mapMethodsToState = (state) => ({
-  buildColumns: {
-    _comparedValue: (state) => state.flows.columns,
-    _returnedValue: (state) => {
-      return {
-        columns: state.flows.columns,
-        selectedColumnsIds: state.flows.selectedColumnsIds
-      };
-    }
-  },
+  buildColumns: state.flows.columns,
   selectColumns: state.flows.selectedColumnsIds
 });
 

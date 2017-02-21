@@ -8,19 +8,23 @@ export default class {
     this.el = document.querySelector('.js-columns-selector');
   }
 
-  buildColumns({columns, selectedColumnsIds}) {
-    const columnsByPosition = [];
+  buildColumns(columns) {
+    const columnsByGroup = [];
+    const defaultColumns = []
     columns.forEach(column => {
-      if (!columnsByPosition[column.position]) {
-        columnsByPosition[column.position] = [_.cloneDeep(column)];
+      if (column.isDefault) {
+        defaultColumns.push(column.id);
+      }
+      if (!columnsByGroup[column.group]) {
+        columnsByGroup[column.group] = [_.cloneDeep(column)];
       } else {
-        columnsByPosition[column.position].push(_.cloneDeep(column));
+        columnsByGroup[column.group].push(_.cloneDeep(column));
       }
     });
-    this.el.innerHTML = ColumnsSelectorTemplate({columnsByPosition});
-    this.dropdowns = columnsByPosition.map((columns, i) => new Dropdown(`column${i}`, this._onDropdownValueSelected.bind(this)));
-    
-    this.selectColumns(selectedColumnsIds);
+    this.el.innerHTML = ColumnsSelectorTemplate({ columnsByGroup });
+    this.dropdowns = columnsByGroup.map((columns, i) => new Dropdown(`column${i}`, this._onDropdownValueSelected.bind(this)));
+
+    this.selectColumns(defaultColumns);
   }
 
   selectColumns(columnIds) {
@@ -33,7 +37,7 @@ export default class {
   }
 
   _onDropdownValueSelected(rawColumnId, dropdownId) {
-    const columnIndex = parseInt(dropdownId.replace('column',''), 10);
+    const columnIndex = parseInt(dropdownId.replace('column', ''), 10);
     const columnId = parseInt(rawColumnId, 10);
     this.callbacks.onColumnSelected(columnIndex, columnId);
   }

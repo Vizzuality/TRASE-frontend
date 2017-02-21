@@ -49,7 +49,6 @@ export const FLOWS_DEFAULT_STATE = {
     selectedNodesColorGroups: [],
     areNodesExpanded: false,
     selectedNodesData: [],
-    selectedColumnsIds: [3, 4, 6, 7],
     // TODO title should be inferred from the uid, not kept in state
     selectedMapVariables: {
       horizontal: {

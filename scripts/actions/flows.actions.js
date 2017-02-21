@@ -35,13 +35,12 @@ export function selectQuant(quant, reloadLinks) {
 }
 export function selectRecolorBy(data) {
   if (data.active !== undefined && data.active === 'false') {
-    return () => {};
+    return () => {
+    };
   }
   return dispatch => {
     dispatch({
-      type: actions.SELECT_RECOLOR_BY,
-      value: data.value,
-      value_type: data.type
+      type: actions.SELECT_RECOLOR_BY, value: data.value, value_type: data.type
     });
     dispatch(loadLinks());
   };
@@ -53,9 +52,7 @@ export function selectView(detailedView, reloadLinks) {
 export function selectColumn(columnIndex, columnId, reloadLinks = true) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_COLUMN,
-      columnIndex,
-      columnId
+      type: actions.SELECT_COLUMN, columnIndex, columnId
     });
     if (reloadLinks) {
       dispatch(loadLinks());
@@ -66,8 +63,7 @@ export function selectColumn(columnIndex, columnId, reloadLinks = true) {
 export function selectYears(years) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_YEARS,
-      years
+      type: actions.SELECT_YEARS, years
     });
     dispatch(loadNodes());
     dispatch(loadLinks());
@@ -85,8 +81,7 @@ export function selectMapVariable(variableData) {
 
 export function selectContextualLayers(contextualLayers) {
   return {
-    type: actions.SELECT_CONTEXTUAL_LAYERS,
-    contextualLayers
+    type: actions.SELECT_CONTEXTUAL_LAYERS, contextualLayers
   };
 }
 
@@ -111,19 +106,15 @@ export function loadInitialData() {
     });
 
     const params = {
-      country: getState().flows.selectedCountry,
-      commodity: getState().flows.selectedCommodity
+      country: getState().flows.selectedCountry, commodity: getState().flows.selectedCommodity
     };
     const allNodesURL = getURLFromParams(GET_ALL_NODES, params);
     const columnsURL = getURLFromParams(GET_COLUMNS, params);
 
-    Promise.all([allNodesURL, columnsURL].map(url =>
-      fetch(url).then(resp => resp.text())
-    )).then(payload => {
+    Promise.all([allNodesURL, columnsURL].map(url => fetch(url).then(resp => resp.text()))).then(payload => {
       // TODO do not wait for end of all promises/use another .all call
       dispatch({
-        type: actions.GET_COLUMNS,
-        payload: payload.slice(0, 2),
+        type: actions.GET_COLUMNS, payload: payload.slice(0, 2),
       });
       dispatch(loadNodes());
       dispatch(loadLinks());
@@ -142,8 +133,7 @@ export function loadNodes() {
       country: getState().flows.selectedCountry.toUpperCase(),
       commodity: getState().flows.selectedCommodity.toUpperCase(),
       year_start: getState().flows.selectedYears[0],
-      year_end: getState().flows.selectedYears[1],
-      // column_id: 2
+      year_end: getState().flows.selectedYears[1], // column_id: 2
     };
 
     const getNodesURL = getURLFromParams(GET_NODES, params);
@@ -225,8 +215,7 @@ export function loadLinks() {
       .then(res => res.text())
       .then(payload => {
         dispatch({
-          type: actions.GET_LINKS,
-          payload
+          type: actions.GET_LINKS, payload
         });
 
         // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
@@ -248,12 +237,11 @@ export function loadLinks() {
   };
 }
 
-
 export function loadMapVectorData() {
   return (dispatch, getState) => {
     // get columns at position 0
     // exclude logistics hubs which doesnt have its own topojson
-    const geoColumns = getState().flows.columns.filter(column => column.position === 0);
+    const geoColumns = getState().flows.columns.filter(column => column.group === 0);
     const geoColumnsWithTopoJSON = geoColumns.filter(column => column.id !== 2);
     const geoJSONUrls = geoColumnsWithTopoJSON.map(geoColumn => `${geoColumn.name}.topo.json`);
     Promise.all(geoJSONUrls.map(url =>
@@ -262,6 +250,9 @@ export function loadMapVectorData() {
       const mapVectorData = {};
       geoColumnsWithTopoJSON.forEach((geoColumn, i) => {
         const layerPayload = payload[i];
+        if (!layerPayload) {
+          return;
+        }
         const topoJSON = JSON.parse(layerPayload);
         const key = Object.keys(topoJSON.objects)[0];
         const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
@@ -270,8 +261,7 @@ export function loadMapVectorData() {
       });
 
       dispatch({
-        type: actions.GET_MAP_VECTOR_DATA,
-        mapVectorData
+        type: actions.GET_GEO_DATA, geoData
       });
     });
   };
@@ -286,14 +276,11 @@ export function loadMapContextLayers() {
       return `${CARTO_NAMED_MAPS_BASE_URL}${layer.name}/jsonp?callback=cb`;
     }).filter(url => url !== null);
 
-    Promise.all(namedMapsURLs.map(url =>
-      fetch(url).then(resp => resp.text())
-    )).then(() => {
+    Promise.all(namedMapsURLs.map(url => fetch(url).then(resp => resp.text()))).then(() => {
       // we actually don't care about layergroupids because we already have them pregenerated
       // this is just about reinstanciating named maps, you know, because CARTO
       dispatch({
-        type: actions.GET_CONTEXT_LAYERS,
-        mapContextualLayers
+        type: actions.GET_CONTEXT_LAYERS, mapContextualLayers
       });
     });
 
@@ -320,10 +307,7 @@ export function selectNode(nodeId, isAggregated = false) {
     } else {
       const currentSelectedNodesIds = getState().flows.selectedNodesIds;
       // we are unselecting the node that is currently expanded: just shrink it and bail
-      if (getState().flows.areNodesExpanded &&
-        currentSelectedNodesIds.length === 1 &&
-        currentSelectedNodesIds.indexOf(nodeId) > -1
-      ) {
+      if (getState().flows.areNodesExpanded && currentSelectedNodesIds.length === 1 && currentSelectedNodesIds.indexOf(nodeId) > -1) {
         dispatch(toggleNodesExpand());
       }
 
@@ -390,18 +374,14 @@ export function toggleNodesExpand(forceExpand = false, forceExpandNodeIds) {
     // if expanding, and if in detailed mode, toggle to overview mode
     if (getState().flows.areNodesExpanded === true && getState().flows.detailedView === true) {
       dispatch({
-        type: actions.SELECT_VIEW,
-        detailedView: false,
-        forcedOverview: true
+        type: actions.SELECT_VIEW, detailedView: false, forcedOverview: true
       });
     }
 
     // if shrinking, and if overview was previously forced, go back to detailed
     else if (getState().flows.areNodesExpanded === false && getState().flows.forcedOverview === true) {
       dispatch({
-        type: actions.SELECT_VIEW,
-        detailedView: true,
-        forcedOverview: false
+        type: actions.SELECT_VIEW, detailedView: true, forcedOverview: false
       });
     }
 
