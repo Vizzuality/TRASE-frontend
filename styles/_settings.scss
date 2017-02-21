@@ -45,6 +45,28 @@ $flow-1: $medium-pink;
 $flow-2: $manilla;
 $flow-3: #2d586e;
 
+/*$flow-4: #007d29;
+$flow-5: #b4008a;
+$flow-6: #06ff67;
+$flow-7: #8339aa;
+$flow-8: #f3fb00;
+$flow-9: #7193ff;
+$flow-10: #b27200;
+$flow-11: #894761;
+$flow-12: #ffca8e;
+$flow-13: #ff5b6f;*/
+
+$flow-4: #2d9540;
+$flow-5: #992ca8;
+$flow-6: #e94cac;
+$flow-7: #6a52d8;
+$flow-8: #3eb2ff;
+$flow-9: #9d89f5;
+$flow-10: #b27200;
+$flow-11: #abd539;
+$flow-12: #69d0b1;
+$flow-13: #ff5b6f;
+
 $qual-biome-amazonia: #43f3f3;
 $qual-biome-cerrado: #517fee;
 $qual-biome-mataatlantica: #8c28ff;
@@ -75,13 +97,14 @@ $ind-smallholders-2: #78c679;
 $ind-smallholders-3: #31a354;
 $ind-smallholders-4: #006837;
 
+
 $qual-colors: $qual-biome-amazonia, $qual-biome-cerrado, $qual-biome-mataatlantica, $qual-biome-caatinga, $qual-biome-pampa, $qual-biome-pantanal, $ind-forest_500-0, $ind-forest_500-1, $ind-forest_500-2, $ind-forest_500-3, $ind-forest_500-4, $qual-zero_deforestation-yes, $qual-zero_deforestation-no, $ind-water_scarcity-0, $ind-water_scarcity-1, $ind-water_scarcity-2, $ind-water_scarcity-3, $ind-water_scarcity-4, $ind-water_scarcity-5, $ind-water_scarcity-6, $ind-smallholders-0, $ind-smallholders-1, $ind-smallholders-2, $ind-smallholders-3, $ind-smallholders-4;
 
 $qual-colors-names: '-qual-biome-amazonia', '-qual-biome-cerrado', '-qual-biome-mataatlantica', '-qual-biome-caatinga', '-qual-biome-pampa', '-qual-biome-pantanal', '-ind-forest_500-0', '-ind-forest_500-1', '-ind-forest_500-2', '-ind-forest_500-3', '-ind-forest_500-4', '-qual-zero_deforestation-yes', '-qual-zero_deforestation-no', '-ind-water_scarcity-0', '-ind-water_scarcity-1', '-ind-water_scarcity-2', '-ind-water_scarcity-3', '-ind-water_scarcity-4', '-ind-water_scarcity-5', '-ind-water_scarcity-6', '-ind-smallholders-0', '-ind-smallholders-1', '-ind-smallholders-2', '-ind-smallholders-3', '-ind-smallholders-4';
 
-$flow-colors: $flow-1, $flow-2, $flow-3;
+$flow-colors: $flow-1, $flow-2, $flow-3, $flow-4, $flow-5, $flow-6, $flow-7, $flow-8, $flow-9, $flow-10, $flow-11, $flow-12, $flow-13;
 
-$flow-colors-names: '-flow-1', '-flow-2', '-flow-3';
+$flow-colors-names: '-flow-1', '-flow-2', '-flow-3', '-flow-4', '-flow-5', '-flow-6', '-flow-7', '-flow-8', '-flow-9', '-flow-10', '-flow-11', '-flow-12', '-flow-13';
 // typography
 $font-family-1: 'DecimaMonoPro', 'Courier New', sans-serif;
 $font-family-2: 'Merriweather', serif;
