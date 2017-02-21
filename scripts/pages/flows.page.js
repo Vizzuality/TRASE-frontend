@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columns-selector.container';
-import MapLayersContainer from 'containers/map-layers.container';
+import MapVariablesContainer from 'containers/map-variables.container';
 import MapContextContainer from 'containers/map-context.container';
 import MapLegendContainer from 'containers/map-legend.container';
 import MapContainer from 'containers/map.container';
@@ -49,7 +49,7 @@ const start = (initialState) => {
   new SankeyContainer(store);
   new ColumnsSelectorContainer(store);
   new MapContainer(store);
-  new MapLayersContainer(store);
+  new MapVariablesContainer(store);
   new MapContextContainer(store);
   new MapLegendContainer(store);
   new NavContainer(store);

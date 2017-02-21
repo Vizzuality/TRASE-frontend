@@ -6,17 +6,17 @@ import Map from 'components/map.component.js';
 
 const mapMethodsToState = (state) => ({
   showLoadedMap: {
-    _comparedValue: (state) => state.flows.geoData,
+    _comparedValue: (state) => state.flows.mapVectorData,
     _returnedValue: (state) => {
       return {
-        geoData: state.flows.geoData,
-        currentLayer: state.flows.selectedColumnsIds[0],
+        mapVectorData: state.flows.mapVectorData,
+        currentPolygonType: state.flows.selectedColumnsIds[0],
         selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
         recolourByNodeIds: state.flows.recolourByNodeIds
       };
     }
   },
-  selectVectorLayer: state.flows.selectedColumnsIds,
+  selectPolygonType: state.flows.selectedColumnsIds,
   selectPolygons: state.flows.selectedNodesGeoIds,
   highlightPolygon: state.flows.highlightedGeoIds,
   setChoropleth: state.flows.choropleth,

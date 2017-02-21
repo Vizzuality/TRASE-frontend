@@ -1,7 +1,7 @@
 import 'styles/components/map/map-layers.scss';
 import 'styles/components/shared/radio-btn.scss';
 import 'styles/components/shared/switcher.scss';
-import LayerTemplate from 'ejs!templates/layer.ejs';
+import MapVariableTemplate from 'ejs!templates/mapVariable.ejs';
 
 export default class {
 
@@ -11,21 +11,20 @@ export default class {
     this.tooltip = document.querySelector('.tooltip-layout');
   }
 
-  loadLayers(layers) {
-    this.layerList.innerHTML = layers.map(layer => LayerTemplate(layer)).join('');
+  loadMapVariables(variables) {
+    this.layerList.innerHTML = variables.map(layer => MapVariableTemplate(layer)).join('');
 
     this._setVars();
     this._setEventListeners();
-
   }
 
-  selectVectorLayers(layers) {
-    const mapVectorLayers =  {
+  selectMapVariables(layers) {
+    const mapVariables =  {
       horizontal: layers.horizontal || null,
       vertical: layers.vertical || null
     };
 
-    this._setActiveVectorLayers(mapVectorLayers);
+    this._setActiveMapVariables(mapVariables);
   }
 
   _setVars() {
@@ -49,15 +48,15 @@ export default class {
     });
   }
 
-  _setActiveVectorLayers(layers) {
-    const directions = Object.keys(layers);
+  _setActiveMapVariables(variables) {
+    const directions = Object.keys(variables);
 
     directions.forEach((group) => {
       const radios = Array.prototype.slice.call(
         this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`), 0);
 
       radios.forEach((radio) => {
-        if (radio.getAttribute('value') !== layers[group]['uid']) return;
+        if (radio.getAttribute('value') !== variables[group]['uid']) return;
         const layerItem = radio.closest('.layer-item');
         const partnerRadio = radio.nextElementSibling ?
           radio.nextElementSibling : radio.previousElementSibling;
@@ -84,7 +83,7 @@ export default class {
       this._cleanRadiosByGroup(group);
     }
 
-    this.callbacks.onVectorLayersSelected({
+    this.callbacks.onMapVariablesSelected({
       direction: group, // 'vertical' or 'horizontal'
       title,
       uid

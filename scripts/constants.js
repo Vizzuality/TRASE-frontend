@@ -49,7 +49,7 @@ export const FLOWS_DEFAULT_STATE = {
     selectedNodesData: [],
     selectedColumnsIds: [3, 4, 6, 7],
     // TODO title should be inferred from the uid, not kept in state
-    selectedVectorLayers: {
+    selectedMapVariables: {
       horizontal: {
         uid: null,
         title: null

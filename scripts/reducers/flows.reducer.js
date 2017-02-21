@@ -10,7 +10,7 @@ import splitLinksByColumn from './helpers/splitLinksByColumn';
 import sortVisibleNodes from './helpers/sortVisibleNodes';
 import mergeLinks from './helpers/mergeLinks';
 import filterLinks from './helpers/filterLinks';
-import getMapLayers from './helpers/getMapLayers';
+import getMapVariables from './helpers/getMapVariables';
 import setNodesMeta from './helpers/setNodesMeta';
 import getChoropleth from './helpers/getChoropleth';
 import getNodesAtColumns from './helpers/getNodesAtColumns';
@@ -57,14 +57,14 @@ export default function (state = {}, action) {
   case actions.GET_NODES: {
     const jsonPayload = JSON.parse(action.payload);
     const nodesMeta = jsonPayload.data;
-    const rawLayers = jsonPayload.include.includedLayers;
+    const rawMapVariables = jsonPayload.include.includedLayers;
 
-    const mapLayers = getMapLayers(rawLayers);
+    const mapVariables = getMapVariables(rawMapVariables);
 
     // store layer values in nodesDict as uid: layerValue
-    const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, rawLayers);
+    const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, mapVariables);
 
-    newState = Object.assign({}, state, { mapLayers, nodesDictWithMeta });
+    newState = Object.assign({}, state, { mapVariables, nodesDictWithMeta });
     break;
   }
 
@@ -184,8 +184,8 @@ export default function (state = {}, action) {
     break;
   }
 
-  case actions.GET_GEO_DATA: {
-    newState = Object.assign({}, state, { geoData: action.geoData });
+  case actions.GET_MAP_VECTOR_DATA: {
+    newState = Object.assign({}, state, { mapVectorData: action.mapVectorData });
     break;
   }
 
@@ -194,21 +194,21 @@ export default function (state = {}, action) {
     break;
   }
 
-  case actions.SELECT_VECTOR_LAYERS: {
-    const selectedVectorLayers = Object.assign({}, state.selectedVectorLayers);
-    const currentUidForDirection = selectedVectorLayers[action.layerData.direction].uid;
-    const nextUid = action.layerData.uid;
-    selectedVectorLayers[action.layerData.direction] = {
-      title: action.layerData.title,
+  case actions.SELECT_MAP_VARIABLES: {
+    const selectedMapVariables = Object.assign({}, state.selectedMapVariables);
+    const currentUidForDirection = selectedMapVariables[action.variableData.direction].uid;
+    const nextUid = action.variableData.uid;
+    selectedMapVariables[action.variableData.direction] = {
+      title: action.variableData.title,
       uid: (currentUidForDirection === nextUid) ? null : nextUid
     };
 
     // get a geoId <-> color dict
-    const choropleth = (selectedVectorLayers.horizontal.uid === null && selectedVectorLayers.vertical.uid === null) ?
+    const choropleth = (selectedMapVariables.horizontal.uid === null && selectedMapVariables.vertical.uid === null) ?
       {} :
-      getChoropleth(selectedVectorLayers, state.nodesDictWithMeta, LEGEND_COLORS);
+      getChoropleth(selectedMapVariables, state.nodesDictWithMeta, LEGEND_COLORS);
 
-    newState = Object.assign({}, state, { selectedVectorLayers, choropleth });
+    newState = Object.assign({}, state, { selectedMapVariables, choropleth });
     break;
   }
   case actions.SELECT_CONTEXTUAL_LAYERS: {

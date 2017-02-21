@@ -12,12 +12,12 @@ export default class {
     this.context = document.querySelector('.js-map-legend-context');
   }
 
-  selectVectorLayers({selectedVectorLayers, selectedMapContextualLayersData}) {
-    this._setupChoro(selectedVectorLayers, selectedMapContextualLayersData);
+  updateChoroplethLegend({selectedMapVariables, selectedMapContextualLayersData}) {
+    this._setupChoro(selectedMapVariables, selectedMapContextualLayersData);
   }
 
-  loadContextLayers({selectedVectorLayers, selectedMapContextualLayersData}) {
-    this._toggleLegend(selectedVectorLayers, selectedMapContextualLayersData);
+  updateContextLegend({selectedMapVariables, selectedMapContextualLayersData}) {
+    this._toggleLegend(selectedMapVariables, selectedMapContextualLayersData);
     this._renderContext(selectedMapContextualLayersData);
   }
 

@@ -74,13 +74,11 @@ export function selectYears(years) {
   };
 }
 
-// we don't know at this moment waht to do with a vector layer.
-// this isan example of the implementation
-export function selectVectorLayers(layerData) {
+export function selectMapVariables(variableData) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_VECTOR_LAYERS,
-      layerData
+      type: actions.SELECT_MAP_VARIABLES,
+      variableData
     });
   };
 }
@@ -129,7 +127,7 @@ export function loadInitialData() {
       });
       dispatch(loadNodes());
       dispatch(loadLinks());
-      dispatch(loadMapVectorLayers());
+      dispatch(loadMapVectorData());
       dispatch(loadMapContextLayers());
     });
   };
@@ -233,7 +231,7 @@ export function loadLinks() {
 }
 
 
-export function loadMapVectorLayers() {
+export function loadMapVectorData() {
   return (dispatch, getState) => {
     // get columns at position 0
     // exclude logistics hubs which doesnt have its own topojson
@@ -243,19 +241,19 @@ export function loadMapVectorLayers() {
     Promise.all(geoJSONUrls.map(url =>
       fetch(url).then(resp => resp.text())
     )).then(payload => {
-      const geoData = {};
+      const mapVectorData = {};
       geoColumnsWithTopoJSON.forEach((geoColumn, i) => {
         const layerPayload = payload[i];
         const topoJSON = JSON.parse(layerPayload);
         const key = Object.keys(topoJSON.objects)[0];
         const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
         setGeoJSONMeta(geoJSON, getState().flows.nodesDict, getState().flows.geoIdsDict, geoColumn.id);
-        geoData[geoColumn.name] = geoJSON;
+        mapVectorData[geoColumn.name] = geoJSON;
       });
 
       dispatch({
-        type: actions.GET_GEO_DATA,
-        geoData
+        type: actions.GET_MAP_VECTOR_DATA,
+        mapVectorData
       });
     });
   };

@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { LEGEND_COLORS } from 'constants';
 
-export default function(selectedVectorLayers, nodesDictWithMeta, allColors) {
-  const horizontalLayer = selectedVectorLayers.horizontal;
-  const verticalLayer = selectedVectorLayers.vertical;
+export default function(selectedMapVariables, nodesDictWithMeta, allColors) {
+  const horizontalLayer = selectedMapVariables.horizontal;
+  const verticalLayer = selectedMapVariables.vertical;
   const isBidimensional = horizontalLayer.uid !== null && verticalLayer.uid !== null;
   const isEmpty = horizontalLayer.uid === null && verticalLayer.uid === null;
   const isHorizontal = horizontalLayer.uid !== null;

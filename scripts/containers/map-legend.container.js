@@ -3,20 +3,20 @@ import { toggleMapLayerMenu } from 'actions/app.actions';
 import MapLegend from 'components/map-legend.component';
 
 const mapMethodsToState = () => ({
-  selectVectorLayers: {
-    _comparedValue: (state) => state.flows.selectedVectorLayers,
+  updateChoroplethLegend: {
+    _comparedValue: (state) => state.flows.selectedMapVariables,
     _returnedValue: (state) => {
       return {
-        selectedVectorLayers: state.flows.selectedVectorLayers,
+        selectedMapVariables: state.flows.selectedMapVariables,
         selectedMapContextualLayersData: state.flows.selectedMapContextualLayersData,
       };
     }
   },
-  loadContextLayers: {
+  updateContextLegend: {
     _comparedValue: (state) => state.flows.selectedMapContextualLayersData,
     _returnedValue: (state) => {
       return {
-        selectedVectorLayers: state.flows.selectedVectorLayers,
+        selectedMapVariables: state.flows.selectedMapVariables,
         selectedMapContextualLayersData: state.flows.selectedMapContextualLayersData,
       };
     }
