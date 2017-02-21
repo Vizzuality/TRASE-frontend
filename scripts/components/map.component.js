@@ -222,7 +222,7 @@ export default class {
     if (highlighted === true) {
       classNames.push('-highlighted');
     }
-    return {className: classNames.join(' ')};
+    return {className: classNames.join(' '), smoothFactor: 0.9};
   }
 
   _onToggleMap () {
