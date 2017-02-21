@@ -99,8 +99,6 @@ export default class {
     selectedRecolorByLegendItems.forEach(legend =>
       legendItems.push(legend.className)
     );
-    const legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
-    legendContainer.innerHTML = legendItems.map(legendItem => `<div class="color ${legendItem}"></div>`).join('');
     this.recolorByDropdown.selectValue(data.value);
 
     // if (value === 'none') {
@@ -108,6 +106,11 @@ export default class {
     // } else {
     //   this.recolorByDropdown.title.classList.remove('-dimmed');
     // }
+  }
+
+  selectedNodeColors(colors) {
+    const legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
+    legendContainer.innerHTML = colors.map(color => `<div class="color -flow-${color}"></div>`).join('');
   }
 
   selectView(value) {

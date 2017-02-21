@@ -175,12 +175,15 @@ export default function (state = {}, action) {
       links = mergeLinks(state.unmergedLinks);
     }
 
-    let mapNodeColors = [];
+    let mapNodeColors = [],
+      selectedNodeColors = [];
     if (nodesColoredBySelection && nodesColoredBySelection.length !== 0) {
       //TODO: finish this so that we can color the map too
-      mapNodeColors = getMapColorsFromLinks(links);
+      const colorsFromLinks = getColorsFromLinks(links);
+      mapNodeColors = colorsFromLinks.geoColorMap;
+      selectedNodeColors = colorsFromLinks.colors;
     }
-    newState = Object.assign({}, state, { links, nodesColoredBySelection, recolorGroups, mapNodeColors });
+    newState = Object.assign({}, state, { links, nodesColoredBySelection, recolorGroups, mapNodeColors, selectedNodeColors });
     break;
   }
 
@@ -269,12 +272,20 @@ export default function (state = {}, action) {
   return newState;
 }
 
-const getMapColorsFromLinks = (links) => {
-  const geoColorMap = [];
+const getColorsFromLinks = (links) => {
+  const data = {
+    geoColorMap: [],
+    colors: []
+  };
   for (let i = 0; i < links.length; i++) {
     let link = links[i];
-    geoColorMap[link.originalPath[0]] = link.recolourGroup;
-  }
+    data.geoColorMap[link.originalPath[0]] = link.recolourGroup;
 
-  return geoColorMap;
+    if (!data.colors.includes(link.recolourGroup)) {
+      data.colors.push(link.recolourGroup)
+    }
+  }
+  data.colors.sort();
+
+  return data;
 };

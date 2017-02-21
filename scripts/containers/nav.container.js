@@ -10,6 +10,7 @@ const mapMethodsToState = (state) => ({
   selectBiomeFilter: state.flows.selectedBiomeFilter,
   selectYears: state.flows.selectedYears,
   selectRecolorBy: state.flows.selectedRecolorBy,
+  selectedNodeColors: state.flows.selectedNodeColors,
   selectView: state.flows.detailedView
 });
 
