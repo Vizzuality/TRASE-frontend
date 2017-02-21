@@ -45,8 +45,16 @@ export default function (state = {}, action) {
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
     const columns = JSON.parse(action.payload[1]).data;
+
+    const selectedColumnsIds = [];
+    columns.forEach(column => {
+      if (column.isDefault) {
+        selectedColumnsIds.push(column.id);
+      }
+    });
+
     const { nodesDict, geoIdsDict } = getNodesDict(rawNodes, columns);
-    newState = Object.assign({}, state, { columns, nodesDict, geoIdsDict, initialDataLoading: false });
+    newState = Object.assign({}, state, { columns, nodesDict, geoIdsDict, initialDataLoading: false, selectedColumnsIds });
     break;
   }
 

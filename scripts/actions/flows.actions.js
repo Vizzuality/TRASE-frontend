@@ -173,25 +173,26 @@ export function loadLinks() {
     dispatch({
       type: actions.LOAD_LINKS
     });
+    const state = getState();
     const params = {
-      country: getState().flows.selectedCountry.toUpperCase(),
-      commodity: getState().flows.selectedCommodity.toUpperCase(),
-      year_start: getState().flows.selectedYears[0],
-      year_end: getState().flows.selectedYears[1],
-      include_columns: getState().flows.selectedColumnsIds.join(','),
-      flow_quant: getState().flows.selectedQuant
+      country: state.flows.selectedCountry.toUpperCase(),
+      commodity: state.flows.selectedCommodity.toUpperCase(),
+      year_start: state.flows.selectedYears[0],
+      year_end: state.flows.selectedYears[1],
+      include_columns: state.flows.selectedColumnsIds.join(','),
+      flow_quant: state.flows.selectedQuant
     };
 
-    if (getState().flows.detailedView === true) {
+    if (state.flows.detailedView === true) {
       params.n_nodes = NUM_NODES_DETAILED;
-    } else if (getState().flows.areNodesExpanded === true) {
+    } else if (state.flows.areNodesExpanded === true) {
       params.n_nodes = NUM_NODES_EXPANDED;
     } else {
       params.n_nodes = NUM_NODES_SUMMARY;
     }
 
-    const selectRecolorByType = getState().flows.selectedRecolorBy.type;
-    const selectRecolorByValue = getState().flows.selectedRecolorBy.value;
+    const selectRecolorByType = state.flows.selectedRecolorBy.type;
+    const selectRecolorByValue = state.flows.selectedRecolorBy.value;
     if (selectRecolorByValue !== 'none') {
       if (selectRecolorByType === 'qual') {
         params.flow_qual = selectRecolorByValue;
@@ -200,13 +201,13 @@ export function loadLinks() {
       }
     }
 
-    const selectedBiomeFilter = getState().flows.selectedBiomeFilter;
+    const selectedBiomeFilter = state.flows.selectedBiomeFilter;
     if (selectedBiomeFilter !== 'none') {
       params.biome_filter = selectedBiomeFilter;
     }
 
-    if (getState().flows.areNodesExpanded) {
-      params.selected_nodes = getState().flows.expandedNodesIds.join(',');
+    if (state.flows.areNodesExpanded) {
+      params.selected_nodes = state.flows.expandedNodesIds.join(',');
     }
 
     const url = getURLFromParams(GET_FLOWS, params);
@@ -219,13 +220,13 @@ export function loadLinks() {
         });
 
         // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
-        const selectedNodesIds = getSelectedNodesStillVisible(getState().flows.visibleNodes, getState().flows.selectedNodesIds);
+        const selectedNodesIds = getSelectedNodesStillVisible(state.flows.visibleNodes, state.flows.selectedNodesIds);
 
-        const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
+        const action = getNodesSelectionAction(selectedNodesIds, state.flows);
         action.type = actions.UPDATE_NODE_SELECTION;
         dispatch(action);
 
-        if (getState().flows.selectedNodesIds && getState().flows.selectedNodesIds.length > 0) {
+        if (state.flows.selectedNodesIds && state.flows.selectedNodesIds.length > 0) {
           dispatch({
             type: actions.FILTER_LINKS_BY_NODES
           });
