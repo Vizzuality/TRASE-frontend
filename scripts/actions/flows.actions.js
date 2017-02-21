@@ -1,7 +1,7 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
 import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
-import { getURLFromParams, API_ENDPOINTS } from 'utils/getURLFromParams';
+import { getURLFromParams, GET_ALL_NODES, GET_COLUMNS, GET_FLOWS, GET_NODES } from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
 import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
 import getNodesSelectionAction from './helpers/getNodesSelectionAction';
@@ -114,8 +114,8 @@ export function loadInitialData() {
       country: getState().flows.selectedCountry,
       commodity: getState().flows.selectedCommodity
     };
-    const allNodesURL = getURLFromParams(API_ENDPOINTS.GET_ALL_NODES, params);
-    const columnsURL = getURLFromParams(API_ENDPOINTS.GET_COLUMNS, params);
+    const allNodesURL = getURLFromParams(GET_ALL_NODES, params);
+    const columnsURL = getURLFromParams(GET_COLUMNS, params);
 
     Promise.all([allNodesURL, columnsURL].map(url =>
       fetch(url).then(resp => resp.text())
@@ -146,7 +146,7 @@ export function loadNodes() {
       // column_id: 2
     };
 
-    const getNodesURL = getURLFromParams(API_ENDPOINTS.GET_NODES, params);
+    const getNodesURL = getURLFromParams(GET_NODES, params);
     const getMapVariablesMetadataURL = 'jsonMockups/get_map_variables_metadata.json';
 
     Promise.all([getNodesURL, getMapVariablesMetadataURL].map(url =>
@@ -219,7 +219,7 @@ export function loadLinks() {
       params.selected_nodes = getState().flows.expandedNodesIds.join(',');
     }
 
-    const url = getURLFromParams(API_ENDPOINTS.GET_FLOWS, params);
+    const url = getURLFromParams(GET_FLOWS, params);
 
     fetch(url)
       .then(res => res.text())
