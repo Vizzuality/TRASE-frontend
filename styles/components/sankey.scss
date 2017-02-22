@@ -94,9 +94,31 @@
     box-shadow: $box-shadow-big;
     cursor: pointer;
 
+    .c-sankey-tooltip {
+      right: 0;
+      display: none;
+
+      .expand-action:before {
+        content: attr(data-collapsed-text);
+      }
+    }
+
     &.-visible {
       display: block;
     }
-  }
 
+    &.-expanded {
+
+      .expand-action:before {
+        content: attr(data-expanded-text);
+      }
+    }
+
+    &:hover {
+
+      .c-sankey-tooltip {
+        display: block;
+      }
+    }
+  }
 }

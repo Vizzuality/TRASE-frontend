@@ -1,4 +1,4 @@
-import { selectNode, highlightNode, toggleNodesExpand } from 'actions/flows.actions';
+import { selectNode, highlightNode, toggleNodesExpand, resetState } from 'actions/flows.actions';
 import connect from 'connect';
 import Sankey from 'components/sankey.component.js';
 
@@ -57,7 +57,8 @@ const mapMethodsToState = (state) => ({
 const mapViewCallbacksToActions = () => ({
   onNodeClicked: (id, isAggregated) => selectNode(id, isAggregated),
   onNodeHighlighted: (id, isAggregated) => highlightNode(id, isAggregated),
-  onExpandClick: () => toggleNodesExpand()
+  onExpandClick: () => toggleNodesExpand(),
+  onClearClick: () => resetState()
 });
 
 export default connect(Sankey, mapMethodsToState, mapViewCallbacksToActions);

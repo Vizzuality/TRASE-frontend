@@ -4,19 +4,34 @@
   position: absolute;
   width: 200px;
   box-shadow: $box-shadow-big;
+  font-family: $font-family-1;
 
   > .title {
     padding: 10px;
     background-color: $manilla;
-    font-family: $font-family-1;
     letter-spacing: -1px;
-
+    font-family: $font-family-1;
   }
 
   > .body {
     padding: 10px;
     background-color: $white;
-    font-family: $font-family-1;
+  }
 
+  .actions {
+
+    li {
+      height: 32px;
+      padding: 11px 8px;
+      font-size: 12px;
+      letter-spacing: -0.6px;
+      color: $charcoal-grey;
+      background-color: $white;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $manilla;
+      }
+    }
   }
 }

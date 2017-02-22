@@ -102,8 +102,10 @@ export default class {
     addSVGDropShadowDef(this.svg);
 
     this.expandButton = document.querySelector('.js-expand');
-    this.expandButton.addEventListener('click', this._onExpandClick.bind(this));
-
+    this.expandActionButton = document.querySelector('.js-expand-action');
+    this.expandActionButton.addEventListener('click', this._onExpandClick.bind(this));
+    this.clearButton = document.querySelector('.js-clear');
+    this.clearButton.addEventListener('click', this.callbacks.onClearClick);
   }
 
   _onExpandClick() {
