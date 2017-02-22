@@ -359,10 +359,6 @@ export function highlightNode(nodeId, isAggregated) {
       return;
     }
 
-    if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) {
-      return;
-    }
-
     const action = getNodesSelectionAction([nodeId], getState().flows);
     action.type = actions.HIGHLIGHT_NODE;
     dispatch(action);

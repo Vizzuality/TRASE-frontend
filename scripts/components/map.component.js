@@ -61,62 +61,45 @@ export default class {
     ];
     this.selectPolygonType([payload.currentPolygonType]);
     if (payload.selectedNodesGeoIds) {
-      this.selectPolygons(payload.selectedNodesGeoIds);
+      this._outlinePolygons({selectedGeoIds: payload.selectedNodesGeoIds});
     }
   }
 
-  selectPolygons(geoIds) {
-    this.selectedNodesLayer = this._paintPolygons(geoIds, this.selectedNodesLayer, '-selected');
+
+  showLinkedGeoIds(/*linkedGeoIds*/) {
+    // TBD
   }
 
-  showLinkedGeoIds(linkedGeoIds) {
-    this.linkedLayer = this._paintPolygons(linkedGeoIds, this.linkedLayer, '-linked');
-  }
+  selectPolygons(payload) { this._outlinePolygons(payload); }
+  highlightPolygon(payload) { this._outlinePolygons(payload); }
 
-  _paintPolygons(geoIds, targetLayer, className) {
+  _outlinePolygons({selectedGeoIds, highlightedGeoId}) {
+    console.log(selectedGeoIds, highlightedGeoId)
     if (!this.currentPolygonTypeLayer) {
       return;
     }
 
-    if (targetLayer) this.map.removeLayer(targetLayer);
+    if (this.vectorOutline) {
+      this.map.removeLayer(this.vectorOutline);
+    }
 
-    const selectedFeatures = [];
-    this.currentPolygonTypeLayer.eachLayer(layer => {
-      if (geoIds.indexOf(layer.feature.properties.geoid) > - 1) {
-        selectedFeatures.push(layer.feature);
-      }
+    const selectedFeatures = selectedGeoIds.map(selectedGeoId => {
+      return this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId).feature;
     });
 
-    // polygon appears 'burried', and SVG does nto support z-indexes
-    // so we have to recreate the clicked layers on top of all other polygons
-    let layer;
+    if (highlightedGeoId && selectedGeoIds.indexOf(highlightedGeoId) === -1) {
+      selectedFeatures.push(this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === highlightedGeoId).feature);
+    }
+
     if (selectedFeatures.length > 0) {
-      layer = L.geoJSON(selectedFeatures, { pane: MAP_PANES.vectorMain });
-      layer.setStyle(feature => this._getPolygonSyle(className, feature));
-      this.map.addLayer(layer);
-    }
-    return layer;
-  }
-
-  // TODO use _paintPolygons
-  highlightPolygon(geoIds) {
-    if (!this.currentPolygonTypeLayer) {
-      return;
-    }
-
-    if (this.highlightedLayer) this.map.removeLayer(this.highlightedLayer);
-
-    if (geoIds.length > 0) {
-      const geoId = geoIds[0];
-      this.currentPolygonTypeLayer.eachLayer(layer => {
-        if (geoId === layer.feature.properties.geoid) {
-          // polygon appears 'burried', and SVG does nto support z-indexes
-          // so we have to recreate the hover layer on top of all other polygons
-          this.highlightedLayer = L.geoJSON(layer.feature, { pane: MAP_PANES.vectorMain });
-          this.highlightedLayer.setStyle(feature => this._getPolygonSyle(null, feature, true));
-          this.map.addLayer(this.highlightedLayer);
-        }
+      this.vectorOutline = L.geoJSON(selectedFeatures, { pane: MAP_PANES.vectorOutline });
+      this.vectorOutline.setStyle(feature => {
+        return this._getPolygonStyle(feature, {
+          selected: true,
+          highlighted: feature.properties.geoid === highlightedGeoId
+        });
       });
+      this.map.addLayer(this.vectorOutline);
     }
   }
 
@@ -207,7 +190,7 @@ export default class {
   _getPolygonTypeLayer(geoJSON, polygonClassName) {
     var topoLayer = new L.GeoJSON(geoJSON, { pane: MAP_PANES.vectorMain });
 
-    topoLayer.setStyle(feature => this._getPolygonSyle(polygonClassName, feature));
+    topoLayer.setStyle(feature => this._getPolygonStyle(feature, {customClass: polygonClassName }));
 
     topoLayer.eachLayer(layer => {
       const that = this;
@@ -228,16 +211,19 @@ export default class {
     return topoLayer;
   }
 
-  _getPolygonSyle(polygonClassName, feature, highlighted) {
+  _getPolygonStyle(feature, {selected, highlighted, customClass}) {
     let classNames = ['map-polygon'];
-    if (polygonClassName) {
-      classNames.push(polygonClassName);
-    }
     if (!feature.properties.hasFlows) {
       classNames.push('-disabled');
     }
     if (highlighted === true) {
       classNames.push('-highlighted');
+    }
+    if (selected === true) {
+      classNames.push('-selected');
+    }
+    if (customClass !== undefined) {
+      classNames.push(customClass);
     }
     return {className: classNames.join(' '), smoothFactor: 0.9};
   }
@@ -262,6 +248,4 @@ export default class {
       }
     });
   }
-
-
 }

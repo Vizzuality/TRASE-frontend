@@ -17,8 +17,23 @@ const mapMethodsToState = (state) => ({
     }
   },
   selectPolygonType: state.flows.selectedColumnsIds,
-  selectPolygons: state.flows.selectedNodesGeoIds,
-  highlightPolygon: state.flows.highlightedGeoIds,
+  selectPolygons:  {
+    _comparedValue: (state) => state.flows.selectedNodesGeoIds,
+    _returnedValue: (state) => {
+      return {
+        selectedGeoIds: state.flows.selectedNodesGeoIds
+      };
+    }
+  },
+  highlightPolygon:  {
+    _comparedValue: (state) => state.flows.highlightedGeoIds,
+    _returnedValue: (state) => {
+      return {
+        selectedGeoIds: state.flows.selectedNodesGeoIds,
+        highlightedGeoId: state.flows.highlightedGeoIds[0]
+      };
+    }
+  },
   setChoropleth: state.flows.choropleth,
   loadContextLayers: state.flows.selectedMapContextualLayersData,
   showLinkedGeoIds: state.flows.linkedGeoIds
