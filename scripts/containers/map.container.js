@@ -34,7 +34,15 @@ const mapMethodsToState = (state) => ({
       };
     }
   },
-  setChoropleth: state.flows.choropleth,
+  setChoropleth: {
+    _comparedValue: (state) => state.flows.choropleth,
+    _returnedValue: (state) => {
+      return {
+        choropleth: state.flows.choropleth,
+        linkedGeoIds: state.flows.linkedGeoIds
+      };
+    }
+  },
   loadContextLayers: state.flows.selectedMapContextualLayersData,
   showLinkedGeoIds: state.flows.linkedGeoIds
 });

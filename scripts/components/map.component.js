@@ -251,7 +251,7 @@ export default class {
     }, 850);
   }
 
-  setChoropleth(choropleth) {
+  setChoropleth({choropleth, linkedGeoIds}) {
     this.currentPolygonTypeLayer.eachLayer(layer => {
       const choroItem = choropleth[layer.feature.properties.geoid];
       const classNames = [];
@@ -262,5 +262,10 @@ export default class {
       layer._path.setAttribute('class', classNames.join(' '));
       layer._path.setAttribute('geoid', layer.feature.properties.geoid);
     });
+
+    console.log(linkedGeoIds)
+    if (linkedGeoIds && linkedGeoIds.length) {
+      this.showLinkedGeoIds(linkedGeoIds);
+    }
   }
 }
