@@ -12,7 +12,30 @@
 }
 
 .c-map-legend-choro {
-  margin-bottom: 10px;;
+  margin-bottom: 10px;
+
+  .bucket {
+    &.ch-red-0 { background-color: $ch-red-0; };
+    &.ch-red-1 { background-color: $ch-red-1; };
+    &.ch-red-2 { background-color: $ch-red-2; };
+    &.ch-red-3 { background-color: $ch-red-3; };
+    &.ch-red-4 { background-color: $ch-red-4; };
+    &.ch-blue-0 { background-color: $ch-blue-0; };
+    &.ch-blue-1 { background-color: $ch-blue-1; };
+    &.ch-blue-2 { background-color: $ch-blue-2; };
+    &.ch-blue-3 { background-color: $ch-blue-3; };
+    &.ch-blue-4 { background-color: $ch-blue-4; };
+    &.ch-bi-0-2 { background-color: $ch-bi-0-2; };
+    &.ch-bi-1-2 { background-color: $ch-bi-1-2; };
+    &.ch-bi-2-2 { background-color: $ch-bi-2-2; };
+    &.ch-bi-0-1 { background-color: $ch-bi-0-1; };
+    &.ch-bi-1-1 { background-color: $ch-bi-1-1; };
+    &.ch-bi-2-1 { background-color: $ch-bi-2-1; };
+    &.ch-bi-0-0 { background-color: $ch-bi-0-0; };
+    &.ch-bi-1-0 { background-color: $ch-bi-1-0; };
+    &.ch-bi-2-0 { background-color: $ch-bi-2-0; };
+  }
+
   > .bucket-container {
     display: flex;
     position: relative;
@@ -54,7 +77,6 @@
 
     .layer-name {
       max-width: 75px;
-
       color: rgba($charcoal-grey, .5);
       font-family: $font-family-1;
       font-size: $font-size-small;

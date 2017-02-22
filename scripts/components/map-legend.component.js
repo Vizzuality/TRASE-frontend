@@ -1,4 +1,4 @@
-import { LEGEND_COLORS } from 'constants';
+import { CHOROPLETH_CLASSES } from 'constants';
 import LegendChoroTemplate from 'ejs!templates/map/legend-choro.ejs';
 import LegendContextTemplate from 'ejs!templates/map/legend-context.ejs';
 import 'style/components/map/map-legend.scss';
@@ -77,16 +77,16 @@ export default class {
   }
 
   _renderChoro(settings) {
-    let colors = LEGEND_COLORS['horizontal'];
+    let colors = CHOROPLETH_CLASSES['horizontal'];
     let title = [];
     let cssClass = '';
 
     if (settings.isBidimensional) {
-      colors = LEGEND_COLORS['bidimensional'];
+      colors = CHOROPLETH_CLASSES['bidimensional'];
       title = [settings.vertical.title, settings.horizontal.title];
       cssClass = '-bidimensional';
     } else if (settings.vertical) {
-      colors = LEGEND_COLORS['vertical'];
+      colors = CHOROPLETH_CLASSES['vertical'];
       title = [settings.vertical.title, null];
       cssClass = '-vertical';
     } else {
