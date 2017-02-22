@@ -11,7 +11,6 @@ export default class {
     this._setEventListeners();
 
     this.state = {
-      value: 'none',
       visibilityAppMenu: false
     };
 
@@ -28,6 +27,7 @@ export default class {
     this.recolorByDropdown = new Dropdown('recolor-by', this.callbacks.onRecolorBySelected);
     this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
 
+    this.legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
 
     // new BookmarkMenu();
     // new Dropdown('bookmark', this.callbacks.onQuantSelected);
@@ -86,13 +86,13 @@ export default class {
   }
 
   selectRecolorBy(data) {
-    // TODO friday hack, this should not happen
-    this.state.value = data.value;
-    if (this.state.value === undefined) {
-      this.state.value = 'none';
+    let recolorByValue = data.value;
+    if (recolorByValue === undefined) {
+      // TODO have this set up by default in an action
+      recolorByValue = 'none';
     }
 
-    const selectedRecolorByLegend = this.recolorByDropdown.el.querySelector(`[data-value="${this.state.value}"]`);
+    const selectedRecolorByLegend = this.recolorByDropdown.el.querySelector(`[data-value="${recolorByValue}"]`);
     const selectedRecolorByLegendItems = Array.prototype.slice.call(
       selectedRecolorByLegend.querySelectorAll('.js-dropdown-item-legend li'), 0);
 
@@ -100,8 +100,7 @@ export default class {
     selectedRecolorByLegendItems.forEach(legend =>
       legendItems.push(legend.className)
     );
-    const legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
-    legendContainer.innerHTML = legendItems.map(legendItem => `<div class="color ${legendItem}"></div>`).join('');
+    this.legendContainer.innerHTML = legendItems.map(legendItem => `<div class="color ${legendItem}"></div>`).join('');
     this.recolorByDropdown.selectValue(data.value);
 
     // if (value === 'none') {
@@ -111,11 +110,11 @@ export default class {
     // }
   }
 
-  selectedNodeColors(colors) {
-    if (this.state.value === 'none') {
-      const legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
-      legendContainer.innerHTML = colors.map(color => typeof color !== 'undefined' ? `<div class="color -flow-${color}" style="order:${color};"></div>` : '').join('');
+  updateNodeSelectionColors(colors) {
+    if (colors === null) {
+      return;
     }
+    this.legendContainer.innerHTML = colors.map(color => `<div class="color -flow-${color}" style="order:${color};"></div>`).join('');
   }
 
   selectView(value) {

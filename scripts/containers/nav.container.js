@@ -10,7 +10,15 @@ const mapMethodsToState = (state) => ({
   selectBiomeFilter: state.flows.selectedBiomeFilter,
   selectYears: state.flows.selectedYears,
   selectRecolorBy: state.flows.selectedRecolorBy,
-  selectedNodeColors: state.flows.recolorGroups,
+  updateNodeSelectionColors:  {
+    _comparedValue: (state) => state.flows.recolorGroups,
+    _returnedValue: (state) => {
+      return (state.flows.selectedRecolorBy.value === undefined)
+        // TODO state.flows.recolorGroups should probably be cleaned up of all undefined values in the state
+        ? state.flows.recolorGroups.filter(c => c!== undefined)
+        : null;
+    }
+  },
   selectView: state.flows.detailedView
 });
 
