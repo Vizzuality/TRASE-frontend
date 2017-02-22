@@ -59,7 +59,8 @@ export const FLOWS_DEFAULT_STATE = {
         title: null
       }
     },
-    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
+    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
+    recolorGroups: []
   }
 };
 

@@ -11,6 +11,7 @@ export default class {
     this._setEventListeners();
 
     this.state = {
+      value: 'none',
       visibilityAppMenu: false
     };
 
@@ -86,12 +87,12 @@ export default class {
 
   selectRecolorBy(data) {
     // TODO friday hack, this should not happen
-    let value = data.value;
-    if (value === undefined) {
-      value = 'none';
+    this.state.value = data.value;
+    if (this.state.value === undefined) {
+      this.state.value = 'none';
     }
 
-    const selectedRecolorByLegend = this.recolorByDropdown.el.querySelector(`[data-value="${value}"]`);
+    const selectedRecolorByLegend = this.recolorByDropdown.el.querySelector(`[data-value="${this.state.value}"]`);
     const selectedRecolorByLegendItems = Array.prototype.slice.call(
       selectedRecolorByLegend.querySelectorAll('.js-dropdown-item-legend li'), 0);
 
@@ -99,6 +100,8 @@ export default class {
     selectedRecolorByLegendItems.forEach(legend =>
       legendItems.push(legend.className)
     );
+    const legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
+    legendContainer.innerHTML = legendItems.map(legendItem => `<div class="color ${legendItem}"></div>`).join('');
     this.recolorByDropdown.selectValue(data.value);
 
     // if (value === 'none') {
@@ -109,8 +112,10 @@ export default class {
   }
 
   selectedNodeColors(colors) {
-    const legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
-    legendContainer.innerHTML = colors.map(color => `<div class="color -flow-${color}"></div>`).join('');
+    if (this.state.value === 'none') {
+      const legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
+      legendContainer.innerHTML = colors.map(color => typeof color !== 'undefined' ? `<div class="color -flow-${color}" style="order:${color};"></div>` : '').join('');
+    }
   }
 
   selectView(value) {
