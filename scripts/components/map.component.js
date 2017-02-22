@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import _ from 'lodash';
 import 'leaflet.utfgrid';
-import { CARTO_BASE_URL } from 'constants';
+import { CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, BASEMAPS } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/map.scss';
 import 'style/components/map/map-legend.scss';
@@ -16,18 +16,37 @@ export default class {
     this.map = L.map('map', mapOptions).setView([-16, -50], 4);
     new L.Control.Zoom({ position: 'bottomleft' }).addTo(this.map);
 
-    var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' });
-    this.map.addLayer(basemap);
+    Object.keys(MAP_PANES).forEach(paneKey => {
+      this.map.createPane(paneKey);
+      this.map.getPane(paneKey).style.zIndex = MAP_PANES_Z[paneKey];
+    });
 
-    this.map.createPane('main');
-    this.map.getPane('main').style.zIndex = 600;
-    this.map.createPane('context_above');
-    this.map.getPane('context_above').style.zIndex = 601;
+    this.loadBasemap('positron');
 
     this.contextLayers = [];
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
+  }
+
+  loadBasemap(basemapId) {
+    if (this.basemap) {
+      this.map.removeLayer(this.basemap);
+    }
+    if (this.basemapLabels) {
+      this.map.removeLayer(this.basemapLabels);
+    }
+
+    const basemapOptions = BASEMAPS[basemapId];
+    basemapOptions.pane = MAP_PANES.basemap;
+    this.basemap = L.tileLayer(basemapOptions.url, basemapOptions);
+    this.map.addLayer(this.basemap);
+
+    if (basemapOptions.labelsUrl !== undefined) {
+      basemapOptions.pane = MAP_PANES.basemapLabels;
+      this.basemapLabels = L.tileLayer(basemapOptions.labelsUrl, basemapOptions);
+      this.map.addLayer(this.basemapLabels);
+    }
   }
 
   showLoadedMap(payload) {
@@ -72,7 +91,7 @@ export default class {
     // so we have to recreate the clicked layers on top of all other polygons
     let layer;
     if (selectedFeatures.length > 0) {
-      layer = L.geoJSON(selectedFeatures, { pane: 'main' });
+      layer = L.geoJSON(selectedFeatures, { pane: MAP_PANES.vectorMain });
       layer.setStyle(feature => this._getPolygonSyle(className, feature));
       this.map.addLayer(layer);
     }
@@ -93,7 +112,7 @@ export default class {
         if (geoId === layer.feature.properties.geoid) {
           // polygon appears 'burried', and SVG does nto support z-indexes
           // so we have to recreate the hover layer on top of all other polygons
-          this.highlightedLayer = L.geoJSON(layer.feature, { pane: 'main' });
+          this.highlightedLayer = L.geoJSON(layer.feature, { pane: MAP_PANES.vectorMain });
           this.highlightedLayer.setStyle(feature => this._getPolygonSyle(null, feature, true));
           this.map.addLayer(this.highlightedLayer);
         }
@@ -138,8 +157,8 @@ export default class {
 
     // disable main choropleth layer when there are context layers
     // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
-    this.map.getPane('main').classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
-    this.map.getPane('main').classList.toggle('-hidden', hideMain);
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-hidden', hideMain);
   }
 
   _createRasterLayer(layerData) {
@@ -152,7 +171,7 @@ export default class {
     const bounds = L.latLngBounds(southWest, northEast);
 
     var layer = L.tileLayer(url, {
-      pane: 'context_above',
+      pane: MAP_PANES.context,
       tms: true,
       // TODO add those params in layer configuration
       maxZoom: 11,
@@ -186,9 +205,7 @@ export default class {
   }
 
   _getPolygonTypeLayer(geoJSON, polygonClassName) {
-    var topoLayer = new L.GeoJSON(geoJSON, {
-      pane: 'main'
-    });
+    var topoLayer = new L.GeoJSON(geoJSON, { pane: MAP_PANES.vectorMain });
 
     topoLayer.setStyle(feature => this._getPolygonSyle(polygonClassName, feature));
 

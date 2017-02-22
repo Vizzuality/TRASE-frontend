@@ -91,6 +91,30 @@ export const CHORD_COLORS = ['#ea6869', '#34444c'];
 // map
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';
 export const CARTO_NAMED_MAPS_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/named/';
+export const MAP_PANES = {
+  basemap: 'basemap',
+  vectorMain: 'vectorMain',
+  vectorLinked: 'vectorLinked',
+  vectorOutline: 'vectorOutline',
+  context: 'context',
+  basemapLabels: 'basemapLabels'
+};
+export const MAP_PANES_Z = {
+  [MAP_PANES.basemap]: 200,
+  [MAP_PANES.vectorMain]: 410,
+  [MAP_PANES.vectorLinked]: 411,
+  [MAP_PANES.vectorOutline]: 412,
+  [MAP_PANES.context]: 420,
+  [MAP_PANES.basemapLabels]: 490
+};
+export const BASEMAPS = {
+  positron: {
+    title: 'Positron',
+    url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+    labelsUrl: 'http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png',
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  }
+};
 
 // GA
 export const GA_ACTION_WHITELIST = [
