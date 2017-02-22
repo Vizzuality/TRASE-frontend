@@ -1,0 +1,131 @@
+{
+  "folders": [
+    {
+      "id": 0,
+      "name": "Trading"
+    },
+    {
+      "id": 1,
+      "name": "Environment"
+    },
+    {
+      "id": 2,
+      "name": "Economy"
+    },
+    {
+      "id": 3,
+      "name": "Conflicts"
+    }
+  ],
+  "default_selection": [17, 15],
+  "variables": [
+    {
+      "id": 17,
+      "name": "Production of soy",
+      "type": "quant",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 0,
+      "unit": "Tn"
+    },
+    {
+      "id": 14,
+      "name": "% soy of total farming land",
+      "type": "ind",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 0,
+      "unit": "%"
+    },
+    {
+      "id": 15,
+      "name": "Deforestation rate",
+      "type": "ind",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 1,
+      "unit": "ha/yr"
+    },
+    {
+      "id": 16,
+      "name": "Water scarcity",
+      "type": "ind",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 1,
+      "unit": "/7"
+    },
+    {
+      "id": 19,
+      "name": "Biodiversity",
+      "type": "quant",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 1,
+      "unit": "-"
+    },
+    {
+      "id": 17,
+      "name": "Human development index",
+      "type": "ind",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 2,
+      "unit": "/1"
+    },
+    {
+      "id": 18,
+      "name": "GDP per capita",
+      "type": "ind",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 2,
+      "unit": "USD/capita"
+    },
+    {
+      "id": 19,
+      "name": "% GDP from agriculture",
+      "type": "ind",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 2,
+      "unit": "%"
+    },
+    {
+      "id": 20,
+      "name": "Smallholder dominance",
+      "type": "ind",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 2,
+      "unit": "%"
+    },
+    {
+      "id": 21,
+      "name": "Reported cases of forced labour (2014)",
+      "type": "quant",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 3,
+      "unit": "individuals with lawsuits"
+    },
+    {
+      "id": 22,
+      "name": "Land conflicts (2014)",
+      "type": "quant",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 3,
+      "unit": "land conflicts"
+    },
+    {
+      "id": 23,
+      "name": "Number of environmental embargos (2015)",
+      "type": "quant",
+      "buckets3": ["<1k", "1.5k", ">2k"],
+      "buckets5": ["<1k", "1.25k", "1.5k", "1.75k", ">2k"],
+      "folder_id": 3,
+      "unit": "fines & embargoes"
+    }
+  ]
+}

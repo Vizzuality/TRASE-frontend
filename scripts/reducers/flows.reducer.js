@@ -55,16 +55,18 @@ export default function (state = {}, action) {
     break;
 
   case actions.GET_NODES: {
-    const jsonPayload = JSON.parse(action.payload);
-    const nodesMeta = jsonPayload.data;
-    const rawMapVariables = jsonPayload.include.includedLayers;
+    const nodesMeta = action.payload.nodesJSON.data;
 
+    const mapVariablesMeta = action.payload.mapVariablesMetaJSON;
+    const rawMapVariables = mapVariablesMeta.variables;
     const mapVariables = getMapVariables(rawMapVariables);
+
+    const mapVariablesFolders = mapVariablesMeta.folders;
 
     // store layer values in nodesDict as uid: layerValue
     const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, mapVariables);
 
-    newState = Object.assign({}, state, { mapVariables, nodesDictWithMeta });
+    newState = Object.assign({}, state, { mapVariables, mapVariablesFolders, nodesDictWithMeta });
     break;
   }
 

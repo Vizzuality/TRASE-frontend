@@ -1,0 +1,37 @@
+<% folders.forEach(function(folder) { %>
+  <li>
+    <div class="folder-title">
+      <%= folder.folder.name %>
+    </div>
+    <ul>
+      <% folder.variables.forEach(function(variable) { %>
+        <li
+          class="layer-item"
+          data-layer-uid="<%= variable.uid %>"
+        >
+          <label class="layer-name">
+            <%= variable.name %>
+            <% if (variable.unit) { %>
+              (<%= variable.unit %>)
+            <% } %>
+            <ul class="layer-options-list">
+              <!--<li class="layer-option c-tooltip">-->
+                <!--<svg class="icon icon-layer-info js-layer-info" data-description="description/tooltip goes here">-->
+                  <!--<use xlink:href="#icon-layer-info">-->
+                <!--</use>-->
+              <!--</svg>-->
+              <!--</li>-->
+              <!--<li class="layer-option">-->
+                <!--<svg class="icon icon-layer-download js-layer-download"><use xlink:href="#icon-layer-download"></use></svg>-->
+              <!--</li>-->
+            </ul>
+          </label>
+          <div class="radios">
+            <div class="c-radio-btn" data-group="vertical" value="<%= variable.uid %>"></div>
+            <div class="c-radio-btn" data-group="horizontal" value="<%= variable.uid %>"></div>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  </li>
+<% }) %>

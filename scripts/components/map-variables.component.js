@@ -1,7 +1,7 @@
 import 'styles/components/map/map-layers.scss';
 import 'styles/components/shared/radio-btn.scss';
 import 'styles/components/shared/switcher.scss';
-import MapVariableTemplate from 'ejs!templates/mapVariable.ejs';
+import MapVariablesTemplate from 'ejs!templates/mapVariables.ejs';
 
 export default class {
 
@@ -11,8 +11,9 @@ export default class {
     this.tooltip = document.querySelector('.tooltip-layout');
   }
 
-  loadMapVariables(variables) {
-    this.layerList.innerHTML = variables.map(layer => MapVariableTemplate(layer)).join('');
+  loadMapVariables(variablesByFolder) {
+    // this.layerList.innerHTML = variables.map(layer => MapVariablesTemplate(layer)).join('');
+    this.layerList.innerHTML = MapVariablesTemplate({folders: variablesByFolder});
 
     this._setVars();
     this._setEventListeners();

@@ -7,7 +7,7 @@ import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
 import getNodesSelectionAction from './helpers/getNodesSelectionAction';
 import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible';
 import setGeoJSONMeta from './helpers/setGeoJSONMeta';
-
+import getNodeMetaUid from 'reducers/helpers/getNodeMetaUid';
 
 export function resetState() {
   return (dispatch) => {
@@ -74,7 +74,7 @@ export function selectYears(years) {
   };
 }
 
-export function selectMapVariables(variableData) {
+export function selectMapVariable(variableData) {
   return dispatch => {
     dispatch({
       type: actions.SELECT_MAP_VARIABLES,
@@ -146,16 +146,35 @@ export function loadNodes() {
       // column_id: 2
     };
 
-    const url = getURLFromParams('/v1/get_nodes', params);
+    const getNodesURL = getURLFromParams('/v1/get_nodes', params);
+    const getMapVariablesMetadataURL = 'jsonMockups/get_map_variables_metadata.json';
 
-    fetch(url)
-      .then(res => res.text())
-      .then(payload => {
-        dispatch({
-          type: actions.GET_NODES,
-          payload
-        });
+    Promise.all([getNodesURL, getMapVariablesMetadataURL].map(url =>
+      fetch(url).then(resp => resp.text())
+    )).then(rawPayload => {
+      const payload = {
+        nodesJSON: JSON.parse(rawPayload[0]),
+        mapVariablesMetaJSON: JSON.parse(rawPayload[1])
+      };
+
+      dispatch({
+        type: actions.GET_NODES,
+        payload
       });
+
+      const selection = payload.mapVariablesMetaJSON.default_selection;
+      if (selection !== undefined) {
+        selection.forEach((selection, index) => {
+          const direction = (index === 0) ? 'vertical' : 'horizontal';
+          const selectedVariable = getState().flows.mapVariables.find(variable => variable.id === selection);
+          dispatch(selectMapVariable({
+            direction,
+            title: selectedVariable.name,
+            uid: getNodeMetaUid(selectedVariable.type, selectedVariable.id)
+          }));
+        });
+      }
+    });
   };
 }
 

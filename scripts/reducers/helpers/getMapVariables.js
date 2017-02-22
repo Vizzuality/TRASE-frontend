@@ -1,8 +1,8 @@
 import getNodeMetaUid from './getNodeMetaUid';
 
 export default function(mapVariables) {
-  mapVariables.forEach(layer => {
-    layer.uid = getNodeMetaUid(layer.type, layer.id);
+  mapVariables.forEach(variable => {
+    variable.uid = getNodeMetaUid(variable.type, variable.id);
   });
 
   return mapVariables;

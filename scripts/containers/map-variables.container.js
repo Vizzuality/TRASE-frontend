@@ -1,15 +1,25 @@
 import connect from 'connect';
-import { selectMapVariables } from 'actions/flows.actions';
+import { selectMapVariable } from 'actions/flows.actions';
 import { toggleModal } from 'actions/app.actions';
 import MapVariables from 'components/map-variables.component';
 
 const mapMethodsToState = (state) => ({
-  loadMapVariables: state.flows.mapVariables,
+  loadMapVariables: {
+    _comparedValue: (state) => state.flows.mapVariables,
+    _returnedValue: (state) => {
+      return state.flows.mapVariablesFolders.map(folder => {
+        return {
+          folder,
+          variables: state.flows.mapVariables.filter(variable => variable.folder_id === folder.id)
+        };
+      });
+    }
+  },
   selectMapVariables: state.flows.selectedMapVariables,
 });
 
 const mapViewCallbacksToActions = () => ({
-  onMapVariablesSelected: variableData => selectMapVariables(variableData),
+  onMapVariablesSelected: variableData => selectMapVariable(variableData),
   onToggleModal: (visibility, data) => toggleModal(visibility, data)
 });
 

@@ -23,7 +23,7 @@ $charcoal-grey: #34444c;
 $charcoal-grey-faded: rgba($charcoal-grey, .6);
 $gray: #ebebeb;
 $medium-pink: #ea6869;
-$medium-pink-faded: lighten(#ea6869, 20%);
+$medium-pink-faded: lighten($medium-pink, 20%);
 $manilla: #ffeb8b;
 $orange: #ffa500;
 $pale-grey: #e0e4e8;

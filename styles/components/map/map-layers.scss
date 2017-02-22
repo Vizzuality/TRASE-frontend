@@ -71,8 +71,17 @@
     }
   }
 
-  > .layer-list {
+
+  .layer-list {
     margin: 20px 0 40px;
+
+    .folder-title {
+      margin: 30px 0 20px;
+      color: $charcoal-grey;
+      font-family: $font-family-1;
+      font-size: $font-size-small;
+      text-transform: uppercase;
+    }
 
     &:not(:last-child) {
       &::after {
@@ -87,7 +96,7 @@
       }
     }
 
-    > .layer-item {
+    .layer-item {
       display: flex;
       justify-content: space-between;
       height: 18px;
