@@ -74,7 +74,6 @@ export default class {
   highlightPolygon(payload) { this._outlinePolygons(payload); }
 
   _outlinePolygons({selectedGeoIds, highlightedGeoId}) {
-    console.log(selectedGeoIds, highlightedGeoId)
     if (!this.currentPolygonTypeLayer) {
       return;
     }
@@ -169,7 +168,7 @@ export default class {
     const layerUrl = `${baseUrl}.png`;
     // console.log(layerUrl)
     const layer = new L.tileLayer(layerUrl, {
-      pane: 'context_above'
+      pane: MAP_PANES.context
     });
 
     this.contextLayers.push(layer);
