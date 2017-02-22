@@ -85,40 +85,17 @@
   .expand-button {
     display: none;
     position: absolute;
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
     transition: top .45s $ease-in-out-sine;
-    border-radius: 99px;
-    background-color: $medium-pink;
+    border-radius: 50%;
+    background-color: $charcoal-grey;
     color: $white;
     box-shadow: $box-shadow-big;
     cursor: pointer;
 
     &.-visible {
       display: block;
-    }
-
-    &::after {
-      display: block;
-      position: absolute;
-      top: 4px;
-      left: -1px;
-      transform: rotate(90deg) scaleX(.7);
-      font-family: Arial;
-      font-size: 17px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      content: '<>';
-    }
-
-    &.-expanded {
-      &::after {
-        content: '><';
-      }
-    }
-
-    &:hover {
-      transform: scale(1.2);
     }
   }
 
