@@ -105,7 +105,7 @@ export const MAP_PANES_Z = {
   [MAP_PANES.vectorLinked]: 411,
   [MAP_PANES.vectorOutline]: 412,
   [MAP_PANES.context]: 420,
-  [MAP_PANES.basemapLabels]: 700
+  [MAP_PANES.basemapLabels]: 490
 };
 export const BASEMAPS = {
   positron: {

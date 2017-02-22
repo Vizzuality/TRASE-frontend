@@ -37,17 +37,14 @@ export default class {
       this.map.removeLayer(this.basemapLabels);
     }
 
-    const basemap = BASEMAPS[basemapId];
-    this.basemap = L.tileLayer(basemap.url, {
-      attribution: basemap.attribution,
-      pane: MAP_PANES.basemap
-    });
+    const basemapOptions = BASEMAPS[basemapId];
+    basemapOptions.pane = MAP_PANES.basemap;
+    this.basemap = L.tileLayer(basemapOptions.url, basemapOptions);
     this.map.addLayer(this.basemap);
 
-    if (basemap.labelsUrl !== undefined) {
-      this.basemapLabels = L.tileLayer(basemap.labelsUrl, {
-        pane: MAP_PANES.basemapLabels
-      });
+    if (basemapOptions.labelsUrl !== undefined) {
+      basemapOptions.pane = MAP_PANES.basemapLabels;
+      this.basemapLabels = L.tileLayer(basemapOptions.labelsUrl, basemapOptions);
       this.map.addLayer(this.basemapLabels);
     }
   }
