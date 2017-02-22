@@ -78,7 +78,7 @@
   }
 
   .leaflet-vectorMain-pane path {
-    fill: $ch-default;
+    fill: $gray;
     fill-opacity: 1;
     stroke: $charcoal-grey;
     stroke-width: .2px;
@@ -87,7 +87,16 @@
     &.-disabled {
       cursor: not-allowed;
     }
+  }
 
+  .leaflet-vectorLinked-pane path {
+    fill: $gray;
+    fill-opacity: 1;
+    stroke: $charcoal-grey;
+    stroke-width: .5px;
+  }
+
+  .leaflet-vectorMain-pane:not(.-linkedActivated) path, .leaflet-vectorLinked-pane path {
     &.ch-red-0 { fill: $ch-red-0; };
     &.ch-red-1 { fill: $ch-red-1; };
     &.ch-red-2 { fill: $ch-red-2; };
@@ -110,12 +119,6 @@
     &.ch-no-meta { fill: $ch-no-meta; };
     &.ch-no-meta-layer { fill: $ch-no-meta-layer; };
     &.ch-default { fill: $ch-default; };
-  }
-
-  .leaflet-vectorLinked-pane path {
-    fill: $white;
-    fill-opacity: 1;
-    stroke-width: 0;
   }
 
   .leaflet-vectorOutline-pane {

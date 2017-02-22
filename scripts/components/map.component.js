@@ -71,18 +71,26 @@ export default class {
       return;
     }
 
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
+
     if (this.vectorLinked) {
       this.map.removeLayer(this.vectorLinked);
     }
 
-    const linkedFeatures = linkedGeoIds.map(selectedGeoId => {
-      const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId);
+    const linkedFeaturesClassNames = {};
+    const linkedFeatures = linkedGeoIds.map(geoId => {
+      const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
+      // copy class names (ie choropleth from vectorMain's original polygon)
+      linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
       return originalPolygon.feature;
     });
 
     if (linkedFeatures.length > 0) {
       this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
       this.map.addLayer(this.vectorLinked);
+      this.vectorLinked.eachLayer(layer => {
+        layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
+      });
     }
   }
 
