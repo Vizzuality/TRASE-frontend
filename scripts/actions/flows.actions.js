@@ -242,30 +242,35 @@ export function loadMapVectorData() {
   return (dispatch, getState) => {
     // get columns at position 0
     // exclude logistics hubs which doesnt have its own topojson
-    const geoColumns = getState().flows.columns.filter(column => column.group === 0);
-    const geoColumnsWithTopoJSON = geoColumns.filter(column => column.id !== 2);
-    const geoJSONUrls = geoColumnsWithTopoJSON.map(geoColumn => `${geoColumn.name}.topo.json`);
-    Promise.all(geoJSONUrls.map(url =>
-      fetch(url).then(resp => resp.text())
-    )).then(payload => {
-      const mapVectorData = {};
-      geoColumnsWithTopoJSON.forEach((geoColumn, i) => {
-        const layerPayload = payload[i];
-        if (!layerPayload) {
-          return;
-        }
-        const topoJSON = JSON.parse(layerPayload);
-        const key = Object.keys(topoJSON.objects)[0];
-        const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
-        setGeoJSONMeta(geoJSON, getState().flows.nodesDict, getState().flows.geoIdsDict, geoColumn.id);
-        mapVectorData[geoColumn.name] = geoJSON;
-      });
+    const geoColumns = getState().flows.columns.filter(column => column.isGeo === true);
+    const geometriesPromises = [];
+    const mapVectorData = {};
 
+    geoColumns.forEach(geoColumn => {
+      const geometryData = {
+        name: geoColumn.name, useGeometryFromColumnId: geoColumn.useGeometryFromColumnId
+      };
+      mapVectorData[geoColumn.id] = geometryData;
+      if (geoColumn.useGeometryFromColumnId === undefined) {
+        const geometryPromise = fetch(`${geoColumn.name}.topo.json`)
+          .then(resp => resp.text())
+          .then(payload => {
+            const topoJSON = JSON.parse(payload);
+            const key = Object.keys(topoJSON.objects)[0];
+            const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
+            setGeoJSONMeta(geoJSON, getState().flows.nodesDict, getState().flows.geoIdsDict, geoColumn.id);
+            mapVectorData[geoColumn.id].geoJSON = geoJSON;
+          });
+        geometriesPromises.push(geometryPromise);
+      }
+    });
+
+    Promise.all(geometriesPromises).then(() => {
       dispatch({
-        type: actions.GET_GEO_DATA, geoData
+        type: actions.GET_MAP_VECTOR_DATA, mapVectorData
       });
     });
-  };
+  }
 }
 
 export function loadMapContextLayers() {
