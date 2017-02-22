@@ -110,10 +110,9 @@ export default class {
     if (selectedFeatures.length > 0) {
       this.vectorOutline = L.geoJSON(selectedFeatures, { pane: MAP_PANES.vectorOutline });
       this.vectorOutline.setStyle(feature => {
-        return this._getPolygonStyle(feature, {
-          selected: true,
-          highlighted: feature.properties.geoid === highlightedGeoId
-        });
+        return {
+          className: (feature.properties.geoid === highlightedGeoId) ? '-highlighted' : '-selected'
+        };
       });
       this.map.addLayer(this.vectorOutline);
     }
@@ -161,7 +160,6 @@ export default class {
   }
 
   _createRasterLayer(layerData) {
-    // const url = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
     const url = `${layerData.rasterURL}{z}/{x}/{y}.png`;
 
     // TODO add those params in layer configuration
@@ -204,7 +202,12 @@ export default class {
   }
 
   _getPolygonTypeLayer(geoJSON) {
-    var topoLayer = new L.GeoJSON(geoJSON, { pane: MAP_PANES.vectorMain });
+    var topoLayer = new L.GeoJSON(geoJSON, {
+      pane: MAP_PANES.vectorMain,
+      style: {
+        smoothFactor: 0.9
+      }
+    });
 
     topoLayer.eachLayer(layer => {
       const that = this;
@@ -225,23 +228,6 @@ export default class {
     return topoLayer;
   }
 
-  _getPolygonStyle(feature, {selected, highlighted, customClass}) {
-    let classNames = ['map-polygon'];
-    if (!feature.properties.hasFlows) {
-      classNames.push('-disabled');
-    }
-    if (highlighted === true) {
-      classNames.push('-highlighted');
-    }
-    if (selected === true) {
-      classNames.push('-selected');
-    }
-    if (customClass !== undefined) {
-      classNames.push(customClass);
-    }
-    return {className: classNames.join(' '), smoothFactor: 0.9};
-  }
-
   _onToggleMap () {
     this.callbacks.onToggleMap();
 
@@ -254,12 +240,12 @@ export default class {
   setChoropleth(choropleth) {
     this.currentPolygonTypeLayer.eachLayer(layer => {
       const choroItem = choropleth[layer.feature.properties.geoid];
-      // TODO use CSS classes instead
-      if (choroItem) {
-        layer._path.setAttribute('class', choroItem);
-      } else {
-        layer._path.setAttribute('class', 'ch-default');
+      const classNames = [];
+      if (!layer.feature.properties.hasFlows) {
+        classNames.push('-disabled');
       }
+      classNames.push((choroItem) ? choroItem : 'ch-default');
+      layer._path.setAttribute('class', classNames.join(' '));
     });
   }
 }

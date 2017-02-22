@@ -78,9 +78,16 @@
   }
 
   .leaflet-vectorMain-pane path {
+    fill: $ch-default;
     fill-opacity: 1;
     stroke: $charcoal-grey;
     stroke-width: .2px;
+    pointer-events: auto;
+
+    &.-disabled {
+      cursor: not-allowed;
+    }
+
     &.ch-red-0 { fill: $ch-red-0; };
     &.ch-red-1 { fill: $ch-red-1; };
     &.ch-red-2 { fill: $ch-red-2; };
@@ -111,30 +118,22 @@
     stroke-width: 0;
   }
 
-  .map-polygon {
+  .leaflet-vectorOutline-pane {
+    pointer-events: none;
 
-    &.-highlighted {
+    path {
       fill: none;
-      pointer-events: none;
       stroke-opacity: 1;
-      stroke-width: 3px;
-      stroke: $white;
 
-      &.-disabled {
-        stroke-width: 1px;
-        stroke-dasharray: 2px 3px;
+      &.-highlighted {
+        stroke-width: 3px;
+        stroke: $white;
       }
-    }
 
-    &.-selected {
-      fill: none;
-      stroke: $charcoal-grey;
-      stroke-opacity: 1;
-      stroke-width: 2.5px;
-    }
-
-    &.-disabled {
-      cursor: not-allowed;
+      &.-selected {
+        stroke: $charcoal-grey;
+        stroke-width: 2.5px;
+      }
     }
   }
 
