@@ -10,7 +10,7 @@ export default (nodesIds, state) => {
 
   const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapVariables);
   const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined);
-  const columnsPos = data.map(node => node.columnPosition);
+  const columnsPos = data.map(node => node.columnGroup);
 
   return {
     ids: nodesIds,

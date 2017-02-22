@@ -220,13 +220,13 @@ export function loadLinks() {
         });
 
         // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
-        const selectedNodesIds = getSelectedNodesStillVisible(state.flows.visibleNodes, state.flows.selectedNodesIds);
+        const selectedNodesIds = getSelectedNodesStillVisible(getState().flows.visibleNodes, getState().flows.selectedNodesIds);
 
-        const action = getNodesSelectionAction(selectedNodesIds, state.flows);
+        const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
         action.type = actions.UPDATE_NODE_SELECTION;
         dispatch(action);
 
-        if (state.flows.selectedNodesIds && state.flows.selectedNodesIds.length > 0) {
+        if (getState().flows.selectedNodesIds && getState().flows.selectedNodesIds.length > 0) {
           dispatch({
             type: actions.FILTER_LINKS_BY_NODES
           });
