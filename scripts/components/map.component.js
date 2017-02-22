@@ -77,6 +77,10 @@ export default class {
       this.map.removeLayer(this.vectorLinked);
     }
 
+    if (!linkedGeoIds.length) {
+      return;
+    }
+
     const linkedFeaturesClassNames = {};
     const linkedFeatures = linkedGeoIds.map(geoId => {
       const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
@@ -92,6 +96,8 @@ export default class {
         layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
       });
     }
+
+    this.map.fitBounds(this.vectorLinked.getBounds());
   }
 
   selectPolygons(payload) { this._outlinePolygons(payload); }
@@ -254,6 +260,7 @@ export default class {
       }
       classNames.push((choroItem) ? choroItem : 'ch-default');
       layer._path.setAttribute('class', classNames.join(' '));
+      layer._path.setAttribute('geoid', layer.feature.properties.geoid);
     });
   }
 }
