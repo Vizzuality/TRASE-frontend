@@ -240,8 +240,6 @@ export function loadLinks() {
 
 export function loadMapVectorData() {
   return (dispatch, getState) => {
-    // get columns at position 0
-    // exclude logistics hubs which doesnt have its own topojson
     const geoColumns = getState().flows.columns.filter(column => column.isGeo === true);
     const geometriesPromises = [];
     const mapVectorData = {};

@@ -53,6 +53,16 @@ export default function (state = {}, action) {
       }
     });
 
+    // TODO temp hacks while this gets implementend in the API
+    columns.forEach(column => {
+      if (column.group === 0) {
+        column.isGeo = true;
+      }
+    });
+    const municipalitiesColumn = columns.find(column => column.name === 'MUNICIPALITY');
+    const logisticsHubColumn = columns.find(column => column.name === 'LOGISTICS HUB');
+    logisticsHubColumn.useGeometryFromColumnId = municipalitiesColumn.id;
+
     const { nodesDict, geoIdsDict } = getNodesDict(rawNodes, columns);
     newState = Object.assign({}, state, { columns, nodesDict, geoIdsDict, initialDataLoading: false, selectedColumnsIds });
     break;
