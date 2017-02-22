@@ -20,7 +20,7 @@ export const LEGEND_COLORS = {
   error_no_metadata_for_layer: '#c7c7c7',
 };
 
-export const NODE_SELECTION_LINKS_NUM_COLORS = 3;
+export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
 
 
 export const APP_DEFAULT_STATE = {
@@ -59,7 +59,8 @@ export const FLOWS_DEFAULT_STATE = {
         title: null
       }
     },
-    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
+    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
+    recolorGroups: []
   }
 };
 

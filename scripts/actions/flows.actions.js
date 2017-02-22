@@ -179,7 +179,6 @@ export function loadLinks() {
       params.n_nodes = NUM_NODES_EXPANDED;
     } else {
       params.n_nodes = NUM_NODES_SUMMARY;
-
     }
 
     const selectRecolorByType = getState().flows.selectedRecolorBy.type;
