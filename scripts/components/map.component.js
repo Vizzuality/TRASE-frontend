@@ -203,10 +203,8 @@ export default class {
     // }
   }
 
-  _getPolygonTypeLayer(geoJSON, polygonClassName) {
+  _getPolygonTypeLayer(geoJSON) {
     var topoLayer = new L.GeoJSON(geoJSON, { pane: MAP_PANES.vectorMain });
-
-    topoLayer.setStyle(feature => this._getPolygonStyle(feature, {customClass: polygonClassName }));
 
     topoLayer.eachLayer(layer => {
       const that = this;
@@ -258,9 +256,9 @@ export default class {
       const choroItem = choropleth[layer.feature.properties.geoid];
       // TODO use CSS classes instead
       if (choroItem) {
-        layer._path.style.fill = choroItem;
+        layer._path.setAttribute('class', choroItem);
       } else {
-        layer._path.style.fill = '#c7c7c7';
+        layer._path.setAttribute('class', 'ch-default');
       }
     });
   }

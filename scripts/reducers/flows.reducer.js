@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import actions from 'actions';
 import { encodeStateToURL } from 'utils/stateURL';
-import { LEGEND_COLORS, GA_ACTION_WHITELIST } from 'constants';
+import { GA_ACTION_WHITELIST } from 'constants';
 import getNodesDict from './helpers/getNodesDict';
 import getVisibleNodes from './helpers/getVisibleNodes';
 import splitVisibleNodesByColumn from './helpers/splitVisibleNodesByColumn';
@@ -201,7 +201,7 @@ export default function (state = {}, action) {
     // get a geoId <-> color dict
     const choropleth = (selectedMapVariables.horizontal.uid === null && selectedMapVariables.vertical.uid === null) ?
       {} :
-      getChoropleth(selectedMapVariables, state.nodesDictWithMeta, LEGEND_COLORS);
+      getChoropleth(selectedMapVariables, state.nodesDictWithMeta);
 
     newState = Object.assign({}, state, { selectedMapVariables, choropleth });
     break;

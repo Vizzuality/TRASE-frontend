@@ -19,6 +19,17 @@ export const LEGEND_COLORS = {
   error_no_metadata: '#c7c7c7',
   error_no_metadata_for_layer: '#c7c7c7',
 };
+export const CHOROPLETH_CLASSES = {
+  bidimensional: [
+    'ch-bi-0-2', 'ch-bi-1-2', 'ch-bi-2-2',
+    'ch-bi-0-1', 'ch-bi-1-1', 'ch-bi-2-1',
+    'ch-bi-0-0', 'ch-bi-1-0', 'ch-bi-2-0'
+  ],
+  horizontal: ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'],
+  vertical: ['ch-blue-0', 'ch-blue-1', 'ch-blue-2', 'ch-blue-3', 'ch-blue-4'],
+  error_no_metadata: 'ch-no-meta',
+  error_no_metadata_for_layer: 'ch-no-meta-layer',
+};
 
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
 
