@@ -437,7 +437,7 @@ export function loadLinkedGeoIDs() {
     if (selectedNodesIds.length === 0) {
       dispatch({
         type: actions.GET_LINKED_GEOIDS,
-        payload: {data:{}}
+        payload: []
       });
       return;
     }

@@ -77,6 +77,12 @@
     }
   }
 
+  .leaflet-vectorLinked-pane path {
+    fill: $white;
+    fill-opacity: 1;
+    stroke-width: 0;
+  }
+
   .map-polygon {
     fill: $pinkish-grey;
     fill-opacity: 1;
@@ -101,14 +107,6 @@
       fill: none;
       stroke-opacity: 1;
       stroke-width: 2.5px;
-    }
-
-    &.-linked {
-      fill: none;
-      stroke-opacity: 1;
-      stroke-width: 1.5px;
-      stroke-dasharray: 2px 3px;
-      stroke-linecap: butt;
     }
 
     &.-disabled {

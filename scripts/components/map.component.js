@@ -66,8 +66,24 @@ export default class {
   }
 
 
-  showLinkedGeoIds(/*linkedGeoIds*/) {
-    // TBD
+  showLinkedGeoIds(linkedGeoIds) {
+    if (!this.currentPolygonTypeLayer) {
+      return;
+    }
+
+    if (this.vectorLinked) {
+      this.map.removeLayer(this.vectorLinked);
+    }
+
+    const linkedFeatures = linkedGeoIds.map(selectedGeoId => {
+      const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId);
+      return originalPolygon.feature;
+    });
+
+    if (linkedFeatures.length > 0) {
+      this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
+      this.map.addLayer(this.vectorLinked);
+    }
   }
 
   selectPolygons(payload) { this._outlinePolygons(payload); }
@@ -83,7 +99,8 @@ export default class {
     }
 
     const selectedFeatures = selectedGeoIds.map(selectedGeoId => {
-      return this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId).feature;
+      const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId);
+      return originalPolygon.feature;
     });
 
     if (highlightedGeoId && selectedGeoIds.indexOf(highlightedGeoId) === -1) {

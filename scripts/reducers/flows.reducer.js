@@ -96,11 +96,9 @@ export default function (state = {}, action) {
   }
 
   case actions.GET_LINKED_GEOIDS: {
-    const linkedGeoIds = action.payload.data;
-    // for now just flatten geoids, later we can remove this and dispaly different stules depending on 1st one, 2nd selected one, etc
-    const flattenedLinkedGeoIds = _.flatten(Object.keys(linkedGeoIds).map(nodeId => linkedGeoIds[nodeId]));
+    const linkedGeoIds = action.payload.map(node => node.geo_id);
 
-    newState = Object.assign({}, state, { linkedGeoIds: flattenedLinkedGeoIds });
+    newState = Object.assign({}, state, { linkedGeoIds });
     break;
   }
 
