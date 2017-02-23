@@ -12,7 +12,9 @@ const mapMethodsToState = (state) => ({
         mapVectorData: state.flows.mapVectorData,
         currentPolygonType: state.flows.selectedColumnsIds[0],
         selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
-        recolourByNodeIds: state.flows.recolourByNodeIds
+        recolourByNodeIds: state.flows.recolourByNodeIds,
+        choropleth: state.flows.choropleth,
+        linkedGeoIds: state.flows.linkedGeoIds
       };
     }
   },

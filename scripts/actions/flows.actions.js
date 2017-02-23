@@ -399,8 +399,6 @@ export function toggleNodesExpand(forceExpand = false, forceExpandNodeId) {
     }
 
     dispatch(loadLinks());
-    // load related geoIds to show on the map
-    dispatch(loadLinkedGeoIDs());
   };
 }
 

@@ -63,6 +63,15 @@ export default class {
     if (payload.selectedNodesGeoIds) {
       this._outlinePolygons({selectedGeoIds: payload.selectedNodesGeoIds});
     }
+
+    // under normal circumstances, choropleth (depends on loadNodes) and linkedGeoIds (depends on loadLinks)
+    // are not available yet, but this is just a fail-safe for race conditions
+    if (payload.choropleth) {
+      this._setChoropleth(payload.choropleth);
+    }
+    if (payload.linkedGeoIds) {
+      this.showLinkedGeoIds(payload.linkedGeoIds);
+    }
   }
 
 
@@ -253,6 +262,13 @@ export default class {
   }
 
   setChoropleth({choropleth, linkedGeoIds}) {
+    this._setChoropleth(choropleth);
+    if (linkedGeoIds && linkedGeoIds.length) {
+      this.showLinkedGeoIds(linkedGeoIds);
+    }
+  }
+
+  _setChoropleth(choropleth) {
     this.currentPolygonTypeLayer.eachLayer(layer => {
       const choroItem = choropleth[layer.feature.properties.geoid];
       const classNames = [];
@@ -264,9 +280,5 @@ export default class {
       layer._path.setAttribute('geoid', layer.feature.properties.geoid);
     });
 
-    console.log(linkedGeoIds)
-    if (linkedGeoIds && linkedGeoIds.length) {
-      this.showLinkedGeoIds(linkedGeoIds);
-    }
   }
 }
