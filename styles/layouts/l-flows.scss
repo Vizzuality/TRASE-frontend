@@ -68,20 +68,17 @@ body, html {
     }
 
     > .c-map {
+      display: flex;
       left: $layer-map-width + 8px;
+      flex-direction: column;
       width: 320px;
       height: calc(100% - 8px);
 
       transition: width .45s $ease-in-out-sine;
 
+
       &.-fullscreen {
         width: calc(90% - 320px);
-      }
-
-      > .c-map-legend {
-        right: 0;
-        bottom: 0;
-        padding: 16px;
       }
     }
 

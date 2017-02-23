@@ -65,11 +65,11 @@ export default class {
   }
 
   _showLegend() {
-    this.el.classList.remove('is-hidden');
+    this.el.classList.remove('-hidden');
   }
 
   _hideLegend() {
-    this.el.classList.add('is-hidden');
+    this.el.classList.add('-hidden');
   }
 
   _cleanChoro() {

@@ -59,6 +59,22 @@
     }
   }
 
+  > .c-map-leaflet {
+    flex: 1 1 100%;
+  }
+
+  > .c-map-legend {
+    flex: 0 0 120px;
+    height: auto;
+    padding: 16px;
+
+    &.-hidden {
+      flex: 0 0 0;
+      height: 0;
+      padding: 0;
+    }
+  }
+
   .leaflet-vectorMain-pane {
     opacity: 1;
     pointer-events: auto;

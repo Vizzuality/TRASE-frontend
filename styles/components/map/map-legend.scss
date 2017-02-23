@@ -4,7 +4,7 @@
   padding: 8px;
 
   border: 1px solid $pinkish-grey;
-  background-color: $white-two;
+  background-color: $white;
 
   cursor: pointer;
   z-index: 401;
@@ -36,7 +36,7 @@
     &.ch-bi-2-0 { background-color: $ch-bi-2-0; };
   }
 
-  > .bucket-container {
+  .bucket-container {
     display: flex;
     position: relative;
     flex-direction: column;
