@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import _ from 'lodash';
 import 'leaflet.utfgrid';
-import { CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, BASEMAPS } from 'constants';
+import { CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, BASEMAPS, SANKEY_TRANSITION_TIME } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/map.scss';
 import 'style/components/map/map-legend.scss';
@@ -70,7 +70,6 @@ export default class {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
-
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
 
     if (this.vectorLinked) {
@@ -80,7 +79,6 @@ export default class {
     if (!linkedGeoIds.length) {
       return;
     }
-
     const linkedFeaturesClassNames = {};
     const linkedFeatures = linkedGeoIds.map(geoId => {
       const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
@@ -97,7 +95,10 @@ export default class {
       });
     }
 
-    this.map.fitBounds(this.vectorLinked.getBounds());
+    window.clearTimeout(this.fitBoundsTimeout);
+    this.fitBoundsTimeout = window.setTimeout(() => {
+      this.map.fitBounds(this.vectorLinked.getBounds());
+    }, SANKEY_TRANSITION_TIME);
   }
 
   selectPolygons(payload) { this._outlinePolygons(payload); }
