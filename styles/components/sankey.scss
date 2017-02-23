@@ -96,17 +96,17 @@
 
     > .icon {
       position: absolute;
-      top: 0;
       bottom: 0;
       left: 0;
       right: 0;
+      top: 0;
       margin: auto;
     }
 
     .c-sankey-tooltip {
+      display: none;
       top: 2px;
       right: 0;
-      display: none;
 
       .expand-action:before {
         content: attr(data-collapsed-text);
@@ -125,7 +125,8 @@
     }
 
     &:hover {
-
+      background-color: transparent;
+      box-shadow: unset;
       .c-sankey-tooltip {
         display: block;
       }
