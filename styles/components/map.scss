@@ -6,6 +6,22 @@
   transition: transform 1s ease;
   z-index: 1;
 
+  > .c-map-leaflet {
+    flex: 1 1 100%;
+  }
+
+  > .c-map-legend {
+    flex: 0 0 120px;
+    height: auto;
+    padding: 16px;
+
+    &.-hidden {
+      flex: 0 0 0;
+      height: 0;
+      padding: 0;
+    }
+  }
+
   .leaflet-control-zoom {
     border: 0;
     box-shadow: $box-shadow;
@@ -15,6 +31,36 @@
       height: 32px;
       font-size: 18px;
     }
+  }
+
+  .leaflet-bottom.leaflet-left {
+    width: 100%;
+  }
+
+  .leaflet-control-scale {
+    display: flex;
+    bottom: -44px;
+    left: 0;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    transition: bottom .3s;
+    background: $charcoal-grey-faded;
+
+    &.-visible {
+      bottom: 0;
+    }
+  }
+
+  .leaflet-control-scale-line {
+    margin-right: 42px;
+    border-width: 1px;
+    border-color: $white;
+    background: transparent;
+    color: $white;
+    font-family: $font-family-1;
+    font-size: $font-size-small;
   }
 
   .btn-map {
@@ -67,22 +113,6 @@
         right: 8px;
         content: '';
       }
-    }
-  }
-
-  > .c-map-leaflet {
-    flex: 1 1 100%;
-  }
-
-  > .c-map-legend {
-    flex: 0 0 120px;
-    height: auto;
-    padding: 16px;
-
-    &.-hidden {
-      flex: 0 0 0;
-      height: 0;
-      padding: 0;
     }
   }
 
