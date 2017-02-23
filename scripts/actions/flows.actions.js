@@ -432,16 +432,19 @@ export function searchNode(nodeId) {
 export function loadLinkedGeoIDs() {
   return (dispatch, getState) => {
     const selectedNodesIds = getState().flows.selectedNodesIds;
-    if (selectedNodesIds.length === 0) {
+
+    // when selection only contains geo nodes (column 0), we should not call get_linked_geoids 
+    const selectedNodesColumnsPos = getState().flows.selectedNodesColumnsPos;
+    const selectedNonGeoNodeIds = selectedNodesIds.filter((nodeId, index) => {
+      return selectedNodesColumnsPos[index] !== 0;
+    });
+    if (selectedNonGeoNodeIds.length === 0) {
       dispatch({
         type: actions.GET_LINKED_GEOIDS,
         payload: []
       });
       return;
     }
-    dispatch({
-      type: actions.LOAD_MAP
-    });
     // const params = {
     //   node_ids: selectedNodesIds.join(','),
     //   column_id: getState().flows.selectedColumnsIds[0]
