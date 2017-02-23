@@ -23,7 +23,7 @@ export const CHOROPLETH_CLASSES = {
 };
 
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
-
+export const SANKEY_TRANSITION_TIME = 1000;
 
 export const APP_DEFAULT_STATE = {
   app: {
