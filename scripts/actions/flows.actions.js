@@ -433,7 +433,7 @@ export function loadLinkedGeoIDs() {
   return (dispatch, getState) => {
     const selectedNodesIds = getState().flows.selectedNodesIds;
 
-    // when selection only contains geo nodes (column 0), we should not call get_linked_geoids 
+    // when selection only contains geo nodes (column 0), we should not call get_linked_geoids
     const selectedNodesColumnsPos = getState().flows.selectedNodesColumnsPos;
     const selectedNonGeoNodeIds = selectedNodesIds.filter((nodeId, index) => {
       return selectedNodesColumnsPos[index] !== 0;
@@ -446,8 +446,12 @@ export function loadLinkedGeoIDs() {
       return;
     }
     // const params = {
-    //   node_ids: selectedNodesIds.join(','),
-    //   column_id: getState().flows.selectedColumnsIds[0]
+    //  country: getState().flows.selectedCountry.toUpperCase(),
+        // commodity: getState().flows.selectedCommodity.toUpperCase(),
+        // year_start: getState().flows.selectedYears[0],
+        // year_end: getState().flows.selectedYears[1],
+    //   node_id: selectedNodesIds.join(','),
+    //   target_column_id: getState().flows.selectedColumnsIds[0]
     // };
     // const url = getURLFromParams('/v1/get_linked_geoids', params);
     const url = 'jsonMockups/get_linked_geoids.json';
