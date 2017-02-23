@@ -14,7 +14,7 @@ export default class {
     };
 
     this.map = L.map('js-map', mapOptions).setView([-16, -50], 4);
-    new L.Control.Zoom({ position: 'bottomleft' }).addTo(this.map);
+    new L.Control.Zoom({ position: 'bottomright' }).addTo(this.map);
 
     Object.keys(MAP_PANES).forEach(paneKey => {
       this.map.createPane(paneKey);
