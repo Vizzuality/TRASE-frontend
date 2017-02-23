@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import _ from 'lodash';
 import 'leaflet.utfgrid';
-import { CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, BASEMAPS } from 'constants';
+import { CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, BASEMAPS, SANKEY_TRANSITION_TIME } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/map.scss';
 import 'style/components/map/map-legend.scss';
@@ -59,62 +59,96 @@ export default class {
     ];
     this.selectPolygonType([payload.currentPolygonType]);
     if (payload.selectedNodesGeoIds) {
-      this.selectPolygons(payload.selectedNodesGeoIds);
+      this._outlinePolygons({selectedGeoIds: payload.selectedNodesGeoIds});
+    }
+
+    // under normal circumstances, choropleth (depends on loadNodes) and linkedGeoIds (depends on loadLinks)
+    // are not available yet, but this is just a fail-safe for race conditions
+    if (payload.choropleth) {
+      this._setChoropleth(payload.choropleth);
+    }
+    if (payload.linkedGeoIds) {
+      this.showLinkedGeoIds(payload.linkedGeoIds);
     }
   }
 
-  selectPolygons(geoIds) {
-    this.selectedNodesLayer = this._paintPolygons(geoIds, this.selectedNodesLayer, '-selected');
-  }
 
   showLinkedGeoIds(linkedGeoIds) {
-    this.linkedLayer = this._paintPolygons(linkedGeoIds, this.linkedLayer, '-linked');
-  }
-
-  _paintPolygons(geoIds, targetLayer, className) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
 
-    if (targetLayer) this.map.removeLayer(targetLayer);
+    // remove choropleth from main layer
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
 
-    const selectedFeatures = [];
-    this.currentPolygonTypeLayer.eachLayer(layer => {
-      if (geoIds.indexOf(layer.feature.properties.geoid) > - 1) {
-        selectedFeatures.push(layer.feature);
+    window.clearTimeout(this.fitBoundsTimeout);
+
+    if (this.vectorLinked) {
+      this.map.removeLayer(this.vectorLinked);
+    }
+
+    if (!linkedGeoIds.length) {
+      return;
+    }
+    const linkedFeaturesClassNames = {};
+    const linkedFeatures = linkedGeoIds.map(geoId => {
+      const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
+
+      if (originalPolygon !== undefined) {
+        // copy class names (ie choropleth from vectorMain's original polygon)
+        linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
+        return originalPolygon.feature;
+      } else {
+        // this can potentially happen when geoId doesn't not match polygon type currently visible
+        return null;
       }
     });
 
-    // polygon appears 'burried', and SVG does nto support z-indexes
-    // so we have to recreate the clicked layers on top of all other polygons
-    let layer;
-    if (selectedFeatures.length > 0) {
-      layer = L.geoJSON(selectedFeatures, { pane: MAP_PANES.vectorMain });
-      layer.setStyle(feature => this._getPolygonSyle(className, feature));
-      this.map.addLayer(layer);
+    _.pull(linkedFeatures, null);
+
+    if (linkedFeatures.length > 0) {
+      this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
+      this.map.addLayer(this.vectorLinked);
+      this.vectorLinked.eachLayer(layer => {
+        layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
+      });
+
+      this.fitBoundsTimeout = window.setTimeout(() => {
+        this.map.fitBounds(this.vectorLinked.getBounds());
+      }, SANKEY_TRANSITION_TIME);
     }
-    return layer;
+
   }
 
-  // TODO use _paintPolygons
-  highlightPolygon(geoIds) {
+  selectPolygons(payload) { this._outlinePolygons(payload); }
+  highlightPolygon(payload) { this._outlinePolygons(payload); }
+
+  _outlinePolygons({selectedGeoIds, highlightedGeoId}) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
 
-    if (this.highlightedLayer) this.map.removeLayer(this.highlightedLayer);
+    if (this.vectorOutline) {
+      this.map.removeLayer(this.vectorOutline);
+    }
 
-    if (geoIds.length > 0) {
-      const geoId = geoIds[0];
-      this.currentPolygonTypeLayer.eachLayer(layer => {
-        if (geoId === layer.feature.properties.geoid) {
-          // polygon appears 'burried', and SVG does nto support z-indexes
-          // so we have to recreate the hover layer on top of all other polygons
-          this.highlightedLayer = L.geoJSON(layer.feature, { pane: MAP_PANES.vectorMain });
-          this.highlightedLayer.setStyle(feature => this._getPolygonSyle(null, feature, true));
-          this.map.addLayer(this.highlightedLayer);
-        }
+    const selectedFeatures = selectedGeoIds.map(selectedGeoId => {
+      const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId);
+      return originalPolygon.feature;
+    });
+
+    if (highlightedGeoId && selectedGeoIds.indexOf(highlightedGeoId) === -1) {
+      selectedFeatures.push(this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === highlightedGeoId).feature);
+    }
+
+    if (selectedFeatures.length > 0) {
+      this.vectorOutline = L.geoJSON(selectedFeatures, { pane: MAP_PANES.vectorOutline });
+      this.vectorOutline.setStyle(feature => {
+        return {
+          className: (feature.properties.geoid === highlightedGeoId) ? '-highlighted' : '-selected'
+        };
       });
+      this.map.addLayer(this.vectorOutline);
     }
   }
 
@@ -160,7 +194,6 @@ export default class {
   }
 
   _createRasterLayer(layerData) {
-    // const url = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
     const url = `${layerData.rasterURL}{z}/{x}/{y}.png`;
 
     // TODO add those params in layer configuration
@@ -184,7 +217,7 @@ export default class {
     const layerUrl = `${baseUrl}.png`;
     // console.log(layerUrl)
     const layer = new L.tileLayer(layerUrl, {
-      pane: 'context_above'
+      pane: MAP_PANES.context
     });
 
     this.contextLayers.push(layer);
@@ -202,10 +235,13 @@ export default class {
     // }
   }
 
-  _getPolygonTypeLayer(geoJSON, polygonClassName) {
-    var topoLayer = new L.GeoJSON(geoJSON, { pane: MAP_PANES.vectorMain });
-
-    topoLayer.setStyle(feature => this._getPolygonSyle(polygonClassName, feature));
+  _getPolygonTypeLayer(geoJSON) {
+    var topoLayer = new L.GeoJSON(geoJSON, {
+      pane: MAP_PANES.vectorMain,
+      style: {
+        smoothFactor: 0.9
+      }
+    });
 
     topoLayer.eachLayer(layer => {
       const that = this;
@@ -226,20 +262,6 @@ export default class {
     return topoLayer;
   }
 
-  _getPolygonSyle(polygonClassName, feature, highlighted) {
-    let classNames = ['map-polygon'];
-    if (polygonClassName) {
-      classNames.push(polygonClassName);
-    }
-    if (!feature.properties.hasFlows) {
-      classNames.push('-disabled');
-    }
-    if (highlighted === true) {
-      classNames.push('-highlighted');
-    }
-    return {className: classNames.join(' '), smoothFactor: 0.9};
-  }
-
   _onToggleMap () {
     this.callbacks.onToggleMap();
 
@@ -249,17 +271,24 @@ export default class {
     }, 850);
   }
 
-  setChoropleth(choropleth) {
-    this.currentPolygonTypeLayer.eachLayer(layer => {
-      const choroItem = choropleth[layer.feature.properties.geoid];
-      // TODO use CSS classes instead
-      if (choroItem) {
-        layer._path.style.fill = choroItem;
-      } else {
-        layer._path.style.fill = '#c7c7c7';
-      }
-    });
+  setChoropleth({choropleth, linkedGeoIds}) {
+    this._setChoropleth(choropleth);
+    if (linkedGeoIds && linkedGeoIds.length) {
+      this.showLinkedGeoIds(linkedGeoIds);
+    }
   }
 
+  _setChoropleth(choropleth) {
+    this.currentPolygonTypeLayer.eachLayer(layer => {
+      const choroItem = choropleth[layer.feature.properties.geoid];
+      const classNames = [];
+      if (!layer.feature.properties.hasFlows) {
+        classNames.push('-disabled');
+      }
+      classNames.push((choroItem) ? choroItem : 'ch-default');
+      layer._path.setAttribute('class', classNames.join(' '));
+      layer._path.setAttribute('geoid', layer.feature.properties.geoid);
+    });
 
+  }
 }

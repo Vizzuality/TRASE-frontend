@@ -12,14 +12,39 @@ const mapMethodsToState = (state) => ({
         mapVectorData: state.flows.mapVectorData,
         currentPolygonType: state.flows.selectedColumnsIds[0],
         selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
-        recolourByNodeIds: state.flows.recolourByNodeIds
+        recolourByNodeIds: state.flows.recolourByNodeIds,
+        choropleth: state.flows.choropleth,
+        linkedGeoIds: state.flows.linkedGeoIds
       };
     }
   },
   selectPolygonType: state.flows.selectedColumnsIds,
-  selectPolygons: state.flows.selectedNodesGeoIds,
-  highlightPolygon: state.flows.highlightedGeoIds,
-  setChoropleth: state.flows.choropleth,
+  selectPolygons:  {
+    _comparedValue: (state) => state.flows.selectedNodesGeoIds,
+    _returnedValue: (state) => {
+      return {
+        selectedGeoIds: state.flows.selectedNodesGeoIds
+      };
+    }
+  },
+  highlightPolygon:  {
+    _comparedValue: (state) => state.flows.highlightedGeoIds,
+    _returnedValue: (state) => {
+      return {
+        selectedGeoIds: state.flows.selectedNodesGeoIds,
+        highlightedGeoId: state.flows.highlightedGeoIds[0]
+      };
+    }
+  },
+  setChoropleth: {
+    _comparedValue: (state) => state.flows.choropleth,
+    _returnedValue: (state) => {
+      return {
+        choropleth: state.flows.choropleth,
+        linkedGeoIds: state.flows.linkedGeoIds
+      };
+    }
+  },
   loadContextLayers: state.flows.selectedMapContextualLayersData,
   loadBasemap: state.flows.selectedMapBasemap,
   showLinkedGeoIds: state.flows.linkedGeoIds

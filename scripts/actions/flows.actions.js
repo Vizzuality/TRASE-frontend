@@ -309,6 +309,19 @@ export function loadMapContextLayers() {
   };
 }
 
+// remove or add nodeId from selectedNodesIds
+function getSelectedNodeIds(currentSelectedNodesIds, chengedNodeId) {
+  let selectedNodesIds;
+  let nodeIndex = currentSelectedNodesIds.indexOf(chengedNodeId);
+  if (nodeIndex > -1) {
+    selectedNodesIds = [].concat(currentSelectedNodesIds);
+    selectedNodesIds.splice(nodeIndex, 1);
+  } else {
+    selectedNodesIds = [chengedNodeId].concat(currentSelectedNodesIds);
+  }
+  return selectedNodesIds;
+}
+
 export function selectNode(nodeId, isAggregated = false) {
   return (dispatch, getState) => {
     if (isAggregated) {
@@ -323,15 +336,7 @@ export function selectNode(nodeId, isAggregated = false) {
         dispatch(toggleNodesExpand());
       }
 
-      // remove or add nodeId from selectedNodesIds
-      let selectedNodesIds;
-      let nodeIndex = currentSelectedNodesIds.indexOf(nodeId);
-      if (nodeIndex > -1) {
-        selectedNodesIds = [].concat(currentSelectedNodesIds);
-        selectedNodesIds.splice(nodeIndex, 1);
-      } else {
-        selectedNodesIds = [nodeId].concat(currentSelectedNodesIds);
-      }
+      const selectedNodesIds = getSelectedNodeIds(currentSelectedNodesIds, nodeId);
 
       // send to state the new node selection allong with new data, geoIds, etc
       const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
@@ -355,7 +360,9 @@ export function selectNodeFromGeoId(geoId) {
 
     // node not in visible Nodes ---> expand node (same behavior as search)
     if (!_isNodeVisible(getState, nodeId)) {
-      dispatch(toggleNodesExpand(true, nodeId));
+      const currentSelectedNodesIds = getState().flows.selectedNodesIds;
+      const selectedNodesIds = getSelectedNodeIds(currentSelectedNodesIds, nodeId);
+      dispatch(toggleNodesExpand(true, selectedNodesIds));
     } else {
       dispatch(selectNode(nodeId, false));
     }
@@ -365,10 +372,6 @@ export function selectNodeFromGeoId(geoId) {
 export function highlightNode(nodeId, isAggregated) {
   return (dispatch, getState) => {
     if (isAggregated) {
-      return;
-    }
-
-    if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) {
       return;
     }
 
@@ -385,12 +388,12 @@ export function highlightNodeFromGeoId(geoId) {
   };
 }
 
-export function toggleNodesExpand(forceExpand = false, forceExpandNodeId) {
+export function toggleNodesExpand(forceExpand = false, forceExpandNodeIds) {
   return (dispatch, getState) => {
     dispatch({
       type: actions.TOGGLE_NODES_EXPAND,
       forceExpand,
-      forceExpandNodeId
+      forceExpandNodeIds
     });
 
     // if expanding, and if in detailed mode, toggle to overview mode
@@ -412,8 +415,6 @@ export function toggleNodesExpand(forceExpand = false, forceExpandNodeId) {
     }
 
     dispatch(loadLinks());
-    // load related geoIds to show on the map
-    dispatch(loadLinkedGeoIDs());
   };
 }
 
@@ -445,37 +446,41 @@ export function searchNode(nodeId) {
 }
 
 export function loadLinkedGeoIDs() {
-  return () => {};
-  //TODO: pending https://github.com/sei-international/TRASE/issues/165
-  // return (dispatch, getState) => {
-  //   return;
-  //   const selectedNodesIds = getState().flows.selectedNodesIds;
-  //   if (selectedNodesIds.length === 0) {
-  //     dispatch({
-  //       type: actions.GET_LINKED_GEOIDS,
-  //       payload: {data:{}}
-  //     });
-  //     return;
-  //   }
-  //   dispatch({
-  //     type: actions.LOAD_MAP
-  //   });
-  //   const params = {
-  //     node_ids: selectedNodesIds.join(','),
-  //     column_id: getState().flows.selectedColumnsIds[0]
-  //   };
-  //   // const url = getURLFromParams('/v1/get_linked_geoids', params);
-  //   const url = 'get_linked_geoids.json';
-  //
-  //   fetch(url)
-  //     .then(res => res.text())
-  //     .then(payload => {
-  //       dispatch({
-  //         type: actions.GET_LINKED_GEOIDS,
-  //         payload: JSON.parse(payload)
-  //       });
-  //     });
-  // };
+  return (dispatch, getState) => {
+    const selectedNodesIds = getState().flows.selectedNodesIds;
+
+    // when selection only contains geo nodes (column 0), we should not call get_linked_geoids
+    const selectedNodesColumnsPos = getState().flows.selectedNodesColumnsPos;
+    const selectedNonGeoNodeIds = selectedNodesIds.filter((nodeId, index) => {
+      return selectedNodesColumnsPos[index] !== 0;
+    });
+    if (selectedNonGeoNodeIds.length === 0) {
+      dispatch({
+        type: actions.GET_LINKED_GEOIDS,
+        payload: []
+      });
+      return;
+    }
+    // const params = {
+    //  country: getState().flows.selectedCountry.toUpperCase(),
+        // commodity: getState().flows.selectedCommodity.toUpperCase(),
+        // year_start: getState().flows.selectedYears[0],
+        // year_end: getState().flows.selectedYears[1],
+    //   node_id: selectedNodesIds.join(','),
+    //   target_column_id: getState().flows.selectedColumnsIds[0]
+    // };
+    // const url = getURLFromParams('/v1/get_linked_geoids', params);
+    const url = 'jsonMockups/get_linked_geoids.json';
+
+    fetch(url)
+      .then(res => res.text())
+      .then(payload => {
+        dispatch({
+          type: actions.GET_LINKED_GEOIDS,
+          payload: JSON.parse(payload)
+        });
+      });
+  };
 }
 
 const _isNodeVisible = (getState, nodeId) => getState().flows.visibleNodes.map(node => node.id).indexOf(nodeId) > -1;

@@ -120,3 +120,30 @@ $ease-in-out-sine:  cubic-bezier(.445, .05, .55, .95);
 // Miscellaneous
 $box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
 $box-shadow-big: 0 3px 6px 0 rgba($black, .1), 0 3px 6px 0 rgba($black, .2);
+
+// choropleth
+$ch-red-0: #f5f3ea;
+$ch-red-1: #f5dfd0;
+$ch-red-2: #f6c7ad;
+$ch-red-3: #fa898d;
+$ch-red-4: #f65e6e;
+
+$ch-blue-0: #F4F1E7;
+$ch-blue-1: #C8E1D8;
+$ch-blue-2: #A0D5CB;
+$ch-blue-3: #87B3C0;
+$ch-blue-4: #7297AA;
+
+$ch-bi-0-2: #8db6ca;
+$ch-bi-1-2: #8f8d94;
+$ch-bi-2-2: #694d52;
+$ch-bi-0-1: #aadad1;
+$ch-bi-1-1: #a8bebf;
+$ch-bi-2-1: #a15661;
+$ch-bi-0-0: #f5f3ea;
+$ch-bi-1-0: #f6c7ad;
+$ch-bi-2-0: #f65e6e;
+
+$ch-no-meta: #c7c7c7;
+$ch-no-meta-layer: #c7c7c7;
+$ch-default: #c7c7c7;

@@ -9,19 +9,21 @@ export const DETAILED_VIEW_SCALE = 1200;
 export const DETAILED_VIEW_MIN_NODE_HEIGHT = 14;
 export const DETAILED_VIEW_MIN_LINK_HEIGHT = 1;
 export const AVAILABLE_YEARS = [2010, 2011, 2012, 2013, 2014, 2015, 2016];
-export const LEGEND_COLORS = {
+
+export const CHOROPLETH_CLASSES = {
   bidimensional: [
-    '#8db6ca', '#8f8d94', '#694d52',
-    '#aadad1', '#a8bebf', '#a15661',
-    '#f5f3ea', '#f6c7ad', '#f65e6e'], //9
-  horizontal: ['#f5f3ea', '#f5dfd0', '#f6c7ad', '#fa898d', '#f65e6e'], // 5
-  vertical: ['#F4F1E7', '#C8E1D8', '#A0D5CB', '#87B3C0', '#7297AA'], // 5
-  error_no_metadata: '#c7c7c7',
-  error_no_metadata_for_layer: '#c7c7c7',
+    'ch-bi-0-2', 'ch-bi-1-2', 'ch-bi-2-2',
+    'ch-bi-0-1', 'ch-bi-1-1', 'ch-bi-2-1',
+    'ch-bi-0-0', 'ch-bi-1-0', 'ch-bi-2-0'
+  ],
+  horizontal: ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'],
+  vertical: ['ch-blue-0', 'ch-blue-1', 'ch-blue-2', 'ch-blue-3', 'ch-blue-4'],
+  error_no_metadata: 'ch-no-meta',
+  error_no_metadata_for_layer: 'ch-no-meta-layer',
 };
 
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
-
+export const SANKEY_TRANSITION_TIME = 1000;
 
 export const APP_DEFAULT_STATE = {
   app: {

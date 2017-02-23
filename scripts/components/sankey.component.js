@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { select as d3_select /*, selectAll as d3_selectAll*/ } from 'd3-selection';
 import { event as d3_event } from 'd3-selection';
 import  'd3-transition';
-import { DETAILED_VIEW_MIN_LINK_HEIGHT } from 'constants';
+import { DETAILED_VIEW_MIN_LINK_HEIGHT, SANKEY_TRANSITION_TIME } from 'constants';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import getComputedSize from 'utils/getComputedSize';
@@ -102,8 +102,10 @@ export default class {
     addSVGDropShadowDef(this.svg);
 
     this.expandButton = document.querySelector('.js-expand');
-    this.expandButton.addEventListener('click', this._onExpandClick.bind(this));
-
+    this.expandActionButton = document.querySelector('.js-expand-action');
+    this.expandActionButton.addEventListener('click', this._onExpandClick.bind(this));
+    this.clearButton = document.querySelector('.js-clear');
+    this.clearButton.addEventListener('click', this.callbacks.onClearClick);
   }
 
   _onExpandClick() {
@@ -120,9 +122,14 @@ export default class {
         .data()[0];
 
       if (lastSelectedNode) {
-        let y = Math.max(0, lastSelectedNode.y - 12);
+        const selectedColumnFirstNode = this.sankeyColumns.selectAll('.sankey-node.-selected')
+          .filter(node => node.x === lastSelectedNode.x)
+          .data()
+          .reduce((acc, val) => acc.y < val.y ? acc : val);
+
+        let y = Math.max(0, selectedColumnFirstNode.y - 12);
         this.expandButton.style.top = `${y}px`;
-        this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
+        this.expandButton.style.left = `${selectedColumnFirstNode.x - 12}px`;
         return;
       }
     }
@@ -178,6 +185,7 @@ export default class {
     this._renderTitles(this.nodes);
 
     const nodesUpdate = this.nodes.transition()
+      .duration(SANKEY_TRANSITION_TIME)
       .attr('transform', d => `translate(0,${d.y})`);
 
     nodesUpdate.select('.sankey-node-rect')
@@ -197,6 +205,7 @@ export default class {
     // update
     links.attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } ); // apply color from CSS class immediately
     links.transition()
+      .duration(SANKEY_TRANSITION_TIME)
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
@@ -218,11 +227,13 @@ export default class {
         this.classList.remove('-hover');
       })
       .transition()
+      .duration(SANKEY_TRANSITION_TIME)
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight));
 
     // exit
     links.exit()
       .transition()
+      .duration(SANKEY_TRANSITION_TIME)
       .attr('stroke-width', 0)
       .remove();
 
