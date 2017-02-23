@@ -13,7 +13,6 @@
   > .c-map-legend {
     flex: 0 0 120px;
     height: auto;
-    padding: 16px;
 
     &.-hidden {
       flex: 0 0 0;
@@ -35,32 +34,46 @@
 
   .leaflet-bottom.leaflet-left {
     width: 100%;
-  }
 
-  .leaflet-control-scale {
-    display: flex;
-    bottom: -44px;
-    left: 0;
-    justify-content: flex-end;
-    width: 100%;
-    margin: 0;
-    padding: 10px;
-    transition: bottom .3s;
-    background: $charcoal-grey-faded;
+    .leaflet-control-scale {
+      display: flex;
+      bottom: -44px;
+      left: 0;
+      justify-content: flex-end;
+      width: 100%;
+      margin: 0;
+      padding: 10px;
+      transition: bottom .3s;
+      background: $charcoal-grey-faded;
 
-    &.-visible {
-      bottom: 0;
+      .leaflet-control-scale-line {
+        margin-right: 42px;
+        border-width: 1px;
+        border-color: $white;
+        background: transparent;
+        color: $white;
+        font-family: $font-family-1;
+        font-size: $font-size-small;
+      }
+
+      &.-visible {
+        bottom: 0;
+      }
     }
   }
 
-  .leaflet-control-scale-line {
-    margin-right: 42px;
-    border-width: 1px;
-    border-color: $white;
-    background: transparent;
-    color: $white;
+  .leaflet-control-attribution {
+    display: none;
+  }
+
+  .c-map-attribution {
+    padding: 8px;
+    border-top: 1px solid $gray;
+    background: $white;
+    color: $medium-grey;
     font-family: $font-family-1;
     font-size: $font-size-small;
+    text-transform: uppercase;
   }
 
   .btn-map {
@@ -82,6 +95,7 @@
       position: absolute;
       bottom: 10px;
       left: 10px;
+      z-index: 2000;
 
       > .icon-layers {
         width: 16px;

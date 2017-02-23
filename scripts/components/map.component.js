@@ -22,12 +22,16 @@ export default class {
       this.map.getPane(paneKey).style.zIndex = MAP_PANES_Z[paneKey];
     });
 
-    this.loadBasemap('positron');
 
     this.contextLayers = [];
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
+
+    this.attribution = document.querySelector('.js-map-attribution');
+    this.attributionSource = document.querySelector('.leaflet-control-attribution');
+    
+    this.loadBasemap('positron');
   }
 
   loadBasemap(basemapId) {
@@ -48,6 +52,8 @@ export default class {
       this.basemapLabels = L.tileLayer(basemapOptions.labelsUrl, basemapOptions);
       this.map.addLayer(this.basemapLabels);
     }
+
+    this._updateAttribution();
   }
 
   showLoadedMap(payload) {
@@ -194,6 +200,8 @@ export default class {
     // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-hidden', hideMain);
+
+    this._updateAttribution();
   }
 
   _createRasterLayer(layerData) {
@@ -293,5 +301,9 @@ export default class {
       layer._path.setAttribute('geoid', layer.feature.properties.geoid);
     });
 
+  }
+
+  _updateAttribution() {
+    this.attribution.innerHTML = this.attributionSource.innerHTML;
   }
 }
