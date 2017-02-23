@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import actions from 'actions';
 import { encodeStateToURL } from 'utils/stateURL';
-import { LEGEND_COLORS, GA_ACTION_WHITELIST } from 'constants';
+import { GA_ACTION_WHITELIST } from 'constants';
 import getNodesDict from './helpers/getNodesDict';
 import getVisibleNodes from './helpers/getVisibleNodes';
 import splitVisibleNodesByColumn from './helpers/splitVisibleNodesByColumn';
@@ -96,11 +96,9 @@ export default function (state = {}, action) {
   }
 
   case actions.GET_LINKED_GEOIDS: {
-    const linkedGeoIds = action.payload.data;
-    // for now just flatten geoids, later we can remove this and dispaly different stules depending on 1st one, 2nd selected one, etc
-    const flattenedLinkedGeoIds = _.flatten(Object.keys(linkedGeoIds).map(nodeId => linkedGeoIds[nodeId]));
+    const linkedGeoIds = action.payload.map(node => node.geo_id);
 
-    newState = Object.assign({}, state, { linkedGeoIds: flattenedLinkedGeoIds });
+    newState = Object.assign({}, state, { linkedGeoIds });
     break;
   }
 
@@ -203,7 +201,7 @@ export default function (state = {}, action) {
     // get a geoId <-> color dict
     const choropleth = (selectedMapVariables.horizontal.uid === null && selectedMapVariables.vertical.uid === null) ?
       {} :
-      getChoropleth(selectedMapVariables, state.nodesDictWithMeta, LEGEND_COLORS);
+      getChoropleth(selectedMapVariables, state.nodesDictWithMeta);
 
     newState = Object.assign({}, state, { selectedMapVariables, choropleth });
     break;

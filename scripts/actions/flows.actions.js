@@ -359,10 +359,6 @@ export function highlightNode(nodeId, isAggregated) {
       return;
     }
 
-    if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) {
-      return;
-    }
-
     const action = getNodesSelectionAction([nodeId], getState().flows);
     action.type = actions.HIGHLIGHT_NODE;
     dispatch(action);
@@ -403,8 +399,6 @@ export function toggleNodesExpand(forceExpand = false, forceExpandNodeId) {
     }
 
     dispatch(loadLinks());
-    // load related geoIds to show on the map
-    dispatch(loadLinkedGeoIDs());
   };
 }
 
@@ -436,37 +430,41 @@ export function searchNode(nodeId) {
 }
 
 export function loadLinkedGeoIDs() {
-  return () => {};
-  //TODO: pending https://github.com/sei-international/TRASE/issues/165
-  // return (dispatch, getState) => {
-  //   return;
-  //   const selectedNodesIds = getState().flows.selectedNodesIds;
-  //   if (selectedNodesIds.length === 0) {
-  //     dispatch({
-  //       type: actions.GET_LINKED_GEOIDS,
-  //       payload: {data:{}}
-  //     });
-  //     return;
-  //   }
-  //   dispatch({
-  //     type: actions.LOAD_MAP
-  //   });
-  //   const params = {
-  //     node_ids: selectedNodesIds.join(','),
-  //     column_id: getState().flows.selectedColumnsIds[0]
-  //   };
-  //   // const url = getURLFromParams('/v1/get_linked_geoids', params);
-  //   const url = 'get_linked_geoids.json';
-  //
-  //   fetch(url)
-  //     .then(res => res.text())
-  //     .then(payload => {
-  //       dispatch({
-  //         type: actions.GET_LINKED_GEOIDS,
-  //         payload: JSON.parse(payload)
-  //       });
-  //     });
-  // };
+  return (dispatch, getState) => {
+    const selectedNodesIds = getState().flows.selectedNodesIds;
+
+    // when selection only contains geo nodes (column 0), we should not call get_linked_geoids
+    const selectedNodesColumnsPos = getState().flows.selectedNodesColumnsPos;
+    const selectedNonGeoNodeIds = selectedNodesIds.filter((nodeId, index) => {
+      return selectedNodesColumnsPos[index] !== 0;
+    });
+    if (selectedNonGeoNodeIds.length === 0) {
+      dispatch({
+        type: actions.GET_LINKED_GEOIDS,
+        payload: []
+      });
+      return;
+    }
+    // const params = {
+    //  country: getState().flows.selectedCountry.toUpperCase(),
+        // commodity: getState().flows.selectedCommodity.toUpperCase(),
+        // year_start: getState().flows.selectedYears[0],
+        // year_end: getState().flows.selectedYears[1],
+    //   node_id: selectedNodesIds.join(','),
+    //   target_column_id: getState().flows.selectedColumnsIds[0]
+    // };
+    // const url = getURLFromParams('/v1/get_linked_geoids', params);
+    const url = 'jsonMockups/get_linked_geoids.json';
+
+    fetch(url)
+      .then(res => res.text())
+      .then(payload => {
+        dispatch({
+          type: actions.GET_LINKED_GEOIDS,
+          payload: JSON.parse(payload)
+        });
+      });
+  };
 }
 
 const _isNodeVisible = (getState, nodeId) => getState().flows.visibleNodes.map(node => node.id).indexOf(nodeId) > -1;
