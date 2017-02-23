@@ -300,6 +300,19 @@ export function loadMapContextLayers() {
   };
 }
 
+// remove or add nodeId from selectedNodesIds
+function getSelectedNodeIds(currentSelectedNodesIds, chengedNodeId) {
+  let selectedNodesIds;
+  let nodeIndex = currentSelectedNodesIds.indexOf(chengedNodeId);
+  if (nodeIndex > -1) {
+    selectedNodesIds = [].concat(currentSelectedNodesIds);
+    selectedNodesIds.splice(nodeIndex, 1);
+  } else {
+    selectedNodesIds = [chengedNodeId].concat(currentSelectedNodesIds);
+  }
+  return selectedNodesIds;
+}
+
 export function selectNode(nodeId, isAggregated = false) {
   return (dispatch, getState) => {
     if (isAggregated) {
@@ -314,15 +327,7 @@ export function selectNode(nodeId, isAggregated = false) {
         dispatch(toggleNodesExpand());
       }
 
-      // remove or add nodeId from selectedNodesIds
-      let selectedNodesIds;
-      let nodeIndex = currentSelectedNodesIds.indexOf(nodeId);
-      if (nodeIndex > -1) {
-        selectedNodesIds = [].concat(currentSelectedNodesIds);
-        selectedNodesIds.splice(nodeIndex, 1);
-      } else {
-        selectedNodesIds = [nodeId].concat(currentSelectedNodesIds);
-      }
+      const selectedNodesIds = getSelectedNodeIds(currentSelectedNodesIds, nodeId);
 
       // send to state the new node selection allong with new data, geoIds, etc
       const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
@@ -346,7 +351,9 @@ export function selectNodeFromGeoId(geoId) {
 
     // node not in visible Nodes ---> expand node (same behavior as search)
     if (!_isNodeVisible(getState, nodeId)) {
-      dispatch(toggleNodesExpand(true, nodeId));
+      const currentSelectedNodesIds = getState().flows.selectedNodesIds;
+      const selectedNodesIds = getSelectedNodeIds(currentSelectedNodesIds, nodeId);
+      dispatch(toggleNodesExpand(true, selectedNodesIds));
     } else {
       dispatch(selectNode(nodeId, false));
     }
@@ -372,12 +379,12 @@ export function highlightNodeFromGeoId(geoId) {
   };
 }
 
-export function toggleNodesExpand(forceExpand = false, forceExpandNodeId) {
+export function toggleNodesExpand(forceExpand = false, forceExpandNodeIds) {
   return (dispatch, getState) => {
     dispatch({
       type: actions.TOGGLE_NODES_EXPAND,
       forceExpand,
-      forceExpandNodeId
+      forceExpandNodeIds
     });
 
     // if expanding, and if in detailed mode, toggle to overview mode

@@ -222,8 +222,8 @@ export default function (state = {}, action) {
     let expandedNodesIds;
     let selectedNodesIds;
     if (action.forceExpand === true) {
-      expandedNodesIds = [action.forceExpandNodeId];
-      selectedNodesIds = [action.forceExpandNodeId];
+      expandedNodesIds = action.forceExpandNodeIds;
+      selectedNodesIds = action.forceExpandNodeIds;
     } else {
       expandedNodesIds = (state.areNodesExpanded) ? [] : state.selectedNodesIds;
       selectedNodesIds = state.selectedNodesIds;
