@@ -79,7 +79,11 @@ export default class {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
+
+    // remove choropleth from main layer
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
+
+    window.clearTimeout(this.fitBoundsTimeout);
 
     if (this.vectorLinked) {
       this.map.removeLayer(this.vectorLinked);
@@ -91,10 +95,18 @@ export default class {
     const linkedFeaturesClassNames = {};
     const linkedFeatures = linkedGeoIds.map(geoId => {
       const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
-      // copy class names (ie choropleth from vectorMain's original polygon)
-      linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
-      return originalPolygon.feature;
+
+      if (originalPolygon !== undefined) {
+        // copy class names (ie choropleth from vectorMain's original polygon)
+        linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
+        return originalPolygon.feature;
+      } else {
+        // this can potentially happen when geoId doesn't not match polygon type currently visible
+        return null;
+      }
     });
+
+    _.pull(linkedFeatures, null);
 
     if (linkedFeatures.length > 0) {
       this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
@@ -102,12 +114,12 @@ export default class {
       this.vectorLinked.eachLayer(layer => {
         layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
       });
+
+      this.fitBoundsTimeout = window.setTimeout(() => {
+        this.map.fitBounds(this.vectorLinked.getBounds());
+      }, SANKEY_TRANSITION_TIME);
     }
 
-    window.clearTimeout(this.fitBoundsTimeout);
-    this.fitBoundsTimeout = window.setTimeout(() => {
-      this.map.fitBounds(this.vectorLinked.getBounds());
-    }, SANKEY_TRANSITION_TIME);
   }
 
   selectPolygons(payload) { this._outlinePolygons(payload); }
