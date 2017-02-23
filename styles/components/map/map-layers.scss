@@ -1,7 +1,6 @@
 @import '../../settings';
 
 .c-basemap-options {
-  padding: 0 8px 8px 7px;
 
   > .explanation {
     display: flex;
@@ -73,39 +72,35 @@
 
 
   .layer-list {
-    margin: 20px 0 40px;
 
     .folder-title {
-      margin: 30px 0 20px;
+      height: 44px;
+      padding: 18px 16px;
       color: $charcoal-grey;
       font-family: $font-family-1;
       font-size: $font-size-small;
+      letter-spacing: -0.5px;
       text-transform: uppercase;
+      background-color: $white;
+      box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+
     }
 
     &:not(:last-child) {
-      &::after {
-        display: inline-block;
-        position: absolute;
-        left: -50%;
-        width: 100%;
-        margin: 20px 0 0;
-        transform: translate(50%, 0);
-        border-bottom: 1px solid rgba($charcoal-grey, .1);
-        content: '';
-      }
+      margin-bottom: 44px;
     }
 
     .layer-item {
       display: flex;
       justify-content: space-between;
-      height: 18px;
-
+      min-height: 44px;
       color: rgba($charcoal-grey, .8);
       font-family: $font-family-1;
       font-size: $font-size-x-regular;
       letter-spacing: -1px;
       text-transform: uppercase;
+      background-color: rgba($white, .5);
+      border-bottom: 1px solid rgba($charcoal-grey, .1);
 
       > .layer-name {
         display: flex;
@@ -147,10 +142,6 @@
         }
       }
 
-      &:not(:last-child) {
-        margin:  0 0 16px;
-      }
-
       > .radios {
         display: flex;
         position: relative;
@@ -159,18 +150,6 @@
         justify-content: space-between;
 
         padding: 0 4px;
-
-        &::after {
-          display: inline-block;
-          position: absolute;
-          left: 50%;
-          height: 185%;
-
-          transform: translate(-50%, 0);
-          border-left: 1px solid rgba($charcoal-grey, .2);
-
-          content: '';
-        }
       }
 
       &:first-child {
