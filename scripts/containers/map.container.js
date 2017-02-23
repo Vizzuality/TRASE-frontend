@@ -21,6 +21,7 @@ const mapMethodsToState = (state) => ({
   highlightPolygon: state.flows.highlightedGeoIds,
   setChoropleth: state.flows.choropleth,
   loadContextLayers: state.flows.selectedMapContextualLayersData,
+  loadBasemap: state.flows.selectedMapBasemap,
   showLinkedGeoIds: state.flows.linkedGeoIds
 });
 

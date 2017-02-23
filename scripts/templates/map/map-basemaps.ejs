@@ -1,0 +1,8 @@
+<% for(let [ i, basemap ] of Object.entries(basemaps)) { %>
+  <li class="layer-item">
+    <span class="layer-name"><%= basemap.title %></span>
+    <div class="radios">
+      <div class="c-radio-btn" value="<%= i %>"></div>
+    </div>
+  </li>
+<%};%>

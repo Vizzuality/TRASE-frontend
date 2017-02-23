@@ -21,8 +21,6 @@ export default class {
       this.map.getPane(paneKey).style.zIndex = MAP_PANES_Z[paneKey];
     });
 
-    this.loadBasemap('positron');
-
     this.contextLayers = [];
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });

@@ -90,6 +90,15 @@ export function selectContextualLayers(contextualLayers) {
   };
 }
 
+export function selectMapBasemap(selectedMapBasemap) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_BASEMAP,
+      selectedMapBasemap
+    });
+  };
+}
+
 const _reloadLinks = (param, value, type, reloadLinks = true) => {
   // console.log(param, value, type, reloadLinks)
   return dispatch => {

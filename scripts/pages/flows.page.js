@@ -7,6 +7,7 @@ import ColumnsSelectorContainer from 'containers/columns-selector.container';
 import MapVariablesContainer from 'containers/map-variables.container';
 import MapContextContainer from 'containers/map-context.container';
 import MapLegendContainer from 'containers/map-legend.container';
+import MapBasemapsContainer from 'containers/map-basemaps.container';
 import MapContainer from 'containers/map.container';
 import NavContainer from 'containers/nav.container';
 import TitlebarContainer from 'containers/titlebar.container';
@@ -52,6 +53,7 @@ const start = (initialState) => {
   new MapVariablesContainer(store);
   new MapContextContainer(store);
   new MapLegendContainer(store);
+  new MapBasemapsContainer(store);
   new NavContainer(store);
   new TitlebarContainer(store);
   new NodesTitlesContainer(store);
