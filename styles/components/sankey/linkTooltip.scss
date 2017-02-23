@@ -21,6 +21,7 @@
   .actions {
 
     li {
+      position: relative;
       height: 32px;
       padding: 11px 8px;
       font-size: 12px;
@@ -28,6 +29,14 @@
       color: $charcoal-grey;
       background-color: $white;
       cursor: pointer;
+
+      > .icon {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        width: 16px;
+        height: 16px;
+      }
 
       &:hover {
         background-color: $manilla;
