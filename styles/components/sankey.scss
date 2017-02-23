@@ -93,6 +93,7 @@
     color: $white;
     box-shadow: $box-shadow-big;
     cursor: pointer;
+    z-index: 1;
 
     > .icon {
       position: absolute;
