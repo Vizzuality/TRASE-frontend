@@ -102,8 +102,10 @@ export default class {
     addSVGDropShadowDef(this.svg);
 
     this.expandButton = document.querySelector('.js-expand');
-    this.expandButton.addEventListener('click', this._onExpandClick.bind(this));
-
+    this.expandActionButton = document.querySelector('.js-expand-action');
+    this.expandActionButton.addEventListener('click', this._onExpandClick.bind(this));
+    this.clearButton = document.querySelector('.js-clear');
+    this.clearButton.addEventListener('click', this.callbacks.onClearClick);
   }
 
   _onExpandClick() {
@@ -120,9 +122,14 @@ export default class {
         .data()[0];
 
       if (lastSelectedNode) {
-        let y = Math.max(0, lastSelectedNode.y - 12);
+        const selectedColumnFirstNode = this.sankeyColumns.selectAll('.sankey-node.-selected')
+          .filter(node => node.x === lastSelectedNode.x)
+          .data()
+          .reduce((acc, val) => acc.y < val.y ? acc : val);
+
+        let y = Math.max(0, selectedColumnFirstNode.y - 12);
         this.expandButton.style.top = `${y}px`;
-        this.expandButton.style.left = `${lastSelectedNode.x - 12}px`;
+        this.expandButton.style.left = `${selectedColumnFirstNode.x - 12}px`;
         return;
       }
     }
