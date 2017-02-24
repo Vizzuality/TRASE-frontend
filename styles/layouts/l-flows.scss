@@ -62,7 +62,7 @@ body, html {
 
     > .c-basemap-options {
       top: 0;
-      width: 320px;
+      width: 376px;
       height: 100%;
       overflow-y: auto;
     }
@@ -75,7 +75,7 @@ body, html {
       transition: width .45s $ease-in-out-sine;
 
       &.-fullscreen {
-        width: calc(90% - 320px);
+        width: calc(90% - 376px);
       }
 
       > .c-map-legend {
@@ -87,8 +87,8 @@ body, html {
 
     > .c-sankey {
       top: -15px;
-      left: 648px;
-      width: calc(100% - #{648px + 10px});
+      left: 704px;
+      width: calc(100% - #{704px + 10px});
       height: calc(100% - 38px);
       margin-left: $sankey-x-padding;
       transition: left .45s $ease-in-out-sine;
@@ -106,8 +106,8 @@ body, html {
 
     > .c-columns-selector {
       bottom: 12px;
-      left: 648px;
-      width: calc(100% - 648px);
+      left: 704px;
+      width: calc(100% - 704px);
     }
   }
 

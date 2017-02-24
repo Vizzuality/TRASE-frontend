@@ -1,48 +1,49 @@
 @import '../../settings';
 
 .c-basemap-options {
+  border: 1px solid rgba(52, 68, 76, 0.1);
 
   > .explanation {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+    padding: 0 10px 0 16px;
+    background-color: $white;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
 
     > .explanation-text {
-      flex-basis: 65%;
-
-      color: rgba($charcoal-grey, .6);
+      padding-right: 30%;
+      color: $charcoal-grey;
       font-family: $font-family-1;
       font-size: $font-size-small;
-      letter-spacing: -.2px;
+      letter-spacing: -.5px;
       text-transform: uppercase;
     }
 
-
     > .chroropleth-distribution-sample {
       display: flex;
-      flex-basis: 25%;
       align-items: center;
       justify-content: space-between;
 
       > .sample {
         display: inline-flex;
         flex-direction: column;
-        width: 10px;
+        width: 26px;
         height: 26px;
-
-        border: 1px solid rgba($charcoal-grey, .3);
+        border: 1px solid $pinkish-grey-two;
 
         &::before,
         &::after {
           display: inline-block;
           flex-basis: calc(100% / 3);
-          width: 8px;
+          width: 100%;
           height: 8px;
           content: '';
         }
 
         &.-vertical {
-          transform: translate(calc(50% + 2px), 0);
           background-color: $beige;
+          margin-right: 15px;
 
           &::before {
             background-color: $light-grey-blue;
@@ -55,11 +56,10 @@
         }
 
         &.-horizontal {
-          transform: translate(calc(-50% - 2px), 0) rotate(90deg);
-          background-color: $warm-pink;
+          background-color: $beige;
 
           &::before {
-            background-color: $beige;
+            background-color: $warm-pink;
           }
 
           &::after {
@@ -74,16 +74,14 @@
   .layer-list {
 
     .folder-title {
-      height: 44px;
-      padding: 18px 16px;
-      color: $charcoal-grey;
+      height: 45px;
+      padding: 29px 15px 0 15px;
+      color: rgba($charcoal-grey, 0.6);
       font-family: $font-family-1;
       font-size: $font-size-small;
-      letter-spacing: -0.5px;
+      letter-spacing: -.5px;
       text-transform: uppercase;
-      background-color: $white;
-      box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
-
+      border-bottom: 1px solid rgba(52, 68, 76, 0.1);
     }
 
     &:not(:last-child) {
@@ -93,12 +91,13 @@
     .layer-item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       min-height: 44px;
-      color: rgba($charcoal-grey, .8);
+      padding: 0 15px;
+      color: rgba($charcoal-grey, .6);
       font-family: $font-family-1;
       font-size: $font-size-x-regular;
       letter-spacing: -1px;
-      text-transform: uppercase;
       background-color: rgba($white, .5);
       border-bottom: 1px solid rgba($charcoal-grey, .1);
 
@@ -145,11 +144,8 @@
       > .radios {
         display: flex;
         position: relative;
-        flex-basis: 25%;
         align-items: center;
         justify-content: space-between;
-
-        padding: 0 4px;
       }
 
       &:first-child {
@@ -193,16 +189,44 @@
         }
       }
 
-
       &.-selected,
       &:hover {
-        > .layer-name {
+        .layer-name {
           color: $charcoal-grey;
           font-weight: $font-weight-bold;
         }
 
         .layer-options-list {
           display: inline-flex;
+        }
+      }
+
+      > .map-thumb {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 56px;
+        height: 56px;
+        margin: 16px 0;
+        border-radius: 50%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        > .layer-name {
+          padding-left: 72px;
+        }
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: -1px;
+          left: -1px;
+          width: calc(100% + 2px);
+          height: calc(100% + 2px);
+          border-radius: 50%;
+          background-color: $pinkish-grey-two;
+          z-index: -1;
         }
       }
     }

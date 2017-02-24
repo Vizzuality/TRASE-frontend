@@ -1,13 +1,10 @@
-<li>
-  <div class="folder-title">
-    Basemaps
-  </div>
-</li>
 <% for(let [ i, basemap ] of Object.entries(basemaps)) { %>
   <li class="layer-item">
-    <span class="layer-name"><%= basemap.title %></span>
+    <div class="map-thumb" style="background-image: url('<%= basemap.thumbnail %>');">
+      <span class="layer-name"><%= basemap.title %></span>
+    </div>
     <div class="radios">
-      <div class="c-radio-btn" value="<%= i %>"></div>
+      <div class="c-radio-btn" data-group="horizontal" value="<%= i %>"></div>
     </div>
   </li>
 <%};%>
