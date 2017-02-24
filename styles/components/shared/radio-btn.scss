@@ -29,6 +29,7 @@
 
       content: '';
     }
+
     &[data-group="vertical"]::before {
       background-color: $light-grey-blue;
     }
@@ -56,7 +57,7 @@
       content: '';
     }
 
-    &:hover {
+    &:hover:not(.-no-self-cancel) {
       align-items: center;
       background-color: $medium-pink;
 
@@ -80,14 +81,14 @@
 
     &[data-group="vertical"] {
       &::before,
-      &:hover{
+      &:hover:not(.-no-self-cancel) {
         background-color: $light-grey-blue;
       }
     }
 
     &[data-group="horizontal"] {
       &::before,
-      &:hover {
+      &:hover:not(.-no-self-cancel) {
         background-color: $medium-pink;
       }
     }
