@@ -53,14 +53,19 @@
           <!-- this is rendered by map-context.component -->
       </ul>
     </div>
-    <div id="map" class="c-map is-absolute">
-      <div class="btn-map -basemap js-basemap-switcher">
-        <svg class="icon icon-layers"><use xlink:href="#icon-layers"></use></svg>
+    <div class="c-map is-absolute">
+      <div id="js-map" class="c-map-leaflet">
+        <div class="btn-map -basemap js-basemap-switcher">
+          <svg class="icon icon-layers"><use xlink:href="#icon-layers"></use></svg>
+        </div>
+        <div class="btn-map -toggle-map js-toggle-map"></div>
       </div>
-      <div class="btn-map -toggle-map js-toggle-map"></div>
-      <div class="c-map-legend is-absolute js-map-legend">
+      <div class="c-map-legend js-map-legend">
         <div class="js-map-legend-choro c-map-legend-choro"></div>
         <div class="js-map-legend-context c-map-legend-context"></div>
+      </div>
+      <div class="js-map-attribution c-map-attribution">
+        <!-- this is rendered by map.component -->
       </div>
     </div>
 
