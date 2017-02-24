@@ -10,6 +10,11 @@ export default class {
     this.el.addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     this.choro = document.querySelector('.js-map-legend-choro');
     this.context = document.querySelector('.js-map-legend-context');
+
+    const zoom = document.querySelector('.leaflet-control-zoom');
+    const scale = document.querySelector('.leaflet-control-scale');
+    zoom.addEventListener('mouseenter', () => { scale.classList.toggle('-visible', true); });
+    zoom.addEventListener('mouseleave', () => { scale.classList.toggle('-visible', false); });
   }
 
   updateChoroplethLegend({selectedMapVariables, selectedMapContextualLayersData}) {
@@ -65,11 +70,11 @@ export default class {
   }
 
   _showLegend() {
-    this.el.classList.remove('is-hidden');
+    this.el.classList.remove('-hidden');
   }
 
   _hideLegend() {
-    this.el.classList.add('is-hidden');
+    this.el.classList.add('-hidden');
   }
 
   _cleanChoro() {

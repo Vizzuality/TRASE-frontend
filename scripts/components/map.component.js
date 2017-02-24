@@ -13,8 +13,9 @@ export default class {
       zoomControl: false
     };
 
-    this.map = L.map('map', mapOptions).setView([-16, -50], 4);
-    new L.Control.Zoom({ position: 'bottomleft' }).addTo(this.map);
+    this.map = L.map('js-map', mapOptions).setView([-16, -50], 4);
+    new L.Control.Zoom({ position: 'bottomright' }).addTo(this.map);
+    L.control.scale({ position: 'bottomleft', imperial: false }).addTo(this.map);
 
     Object.keys(MAP_PANES).forEach(paneKey => {
       this.map.createPane(paneKey);
@@ -25,6 +26,9 @@ export default class {
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
+
+    this.attribution = document.querySelector('.js-map-attribution');
+    this.attributionSource = document.querySelector('.leaflet-control-attribution');
   }
 
   loadBasemap(basemapId) {
@@ -45,6 +49,8 @@ export default class {
       this.basemapLabels = L.tileLayer(basemapOptions.labelsUrl, basemapOptions);
       this.map.addLayer(this.basemapLabels);
     }
+
+    this._updateAttribution();
   }
 
   showLoadedMap(payload) {
@@ -191,6 +197,8 @@ export default class {
     // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-hidden', hideMain);
+
+    this._updateAttribution();
   }
 
   _createRasterLayer(layerData) {
@@ -290,5 +298,9 @@ export default class {
       layer._path.setAttribute('geoid', layer.feature.properties.geoid);
     });
 
+  }
+
+  _updateAttribution() {
+    this.attribution.innerHTML = this.attributionSource.innerHTML;
   }
 }
