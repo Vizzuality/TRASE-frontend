@@ -1,7 +1,7 @@
 import 'styles/components/map/map-layers.scss';
 import 'styles/components/shared/radio-btn.scss';
 import 'styles/components/shared/switcher.scss';
-import MapVariablesTemplate from 'ejs!templates/mapVariables.ejs';
+import MapLayersTemplate from 'ejs!templates/mapLayers.ejs';
 
 export default class {
 
@@ -11,21 +11,21 @@ export default class {
     this.tooltip = document.querySelector('.tooltip-layout');
   }
 
-  loadMapVariables(variablesByFolder) {
-    // this.layerList.innerHTML = variables.map(layer => MapVariablesTemplate(layer)).join('');
-    this.layerList.innerHTML = MapVariablesTemplate({folders: variablesByFolder});
+  loadMapLayers(layersByGroup) {
+    // this.layerList.innerHTML = layers.map(layer => MapLayersTemplate(layer)).join('');
+    this.layerList.innerHTML = MapLayersTemplate({layerGroups: layersByGroup});
 
     this._setVars();
     this._setEventListeners();
   }
 
-  selectMapVariables(layers) {
-    const mapVariables =  {
+  selectMapLayers(layers) {
+    const mapLayers =  {
       horizontal: layers.horizontal || null,
       vertical: layers.vertical || null
     };
 
-    this._setActiveMapVariables(mapVariables);
+    this._setActiveMapLayers(mapLayers);
   }
 
   _setVars() {
@@ -49,15 +49,15 @@ export default class {
     });
   }
 
-  _setActiveMapVariables(variables) {
-    const directions = Object.keys(variables);
+  _setActiveMapLayers(layers) {
+    const directions = Object.keys(layers);
 
     directions.forEach((group) => {
       const radios = Array.prototype.slice.call(
         this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`), 0);
 
       radios.forEach((radio) => {
-        if (radio.getAttribute('value') !== variables[group]['uid']) return;
+        if (radio.getAttribute('value') !== layers[group]['uid']) return;
         const layerItem = radio.closest('.layer-item');
         const partnerRadio = radio.nextElementSibling ?
           radio.nextElementSibling : radio.previousElementSibling;
@@ -84,7 +84,7 @@ export default class {
       this._cleanRadiosByGroup(group);
     }
 
-    this.callbacks.onMapVariablesSelected({
+    this.callbacks.onMapLayersSelected({
       direction: group, // 'vertical' or 'horizontal'
       title,
       uid

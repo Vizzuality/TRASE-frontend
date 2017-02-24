@@ -1,7 +1,9 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
 import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
-import { getURLFromParams, GET_ALL_NODES, GET_COLUMNS, GET_FLOWS, GET_NODES } from 'utils/getURLFromParams';
+import {
+  getURLFromParams, GET_ALL_NODES, GET_COLUMNS, GET_FLOWS, GET_NODES, GET_LINKED_GEO_IDS, GET_MAP_BASE_DATA
+} from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
 import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
 import getNodesSelectionAction from './helpers/getNodesSelectionAction';
@@ -70,11 +72,10 @@ export function selectYears(years) {
   };
 }
 
-export function selectMapVariable(variableData) {
+export function selectMapLayer(layerData) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_MAP_VARIABLES,
-      variableData
+      type: actions.SELECT_MAP_LAYERS, layerData
     });
   };
 }
@@ -137,30 +138,23 @@ export function loadNodes() {
     };
 
     const getNodesURL = getURLFromParams(GET_NODES, params);
-    const getMapVariablesMetadataURL = 'jsonMockups/get_map_variables_metadata.json';
+    const getMapLayersMetadataURL = getURLFromParams(GET_MAP_BASE_DATA, params);
 
-    Promise.all([getNodesURL, getMapVariablesMetadataURL].map(url =>
-      fetch(url).then(resp => resp.text())
-    )).then(rawPayload => {
+    Promise.all([getNodesURL, getMapLayersMetadataURL].map(url => fetch(url).then(resp => resp.text()))).then(rawPayload => {
       const payload = {
-        nodesJSON: JSON.parse(rawPayload[0]),
-        mapVariablesMetaJSON: JSON.parse(rawPayload[1])
+        nodesJSON: JSON.parse(rawPayload[0]), mapLayersMetaJSON: JSON.parse(rawPayload[1])
       };
 
       dispatch({
-        type: actions.GET_NODES,
-        payload
+        type: actions.GET_NODES, payload
       });
 
-      const selection = payload.mapVariablesMetaJSON.default_selection;
+      const selection = payload.mapLayersMetaJSON.layers.filter(layer => layer.isDefault);
       if (selection !== undefined) {
-        selection.forEach((selection, index) => {
+        selection.forEach((selectedLayer, index) => {
           const direction = (index === 0) ? 'vertical' : 'horizontal';
-          const selectedVariable = getState().flows.mapVariables.find(variable => variable.id === selection);
-          dispatch(selectMapVariable({
-            direction,
-            title: selectedVariable.name,
-            uid: getNodeMetaUid(selectedVariable.type, selectedVariable.id)
+          dispatch(selectMapLayer({
+            direction, title: selectedLayer.name, uid: getNodeMetaUid(selectedLayer.type, selectedLayer.attributeId)
           }));
         });
       }
@@ -370,9 +364,7 @@ export function highlightNodeFromGeoId(geoId) {
 export function toggleNodesExpand(forceExpand = false, forceExpandNodeIds) {
   return (dispatch, getState) => {
     dispatch({
-      type: actions.TOGGLE_NODES_EXPAND,
-      forceExpand,
-      forceExpandNodeIds
+      type: actions.TOGGLE_NODES_EXPAND, forceExpand, forceExpandNodeIds
     });
 
     // if expanding, and if in detailed mode, toggle to overview mode
@@ -431,28 +423,25 @@ export function loadLinkedGeoIDs() {
     });
     if (selectedNonGeoNodeIds.length === 0) {
       dispatch({
-        type: actions.GET_LINKED_GEOIDS,
-        payload: []
+        type: actions.GET_LINKED_GEOIDS, payload: []
       });
       return;
     }
-    // const params = {
-    //  country: getState().flows.selectedCountry.toUpperCase(),
-        // commodity: getState().flows.selectedCommodity.toUpperCase(),
-        // year_start: getState().flows.selectedYears[0],
-        // year_end: getState().flows.selectedYears[1],
-    //   node_id: selectedNodesIds.join(','),
-    //   target_column_id: getState().flows.selectedColumnsIds[0]
-    // };
-    // const url = getURLFromParams('/v1/get_linked_geoids', params);
-    const url = 'jsonMockups/get_linked_geoids.json';
+    const params = {
+      country: getState().flows.selectedCountry.toUpperCase(),
+      commodity: getState().flows.selectedCommodity.toUpperCase(),
+      year_start: getState().flows.selectedYears[0],
+      year_end: getState().flows.selectedYears[1],
+      node_id: selectedNodesIds.join(','),
+      target_column_id: getState().flows.selectedColumnsIds[0]
+    };
+    const url = getURLFromParams(GET_LINKED_GEO_IDS, params);
 
     fetch(url)
       .then(res => res.text())
       .then(payload => {
         dispatch({
-          type: actions.GET_LINKED_GEOIDS,
-          payload: JSON.parse(payload)
+          type: actions.GET_LINKED_GEOIDS, payload: JSON.parse(payload)
         });
       });
   };

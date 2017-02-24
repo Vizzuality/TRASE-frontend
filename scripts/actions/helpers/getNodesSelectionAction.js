@@ -8,7 +8,7 @@ export default (nodesIds, state) => {
     };
   }
 
-  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapVariables);
+  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapLayers);
   const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined);
   const columnsPos = data.map(node => node.columnGroup);
 
@@ -20,7 +20,7 @@ export default (nodesIds, state) => {
   };
 };
 
-const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta, selectedMapVariables) => {
+const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta, selectedMapLayers) => {
   if (selectedNodesIds === undefined) {
     return [];
   }
@@ -36,12 +36,12 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
       node.selectedMetas = [];
       let meta;
       if (node.meta) {
-        if (selectedMapVariables.horizontal.uid) {
-          meta = node.meta[selectedMapVariables.horizontal.uid];
+        if (selectedMapLayers.horizontal.uid) {
+          meta = node.meta[selectedMapLayers.horizontal.uid];
           if (meta) node.selectedMetas.push(meta);
         }
-        if (selectedMapVariables.vertical.uid) {
-          meta = node.meta[selectedMapVariables.vertical.uid];
+        if (selectedMapLayers.vertical.uid) {
+          meta = node.meta[selectedMapLayers.vertical.uid];
           if (meta) node.selectedMetas.push(meta);
         }
       }

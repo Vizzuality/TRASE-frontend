@@ -148,6 +148,7 @@ export default class {
     }
 
     const selectedFeatures = selectedGeoIds.map(selectedGeoId => {
+      if (!selectedGeoId) return;
       const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId);
       return originalPolygon.feature;
     });
