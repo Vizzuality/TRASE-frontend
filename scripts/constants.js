@@ -156,10 +156,6 @@ export const GA_ACTION_WHITELIST = [
     type: actions.TOGGLE_MAP_LAYERS_MENU
   },
   {
-    type: actions.SELECT_VECTOR_LAYERS,
-    getPayload: action => [action.layerData.title, action.layerData.direction].join(' - ')
-  },
-  {
     type: actions.SELECT_CONTEXTUAL_LAYERS,
     getPayload: action => action.contextualLayers.join(', ')
   }

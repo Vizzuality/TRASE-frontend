@@ -1,5 +1,6 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
+import _  from 'lodash';
 import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
 import {
   getURLFromParams, GET_ALL_NODES, GET_COLUMNS, GET_FLOWS, GET_NODES, GET_LINKED_GEO_IDS, GET_MAP_BASE_DATA
@@ -430,9 +431,8 @@ export function loadLinkedGeoIDs() {
     const params = {
       country: getState().flows.selectedCountry.toUpperCase(),
       commodity: getState().flows.selectedCommodity.toUpperCase(),
-      year_start: getState().flows.selectedYears[0],
-      year_end: getState().flows.selectedYears[1],
-      node_id: selectedNodesIds.join(','),
+      years: _.uniq([getState().flows.selectedYears[0], getState().flows.selectedYears[1]]),
+      node_id: selectedNodesIds,
       target_column_id: getState().flows.selectedColumnsIds[0]
     };
     const url = getURLFromParams(GET_LINKED_GEO_IDS, params);
