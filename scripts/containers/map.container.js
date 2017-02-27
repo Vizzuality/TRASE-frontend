@@ -46,6 +46,7 @@ const mapMethodsToState = (state) => ({
     }
   },
   loadContextLayers: state.flows.selectedMapContextualLayersData,
+  loadBasemap: state.flows.selectedMapBasemap,
   showLinkedGeoIds: state.flows.linkedGeoIds
 });
 

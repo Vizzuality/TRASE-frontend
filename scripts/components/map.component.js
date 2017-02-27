@@ -22,7 +22,6 @@ export default class {
       this.map.getPane(paneKey).style.zIndex = MAP_PANES_Z[paneKey];
     });
 
-
     this.contextLayers = [];
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
@@ -30,8 +29,6 @@ export default class {
 
     this.attribution = document.querySelector('.js-map-attribution');
     this.attributionSource = document.querySelector('.leaflet-control-attribution');
-    
-    this.loadBasemap('positron');
   }
 
   loadBasemap(basemapId) {

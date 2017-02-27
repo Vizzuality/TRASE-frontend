@@ -236,6 +236,11 @@ export default function (state = {}, action) {
     break;
   }
 
+  case actions.SELECT_BASEMAP: {
+    newState = Object.assign({}, state, { selectedMapBasemap: action.selectedMapBasemap });
+    break;
+  }
+
   case actions.TOGGLE_NODES_EXPAND: {
     let expandedNodesIds;
     let selectedNodesIds;
