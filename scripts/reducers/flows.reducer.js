@@ -76,10 +76,10 @@ export default function (state = {}, action) {
     const nodesMeta = action.payload.nodesJSON.data;
 
     const mapDimensionsMeta = action.payload.mapDimensionsMetaJSON;
-    const rawMapDimensions = mapDimensionsMeta.dimensions;
+    const rawMapDimensions = mapDimensionsMeta.layers;
     const mapDimensions = getMapDimensions(rawMapDimensions);
 
-    const mapDimensionsFolders = mapDimensionsMeta.dimensionGroups;
+    const mapDimensionsFolders = mapDimensionsMeta.layerGroups;
 
     // store dimension values in nodesDict as uid: dimensionValue
     const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, mapDimensions);
