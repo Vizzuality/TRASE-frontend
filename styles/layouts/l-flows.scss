@@ -24,23 +24,12 @@ body, html {
     }
   }
 
-  > .c-titlebar {
-    position: absolute;
-    top: $nav-height;
-    width: 100%;
-    z-index: 3;
-
-    .search {
-      padding-top: 16px;
-    }
-  }
-
   > .flow-content {
     position: absolute;
-    top: $flow-content-y;
+    top: $nav-height;
     left: 0;
     width: calc(100% + #{$layer-map-width});
-    height: calc(100% - #{$flow-content-y});
+    height: calc(100% - #{$nav-height});
 
     transform: translate(-$layer-map-width, 0);
     transition: transform .15s $ease-in-out-sine, width .15s $ease-in-out-sine;
@@ -69,13 +58,12 @@ body, html {
 
     > .c-map {
       display: flex;
-      left: $layer-map-width + 8px;
+      left: $layer-map-width;
       flex-direction: column;
       width: 320px;
-      height: calc(100% - 8px);
+      height: 100%;
 
       transition: width .45s $ease-in-out-sine;
-
 
       &.-fullscreen {
         width: calc(90% - 376px);
@@ -83,11 +71,11 @@ body, html {
     }
 
     > .c-sankey {
-      top: -15px;
-      left: 704px;
-      width: calc(100% - #{704px + 10px});
-      height: calc(100% - 38px);
-      margin-left: $sankey-x-padding;
+      top: 32px;
+      left: $map-width + $layer-map-width;
+      width: calc(100% - #{$map-width + $layer-map-width + ($sankey-x-margin * 2)});
+      height: calc(100% - 96px);
+      margin: 0 $sankey-x-margin;
       transition: left .45s $ease-in-out-sine;
 
       .sankey {
@@ -102,9 +90,22 @@ body, html {
     }
 
     > .c-columns-selector {
-      bottom: 12px;
-      left: 704px;
-      width: calc(100% - 704px);
+      top: 8px;
+      left: $map-width + $layer-map-width;
+      width: calc(100% - #{$map-width + $layer-map-width});
+    }
+
+    > .c-titlebar {
+      position: absolute;
+      left: $map-width + $layer-map-width;
+      top: calc(100% - #{$titlebar-height});
+      width: calc(100% - #{$map-width + $layer-map-width});
+      padding-left: 16px;
+      overflow: auto;
+
+      .search {
+        padding-top: 16px;
+      }
     }
   }
 
