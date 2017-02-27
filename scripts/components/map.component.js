@@ -58,15 +58,28 @@ export default class {
 
   showLoadedMap(payload) {
     const mapVectorData = payload.mapVectorData;
-    // TODO this statically maps polygonTypesLayers indexes to column indexes, it should be dynamic
-    let municipalitiesLayer = this._getPolygonTypeLayer(mapVectorData.MUNICIPALITY, 'map-polygon-municipality');
-    this.polygonTypesLayers = [
-      this._getPolygonTypeLayer(mapVectorData.BIOME, 'map-polygon-biome'),
-      this._getPolygonTypeLayer(mapVectorData.STATE, 'map-polygon-state'),
-      municipalitiesLayer, // logistics hubs
-      municipalitiesLayer // municipalities
-    ];
-    this.selectPolygonType([payload.currentPolygonType]);
+    this.polygonTypesLayers = {};
+
+    // create geometry layers for all polygonTypes that have their own geometry
+    Object.keys(mapVectorData).forEach(polygonTypeId => {
+      const polygonType = mapVectorData[polygonTypeId];
+      if (polygonType.useGeometryFromColumnId === undefined) {
+        this.polygonTypesLayers[polygonTypeId] = this._getPolygonTypeLayer(
+          polygonType.geoJSON,
+          `map-polygon-${polygonType.name.toLowerCase()}`
+        );
+      }
+    });
+
+    // for polygonTypes that don't have their geometry, link to actual geometry layers
+    Object.keys(mapVectorData).forEach(polygonTypeId => {
+      const polygonType = mapVectorData[polygonTypeId];
+      if (polygonType.useGeometryFromColumnId !== undefined) {
+        this.polygonTypesLayers[polygonTypeId] = this.polygonTypesLayers[polygonType.useGeometryFromColumnId];
+      }
+    });
+
+    this.selectPolygonType(payload.currentPolygonType);
     if (payload.selectedNodesGeoIds) {
       this._outlinePolygons({selectedGeoIds: payload.selectedNodesGeoIds});
     }
@@ -142,6 +155,7 @@ export default class {
     }
 
     const selectedFeatures = selectedGeoIds.map(selectedGeoId => {
+      if (!selectedGeoId) return;
       const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId);
       return originalPolygon.feature;
     });

@@ -11,8 +11,7 @@ const mapMethodsToState = (state) => ({
         selectedColumnsIds: state.flows.selectedColumnsIds
       };
     }
-  },
-  selectColumns: state.flows.selectedColumnsIds
+  }, selectColumns: state.flows.selectedColumnsIds
 });
 
 const mapViewCallbacksToActions = () => ({

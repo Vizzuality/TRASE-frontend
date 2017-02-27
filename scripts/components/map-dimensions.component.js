@@ -1,7 +1,8 @@
 import 'styles/components/map/map-layers.scss';
 import 'styles/components/shared/radio-btn.scss';
 import 'styles/components/shared/switcher.scss';
-import MapVariablesTemplate from 'ejs!templates/mapVariables.ejs';
+import MapDimensionsTemplate from 'ejs!templates/mapDimensions.ejs';
+
 
 export default class {
 
@@ -11,21 +12,21 @@ export default class {
     this.tooltip = document.querySelector('.tooltip-layout');
   }
 
-  loadMapVariables(variablesByFolder) {
-    // this.layerList.innerHTML = variables.map(layer => MapVariablesTemplate(layer)).join('');
-    this.layerList.innerHTML = MapVariablesTemplate({folders: variablesByFolder});
+  loadMapDimensions(dimensionsByGroup) {
+    // this.dimensionList.innerHTML = dimensions.map(dimension => MapDimensionsTemplate(dimension)).join('');
+    this.layerList.innerHTML = MapDimensionsTemplate({dimensionGroups: dimensionsByGroup});
 
     this._setVars();
     this._setEventListeners();
   }
 
-  selectMapVariables(layers) {
-    const mapVariables =  {
-      horizontal: layers.horizontal || null,
-      vertical: layers.vertical || null
+  selectMapDimensions(dimensions) {
+    const mapDimensions =  {
+      horizontal: dimensions.horizontal || null,
+      vertical: dimensions.vertical || null
     };
 
-    this._setActiveMapVariables(mapVariables);
+    this._setActiveMapDimensions(mapDimensions);
   }
 
   _setVars() {
@@ -49,15 +50,15 @@ export default class {
     });
   }
 
-  _setActiveMapVariables(variables) {
-    const directions = Object.keys(variables);
+  _setActiveMapDimensions(dimensions) {
+    const directions = Object.keys(dimensions);
 
     directions.forEach((group) => {
       const radios = Array.prototype.slice.call(
         this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`), 0);
 
       radios.forEach((radio) => {
-        if (radio.getAttribute('value') !== variables[group]['uid']) return;
+        if (radio.getAttribute('value') !== dimensions[group]['uid']) return;
         const layerItem = radio.closest('.layer-item');
         const partnerRadio = radio.nextElementSibling ?
           radio.nextElementSibling : radio.previousElementSibling;
@@ -84,7 +85,7 @@ export default class {
       this._cleanRadiosByGroup(group);
     }
 
-    this.callbacks.onMapVariablesSelected({
+    this.callbacks.onMapDimensionsSelected({
       direction: group, // 'vertical' or 'horizontal'
       title,
       uid

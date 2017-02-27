@@ -49,9 +49,8 @@ export const FLOWS_DEFAULT_STATE = {
     selectedNodesColorGroups: [],
     areNodesExpanded: false,
     selectedNodesData: [],
-    selectedColumnsIds: [3, 4, 6, 7],
     // TODO title should be inferred from the uid, not kept in state
-    selectedMapVariables: {
+    selectedMapDimensions: {
       horizontal: {
         uid: null,
         title: null
@@ -155,10 +154,6 @@ export const GA_ACTION_WHITELIST = [
   },
   {
     type: actions.TOGGLE_MAP_LAYERS_MENU
-  },
-  {
-    type: actions.SELECT_VECTOR_LAYERS,
-    getPayload: action => [action.layerData.title, action.layerData.direction].join(' - ')
   },
   {
     type: actions.SELECT_CONTEXTUAL_LAYERS,
