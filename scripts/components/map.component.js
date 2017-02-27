@@ -102,9 +102,11 @@ export default class {
 
     window.clearTimeout(this.fitBoundsTimeout);
 
+    console.time('remove')
     if (this.vectorLinked) {
       this.map.removeLayer(this.vectorLinked);
     }
+    console.timeEnd('remove')
 
     if (!linkedGeoIds.length) {
       return;
