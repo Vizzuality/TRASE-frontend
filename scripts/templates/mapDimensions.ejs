@@ -1,18 +1,18 @@
-<% layerGroups.forEach(function(layerGroup) { %>
+<% dimensionGroups.forEach(function(dimensionGroup) { %>
   <li>
-    <div class="layer-group-title">
-      <%= layerGroup.layerGroup.name %>
+    <div class="dimension-group-title">
+      <%= dimensionGroup.dimensionGroup.name %>
     </div>
     <ul>
-      <% layerGroup.layers.forEach(function(layer) { %>
+      <% dimensionGroup.dimensions.forEach(function(dimension) { %>
         <li
           class="layer-item"
-          data-layer-uid="<%= layer.uid %>"
+          data-layer-uid="<%= dimension.uid %>"
         >
           <label class="layer-name">
-            <%= layer.name %>
-            <% if (layer.unit) { %>
-              (<%= layer.unit %>)
+            <%= dimension.name %>
+            <% if (dimension.unit) { %>
+              (<%= dimension.unit %>)
             <% } %>
             <ul class="layer-options-list">
               <!--<li class="layer-option c-tooltip">-->
@@ -27,8 +27,8 @@
             </ul>
           </label>
           <div class="radios">
-            <div class="c-radio-btn" data-group="vertical" value="<%= layer.uid %>"></div>
-            <div class="c-radio-btn" data-group="horizontal" value="<%= layer.uid %>"></div>
+            <div class="c-radio-btn" data-group="vertical" value="<%= dimension.uid %>"></div>
+            <div class="c-radio-btn" data-group="horizontal" value="<%= dimension.uid %>"></div>
           </div>
         </li>
       <% }) %>

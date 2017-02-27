@@ -50,7 +50,7 @@ export const FLOWS_DEFAULT_STATE = {
     areNodesExpanded: false,
     selectedNodesData: [],
     // TODO title should be inferred from the uid, not kept in state
-    selectedMapLayers: {
+    selectedMapDimensions: {
       horizontal: {
         uid: null,
         title: null

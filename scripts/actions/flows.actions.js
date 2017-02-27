@@ -73,10 +73,10 @@ export function selectYears(years) {
   };
 }
 
-export function selectMapLayer(layerData) {
+export function selectMapDimension(dimensionData) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_MAP_LAYERS, layerData
+      type: actions.SELECT_MAP_DIMENSIONS, dimensionData
     });
   };
 }
@@ -139,23 +139,23 @@ export function loadNodes() {
     };
 
     const getNodesURL = getURLFromParams(GET_NODES, params);
-    const getMapLayersMetadataURL = getURLFromParams(GET_MAP_BASE_DATA, params);
+    const getMapDimensionsMetadataURL = getURLFromParams(GET_MAP_BASE_DATA, params);
 
-    Promise.all([getNodesURL, getMapLayersMetadataURL].map(url => fetch(url).then(resp => resp.text()))).then(rawPayload => {
+    Promise.all([getNodesURL, getMapDimensionsMetadataURL].map(url => fetch(url).then(resp => resp.text()))).then(rawPayload => {
       const payload = {
-        nodesJSON: JSON.parse(rawPayload[0]), mapLayersMetaJSON: JSON.parse(rawPayload[1])
+        nodesJSON: JSON.parse(rawPayload[0]), mapDimensionsMetaJSON: JSON.parse(rawPayload[1])
       };
 
       dispatch({
         type: actions.GET_NODES, payload
       });
 
-      const selection = payload.mapLayersMetaJSON.layers.filter(layer => layer.isDefault);
+      const selection = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
       if (selection !== undefined) {
-        selection.forEach((selectedLayer, index) => {
+        selection.forEach((selectedDimension, index) => {
           const direction = (index === 0) ? 'vertical' : 'horizontal';
-          dispatch(selectMapLayer({
-            direction, title: selectedLayer.name, uid: getNodeMetaUid(selectedLayer.type, selectedLayer.attributeId)
+          dispatch(selectMapDimension({
+            direction, title: selectedDimension.name, uid: getNodeMetaUid(selectedDimension.type, selectedDimension.attributeId)
           }));
         });
       }
@@ -263,7 +263,7 @@ export function loadMapVectorData() {
         type: actions.GET_MAP_VECTOR_DATA, mapVectorData
       });
     });
-  }
+  };
 }
 
 export function loadMapContextLayers() {

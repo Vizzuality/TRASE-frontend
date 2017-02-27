@@ -4,10 +4,10 @@ import MapLegend from 'components/map-legend.component';
 
 const mapMethodsToState = () => ({
   updateChoroplethLegend: {
-    _comparedValue: (state) => state.flows.selectedMapLayers,
+    _comparedValue: (state) => state.flows.selectedMapDimensions,
     _returnedValue: (state) => {
       return {
-        selectedMapLayers: state.flows.selectedMapLayers,
+        selectedMapDimensions: state.flows.selectedMapDimensions,
         selectedMapContextualLayersData: state.flows.selectedMapContextualLayersData,
       };
     }
@@ -16,7 +16,7 @@ const mapMethodsToState = () => ({
     _comparedValue: (state) => state.flows.selectedMapContextualLayersData,
     _returnedValue: (state) => {
       return {
-        selectedMapLayers: state.flows.selectedMapLayers,
+        selectedMapDimensions: state.flows.selectedMapDimensions,
         selectedMapContextualLayersData: state.flows.selectedMapContextualLayersData,
       };
     }

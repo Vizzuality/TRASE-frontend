@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { CHOROPLETH_CLASSES } from 'constants';
 
-export default function(selectedMapLayers, nodesDictWithMeta) {
-  const horizontalLayer = selectedMapLayers.horizontal;
-  const verticalLayer = selectedMapLayers.vertical;
+export default function(selectedMapDimensions, nodesDictWithMeta) {
+  const horizontalLayer = selectedMapDimensions.horizontal;
+  const verticalLayer = selectedMapDimensions.vertical;
   const isBidimensional = horizontalLayer.uid !== null && verticalLayer.uid !== null;
   const isEmpty = horizontalLayer.uid === null && verticalLayer.uid === null;
   const isHorizontal = horizontalLayer.uid !== null;
