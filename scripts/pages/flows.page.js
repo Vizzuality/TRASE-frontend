@@ -1,10 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-
 import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columns-selector.container';
-import MapVariablesContainer from 'containers/map-variables.container';
+import MapDimensionsContainer from 'containers/map-dimensions.container.js';
 import MapContextContainer from 'containers/map-context.container';
 import MapLegendContainer from 'containers/map-legend.container';
 import MapBasemapsContainer from 'containers/map-basemaps.container';
@@ -50,7 +49,7 @@ const start = (initialState) => {
   new SankeyContainer(store);
   new ColumnsSelectorContainer(store);
   new MapContainer(store);
-  new MapVariablesContainer(store);
+  new MapDimensionsContainer(store);
   new MapContextContainer(store);
   new MapLegendContainer(store);
   new MapBasemapsContainer(store);

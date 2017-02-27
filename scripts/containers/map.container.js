@@ -10,7 +10,7 @@ const mapMethodsToState = (state) => ({
     _returnedValue: (state) => {
       return {
         mapVectorData: state.flows.mapVectorData,
-        currentPolygonType: state.flows.selectedColumnsIds[0],
+        currentPolygonType: state.flows.selectedColumnsIds,
         selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
         recolourByNodeIds: state.flows.recolourByNodeIds,
         choropleth: state.flows.choropleth,
