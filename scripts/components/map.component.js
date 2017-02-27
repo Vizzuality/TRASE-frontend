@@ -23,6 +23,7 @@ export default class {
     });
 
     this.contextLayers = [];
+    this.polygonFeaturesDict = {};
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
@@ -96,7 +97,6 @@ export default class {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
-
     // remove choropleth from main layer
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
 
@@ -109,31 +109,63 @@ export default class {
     if (!linkedGeoIds.length) {
       return;
     }
-    const linkedFeaturesClassNames = {};
-    const linkedFeatures = linkedGeoIds.map(geoId => {
-      const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
 
+    console.log(linkedGeoIds.length)
+    console.time('looking_up_polys')
+    const linkedFeaturesClassNames = {};
+    // const linkedFeatures = linkedGeoIds.map(geoId => {
+    //   const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
+    //
+    //   if (originalPolygon !== undefined) {
+    //     // copy class names (ie choropleth from vectorMain's original polygon)
+    //     linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
+    //     return originalPolygon.feature;
+    //   } else {
+    //     // this can potentially happen when geoId doesn't not match polygon type currently visible
+    //     return null;
+    //   }
+    // });
+    const linkedFeatures = linkedGeoIds.map(geoId => {
+      // const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
+      const originalPolygon = this.polygonFeaturesDict[geoId];
       if (originalPolygon !== undefined) {
         // copy class names (ie choropleth from vectorMain's original polygon)
-        linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
-        return originalPolygon.feature;
+        // linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
+        return originalPolygon;
       } else {
         // this can potentially happen when geoId doesn't not match polygon type currently visible
         return null;
       }
     });
 
+    // const linkedFeatures = [];
+    // this.currentPolygonTypeLayer.eachLayer(polygon => {
+    //   const geoId = polygon.feature.properties.geoid;
+    //   const geoIdIndex = linkedGeoIds.indexOf(geoId);
+    //   if (geoIdIndex > -1) {
+    //     linkedFeatures.push(polygon.feature);
+    //     // copy class names (ie choropleth from vectorMain's original polygon)
+    //     linkedFeaturesClassNames[geoId] = polygon._path.getAttribute('class');
+    //
+    //   }
+    // });
+
+    console.timeEnd('looking_up_polys')
     _.pull(linkedFeatures, null);
 
     if (linkedFeatures.length > 0) {
+      console.time('create_layer')
       this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
       this.map.addLayer(this.vectorLinked);
-      this.vectorLinked.eachLayer(layer => {
-        layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
-      });
+      // this.vectorLinked.eachLayer(layer => {
+      //   layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
+      // });
+      console.timeEnd('create_layer')
 
       this.fitBoundsTimeout = window.setTimeout(() => {
+        console.time('fit')
         this.map.fitBounds(this.vectorLinked.getBounds());
+        console.timeEnd('fit')
       }, SANKEY_TRANSITION_TIME);
     }
 
@@ -258,6 +290,7 @@ export default class {
   }
 
   _getPolygonTypeLayer(geoJSON) {
+    console.time('time')
     var topoLayer = new L.GeoJSON(geoJSON, {
       pane: MAP_PANES.vectorMain,
       style: {
@@ -266,6 +299,7 @@ export default class {
     });
 
     topoLayer.eachLayer(layer => {
+      this.polygonFeaturesDict[layer.feature.properties.geoid] = layer.feature;
       const that = this;
       layer.on({
         mouseover: function() {
@@ -281,6 +315,7 @@ export default class {
         }
       });
     });
+    console.timeEnd('time')
     return topoLayer;
   }
 
