@@ -115,42 +115,18 @@ export default class {
     console.log(linkedGeoIds.length)
     console.time('looking_up_polys')
     const linkedFeaturesClassNames = {};
-    // const linkedFeatures = linkedGeoIds.map(geoId => {
-    //   const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
-    //
-    //   if (originalPolygon !== undefined) {
-    //     // copy class names (ie choropleth from vectorMain's original polygon)
-    //     linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
-    //     return originalPolygon.feature;
-    //   } else {
-    //     // this can potentially happen when geoId doesn't not match polygon type currently visible
-    //     return null;
-    //   }
-    // });
+
     const linkedFeatures = linkedGeoIds.map(geoId => {
-      // const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
       const originalPolygon = this.polygonFeaturesDict[geoId];
       if (originalPolygon !== undefined) {
         // copy class names (ie choropleth from vectorMain's original polygon)
-        // linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
-        return originalPolygon;
+        linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
+        return originalPolygon.feature;
       } else {
         // this can potentially happen when geoId doesn't not match polygon type currently visible
         return null;
       }
     });
-
-    // const linkedFeatures = [];
-    // this.currentPolygonTypeLayer.eachLayer(polygon => {
-    //   const geoId = polygon.feature.properties.geoid;
-    //   const geoIdIndex = linkedGeoIds.indexOf(geoId);
-    //   if (geoIdIndex > -1) {
-    //     linkedFeatures.push(polygon.feature);
-    //     // copy class names (ie choropleth from vectorMain's original polygon)
-    //     linkedFeaturesClassNames[geoId] = polygon._path.getAttribute('class');
-    //
-    //   }
-    // });
 
     console.timeEnd('looking_up_polys')
     _.pull(linkedFeatures, null);
@@ -159,9 +135,9 @@ export default class {
       console.time('create_layer')
       this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
       this.map.addLayer(this.vectorLinked);
-      // this.vectorLinked.eachLayer(layer => {
-      //   layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
-      // });
+      this.vectorLinked.eachLayer(layer => {
+        layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
+      });
       console.timeEnd('create_layer')
 
       this.fitBoundsTimeout = window.setTimeout(() => {
@@ -301,7 +277,7 @@ export default class {
     });
 
     topoLayer.eachLayer(layer => {
-      this.polygonFeaturesDict[layer.feature.properties.geoid] = layer.feature;
+      this.polygonFeaturesDict[layer.feature.properties.geoid] = layer;
       const that = this;
       layer.on({
         mouseover: function() {
