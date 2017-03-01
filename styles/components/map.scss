@@ -69,12 +69,16 @@
 
   .c-map-attribution {
     padding: 8px;
-    border-top: 1px solid $gray;
+    border-top: 1px solid rgba($charcoal-grey, .2);
     background: $white;
-    color: $medium-grey;
-    font-family: $font-family-1;
-    font-size: $font-size-small;
-    text-transform: uppercase;
+    color: $charcoal-grey;
+    font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+
+    a,
+    span {
+      color: rgba($charcoal-grey, .5);
+    }
   }
 
   .btn-map {
