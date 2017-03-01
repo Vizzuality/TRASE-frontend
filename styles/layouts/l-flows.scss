@@ -40,7 +40,7 @@ body, html {
 
       > .c-sankey,
       >.c-columns-selector {
-        left: 90%;
+        left: 91%;
       }
     }
 
@@ -66,7 +66,7 @@ body, html {
       transition: width .45s $ease-in-out-sine;
 
       &.-fullscreen {
-        width: calc(90% - 376px);
+        width: calc(91% - 366px);
       }
     }
 
@@ -74,8 +74,9 @@ body, html {
       top: 32px;
       left: $map-width + $layer-map-width;
       width: calc(100% - #{$map-width + $layer-map-width + ($sankey-x-margin * 2)});
-      height: calc(100% - 96px);
+      height: calc(100% - 32px);
       margin: 0 $sankey-x-margin;
+      padding-bottom: $titlebar-height + 8px;
       transition: left .45s $ease-in-out-sine;
 
       .sankey {
@@ -95,11 +96,11 @@ body, html {
       width: calc(100% - #{$map-width + $layer-map-width});
     }
 
-    > .c-titlebar {
+    .c-titlebar {
       position: absolute;
-      left: $map-width + $layer-map-width;
-      top: calc(100% - #{$titlebar-height});
-      width: calc(100% - #{$map-width + $layer-map-width});
+      left: -16px;
+      bottom: 0;
+      width: calc(100% + 32px);
       padding-left: 16px;
       overflow: auto;
 
