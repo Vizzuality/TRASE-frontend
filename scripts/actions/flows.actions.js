@@ -159,7 +159,7 @@ export function loadNodes() {
         type: actions.GET_NODES, payload
       });
 
-      const selection = payload.mapDimensionsMetaJSON.layers.filter(dimension => dimension.isDefault);
+      const selection = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
       if (selection !== undefined) {
         selection.forEach((selectedDimension, index) => {
           const direction = (index === 0) ? 'vertical' : 'horizontal';
