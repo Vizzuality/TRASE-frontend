@@ -55,6 +55,8 @@ body, html {
       width: 376px;
       height: 100%;
       overflow-y: auto;
+      background: $background-white;
+      z-index: 2;
     }
 
     > .c-map {
