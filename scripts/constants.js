@@ -49,9 +49,8 @@ export const FLOWS_DEFAULT_STATE = {
     selectedNodesColorGroups: [],
     areNodesExpanded: false,
     selectedNodesData: [],
-    selectedColumnsIds: [3, 4, 6, 7],
     // TODO title should be inferred from the uid, not kept in state
-    selectedMapVariables: {
+    selectedMapDimensions: {
       horizontal: {
         uid: null,
         title: null
@@ -116,14 +115,14 @@ export const BASEMAPS = {
     url: 'https://api.mapbox.com/styles/v1/trasebase/cizi55y2r00122rl65a97ppz1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     labelsUrl: 'https://api.mapbox.com/styles/v1/traselabels/cizi59ohm00122spaghssyqsd/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2VsYWJlbHMiLCJhIjoiY2l6aTU4bm9sMDAyczMzazdwNWJ1MmFmbSJ9.zcNOZLokWun7cDwbArtV6g',
     attribution: '<span>&copy;</span> <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <span>&copy;</span> <a href="https://www.mapbox.com/about/maps/">Mapbox</a>',
-    thumbnail: 'https://cartodb-basemaps-4.global.ssl.fastly.net/light_all/2/2/1.png'
+    thumbnail: 'images/maps/thumb-basemap-default.png'
   },
   positron: {
     title: 'Positron',
     url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
     labelsUrl: 'http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png',
     attribution: '<span>&copy;</span> <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <span>&copy;</span> <a href="https://carto.com/attributions">CARTO</a>',
-    thumbnail: 'https://cartodb-basemaps-4.global.ssl.fastly.net/light_all/2/2/1.png'
+    thumbnail: 'images/maps/thumb-basemap-default.png'
   },
 };
 
@@ -164,10 +163,6 @@ export const GA_ACTION_WHITELIST = [
   },
   {
     type: actions.TOGGLE_MAP_LAYERS_MENU
-  },
-  {
-    type: actions.SELECT_VECTOR_LAYERS,
-    getPayload: action => [action.layerData.title, action.layerData.direction].join(' - ')
   },
   {
     type: actions.SELECT_CONTEXTUAL_LAYERS,

@@ -10,7 +10,7 @@ import splitLinksByColumn from './helpers/splitLinksByColumn';
 import sortVisibleNodes from './helpers/sortVisibleNodes';
 import mergeLinks from './helpers/mergeLinks';
 import filterLinks from './helpers/filterLinks';
-import getMapVariables from './helpers/getMapVariables';
+import getMapDimensions from './helpers/getMapDimensions';
 import setNodesMeta from './helpers/setNodesMeta';
 import getChoropleth from './helpers/getChoropleth';
 import getNodesAtColumns from './helpers/getNodesAtColumns';
@@ -45,8 +45,26 @@ export default function (state = {}, action) {
   case actions.GET_COLUMNS: {
     const rawNodes = JSON.parse(action.payload[0]).data;
     const columns = JSON.parse(action.payload[1]).data;
+
+    const selectedColumnsIds = [];
+    columns.forEach(column => {
+      if (column.isDefault) {
+        selectedColumnsIds.push(column.id);
+      }
+    });
+
+    // TODO temp hacks while this gets implementend in the API
+    columns.forEach(column => {
+      if (column.group === 0) {
+        column.isGeo = true;
+      }
+    });
+    const municipalitiesColumn = columns.find(column => column.name === 'MUNICIPALITY');
+    const logisticsHubColumn = columns.find(column => column.name === 'LOGISTICS HUB');
+    logisticsHubColumn.useGeometryFromColumnId = municipalitiesColumn.id;
+
     const { nodesDict, geoIdsDict } = getNodesDict(rawNodes, columns);
-    newState = Object.assign({}, state, { columns, nodesDict, geoIdsDict, initialDataLoading: false });
+    newState = Object.assign({}, state, { columns, nodesDict, geoIdsDict, initialDataLoading: false, selectedColumnsIds });
     break;
   }
 
@@ -57,16 +75,16 @@ export default function (state = {}, action) {
   case actions.GET_NODES: {
     const nodesMeta = action.payload.nodesJSON.data;
 
-    const mapVariablesMeta = action.payload.mapVariablesMetaJSON;
-    const rawMapVariables = mapVariablesMeta.variables;
-    const mapVariables = getMapVariables(rawMapVariables);
+    const mapDimensionsMeta = action.payload.mapDimensionsMetaJSON;
+    const rawMapDimensions = mapDimensionsMeta.dimensions;
+    const mapDimensions = getMapDimensions(rawMapDimensions);
 
-    const mapVariablesFolders = mapVariablesMeta.folders;
+    const mapDimensionsFolders = mapDimensionsMeta.dimensionGroups;
 
-    // store layer values in nodesDict as uid: layerValue
-    const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, mapVariables);
+    // store dimension values in nodesDict as uid: dimensionValue
+    const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, mapDimensions);
 
-    newState = Object.assign({}, state, { mapVariables, mapVariablesFolders, nodesDictWithMeta });
+    newState = Object.assign({}, state, { mapDimensions, mapDimensionsFolders, nodesDictWithMeta });
     break;
   }
 
@@ -189,21 +207,21 @@ export default function (state = {}, action) {
     break;
   }
 
-  case actions.SELECT_MAP_VARIABLES: {
-    const selectedMapVariables = Object.assign({}, state.selectedMapVariables);
-    const currentUidForDirection = selectedMapVariables[action.variableData.direction].uid;
-    const nextUid = action.variableData.uid;
-    selectedMapVariables[action.variableData.direction] = {
-      title: action.variableData.title,
+  case actions.SELECT_MAP_DIMENSIONS: {
+    const selectedMapDimensions = Object.assign({}, state.selectedMapDimensions);
+    const currentUidForDirection = selectedMapDimensions[action.dimensionData.direction].uid;
+    const nextUid = action.dimensionData.uid;
+    selectedMapDimensions[action.dimensionData.direction] = {
+      title: action.dimensionData.title,
       uid: (currentUidForDirection === nextUid) ? null : nextUid
     };
 
     // get a geoId <-> color dict
-    const choropleth = (selectedMapVariables.horizontal.uid === null && selectedMapVariables.vertical.uid === null) ?
+    const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ?
       {} :
-      getChoropleth(selectedMapVariables, state.nodesDictWithMeta);
+      getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
 
-    newState = Object.assign({}, state, { selectedMapVariables, choropleth });
+    newState = Object.assign({}, state, { selectedMapDimensions, choropleth });
     break;
   }
   case actions.SELECT_CONTEXTUAL_LAYERS: {

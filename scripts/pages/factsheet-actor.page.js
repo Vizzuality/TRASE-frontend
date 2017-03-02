@@ -104,7 +104,7 @@ const _init = ()  => {
   const commodity = urlParams.commodity || defaults.commodity;
 
 
-  fetch(`${API_URL}/v1/get_actor_node_attributes?node_id=${nodeId}&country=Brazil&commodity=soy`)
+  fetch(`${API_V1_URL}/v1/get_actor_node_attributes?node_id=${nodeId}&country=Brazil&commodity=soy`)
     .then((response) => {
       if (response.status === 404) {
         _showErrorMessage();

@@ -74,7 +74,8 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({ name: 'common' }),
     new webpack.DefinePlugin({
       NODE_ENV_DEV: process.env.NODE_ENV === 'development',
-      API_URL: JSON.stringify(process.env.API_URL),
+      API_V1_URL: JSON.stringify(process.env.API_V1_URL),
+      API_V2_URL: JSON.stringify(process.env.API_V2_URL),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       API_CMS_URL: JSON.stringify(process.env.API_CMS_URL),
       API_STORY_CONTENT: JSON.stringify(process.env.API_STORY_CONTENT)
