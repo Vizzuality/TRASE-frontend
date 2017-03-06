@@ -1,10 +1,10 @@
-<% for(let [ i, basemap ] in Object.entries(basemaps)) { %>
+<% Object.keys(basemaps).forEach(function (i) { %>
   <li class="layer-item">
-    <div class="map-thumb" style="background-image: url('<%= basemap.thumbnail %>');">
-      <span class="layer-name"><%= basemap.title %></span>
+    <div class="map-thumb" style="background-image: url('<%= basemaps[i].thumbnail %>');">
+      <span class="layer-name"><%= basemaps[i].title %></span>
     </div>
     <div class="radios">
       <div class="c-radio-btn -no-self-cancel" data-group="horizontal" value="<%= i %>"></div>
     </div>
   </li>
-<%};%>
+<%});%>
