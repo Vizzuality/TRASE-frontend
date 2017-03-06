@@ -7,125 +7,124 @@
 <body>
   <div class="tooltip-layout is-hidden"></div>
   <div class="loading-wrapper">
-  <%= htmlWebpackPlugin.options.icons %>
-  <div class="l-flows">
+    <%= htmlWebpackPlugin.options.icons %>
+    <div class="l-flows">
 
-    <%= htmlWebpackPlugin.options.nav %>
+      <%= htmlWebpackPlugin.options.nav %>
 
-    <div class="veil js-veil"></div>
-    <div class="c-modal js-modal"></div>
+      <div class="veil js-veil"></div>
+      <div class="c-modal js-modal"></div>
 
-    <div class="c-titlebar">
-      <div class="search js-search-container">
-        <div class="c-search js-search">
-          <label for="search-input">Search for:</label>
-          <input class="js-search-input" id="search-input" placeholder="producer, trader or country of import" />
-          <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
-        </div>
+      <div class="flow-content">
+        <div class="c-basemap-options is-absolute">
+          <div class="explanation">
+            <span class="explanation-text">choose one layer on each column to draw comparisons</span>
+            <div class="chroropleth-distribution-sample">
+              <div class="sample -vertical"></div>
+              <div class="sample -horizontal"></div>
+            </div>
+          </div>
+          <ul class="layer-list js-layer-list">
+            <!-- this is rendered by map-layers.component -->
+          </ul>
+
+          <div class="explanation">
+            <span class="explanation-text">Contextual layers</span>
+          </div>
+          <ul class="layer-list js-layer-contextual">
+            <!-- this is rendered by map-context.component -->
+          </ul>
+
+          <div class="explanation">
+            <span class="explanation-text">Basemaps</span>
+          </div>
+          <ul class="layer-list js-layer-basemaps">
+            <!-- this is rendered by map-basemaps.component -->
+          </ul>
       </div>
-      <div class="js-nodes-titles-container">
-        <div class="c-nodes-titles js-nodes-titles"></div>
-        <div class="contain-button-discard">
-          <span id="clear-span">DISCARD SELECTION</span>
-          <svg id="clear-icon" class="icon"><use xlink:href="#icon-rubbish"></use></svg>
-        </div>
-      </div>
-    </div>
 
-    <div class="flow-content">
-      <div class="c-basemap-options is-absolute">
-        <div class="explanation">
-          <span class="explanation-text">choose one layer on each column to draw comparisons</span>
-          <div class="chroropleth-distribution-sample">
-            <div class="sample -vertical"></div>
-            <div class="sample -horizontal"></div>
+        <div class="c-map is-absolute">
+          <div id="js-map" class="c-map-leaflet">
+            <div class="btn-map -basemap js-basemap-switcher">
+              <svg class="icon icon-layers"><use xlink:href="#icon-layers"></use></svg>
+            </div>
+          </div>
+          <div class="btn-map -toggle-map js-toggle-map">
+            <svg class="icon icon-dragger_dots"><use xlink:href="#icon-dragger_dots"></use></svg>
+          </div>
+          <div class="c-map-legend js-map-legend">
+            <div class="js-map-legend-choro c-map-legend-choro"></div>
+            <div class="js-map-legend-context c-map-legend-context"></div>
+          </div>
+          <div class="js-map-attribution c-map-attribution">
+            <!-- this is rendered by map.component -->
           </div>
         </div>
-        <ul class="layer-list js-layer-list">
-          <!-- this is rendered by map-layers.component -->
-        </ul>
 
-        <div class="explanation">
-          <span class="explanation-text">Contextual layers</span>
+        <div class="c-columns-selector is-absolute js-columns-selector">
+          <!-- this is rendered by columns-selector.component -->
         </div>
-        <ul class="layer-list js-layer-contextual">
-          <!-- this is rendered by map-context.component -->
-        </ul>
 
-        <div class="explanation">
-          <span class="explanation-text">Basemaps</span>
-        </div>
-        <ul class="layer-list js-layer-basemaps">
-          <!-- this is rendered by map-basemaps.component -->
-        </ul>
-    </div>
-    <div class="c-map is-absolute">
-      <div id="js-map" class="c-map-leaflet">
-        <div class="btn-map -basemap js-basemap-switcher">
-          <svg class="icon icon-layers"><use xlink:href="#icon-layers"></use></svg>
-        </div>
-        <div class="btn-map -toggle-map js-toggle-map"></div>
-      </div>
-      <div class="c-map-legend js-map-legend">
-        <div class="js-map-legend-choro c-map-legend-choro"></div>
-        <div class="js-map-legend-context c-map-legend-context"></div>
-      </div>
-      <div class="js-map-attribution c-map-attribution">
-        <!-- this is rendered by map.component -->
-      </div>
-    </div>
+        <div class="c-sankey is-absolute js-sankey">
+          <div class="c-loading js-loading">
+            Loading...
+          </div>
+          <div class="js-sankey-tooltip c-sankey-tooltip">
 
-      <div class="c-sankey is-absolute js-sankey">
-        <div class="c-loading js-loading">
-          Loading...
-        </div>
-        <div class="js-sankey-tooltip c-sankey-tooltip">
-
-        </div>
-        <svg class="js-sankey-canvas sankey">
-          <defs>
-            <pattern id="isAggregatedPattern" x="0" y="0" width="1" height="3" patternUnits="userSpaceOnUse">
-              <rect x="0" y="0" width="50" height="1" fill="#ddd"/>
-              <rect x="0" y="1" width="50" height="2" fill="#fff"/>
-            </pattern>
-          </defs>
-          <g class="sankey-container">
-            <rect class="sankey-bg"></rect>
-            <g class="sankey-links"></g>
-            <g class="sankey-columns">
-              <g class="sankey-column">
-                <g class="sankey-nodes"></g>
-              </g>
-              <g class="sankey-column">
-                <g class="sankey-nodes"></g>
-              </g>
-              <g class="sankey-column">
-                <g class="sankey-nodes"></g>
-              </g>
-              <g class="sankey-column">
-                <g class="sankey-nodes"></g>
+          </div>
+          <svg class="js-sankey-canvas sankey">
+            <defs>
+              <pattern id="isAggregatedPattern" x="0" y="0" width="1" height="3" patternUnits="userSpaceOnUse">
+                <rect x="0" y="0" width="50" height="1" fill="#ddd"/>
+                <rect x="0" y="1" width="50" height="2" fill="#fff"/>
+              </pattern>
+            </defs>
+            <g class="sankey-container">
+              <g class="sankey-links"></g>
+              <g class="sankey-columns">
+                <g class="sankey-column">
+                  <g class="sankey-nodes"></g>
+                </g>
+                <g class="sankey-column">
+                  <g class="sankey-nodes"></g>
+                </g>
+                <g class="sankey-column">
+                  <g class="sankey-nodes"></g>
+                </g>
+                <g class="sankey-column">
+                  <g class="sankey-nodes"></g>
+                </g>
               </g>
             </g>
-          </g>
-        </svg>
-        <div class="expand-button js-expand">
-          <svg class="icon icon-outside-link"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-more-options"></use></svg>
-          <div class="c-sankey-tooltip">
-            <ul class="actions">
-              <li class="expand-action js-expand-action" data-collapsed-text="EXPAND SELECTED NODES" data-expanded-text="COLLAPSE SELECTED NODES">
-                <svg class="icon"><use xlink:href="#icon-more-options"></use></svg>
-              </li>
-              <li class="js-clear">CLEAR SELECTION</li>
-            </ul>
+          </svg>
+          <div class="expand-button js-expand">
+            <svg class="icon icon-outside-link"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-more-options"></use></svg>
+            <div class="c-sankey-tooltip">
+              <ul class="actions">
+                <li class="expand-action js-expand-action" data-collapsed-text="EXPAND SELECTED NODES" data-expanded-text="COLLAPSE SELECTED NODES">
+                  <svg class="icon"><use xlink:href="#icon-more-options"></use></svg>
+                </li>
+                <li class="js-clear">CLEAR SELECTION</li>
+              </ul>
+            </div>
           </div>
         </div>
+
+        <div class="c-titlebar">
+          <div class="search js-search-container">
+            <div class="c-search js-search">
+              <label for="search-input">Search for:</label>
+              <input class="js-search-input" id="search-input" placeholder="producer, trader or country of import" />
+              <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
+            </div>
+          </div>
+          <div class="c-nodes-titles js-nodes-titles"></div>
+        </div>
+
+        <div class="flow-veil is-hidden"></div>
       </div>
 
-      <div class="c-columns-selector is-absolute js-columns-selector">
-        <!-- this is rendered by columns-selector.component -->
-      </div>
     </div>
-  </div>
   </div>
   <%= htmlWebpackPlugin.options.scripts %>
 

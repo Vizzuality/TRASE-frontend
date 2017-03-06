@@ -1,16 +1,13 @@
 @import '../../settings';
 
 .c-map-legend {
+  height: 96px;
   padding: 0;
   background-color: $white;
-
   cursor: pointer;
-  z-index: 401;
-
 }
 
 .c-map-legend-choro {
-  margin-bottom: 10px;
 
   .bucket {
     &.ch-red-0 { background-color: $ch-red-0; };
@@ -35,133 +32,87 @@
   }
 
   .bucket-container {
-    display: flex;
     position: relative;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: flex-end;
+    border-top: 1px solid rgba($charcoal-grey, .2);
 
-    > .bucket-block {
+    .bucket-names {
       display: flex;
-      position: relative;
-      align-items: center;
-
-      .bucket-legend {
-        display: flex;
-        flex-wrap: wrap;
-        width: 85px;
-        height: 18px; // 16px content + 2px border
-
-        border: 1px solid $pinkish-grey-two;
-
-      }
-
-      .bucket-legend > .bucket-item > .bucket {
-        padding-bottom: 100%;
-      }
+      justify-content: space-between;
     }
 
-    > .bucket-footer {
-      margin: 16px 0 0;
+    .bucket-legend {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      width: 258px;
+      height: 18px;
+      border: 1px solid #6C787D;
+    }
 
-      > .icon-legend-arrow {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        height: 48px;
-        transform: translate(-50%, 0) rotate(90deg);
-      }
+    .bucket-legend > .bucket-item > .bucket {
+      height: 100%;
     }
 
     .layer-name {
-      max-width: 75px;
-      color: rgba($charcoal-grey, .5);
       font-family: $font-family-1;
-      font-size: $font-size-small;
-      letter-spacing: -.5px;
-      line-height: .8;
+      font-size: 11px;
+      letter-spacing: -1.1px;
+      color: $charcoal-grey;
       text-transform: uppercase;
     }
 
-    &.-horizontal {
-
-      > .bucket-block {
-        .bucket-legend > .bucket-item {
-          flex-basis: calc(100% / 5);
-        }
-
-        > .layer-name,
-        > .icon-legend-arrow {
-          display: none;
-        }
-      }
-
-      > .bucket-footer {
-        width: 100%;
-
-        > .layer-name {
-          max-width: 85px;
-        }
-      }
+    .icon-bidimensional-legend-arrows {
+      display: none;
+      position: absolute;
+      top: 46px;
+      left: -10px;
+      right: 0;
+      margin: auto;
+      width: 103px;
+      height: 40px;
     }
 
+    &.-horizontal,
     &.-vertical {
+      align-items: flex-end;
 
-      > .bucket-block {
+      .bucket-legend {
+        position: absolute;
+        right: 16px;
 
-        > .layer-name {
-          margin:  0 16px 0 0;
-        }
-
-        > .icon-legend-arrow {
-          position: absolute;
-          right: calc(26px - 6px);
-        }
-
-        > .bucket-legend {
-          flex-direction: column-reverse;
-          flex-wrap: nowrap;
-          width: 18px;
-          height: 100%;
+        .bucket-item {
+          flex-basis: calc(100% / 9);
         }
       }
 
-      > .bucket-footer {
+      > .icon-legend-arrow {
         display: none;
       }
     }
 
     &.-bidimensional {
+      height: 96px;
+      padding: 16px 0;
 
-      > .bucket-block {
-        .bucket-legend {
-          width: 48px;
-          height: 48px;
+      .bucket-names {
+        padding: 0 22px;
+      }
 
-          > .bucket-item {
-            flex-basis: calc(100% / 3);
-          }
-        }
+      .bucket-legend {
+        position: absolute;
+        top: 23px;
+        left: 130px;
+        width: 50px;
+        height: 50px;
+        transform: rotateZ(-45deg);
 
-        > .layer-name {
-          text-align: right;
+        > .bucket-item {
+          flex-basis: calc(100% / 3);
         }
       }
 
-      > .bucket-footer {
-        position: relative;
-        min-height: 16px;
-
-        > .layer-name {
-          max-width: 56px;
-        }
-
-        > .icon-legend-arrow {
-          top: auto;
-          right: 13px;
-          bottom: 3px;
-          left: auto;
-        }
+      .icon-bidimensional-legend-arrows {
+        display: block;
       }
     }
   }

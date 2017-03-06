@@ -1,17 +1,14 @@
 <div class="bucket-container js-bucket-legend <%= cssClass %>">
-  <div class="bucket-block">
+  <div class="bucket-names">
     <div class="layer-name"><%= title[0] %></div>
-    <svg class="icon icon-legend-arrow"><use xlink:href="#icon-legend-arrow"></use></svg>
-    <ul class="bucket-legend">
-      <% colors.forEach(function(color) { %>
-        <li class="bucket-item" >
-          <div class="bucket <%= color %>"></div>
-        </li>
-        <% }) %>
-      </ul>
-  </div>
-  <div class="bucket-footer">
-    <svg class="icon icon-legend-arrow"><use xlink:href="#icon-legend-arrow"></use></svg>
     <div class="layer-name "><%= title[1] %></div>
   </div>
+  <ul class="bucket-legend">
+    <% colors.forEach(function(color) { %>
+      <li class="bucket-item" >
+        <div class="bucket <%= color %>"></div>
+      </li>
+    <% }) %>
+  </ul>
+  <svg class="icon icon-bidimensional-legend-arrows"><use xlink:href="#icon-bidimensional-legend-arrows"></use></svg>
 </div>

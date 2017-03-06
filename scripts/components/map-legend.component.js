@@ -10,6 +10,7 @@ export default class {
     this.el.addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     this.choro = document.querySelector('.js-map-legend-choro');
     this.context = document.querySelector('.js-map-legend-context');
+    this.map = document.querySelector('.c-map');
 
     const zoom = document.querySelector('.leaflet-control-zoom');
     const scale = document.querySelector('.leaflet-control-scale');
@@ -71,10 +72,12 @@ export default class {
 
   _showLegend() {
     this.el.classList.remove('-hidden');
+    this.map.classList.add('-have-legend');
   }
 
   _hideLegend() {
     this.el.classList.add('-hidden');
+    this.map.classList.remove('-have-legend');
   }
 
   _cleanChoro() {

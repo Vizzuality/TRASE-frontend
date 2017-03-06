@@ -114,14 +114,14 @@ export const BASEMAPS = {
     title: 'Default',
     url: 'https://api.mapbox.com/styles/v1/trasebase/cizi55y2r00122rl65a97ppz1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     labelsUrl: 'https://api.mapbox.com/styles/v1/traselabels/cizi59ohm00122spaghssyqsd/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2VsYWJlbHMiLCJhIjoiY2l6aTU4bm9sMDAyczMzazdwNWJ1MmFmbSJ9.zcNOZLokWun7cDwbArtV6g',
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a>',
+    attribution: '<span>&copy;</span> <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <span>&copy;</span> <a href="https://www.mapbox.com/about/maps/">Mapbox</a>',
     thumbnail: 'images/maps/thumb-basemap-default.png'
   },
   positron: {
     title: 'Positron',
     url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
     labelsUrl: 'http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png',
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    attribution: '<span>&copy;</span> <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <span>&copy;</span> <a href="https://carto.com/attributions">CARTO</a>',
     thumbnail: 'images/maps/thumb-basemap-default.png'
   },
 };
