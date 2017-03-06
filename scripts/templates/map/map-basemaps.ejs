@@ -1,4 +1,4 @@
-<% for(let [ i, basemap ] of Object.entries(basemaps)) { %>
+<% for(let [ i, basemap ] in Object.entries(basemaps)) { %>
   <li class="layer-item">
     <div class="map-thumb" style="background-image: url('<%= basemap.thumbnail %>');">
       <span class="layer-name"><%= basemap.title %></span>
