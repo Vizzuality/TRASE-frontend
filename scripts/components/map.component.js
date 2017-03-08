@@ -102,18 +102,14 @@ export default class {
 
     window.clearTimeout(this.fitBoundsTimeout);
 
-    console.time('remove')
     if (this.vectorLinked) {
       this.map.removeLayer(this.vectorLinked);
     }
-    console.timeEnd('remove')
 
     if (!linkedGeoIds.length) {
       return;
     }
 
-    console.log(linkedGeoIds.length)
-    console.time('looking_up_polys')
     const linkedFeaturesClassNames = {};
 
     const linkedFeatures = linkedGeoIds.map(geoId => {
@@ -128,22 +124,17 @@ export default class {
       }
     });
 
-    console.timeEnd('looking_up_polys')
     _.pull(linkedFeatures, null);
 
     if (linkedFeatures.length > 0) {
-      console.time('create_layer')
       this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
       this.map.addLayer(this.vectorLinked);
       this.vectorLinked.eachLayer(layer => {
         layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
       });
-      console.timeEnd('create_layer')
 
       this.fitBoundsTimeout = window.setTimeout(() => {
-        console.time('fit')
         this.map.fitBounds(this.vectorLinked.getBounds());
-        console.timeEnd('fit')
       }, SANKEY_TRANSITION_TIME);
     }
 
@@ -247,7 +238,6 @@ export default class {
   _createCartoLayer(layerData /*, i */  ) {
     const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/{z}/{x}/{y}`;
     const layerUrl = `${baseUrl}.png`;
-    // console.log(layerUrl)
     const layer = new L.tileLayer(layerUrl, {
       pane: MAP_PANES.context
     });
@@ -268,7 +258,6 @@ export default class {
   }
 
   _getPolygonTypeLayer(geoJSON) {
-    console.time('time')
     var topoLayer = new L.GeoJSON(geoJSON, {
       pane: MAP_PANES.vectorMain,
       style: {
@@ -293,7 +282,6 @@ export default class {
         }
       });
     });
-    console.timeEnd('time')
     return topoLayer;
   }
 
