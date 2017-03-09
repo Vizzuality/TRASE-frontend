@@ -23,6 +23,7 @@ export default class {
     });
 
     this.contextLayers = [];
+    this.polygonFeaturesDict = {};
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
@@ -96,7 +97,6 @@ export default class {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
-
     // remove choropleth from main layer
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
 
@@ -109,10 +109,11 @@ export default class {
     if (!linkedGeoIds.length) {
       return;
     }
-    const linkedFeaturesClassNames = {};
-    const linkedFeatures = linkedGeoIds.map(geoId => {
-      const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === geoId);
 
+    const linkedFeaturesClassNames = {};
+
+    const linkedFeatures = linkedGeoIds.map(geoId => {
+      const originalPolygon = this.polygonFeaturesDict[geoId];
       if (originalPolygon !== undefined) {
         // copy class names (ie choropleth from vectorMain's original polygon)
         linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
@@ -237,7 +238,6 @@ export default class {
   _createCartoLayer(layerData /*, i */  ) {
     const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/{z}/{x}/{y}`;
     const layerUrl = `${baseUrl}.png`;
-    // console.log(layerUrl)
     const layer = new L.tileLayer(layerUrl, {
       pane: MAP_PANES.context
     });
@@ -266,6 +266,7 @@ export default class {
     });
 
     topoLayer.eachLayer(layer => {
+      this.polygonFeaturesDict[layer.feature.properties.geoid] = layer;
       const that = this;
       layer.on({
         mouseover: function() {
