@@ -59,6 +59,7 @@ export default class {
   }
 
   _openSearch() {
+    this.input.value = '';
     this.el.classList.remove('is-hidden');
     this.input.focus();
   }
