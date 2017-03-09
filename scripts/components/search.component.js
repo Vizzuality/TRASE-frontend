@@ -24,12 +24,11 @@ export default class {
           html = text;
         } else {
           // next two lines are borrowed from awesomeplete's default ._ITEM implementation
-          const s = input.trim().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-          html = text.replace(RegExp(s, 'gi'), '<mark>$&</mark>');
-          html = `<span class="node-name">${html}</span>`;
-
           const value = JSON.parse(text.value);
-          html += `<span class="node-type">${value.columnName}</span>`;
+          html = `<span class="node-type">${value.columnName}</span>`;
+
+          const s = input.trim().replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+          html += `<span class="node-name">${text.replace(RegExp(s, 'gi'), '<mark>$&</mark>')}</span>`;
         }
         const dom = document.createElement('li');
         dom.innerHTML = html;

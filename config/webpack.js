@@ -40,6 +40,7 @@ const pages = {
 };
 
 const htmlHeadTemplate = _.template(fs.readFileSync('./html/includes/_head.ejs', 'utf8'));
+const htmlSearchTemplate = _.template(fs.readFileSync('./html/includes/_search.ejs', 'utf8'));
 const htmlNavTemplate = _.template(fs.readFileSync('./html/includes/_nav.ejs', 'utf8'));
 const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
 
@@ -55,6 +56,7 @@ const getPagePlugin = (id, params) => {
       dev: process.env.NODE_ENV === 'development',
       GOOGLE_ANALYTICS_KEY: JSON.stringify(process.env.GOOGLE_ANALYTICS_KEY),
     }),
+    search: htmlSearchTemplate(),
     nav: htmlNavTemplate({page: id}),
     footer: htmlFooterTemplate(),
     scripts: htmlScriptsTemplate({bundle: id}),
