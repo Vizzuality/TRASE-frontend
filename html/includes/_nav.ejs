@@ -1,4 +1,3 @@
-
 <div class="c-nav">
   <div class="offset">
 
@@ -36,9 +35,19 @@
     <div class="left-side">
       <nav class="page-section-list">
         <li class="<%= page === 'flows' ? 'page-section -selected' : 'page-section' %>"><a href="/flows.html">Tool</a></li>
-        <li class="<%= page === 'factsheets' || page === 'factsheet-actor' || page === 'factsheet-place' ? 'page-section -selected' : 'page-section' %>"><a href="/factsheets.html">Factsheets</a></li>
+        <li class="<%= page.indexOf('factsheets') !== -1 ? 'page-section -selected' : 'page-section' %> -has-menu">
+          Profiles
+          <ul class="submenu">
+            <li class="page-section">
+              <a href="/factsheet-place.html">Profiles place</a>
+            </li>
+            <li class="page-section">
+              <a href="/factsheet-actor.html">Profiles trader</a>
+            </li>
+          </ul>
+        </li>
         <li class="<%= page === 'FAQ' ? 'page-section -selected' : 'page-section' %>"><a href="/FAQ.html">FAQ</a></li>
-        <li class="<%= page === 'about' ? 'page-section -selected -has-menu' : 'page-section -has-menu' %>">
+        <li class="<%= page === 'about' ? 'page-section -selected' : 'page-section' %> -has-menu">
           <a href="/about.html">About</a>
           <ul class="submenu">
             <li class="page-section">
