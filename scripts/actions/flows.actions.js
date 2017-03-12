@@ -1,9 +1,16 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
-import _  from 'lodash';
+import _ from 'lodash';
 import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
 import {
-  getURLFromParams, GET_ALL_NODES, GET_COLUMNS, GET_FLOWS, GET_NODES, GET_LINKED_GEO_IDS, GET_MAP_BASE_DATA
+  getURLFromParams,
+  GET_ALL_NODES,
+  GET_COLUMNS,
+  GET_FLOWS,
+  GET_NODES,
+  GET_LINKED_GEO_IDS,
+  GET_MAP_BASE_DATA,
+  GET_CONTEXTS
 } from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
 import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
@@ -24,23 +31,43 @@ export function resetState() {
     dispatch(loadLinks());
   };
 }
-export function selectCountry(country, reloadLinks) {
-  return _reloadLinks('country', country, actions.SELECT_COUNTRY, reloadLinks);
+export function selectCountry(country) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const context = state.flows.contexts.find(context => context.id === state.flows.selectedContextId);
+    let contextMatch = state.flows.contexts.find(elem => elem.commodityId === context.commodityId && elem.countryId === parseInt(country));
+
+    if (!contextMatch) {
+      contextMatch = state.flows.contexts.find(elem => elem.countryId === parseInt(country));
+    }
+
+    dispatch(setContext(contextMatch.id));
+  };
 }
-export function selectCommodity(commodity, reloadLinks) {
-  return _reloadLinks('commodity', commodity, actions.SELECT_COMMODITY, reloadLinks);
+
+export function selectCommodity(commodity) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const context = state.flows.contexts.find(context => context.id === state.flows.selectedContextId);
+    let contextMatch = state.flows.contexts.find(elem => elem.countryId === context.countryId && elem.commodityId === parseInt(commodity));
+
+    if (!contextMatch) {
+      contextMatch = state.flows.contexts.find(elem => elem.commodityId === parseInt(commodity));
+    }
+
+    dispatch(setContext(contextMatch.id));
+  };
 }
+
 export function selectBiomeFilter(biomeFilter, reloadLinks) {
   return _reloadLinks('biomeFilter', biomeFilter, actions.SELECT_BIOME_FILTER, reloadLinks);
 }
-export function selectQuant(quant, reloadLinks) {
-  return _reloadLinks('quant', quant, actions.SELECT_QUANT, reloadLinks);
+
+export function selectResizeBy(resizeBy, reloadLinks) {
+  return _reloadLinks('resizeBy', resizeBy, actions.SELECT_RESIZE_BY, reloadLinks);
 }
+
 export function selectRecolorBy(data) {
-  if (data.active !== undefined && data.active === 'false') {
-    return () => {
-    };
-  }
   return dispatch => {
     dispatch({
       type: actions.SELECT_RECOLOR_BY, value: data.value, value_type: data.type
@@ -90,14 +117,12 @@ export function selectContextualLayers(contextualLayers) {
 export function selectMapBasemap(selectedMapBasemap) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_BASEMAP,
-      selectedMapBasemap
+      type: actions.SELECT_BASEMAP, selectedMapBasemap
     });
   };
 }
 
 const _reloadLinks = (param, value, type, reloadLinks = true) => {
-  // console.log(param, value, type, reloadLinks)
   return dispatch => {
     const action = {
       type
@@ -111,13 +136,38 @@ const _reloadLinks = (param, value, type, reloadLinks = true) => {
 };
 
 export function loadInitialData() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch({
       type: actions.LOAD_INITIAL_DATA
     });
 
+    const contextURL = getURLFromParams(GET_CONTEXTS);
+
+    fetch(contextURL).then(resp => resp.text()).then(data => {
+      const payload = JSON.parse(data).data;
+
+      // load contexts
+      dispatch({
+        type: actions.LOAD_CONTEXTS, payload
+      });
+
+      const defaultContextId = payload.find(context => context.isDefault === true).id;
+
+      dispatch(setContext(defaultContextId, true));
+    });
+  };
+}
+
+export function setContext(contextId, isInitialContextSet = false) {
+  return dispatch => {
+
+    // load default params
+    dispatch({
+      type: (isInitialContextSet ? actions.LOAD_INITIAL_CONTEXT : actions.SET_CONTEXT), payload: contextId
+    });
+
     const params = {
-      country: getState().flows.selectedCountry, commodity: getState().flows.selectedCommodity
+      context_id: contextId
     };
     const allNodesURL = getURLFromParams(GET_ALL_NODES, params);
     const columnsURL = getURLFromParams(GET_COLUMNS, params);
@@ -127,6 +177,7 @@ export function loadInitialData() {
       dispatch({
         type: actions.GET_COLUMNS, payload: payload.slice(0, 2),
       });
+
       dispatch(loadNodes());
       dispatch(loadLinks());
       dispatch(loadMapVectorData());
@@ -141,8 +192,7 @@ export function loadNodes() {
       type: actions.LOAD_NODES
     });
     const params = {
-      country: getState().flows.selectedCountry.toUpperCase(),
-      commodity: getState().flows.selectedCommodity.toUpperCase(),
+      context_id: getState().flows.selectedContextId,
       year_start: getState().flows.selectedYears[0],
       year_end: getState().flows.selectedYears[1], // column_id: 2
     };
@@ -164,7 +214,9 @@ export function loadNodes() {
         selection.forEach((selectedDimension, index) => {
           const direction = (index === 0) ? 'vertical' : 'horizontal';
           dispatch(selectMapDimension({
-            direction, title: selectedDimension.name, uid: getNodeMetaUid(selectedDimension.type, selectedDimension.attributeId)
+            direction,
+            title: selectedDimension.name,
+            uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId)
           }));
         });
       }
@@ -174,17 +226,17 @@ export function loadNodes() {
 
 export function loadLinks() {
   return (dispatch, getState) => {
+
     dispatch({
       type: actions.LOAD_LINKS
     });
     const state = getState();
     const params = {
-      country: state.flows.selectedCountry.toUpperCase(),
-      commodity: state.flows.selectedCommodity.toUpperCase(),
+      context_id: state.flows.selectedContextId,
       year_start: state.flows.selectedYears[0],
       year_end: state.flows.selectedYears[1],
       include_columns: state.flows.selectedColumnsIds.join(','),
-      flow_quant: state.flows.selectedQuant
+      flow_quant: state.flows.selectedResizeBy.name
     };
 
     if (state.flows.detailedView === true) {
@@ -195,19 +247,27 @@ export function loadLinks() {
       params.n_nodes = NUM_NODES_SUMMARY;
     }
 
-    const selectRecolorByType = state.flows.selectedRecolorBy.type;
-    const selectRecolorByValue = state.flows.selectedRecolorBy.value;
-    if (selectRecolorByValue !== 'none') {
-      if (selectRecolorByType === 'qual') {
-        params.flow_qual = selectRecolorByValue;
-      } else if (selectRecolorByType === 'ind') {
-        params.flow_ind = selectRecolorByValue;
+    if (state.flows.selectedRecolorBy) {
+      if (state.flows.selectedRecolorBy.type === 'qual') {
+        params.flow_qual = state.flows.selectedRecolorBy.name;
+      } else if (state.flows.selectedRecolorBy.type === 'ind') {
+        params.flow_ind = state.flows.selectedRecolorBy.name;
       }
+
     }
+    // const selectRecolorByType = state.flows.selectedRecolorBy ? state.flows.selectedRecolorBy.type : null;
+    // const selectRecolorByValue = state.flows.selectedRecolorBy ? state.flows.selectedRecolorBy.value : null;
+    // if (selectRecolorByValue && selectRecolorByValue !== 'none') {
+    //   if (selectRecolorByType === 'qual') {
+    //     params.flow_qual = selectRecolorByValue;
+    //   } else if (selectRecolorByType === 'ind') {
+    //     params.flow_ind = selectRecolorByValue;
+    //   }
+    // }
 
     const selectedBiomeFilter = state.flows.selectedBiomeFilter;
-    if (selectedBiomeFilter !== 'none') {
-      params.biome_filter = selectedBiomeFilter;
+    if (selectedBiomeFilter && selectedBiomeFilter !== 'none') {
+      params.biome_filter_id = selectedBiomeFilter;
     }
 
     if (state.flows.areNodesExpanded) {
@@ -255,8 +315,15 @@ export function loadMapVectorData() {
       mapVectorData[geoColumn.id] = geometryData;
       if (geoColumn.useGeometryFromColumnId === undefined) {
         const geometryPromise = fetch(`${geoColumn.name}.topo.json`)
-          .then(resp => resp.text())
+          .then(response => {
+            if (response.status >= 200 && response.status < 300) {
+              return response.text();
+            }
+          })
           .then(payload => {
+            if (payload === undefined) {
+              return;
+            }
             const topoJSON = JSON.parse(payload);
             const key = Object.keys(topoJSON.objects)[0];
             const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
@@ -438,8 +505,7 @@ export function loadLinkedGeoIDs() {
       return;
     }
     const params = {
-      country: getState().flows.selectedCountry.toUpperCase(),
-      commodity: getState().flows.selectedCommodity.toUpperCase(),
+      context_id: getState().flows.selectedContextId,
       years: _.uniq([getState().flows.selectedYears[0], getState().flows.selectedYears[1]]),
       node_id: selectedNodesIds,
       target_column_id: getState().flows.selectedColumnsIds[0]

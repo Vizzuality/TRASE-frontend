@@ -37,7 +37,67 @@ export default function (state = {}, action) {
       expandedNodesIds: [],
       areNodesExpanded: false,
       selectedBiomeFilter: 'none',
-      recolourByNodeIds: []
+      recolorByNodeIds: []
+    });
+    break;
+  }
+  case actions.LOAD_CONTEXTS: {
+    newState = Object.assign({}, state, { contexts: action.payload });
+    break;
+  }
+
+  case actions.LOAD_INITIAL_CONTEXT: {
+    let context = state.contexts.find(context => context.id === state.selectedContextId);
+    if (!context) {
+      context = state.contexts.find(context => context.id === action.payload);
+    }
+
+    let recolorBy = context.recolorBy.find(recolorBy => recolorBy.name === state.selectedRecolorByName);
+    if (!recolorBy) {
+      recolorBy = context.recolorBy.find(recolorBy => recolorBy.isDefault === true);
+    }
+
+    let resizeBy;
+    if (state.selectedResizeByName === 'none') {
+      resizeBy = { type: 'none', name: 'none' };
+    } else {
+      resizeBy = context.resizeBy.find(resizeBy => resizeBy.name === state.selectedResizeByName);
+      if (!recolorBy) {
+        resizeBy = context.resizeBy.find(resizeBy => resizeBy.isDefault === true);
+      }
+    }
+
+    newState = Object.assign({}, state, {
+      selectedContext: context,
+      selectedContextId: context.id,
+      selectedYears: state.selectedYears || [context.defaultYear, context.defaultYear],
+      selectedRecolorBy: recolorBy || { type: 'none', name: 'none' },
+      selectedResizeBy: resizeBy,
+      mapView: context.map
+    });
+    break;
+  }
+
+  case actions.SET_CONTEXT: {
+    const contextId = action.payload;
+    const context = state.contexts.find(context => context.id === contextId);
+    const defaultRecolorBy = context.recolorBy.find(recolorBy => recolorBy.isDefault === true);
+    const defaultResizeBy = context.resizeBy.find(resizeBy => resizeBy.isDefault === true);
+
+    newState = Object.assign({}, state, {
+      selectedContext: context,
+      selectedContextId: contextId,
+      selectedYears: [context.defaultYear, context.defaultYear],
+
+      selectedRecolorBy: defaultRecolorBy || { type: 'none', name: 'none' },
+
+      selectedResizeBy: defaultResizeBy,
+
+      selectedBiomeFilter: 'none',
+      detailedView: false,
+      selectedNodesColorGroups: [],
+      recolorGroups: [],
+      mapView: context.map
     });
     break;
   }
@@ -53,7 +113,7 @@ export default function (state = {}, action) {
       }
     });
 
-    // TODO temp hacks while this gets implementend in the API
+    // TODO temp hacks while this gets implemented in the API
     columns.forEach(column => {
       if (column.group === 0) {
         column.isGeo = true;
@@ -61,10 +121,15 @@ export default function (state = {}, action) {
     });
     const municipalitiesColumn = columns.find(column => column.name === 'MUNICIPALITY');
     const logisticsHubColumn = columns.find(column => column.name === 'LOGISTICS HUB');
-    logisticsHubColumn.useGeometryFromColumnId = municipalitiesColumn.id;
+    if (logisticsHubColumn && municipalitiesColumn) {
+      logisticsHubColumn.useGeometryFromColumnId = municipalitiesColumn.id;
+    }
 
     const { nodesDict, geoIdsDict } = getNodesDict(rawNodes, columns);
-    newState = Object.assign({}, state, { columns, nodesDict, geoIdsDict, initialDataLoading: false, selectedColumnsIds });
+
+    newState = Object.assign({}, state, {
+      columns, nodesDict, geoIdsDict, initialDataLoading: false, selectedColumnsIds
+    });
     break;
   }
 
@@ -80,6 +145,7 @@ export default function (state = {}, action) {
     const mapDimensions = getMapDimensions(rawMapDimensions);
 
     const mapDimensionsFolders = mapDimensionsMeta.dimensionGroups;
+
     // store dimension values in nodesDict as uid: dimensionValue
     const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, mapDimensions);
 
@@ -93,6 +159,7 @@ export default function (state = {}, action) {
     const nodesMeta = jsonPayload.include;
 
     const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, nodesMeta, state.selectedColumnsIds);
+
     let visibleNodesByColumn = splitVisibleNodesByColumn(visibleNodes);
     visibleNodesByColumn = sortVisibleNodes(visibleNodesByColumn);
 
@@ -102,12 +169,7 @@ export default function (state = {}, action) {
     const links = mergeLinks(unmergedLinks);
 
     newState = Object.assign({}, state, {
-      links,
-      unmergedLinks,
-      visibleNodes,
-      visibleNodesByColumn,
-      visibleColumns,
-      linksLoading: false
+      links, unmergedLinks, visibleNodes, visibleNodesByColumn, visibleColumns, linksLoading: false
     });
     break;
   }
@@ -119,14 +181,6 @@ export default function (state = {}, action) {
     break;
   }
 
-  case actions.SELECT_COUNTRY:
-    newState = Object.assign({}, state, { selectedCountry: action.country });
-    break;
-
-  case actions.SELECT_COMMODITY:
-    newState = Object.assign({}, state, { selectedCommodity: action.commodity });
-    break;
-
   case actions.SELECT_BIOME_FILTER:
     newState = Object.assign({}, state, { selectedBiomeFilter: action.biomeFilter });
     break;
@@ -135,14 +189,18 @@ export default function (state = {}, action) {
     newState = Object.assign({}, state, { selectedYears: action.years });
     break;
 
-  case actions.SELECT_RECOLOR_BY:
-    newState = Object.assign({}, state, { selectedRecolorBy: { value: action.value, type: action.value_type} });
+  case actions.SELECT_RECOLOR_BY: {
+    const currentContext = state.contexts.find(context => context.id === state.selectedContextId);
+    const recolorBy = currentContext.recolorBy.find(recolorBy => recolorBy.name === action.value && recolorBy.type === action.value_type);
+    newState = Object.assign({}, state, { selectedRecolorBy: recolorBy });
     break;
-
-  case actions.SELECT_QUANT:
-    newState = Object.assign({}, state, { selectedQuant: action.quant });
+  }
+  case actions.SELECT_RESIZE_BY: {
+    const currentContext = state.contexts.find(context => context.id === state.selectedContextId);
+    const resizeBy = currentContext.resizeBy.find(resizeBy => resizeBy.name === action.resizeBy);
+    newState = Object.assign({}, state, { selectedResizeBy: resizeBy });
     break;
-
+  }
   case actions.SELECT_VIEW:
     newState = Object.assign({}, state, { detailedView: action.detailedView, forcedOverview: action.forcedOverview });
     break;
@@ -171,9 +229,7 @@ export default function (state = {}, action) {
     // TODO this prevents spamming browser history, but we should avoid touching it when changed state props are not on th url whitelist (constants.URL_STATE_PROPS)
     updateURLState = false;
     newState = Object.assign({}, state, {
-      highlightedNodesIds: action.ids,
-      highlightedNodeData: action.data,
-      highlightedGeoIds: action.geoIds
+      highlightedNodesIds: action.ids, highlightedNodeData: action.data, highlightedGeoIds: action.geoIds
     });
     break;
   }
@@ -187,12 +243,12 @@ export default function (state = {}, action) {
     let links;
     if (state.selectedNodesIds.length > 0) {
       const filteredLinks = filterLinks(state.unmergedLinks, selectedNodesAtColumns, nodesColoredBySelection, recolorGroups);
-      links =  mergeLinks(filteredLinks, true);
+      links = mergeLinks(filteredLinks, true);
     } else {
       links = mergeLinks(state.unmergedLinks);
     }
 
-    newState = Object.assign({}, state, { links, nodesColoredBySelection, recolorGroups});
+    newState = Object.assign({}, state, { links, nodesColoredBySelection, recolorGroups });
     break;
   }
 
@@ -211,14 +267,11 @@ export default function (state = {}, action) {
     const currentUidForDirection = selectedMapDimensions[action.dimensionData.direction].uid;
     const nextUid = action.dimensionData.uid;
     selectedMapDimensions[action.dimensionData.direction] = {
-      title: action.dimensionData.title,
-      uid: (currentUidForDirection === nextUid) ? null : nextUid
+      title: action.dimensionData.title, uid: (currentUidForDirection === nextUid) ? null : nextUid
     };
 
     // get a geoId <-> color dict
-    const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ?
-      {} :
-      getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
+    const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
 
     newState = Object.assign({}, state, { selectedMapDimensions, choropleth });
     break;
@@ -229,8 +282,7 @@ export default function (state = {}, action) {
       return _.cloneDeep(mapContextualLayersDict[layerSlug]);
     });
     newState = Object.assign({}, state, {
-      selectedMapContextualLayers: action.contextualLayers,
-      selectedMapContextualLayersData
+      selectedMapContextualLayers: action.contextualLayers, selectedMapContextualLayersData
     });
     break;
   }
@@ -272,12 +324,10 @@ export default function (state = {}, action) {
     const gaAction = GA_ACTION_WHITELIST.find(whitelistAction => action.type === whitelistAction.type);
     if (gaAction) {
       const gaEvent = {
-        hitType: 'event',
-        eventCategory: 'Sankey',
-        eventAction: gaAction.type
+        hitType: 'event', eventCategory: 'Sankey', eventAction: gaAction.type
       };
       if (gaAction.getPayload) {
-        gaEvent.eventLabel  = gaAction.getPayload(action, state);
+        gaEvent.eventLabel = gaAction.getPayload(action, state);
       }
       ga('send', gaEvent);
     }

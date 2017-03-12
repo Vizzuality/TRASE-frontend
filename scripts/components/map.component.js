@@ -13,7 +13,7 @@ export default class {
       zoomControl: false
     };
 
-    this.map = L.map('js-map', mapOptions).setView([-16, -50], 4);
+    this.map = L.map('js-map', mapOptions);
     new L.Control.Zoom({ position: 'bottomleft' }).addTo(this.map);
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(this.map);
 
@@ -30,6 +30,10 @@ export default class {
 
     this.attribution = document.querySelector('.js-map-attribution');
     this.attributionSource = document.querySelector('.leaflet-control-attribution');
+  }
+
+  setMapView(mapView) {
+    this.map.setView([mapView.latitude, mapView.longitude], mapView.zoom);
   }
 
   loadBasemap(basemapId) {
@@ -144,7 +148,7 @@ export default class {
   highlightPolygon(payload) { this._outlinePolygons(payload); }
 
   _outlinePolygons({selectedGeoIds, highlightedGeoId}) {
-    if (!this.currentPolygonTypeLayer) {
+    if (!this.currentPolygonTypeLayer || !selectedGeoIds) {
       return;
     }
 
@@ -174,14 +178,16 @@ export default class {
   }
 
   selectPolygonType(columnIds) {
-    if (!this.polygonTypesLayers) return;
+    if (!this.polygonTypesLayers || !columnIds.length) return;
     const id = columnIds[0];
     if (this.currentPolygonTypeLayer) {
       this.map.removeLayer(this.currentPolygonTypeLayer);
     }
 
     this.currentPolygonTypeLayer = this.polygonTypesLayers[id];
-    this.map.addLayer(this.currentPolygonTypeLayer);
+    if (this.currentPolygonTypeLayer) {
+      this.map.addLayer(this.currentPolygonTypeLayer);
+    }
   }
 
   loadContextLayers(selectedMapContextualLayersData) {

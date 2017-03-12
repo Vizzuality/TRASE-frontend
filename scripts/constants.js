@@ -36,17 +36,8 @@ export const APP_DEFAULT_STATE = {
 
 export const FLOWS_DEFAULT_STATE = {
   flows: {
-    selectedCountry: 'brazil',
-    selectedCommodity: 'soy',
-    selectedYears: [2015, 2015],
-    selectedQuant: 'volume',
-    detailedView: false,
-    // TODO value_type should be inferred from the value, not kept in state
-    selectedRecolorBy: { value: 'none', value_type: 'none' },
-    selectedBiomeFilter: 'none',
     selectedNodesIds: [],
     expandedNodesIds: [],
-    selectedNodesColorGroups: [],
     areNodesExpanded: false,
     selectedNodesData: [],
     // TODO title should be inferred from the uid, not kept in state
@@ -62,23 +53,8 @@ export const FLOWS_DEFAULT_STATE = {
     },
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
     selectedMapBasemap: 'default',
-    recolorGroups: []
   }
 };
-
-export const URL_STATE_PROPS = [
-  'selectedCountry',
-  'selectedCommodity',
-  'selectedYears',
-  'selectedQuant',
-  'detailedView',
-  'selectedRecolorBy',
-  'selectedBiomeFilter',
-  'selectedNodesIds',
-  'expandedNodesIds',
-  'areNodesExpanded',
-  'selectedColumnsIds'
-];
 
 // index
 export const HOMEPAGE_COMMODITY_WHITELIST = ['SOY'];
@@ -145,7 +121,7 @@ export const GA_ACTION_WHITELIST = [
     getPayload: action => action.value
   },
   {
-    type: actions.SELECT_QUANT,
+    type: actions.SELECT_RESIZE_BY,
     getPayload: action => action.quant
   },
   {
