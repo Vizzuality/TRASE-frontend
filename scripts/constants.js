@@ -39,6 +39,7 @@ export const FLOWS_DEFAULT_STATE = {
     selectedNodesIds: [],
     expandedNodesIds: [],
     areNodesExpanded: false,
+    detailedView: false,
     selectedNodesData: [],
     // TODO title should be inferred from the uid, not kept in state
     selectedMapDimensions: {
