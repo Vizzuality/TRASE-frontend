@@ -77,7 +77,7 @@
         <% if (index > 0 && resizeBy[index - 1].groupNumber !== resizeByVar.groupNumber) { %>
         <li class="js-dropdown-item dropdown-item -separator"></li>
         <% } %>
-        <li class="js-dropdown-item dropdown-item" <%= resizeByVar.isDisabled ? '' : `data-value="${resizeByVar.name}"` %>><%= _.capitalize(resizeByVar.label) %></li>
+        <li class="js-dropdown-item dropdown-item" <%= resizeByVar.isDisabled ? '' : 'data-value="' + resizeByVar.name + '"' %>><%= _.capitalize(resizeByVar.label) %></li>
         <% }) %>
         <% } %>
       </ul>
@@ -104,16 +104,16 @@
         <% } %>
 
         <li class="js-dropdown-item dropdown-item"
-                <%= recolorByVar.isDisabled ? '' : `data-value="${recolorByVar.name}" data-type="${recolorByVar.type}"` %>>
+                <%= recolorByVar.isDisabled ? '' : 'data-value="' + recolorByVar.name + '" data-type="' + recolorByVar.type + '"' %>>
           <div class="js-dropdown-item-title dropdown-item-title"><%= _.capitalize(recolorByVar.label) %></div>
 
           <% if (recolorByVar.minValue) { %>
-            <span class="dropdown-item-legend-unit"><%= recolorByVar.minValue %></span>
+          <span class="dropdown-item-legend-unit"><%= recolorByVar.minValue %></span>
           <% } %>
 
           <ul class="dropdown-item-legend -<%= recolorByVar.legendType %> js-dropdown-item-legend">
             <% recolorByVar.options.forEach(function(option) { %>
-              <li class="<%= option.class %>"><%= option.label %></li>
+            <li class="<%= option.class %>"><%= option.label %></li>
             <% }) %>
           </ul>
 
