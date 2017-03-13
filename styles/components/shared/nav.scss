@@ -5,11 +5,13 @@
   width: 100%;
   height: $nav-height;
   font-family: $font-family-1;
+  z-index: 2;
 
   nav {
     height: $nav-height;
 
-    li {
+    > li {
+      position: relative;
       display: inline-flex;
       align-items: center;
       height: 100%;
@@ -25,13 +27,21 @@
           display: block;
         }
       }
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
     }
 
     .submenu {
       display: none;
       position: absolute;
       top: $nav-height;
-      left: 0;
+      left: 14px;
       min-width: 200px;
     }
   }
@@ -40,4 +50,5 @@
 .c-nav-spacer {
   width: 100%;
   height: $nav-height;
+  background-color: $egg-shell;
 }
