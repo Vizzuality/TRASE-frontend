@@ -8,6 +8,7 @@ import _ from 'lodash';
 
 import Search from 'components/search.component.js';
 import { FACT_SHEET_NODE_TYPE_WHITELIST } from 'constants';
+import { getURLFromParams, GET_ALL_NODES } from '../utils/getURLFromParams';
 
 const _setSearch = () => {
 
@@ -41,7 +42,9 @@ const _setSearch = () => {
     window.location.href = url;
   };
 
-  fetch(`${API_V1_URL}/v1/get_all_nodes?&country=brazil&commodity=soy`)
+  const allNodesURL = getURLFromParams(GET_ALL_NODES);
+
+  fetch(allNodesURL)
     .then(response => response.json())
     .then((result) => {
 

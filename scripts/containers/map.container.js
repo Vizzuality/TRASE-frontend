@@ -5,6 +5,7 @@ import connect from 'connect';
 import Map from 'components/map.component.js';
 
 const mapMethodsToState = (state) => ({
+  setMapView: state.flows.mapView,
   showLoadedMap: {
     _comparedValue: (state) => state.flows.mapVectorData,
     _returnedValue: (state) => {
@@ -12,7 +13,7 @@ const mapMethodsToState = (state) => ({
         mapVectorData: state.flows.mapVectorData,
         currentPolygonType: state.flows.selectedColumnsIds,
         selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
-        recolourByNodeIds: state.flows.recolourByNodeIds,
+        recolorByNodeIds: state.flows.recolorByNodeIds,
         choropleth: state.flows.choropleth,
         linkedGeoIds: state.flows.linkedGeoIds
       };

@@ -69,7 +69,7 @@ const _setButton = () => {
   if (isValid) {
     findOutButton.innerHTML = 'FIND OUT HERE';
   } else {
-    findOutButton.innerHTML = 'COMMING SOON';
+    findOutButton.innerHTML = 'COMING SOON';
   }
 
   findOutButton.classList.toggle('-disabled', !isValid);

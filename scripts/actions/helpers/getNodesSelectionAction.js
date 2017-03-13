@@ -21,7 +21,7 @@ export default (nodesIds, state) => {
 };
 
 const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta, selectedMapDimensions) => {
-  if (selectedNodesIds === undefined) {
+  if (selectedNodesIds === undefined || visibleNodes === undefined) {
     return [];
   }
 
