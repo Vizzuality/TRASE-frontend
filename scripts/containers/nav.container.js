@@ -2,7 +2,7 @@
 // import _ from 'lodash';
 import connect from 'connect';
 import {
-  selectResizeBy, selectCountry, selectCommodity, selectBiomeFilter, selectYears, selectRecolorBy, selectView
+  selectResizeBy, selectContext, selectBiomeFilter, selectYears, selectRecolorBy, selectView
 } from 'actions/flows.actions';
 import Nav from 'components/nav.component.js';
 
@@ -15,8 +15,7 @@ const mapMethodsToState = (state) => ({
       };
     }
   },
-  selectCountry: state.flows.selectedContext,
-  selectCommodity: state.flows.selectedContext,
+  selectContext: state.flows.selectedContext,
   selectResizeBy: {
     _comparedValue: (state) => ({
       selectedCommodityId: state.flows.selectedResizeBy,
@@ -57,8 +56,7 @@ const mapMethodsToState = (state) => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  onCountrySelected: country => selectCountry(country),
-  onCommoditySelected: commodity => selectCommodity(commodity),
+  onContextSelected: context => selectContext(parseInt(context)),
   onResizeBySelected: resizeBy => selectResizeBy(resizeBy),
   onBiomeFilterSelected: biomeFilter => selectBiomeFilter(biomeFilter),
   onYearsSelected: years => selectYears(years),

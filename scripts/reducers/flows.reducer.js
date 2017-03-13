@@ -49,7 +49,7 @@ export default function (state = {}, action) {
   case actions.LOAD_INITIAL_CONTEXT: {
     let context = state.contexts.find(context => context.id === state.selectedContextId);
     if (!context) {
-      context = state.contexts.find(context => context.id === action.payload);
+      context = state.contexts.find(context => context.isDefault === true);
     }
 
     let recolorBy = context.recolorBy.find(recolorBy => recolorBy.name === state.selectedRecolorByName);
