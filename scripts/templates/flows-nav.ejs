@@ -1,0 +1,146 @@
+<div class="left-side">
+  <div class="offset-container js-logo">
+    <a class="trase-logo" href="/">
+      <img src="images/logos/logo-trase-beta.svg" alt="TRASE" />
+    </a>
+  </div>
+  <div class="nav-param">
+    <div class="c-dropdown" data-dropdown="country">
+      <span class="dropdown-label">Country</span>
+      <span class="js-dropdown-title dropdown-title -small">
+        -
+      </span>
+      <ul class="js-dropdown-list dropdown-list">
+        <% countries.forEach(function(country) { %>
+        <li class="js-dropdown-item dropdown-item" data-value="<%= country.id %>"><%= country.name %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="nav-param">
+    <div class="c-dropdown" data-dropdown="commodity">
+      <span class="dropdown-label">Commodity</span>
+      <span class="js-dropdown-title dropdown-title -small">
+        -
+      </span>
+      <ul class="js-dropdown-list dropdown-list">
+        <% commodities.forEach(function(commodity) { %>
+        <li class="js-dropdown-item dropdown-item" data-value="<%= commodity.id %>"><%= commodity.name %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+
+  <% if (filters) { %>
+  <div class="nav-param">
+    <div class="c-dropdown" data-dropdown="biomeFilter">
+      <span class="dropdown-label"><%= filters.name %></span>
+      <span class="js-dropdown-title dropdown-title -small">
+          -
+        </span>
+      <ul class="js-dropdown-list dropdown-list">
+        <li class="js-dropdown-item dropdown-item" data-value="none">All</li>
+        <% filters.nodes.forEach(function(node) { %>
+        <li class="js-dropdown-item dropdown-item"
+            data-value="<%= node.nodeId %>"><%= _.capitalize(node.name) %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+  <% } %>
+
+  <div class="nav-param">
+    <div class="c-dropdown" data-dropdown="years">
+      <span class="dropdown-label">years</span>
+      <span class="js-dropdown-title dropdown-title -small">
+        -
+      </span>
+      <ul class="js-dropdown-list dropdown-list">
+        <div class="js-years-slider c-years-slider"></div>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="right-side">
+  <div class="nav-param">
+    <div class="c-dropdown -small" data-dropdown="resize-by">
+      <span class="dropdown-label">Resize by</span>
+      <span class="js-dropdown-title dropdown-title -small">
+        -
+      </span>
+      <ul class="js-dropdown-list dropdown-list -right">
+        <% if (resizeBy) { %>
+        <% resizeBy.forEach(function(resizeByVar, index) { %>
+        <% if (index > 0 && resizeBy[index - 1].groupNumber !== resizeByVar.groupNumber) { %>
+        <li class="js-dropdown-item dropdown-item -separator"></li>
+        <% } %>
+        <li class="js-dropdown-item dropdown-item" <%= resizeByVar.isDisabled ? '' : 'data-value="' + resizeByVar.name + '"' %>><%= _.capitalize(resizeByVar.label) %></li>
+        <% }) %>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="nav-param -color js-qual-dropdown">
+    <div class="c-dropdown -small" data-dropdown="recolor-by">
+      <span class="dropdown-label">Recolour by</span>
+      <span class="js-dropdown-title dropdown-title -small">
+        -
+      </span>
+      <ul class="js-dropdown-list dropdown-list -large -right">
+        <li class="js-dropdown-item dropdown-item" data-value="none" data-type="none">
+          <div class="js-dropdown-item-title dropdown-item-title">Node selection</div>
+        </li>
+
+        <% if (recolorBy) { %>
+        <% recolorBy.forEach(function(recolorByVar, index) { %>
+
+        <% if (index > 0 && recolorBy[index - 1].groupNumber !== recolorByVar.groupNumber) { %>
+        <li class="js-dropdown-item dropdown-item -separator"></li>
+        <% } %>
+
+        <li class="js-dropdown-item dropdown-item"
+                <%= recolorByVar.isDisabled ? '' : 'data-value="' + recolorByVar.name + '" data-type="' + recolorByVar.type + '"' %>>
+          <div class="js-dropdown-item-title dropdown-item-title"><%= _.capitalize(recolorByVar.label) %></div>
+
+          <% if (recolorByVar.minValue) { %>
+          <span class="dropdown-item-legend-unit"><%= recolorByVar.minValue %></span>
+          <% } %>
+
+          <ul class="dropdown-item-legend -<%= recolorByVar.legendType %> js-dropdown-item-legend">
+            <% recolorByVar.options.forEach(function(option) { %>
+            <li class="<%= option.class %>"><%= option.label %></li>
+            <% }) %>
+          </ul>
+
+          <% if (recolorByVar.maxValue) { %>
+          <span class="dropdown-item-legend-unit"><%= recolorByVar.maxValue %></span>
+          <% } %>
+        </li>
+
+        <% }) %>
+        <% } %>
+      </ul>
+    </div>
+    <div class="dropdown-item-legend-summary js-dropdown-item-legend-summary">
+      <!-- legend summary is filled in in nav.component.selectRecolorBy -->
+    </div>
+  </div>
+
+  <div class="nav-param">
+    <div class="c-dropdown -small" data-dropdown="view">
+      <span class="dropdown-label">Change view</span>
+      <span class="js-dropdown-title dropdown-title -small">
+        -
+      </span>
+      <ul class="js-dropdown-list dropdown-list -right">
+        <li class="js-dropdown-item dropdown-item" data-value="false">Summary</li>
+        <li class="js-dropdown-item dropdown-item" data-value="true">Complete</li>
+      </ul>
+    </div>
+  </div>
+</div>

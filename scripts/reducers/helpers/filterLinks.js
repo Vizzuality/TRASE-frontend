@@ -22,8 +22,8 @@ export default function(links, selectedNodesAtColumns, nodesColoredBySelection, 
       const nodeIds = _.intersection(link.originalPath, nodesColoredBySelection);
       if (nodeIds) {
         let nodeId = nodeIds[0];
-        // clonedLink.recolourGroup = nodesColoredBySelection.length - nodesColoredBySelection.indexOf(nodeId);
-        clonedLink.recolourGroup = recolorGroups[nodeId];
+        // clonedLink.recolorGroup = nodesColoredBySelection.length - nodesColoredBySelection.indexOf(nodeId);
+        clonedLink.recolorGroup = recolorGroups[nodeId];
       }
       filteredLinks.push(clonedLink);
     }

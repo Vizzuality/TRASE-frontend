@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 // merges same origin / same destination / same qual links
-export default function(links, useRecolourGroups) {
+export default function(links, userecolorGroups) {
   const mergedLinks = [];
   let dict = {};
 
@@ -9,8 +9,8 @@ export default function(links, useRecolourGroups) {
     var link = links[i];
 
     let key = `${link.sourceNodeId}-${link.targetNodeId}`;
-    if (useRecolourGroups === true) {
-      key = `${key}-colourGroup${link.recolourGroup}`;
+    if (userecolorGroups === true) {
+      key = `${key}-colourGroup${link.recolorGroup}`;
     } else {
       key = `${key}--${link.qual}-${link.ind}`;
     }

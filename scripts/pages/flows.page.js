@@ -66,7 +66,6 @@ const start = (initialState) => {
   });
 };
 
-
 if (objParams.story) {
 
   // TODO display loading state while loading service
