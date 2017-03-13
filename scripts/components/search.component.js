@@ -7,8 +7,6 @@ export default class {
   onCreated() {
     this.el = document.querySelector('.js-search');
     this.input = this.el.querySelector('.js-search-input');
-    this.launcher = document.querySelector('.js-open-search');
-    this.closer = document.querySelector('.js-close-search');
     this.autocomplete = new Awesomplete(this.input, {
       data: node => {
         return {
@@ -42,6 +40,11 @@ export default class {
         this.input.value = text;
       }
     });
+  }
+
+  loadEvents() {
+    this.launcher = document.querySelector('.js-open-search');
+    this.closer = document.querySelector('.js-close-search');
 
     this.launcher.addEventListener('click', this._openSearch.bind(this));
     this.closer.addEventListener('click', this._closeSearch.bind(this));
