@@ -196,7 +196,9 @@ export function loadNodes() {
           dispatch(selectMapDimension({
             direction,
             title: selectedDimension.name,
-            uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId)
+            uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId),
+            bucket3: selectedDimension.bucket3,
+            bucket5: selectedDimension.bucket5
           }));
         });
       }
@@ -496,7 +498,7 @@ export function loadLinkedGeoIDs() {
       .then(res => res.text())
       .then(payload => {
         dispatch({
-          type: actions.GET_LINKED_GEOIDS, payload: JSON.parse(payload).nodes
+          type: actions.GET_LINKED_GEOIDS, payload: JSON.parse(payload)
         });
       });
   };
