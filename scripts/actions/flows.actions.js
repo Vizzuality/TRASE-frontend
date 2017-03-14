@@ -498,7 +498,7 @@ export function loadLinkedGeoIDs() {
       .then(res => res.text())
       .then(payload => {
         dispatch({
-          type: actions.GET_LINKED_GEOIDS, payload: JSON.parse(payload).nodes
+          type: actions.GET_LINKED_GEOIDS, payload: JSON.parse(payload)
         });
       });
   };
