@@ -267,7 +267,10 @@ export default function (state = {}, action) {
     const currentUidForDirection = selectedMapDimensions[action.dimensionData.direction].uid;
     const nextUid = action.dimensionData.uid;
     selectedMapDimensions[action.dimensionData.direction] = {
-      title: action.dimensionData.title, uid: (currentUidForDirection === nextUid) ? null : nextUid
+      title: action.dimensionData.title,
+      uid: (currentUidForDirection === nextUid) ? null : nextUid,
+      bucket3: action.dimensionData.bucket3,
+      bucket5: action.dimensionData.bucket5,
     };
 
     // get a geoId <-> color dict

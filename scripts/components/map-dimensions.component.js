@@ -13,7 +13,8 @@ export default class {
   }
 
   loadMapDimensions(dimensionsByGroup) {
-    // this.dimensionList.innerHTML = dimensions.map(dimension => MapDimensionsTemplate(dimension)).join('');
+    this.mapDimensions = dimensionsByGroup;
+
     this.layerList.innerHTML = MapDimensionsTemplate({dimensionGroups: dimensionsByGroup});
 
     this._setVars();
@@ -71,13 +72,24 @@ export default class {
   }
 
   _onToggleRadio(e) {
-    var radio = e && e.currentTarget;
+    const radio = e && e.currentTarget;
     if (!radio) return;
 
     const group = radio.getAttribute('data-group');
     const uid = radio.getAttribute('value');
     const title = this.layerList.querySelector(`.layer-item[data-layer-uid="${uid}"] .layer-name`).innerText;
     const currentSelectedRadio = this.layerList.querySelector('.c-radio-btn.-enabled');
+    const bucket =  this.mapDimensions[0].dimensions.filter(dimension => {
+      if (dimension.uid === uid){
+        return dimension;
+      }
+    }).concat(
+      this.mapDimensions[1].dimensions.filter(dimension => {
+        if (dimension.uid === uid){
+          return dimension;
+        }
+      })
+    );
 
     if (radio === currentSelectedRadio) {
       this._disableRadio(radio);
@@ -88,7 +100,9 @@ export default class {
     this.callbacks.onMapDimensionsSelected({
       direction: group, // 'vertical' or 'horizontal'
       title,
-      uid
+      uid,
+      bucket3: bucket[0].bucket3,
+      bucket5: bucket[0].bucket5
     });
   }
 

@@ -196,7 +196,9 @@ export function loadNodes() {
           dispatch(selectMapDimension({
             direction,
             title: selectedDimension.name,
-            uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId)
+            uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId),
+            bucket3: selectedDimension.bucket3,
+            bucket5: selectedDimension.bucket5
           }));
         });
       }

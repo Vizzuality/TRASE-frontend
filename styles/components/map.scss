@@ -13,7 +13,7 @@
 
   > .c-map-legend {
     position: absolute;
-    bottom: 24px;
+    bottom: 23px;
     width: 319px;
     z-index: 1001;
 
@@ -24,10 +24,12 @@
   }
 
   .leaflet-control-zoom {
-    left: -3px;
-    bottom: 62px;
+    left: 7px;
+    bottom: 72px;
     border: 0;
     box-shadow: $box-shadow;
+    margin-bottom: 0;
+    margin-left: 0;
 
     > a {
       width: 32px;
@@ -47,8 +49,9 @@
       width: 320px;
       margin: 0;
       padding: 5px 10px 4px 10px;
-      transition: bottom .3s;
       background: $charcoal-grey-faded;
+      transform: translateY(24px);
+      transition: transform .3s;
 
       .leaflet-control-scale-line {
         margin-right: 42px;
@@ -75,7 +78,6 @@
     bottom: 0;
     width: 319px;
     padding: 6px 8px;
-    border-top: 1px solid rgba($charcoal-grey, .2);
     background: $white;
     color: $charcoal-grey;
     font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
@@ -250,19 +252,10 @@
 
   &.-have-legend {
 
-    .leaflet-control-zoom {
-      bottom: 158px;
-    }
-
-    .btn-map.-basemap {
-      bottom: 128px;
-    }
-
     .leaflet-bottom.leaflet-left .leaflet-control-scale {
-      bottom: 22px;
 
       &.-visible {
-        bottom: 45px;
+        transform: translateY(0);
       }
     }
   }
