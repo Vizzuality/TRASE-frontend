@@ -3,37 +3,45 @@
     <div class="small-6 columns">
       <nav>
         <% if(page !== 'index') { %>
-          <li class="page-section"><a href="/">HOME</a></li>
+          <li class="nav-item">
+            <a href="/" class="nav-link">HOME</a>
+          </li>
         <% } %>
-        <li class="page-section"><a href="/flows.html">TOOL</a></li>
-        <li class="<%= page.indexOf('factsheets') !== -1 ? 'page-section -selected' : 'page-section' %> -has-menu">
-          PROFILES
-          <ul class="submenu">
-            <li class="page-section">
-              <a href="/factsheet-place.html">Profiles place</a>
+        <li class="nav-item">
+          <a href="/flows.html" class="nav-link">TOOL</a>
+        </li>
+        <li class="<%= page.indexOf('factsheets') !== -1 ? 'nav-item -selected' : 'nav-item' %> -has-menu">
+          <span class="nav-link">PROFILES</span>
+          <ul class="nav-submenu">
+            <li class="nav-item">
+              <a href="/factsheet-actor.html">COMPANIES</a>
             </li>
-            <li class="page-section">
-              <a href="/factsheet-actor.html">Profiles trader</a>
+            <li class="nav-item">
+              <a href="/factsheet-place.html">REGIONS</a>
             </li>
           </ul>
         </li>
-        <li class="<%= page === 'about' ? 'page-section -selected' : 'page-section' %> -has-menu">
-          <a href="/about.html">ABOUT</a>
-          <ul class="submenu">
-            <li class="page-section">
-              <a href="/terms-of-use.html">Terms of use</a>
+        <li class="<%= page === 'about' ? 'nav-item -selected' : 'nav-item' %> -has-menu">
+          <a href="/about.html" class="nav-link">ABOUT</a>
+          <ul class="nav-submenu">
+            <li class="nav-item">
+              <a href="/terms-of-use.html">TERMS OF USE</a>
             </li>
-            <li class="page-section">
-              <a href="/data-methods.html">Data and methods</a>
+            <li class="nav-item">
+              <a href="/data-methods.html">DATA AND METHODS</a>
             </li>
           </ul>
         </li>
-        <li class="<%= page === 'data' ? 'page-section -selected' : 'page-section' %>"><a href="#">DATA</a></li>
+        <li class="<%= page === 'data' ? 'nav-item -selected' : 'nav-item' %>"><a href="#">DATA</a></li>
       </nav>
     </div>
 
     <div class="small-6 columns">
-
+      <nav class="-right">
+        <div class="nav-item js-open-search">
+          <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
+        </div>
+      </nav>
     </div>
   </div>
 </div>

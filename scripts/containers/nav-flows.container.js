@@ -4,7 +4,7 @@ import connect from 'connect';
 import {
   selectResizeBy, selectCountry, selectCommodity, selectBiomeFilter, selectYears, selectRecolorBy, selectView
 } from 'actions/flows.actions';
-import Nav from 'components/nav.component.js';
+import Nav from 'components/nav-flows.component.js';
 
 const mapMethodsToState = (state) => ({
   render: {

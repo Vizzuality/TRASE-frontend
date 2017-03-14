@@ -8,7 +8,7 @@ import MapContextContainer from 'containers/map-context.container';
 import MapLegendContainer from 'containers/map-legend.container';
 import MapBasemapsContainer from 'containers/map-basemaps.container';
 import MapContainer from 'containers/map.container';
-import NavContainer from 'containers/nav.container';
+import NavContainer from 'containers/nav-flows.container';
 import TitlebarContainer from 'containers/titlebar.container';
 import NodesTitlesContainer from 'containers/nodesTitles.container';
 import SearchContainer from 'containers/search.container';
