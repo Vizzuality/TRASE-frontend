@@ -10,6 +10,7 @@
     <%= htmlWebpackPlugin.options.icons %>
     <div class="l-flows">
 
+      <%= htmlWebpackPlugin.options.search %>
       <%= htmlWebpackPlugin.options.nav %>
 
       <div class="veil js-veil"></div>
@@ -111,13 +112,6 @@
         </div>
 
         <div class="c-titlebar">
-          <div class="search js-search-container">
-            <div class="c-search js-search">
-              <label for="search-input">Search for:</label>
-              <input class="js-search-input" id="search-input" placeholder="producer, trader or country of import" />
-              <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
-            </div>
-          </div>
           <div class="c-nodes-titles js-nodes-titles"></div>
         </div>
 

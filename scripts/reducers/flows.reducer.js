@@ -208,7 +208,10 @@ export default function (state = {}, action) {
   case actions.SELECT_COLUMN: {
     // TODO also update choropleth with default selected indicators
     const selectedColumnsIds = [].concat(state.selectedColumnsIds);
-    selectedColumnsIds[action.columnIndex] = action.columnId;
+    if (selectedColumnsIds.indexOf(action.columnId) === -1) {
+      selectedColumnsIds[action.columnIndex] = action.columnId;
+    }
+
     newState = Object.assign({}, state, { selectedColumnsIds });
     break;
   }

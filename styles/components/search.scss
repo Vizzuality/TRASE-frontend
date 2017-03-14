@@ -2,70 +2,83 @@
 @import '../mixins';
 
 .c-search {
-  display: flex;
-  position: relative;
-  align-items: center;
-  width: 512px;
-  margin: auto;
-  color: $charcoal-grey;
-  font-family: $font-family-1;
-  font-size: $font-size-x-regular;
-
-  label {
-    width: 20%;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  background-color: $white;
+  z-index: 100;
 
   > .icon-search {
     position: absolute;
-    top: 50%;
-    right: 32px;
-    transform: translate(0, -50%);
+    top: 0;
+    bottom: 0;
+    right: 18px;
+    margin: auto;
+    width: 21px;
+    height: 22px;
   }
 
   .awesomplete {
-    width: 75%;
+    width: 100%;
+    height: 100%;
 
     > input {
+      position: relative;
       width: 100%;
-      height: 32px;
-      padding: 6px 10px;
-      border: 1px solid $medium-pink;
-      border-radius: 4px;
+      height: 100%;
+      padding: 2px 15px 0 15px;
       background: none;
       font-family: $font-family-1;
-      font-size: $font-size-x-regular;
-      text-transform: capitalize;
+      font-size: $font-size-medium;
+      letter-spacing: -1px;
+      color: $charcoal-grey;
+      outline: none;
+      box-shadow: 0 10px 20px 0 rgba($charcoal-grey, 0.2);
+      border-radius: 0;
+      z-index: 2;
+    }
 
-      &::placeholder {
-        text-transform: none;
-      }
+    > ul {
+      border-radius: 0;
+      margin: 0;
+      background: #f8f8f8;
+      border: 0;
+      box-shadow: none;
+      text-shadow: none;
+      transition: none;
 
-      &:focus {
-        border-width: 2px;
-        outline: none;
+      &:before {
+        display: none;
       }
     }
   }
 
   .awesomplete > ul > li {
     position: relative;
-    padding: 10px;
+    padding: 14px 15px;
     cursor: pointer;
+    border-bottom: solid 1px #dbe0e5;
 
     > .node-name {
-      font-weight: bold;
-      text-transform: capitalize;
+      position: relative;
+      left: -1px;
+      font-family: $font-family-1;
+      font-size: 17px;
+      letter-spacing: -0.5px;
+      color: $charcoal-grey;
+      text-transform: uppercase;
     }
 
     > .node-type {
       @include smallcaps;
-      display: inline-block;
-      margin-left: 10px;
+      display: block;
     }
-	}
+  }
 
   .awesomplete > ul > li:hover, .awesomplete > ul > li[aria-selected='true'] {
-    background: $manilla;
+    background: $egg-shell;
     color: $charcoal-grey;
   }
 
@@ -74,11 +87,19 @@
   }
 
   .awesomplete mark {
-    background: $medium-pink-faded;
+    background: $egg-shell;
   }
 
   .awesomplete li:hover mark, .awesomplete > ul > li[aria-selected='true'] mark {
-    background: $medium-pink-faded;
+    background: $egg-shell;
   }
 
+  .c-search__veil {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 56px);
+    background-color: rgba($charcoal-grey, .4);
+  }
 }

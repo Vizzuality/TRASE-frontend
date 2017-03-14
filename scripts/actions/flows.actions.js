@@ -463,7 +463,7 @@ export function searchNode(nodeId) {
       // 1. before: go to detailed mode and select
       // dispatch(selectView(true));
       // 2. as per SEI request: go to expanded node
-      dispatch(toggleNodesExpand(true, nodeId));
+      dispatch(toggleNodesExpand(true, [nodeId]));
 
     } else {
       dispatch(selectNode(nodeId, false));
