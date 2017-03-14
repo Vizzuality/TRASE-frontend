@@ -1,0 +1,78 @@
+.c-homepage {
+  margin-top: $nav-height;
+
+  .introduction {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    .intro-statement {
+
+      > .paragraph {
+        margin: 17px 0;
+      }
+    }
+
+    > .trase-logo {
+      display: flex;
+      justify-content: center;
+      margin: 0 0 56px;
+    }
+
+    > .btn-explore {
+      display: inline-block;
+      margin: 32px 0 0;
+      padding: 16px 28px;
+    }
+  }
+
+  .sliding-content {
+    margin-top: 65px;
+
+    .slider-title {
+      display: flex;
+      align-items: center;
+      padding-bottom: 65px;
+      color: rgba($charcoal-grey-faded, 0.3);
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      text-transform: uppercase;
+
+      &::after {
+        content: '';
+        height: 2px;
+        background-color: rgba($charcoal-grey-faded, 0.3);
+        flex: 1;
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .newsletter {
+    height: 160px;
+    width: 100%;
+    background-color: $white;
+
+    form {
+
+      .newsletter-label {
+        font-family: $font-family-2;
+        font-size: $font-size-xx-regular;
+        color: $charcoal-grey;
+      }
+
+      .newsletter-email {
+        font-family: $font-family-1;
+        border: solid 2px $charcoal-grey;
+        border-radius: 4px;
+        padding: 15px;
+        width: 100%;
+        max-width: 336px;
+
+        &::placeholder {
+          text-transform: none;
+        }
+      }
+    }
+  }
+}

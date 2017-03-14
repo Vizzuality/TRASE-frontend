@@ -10,11 +10,11 @@
 
     <%= htmlWebpackPlugin.options.nav %>
 
-    <div class="c-scroll-container">
+    <div class="c-homepage">
 
       <section class="c-scroll-section -intro-top">
         <div class="introduction row">
-            <div class="intro-statement column small-6">
+            <article class="intro-statement column small-6">
               <div class="trase-logo">
                 <img src="images/logos/new-logo-trase.svg" alt="TRASE"/>
               </div>
@@ -24,7 +24,7 @@
                 environmental impacts. But links to the markets engaged
                 in commodity trade remain obscure.
               </p>
-            </div>
+            </article>
         </div>
       </section>
 
@@ -34,7 +34,7 @@
 
       <section class="c-scroll-section -intro-bottom">
         <div class="introduction row">
-          <div class="intro-statement column small-6">
+          <article class="intro-statement column small-6">
             <p class="paragraph -white">
               Explore the unprecedented supply chain transparency enabled by Trase.
               Map the movement of agricultural commodities from the places of production all the
@@ -45,7 +45,31 @@
             <div>
               <a href="/flows.html" class="c-button -big -white -bold btn-explore">explore the tool</a>
             </div>
-          </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="c-scroll-section">
+        <article class="sliding-content row column">
+          <h3 class="slider-title">What can you dou with trase?</h3>
+        </article>
+        <article class="sliding-content row column">
+          <h3 class="slider-title">Latest updates</h3>
+        </article>
+        <article class="sliding-content row column">
+          <h3 class="slider-title">Trase on social media</h3>
+        </article>
+      </section>
+
+      <section class="newsletter">
+        <div class="row">
+          <form class="column small-6">
+            <label for="newsletter-email" class="newsletter-label">
+              Sign up here to receive news updates about TRASE
+            </label>
+            <input type="email" name="email" placeholder="email address" id="newsletter-email" class="newsletter-email">
+            <button type="submit" class="c-button -big">Subscribe</button>
+          </form>
         </div>
       </section>
 

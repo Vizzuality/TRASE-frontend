@@ -2,31 +2,6 @@
   height: calc(100vh - #{$nav-height});
   width: 100%;
 
-  .introduction {
-    height: 100%;
-    display: flex;
-    align-items: center;
-
-    .intro-statement {
-
-      > .paragraph {
-        margin: 17px 0;
-      }
-    }
-
-    > .trase-logo {
-      display: flex;
-      justify-content: center;
-      margin: 0 0 56px;
-    }
-
-    > .btn-explore {
-      display: inline-block;
-      margin: 32px 0 0;
-      padding: 16px 28px;
-    }
-  }
-
   &.-intro-top {
     background-image: url('./../public/images/backgrounds/intro-top.png');
     background-attachment: fixed;
