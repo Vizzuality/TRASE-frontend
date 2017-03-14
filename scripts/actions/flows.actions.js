@@ -31,31 +31,9 @@ export function resetState() {
     dispatch(loadLinks());
   };
 }
-export function selectCountry(country) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const context = state.flows.contexts.find(context => context.id === state.flows.selectedContextId);
-    let contextMatch = state.flows.contexts.find(elem => elem.commodityId === context.commodityId && elem.countryId === parseInt(country));
-
-    if (!contextMatch) {
-      contextMatch = state.flows.contexts.find(elem => elem.countryId === parseInt(country));
-    }
-
-    dispatch(setContext(contextMatch.id));
-  };
-}
-
-export function selectCommodity(commodity) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const context = state.flows.contexts.find(context => context.id === state.flows.selectedContextId);
-    let contextMatch = state.flows.contexts.find(elem => elem.countryId === context.countryId && elem.commodityId === parseInt(commodity));
-
-    if (!contextMatch) {
-      contextMatch = state.flows.contexts.find(elem => elem.commodityId === parseInt(commodity));
-    }
-
-    dispatch(setContext(contextMatch.id));
+export function selectContext(context) {
+  return dispatch => {
+    dispatch(setContext(context));
   };
 }
 
@@ -136,7 +114,7 @@ const _reloadLinks = (param, value, type, reloadLinks = true) => {
 };
 
 export function loadInitialData() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: actions.LOAD_INITIAL_DATA
     });
@@ -151,7 +129,9 @@ export function loadInitialData() {
         type: actions.LOAD_CONTEXTS, payload
       });
 
-      const defaultContextId = payload.find(context => context.isDefault === true).id;
+      const state = getState();
+
+      const defaultContextId = state.flows.selectedContextId || payload.find(context => context.isDefault === true).id;
 
       dispatch(setContext(defaultContextId, true));
     });
@@ -516,7 +496,7 @@ export function loadLinkedGeoIDs() {
       .then(res => res.text())
       .then(payload => {
         dispatch({
-          type: actions.GET_LINKED_GEOIDS, payload: JSON.parse(payload)
+          type: actions.GET_LINKED_GEOIDS, payload: JSON.parse(payload).nodes
         });
       });
   };
