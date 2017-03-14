@@ -19,6 +19,7 @@ import Table from 'components/table/table.component';
 import { getURLParams } from 'utils/stateURL';
 import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
+import { getURLFromParams, GET_PLACE_FACTSHEET } from '../utils/getURLFromParams';
 
 const defaults = {
   country: 'Brazil',
@@ -95,14 +96,14 @@ const _init = () => {
   const url = window.location.search;
   const urlParams = getURLParams(url);
   const nodeId = urlParams.nodeId;
-  const country = urlParams.country || defaults.country;
-  const commodity = urlParams.commodity || defaults.commodity;
 
   const commodityDropdown = new Dropdown('commodity', _onSelect);
 
   commodityDropdown.setTitle(defaults.commodity);
 
-  fetch(`${API_V1_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=${country}&commodity=${commodity}`)
+  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId});
+
+  fetch(placeFactsheetURL)
     .then((response) => {
       if (response.status === 404) {
         _showErrorMessage();

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { NODE_SELECTION_LINKS_NUM_COLORS } from 'constants';
 
 export default (previousNodesColoredBySelection, nextColoredBySelection, recolorGroups) => {
-  let nextRecolorGroups = _.cloneDeep(recolorGroups) || {};
+  let nextRecolorGroups = _.cloneDeep(recolorGroups) || [];
 
   // test for nodeIds not selected anymore
   if (previousNodesColoredBySelection) {

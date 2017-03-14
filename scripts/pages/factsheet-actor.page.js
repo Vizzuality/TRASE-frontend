@@ -17,6 +17,7 @@ import Table from 'components/table/table.component';
 
 import { getURLParams } from 'utils/stateURL';
 import _ from 'lodash';
+import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
 const defaults = {
   commodity: 'soy',
@@ -103,8 +104,9 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId});
 
-  fetch(`${API_V1_URL}/v1/get_actor_node_attributes?node_id=${nodeId}&country=Brazil&commodity=soy`)
+  fetch(actorFactsheetURL)
     .then((response) => {
       if (response.status === 404) {
         _showErrorMessage();

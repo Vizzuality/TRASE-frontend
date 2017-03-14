@@ -5,6 +5,8 @@ export const GET_NODES = 'GET_NODES';
 export const GET_FLOWS = 'GET_FLOWS';
 export const GET_MAP_BASE_DATA = 'GET_MAP_BASE_DATA';
 export const GET_LINKED_GEO_IDS = 'GET_LINKED_GEO_IDS';
+export const GET_PLACE_FACTSHEET = 'GET_PLACE_FACTSHEET';
+export const GET_ACTOR_FACTSHEET = 'GET_ACTOR_FACTSHEET';
 
 const API_ENDPOINTS = {
   [GET_CONTEXTS]: { version: 2, endpoint: '/get_contexts' },
@@ -14,6 +16,8 @@ const API_ENDPOINTS = {
   [GET_FLOWS]: { version: 1, endpoint: '/get_flows' },
   [GET_MAP_BASE_DATA]: { version: 2, endpoint: '/get_map_base_data' },
   [GET_LINKED_GEO_IDS]: { version: 2, endpoint: '/get_linked_geoids' },
+  [GET_PLACE_FACTSHEET]: { version: 1, endpoint: '/get_place_node_attributes' },
+  [GET_ACTOR_FACTSHEET]: { version: 1, endpoint: '/get_actor_node_attributes' },
 };
 
 function getURLForV2(endpoint, params = {}) {

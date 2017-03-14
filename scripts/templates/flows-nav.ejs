@@ -5,28 +5,17 @@
     </a>
   </div>
   <div class="nav-param">
-    <div class="c-dropdown" data-dropdown="country">
-      <span class="dropdown-label">Country</span>
+    <div class="c-dropdown" data-dropdown="context">
+      <span class="dropdown-label">Country - Commodity</span>
       <span class="js-dropdown-title dropdown-title -small">
         -
       </span>
       <ul class="js-dropdown-list dropdown-list">
-        <% countries.forEach(function(country) { %>
-        <li class="js-dropdown-item dropdown-item" data-value="<%= country.id %>"><%= country.name %></li>
-        <% }) %>
-      </ul>
-    </div>
-  </div>
-
-  <div class="nav-param">
-    <div class="c-dropdown" data-dropdown="commodity">
-      <span class="dropdown-label">Commodity</span>
-      <span class="js-dropdown-title dropdown-title -small">
-        -
-      </span>
-      <ul class="js-dropdown-list dropdown-list">
-        <% commodities.forEach(function(commodity) { %>
-        <li class="js-dropdown-item dropdown-item" data-value="<%= commodity.id %>"><%= commodity.name %></li>
+        <% contexts.forEach(function(context) { %>
+        <li class="js-dropdown-item dropdown-item" <%= context.isDisabled ? '' : 'data-value="' + context.id + '"'
+        %>><%= _.capitalize(context
+                  .countryName) %> - <%=
+            _.capitalize(context.commodityName) %></li>
         <% }) %>
       </ul>
     </div>

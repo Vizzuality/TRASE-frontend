@@ -21,34 +21,24 @@ export default class {
 
   render({ contexts, selectedContextId }) {
     let currentContext = contexts ? contexts.find(elem => elem.id === selectedContextId) : null;
-    let countries = [];
-    let commodities = [];
     let filters = null;
     let resizeBy = null;
     let recolorBy = null;
 
     if (currentContext) {
-      countries = _.uniqBy(contexts.map(elem => ({
-        name: _.capitalize(elem.countryName), id: elem.countryId
-      })), elem => elem.name);
-      commodities = _.uniqBy(contexts.map(elem => ({
-        name: _.capitalize(elem.commodityName), id: elem.commodityId
-      })), elem => elem.name);
-
       filters = (currentContext.filterBy && currentContext.filterBy.length > 0) ? currentContext.filterBy[0] : null;
       resizeBy = currentContext.resizeBy.sort((a, b) => a.position > b.position);
       recolorBy = currentContext.recolorBy.sort((a, b) => (a.groupNumber === b.groupNumber) ? (a.position > b.position) : (a.groupNumber > b.groupNumber));
     }
 
     this.container.innerHTML = NavTemplate({
-      countries, commodities, filters, resizeBy, recolorBy: this._generateRecolorByOption(recolorBy)
+      contexts, filters, resizeBy, recolorBy: this._generateRecolorByOption(recolorBy)
     });
 
     if (currentContext) {
 
       // left side
-      this.countryDropdown = new Dropdown('country', this.callbacks.onCountrySelected);
-      this.commodityDropdown = new Dropdown('commodity', this.callbacks.onCommoditySelected);
+      this.contextDropdown = new Dropdown('context', this.callbacks.onContextSelected);
       if (filters) {
         this.biomeFilterDropdown = new Dropdown('biomeFilter', this.callbacks.onBiomeFilterSelected);
       }
@@ -139,18 +129,11 @@ export default class {
     this.biomeFilterDropdown.selectValue(value);
   }
 
-  selectCountry(selectedContext) {
-    if (!this.countryDropdown || !selectedContext || !selectedContext.countryId) {
+  selectContext(selectedContext) {
+    if (!this.contextDropdown || !selectedContext) {
       return;
     }
-    this.countryDropdown.selectValue(selectedContext.countryId);
-  }
-
-  selectCommodity(selectedContext) {
-    if (!this.commodityDropdown || !selectedContext || !selectedContext.commodityId) {
-      return;
-    }
-    this.commodityDropdown.selectValue(selectedContext.commodityId);
+    this.contextDropdown.selectValue(selectedContext.id);
   }
 
   selectResizeBy(value) {
