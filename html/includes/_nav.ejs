@@ -1,45 +1,44 @@
 <div class="c-nav">
   <div class="row">
-    <div class="small-6 columns">
+    <div class="small-12 columns">
       <nav>
-        <% if(page !== 'index') { %>
-          <li class="nav-item">
-            <a href="/" class="nav-link">HOME</a>
-          </li>
-        <% } %>
-        <li class="nav-item">
-          <a href="/flows.html" class="nav-link">TOOL</a>
-        </li>
-        <li class="<%= page.indexOf('factsheets') !== -1 ? 'nav-item -selected' : 'nav-item' %> -has-menu">
-          <span class="nav-link">PROFILES</span>
-          <ul class="nav-submenu">
-            <li class="nav-item">
-              <a href="/factsheet-actor.html">COMPANIES</a>
-            </li>
-            <li class="nav-item">
-              <a href="/factsheet-place.html">REGIONS</a>
-            </li>
-          </ul>
-        </li>
-        <li class="<%= page === 'about' ? 'nav-item -selected' : 'nav-item' %> -has-menu">
-          <a href="/about.html" class="nav-link">ABOUT</a>
-          <ul class="nav-submenu">
-            <li class="nav-item">
-              <a href="/terms-of-use.html">TERMS OF USE</a>
-            </li>
-            <li class="nav-item">
-              <a href="/data-methods.html">DATA AND METHODS</a>
-            </li>
-          </ul>
-        </li>
-        <li class="<%= page === 'data' ? 'nav-item -selected' : 'nav-item' %>"><a href="#">DATA</a></li>
-      </nav>
-    </div>
-
-    <div class="small-6 columns">
-      <nav class="-right">
-        <div class="nav-item js-open-search">
-          <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
+        <div class="left-side">
+          <% if(page !== 'index') { %>
+            <div class="nav-item">
+              <a href="/" class="nav-link">HOME</a>
+            </div>
+          <% } %>
+          <div class="nav-item">
+            <a href="/flows.html" class="nav-link">TOOL</a>
+          </div>
+          <div class="<%= page.indexOf('factsheets') !== -1 ? 'nav-item -selected' : 'nav-item' %> -has-menu">
+            <span class="nav-link">PROFILES</span>
+            <ul class="nav-submenu">
+              <li class="nav-submenu-item">
+                <a href="/factsheet-actor.html" class="nav-link">COMPANIES</a>
+              </li>
+              <li class="nav-submenu-item">
+                <a href="/factsheet-place.html" class="nav-link">REGIONS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="<%= page === 'about' ? 'nav-item -selected' : 'nav-item' %> -has-menu">
+            <a href="/about.html" class="nav-link">ABOUT</a>
+            <ul class="nav-submenu">
+              <li class="nav-submenu-item">
+                <a href="/terms-of-use.html" class="nav-link">TERMS OF USE</a>
+              </li>
+              <li class="nav-submenu-item">
+                <a href="/data-methods.html" class="nav-link">DATA AND METHODS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="<%= page === 'data' ? 'nav-item -selected' : 'nav-item' %>"><a href="#">DATA</a></div>
+        </div>
+        <div class="right-side">
+          <div class="nav-item js-open-search">
+            <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
+          </div>
         </div>
       </nav>
     </div>

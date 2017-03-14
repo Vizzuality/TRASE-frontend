@@ -7,26 +7,24 @@
   font-family: $font-family-1;
   z-index: 2;
 
+  > .columns {
+    display: flex;
+  }
+
   nav {
+    display: flex;
+    justify-content: space-between;
     height: $nav-height;
 
-    > .nav-item {
+    .nav-item {
       position: relative;
       display: inline-flex;
       align-items: center;
       height: 100%;
-      padding: 0 13px;
       font-size: 16px;
       font-weight: bold;
       letter-spacing: 0.5px;
       color: $charcoal-grey;
-
-      > .nav-link {
-        position: relative;
-        display: flex;
-        align-items: center;
-        height: 100%;
-      }
 
       &.-has-menu {
 
@@ -46,9 +44,9 @@
       &.-selected > .nav-link:before {
         content: "";
         position: absolute;
-        left: 0;
+        left: 16px;
         bottom: 0;
-        width: 100%;
+        width: calc(100% - 32px);
         height: 6px;
         background-color: $medium-pink;
       }
@@ -58,16 +56,16 @@
       display: none;
       position: fixed;
       top: $nav-height - 11;
+      margin-left: 16px;
       background-color: $white;
       box-shadow: 0 10px 20px 0 rgba($charcoal-grey, .2), 0 0 20px 0 rgba($charcoal-grey, .18);
       border: solid 1px rgba($charcoal-grey, .2);
       z-index: 1;
 
-      > .nav-item {
+      > .nav-submenu-item {
         display: flex;
         align-items: center;
         font-weight: normal;
-        padding: 0 16px;
         height: 48px;
 
         &:not(:first-child) {
@@ -103,8 +101,12 @@
       }
     }
 
-    &.-right {
-      text-align: right;
+    .nav-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0 16px;
     }
   }
 
