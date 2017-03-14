@@ -4,121 +4,59 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  <div class="loading-wrapper">
+<div class="loading-wrapper">
   <%= htmlWebpackPlugin.options.icons %>
   <div class="l-homepage">
 
-  <%= htmlWebpackPlugin.options.nav %>
+    <%= htmlWebpackPlugin.options.nav %>
 
-  <div class="wrap">
-    <section id="introduction" class="c-introduction">
-      <div class="trase-logo">
-        <img src="images/logos/logo-trase-big.svg" alt="TRASE" />
-      </div>
+    <div class="c-scroll-container">
 
-      <p class="paragraph -center">
-        Commodity production drives two thirds of tropical deforestation worldwide. This accelerates climate
-        change and is associated with many other social and environmental impacts.
-        But links to the markets engaged in commodity trade remain obscure.
-      </p>
-
-      <div class="c-workflow-graphic">
-        <ul class="supply-chain-list">
-          <li class="supply-chain-item">
-            <span class="description -top paragraph -center">Where are commodities produced?</span>
-              <svg class="icon icon-supply icon-supply-chain-1"><use xlink:href="#icon-supply-chain-1"></use></svg>
-          </li>
-            <li class="supply-chain-item">
-             <svg class="icon icon-supply icon-supply-chain-2"><use xlink:href="#icon-supply-chain-2"></use></svg>
-              <span class="description -bottom paragraph -center">Who trades<br/>in them?</span>
-          </li>
-            <li class="supply-chain-item">
-             <span class="description -top paragraph -center">Where are they consumed?</span>
-              <svg class="icon icon-supply icon-supply-chain-3"><use xlink:href="#icon-supply-chain-3"></use></svg>
-          </li>
-            <li class="supply-chain-item">
-             <svg class="icon icon-supply icon-supply-chain-4"><use xlink:href="#icon-supply-chain-4"></use></svg>
-              <span class="description -bottom paragraph -center">What are the sustainability risks and opportunities?</span>
-          </li>
-            <li class="supply-chain-item">
-             <span class="description -top paragraph -center">And how can we<br/>make a difference?</span>
-              <svg class="icon icon-supply icon-supply-chain-5"><use xlink:href="#icon-supply-chain-5"></use></svg>
-          </li>
-        </ul>
-      </div>
-
-      <p class="paragraph -center">
-        Explore the unprecedented supply chain transparency enabled by Trase.
-        Map the movement of agricultural commodities
-        from the places of production all the way to the country of
-        consumption, identifying the key supply chain actors along the way.
-      </p>
-
-      <a href="/flows.html" class="c-button -big -pink -bold btn-explore">explore the tool</a>
-
-      <div id="risks-map" class="c-map-risks">
-        <div class="map-container">
-          <h3 class="title -big -center -light">What are the sustainability risks associated with
-            the trade <br/>in
-            <div class="c-dropdown -homepage -big" data-dropdown="commodity">
-              <span class="js-dropdown-title dropdown-title">
-                -
-              </span>
-              <ul class="js-dropdown-list dropdown-list js-commodity-dropdown">
-                <li class="js-dropdown-item dropdown-item" data-value="Soy">Soy</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Coffee">Coffee</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Cocoa">Cocoa</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Cotton">Cotton</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Oilpalm">Oilpalm</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Sugar">Sugar</li>
-                <li class="js-dropdown-item dropdown-item" data-value="Beef">Beef</li>
-              </ul>
+      <section class="c-scroll-section -intro">
+        <div class="introduction row">
+            <div class="intro-statement column small-6">
+              <div class="trase-logo">
+                <img src="images/logos/new-logo-trase.svg" alt="TRASE"/>
+              </div>
+              <p class="paragraph">
+                Commodity production drives two thirds of tropical deforestation worldwide.
+                This accelerates climate change and is associated with many other social and
+                environmental impacts. But links to the markets engaged
+                in commodity trade remain obscure.
+              </p>
             </div>
-            from
-            <div class="c-dropdown -homepage -big" data-dropdown="country">
-              <span class="js-dropdown-title dropdown-title">
-                -
-              </span>
-              <ul class="js-dropdown-list dropdown-list js-country-dropdown">
-                <li class="js-dropdown-item dropdown-item" data-commodity="beef" data-value="Argentina">Argentina</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="beef,cotton,soy,sugar" data-value="Brazil">Brazil</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="coffee" data-value="Colombia">Colombia</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="oilpalm" data-value="Indonesia">Indonesia</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="beef,soy" data-value="Paraguay">Paraguay</li>
-                <li class="js-dropdown-item dropdown-item" data-commodity="cocoa" data-value="Peru">Peru</li>
-              </ul>
-            </div>
-            ?
-          </h3>
+        </div>
+      </section>
 
-          <div id="map" class="map">
-            <ul class="map-gallery-list">
-              <li class="map-gallery-item is-hidden" data-image-name="soy-brazil"><img src="images/maps/soy-brazil.jpg" alt="soy-brazil"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="soy-paraguay"><img src="images/maps/soy-paraguay.jpg" alt="soy-paraguay"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="coffee-colombia"><img src="images/maps/coffee-colombia.jpg" alt="coffee-colombia"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="cotton-brazil"><img src="images/maps/cotton-brazil.jpg" alt="cotton-brazil"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="sugar-brazil"><img src="images/maps/sugar-brazil.jpg" alt="sugar-brazil"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="oilpalm-indonesia"><img src="images/maps/oilpalm-indonesia.jpg" alt="oilpalm-indonesia"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="cocoa-peru"><img src="images/maps/cocoa-peru.jpg" alt="cocoa-peru"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="beef-argentina"><img src="images/maps/beef-argentina.jpg" alt="beef-argentina"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="beef-brazil"><img src="images/maps/beef-brazil.jpg" alt="beef-brazil"></li>
-              <li class="map-gallery-item is-hidden" data-image-name="beef-paraguay"><img src="images/maps/beef-paraguay.jpg" alt="beef-paraguay"></li>
-            </ul>
+      <section class="c-scroll-section -screenshot">
+        <div class="screenshot-container"></div>
+      </section>
+
+      <section class="c-scroll-section -intro">
+        <div class="introduction row">
+          <div class="intro-statement column small-6">
+            <p class="paragraph">
+              Explore the unprecedented supply chain transparency enabled by Trase.
+              Map the movement of agricultural commodities from the places of production all the
+              way to the country of consumption,
+              identifying the key supply chain actors along the way.
+              But links to the markets engaged in commodity trade remain obscure.
+            </p>
+            <div>
+              <a href="/flows.html" class="c-button -big -pink -bold btn-explore">explore the tool</a>
+            </div>
           </div>
         </div>
+      </section>
 
-        <a href="/flows.html" class="c-button -big -transparent -bold btn-find-out js-find-out">find out here</a>
-      </div>
-    </section>
-  </div>
+    </div>
 
-    <section class="c-posts-grid js-posts-grid" id="posts"></section>
 
     <%= htmlWebpackPlugin.options.footer %>
 
   </div>
-  </div>
+</div>
 
-  <%= htmlWebpackPlugin.options.scripts %>
+<%= htmlWebpackPlugin.options.scripts %>
 </body>
 </html>

@@ -1,0 +1,49 @@
+.c-scroll-section {
+  height: calc(100vh - #{$nav-height});
+  width: 100%;
+
+  &.-intro {
+
+    .introduction {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      .intro-statement {
+
+        > .paragraph {
+          margin: 17px 0;
+        }
+      }
+
+      > .trase-logo {
+        display: flex;
+        justify-content: center;
+        margin: 0 0 56px;
+      }
+
+      > .btn-explore {
+        display: inline-block;
+        margin: 32px 0 0;
+        padding: 16px 28px;
+      }
+    }
+  }
+
+  &.-screenshot {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 50%;
+    right: 0;
+    top: 100%;
+
+    .screenshot-container {
+      height: 50%;
+      width: 100%;
+      transform: translateY(-100%);
+      background-image: url('./../public/images/backgrounds/app-screenshot@2x.png');
+      background-size: cover;
+    }
+  }
+}

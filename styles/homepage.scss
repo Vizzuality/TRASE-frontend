@@ -3,6 +3,7 @@
 'base',
 'texts',
 'mixins',
+'foundation',
 
 'layouts/l-homepage',
 
@@ -12,7 +13,7 @@
 'components/shared/footer',
 'components/shared/selector',
 
-'components/homepage/introduction',
+'components/homepage/scroll-container',
+'components/homepage/scroll-section',
 'components/homepage/workflow-graphic',
-'components/homepage/map-risks',
-'components/homepage/posts-grid';
+'components/homepage/map-risks';
