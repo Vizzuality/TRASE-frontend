@@ -17,8 +17,13 @@
   &.-pink {
     border-color: transparent;
     background-color: $medium-pink;
-
     color: $white;
+  }
+
+  &.-white {
+    border-color: transparent;
+    background-color: $white;
+    color: $medium-pink;
   }
 
   &.-transparent {
