@@ -1,0 +1,36 @@
+.c-updates {
+  .update {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .update-title-wrapper {
+      margin-bottom: 15px;
+      .update-type {
+        text-transform: uppercase;
+        font-family: $font-family-1;
+        font-size: $font-size-x-regular;
+        color: $medium-pink;
+      }
+
+      .update-title {
+        font-family: $font-family-2;
+        color: $charcoal-grey;
+        font-weight: $font-weight-light;
+        font-size: $font-size-medium;
+      }
+    }
+
+    .update-image-wrapper {
+      min-height: 300px;
+      .update-image {
+        border-radius: 4px;
+        width: 100%;
+        height: 160px;
+        background-image: url('./../public/images/mocks/two.jpg');
+        background-position: center;
+        background-size: cover;
+      }
+    }
+  }
+}
