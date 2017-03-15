@@ -37,6 +37,7 @@ module.exports = {
       API_CMS_URL: true,
       API_STORY_CONTENT: true,
       GOOGLE_ANALYTICS_KEY: true,
-      ga: true
+      ga: true,
+      fetch: true
     }
 };

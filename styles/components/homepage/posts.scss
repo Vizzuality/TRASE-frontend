@@ -1,0 +1,20 @@
+.c-posts {
+  width: 100%;
+
+  .post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .post-image {
+      height: 200px;
+      width: 100%;
+    }
+
+    .post-title {
+      font-family: $font-family-2;
+      font-size: $font-size-medium;
+      color: $charcoal-grey;
+    }
+  }
+}
