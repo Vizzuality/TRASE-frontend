@@ -3,8 +3,6 @@
 
   .introduction {
     height: 100%;
-    display: flex;
-    align-items: center;
 
     .intro-statement {
 
@@ -53,24 +51,27 @@
     width: 100%;
     background-color: $white;
 
-    form {
+    > .newsletter-content {
+      height: 100%;
 
-      .newsletter-label {
-        font-family: $font-family-2;
-        font-size: $font-size-xx-regular;
-        color: $charcoal-grey;
-      }
+      form {
+        .newsletter-label {
+          font-family: $font-family-2;
+          font-size: $font-size-xx-regular;
+          color: $charcoal-grey;
+        }
 
-      .newsletter-email {
-        font-family: $font-family-1;
-        border: solid 2px $charcoal-grey;
-        border-radius: 4px;
-        padding: 15px;
-        width: 100%;
-        max-width: 336px;
+        .newsletter-email {
+          font-family: $font-family-1;
+          border: solid 2px $charcoal-grey;
+          border-radius: 4px;
+          padding: 15px;
+          width: 100%;
+          max-width: 336px;
 
-        &::placeholder {
-          text-transform: none;
+          &::placeholder {
+            text-transform: none;
+          }
         }
       }
     }

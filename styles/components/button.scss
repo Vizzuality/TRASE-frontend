@@ -36,8 +36,13 @@
   &.-gray {
     border-color: transparent;
     background-color: $gray;
-
     color: $charcoal-grey;
+  }
+
+  &.-charcoal {
+    border-color: transparent;
+    background-color: $charcoal-grey;
+    color: $white;
   }
 
   &.-medium {
