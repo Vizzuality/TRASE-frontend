@@ -11,16 +11,8 @@
           <div class="nav-item">
             <a href="/flows.html" class="nav-link">TOOL</a>
           </div>
-          <div class="<%= page.indexOf('factsheets') !== -1 ? 'nav-item -selected' : 'nav-item' %> -has-menu">
-            <span class="nav-link">PROFILES</span>
-            <ul class="nav-submenu">
-              <li class="nav-submenu-item">
-                <a href="/factsheet-actor.html" class="nav-link">COMPANIES</a>
-              </li>
-              <li class="nav-submenu-item">
-                <a href="/factsheet-place.html" class="nav-link">REGIONS</a>
-              </li>
-            </ul>
+          <div class="<%= page.indexOf('factsheets') !== -1 ? 'nav-item -selected' : 'nav-item' %>">
+            <a href="/factsheets.html" class="nav-link">FACTSHEETS</a>
           </div>
           <div class="<%= page === 'about' ? 'nav-item -selected' : 'nav-item' %> -has-menu">
             <a href="/about.html" class="nav-link">ABOUT</a>

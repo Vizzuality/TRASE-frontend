@@ -93,7 +93,6 @@ export default class {
     this.AppNav = this.el.querySelector('.app-nav');
     this.FlowsNav = this.el.querySelector('.flows-nav');
     this.toggleBtn = this.el.querySelector('.js-toggle-menu');
-    this.logo = this.el.querySelector('.js-logo');
   }
 
   _setEventListeners() {
@@ -110,7 +109,6 @@ export default class {
   setAppMenuVisibility() {
     this.AppNav.classList.toggle('is-hidden', !this.state.visibilityAppMenu);
     this.FlowsNav.classList.toggle('is-hidden', this.state.visibilityAppMenu);
-    this.logo.classList.toggle('is-hidden', !this.state.visibilityAppMenu);
   }
 
   selectYears(years) {
