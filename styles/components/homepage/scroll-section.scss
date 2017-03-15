@@ -1,5 +1,5 @@
 .c-scroll-section {
-  min-height: calc(100vh - #{$nav-height});
+  height: calc(100vh - #{$nav-height});
   width: 100%;
 
   &.-intro-top {
@@ -18,5 +18,10 @@
     background-image: url('./../public/images/backgrounds/intro-bottom.jpg');
     background-attachment: fixed;
     background-size: cover;
+  }
+
+  &.-content {
+    height: unset;
+    min-height: calc(100vh - #{$nav-height});
   }
 }
