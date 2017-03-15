@@ -170,6 +170,10 @@
     <path fill="none" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M41.257 31.542l29.455-30.255"></path>
     <path fill="#6c787d" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M67.964 1.669l3.201-0.8-0.8 3.201z"></path>
   </symbol>
+  <symbol id="icon-arrow-next" viewBox="0 0 17 32">
+    <title>arrow-next</title>
+    <path fill="#ea6869" style="fill: var(--color1, #ea6869)" d="M0.275 30.394c-0.367 0.367-0.367 0.964 0.002 1.331 0.367 0.367 0.964 0.367 1.331-0.002l15.059-15.104c0.367-0.367 0.367-0.96 0-1.329l-14.969-15.014c-0.367-0.367-0.963-0.369-1.33-0.002-0.369 0.367-0.37 0.963-0.003 1.331l14.306 14.349-14.394 14.44z"></path>
+  </symbol>
 </defs>
 </svg>
 </div>
