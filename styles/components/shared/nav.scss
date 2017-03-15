@@ -237,6 +237,18 @@
       padding: 0 18px !important;
       border-left: 1px solid $pale-grey;
     }
+
+    .app-nav {
+
+      .nav-item {
+        padding: 0 !important;
+      }
+
+      .nav-link:before {
+        width: 100%;
+        left: 0;
+      }
+    }
   }
 }
 
