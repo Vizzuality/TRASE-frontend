@@ -15,30 +15,6 @@ body, html {
   width: 100%;
   height: 100%;
 
-  .c-nav {
-    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.15), 0 1px 6px 0 rgba(0, 0, 0, 0.2);
-
-
-    .row {
-      max-width: 100%;
-    }
-
-    .columns {
-      display: flex;
-      align-items: center;
-      padding-right: 0;
-      padding-left: 0;
-    }
-
-    .dropdown-list {
-      top: $nav-height;
-    }
-  }
-
-  .c-nav-spacer {
-    background-color: $white;
-  }
-
   .flows-nav {
     width: 100%;
   }

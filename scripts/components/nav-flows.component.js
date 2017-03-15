@@ -102,7 +102,7 @@ export default class {
   onToggleMenu() {
     Object.assign(this.state, { visibilityAppMenu: !this.state.visibilityAppMenu });
 
-    this.toggleBtn.classList.toggle('open');
+    this.toggleBtn.querySelector('.burger').classList.toggle('open');
     this.setAppMenuVisibility();
   }
 
