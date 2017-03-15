@@ -11,14 +11,14 @@ export default class {
   init() {
     const { selector, perPage, next, prev } = this.options;
     this.slider = new Siema({ selector, perPage });
-    if(next) this.el.querySelector(next).addEventListener('click', this.slider.next);
-    if(prev) this.el.querySelector(prev).addEventListener('click', this.slider.prev);
+    if(next) document.querySelector(next).addEventListener('click', () => this.slider.next());
+    if(prev) document.querySelector(prev).addEventListener('click', () => this.slider.prev());
   }
 
   destroy() {
     const { next, prev } = this.options;
-    if(next) this.el.querySelector(next).removeEventListener('click', this.slider.next);
-    if(prev) this.el.querySelector(prev).removeEventListener('click', this.slider.prev);
+    if(next) document.querySelector(next).removeEventListener('click', () => this.slider.next());
+    if(prev) document.querySelector(prev).removeEventListener('click', () => this.slider.prev());
     this.slider.destroy();
   }
 }

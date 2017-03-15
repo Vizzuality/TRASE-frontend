@@ -11,8 +11,9 @@ const state = {
       el: document.querySelector('.js-posts'),
       selector: '.js-posts-slider',
       endpoint: '/posts',
+      template: PostsTemplate,
       perPage: 3,
-      template: PostsTemplate
+      next: '.js-posts-next'
     },
     // {
     //   el: '.js-updates',
@@ -30,13 +31,13 @@ const state = {
 };
 
 
-const renderSlider = ({ el, selector, endpoint, perPage, template }) => {
+const renderSlider = ({ el, selector, endpoint, perPage, next, template }) => {
   fetch(API_CMS_URL + endpoint)
     .then(response => response.json())
     .then((data) => template({ posts: data }))
     .then((slides) => {
       el.insertAdjacentHTML('beforeend', slides);
-      setTimeout(() => {new Slider({ selector, perPage })});
+      setTimeout(() => {new Slider({ selector, perPage, next })});
     });
 };
 
