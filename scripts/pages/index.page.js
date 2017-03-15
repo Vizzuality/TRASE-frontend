@@ -43,9 +43,10 @@ const renderSlider = ({ el, selector, endpoint, perPage, next, template }) => {
 
 const _init = () => {
   const content = document.querySelector('.-content');
-  const nav = new Nav({
-    pageOffset: content.getBoundingClientRect().top
-  });
+  const padding = 65;
+  const navHeight = 64;
+  const pageOffset = content.getBoundingClientRect().top - padding - navHeight;
+  const nav = new Nav({ pageOffset });
   nav.onCreated();
   state.sliders.forEach(renderSlider);
 };
