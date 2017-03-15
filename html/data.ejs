@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%= htmlWebpackPlugin.options.head %>
+</head>
+<body>
+  <div class="loading-wrapper">
+    <%= htmlWebpackPlugin.options.icons %>
+    <%= htmlWebpackPlugin.options.nav %>
+      <div class="l-data">
+        <div class="row">
+          <div class="small-12 columns">
+            <div class="c-bulk-downloads">
+              <div class="c-bulk-downloads__title">BULK DOWNLOADS</div>
+              <div class="row">
+                <% for(var i = 0; i < 4; i++) { %>
+                  <div class="small-4 columns">
+                    <div class="c-bulk-downloads__item">
+                      <span>Brazilian Soy (all years)</span>
+                      <svg class="icon icon-download"><use xlink:href="#icon-download"></use></svg>
+                    </div>
+                  </div>
+                <% } %>
+              </div>
+            </div>
+            <div class="c-custom-dataset">
+              <div class="c-custom-dataset__title">CREATE A CUSTOM DATASET</div>
+              <div class="row">
+                <div class="small-9 columns">
+                  <div class="row">
+                    <div class="small-4 columns">
+                      <div class="c-custom-dataset-selector" data-type="value">
+                        <div class="c-custom-dataset-selector__header">PRODUCTION COUNTRIES</div>
+                        <ul class="c-custom-dataset-selector__values">
+                          <li>
+                            Argentina
+                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                          </li>
+                          <li class="-selected">
+                            Brazil
+                            <div class="c-radio-btn -enabled" data-group="horizontal" value=""></div>
+                          </li>
+                          <li>
+                            Colombia
+                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                          </li>
+                          <li>
+                            Indonesia
+                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                          </li>
+                          <li>
+                            Paraguay
+                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="small-4 columns">
+                      <div class="c-custom-dataset-selector" data-type="value">
+                        <div class="c-custom-dataset-selector__header">COMMODITIES</div>
+                        <ul class="c-custom-dataset-selector__values">
+                          <li>
+                            Beef
+                            <div class="c-radio-btn -disabled" data-group="horizontal" value=""></div>
+                          </li>
+                          <li>
+                            Cocoa
+                            <div class="c-radio-btn -disabled" data-group="horizontal" value=""></div>
+                          </li>
+                          <li>
+                            Coffee
+                            <div class="c-radio-btn -disabled" data-group="horizontal" value=""></div>
+                          </li>
+                          <li>
+                            Cotton
+                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                          </li>
+                          <li>
+                            Palm oil
+                            <div class="c-radio-btn -disabled" data-group="horizontal" value=""></div>
+                          </li>
+                          <li class="-selected">
+                            Soy
+                            <div class="c-radio-btn -enabled" data-group="horizontal" value=""></div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="small-4 columns">
+                      <div class="c-custom-dataset-selector -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
+                        <div class="c-custom-dataset-selector__header">
+                          YEARS
+                          <ul class="c-custom-dataset-selector__header-options">
+                            <li>
+                              <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                            </li>
+                          </ul>
+                        </div>
+                        <ul class="c-custom-dataset-selector__values">
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="small-4 columns">
+                      <div class="c-custom-dataset-selector -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
+                        <div class="c-custom-dataset-selector__header">
+                          COMPANIES
+                          <ul class="c-custom-dataset-selector__header-options">
+                            <li>
+                              <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                            </li>
+                          </ul>
+                        </div>
+                        <ul class="c-custom-dataset-selector__values">
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="small-4 columns">
+                      <div class="c-custom-dataset-selector -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
+                        <div class="c-custom-dataset-selector__header">
+                          CONSUMPTION COUNTRIES
+                          <ul class="c-custom-dataset-selector__header-options">
+                            <li>
+                              <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                            </li>
+                          </ul>
+                        </div>
+                        <ul class="c-custom-dataset-selector__values">
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="small-4 columns">
+                      <div class="c-custom-dataset-selector -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
+                        <div class="c-custom-dataset-selector__header">
+                          INDICATORS
+                          <ul class="c-custom-dataset-selector__header-options">
+                            <li>
+                              <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                            </li>
+                          </ul>
+                        </div>
+                        <ul class="c-custom-dataset-selector__values">
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="small-3 columns">
+                  <div class="c-custom-dataset__format-sidebar">
+                    <div class="c-custom-dataset-selector" data-type="format">
+                      <div class="c-custom-dataset-selector__header">OUTPUT TYPE</div>
+                      <ul class="c-custom-dataset-selector__values">
+                        <li class="-selected">
+                          Table
+                          <div class="c-radio-btn -no-self-cancel -enabled" data-group="grey" value=""></div>
+                        </li>
+                        <li>
+                          Pivot
+                          <div class="c-radio-btn -no-self-cancel" data-group="grey" value=""></div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="c-custom-dataset-selector" data-type="format">
+                      <div class="c-custom-dataset-selector__header">FORMATTING OPTIONS</div>
+                      <ul class="c-custom-dataset-selector__values">
+                        <li class="-selected">
+                          Location codes
+                          <div class="c-radio-btn -no-self-cancel -enabled" data-group="grey" value=""></div>
+                        </li>
+                        <li>
+                          Units
+                          <div class="c-radio-btn -no-self-cancel" data-group="grey" value=""></div>
+                        </li>
+                        <li>
+                          Null Values
+                          <div class="c-radio-btn -no-self-cancel" data-group="grey" value=""></div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="c-custom-dataset-selector" data-type="format">
+                      <div class="c-custom-dataset-selector__header">FILE</div>
+                      <ul class="c-custom-dataset-selector__values">
+                        <li class="-selected">
+                          .csv
+                          <div class="c-radio-btn -no-self-cancel -enabled" data-group="grey" value=""></div>
+                        </li>
+                        <li>
+                          .json
+                          <div class="c-radio-btn -no-self-cancel" data-group="grey" value=""></div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="c-custom-dataset-submit-button">
+                      <svg class="icon icon-download"><use xlink:href="#icon-download"></use></svg>
+                      DOWNLOAD DATA
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <%= htmlWebpackPlugin.options.footer %>
+  </div>
+  <%= htmlWebpackPlugin.options.scripts %>
+</body>
+</html>

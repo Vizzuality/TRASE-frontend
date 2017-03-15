@@ -36,6 +36,9 @@ const pages = {
   },
   'data-methods': {
     title: 'TRASE - Data and methods'
+  },
+  'data': {
+    title: 'TRASE - Data'
   }
 };
 

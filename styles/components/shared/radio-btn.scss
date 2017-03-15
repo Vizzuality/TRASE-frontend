@@ -37,6 +37,10 @@
     &[data-group="horizontal"]::before {
       background-color: $medium-pink;
     }
+
+    &[data-group="grey"]::before {
+      background-color: $charcoal-grey;
+    }
   }
 
   &.-enabled {
@@ -90,6 +94,13 @@
       &::before,
       &:hover:not(.-no-self-cancel) {
         background-color: $medium-pink;
+      }
+    }
+
+    &[data-group="grey"] {
+      &::before,
+      &:hover:not(.-no-self-cancel) {
+        background-color: $charcoal-grey;
       }
     }
   }
