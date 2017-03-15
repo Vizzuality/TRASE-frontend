@@ -10,6 +10,7 @@ import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
 import 'styles/components/loading.scss';
 
+import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
 // import AreaStack from 'components/graphs/area-stack.component';  stack area future
 import Top from 'components/factsheets/top.component';
@@ -132,6 +133,9 @@ const _init = ()  => {
 
       _build(data);
     });
+
+  const nav = new Nav();
+  nav.onCreated();
 
 };
 

@@ -1,3 +1,4 @@
+import Nav from 'components/nav.component.js';
 import Dropdown from 'scripts/components/dropdown.component';
 import PostGridTemplate from 'ejs!templates/homepage/post-grid.ejs';
 import 'styles/homepage.scss';
@@ -187,6 +188,9 @@ const _init = () => {
 
   _setMap();
   _getPosts();
+
+  const nav = new Nav();
+  nav.onCreated();
 };
 
 _init();

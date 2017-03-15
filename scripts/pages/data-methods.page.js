@@ -1,3 +1,4 @@
+import Nav from 'components/nav.component.js';
 import 'styles/data-methods.scss';
 
 import smoothScroll from 'utils/smoothScroll';
@@ -58,3 +59,6 @@ const _setEventListeners = () => {
 
 _calculateOffsets();
 _setEventListeners();
+
+const nav = new Nav();
+nav.onCreated();
