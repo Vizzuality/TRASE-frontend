@@ -6,7 +6,6 @@ import { brushX as d3_brush_x } from 'd3-brush';
 import { event as d3_event } from 'd3-selection';
 import ThumbTemplate from 'ejs!templates/years-slider-thumb.ejs';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
-import {AVAILABLE_YEARS} from 'constants';
 import 'styles/components/nav/years-slider.scss';
 
 
@@ -16,8 +15,6 @@ export default class {
     this.id = id;
     this.callback = callback;
     this.el = document.querySelector(`.${id}`);
-
-    this._build();
   }
 
   setYears(years) {
@@ -33,9 +30,14 @@ export default class {
 
   }
 
-  _build () {
-    const startYear = AVAILABLE_YEARS[0];
-    const endYear = AVAILABLE_YEARS[AVAILABLE_YEARS.length - 1];
+  setAvailableYears(years) {
+    this._build(years);
+  }
+
+  _build (years) {
+
+    const startYear = years[0];
+    const endYear = years[years.length - 1];
 
     var margin = {
       top: 5,
@@ -43,7 +45,7 @@ export default class {
       bottom: 10,
       left: 5
     };
-    const width = (AVAILABLE_YEARS.length * 40) - margin.left - margin.right;
+    const width = ((endYear - startYear + 1) * 40) - margin.left - margin.right;
     const height = 45 - margin.top - margin.bottom;
     this.xScale = d3_scale_time()
       .domain([new Date(startYear, 0, 1), new Date(endYear, 11, 31)])
@@ -128,10 +130,10 @@ export default class {
     this.brush.transition()
       .call(d3_event.target.move, pixelSelection);
 
-    // var startYear = new Date (d1[0]).getFullYear();
-    // var endYear = new Date (d1[1]).getFullYear() - 1;
+    var startYear = new Date (d1[0]).getFullYear();
+    var endYear = new Date (d1[1]).getFullYear() - 1;
 
-    this.callback([2015, 2015]);
+    this.callback([startYear, endYear]);
   }
 
   _moveBrushOverlay(pixelSelection) {
