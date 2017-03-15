@@ -20,6 +20,16 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       // inds: []
     };
 
+    // TODO temp hack, wait for DB fix
+    if (node.name === 'None' || node.id === 424) {
+      newNode.isDomestic = true;
+      newNode.name = 'DOMESTIC CONSUMPTION';
+    }
+
+    if (node.isDomestic === true || node.isDomestic === 'true') {
+      newNode.isDomestic = true;
+    }
+
     if (node.isAggregated === true || node.isAggregated === 'true') {
       newNode.isAggregated = true;
     }

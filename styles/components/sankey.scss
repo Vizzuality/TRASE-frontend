@@ -26,6 +26,10 @@
       fill: url('#isAggregatedPattern');
     }
 
+    &.-is-domestic > .sankey-node-rect {
+      fill: $gray;
+    }
+
     &.-selected {
       // disabled for now because of a Firefox rendering bug
       //filter: url(#drop-shadow); //ignore sasslint warning here
