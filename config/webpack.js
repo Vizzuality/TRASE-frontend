@@ -114,7 +114,18 @@ const config = {
       {
         test: /\.png$/,
         loader: 'url-loader',
-        query: { mimetype: 'image/png' }
+        query: {
+          mimetype: 'image/png',
+          limit: 380000
+        }
+      },
+      {
+        test: /\.jpg$/,
+        loader: 'url-loader',
+        query: {
+          mimetype: 'image/jpg',
+          limit: 30000
+        }
       }
     ]
   },

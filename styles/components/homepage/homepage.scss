@@ -22,6 +22,43 @@
       margin: 32px 0 0;
       padding: 16px 28px;
     }
+
+
+    .screenshot-container {
+      position: absolute;
+      height: 100%;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      left: 50%;
+
+      .screenshot {
+        height: 50%;
+        width: 100%;
+        background-size: cover;
+        border-radius: 4px;
+
+        &.-top {
+          background-image: url('./../public/images/backgrounds/app-screenshot-1@2px.jpg');
+        }
+
+        &.-middle {
+          background-image: url('./../public/images/backgrounds/app-screenshot-2@2x.jpg');
+        }
+
+        &.-bottom {
+          background-image: url('./../public/images/backgrounds/app-screenshot-3@2x.jpg');
+        }
+      }
+      .screenshot-caption {
+        font-family: $font-family-1;
+        color: rgba($white, 0.6);
+        font-size: $font-size-medium;
+        width: 100%;
+      }
+    }
   }
 
   .sliding-content {
@@ -56,21 +93,39 @@
 
       form {
         .newsletter-label {
+          display: inline-block;
+          margin-bottom: 10px;
+
           font-family: $font-family-2;
           font-size: $font-size-xx-regular;
           color: $charcoal-grey;
         }
 
-        .newsletter-email {
-          font-family: $font-family-1;
-          border: solid 2px $charcoal-grey;
-          border-radius: 4px;
-          padding: 15px;
-          width: 100%;
-          max-width: 336px;
+        .newsletter-input-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 40px;
 
-          &::placeholder {
-            text-transform: none;
+          > .newsletter-email {
+            font-family: $font-family-1;
+            border: solid 2px $charcoal-grey;
+            border-radius: 4px;
+            padding: 15px;
+            width: 100%;
+            max-width: 336px;
+            max-height: 100%;
+
+            &::placeholder {
+              text-transform: none;
+            }
+          }
+
+          > .c-button {
+            height: 100%;
+            margin-left: 10px;
+            padding: 0 16px;
+            flex: 1;
           }
         }
       }

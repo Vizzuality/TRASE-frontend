@@ -3,29 +3,20 @@
   width: 100%;
 
   &.-intro-top {
-    background-image: url('./../public/images/backgrounds/intro-top.png');
+    background-image: url('./../public/images/backgrounds/intro-top.jpg');
     background-attachment: fixed;
+    background-size: cover;
+  }
+
+  &.-intro-middle {
+    background-image: url('./../public/images/backgrounds/intro-middle.jpg');
+    background-attachment: fixed;
+    background-size: cover;
   }
 
   &.-intro-bottom {
-    background-image: url('./../public/images/backgrounds/intro-bottom.png');
+    background-image: url('./../public/images/backgrounds/intro-bottom.jpg');
     background-attachment: fixed;
-  }
-
-  &.-screenshot {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    width: 50%;
-    right: 0;
-    top: 100%;
-
-    .screenshot-container {
-      height: 50%;
-      width: 100%;
-      transform: translateY(-100%);
-      background-image: url('./../public/images/backgrounds/app-screenshot@2x.png');
-      background-size: cover;
-    }
+    background-size: cover;
   }
 }
