@@ -8,6 +8,7 @@ export const GET_LINKED_GEO_IDS = 'GET_LINKED_GEO_IDS';
 export const GET_PLACE_FACTSHEET = 'GET_PLACE_FACTSHEET';
 export const GET_ACTOR_FACTSHEET = 'GET_ACTOR_FACTSHEET';
 export const GET_INDICATORS = 'GET_INDICATORS';
+export const GET_DATA_DOWNLOAD_FILE = 'GET_DATA_DOWNLOAD_FILE';
 
 const API_ENDPOINTS = {
   [GET_CONTEXTS]: { version: 2, endpoint: '/get_contexts' },
@@ -20,6 +21,7 @@ const API_ENDPOINTS = {
   [GET_PLACE_FACTSHEET]: { version: 1, endpoint: '/get_place_node_attributes' },
   [GET_ACTOR_FACTSHEET]: { version: 1, endpoint: '/get_actor_node_attributes' },
   [GET_INDICATORS]: { version: 2, endpoint: '/indicators' },
+  [GET_DATA_DOWNLOAD_FILE]: { version: 2, endpoint: '/download' },
 };
 
 function getURLForV2(endpoint, params = {}) {

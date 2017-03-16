@@ -1,14 +1,20 @@
 import SelectorItemsTemplate from 'ejs!templates/data/selector-items.ejs';
+import {
+  getURLFromParams,
+  GET_DATA_DOWNLOAD_FILE
+} from 'utils/getURLFromParams';
 
 export default class {
 
   onCreated() {
     this._setVars();
+    this.downloadButton.addEventListener('click', () => this._downloadFile());
   }
 
   _setVars() {
     this.el = document.querySelector('.c-custom-dataset');
 
+    this.downloadButton = this.el.querySelector('.js-custom-dataset-download-button');
     this.selectorCountries = this.el.querySelector('.js-custom-dataset-selector-countries');
     this.selectorCommodities = this.el.querySelector('.js-custom-dataset-selector-commodities');
     this.selectorYears = this.el.querySelector('.js-custom-dataset-selector-years');
@@ -57,12 +63,45 @@ export default class {
   }
 
   fillIndicators(indicators) {
-    const items = indicators.map(country => { return {id: country.id, name: country.name.toLowerCase(), group: 'indicators', noSelfCancel: false} });
+    const items = indicators.map(indicator => { return {id: indicator.name, name: indicator.frontendName, group: 'indicators', noSelfCancel: false} });
 
     this.selectorIndicators.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
     });
     this._setSelectorEvents(this.selectorIndicators);
+  }
+
+  _downloadFile() {
+    window.open(this._getDownloadURL());
+  }
+
+  _getDownloadURL() {
+    const baseURL = getURLFromParams(GET_DATA_DOWNLOAD_FILE);
+    const file = this.selectorFile.querySelector('.c-radio-btn.-enabled').getAttribute('value');
+
+    let urlParams = `?context_id=${this.selectorCommodities.querySelector('.c-radio-btn.-enabled').getAttribute('value')}`;
+
+    const years = Array.prototype.slice.call(this.selectorYears.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn.-enabled'), 0);
+    if (years.length > 0) {
+      urlParams += `&years[]=${years.map(item => item.getAttribute('value')).join(',')}`;
+    }
+
+    const exporters = Array.prototype.slice.call(this.selectorCompanies.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn.-enabled'), 0);
+    if (exporters.length > 0) {
+      urlParams += `&exporters_ids[]=${exporters.map(item => item.getAttribute('value')).join(',')}`;
+    }
+
+    const consumptionCountries = Array.prototype.slice.call(this.selectorConsumptionCountries.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn.-enabled'), 0);
+    if (consumptionCountries.length > 0) {
+      urlParams += `&importers_ids[]=${consumptionCountries.map(item => item.getAttribute('value')).join(',')}`;
+    }
+
+    const indicators = Array.prototype.slice.call(this.selectorIndicators.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn.-enabled'), 0);
+    if (indicators.length > 0) {
+      urlParams += `&quants_ids[]=${indicators.map(item => item.getAttribute('value')).join(',')}`;
+    }
+
+    return `${baseURL}${file}${urlParams}`;
   }
 
   _setSelectorEvents(selector) {
@@ -79,7 +118,7 @@ export default class {
     const container = selectedRadio.closest('li');
     const value = selectedRadio.getAttribute('value');
     const group = selectedRadio.getAttribute('data-group');
-    const allClosest = this.el.querySelector('.c-radio-btn[data-group="' + group + '-all"]');
+    const allClosest = this.el.querySelector(`.c-radio-btn[data-group="${group}-all"]`);
     const isEnabled = selectedRadio.classList.contains('-enabled');
     switch (group) {
       case 'countries':
