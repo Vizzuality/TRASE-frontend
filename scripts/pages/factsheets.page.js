@@ -49,7 +49,7 @@ const _setSearch = () => {
     .then(response => response.json())
     .then((result) => {
 
-      document.querySelector('.js-search-container').classList.remove('is-hidden');
+      document.querySelector('.js-factsheets-search-container').classList.remove('is-hidden');
 
       const search = new Search();
       search.onCreated();
