@@ -32,7 +32,6 @@ const _setSearch = () => {
   };
 
   const onNodeSelected = function(nodeId, type) {
-    debugger;
     let url = '';
     if (type === 'exporter' || type === 'importer') {
       url = `factsheet-actor.html?nodeId=${nodeId}`;
