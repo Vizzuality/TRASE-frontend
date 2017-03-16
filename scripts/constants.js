@@ -56,6 +56,10 @@ export const FLOWS_DEFAULT_STATE = {
   }
 };
 
+export const DATA_DEFAULT_STATE = {
+  data: {}
+};
+
 
 // fact sheets
 export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
