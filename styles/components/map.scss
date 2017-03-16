@@ -201,6 +201,10 @@
     &.ch-default { fill: $ch-default; };
   }
 
+  .leaflet-vectorMain-pane:not(.-linkedActivated) path {
+    &.ch-default { fill-opacity: 0;  };
+  }
+
   .leaflet-vectorLinked-pane path {
     &.ch-no-meta { fill: $white; };
     &.ch-no-meta-layer { fill: $white; };

@@ -300,7 +300,8 @@ export default class {
     }, 850);
   }
 
-  setChoropleth({choropleth, linkedGeoIds}) {
+  setChoropleth({choropleth, linkedGeoIds, selectedMapDimensions}) {
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
       this.showLinkedGeoIds(linkedGeoIds);
