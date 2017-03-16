@@ -174,6 +174,7 @@ export default class {
       .attr('class', 'sankey-node')
       .attr('transform', node => `translate(0,${node.y})`)
       .classed('-is-aggregated', node => node.isAggregated)
+      .classed('-is-domestic', node => node.isDomestic)
       .on('mouseenter', function(node) { that._onNodeOver(d3_select(this), node.id, node.isAggregated); } )
       .on('mouseleave', () => { this._onNodeOut(); } )
       .on('click', node => { this.callbacks.onNodeClicked(node.id, node.isAggregated); } );

@@ -11,8 +11,8 @@ export default function(rawLinks, nodesDict) {
       links.push({
         sourceNodeId,
         targetNodeId,
-        sourceColumnId: sourceNode.columnId,
-        targetColumnId: targetNode.columnId,
+        sourceColumnPosition: sourceNode.columnGroup,
+        targetColumnPosition: targetNode.columnGroup,
         sourceNodeName: sourceNode.name,
         targetNodeName: targetNode.name,
         height: link.height,

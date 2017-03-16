@@ -7,7 +7,7 @@
     <% colors.forEach(function(color, i) { %>
       <li class="bucket-item" >
         <div class="bucket <%= color %>">
-          <% if (!isBidimensional && typeof bucket !== "undefined") { %>
+          <% if (!isBidimensional && typeof bucket !== "undefined" && bucket !== null) { %>
             <span><%= i === 0 ? '<' : '>' %><%= abbreviateNumber(bucket[i], 3) %></span>
           <% } %>
         </div>
@@ -15,7 +15,7 @@
     <% }) %>
   </ul>
 
-  <% if (isBidimensional && typeof bucket !== "undefined") { %>
+  <% if (isBidimensional && typeof bucket !== "undefined" && bucket[0] !== null && bucket[1] !== null) { %>
     <ul class="bucket-values">
       <% bucket[0].reverse().forEach(function(value) { %>
         <li><%= abbreviateNumber(value, 3) %></li>

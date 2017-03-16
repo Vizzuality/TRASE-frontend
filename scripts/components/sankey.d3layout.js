@@ -136,7 +136,7 @@ const sankeyLayout = function() {
 
     links.forEach(link => {
       link.width = linksColumnWidth;
-      link.x = columnWidth + _getColumnX(_getColumnIndex(link.sourceColumnId));
+      link.x = columnWidth + _getColumnX(link.sourceColumnPosition);
 
       if (detailedView === true) {
         link.renderedHeight = link.height * DETAILED_VIEW_SCALE;
@@ -145,7 +145,7 @@ const sankeyLayout = function() {
       }
 
       const sId = link.sourceNodeId;
-      if (!stackedHeightsByNodeId.source[sId]) stackedHeightsByNodeId.source[sId] = _getNode(link.sourceColumnId, sId).y;
+      if (!stackedHeightsByNodeId.source[sId]) stackedHeightsByNodeId.source[sId] = _getNode(link.sourceColumnPosition, sId).y;
       link.sy = stackedHeightsByNodeId.source[sId];
       stackedHeightsByNodeId.source[sId] = link.sy + link.renderedHeight;
 
@@ -155,7 +155,7 @@ const sankeyLayout = function() {
       // }
 
       const tId = link.targetNodeId;
-      if (!stackedHeightsByNodeId.target[tId]) stackedHeightsByNodeId.target[tId] = _getNode(link.targetColumnId, tId).y;
+      if (!stackedHeightsByNodeId.target[tId]) stackedHeightsByNodeId.target[tId] = _getNode(link.targetColumnPosition, tId).y;
       link.ty = stackedHeightsByNodeId.target[tId];
       stackedHeightsByNodeId.target[tId] = link.ty + link.renderedHeight;
 
@@ -168,11 +168,8 @@ const sankeyLayout = function() {
 
   const _getColumnX = (columnIndex) => PADDING_X + columnIndex * (columnWidth + linksColumnWidth);
 
-  const _getColumnIndex = (columnId) => columns.findIndex(column => column.columnId === columnId);
-
-  const _getNode = (columnId, nodeId) => {
-    const columnIndex = _getColumnIndex(columnId);
-    const column = columns[columnIndex];
+  const _getNode = (columnPosition, nodeId) => {
+    const column = columns[columnPosition];
     return column.values.find(node => node.id === nodeId);
   };
 
