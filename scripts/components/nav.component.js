@@ -60,8 +60,8 @@ export default class {
       return null;
     }
 
-    const recolorByView = [];
-    recolorBy.forEach(recolorByElem => {
+    return recolorBy.map(recolorByElem => {
+      recolorByElem.label = recolorByElem.label || recolorByElem.name;
       switch (recolorByElem.legendType) {
       case 'qual': {
         recolorByElem.options = [];
@@ -81,10 +81,8 @@ export default class {
         break;
       }
       }
-      recolorByView.push(recolorByElem);
+      return recolorByElem;
     });
-
-    return recolorByView;
   }
 
   _setVars() {
