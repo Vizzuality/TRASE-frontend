@@ -101,9 +101,7 @@
           <% } %>
 
           <ul class="dropdown-item-legend -<%= recolorByVar.legendType %> js-dropdown-item-legend">
-            <% recolorByVar.options.forEach(function(option) { %>
-            <li class="<%= option.class %>"><%= option.label %></li>
-            <% }) %>
+            <% recolorByVar.options.forEach(function(option) { %><li class="<%= option.class %>"><%= option.label %></li><% }) %>
           </ul>
 
           <% if (recolorByVar.maxValue) { %>
