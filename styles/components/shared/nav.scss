@@ -68,6 +68,28 @@
       height: 6px;
       background-color: $medium-pink;
     }
+
+    &.-logo {
+
+      > a {
+        display: inline-block;
+        padding-right: 32px;
+
+        .logo-img {
+
+          &.-sei {
+            width: 135px;
+            height: 25px;
+          }
+
+          &.-gcp {
+            width: 61px;
+            height: 28px;
+          }
+        }
+      }
+
+    }
   }
 
   .nav-submenu {
