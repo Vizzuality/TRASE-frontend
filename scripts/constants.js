@@ -100,6 +100,12 @@ export const BASEMAPS = {
     attribution: '<span>&copy;</span> <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <span>&copy;</span> <a href="https://carto.com/attributions">CARTO</a>',
     thumbnail: 'images/maps/thumb-basemap-default.png'
   },
+  satellite: {
+    title: 'Satellite',
+    url: 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
+    attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>, <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>, <a href="https://www.digitalglobe.com/" target="_blank">DigitalGlobe</a></div>',
+    thumbnail: 'images/maps/thumb-basemap-satellite.jpeg'
+  },
 };
 
 // GA
