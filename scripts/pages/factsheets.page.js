@@ -63,8 +63,7 @@ const _setSearch = () => {
 
 const _init = () => {
   _setSearch();
-  const nav = new Nav();
-  nav.onCreated();
+  new Nav();
 };
 
 

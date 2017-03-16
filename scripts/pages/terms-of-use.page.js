@@ -7,5 +7,4 @@ import 'styles/components/button.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 
-const nav = new Nav();
-nav.onCreated();
+new Nav();

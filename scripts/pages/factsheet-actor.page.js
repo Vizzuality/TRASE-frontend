@@ -134,8 +134,8 @@ const _init = ()  => {
       _build(data);
     });
 
-  const nav = new Nav();
-  nav.onCreated();
+  new Nav();
+
 
 };
 
