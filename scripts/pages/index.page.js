@@ -1,8 +1,8 @@
+import Nav from 'components/nav.component.js';
 import Slider from 'scripts/components/shared/slider.component';
 import PostsTemplate from 'ejs!templates/homepage/posts.ejs';
 // import UpdatesTemplate from 'ejs!templates/homepage/updates.ejs';
 // import TweetsTemplate from 'ejs!templates/homepage/tweets.ejs';
-
 import 'styles/homepage.scss';
 
 const state = {
@@ -41,7 +41,18 @@ const renderSlider = ({ el, selector, endpoint, perPage, next, template }) => {
     });
 };
 
+const getPageOffset = () => {
+  const body = document.querySelector('body').getBoundingClientRect();
+  const content = document.querySelector('.js-content-section').getBoundingClientRect();
+  const padding = 65;
+  const navHeight = 64;
+  return Math.abs(body.top) + Math.abs(content.top) - padding - navHeight;
+};
+
 const _init = () => {
+  const pageOffset = getPageOffset();
+  new Nav({ pageOffset });
+
   state.sliders.forEach(renderSlider);
 };
 

@@ -1,96 +1,51 @@
-
 <div class="c-nav">
-  <div class="offset">
-
-    <% if(page !== 'index') { %>
-      <% if(page === 'flows') { %>
-
-        <div class="offset-container">
-          <div class="burger js-toggle-menu">
-            <span class="ingredient"></span>
-            <span class="ingredient"></span>
-            <span class="ingredient"></span>
+  <div class="row column">
+      <nav>
+        <div class="left-side">
+          <% if(page !== 'index') { %>
+            <div class="nav-item">
+              <a href="/" class="nav-link">HOME</a>
+            </div>
+          <% } %>
+          <div class="nav-item">
+            <a href="/flows.html" class="nav-link">TOOL</a>
+          </div>
+          <div class="<%= page.indexOf('factsheets') !== -1 ? 'nav-item -selected' : 'nav-item' %>">
+            <a href="/factsheets.html" class="nav-link">FACTSHEETS</a>
+          </div>
+          <div class="<%= page === 'about' ? 'nav-item -selected' : 'nav-item' %> -has-menu">
+            <a href="/about.html" class="nav-link">ABOUT</a>
+            <ul class="nav-submenu">
+              <li class="nav-submenu-item">
+                <a href="/terms-of-use.html" class="nav-link">TERMS OF USE</a>
+              </li>
+              <li class="nav-submenu-item">
+                <a href="/data-methods.html" class="nav-link">DATA AND METHODS</a>
+              </li>
+            </ul>
+          </div>
+          <div class="<%= page === 'data' ? 'nav-item -selected' : 'nav-item' %>">
+            <a href="#" class="nav-link">DATA</a>
           </div>
         </div>
-
-        <div class="offset-container js-logo">
-          <a class="trase-logo" href="/">
-            <img src="images/logos/logo-trase-small-beta.svg" alt="TRASE" />
-          </a>
+        <div class="right-side">
+          <% if (page === 'index') { %>
+            <div class="nav-item -logo">
+              <a class="nav-logo" target="_blank" href="https://www.sei-international.org/">
+                <img class="logo-img -sei" src="images/logos/SEI_0@2x.png" alt="SEI International">
+              </a>
+            </div>
+            <div class="nav-item -logo">
+              <a class="nav-logo" target="_blank" href="https://www.globalcanopy.org/">
+                <img class="logo-img -gcp" src="images/logos/GCP@2x.png" alt="Global Canopy Programme">
+              </a>
+            </div>
+          <% } %>
+          <div class="nav-item js-open-search">
+            <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
+          </div>
         </div>
-
-      <% } else { %>
-
-        <div class="offset-container js-logo">
-          <a class="trase-logo" href="/">
-            <img src="images/logos/logo-trase-small.svg" alt="TRASE" />
-          </a>
-        </div>
-
-      <% } %>
-
-    <% } %>
-  </div>
-
-  <div class="app-nav">
-    <div class="left-side">
-      <nav class="page-section-list">
-        <li class="<%= page === 'flows' ? 'page-section -selected' : 'page-section' %>"><a href="/flows.html">Tool</a></li>
-        <li class="<%= page === 'factsheets' || page === 'factsheet-actor' || page === 'factsheet-place' ? 'page-section -selected' : 'page-section' %>"><a href="/factsheets.html">Factsheets</a></li>
-        <li class="<%= page === 'FAQ' ? 'page-section -selected' : 'page-section' %>"><a href="/FAQ.html">FAQ</a></li>
-        <li class="<%= page === 'about' ? 'page-section -selected -has-menu' : 'page-section -has-menu' %>">
-          <a href="/about.html">About</a>
-          <ul class="submenu">
-            <li class="page-section">
-              <a href="/terms-of-use.html">Terms of use</a>
-            </li>
-            <li class="page-section">
-              <a href="/data-methods.html">Data and methods</a>
-            </li>
-          </ul>
-        </li>
       </nav>
-    </div>
-
-    <div class="right-side">
-      <% if(page === 'index') { %>
-      <ul class="logos-list">
-        <li class="logo-item">
-          <a class="logo-link" target="_blank" href="https://www.sei-international.org/"><img class="logo-img -sei" src="images/logos/SEI_0@2x.png" alt="SEI International"></a>
-        </li>
-        <li class="logo-item">
-          <a class="logo-link" target="_blank" href="http://globalcanopy.org/"><img class="logo-img -gcp" src="images/logos/GCP@2x.png" alt="Global Canopy Programme"></a></li>
-      </ul>
-      <% } %>
-    </div>
   </div>
-
-  <% if(page === 'flows') { %>
-    <div class="flows-nav js-flows-nav-container">
-
-    </div>
-  <% } %>
-
-  <!-- <ul class="miscellaneous-nav">
-    <% if(page === 'flows') { %>
-    <li class="miscellaneous-item -bookmark js-bookmark" data-dropdown="bookmark">
-      <div class="miscellaneous-item-title js-dropdown-title">
-        <svg class="icon icon-bookmark"><use xlink:href="#icon-bookmark"></use></svg>
-      </div>
-      <div class="c-bookmark-dropdown js-dropdown-list">
-        <ul class="bookmark-list"></ul>
-        <div class="bookmark-btn-container">
-          <button class="c-button add-bookmark">+ add a new bookmark</button>
-        </div>
-      </div>
-    </li>
-    <% } %>
-    <li class="miscellaneous-item js-share" data-dropdown="share">
-      <div class="miscellaneous-item-title js-dropdown-title">
-        <svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg>
-      </div>
-      <div class="c-share-dropdown js-dropdown-list"></div>
-    </li>
-  </ul> -->
-
 </div>
+<div class="c-nav-spacer"></div>
