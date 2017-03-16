@@ -29,79 +29,61 @@
                 <div class="small-9 columns">
                   <div class="row">
                     <div class="small-4 columns">
-                      <div class="c-custom-dataset-selector" data-type="value">
+                      <div class="c-custom-dataset-selector js-custom-dataset-selector-countries" data-type="value">
                         <div class="c-custom-dataset-selector__header">PRODUCTION COUNTRIES</div>
-                        <ul class="c-custom-dataset-selector__values">
-                          <li>
-                            Argentina
-                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
-                          </li>
-                          <li class="-selected">
-                            Brazil
-                            <div class="c-radio-btn -enabled" data-group="horizontal" value=""></div>
-                          </li>
-                          <li>
-                            Colombia
-                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
-                          </li>
-                          <li>
-                            Indonesia
-                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
-                          </li>
-                          <li>
-                            Paraguay
-                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
-                          </li>
-                        </ul>
+                        <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values"></ul>
                       </div>
                     </div>
                     <div class="small-4 columns">
-                      <div class="c-custom-dataset-selector" data-type="value">
+                      <div class="c-custom-dataset-selector js-custom-dataset-selector-commodities -disabled" data-type="value" data-disabled-text="Please select first a country">
                         <div class="c-custom-dataset-selector__header">COMMODITIES</div>
-                        <ul class="c-custom-dataset-selector__values">
-                          <li>
-                            Beef
-                            <div class="c-radio-btn -disabled" data-group="horizontal" value=""></div>
-                          </li>
-                          <li>
-                            Cocoa
-                            <div class="c-radio-btn -disabled" data-group="horizontal" value=""></div>
-                          </li>
-                          <li>
-                            Coffee
-                            <div class="c-radio-btn -disabled" data-group="horizontal" value=""></div>
-                          </li>
-                          <li>
-                            Cotton
-                            <div class="c-radio-btn" data-group="horizontal" value=""></div>
-                          </li>
-                          <li>
-                            Palm oil
-                            <div class="c-radio-btn -disabled" data-group="horizontal" value=""></div>
-                          </li>
-                          <li class="-selected">
-                            Soy
-                            <div class="c-radio-btn -enabled" data-group="horizontal" value=""></div>
-                          </li>
-                        </ul>
+                        <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values"></ul>
                       </div>
                     </div>
                     <div class="small-4 columns">
-                      <div class="c-custom-dataset-selector -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
+                      <div class="c-custom-dataset-selector js-custom-dataset-selector-years -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
                         <div class="c-custom-dataset-selector__header">
                           YEARS
                           <ul class="c-custom-dataset-selector__header-options">
                             <li>
-                              <div class="c-radio-btn" data-group="horizontal" value=""></div>
+                              <div class="c-radio-btn -red" data-group="years-all" value="all"></div>
                             </li>
                           </ul>
                         </div>
-                        <ul class="c-custom-dataset-selector__values">
+                        <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values">
+                          <li>
+                            2016
+                            <div class="c-radio-btn -red -disabled" data-group="years" value="2016"></div>
+                          </li>
+                          <li>
+                            2015
+                            <div class="c-radio-btn -red" data-group="years" value="2015"></div>
+                          </li>
+                          <li>
+                            2014
+                            <div class="c-radio-btn -red -disabled" data-group="years" value="2014"></div>
+                          </li>
+                          <li>
+                            2013
+                            <div class="c-radio-btn -red -disabled" data-group="years" value="2013"></div>
+                          </li>
+                          <li>
+                            2012
+                            <div class="c-radio-btn -red -disabled" data-group="years" value="2012"></div>
+                          </li>
+                          <li>
+                            2011
+                            <div class="c-radio-btn -red -disabled" data-group="years" value="2011"></div>
+                          </li>
+                          <li>
+                            2010
+                            <div class="c-radio-btn -red -disabled" data-group="years" value="2010"></div>
+                          </li>
                         </ul>
                       </div>
                     </div>
                     <div class="small-4 columns">
-                      <div class="c-custom-dataset-selector -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
+                      <div class="c-custom-dataset-selector js-custom-dataset-selector-companies -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
                         <div class="c-custom-dataset-selector__header">
                           COMPANIES
                           <ul class="c-custom-dataset-selector__header-options">
@@ -110,12 +92,11 @@
                             </li>
                           </ul>
                         </div>
-                        <ul class="c-custom-dataset-selector__values">
-                        </ul>
+                        <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values"></ul>
                       </div>
                     </div>
                     <div class="small-4 columns">
-                      <div class="c-custom-dataset-selector -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
+                      <div class="c-custom-dataset-selector js-custom-dataset-selector-consumption-countries -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
                         <div class="c-custom-dataset-selector__header">
                           CONSUMPTION COUNTRIES
                           <ul class="c-custom-dataset-selector__header-options">
@@ -124,12 +105,11 @@
                             </li>
                           </ul>
                         </div>
-                        <ul class="c-custom-dataset-selector__values">
-                        </ul>
+                        <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values"></ul>
                       </div>
                     </div>
                     <div class="small-4 columns">
-                      <div class="c-custom-dataset-selector -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
+                      <div class="c-custom-dataset-selector js-custom-dataset-selector-indicators -disabled" data-type="value" data-disabled-text="Please select first a country and commodity">
                         <div class="c-custom-dataset-selector__header">
                           INDICATORS
                           <ul class="c-custom-dataset-selector__header-options">
@@ -138,56 +118,55 @@
                             </li>
                           </ul>
                         </div>
-                        <ul class="c-custom-dataset-selector__values">
-                        </ul>
+                        <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values"></ul>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="small-3 columns">
                   <div class="c-custom-dataset__format-sidebar">
-                    <div class="c-custom-dataset-selector" data-type="format">
+                    <div class="c-custom-dataset-selector js-custom-dataset-selector-output-type" data-type="format">
                       <div class="c-custom-dataset-selector__header">OUTPUT TYPE</div>
-                      <ul class="c-custom-dataset-selector__values">
+                      <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values">
                         <li class="-selected">
                           Table
-                          <div class="c-radio-btn -no-self-cancel -enabled" data-group="grey" value=""></div>
+                          <div class="c-radio-btn -no-self-cancel -enabled -grey" data-group="output-type" value="table"></div>
                         </li>
                         <li>
                           Pivot
-                          <div class="c-radio-btn -no-self-cancel" data-group="grey" value=""></div>
+                          <div class="c-radio-btn -no-self-cancel -grey" data-group="output-type" value="pivot"></div>
                         </li>
                       </ul>
                     </div>
 
-                    <div class="c-custom-dataset-selector" data-type="format">
+                    <div class="c-custom-dataset-selector js-custom-dataset-selector-formatting" data-type="format">
                       <div class="c-custom-dataset-selector__header">FORMATTING OPTIONS</div>
-                      <ul class="c-custom-dataset-selector__values">
+                      <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values">
                         <li class="-selected">
                           Location codes
-                          <div class="c-radio-btn -no-self-cancel -enabled" data-group="grey" value=""></div>
+                          <div class="c-radio-btn -no-self-cancel -enabled -grey" data-group="formatting" value="location-codes"></div>
                         </li>
                         <li>
                           Units
-                          <div class="c-radio-btn -no-self-cancel" data-group="grey" value=""></div>
+                          <div class="c-radio-btn -no-self-cancel -grey" data-group="formatting" value="units"></div>
                         </li>
                         <li>
                           Null Values
-                          <div class="c-radio-btn -no-self-cancel" data-group="grey" value=""></div>
+                          <div class="c-radio-btn -no-self-cancel -grey" data-group="formatting" value="null"></div>
                         </li>
                       </ul>
                     </div>
 
-                    <div class="c-custom-dataset-selector" data-type="format">
+                    <div class="c-custom-dataset-selector js-custom-dataset-selector-file" data-type="format">
                       <div class="c-custom-dataset-selector__header">FILE</div>
-                      <ul class="c-custom-dataset-selector__values">
+                      <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values">
                         <li class="-selected">
                           .csv
-                          <div class="c-radio-btn -no-self-cancel -enabled" data-group="grey" value=""></div>
+                          <div class="c-radio-btn -no-self-cancel -enabled -grey" data-group="file" value="csv"></div>
                         </li>
                         <li>
                           .json
-                          <div class="c-radio-btn -no-self-cancel" data-group="grey" value=""></div>
+                          <div class="c-radio-btn -no-self-cancel -grey" data-group="file" value="json"></div>
                         </li>
                       </ul>
                     </div>

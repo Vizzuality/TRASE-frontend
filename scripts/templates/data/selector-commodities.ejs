@@ -1,0 +1,6 @@
+<% commodities.forEach(function(commodity) { %>
+  <li>
+    <%= commodity.name %>
+    <div class="c-radio-btn -red" data-group="commodities" value="<%= commodity.id %>"></div>
+  </li>
+<% }) %>
