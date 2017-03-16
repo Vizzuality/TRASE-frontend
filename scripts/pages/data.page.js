@@ -31,5 +31,4 @@ const globalState = Object.assign({}, DATA_DEFAULT_STATE);
 
 start(globalState);
 
-const nav = new Nav();
-nav.onCreated();
+new Nav();
