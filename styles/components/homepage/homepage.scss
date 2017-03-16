@@ -29,7 +29,7 @@
       width: 50%;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       left: 50%;
 
@@ -54,8 +54,8 @@
       .screenshot-caption {
         font-family: $font-family-1;
         color: rgba($white, 0.6);
-        font-size: $font-size-medium;
-        width: 100%;
+        font-size: 14px;
+        max-width: 100%;
       }
     }
   }
