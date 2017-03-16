@@ -57,6 +57,10 @@ export const FLOWS_DEFAULT_STATE = {
   }
 };
 
+export const DATA_DEFAULT_STATE = {
+  data: {}
+};
+
 // index
 export const HOMEPAGE_COMMODITY_WHITELIST = ['SOY'];
 export const HOMEPAGE_COUNTRY_WHITELIST = ['BRAZIL'];

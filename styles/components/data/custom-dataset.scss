@@ -54,6 +54,12 @@
         align-items: center;
         height: 41px;
 
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
         &:not(.-selected) {
           color: rgba($charcoal-grey, .6);
         }
@@ -104,6 +110,10 @@
         li {
           padding: 0 12px 0 9px;
           text-transform: capitalize;
+
+          span {
+            width: calc(100% - 28px);
+          }
 
           &:not(:last-child):before {
             left: 8px;

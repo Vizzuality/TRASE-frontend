@@ -1,12 +1,16 @@
 import connect from 'connect';
-//import { selectNodeFromGeoId, highlightNodeFromGeoId } from 'actions/flows.actions';
+import { loadContextNodes } from 'actions/data.actions';
 import dataContent from 'components/data-content.component';
 
 const mapMethodsToState = (state) => ({
-  fillSelectors: state.flows.contexts,
+  fillContexts: state.data.contexts,
+  fillExporters: state.data.exporters,
+  fillConsumptionCountries: state.data.consumptionCountries,
+  fillIndicators: state.data.indicators
 });
 
 const mapViewCallbacksToActions = () => ({
+  onContextSelected: contextId => loadContextNodes(contextId),
 });
 
 export default connect(dataContent, mapMethodsToState, mapViewCallbacksToActions);

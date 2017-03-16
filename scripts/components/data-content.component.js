@@ -1,5 +1,4 @@
-import SelectorCountriesTemplate from 'ejs!templates/data/selector-countries.ejs';
-import SelectorCommoditiesTemplate from 'ejs!templates/data/selector-commodities.ejs';
+import SelectorItemsTemplate from 'ejs!templates/data/selector-items.ejs';
 
 export default class {
 
@@ -21,19 +20,49 @@ export default class {
     this.selectorFile = this.el.querySelector('.js-custom-dataset-selector-file');
   }
 
-  fillSelectors(contexts) {
+  fillContexts(contexts) {
     this.contexts = contexts;
 
-    const countries = contexts
-      .map(context => { return {id: context.countryId, name: context.countryName.toLowerCase()} })
+    const items = contexts
+      .map(context => { return {id: context.countryId, name: context.countryName.toLowerCase(), group: 'countries', noSelfCancel: true} })
       .filter((elem, index, self) => self.findIndex((t) => { return t.id === elem.id; }) === index);
 
-    this.selectorCountries.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorCountriesTemplate({
-      countries
+    this.selectorCountries.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
+      items
     });
 
     this._setSelectorEvents(this.selectorCountries);
     this._setSelectorEvents(this.selectorYears);
+    this._setSelectorEvents(this.selectorOutputType);
+    this._setSelectorEvents(this.selectorFormatting);
+    this._setSelectorEvents(this.selectorFile);
+  }
+
+  fillExporters(exporters) {
+    const items = exporters.map(exporter => { return {id: exporter.id, name: exporter.name.toLowerCase(), group: 'companies', noSelfCancel: false} });
+
+    this.selectorCompanies.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
+      items
+    });
+    this._setSelectorEvents(this.selectorCompanies);
+  }
+
+  fillConsumptionCountries(consumptionCountries) {
+    const items = consumptionCountries.map(country => { return {id: country.id, name: country.name.toLowerCase(), group: 'consumption-countries', noSelfCancel: false} });
+
+    this.selectorConsumptionCountries.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
+      items
+    });
+    this._setSelectorEvents(this.selectorConsumptionCountries);
+  }
+
+  fillIndicators(indicators) {
+    const items = indicators.map(country => { return {id: country.id, name: country.name.toLowerCase(), group: 'indicators', noSelfCancel: false} });
+
+    this.selectorIndicators.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
+      items
+    });
+    this._setSelectorEvents(this.selectorIndicators);
   }
 
   _setSelectorEvents(selector) {
@@ -57,14 +86,8 @@ export default class {
         this._cleanRadios(this.selectorCountries);
         this._updateSelectorCommodities(value);
         break;
-      case 'output-type':
-        this._cleanRadios(this.selectorOutputType);
-        break;
-      case 'formatting':
-        this._cleanRadios(this.selectorFormatting);
-        break;
-      case 'file':
-        this._cleanRadios(this.selectorFile);
+      case 'commodities':
+        this.callbacks.onContextSelected(value);
         break;
       case 'years':
         if (allClosest !== null) {
@@ -79,7 +102,57 @@ export default class {
         } else {
           this._selectAllRadios(this.selectorYears);
         }
+        break;
+      case 'companies':
+        if (allClosest !== null) {
+          allClosest.classList.remove('-enabled');
+        }
+        break;
+      case 'companies-all':
+        if (this.selectorCompanies.classList.contains('-disabled')) return;
 
+        if (isEnabled) {
+          this._cleanRadios(this.selectorCompanies);
+        } else {
+          this._selectAllRadios(this.selectorCompanies);
+        }
+        break;
+      case 'consumption-countries':
+        if (allClosest !== null) {
+          allClosest.classList.remove('-enabled');
+        }
+        break;
+      case 'consumption-countries-all':
+        if (this.selectorConsumptionCountries.classList.contains('-disabled')) return;
+
+        if (isEnabled) {
+          this._cleanRadios(this.selectorConsumptionCountries);
+        } else {
+          this._selectAllRadios(this.selectorConsumptionCountries);
+        }
+        break;
+      case 'indicators':
+        if (allClosest !== null) {
+          allClosest.classList.remove('-enabled');
+        }
+        break;
+      case 'indicators-all':
+        if (this.selectorIndicators.classList.contains('-disabled')) return;
+
+        if (isEnabled) {
+          this._cleanRadios(this.selectorIndicators);
+        } else {
+          this._selectAllRadios(this.selectorIndicators);
+        }
+        break;
+      case 'output-type':
+        this._cleanRadios(this.selectorOutputType);
+        break;
+      case 'formatting':
+        this._cleanRadios(this.selectorFormatting);
+        break;
+      case 'file':
+        this._cleanRadios(this.selectorFile);
         break;
     }
 
@@ -98,10 +171,10 @@ export default class {
   }
 
   _checkDependentSelectors() {
-    const countriesRadios = this.selectorCountries.querySelectorAll('.c-radio-btn.-enabled');
-    const commoditiesRadios = this.selectorCommodities.querySelectorAll('.c-radio-btn.-enabled');
+    const countryRadio = this.selectorCountries.querySelector('.c-radio-btn.-enabled');
+    const commodityRadio = this.selectorCommodities.querySelector('.c-radio-btn.-enabled');
 
-    if (countriesRadios.length > 0 && commoditiesRadios.length > 0) {
+    if (countryRadio !== null && commodityRadio !== null) {
       this._showDependentSelectors();
     } else {
       this._hideDependentSelectors();
@@ -110,6 +183,9 @@ export default class {
 
   _showDependentSelectors() {
     this.selectorYears.classList.remove('-disabled');
+    this.selectorCompanies.classList.remove('-disabled');
+    this.selectorConsumptionCountries.classList.remove('-disabled');
+    this.selectorIndicators.classList.remove('-disabled');
   }
 
   _hideDependentSelectors() {
@@ -129,12 +205,12 @@ export default class {
   }
 
   _updateSelectorCommodities(country) {
-    const commodities = this.contexts
+    const items = this.contexts
       .filter( context => context.id === parseInt(country))
-      .map(context => { return {id: context.id, name: context.commodityName.toLowerCase()} });
+      .map(context => { return {id: context.id, name: context.commodityName.toLowerCase(), group: 'commodities', noSelfCancel: false} });
 
-    this.selectorCommodities.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorCommoditiesTemplate({
-      commodities
+    this.selectorCommodities.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
+      items
     });
 
     this.selectorCommodities.classList.remove('-disabled');
