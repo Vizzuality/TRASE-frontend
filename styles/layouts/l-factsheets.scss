@@ -17,8 +17,13 @@
       margin: 0 auto;
 
       > .c-search {
+        position: relative;
         flex-direction: column;
         align-items: flex-start;
+        height: auto;
+        color: $charcoal-grey;
+        font-family: $font-family-1;
+        background-color: transparent;
       }
 
       > .c-search > label {
@@ -38,10 +43,14 @@
           padding: 12px 10px 6px;
 
           font-size: $font-size-medium;
+          border: 1px solid $medium-pink;
+          border-radius: 4px;
+          box-shadow: none;
         }
 
         > ul {
           background: $white;
+          border: 1px solid rgba($black, .3);
         }
       }
 
