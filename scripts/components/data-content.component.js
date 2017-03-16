@@ -79,7 +79,7 @@ export default class {
     const baseURL = getURLFromParams(GET_DATA_DOWNLOAD_FILE);
     const file = this.selectorFile.querySelector('.c-radio-btn.-enabled').getAttribute('value');
 
-    let urlParams = `?context_id=${this.selectorCommodities.querySelector('.c-radio-btn.-enabled').getAttribute('value')}`;
+    let urlParams = `context_id=${this.selectorCommodities.querySelector('.c-radio-btn.-enabled').getAttribute('value')}`;
 
     const years = Array.prototype.slice.call(this.selectorYears.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn.-enabled'), 0);
     if (years.length > 0) {
@@ -101,7 +101,7 @@ export default class {
       urlParams += `&quants_ids[]=${indicators.map(item => item.getAttribute('value')).join(',')}`;
     }
 
-    return `${baseURL}${file}${urlParams}`;
+    return `${baseURL}${urlParams}`.replace('?', `${file}?`);
   }
 
   _setSelectorEvents(selector) {
