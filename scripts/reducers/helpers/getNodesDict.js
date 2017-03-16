@@ -21,7 +21,7 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
     };
 
     // TODO temp hack, wait for DB fix
-    if (node.name === 'None' || node.id === 424) {
+    if (node.name === 'None' || node.name === 'DOMESTIC CONSUMPTION' || node.id === 424) {
       newNode.isDomestic = true;
       newNode.name = 'DOMESTIC CONSUMPTION';
     }
