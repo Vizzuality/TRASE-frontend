@@ -63,7 +63,7 @@ export default class {
   }
 
   fillIndicators(indicators) {
-    const items = indicators.map(indicator => { return {id: indicator.name, name: indicator.frontendName, group: 'indicators', noSelfCancel: false} });
+    const items = indicators.map(indicator => { return {id: indicator.name, name: `${indicator.frontendName}${indicator.unit !== null ? `(${indicator.unit})` : ''}`, group: 'indicators', noSelfCancel: false} });
 
     this.selectorIndicators.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
