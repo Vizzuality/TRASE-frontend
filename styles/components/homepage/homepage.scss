@@ -4,6 +4,7 @@
     position: fixed;
     height: 100%;
     width: 100%;
+    z-index: 1;
 
     .intro-wrapper {
       height: 100%;
@@ -64,7 +65,7 @@
   }
 
   .sliding-content {
-    margin-top: 65px;
+    padding-top: 65px;
 
     .slider-title {
       display: flex;

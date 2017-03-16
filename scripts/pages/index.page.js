@@ -6,8 +6,8 @@ import PostsTemplate from 'ejs!templates/homepage/posts.ejs';
 import 'styles/homepage.scss';
 
 const state = {
-  offsets: [],
   activeIndex: 0,
+  scrollTop: 0,
   texts: [
     {
       text: 'Trase transforms our understanding of how companies and governments involved in the trade of agricultural commodities are linked to impacts and opportunities for more sustainable production.',
@@ -75,24 +75,24 @@ const getPageOffset = (bounds) => {
   return 0;
 };
 
-const getScrollOffset = (section) => {
-  const offset = getPageOffset(section.getBoundingClientRect()) - (window.innerHeight / 2);
-  if (offset >= 0) return offset;
-  return 0;
-};
-
 const scrollIntro = () => {
-  console.log(state.offsets);
-  const page = window.pageYOffset;
-  let index;
-  if (page >= state.offsets[state.activeIndex]) {
-    index = page < state.offsets[state.activeIndex + 1] ? -1 : (state.activeIndex + 1);
+  const sections = document.querySelectorAll('.js-scroll-change');
+  const offsets = Array.prototype.map.call(sections, (section) => section.getBoundingClientRect().top);
+  const direction = (state.scrollTop < window.scrollY) ? 1 : -1;
+  let index = state.activeIndex;
+
+
+  if (offsets[state.activeIndex + 1] < window.innerHeight / 2 && direction === 1) {
+    index += direction;
   }
-  if (page <= state.offsets[state.activeIndex]) {
-    index = page > state.offsets[state.activeIndex - 1] ? -1 : (state.activeIndex - 1);
+  if (offsets[state.activeIndex] > window.innerHeight / 2 && direction === -1) {
+    index += direction;
   }
 
-  if (index !== -1 && state.activeIndex !== index) {
+  state.scrollTop = window.scrollY;
+
+  if(typeof offsets[index] === 'undefined') return;
+  if (state.activeIndex !== index) {
     const intro = document.querySelector('.js-intro-statement');
     const { text, action } = state.texts[index];
     const actionNode = intro.querySelector('.js-action');
@@ -111,8 +111,6 @@ const init = () => {
   const pageOffset = getPageOffset(bounds);
   new Nav({ pageOffset });
 
-  const sections = document.querySelectorAll('.js-scroll-change');
-  state.offsets = Array.prototype.map.call(sections, (section) => getScrollOffset(section));
 
   state.sliders.forEach(renderSlider);
 
