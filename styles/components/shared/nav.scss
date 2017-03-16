@@ -247,7 +247,7 @@
     box-shadow: 0 1px 6px 0 rgba($black, .15), 0 1px 6px 0 rgba($black, .2);
 
     .row {
-      max-width: 100%;
+      min-width: 100%;
     }
 
     .columns {
