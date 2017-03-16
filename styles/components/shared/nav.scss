@@ -65,6 +65,10 @@
       height: 6px;
       background-color: $medium-pink;
     }
+
+    > .nav-link:first-child {
+      padding-left: 0;
+    }
   }
 
   .nav-submenu {
