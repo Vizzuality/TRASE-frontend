@@ -1,5 +1,6 @@
 import 'styles/_base.scss';
 import 'styles/_texts.scss';
+import 'styles/_foundation.css';
 import 'styles/layouts/l-factsheet-actor.scss';
 import 'styles/components/button.scss';
 import 'styles/components/loading.scss';
