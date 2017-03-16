@@ -24,7 +24,7 @@ const mapMethodsToState = (state) => ({
   updateNodeSelectionColors: {
     _comparedValue: (state) => state.flows.recolorGroups,
     _returnedValue: (state) => {
-      return (state.flows.selectedRecolorBy === undefined || state.flows.selectedRecolorBy.value === undefined || state.flows.selectedRecolorBy.value === 'none')
+      return (state.flows.selectedRecolorBy === undefined || state.flows.selectedRecolorBy.name === 'none')
         // TODO state.flows.recolorGroups should probably be cleaned up of all undefined values in the state
         ? state.flows.recolorGroups.filter(c => c !== undefined) : null;
     }
