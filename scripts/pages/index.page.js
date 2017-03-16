@@ -37,7 +37,7 @@ const renderSlider = ({ el, selector, endpoint, perPage, next, template }) => {
     .then((data) => template({ posts: data }))
     .then((slides) => {
       el.insertAdjacentHTML('beforeend', slides);
-      setTimeout(() => {new Slider({ selector, perPage, next })});
+      new Slider({ selector, perPage, next });
     });
 };
 
