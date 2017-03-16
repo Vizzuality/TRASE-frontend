@@ -60,5 +60,5 @@ const _setEventListeners = () => {
 _calculateOffsets();
 _setEventListeners();
 
-const nav = new Nav();
-nav.onCreated();
+new Nav();
+

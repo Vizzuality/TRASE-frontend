@@ -51,8 +51,8 @@ const getPageOffset = () => {
 
 const _init = () => {
   const pageOffset = getPageOffset();
-  const nav = new Nav({ pageOffset });
-  nav.onCreated();
+  new Nav({ pageOffset });
+
   state.sliders.forEach(renderSlider);
 };
 

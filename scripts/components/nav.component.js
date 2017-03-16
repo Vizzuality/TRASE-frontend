@@ -7,9 +7,6 @@ export default class {
   constructor(settings ) {
     this.options = Object.assign({}, defaults, settings);
     this.el = document.querySelector(this.options.el);
-  }
-
-  onCreated() {
     this._setEventListeners();
   }
 

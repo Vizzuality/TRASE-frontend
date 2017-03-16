@@ -68,6 +68,28 @@
       height: 6px;
       background-color: $medium-pink;
     }
+
+    &.-logo {
+
+      > a {
+        display: inline-block;
+        padding-right: 32px;
+
+        .logo-img {
+
+          &.-sei {
+            width: 135px;
+            height: 25px;
+          }
+
+          &.-gcp {
+            width: 61px;
+            height: 28px;
+          }
+        }
+      }
+
+    }
   }
 
   .nav-submenu {
@@ -209,6 +231,7 @@
     width: 21px;
     height: 22px;
     fill: $charcoal-grey;
+    visibility: hidden;
   }
 
   &.-have-background {
@@ -224,7 +247,7 @@
     box-shadow: 0 1px 6px 0 rgba($black, .15), 0 1px 6px 0 rgba($black, .2);
 
     .row {
-      max-width: 100%;
+      min-width: 100%;
     }
 
     .columns {
@@ -245,6 +268,12 @@
     .nav-item {
       padding: 0 18px !important;
       border-left: 1px solid $pale-grey;
+
+      &:first-child {
+        .nav-link {
+          padding-left: 16px;
+        }
+      }
     }
 
     .app-nav {
@@ -257,6 +286,10 @@
         width: 100%;
         left: 0;
       }
+    }
+
+    .icon-search {
+      visibility: visible;
     }
   }
 }

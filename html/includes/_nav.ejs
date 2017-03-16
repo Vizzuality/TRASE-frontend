@@ -29,6 +29,18 @@
           </div>
         </div>
         <div class="right-side">
+          <% if (page === 'index') { %>
+            <div class="nav-item -logo">
+              <a class="nav-logo" target="_blank" href="https://www.sei-international.org/">
+                <img class="logo-img -sei" src="images/logos/SEI_0@2x.png" alt="SEI International">
+              </a>
+            </div>
+            <div class="nav-item -logo">
+              <a class="nav-logo" target="_blank" href="https://www.globalcanopy.org/">
+                <img class="logo-img -gcp" src="images/logos/GCP@2x.png" alt="Global Canopy Programme">
+              </a>
+            </div>
+          <% } %>
           <div class="nav-item js-open-search">
             <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
           </div>

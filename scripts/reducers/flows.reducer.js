@@ -175,7 +175,7 @@ export default function (state = {}, action) {
   }
 
   case actions.GET_LINKED_GEOIDS: {
-    const linkedGeoIds = action.payload.map(node => node.geo_id);
+    const linkedGeoIds = (action.payload.length) ? action.payload.map(node => node.geo_id) : [];
 
     newState = Object.assign({}, state, { linkedGeoIds });
     break;

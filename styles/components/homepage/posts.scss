@@ -1,6 +1,7 @@
 .c-posts {
   width: 100%;
   position: relative;
+  padding-left: 2px;
 
   .post {
     display: flex;
@@ -33,7 +34,7 @@
     width: 18px;
     position: absolute;
     top: 40%;
-    right: -5%;
+    right: -16px;
     transform: translateY(-50%);
     cursor: pointer;
   }
