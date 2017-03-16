@@ -88,11 +88,8 @@ export default function (state = {}, action) {
       selectedContext: context,
       selectedContextId: contextId,
       selectedYears: [context.defaultYear, context.defaultYear],
-
       selectedRecolorBy: defaultRecolorBy || { type: 'none', name: 'none' },
-
       selectedResizeBy: defaultResizeBy,
-
       selectedBiomeFilter: 'none',
       detailedView: false,
       selectedNodesColorGroups: [],
@@ -232,7 +229,9 @@ export default function (state = {}, action) {
     // TODO this prevents spamming browser history, but we should avoid touching it when changed state props are not on th url whitelist (constants.URL_STATE_PROPS)
     updateURLState = false;
     newState = Object.assign({}, state, {
-      highlightedNodesIds: action.ids, highlightedNodeData: action.data, highlightedGeoIds: action.geoIds
+      highlightedNodesIds: action.ids,
+      highlightedNodeData: action.data,
+      highlightedGeoIds: action.geoIds
     });
     break;
   }
