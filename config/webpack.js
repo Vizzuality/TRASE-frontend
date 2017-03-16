@@ -42,6 +42,7 @@ const pages = {
 const htmlHeadTemplate = _.template(fs.readFileSync('./html/includes/_head.ejs', 'utf8'));
 const htmlSearchTemplate = _.template(fs.readFileSync('./html/includes/_search.ejs', 'utf8'));
 const htmlNavTemplate = _.template(fs.readFileSync('./html/includes/_nav.ejs', 'utf8'));
+const htmlNavFlowTemplate = _.template(fs.readFileSync('./html/includes/_nav-flow.ejs', 'utf8'));
 const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
 
 const htmlScriptsTemplate = _.template(fs.readFileSync('./html/includes/_scripts.ejs', 'utf8'));
@@ -58,6 +59,7 @@ const getPagePlugin = (id, params) => {
     }),
     search: htmlSearchTemplate(),
     nav: htmlNavTemplate({page: id}),
+    nav_flow: htmlNavFlowTemplate(),
     footer: htmlFooterTemplate(),
     scripts: htmlScriptsTemplate({bundle: id}),
     icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
@@ -116,7 +118,18 @@ const config = {
       {
         test: /\.png$/,
         loader: 'url-loader',
-        query: { mimetype: 'image/png' }
+        query: {
+          mimetype: 'image/png',
+          limit: 380000
+        }
+      },
+      {
+        test: /\.jpg$/,
+        loader: 'url-loader',
+        query: {
+          mimetype: 'image/jpg',
+          limit: 30000
+        }
       }
     ]
   },

@@ -18,6 +18,9 @@ export default class {
   }
 
   setYears(years) {
+    if (!this.xScale) {
+      return;
+    }
     const d0 = [new Date(years[0], 0, 1), new Date(years[1] + 1, 0, 1)];
     const pixelSelection = d0.map(this.xScale);
 

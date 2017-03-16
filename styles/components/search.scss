@@ -6,7 +6,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 56px;
+  height: $nav-height;
   background-color: $white;
   z-index: 100;
 
@@ -96,7 +96,7 @@
 
   .c-search__veil {
     position: fixed;
-    top: 56px;
+    top: $nav-height;
     left: 0;
     width: 100%;
     height: calc(100% - 56px);

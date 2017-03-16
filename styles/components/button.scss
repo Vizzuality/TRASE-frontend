@@ -9,6 +9,7 @@
   line-height: 1;
   text-transform: uppercase;
   cursor: pointer;
+  white-space: nowrap;
 
   &.-bold {
     font-weight: $font-weight-bold;
@@ -17,8 +18,13 @@
   &.-pink {
     border-color: transparent;
     background-color: $medium-pink;
-
     color: $white;
+  }
+
+  &.-white {
+    border-color: transparent;
+    background-color: $white;
+    color: $medium-pink;
   }
 
   &.-transparent {
@@ -31,8 +37,13 @@
   &.-gray {
     border-color: transparent;
     background-color: $gray;
-
     color: $charcoal-grey;
+  }
+
+  &.-charcoal {
+    border-color: transparent;
+    background-color: $charcoal-grey;
+    color: $white;
   }
 
   &.-medium {

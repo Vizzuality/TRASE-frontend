@@ -7,7 +7,8 @@ module.exports = {
     "rules": {
         "indent": [
             "warn",
-            2
+            2,
+            { "SwitchCase": 1 }
         ],
         "linebreak-style": [
             "error",
@@ -37,6 +38,7 @@ module.exports = {
       API_CMS_URL: true,
       API_STORY_CONTENT: true,
       GOOGLE_ANALYTICS_KEY: true,
-      ga: true
+      ga: true,
+      fetch: true
     }
 };

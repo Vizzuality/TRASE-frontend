@@ -8,11 +8,11 @@ export default function(selectedMapDimensions, nodesDictWithMeta) {
   const isEmpty = horizontalLayer.uid === null && verticalLayer.uid === null;
   const isHorizontal = horizontalLayer.uid !== null;
 
-  const geoNodes = _.filter(nodesDictWithMeta, node => node.geoId !== undefined);
-  const nodeIds = Object.keys(geoNodes);
+  const geoNodes = _.filter(nodesDictWithMeta, node => node.geoId !== undefined && node.geoId !== null);
+  const geoNodesIds = Object.keys(geoNodes);
   const choropleth = {};
 
-  nodeIds.forEach(nodeId => {
+  geoNodesIds.forEach(nodeId => {
     const node = geoNodes[nodeId];
     let color = 'none';
 

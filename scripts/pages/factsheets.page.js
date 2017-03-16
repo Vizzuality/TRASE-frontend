@@ -1,3 +1,4 @@
+import Nav from 'components/nav.component.js';
 import 'styles/_base.scss';
 import 'styles/_texts.scss';
 import 'styles/layouts/l-factsheets.scss';
@@ -62,6 +63,8 @@ const _setSearch = () => {
 
 const _init = () => {
   _setSearch();
+  new Nav();
 };
+
 
 _init();
