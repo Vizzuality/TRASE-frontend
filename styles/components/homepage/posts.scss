@@ -1,0 +1,40 @@
+.c-posts {
+  width: 100%;
+  position: relative;
+
+  .post {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-right: 16px;
+
+    .post-wrapper {
+      width: 100%;
+
+      .post-image {
+        height: 200px;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .post-title {
+        font-family: $font-family-2;
+        font-size: $font-size-medium;
+        color: $charcoal-grey;
+      }
+    }
+  }
+
+  .posts-next {
+    height: 34px;
+    width: 18px;
+    position: absolute;
+    top: 40%;
+    right: -5%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+}

@@ -61,10 +61,6 @@ export const DATA_DEFAULT_STATE = {
   data: {}
 };
 
-// index
-export const HOMEPAGE_COMMODITY_WHITELIST = ['SOY'];
-export const HOMEPAGE_COUNTRY_WHITELIST = ['BRAZIL'];
-
 
 // fact sheets
 export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];

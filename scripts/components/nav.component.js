@@ -1,13 +1,16 @@
 import 'styles/components/shared/nav.scss';
 
+const defaults = { el: '.c-nav', haveSolidBackground: false, pageOffset: 0 };
+
 export default class {
-  onCreated() {
-    this._setVars();
-    this._setEventListeners();
+
+  constructor(settings ) {
+    this.options = Object.assign({}, defaults, settings);
+    this.el = document.querySelector(this.options.el);
   }
-  _setVars() {
-    this.el = document.querySelector('.c-nav');
-    this.haveSolidBackground = false;
+
+  onCreated() {
+    this._setEventListeners();
   }
 
   _setEventListeners() {
@@ -15,12 +18,13 @@ export default class {
   }
 
   _checkBackground() {
-    if (window.pageYOffset > 0 && !this.haveSolidBackground) {
+    const { pageOffset } = this.options;
+    if (window.pageYOffset > pageOffset && !this.options.haveSolidBackground) {
       this.el.classList.add('-have-background');
-      this.haveSolidBackground = true;
-    } else if(window.pageYOffset <= 0 && this.haveSolidBackground) {
+      this.options.haveSolidBackground = true;
+    } else if(window.pageYOffset <= pageOffset && this.options.haveSolidBackground) {
       this.el.classList.remove('-have-background');
-      this.haveSolidBackground = false;
+      this.options.haveSolidBackground = false;
     }
   }
 }

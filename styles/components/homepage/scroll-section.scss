@@ -1,0 +1,27 @@
+.c-scroll-section {
+  height: calc(100vh - #{$nav-height});
+  width: 100%;
+
+  &.-intro-top {
+    background-image: url('./../public/images/backgrounds/intro-top.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  &.-intro-middle {
+    background-image: url('./../public/images/backgrounds/intro-middle.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  &.-intro-bottom {
+    background-image: url('./../public/images/backgrounds/intro-bottom.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  &.-content {
+    height: unset;
+    min-height: calc(100vh - #{$nav-height});
+  }
+}

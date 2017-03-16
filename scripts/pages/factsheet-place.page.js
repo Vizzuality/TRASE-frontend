@@ -10,6 +10,7 @@ import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
 import 'styles/components/loading.scss';
 
+import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
 import Line from 'components/graphs/line.component';
 import Chord from 'components/graphs/chord.component';
@@ -137,6 +138,9 @@ const _init = () => {
 
       _build(data);
     });
+
+  const nav = new Nav();
+  nav.onCreated();
 };
 
 _init();
