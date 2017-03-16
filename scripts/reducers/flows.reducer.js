@@ -187,9 +187,14 @@ export default function (state = {}, action) {
     break;
 
   case actions.SELECT_RECOLOR_BY: {
-    const currentContext = state.contexts.find(context => context.id === state.selectedContextId);
-    const recolorBy = currentContext.recolorBy.find(recolorBy => recolorBy.name === action.value && recolorBy.type === action.value_type);
-    newState = Object.assign({}, state, { selectedRecolorBy: recolorBy });
+    let selectedRecolorBy;
+    if (action.value === 'none') {
+      selectedRecolorBy = { name: 'none' };
+    } else {
+      const currentContext = state.contexts.find(context => context.id === state.selectedContextId);
+      selectedRecolorBy = currentContext.recolorBy.find(recolorBy => recolorBy.name === action.value && recolorBy.type === action.value_type);
+    }
+    newState = Object.assign({}, state, { selectedRecolorBy });
     break;
   }
   case actions.SELECT_RESIZE_BY: {
