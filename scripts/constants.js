@@ -112,6 +112,12 @@ export const BASEMAPS = {
     attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy;<a href="http://opentopomap.org">opentopomap.org</a>',
     thumbnail: 'images/maps/thumb-basemap-topo.png'
   },
+  streets: {
+    title: 'Streets (OSM)',
+    url: '//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+    attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',
+    thumbnail: 'images/maps/thumb-basemap-streets.png'
+  },
 };
 
 // GA
