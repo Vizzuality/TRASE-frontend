@@ -41,11 +41,16 @@ const renderSlider = ({ el, selector, endpoint, perPage, next, template }) => {
     });
 };
 
-const _init = () => {
-  const content = document.querySelector('.-content');
+const getPageOffset = () => {
+  const body = document.querySelector('body').getBoundingClientRect();
+  const content = document.querySelector('.js-content-section').getBoundingClientRect();
   const padding = 65;
   const navHeight = 64;
-  const pageOffset = content.getBoundingClientRect().top - padding - navHeight;
+  return Math.abs(body.top) + Math.abs(content.top) - padding - navHeight;
+};
+
+const _init = () => {
+  const pageOffset = getPageOffset();
   const nav = new Nav({ pageOffset });
   nav.onCreated();
   state.sliders.forEach(renderSlider);
