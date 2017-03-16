@@ -56,10 +56,6 @@ export const FLOWS_DEFAULT_STATE = {
   }
 };
 
-// index
-export const HOMEPAGE_COMMODITY_WHITELIST = ['SOY'];
-export const HOMEPAGE_COUNTRY_WHITELIST = ['BRAZIL'];
-
 
 // fact sheets
 export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
