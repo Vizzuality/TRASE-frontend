@@ -96,7 +96,7 @@
 
   .c-search__veil {
     position: fixed;
-    top: 56px;
+    top: $nav-height;
     left: 0;
     width: 100%;
     height: calc(100% - 56px);

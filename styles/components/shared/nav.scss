@@ -231,6 +231,7 @@
     width: 21px;
     height: 22px;
     fill: $charcoal-grey;
+    visibility: hidden;
   }
 
   &.-have-background {
@@ -279,6 +280,10 @@
         width: 100%;
         left: 0;
       }
+    }
+
+    .icon-search {
+      visibility: visible;
     }
   }
 }
