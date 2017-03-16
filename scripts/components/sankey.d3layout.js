@@ -133,7 +133,6 @@ const sankeyLayout = function() {
   // will be called at each relayouting (user clicks nodes, user scrolls, etc)
   const _computeLinksCoords = () => {
     const stackedHeightsByNodeId = {source:{},target:{}};
-    let n = 0;
     links.forEach(link => {
       link.width = linksColumnWidth;
       link.x = columnWidth + _getColumnX(link.sourceColumnPosition);
@@ -148,10 +147,6 @@ const sankeyLayout = function() {
       if (!stackedHeightsByNodeId.source[sId]) stackedHeightsByNodeId.source[sId] = _getNode(link.sourceColumnPosition, sId).y;
       link.sy = stackedHeightsByNodeId.source[sId];
       stackedHeightsByNodeId.source[sId] = link.sy + link.renderedHeight;
-
-      if (link.sourceColumnPosition === 0) {
-        n+= link.height;
-      }
 
       // const sLayerIndex = link.sourceNodeLayerIndex;
       // if (layerOffsets && layerOffsets[sLayerIndex]) {
@@ -168,7 +163,6 @@ const sankeyLayout = function() {
       //   link.ty += layerOffsets[tLayerIndex];
       // }
     });
-    console.log(n)
   };
 
   const _getColumnX = (columnIndex) => PADDING_X + columnIndex * (columnWidth + linksColumnWidth);
