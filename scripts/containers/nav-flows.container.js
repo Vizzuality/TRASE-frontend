@@ -11,7 +11,9 @@ const mapMethodsToState = (state) => ({
     _comparedValue: (state) => state.flows.selectedContext,
     _returnedValue: (state) => {
       return {
-        contexts: state.flows.contexts, selectedContextId: state.flows.selectedContextId
+        contexts: state.flows.contexts,
+        selectedContextId: state.flows.selectedContextId,
+        detailedView: state.flows.detailedView
       };
     }
   },

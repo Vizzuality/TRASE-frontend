@@ -10,7 +10,7 @@
     <div class="nav-item">
       <div class="c-dropdown" data-dropdown="context">
         <span class="dropdown-label">Country - Commodity</span>
-        <span class="js-dropdown-title dropdown-title -small">
+        <span class="js-dropdown-title dropdown-title">
           -
         </span>
         <ul class="js-dropdown-list dropdown-list">
@@ -28,14 +28,14 @@
     <div class="nav-item">
       <div class="c-dropdown" data-dropdown="biomeFilter">
         <span class="dropdown-label"><%= filters.name %></span>
-        <span class="js-dropdown-title dropdown-title -small">
+        <span class="js-dropdown-title dropdown-title">
             -
           </span>
         <ul class="js-dropdown-list dropdown-list">
           <li class="js-dropdown-item dropdown-item" data-value="none">All</li>
           <% filters.nodes.forEach(function(node) { %>
           <li class="js-dropdown-item dropdown-item"
-              data-value="<%= node.nodeId %>"><%= _.capitalize(node.name) %></li>
+              data-value="<%= node.name %>"><%= _.capitalize(node.name) %></li>
           <% }) %>
         </ul>
       </div>
@@ -45,7 +45,7 @@
     <div class="nav-item">
       <div class="c-dropdown" data-dropdown="years">
         <span class="dropdown-label">years</span>
-        <span class="js-dropdown-title dropdown-title -small">
+        <span class="js-dropdown-title dropdown-title">
           -
         </span>
         <ul class="js-dropdown-list dropdown-list">
