@@ -163,7 +163,12 @@ export default class {
     });
 
     if (highlightedGeoId && selectedGeoIds.indexOf(highlightedGeoId) === -1) {
-      selectedFeatures.push(this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === highlightedGeoId).feature);
+      const highlightedPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === highlightedGeoId);
+      if (highlightedPolygon !== undefined) {
+        selectedFeatures.push(highlightedPolygon.feature);
+      } else {
+        console.warn('no polygon found with geoId ', highlightedGeoId);
+      }
     }
 
     if (selectedFeatures.length > 0) {
@@ -301,6 +306,9 @@ export default class {
   }
 
   setChoropleth({choropleth, linkedGeoIds, selectedMapDimensions}) {
+    if (!this.currentPolygonTypeLayer) {
+      return;
+    }
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {

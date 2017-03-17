@@ -47,6 +47,15 @@
           background-image: url('./../public/images/mocks/four.jpg');
         }
       }
+
+      .update-description {
+        min-height: 160px;
+        color: $charcoal-grey;
+        font-family: $font-family-2;
+        font-weight: $font-weight-light;
+        font-size: $font-size-xx-regular;
+        line-height: 2.0;
+      }
     }
   }
 }

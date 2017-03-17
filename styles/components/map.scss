@@ -121,14 +121,26 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      right: -5px;
+      right: -16px;
       margin: auto;
-      width: 10px;
-      height: 58px;
-      border-radius: 4px;
+      width: 32px;
+      height: 32px;
+      border-radius: 100%;
       background-color: $charcoal-grey;
       box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
       color: rgba($gray, .5);
+
+      &:before {
+        content: '';
+        position: relative;
+        left: -1px;
+        width: 8px;
+        height: 8px;
+        border: 2px solid $white;
+        border-top: 0;
+        border-left: 0;
+        transform: rotateZ(-45deg);
+      }
     }
 
     .icon-dragger_dots {
@@ -239,11 +251,8 @@
 
     .-toggle-map {
       &::before {
-        border-right-color: $medium-pink;
-      }
-
-      &::after {
-        border-left-color: rgba($charcoal-grey, .3);
+        transform: rotateZ(135deg);
+        left: 1px;
       }
     }
 
