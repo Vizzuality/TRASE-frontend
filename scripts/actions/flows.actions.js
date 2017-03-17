@@ -237,19 +237,10 @@ export function loadLinks() {
       }
 
     }
-    // const selectRecolorByType = state.flows.selectedRecolorBy ? state.flows.selectedRecolorBy.type : null;
-    // const selectRecolorByValue = state.flows.selectedRecolorBy ? state.flows.selectedRecolorBy.value : null;
-    // if (selectRecolorByValue && selectRecolorByValue !== 'none') {
-    //   if (selectRecolorByType === 'qual') {
-    //     params.flow_qual = selectRecolorByValue;
-    //   } else if (selectRecolorByType === 'ind') {
-    //     params.flow_ind = selectRecolorByValue;
-    //   }
-    // }
 
     const selectedBiomeFilter = state.flows.selectedBiomeFilter;
-    if (selectedBiomeFilter && selectedBiomeFilter !== 'none') {
-      params.biome_filter_id = selectedBiomeFilter;
+    if (selectedBiomeFilter && selectedBiomeFilter.value !== 'none') {
+      params.biome_filter_id = selectedBiomeFilter.nodeId;
     }
 
     if (state.flows.areNodesExpanded) {

@@ -35,7 +35,7 @@
           <li class="js-dropdown-item dropdown-item" data-value="none">All</li>
           <% filters.nodes.forEach(function(node) { %>
           <li class="js-dropdown-item dropdown-item"
-              data-value="<%= node.nodeId %>"><%= _.capitalize(node.name) %></li>
+              data-value="<%= node.name %>"><%= _.capitalize(node.name) %></li>
           <% }) %>
         </ul>
       </div>

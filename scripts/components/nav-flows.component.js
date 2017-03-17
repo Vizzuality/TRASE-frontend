@@ -122,7 +122,7 @@ export default class {
     if (!this.biomeFilterDropdown || !value) {
       return;
     }
-    this.biomeFilterDropdown.selectValue(value);
+    this.biomeFilterDropdown.selectValue(value.name);
   }
 
   selectContext(selectedContext) {

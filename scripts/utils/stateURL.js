@@ -26,7 +26,6 @@ const URL_STATE_PROPS = [
   'selectedContextId',
   'selectedYears',
   'detailedView',
-  'selectedBiomeFilter',
   'selectedNodesIds',
   'expandedNodesIds',
   'areNodesExpanded',
@@ -42,6 +41,7 @@ const filterStateToURL = state => {
 
   stateToSave.selectedResizeByName = state.selectedResizeBy ? state.selectedResizeBy.name : null;
   stateToSave.selectedRecolorByName = state.selectedRecolorBy ? state.selectedRecolorBy.name : null;
+  stateToSave.selectedBiomeFilterName = state.selectedBiomeFilter ? state.selectedBiomeFilter.name : null;
 
   return stateToSave;
 };

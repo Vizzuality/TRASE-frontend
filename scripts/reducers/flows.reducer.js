@@ -67,12 +67,20 @@ export default function (state = {}, action) {
         }
       }
 
+      let biomeFilter;
+      if (state.selectedBiomeFilterName === 'none' || !context.filterBy.length) {
+        biomeFilter = { value: 'none' };
+      } else {
+        biomeFilter = context.filterBy[0].nodes.find(filterBy => filterBy.name === state.selectedBiomeFilterName);
+      }
+
       newState = Object.assign({}, state, {
         selectedContext: context,
         selectedContextId: context.id,
         selectedYears: state.selectedYears || [context.defaultYear, context.defaultYear],
         selectedRecolorBy: recolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: resizeBy,
+        selectedBiomeFilter: biomeFilter || { value: 'none' },
         mapView: context.map
       });
       break;
@@ -83,14 +91,14 @@ export default function (state = {}, action) {
       const context = state.contexts.find(context => context.id === contextId);
       const defaultRecolorBy = context.recolorBy.find(recolorBy => recolorBy.isDefault === true);
       const defaultResizeBy = context.resizeBy.find(resizeBy => resizeBy.isDefault === true);
-
+      const defaultFilterBy = context.filterBy.length && context.filterBy[0][0];
       newState = Object.assign({}, state, {
         selectedContext: context,
         selectedContextId: contextId,
         selectedYears: [context.defaultYear, context.defaultYear],
         selectedRecolorBy: defaultRecolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: defaultResizeBy,
-        selectedBiomeFilter: 'none',
+        selectedBiomeFilter: defaultFilterBy,
         detailedView: false,
         selectedNodesColorGroups: [],
         recolorGroups: [],
@@ -178,9 +186,17 @@ export default function (state = {}, action) {
       break;
     }
 
-    case actions.SELECT_BIOME_FILTER:
-      newState = Object.assign({}, state, { selectedBiomeFilter: action.biomeFilter });
+    case actions.SELECT_BIOME_FILTER: {
+      let selectedBiomeFilter;
+      if (action.biomeFilter === 'none') {
+        selectedBiomeFilter = { value: 'none' };
+      } else {
+        const currentContext = state.contexts.find(context => context.id === state.selectedContextId);
+        selectedBiomeFilter = currentContext.filterBy[0].nodes.find(filterBy => filterBy.name === action.biomeFilter);
+      }
+      newState = Object.assign({}, state, { selectedBiomeFilter });
       break;
+    }
 
     case actions.SELECT_YEARS:
       newState = Object.assign({}, state, { selectedYears: action.years });
@@ -226,7 +242,6 @@ export default function (state = {}, action) {
         selectedNodesColumnsPos: action.columnsPos,
         selectedNodesColorGroups: action.colorGroups,
       });
-    // console.log(newState.selectedNodesColorGroups)
       break;
     }
 
