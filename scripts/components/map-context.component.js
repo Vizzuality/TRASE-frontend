@@ -8,7 +8,7 @@ export default class {
   }
 
   buildLayers(layers) {
-    this.el.innerHTML = ContextLayersTemplate({ layers });
+    this.el.innerHTML = ContextLayersTemplate({layers});
     this.switchers = Array.prototype.slice.call(this.el.querySelectorAll('.c-switcher'), 0);
 
     this.switchers.forEach(switcher => {
@@ -25,9 +25,7 @@ export default class {
   _setActiveContextualLayers(layers) {
     layers.forEach((layerSlug) => {
       this.switchers.forEach((switcher) => {
-        if (switcher.getAttribute('data-layer-slug') !== layerSlug) {
-          return;
-        }
+        if (switcher.getAttribute('data-layer-slug') !== layerSlug) return;
         switcher.closest('.layer-item').classList.add('-selected');
         switcher.classList.add('-enabled');
       });
@@ -36,9 +34,7 @@ export default class {
 
   _onToggleSwitcher(e) {
     var switcher = e && e.currentTarget;
-    if (!switcher) {
-      return;
-    }
+    if (!switcher) return;
 
     switcher.closest('.layer-item').classList.toggle('-selected');
     switcher.classList.toggle('-enabled');
@@ -51,9 +47,7 @@ export default class {
     const activeLayers = [];
 
     this.switchers.forEach((switcher) => {
-      if (!switcher.classList.contains('-enabled')) {
-        return;
-      }
+      if(!switcher.classList.contains('-enabled')) return;
 
       const layerSlug = switcher.getAttribute('data-layer-slug');
       activeLayers.push(layerSlug);

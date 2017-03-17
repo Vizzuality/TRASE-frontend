@@ -1,6 +1,7 @@
 import _ from 'lodash';
-import { select as d3_select, event as d3_event } from 'd3-selection';
-import 'd3-transition';
+import { select as d3_select /*, selectAll as d3_selectAll*/ } from 'd3-selection';
+import { event as d3_event } from 'd3-selection';
+import  'd3-transition';
 import { DETAILED_VIEW_MIN_LINK_HEIGHT, SANKEY_TRANSITION_TIME } from 'constants';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
@@ -9,20 +10,19 @@ import 'styles/components/sankey.scss';
 import LinkTooltipTemplate from 'ejs!templates/sankey/linkTooltip.ejs';
 import 'styles/components/sankey/linkTooltip.scss';
 
+
 export default class {
 
   onCreated() {
     this._build();
   }
 
-  resizeViewport({ selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy }) {
+  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy}) {
     this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
 
     if (this.layout.relayout()) {
       this._render(selectedRecolorBy);
-      if (shouldRepositionExpandButton) {
-        this._repositionExpandButton(selectedNodesIds);
-      }
+      if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
     }
   }
 
@@ -53,7 +53,7 @@ export default class {
     this.selectNodes(linksPayload);
   }
 
-  selectNodes({ selectedNodesIds, shouldRepositionExpandButton }) {
+  selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
     // let minimumY = Infinity;
     if (!this.layout.isReady()) {
       return;
@@ -70,9 +70,7 @@ export default class {
         return isSelected;
       });
 
-    if (shouldRepositionExpandButton) {
-      this._repositionExpandButton(selectedNodesIds);
-    }
+    if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
 
   }
 
@@ -97,13 +95,9 @@ export default class {
     this.linksContainer = this.svg.select('.sankey-links');
 
     this.linkTooltip = document.querySelector('.js-sankey-tooltip');
-    this.linkTooltipHideDebounced = _.debounce(function () {
-      document.querySelector('.js-sankey-tooltip').classList.add('is-hidden');
-    }, 10);
+    this.linkTooltipHideDebounced = _.debounce(function() { document.querySelector('.js-sankey-tooltip').classList.add('is-hidden'); }, 10);
 
-    this.sankeyColumns.on('mouseleave', () => {
-      this._onColumnOut();
-    });
+    this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
 
     addSVGDropShadowDef(this.svg);
 
@@ -181,15 +175,9 @@ export default class {
       .attr('transform', node => `translate(0,${node.y})`)
       .classed('-is-aggregated', node => node.isAggregated)
       .classed('-is-domestic', node => node.isDomestic)
-      .on('mouseenter', function (node) {
-        that._onNodeOver(d3_select(this), node.id, node.isAggregated);
-      })
-      .on('mouseleave', () => {
-        this._onNodeOut();
-      })
-      .on('click', node => {
-        this.callbacks.onNodeClicked(node.id, node.isAggregated);
-      });
+      .on('mouseenter', function(node) { that._onNodeOver(d3_select(this), node.id, node.isAggregated); } )
+      .on('mouseleave', () => { this._onNodeOut(); } )
+      .on('click', node => { this.callbacks.onNodeClicked(node.id, node.isAggregated); } );
 
     nodesEnter.append('rect')
       .attr('class', 'sankey-node-rect')
@@ -208,18 +196,19 @@ export default class {
     nodesUpdate.select('.sankey-node-rect')
       .attr('height', d => d.renderedHeight);
 
+
+
     this.nodes.exit()
       .remove();
+
 
     const linksData = this.layout.links();
     const links = this.linksContainer
       .selectAll('path')
-      .data(linksData, link => link.id);
+      .data(linksData , link => link.id);
 
     // update
-    links.attr('class', (link) => {
-      return this._getLinkColor(link, selectedRecolorBy);
-    }); // apply color from CSS class immediately
+    links.attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } ); // apply color from CSS class immediately
     links.transition()
       .duration(SANKEY_TRANSITION_TIME)
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
@@ -228,19 +217,17 @@ export default class {
     // enter
     links.enter()
       .append('path')
-      .attr('class', (link) => {
-        return this._getLinkColor(link, selectedRecolorBy);
-      })
+      .attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } )
       .attr('d', this.layout.link())
-      .on('mouseover', function (link) {
+      .on('mouseover', function(link) {
         that.linkTooltipHideDebounced.cancel();
-        that.linkTooltip.innerHTML = LinkTooltipTemplate({ link });
+        that.linkTooltip.innerHTML = LinkTooltipTemplate({link});
         that.linkTooltip.classList.remove('is-hidden');
         that.linkTooltip.style.left = d3_event.offsetX + 'px';
         that.linkTooltip.style.top = d3_event.offsetY + 'px';
         this.classList.add('-hover');
       })
-      .on('mouseout', function () {
+      .on('mouseout', function() {
         that.linkTooltipHideDebounced();
         this.classList.remove('-hover');
       })
@@ -266,7 +253,7 @@ export default class {
       .enter()
       .append('tspan')
       .attr('class', 'sankey-node-label')
-      .attr('x', this.layout.columnWidth() / 2)
+      .attr('x', this.layout.columnWidth()/2)
       .attr('dy', 12)
       .text(d => d);
   }
@@ -286,4 +273,4 @@ export default class {
   }
 }
 
-const placeNodeText = node => `translate(0,${ -7 + node.renderedHeight / 2 - ((node.label.length - 1) * 7) })`;
+const placeNodeText = node => `translate(0,${ - 7 + node.renderedHeight/2 - ((node.label.length-1) * 7) })`;

@@ -4,14 +4,15 @@ function calculateOffsets(el) {
   const absoluteOffsetTop = el.getBoundingClientRect().top;
   let top = 0;
 
-  top = window.pageYOffset > absoluteOffsetTop ? window.pageYOffset + absoluteOffsetTop : window.pageYOffset + Math.abs(absoluteOffsetTop);
+  top = window.pageYOffset > absoluteOffsetTop ?
+    window.pageYOffset + absoluteOffsetTop : window.pageYOffset + Math.abs(absoluteOffsetTop);
 
   return {
     top
   };
 }
 
-function scrollDocument(el, offsets, cutOffsets) {
+function scrollDocument (el, offsets, cutOffsets) {
   const scrollTop = window.pageYOffset;
   const elemHeight = el.getBoundingClientRect().height;
   const cutTopPoint = cutOffsets.cutTopOffsets.top;

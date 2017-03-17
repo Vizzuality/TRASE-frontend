@@ -63,23 +63,23 @@ export default class {
     return recolorBy.map(recolorByElem => {
       recolorByElem.label = recolorByElem.label || recolorByElem.name;
       switch (recolorByElem.legendType) {
-        case 'qual': {
-          recolorByElem.options = [];
-          recolorByElem.nodes.forEach(node => recolorByElem.options.push({
-            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.name)}-${_.toLower(node)}`.replace(/ /g, '-'),
-            label: _.capitalize(node)
-          }));
-          break;
-        }
-        case 'stars':
-        case 'linear': {
-          recolorByElem.options = [];
-          _.range(recolorByElem.intervalCount).forEach(node => recolorByElem.options.push({
-            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.name)}-${_.toLower(node)}`.replace(/ /g, '-'),
-            label: ''
-          }));
-          break;
-        }
+      case 'qual': {
+        recolorByElem.options = [];
+        recolorByElem.nodes.forEach(node => recolorByElem.options.push({
+          class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.name)}-${_.toLower(node)}`.replace(/ /g, '-'),
+          label: _.capitalize(node)
+        }));
+        break;
+      }
+      case 'stars':
+      case 'linear': {
+        recolorByElem.options = [];
+        _.range(recolorByElem.intervalCount).forEach(node => recolorByElem.options.push({
+          class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.name)}-${_.toLower(node)}`.replace(/ /g, '-'),
+          label: ''
+        }));
+        break;
+      }
       }
       return recolorByElem;
     });

@@ -1,10 +1,10 @@
 <% columnsByGroup.forEach(function(columns, i) { %>
-<div class="c-dropdown -column-selector" data-dropdown="column<%= i %>">
-  <span class="js-dropdown-title dropdown-title">select column</span>
-  <ul class="js-dropdown-list dropdown-list">
-    <% columns.forEach(function(column) { %>
-    <li class="dropdown-item" data-value="<%= column.id %>"><%= column.name %></li>
-    <% }); %>
-  </ul>
-</div>
-<% }); %>
+  <div class="c-dropdown -column-selector" data-dropdown="column<%= i %>">
+    <span class="js-dropdown-title dropdown-title">select column</span>
+    <ul class="js-dropdown-list dropdown-list">
+      <% columns.forEach(function(column) { %>
+        <li class="dropdown-item" data-value="<%= column.id %>"><%= column.name %></li>
+      <%});%>
+    </ul>
+  </div>
+<%});%>

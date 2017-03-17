@@ -22,13 +22,9 @@ export default class {
     }
 
     // use this as a chance to dispatch an action when component is instanciated (always miss this in react-redux)
-    if (onCreated) {
-      onCreated(store.dispatch);
-    }
+    if (onCreated) onCreated(store.dispatch);
 
-    if (this.view.onCreated) {
-      this.view.onCreated();
-    }
+    if (this.view.onCreated) this.view.onCreated();
   }
 
   _onStateChange(state) {

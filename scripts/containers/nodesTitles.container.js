@@ -6,9 +6,12 @@ import NodesTitles from 'components/nodesTitles.component.js';
 // keys correspond to method names, values to state prop path
 const mapMethodsToState = (state) => ({
   selectNodes: {
-    nodesData: state.flows.selectedNodesData, recolorGroups: state.flows.recolorGroups
-  }, highlightNode: {
-    _comparedValue: (state) => state.flows.highlightedNodeData, _returnedValue: (state) => {
+    nodesData: state.flows.selectedNodesData,
+    recolorGroups: state.flows.recolorGroups
+  },
+  highlightNode: {
+    _comparedValue: (state) => state.flows.highlightedNodeData,
+    _returnedValue: (state) => {
       return {
         nodesData: (state.flows.highlightedNodeData.length === 0) ? state.flows.selectedNodesData : state.flows.highlightedNodeData,
         isHighlight: state.flows.highlightedNodeData.length > 0,

@@ -8,9 +8,7 @@ export default class {
 
   onCreated() {
     this.el = document.querySelector('.js-map-legend');
-    this.el.addEventListener('click', () => {
-      this.callbacks.onToggleMapLayerMenu();
-    });
+    this.el.addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     this.choro = document.querySelector('.js-map-legend-choro');
     this.context = document.querySelector('.js-map-legend-context');
     this.map = document.querySelector('.c-map');
@@ -21,20 +19,16 @@ export default class {
 
     const zoom = document.querySelector('.leaflet-control-zoom');
     const scale = document.querySelector('.leaflet-control-scale');
-    zoom.addEventListener('mouseenter', () => {
-      scale.classList.toggle('-visible', true);
-    });
-    zoom.addEventListener('mouseleave', () => {
-      scale.classList.toggle('-visible', false);
-    });
+    zoom.addEventListener('mouseenter', () => { scale.classList.toggle('-visible', true); });
+    zoom.addEventListener('mouseleave', () => { scale.classList.toggle('-visible', false); });
   }
 
-  updateChoroplethLegend({ selectedMapDimensions, selectedMapContextualLayersData }) {
+  updateChoroplethLegend({selectedMapDimensions, selectedMapContextualLayersData}) {
     this._setupChoro(selectedMapDimensions, selectedMapContextualLayersData);
     this._updateMapControlsPosition();
   }
 
-  updateContextLegend({ selectedMapDimensions, selectedMapContextualLayersData }) {
+  updateContextLegend({selectedMapDimensions, selectedMapContextualLayersData}) {
     this._toggleLegend(selectedMapDimensions, selectedMapContextualLayersData);
     this._renderContext(selectedMapContextualLayersData);
     this._updateMapControlsPosition();
@@ -71,7 +65,11 @@ export default class {
   }
 
   _toggleLegend(vectorLayers, selectedMapContextualLayersData) {
-    if ((vectorLayers && vectorLayers['horizontal'] && vectorLayers['horizontal'].uid) || (vectorLayers && vectorLayers['vertical'] && vectorLayers['vertical'].uid) || (selectedMapContextualLayersData && selectedMapContextualLayersData.length > 0)) {
+    if ( (vectorLayers && vectorLayers['horizontal'] && vectorLayers['horizontal'].uid) ||
+         (vectorLayers && vectorLayers['vertical'] && vectorLayers['vertical'].uid) ||
+         (selectedMapContextualLayersData && selectedMapContextualLayersData.length > 0)
+       )
+    {
       this._showLegend();
     } else {
       this._hideLegend();
@@ -116,7 +114,12 @@ export default class {
     }
 
     const html = LegendChoroTemplate({
-      title, colors, cssClass, bucket, isBidimensional: settings.isBidimensional, abbreviateNumber
+      title,
+      colors,
+      cssClass,
+      bucket,
+      isBidimensional: settings.isBidimensional,
+      abbreviateNumber
     });
 
     if (!settings.horizontal && !settings.vertical) {
@@ -140,5 +143,6 @@ export default class {
     this.mapControlZoom.style.bottom = `${mapFooterHeight + 48}px`;
     this.mapControlScale.style.bottom = `${mapFooterHeight + this.mapControlScale.offsetHeight - 88}px`;
   }
+
 
 }

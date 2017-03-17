@@ -16,7 +16,8 @@
         <ul class="js-dropdown-list dropdown-list">
           <% contexts.forEach(function(context) { %>
           <li class="js-dropdown-item dropdown-item" <%= context.isDisabled ? '' : 'data-value="' + context.id + '"'
-          %>><%= _.capitalize(context.countryName) %> - <%=
+          %>><%= _.capitalize(context
+                    .countryName) %> - <%=
               _.capitalize(context.commodityName) %></li>
           <% }) %>
         </ul>
@@ -134,9 +135,7 @@
     </div>
 
     <div class="nav-item js-open-search">
-      <svg class="icon icon-search">
-        <use xlink:href="#icon-search"></use>
-      </svg>
+      <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
     </div>
   </div>
 </nav>

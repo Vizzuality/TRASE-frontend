@@ -5,7 +5,8 @@ import MapDimensions from 'components/map-dimensions.component.js';
 
 const mapMethodsToState = (state) => ({
   loadMapDimensions: {
-    _comparedValue: (state) => state.flows.mapDimensions, _returnedValue: (state) => {
+    _comparedValue: (state) => state.flows.mapDimensions,
+    _returnedValue: (state) => {
       return state.flows.mapDimensionsFolders.map(dimensionGroup => {
         return {
           dimensionGroup,
@@ -13,7 +14,8 @@ const mapMethodsToState = (state) => ({
         };
       });
     }
-  }, selectMapDimensions: state.flows.selectedMapDimensions,
+  },
+  selectMapDimensions: state.flows.selectedMapDimensions,
 });
 
 const mapViewCallbacksToActions = () => ({

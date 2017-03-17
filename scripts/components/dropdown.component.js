@@ -41,9 +41,7 @@ export default class {
     });
 
     this._bindMultipleEvents(['mouseup', 'touchstart'], window, (event) => {
-      if (event.target === this.list) {
-        return;
-      }
+      if (event.target === this.list) return;
       this._close();
     });
   }
@@ -53,7 +51,9 @@ export default class {
     if (value === undefined) {
       value = 'none';
     }
-    const valueTitle = this.list.querySelector(`[data-value="${value}"] .js-dropdown-item-title`) || this.list.querySelector(`[data-value="${value}"]`);
+    const valueTitle =
+      this.list.querySelector(`[data-value="${value}"] .js-dropdown-item-title`) ||
+      this.list.querySelector(`[data-value="${value}"]`);
     this.setTitle(valueTitle.innerHTML);
   }
 

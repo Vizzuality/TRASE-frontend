@@ -7,7 +7,7 @@ export default class {
   }
 
   buildBasemaps(basemaps) {
-    this.el.innerHTML = BasemapsTemplate({ basemaps });
+    this.el.innerHTML = BasemapsTemplate({basemaps});
 
     this.radios = Array.prototype.slice.call(this.el.querySelectorAll('.c-radio-btn'), 0);
     this.radios.forEach((radio) => {
@@ -21,25 +21,19 @@ export default class {
 
   _setActiveBasemap(basemapId) {
     this.radios.forEach((radio) => {
-      if (radio.getAttribute('value') !== basemapId) {
-        return;
-      }
+      if (radio.getAttribute('value') !== basemapId) return;
       radio.classList.add('-enabled');
     });
   }
 
   _onToggleRadio(e) {
     const selectedRadio = e && e.currentTarget;
-    if (!selectedRadio) {
-      return;
-    }
+    if (!selectedRadio) return;
 
     const value = selectedRadio.getAttribute('value');
     const currentSelectedRadio = this.el.querySelector('.c-radio-btn.-enabled');
 
-    if (selectedRadio === currentSelectedRadio) {
-      return;
-    }
+    if (selectedRadio === currentSelectedRadio) return;
     this.radios.forEach((radio) => {
       radio.classList.remove('-enabled');
     });

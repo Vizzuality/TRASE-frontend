@@ -1,13 +1,9 @@
-export default (number, isPercentage) => {
+export default (number, isPercentage)  => {
   let maximumFractionDigits = 1;
 
-  if (number === null || number === undefined || typeof number !== 'number') {
-    return 'N/A';
-  }
+  if (number === null || number === undefined || typeof number !== 'number') return 'N/A';
 
-  if (number === 0) {
-    return number;
-  }
+  if (number === 0) return number;
 
   if (isPercentage) {
     number *= 100;
@@ -18,6 +14,7 @@ export default (number, isPercentage) => {
   }
 
   return parseFloat(number).toLocaleString(undefined, {
-    minimumFractionDigits: 0, maximumFractionDigits
+    minimumFractionDigits: 0,
+    maximumFractionDigits
   });
 };

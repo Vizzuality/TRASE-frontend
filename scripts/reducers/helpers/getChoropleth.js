@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { CHOROPLETH_CLASSES } from 'constants';
 
-export default function (selectedMapDimensions, nodesDictWithMeta) {
+export default function(selectedMapDimensions, nodesDictWithMeta) {
   const horizontalLayer = selectedMapDimensions.horizontal;
   const verticalLayer = selectedMapDimensions.vertical;
   const isBidimensional = horizontalLayer.uid !== null && verticalLayer.uid !== null;
@@ -34,7 +34,7 @@ export default function (selectedMapDimensions, nodesDictWithMeta) {
           const horizontalValue = horizontalLayerValue.value3;
           const verticalValue = verticalLayerValue.value3;
           colors = CHOROPLETH_CLASSES.bidimensional;
-          colorIndex = (2 - Math.max(0, verticalValue - 1)) * 3 + Math.max(0, horizontalValue - 1);
+          colorIndex = (2 - Math.max(0, verticalValue-1)) * 3 + Math.max(0, horizontalValue-1);
           color = colors[colorIndex];
         }
       } else {
@@ -45,7 +45,7 @@ export default function (selectedMapDimensions, nodesDictWithMeta) {
         } else {
           colors = (isHorizontal) ? CHOROPLETH_CLASSES.horizontal : CHOROPLETH_CLASSES.vertical;
           colorIndex = value.value5;
-          color = colors[Math.max(0, colorIndex - 1)];
+          color = colors[Math.max(0, colorIndex-1)];
         }
       }
     }

@@ -1,6 +1,9 @@
+
 import _ from 'lodash';
 import formatNumber from 'utils/formatNumber';
+
 import TopTemplate from 'ejs!templates/factsheets/top.ejs';
+
 import 'styles/components/factsheets/top.scss';
 
 export default class {
@@ -17,7 +20,8 @@ export default class {
   }
 
   _parseData() {
-    const baseUrlLink = this.targetLink ? `/factsheet-${this.targetLink}.html?nodeId=` : null;
+    const baseUrlLink = this.targetLink ?
+      `/factsheet-${this.targetLink}.html?nodeId=` : null;
 
     this.data.forEach(d => {
       // this verification shouldn't exist. All list must have same data format.
@@ -29,7 +33,9 @@ export default class {
 
   _render() {
     this.el.innerHTML = TopTemplate({
-      list: this.data, title: this.title, unit: this.unit
+      list: this.data,
+      title: this.title,
+      unit: this.unit
     });
   }
 }

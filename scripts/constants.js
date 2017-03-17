@@ -10,7 +10,11 @@ export const DETAILED_VIEW_MIN_NODE_HEIGHT = 14;
 export const DETAILED_VIEW_MIN_LINK_HEIGHT = 1;
 
 export const CHOROPLETH_CLASSES = {
-  bidimensional: ['ch-bi-0-2', 'ch-bi-1-2', 'ch-bi-2-2', 'ch-bi-0-1', 'ch-bi-1-1', 'ch-bi-2-1', 'ch-bi-0-0', 'ch-bi-1-0', 'ch-bi-2-0'],
+  bidimensional: [
+    'ch-bi-0-2', 'ch-bi-1-2', 'ch-bi-2-2',
+    'ch-bi-0-1', 'ch-bi-1-1', 'ch-bi-2-1',
+    'ch-bi-0-0', 'ch-bi-1-0', 'ch-bi-2-0'
+  ],
   horizontal: ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'],
   vertical: ['ch-blue-0', 'ch-blue-1', 'ch-blue-2', 'ch-blue-3', 'ch-blue-4'],
   error_no_metadata: 'ch-no-meta',
@@ -23,7 +27,8 @@ export const SANKEY_TRANSITION_TIME = 1000;
 export const APP_DEFAULT_STATE = {
   app: {
     modal: {
-      visibility: false, modalParams: null
+      visibility: false,
+      modalParams: null
     }
   }
 };
@@ -34,12 +39,16 @@ export const FLOWS_DEFAULT_STATE = {
     expandedNodesIds: [],
     areNodesExpanded: false,
     detailedView: false,
-    selectedNodesData: [], // TODO title should be inferred from the uid, not kept in state
+    selectedNodesData: [],
+    // TODO title should be inferred from the uid, not kept in state
     selectedMapDimensions: {
       horizontal: {
-        uid: null, title: null
-      }, vertical: {
-        uid: null, title: null
+        uid: null,
+        title: null
+      },
+      vertical: {
+        uid: null,
+        title: null
       }
     },
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
@@ -50,6 +59,7 @@ export const FLOWS_DEFAULT_STATE = {
 export const DATA_DEFAULT_STATE = {
   data: {}
 };
+
 
 // fact sheets
 export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
@@ -82,17 +92,20 @@ export const BASEMAPS = {
     labelsUrl: '//api.mapbox.com/styles/v1/traselabels/cizi59ohm00122spaghssyqsd/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2VsYWJlbHMiLCJhIjoiY2l6aTU4bm9sMDAyczMzazdwNWJ1MmFmbSJ9.zcNOZLokWun7cDwbArtV6g',
     attribution: '<span>&copy;</span> <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <span>&copy;</span> <a href="https://www.mapbox.com/about/maps/">Mapbox</a>',
     thumbnail: 'images/maps/thumb-basemap-default.png'
-  }, satellite: {
+  },
+  satellite: {
     title: 'Satellite',
     url: '//api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>, <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>, <a href="https://www.digitalglobe.com/" target="_blank">DigitalGlobe</a>',
     thumbnail: 'images/maps/thumb-basemap-satellite.jpeg'
-  }, topo: {
+  },
+  topo: {
     title: 'Topography',
     url: '//{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
     attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy;<a href="http://opentopomap.org">opentopomap.org</a>',
     thumbnail: 'images/maps/thumb-basemap-topo.png'
-  }, streets: {
+  },
+  streets: {
     title: 'Streets (OSM)',
     url: '//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
     attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',
@@ -101,28 +114,46 @@ export const BASEMAPS = {
 };
 
 // GA
-export const GA_ACTION_WHITELIST = [{
-  type: actions.UPDATE_NODE_SELECTION, getPayload: action => action.data.map(d => d.name).join(',')
-}, {
-  type: actions.SELECT_BIOME_FILTER, getPayload: action => action.biomeFilter
-}, {
-  type: actions.SELECT_YEARS, getPayload: action => action.years.join(',')
-}, {
-  type: actions.SELECT_RECOLOR_BY, getPayload: action => action.value
-}, {
-  type: actions.SELECT_RESIZE_BY, getPayload: action => action.quant
-}, {
-  type: actions.SELECT_VIEW, getPayload: action => (action.detailedView) ? 'detailed' : 'overview'
-}, {
-  type: actions.SELECT_COLUMN, getPayload: (action, state) => {
-    return state.columns[action.columnId].name;
+export const GA_ACTION_WHITELIST = [
+  {
+    type: actions.UPDATE_NODE_SELECTION,
+    getPayload: action => action.data.map(d => d.name).join(',')
+  },
+  {
+    type: actions.SELECT_BIOME_FILTER,
+    getPayload: action => action.biomeFilter
+  },
+  {
+    type: actions.SELECT_YEARS,
+    getPayload: action => action.years.join(',')
+  },
+  {
+    type: actions.SELECT_RECOLOR_BY,
+    getPayload: action => action.value
+  },
+  {
+    type: actions.SELECT_RESIZE_BY,
+    getPayload: action => action.quant
+  },
+  {
+    type: actions.SELECT_VIEW,
+    getPayload: action => (action.detailedView) ? 'detailed' : 'overview'
+  },
+  {
+    type: actions.SELECT_COLUMN,
+    getPayload: (action, state) => {
+      return state.columns[action.columnId].name;
+    }
+  },
+  {
+    type: actions.TOGGLE_MAP
+  },
+  {
+    type: actions.TOGGLE_MAP_LAYERS_MENU
+  },
+  {
+    type: actions.SELECT_CONTEXTUAL_LAYERS,
+    getPayload: action => action.contextualLayers.join(', ')
   }
-}, {
-  type: actions.TOGGLE_MAP
-}, {
-  type: actions.TOGGLE_MAP_LAYERS_MENU
-}, {
-  type: actions.SELECT_CONTEXTUAL_LAYERS, getPayload: action => action.contextualLayers.join(', ')
-}
 
 ];

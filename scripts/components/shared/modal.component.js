@@ -1,14 +1,17 @@
 import _ from 'lodash';
+
 import 'styles/_texts.scss';
 import 'styles/components/button.scss';
 import 'styles/components/shared/modal.scss';
+
 import ModalTemplate from 'ejs!templates/shared/modal.ejs';
 
 export default class {
 
   onCreated() {
     this.state = {
-      visibility: false, modalParams: null
+      visibility: false,
+      modalParams: null
     };
 
     this._setVars();
@@ -28,26 +31,22 @@ export default class {
   }
 
   _onKeyDown(e) {
-    if (e && e.keyCode !== 27) {
-      return;
-    }
+    if(e && e.keyCode !== 27) return;
 
-    if (!this.state.visibility) {
-      return;
-    }
+    if (!this.state.visibility) return;
 
     this._toggleVisibility();
   }
 
   _toggleVisibility() {
-    Object.assign(this.state, { visibility: !this.state.visibility });
+    Object.assign(this.state, { visibility: !this.state.visibility});
     this._setVisibility();
   }
 
   getModal(modal) {
 
     if (_.isEqual(modal.modalParams, this.state.modalParams)) {
-      Object.assign(this.state, { visibility: modal.visibility });
+      Object.assign(this.state, {visibility: modal.visibility });
     } else {
       Object.assign(this.state, modal);
       this.render();

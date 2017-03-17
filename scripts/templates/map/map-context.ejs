@@ -1,9 +1,9 @@
-<% layers.forEach(function(layer) { %>
-<li class="layer-item">
-  <span class="layer-name"><%= layer.human_name %></span>
-  <div
-          class="c-switcher"
-          data-layer-slug="<%= layer.name %>">
-  </div>
-</li>
-<% }); %>
+<% layers.forEach(function(layer) {%>
+  <li class="layer-item">
+    <span class="layer-name"><%= layer.human_name %></span>
+    <div
+      class="c-switcher"
+      data-layer-slug="<%= layer.name %>">
+    </div>
+  </li>
+<%});%>

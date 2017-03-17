@@ -6,7 +6,7 @@ const PADDING_X = 16;
 const PADDING_Y_TOP = 16;
 const PADDING_Y_BOTTOM = 0;
 
-const sankeyLayout = function () {
+const sankeyLayout = function() {
   const sankeyLayout = {};
 
   // in
@@ -38,11 +38,9 @@ const sankeyLayout = function () {
   };
 
   sankeyLayout.columnWidth = _ => {
-    if (!_) {
-      return columnWidth;
-    }
+    if (!_) return columnWidth;
     columnWidth = +_;
-    _labelCharsPerLine = Math.floor(columnWidth / _labelCharWidth);
+    _labelCharsPerLine = Math.floor(columnWidth/_labelCharWidth);
     return sankeyLayout;
   };
 
@@ -75,10 +73,19 @@ const sankeyLayout = function () {
   };
 
   // using precomputed dimensions on links objects, this will generate SVG paths for links
-  sankeyLayout.link = function () {
+  sankeyLayout.link = function() {
     function link(d) {
-      var x0 = d.x, x1 = d.x + d.width, xi = d3_interpolateNumber(x0, x1), x2 = xi(.75), x3 = xi(.25), y0 = d.sy + d.renderedHeight / 2, y1 = d.ty + d.renderedHeight / 2;
-      const path = 'M' + x0 + ',' + y0 + 'C' + x2 + ',' + y0 + ' ' + x3 + ',' + y1 + ' ' + x1 + ',' + y1;
+      var x0 = d.x,
+        x1 = d.x + d.width,
+        xi = d3_interpolateNumber(x0, x1),
+        x2 = xi(.75),
+        x3 = xi(.25),
+        y0 = d.sy + d.renderedHeight / 2,
+        y1 = d.ty + d.renderedHeight / 2;
+      const path = 'M' + x0 + ',' + y0
+           + 'C' + x2 + ',' + y0
+           + ' ' + x3 + ',' + y1
+           + ' ' + x1 + ',' + y1;
       return path;
     }
 
@@ -91,7 +98,7 @@ const sankeyLayout = function () {
 
   const _computeNodeCoords = () => {
     const availableLinkSpace = viewportWidth - NUM_COLUMNS * columnWidth - PADDING_X * 2;
-    linksColumnWidth = availableLinkSpace / (NUM_COLUMNS - 1);
+    linksColumnWidth = availableLinkSpace/(NUM_COLUMNS - 1);
 
     maxHeight = 0;
 
@@ -125,7 +132,7 @@ const sankeyLayout = function () {
   // compute links y and y deltas (later used by sankey.link generator)
   // will be called at each relayouting (user clicks nodes, user scrolls, etc)
   const _computeLinksCoords = () => {
-    const stackedHeightsByNodeId = { source: {}, target: {} };
+    const stackedHeightsByNodeId = {source:{},target:{}};
     links.forEach(link => {
       link.width = linksColumnWidth;
       link.x = columnWidth + _getColumnX(link.sourceColumnPosition);
@@ -137,9 +144,7 @@ const sankeyLayout = function () {
       }
 
       const sId = link.sourceNodeId;
-      if (!stackedHeightsByNodeId.source[sId]) {
-        stackedHeightsByNodeId.source[sId] = _getNode(link.sourceColumnPosition, sId).y;
-      }
+      if (!stackedHeightsByNodeId.source[sId]) stackedHeightsByNodeId.source[sId] = _getNode(link.sourceColumnPosition, sId).y;
       link.sy = stackedHeightsByNodeId.source[sId];
       stackedHeightsByNodeId.source[sId] = link.sy + link.renderedHeight;
 
@@ -149,9 +154,7 @@ const sankeyLayout = function () {
       // }
 
       const tId = link.targetNodeId;
-      if (!stackedHeightsByNodeId.target[tId]) {
-        stackedHeightsByNodeId.target[tId] = _getNode(link.targetColumnPosition, tId).y;
-      }
+      if (!stackedHeightsByNodeId.target[tId]) stackedHeightsByNodeId.target[tId] = _getNode(link.targetColumnPosition, tId).y;
       link.ty = stackedHeightsByNodeId.target[tId];
       stackedHeightsByNodeId.target[tId] = link.ty + link.renderedHeight;
 

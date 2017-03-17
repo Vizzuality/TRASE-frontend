@@ -22,7 +22,16 @@ export const getURLParams = url => {
   return objParams;
 };
 
-const URL_STATE_PROPS = ['selectedContextId', 'selectedYears', 'detailedView', 'selectedBiomeFilter', 'selectedNodesIds', 'expandedNodesIds', 'areNodesExpanded', 'selectedColumnsIds'];
+const URL_STATE_PROPS = [
+  'selectedContextId',
+  'selectedYears',
+  'detailedView',
+  'selectedBiomeFilter',
+  'selectedNodesIds',
+  'expandedNodesIds',
+  'areNodesExpanded',
+  'selectedColumnsIds'
+];
 
 const filterStateToURL = state => {
   if (_.isEmpty(state)) {

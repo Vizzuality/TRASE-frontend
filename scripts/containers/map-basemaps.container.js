@@ -4,7 +4,8 @@ import { BASEMAPS } from 'constants';
 import mapBasemaps from 'components/map-basemaps.component';
 
 const mapMethodsToState = (state) => ({
-  buildBasemaps: BASEMAPS, selectBasemap: state.flows.selectedMapBasemap,
+  buildBasemaps: BASEMAPS,
+  selectBasemap: state.flows.selectedMapBasemap,
 });
 
 const mapViewCallbacksToActions = () => ({

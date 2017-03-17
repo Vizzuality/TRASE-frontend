@@ -27,12 +27,8 @@ export default class {
     this.contextLayers = [];
     this.polygonFeaturesDict = {};
 
-    document.querySelector('.js-basemap-switcher').addEventListener('click', () => {
-      this.callbacks.onToggleMapLayerMenu();
-    });
-    document.querySelector('.js-toggle-map').addEventListener('click', () => {
-      this._onToggleMap();
-    });
+    document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
+    document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
 
     this.attribution = document.querySelector('.js-map-attribution');
     this.attributionSource = document.querySelector('.leaflet-control-attribution');
@@ -70,7 +66,10 @@ export default class {
     Object.keys(mapVectorData).forEach(polygonTypeId => {
       const polygonType = mapVectorData[polygonTypeId];
       if (polygonType.useGeometryFromColumnId === undefined) {
-        this.polygonTypesLayers[polygonTypeId] = this._getPolygonTypeLayer(polygonType.geoJSON, `map-polygon-${polygonType.name.toLowerCase()}`);
+        this.polygonTypesLayers[polygonTypeId] = this._getPolygonTypeLayer(
+          polygonType.geoJSON,
+          `map-polygon-${polygonType.name.toLowerCase()}`
+        );
       }
     });
 
@@ -84,7 +83,7 @@ export default class {
 
     this.selectPolygonType(payload.currentPolygonType);
     if (payload.selectedNodesGeoIds) {
-      this._outlinePolygons({ selectedGeoIds: payload.selectedNodesGeoIds });
+      this._outlinePolygons({selectedGeoIds: payload.selectedNodesGeoIds});
     }
 
     // under normal circumstances, choropleth (depends on loadNodes) and linkedGeoIds (depends on loadLinks)
@@ -96,6 +95,7 @@ export default class {
       this.showLinkedGeoIds(payload.linkedGeoIds);
     }
   }
+
 
   showLinkedGeoIds(linkedGeoIds) {
     if (!this.currentPolygonTypeLayer) {
@@ -144,15 +144,10 @@ export default class {
 
   }
 
-  selectPolygons(payload) {
-    this._outlinePolygons(payload);
-  }
+  selectPolygons(payload) { this._outlinePolygons(payload); }
+  highlightPolygon(payload) { this._outlinePolygons(payload); }
 
-  highlightPolygon(payload) {
-    this._outlinePolygons(payload);
-  }
-
-  _outlinePolygons({ selectedGeoIds, highlightedGeoId }) {
+  _outlinePolygons({selectedGeoIds, highlightedGeoId}) {
     if (!this.currentPolygonTypeLayer || !selectedGeoIds) {
       return;
     }
@@ -162,9 +157,7 @@ export default class {
     }
 
     const selectedFeatures = selectedGeoIds.map(selectedGeoId => {
-      if (!selectedGeoId) {
-        return;
-      }
+      if (!selectedGeoId) return;
       const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId);
       return originalPolygon.feature;
     });
@@ -190,9 +183,7 @@ export default class {
   }
 
   selectPolygonType(columnIds) {
-    if (!this.polygonTypesLayers || !columnIds.length) {
-      return;
-    }
+    if (!this.polygonTypesLayers || !columnIds.length) return;
     const id = columnIds[0];
     if (this.currentPolygonTypeLayer) {
       this.map.removeLayer(this.currentPolygonTypeLayer);
@@ -245,14 +236,17 @@ export default class {
     const bounds = L.latLngBounds(southWest, northEast);
 
     var layer = L.tileLayer(url, {
-      pane: MAP_PANES.context, tms: true, // TODO add those params in layer configuration
-      maxZoom: 11, bounds
+      pane: MAP_PANES.context,
+      tms: true,
+      // TODO add those params in layer configuration
+      maxZoom: 11,
+      bounds
     });
     this.contextLayers.push(layer);
     this.map.addLayer(layer);
   }
 
-  _createCartoLayer(layerData /*, i */) {
+  _createCartoLayer(layerData /*, i */  ) {
     const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/{z}/{x}/{y}`;
     const layerUrl = `${baseUrl}.png`;
     const layer = new L.tileLayer(layerUrl, {
@@ -276,7 +270,8 @@ export default class {
 
   _getPolygonTypeLayer(geoJSON) {
     var topoLayer = new L.GeoJSON(geoJSON, {
-      pane: MAP_PANES.vectorMain, style: {
+      pane: MAP_PANES.vectorMain,
+      style: {
         smoothFactor: 0.9
       }
     });
@@ -285,11 +280,13 @@ export default class {
       this.polygonFeaturesDict[layer.feature.properties.geoid] = layer;
       const that = this;
       layer.on({
-        mouseover: function () {
+        mouseover: function() {
           that.callbacks.onPolygonHighlighted(this.feature.properties.geoid);
-        }, mouseout: function () {
+        },
+        mouseout: function() {
           that.callbacks.onPolygonHighlighted();
-        }, click: function () {
+        },
+        click: function() {
           if (this.feature.properties.hasFlows === true) {
             that.callbacks.onPolygonClicked(this.feature.properties.geoid);
           }
@@ -299,16 +296,16 @@ export default class {
     return topoLayer;
   }
 
-  _onToggleMap() {
+  _onToggleMap () {
     this.callbacks.onToggleMap();
 
     // recalculates map size once CSS transition ends
-    setTimeout(() => {
+    setTimeout( () => {
       this.map.invalidateSize(true);
     }, 850);
   }
 
-  setChoropleth({ choropleth, linkedGeoIds, selectedMapDimensions }) {
+  setChoropleth({choropleth, linkedGeoIds, selectedMapDimensions}) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }

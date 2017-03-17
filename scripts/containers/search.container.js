@@ -5,7 +5,8 @@ import { searchNode } from 'actions/flows.actions';
 
 const mapMethodsToState = () => ({
   loadNodes: {
-    _comparedValue: (state) => state.flows.nodesDict, _returnedValue: (state) => {
+    _comparedValue: (state) => state.flows.nodesDict,
+    _returnedValue: (state) => {
       return _.values(state.flows.nodesDict).filter(node => node.hasFlows === true && node.isAggregated !== true);
     }
   }
@@ -14,5 +15,6 @@ const mapMethodsToState = () => ({
 const mapViewCallbacksToActions = () => ({
   onNodeSelected: id => searchNode(parseInt(id, 10)),
 });
+
 
 export default connect(Search, mapMethodsToState, mapViewCallbacksToActions);

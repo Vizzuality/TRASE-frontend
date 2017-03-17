@@ -16,18 +16,18 @@ export default class {
 
   _update(isSelect, nodesData, recolorGroups = null) {
     // TODO nodesData[0] === undefined should never happen, this is a smell form the reducer
-    if (nodesData === undefined || nodesData.length === 0 || nodesData[0] === undefined) {
-      return;
-    }
+    if (nodesData === undefined || nodesData.length === 0 || nodesData[0] === undefined) return;
     this.el.innerHTML = NodeTitleTemplate({
-      nodes: nodesData, isSelect: isSelect || nodesData.length > 1, recolorGroups: recolorGroups
+      nodes: nodesData,
+      isSelect: isSelect || nodesData.length > 1,
+      recolorGroups: recolorGroups
     });
 
     const nodeTitles = Array.prototype.slice.call(document.querySelectorAll('.js-node-title'), 0);
     nodeTitles.forEach((nodeTitle) => {
       nodeTitle.addEventListener('click', (e) => {
         if (e.currentTarget.dataset.nodeLink !== undefined) {
-          window.location.href = e.currentTarget.dataset.nodeLink;
+          window.location.href = e.currentTarget.dataset.nodeLink
         }
       });
     });

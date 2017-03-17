@@ -2,17 +2,22 @@ import 'styles/components/search.scss';
 import Awesomplete from 'awesomplete';
 import 'awesomplete/awesomplete.css';
 
+
 export default class {
   onCreated() {
     this._setVars();
     this.autocomplete = new Awesomplete(this.input, {
       data: node => {
         return {
-          label: node.name.toLowerCase(), value: JSON.stringify({
-            id: node.id, name: node.name.toLowerCase(), columnName: node.columnName.toLowerCase()
+          label: node.name.toLowerCase(),
+          value: JSON.stringify({
+            id: node.id,
+            name: node.name.toLowerCase(),
+            columnName: node.columnName.toLowerCase()
           })
         };
-      }, item: (text, input) => {
+      },
+      item: (text, input) => {
         let html;
         if (input === '') {
           html = text;
@@ -27,7 +32,8 @@ export default class {
         const dom = document.createElement('li');
         dom.innerHTML = html;
         return dom;
-      }, // sets the value that appear in the input when selecting a list item
+      },
+      // sets the value that appear in the input when selecting a list item
       // needs to be overriden because by default it will spit the whole item html
       replace: text => {
         this.input.value = text;

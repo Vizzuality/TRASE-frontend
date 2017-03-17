@@ -8,7 +8,7 @@ export default class {
     this.el = document.querySelector('.js-columns-selector');
   }
 
-  buildColumns({ columns, selectedColumnsIds }) {
+  buildColumns({columns, selectedColumnsIds}) {
     const columnsByGroup = [];
     columns.forEach(column => {
       if (!columnsByGroup[column.group]) {

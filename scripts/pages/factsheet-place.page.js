@@ -9,19 +9,23 @@ import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
+import 'styles/components/loading.scss';
+
 import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
 import Line from 'components/graphs/line.component';
 import Chord from 'components/graphs/chord.component';
 import Top from 'components/factsheets/top.component';
 import Table from 'components/table/table.component';
+
 import { getURLParams } from 'utils/stateURL';
 import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
 import { getURLFromParams, GET_PLACE_FACTSHEET } from '../utils/getURLFromParams';
 
 const defaults = {
-  country: 'Brazil', commodity: 'Soy'
+  country: 'Brazil',
+  commodity: 'Soy'
 };
 
 const _build = data => {
@@ -46,7 +50,10 @@ const _build = data => {
     new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
 
     new Top({
-      el: document.querySelector('.js-top-consumer'), data: data.top_consumers, title: 'top consumers', unit: '%'
+      el: document.querySelector('.js-top-consumer'),
+      data: data.top_consumers,
+      title: 'top consumers',
+      unit: '%'
     });
 
     document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
@@ -54,12 +61,14 @@ const _build = data => {
 
   if (data.sustainability_indicators.rows.length) {
     new Table({
-      el: document.querySelector('.js-score-table'), data: data.sustainability_indicators, type: 't_head_places'
+      el: document.querySelector('.js-score-table'),
+      data: data.sustainability_indicators,
+      type: 't_head_places'
     });
   }
 };
 
-const _onSelect = function (value) {
+const _onSelect = function(value) {
   // updates dropdown's title with new value
   this.setTitle(value);
   // updates default values with incoming ones
@@ -68,7 +77,7 @@ const _onSelect = function (value) {
 
 const _setInfo = (info) => {
   document.querySelector('.js-country-name').innerHTML = info.country ? _.capitalize(info.country) : '-';
-  document.querySelector('.js-state-name').innerHTML = info.state ? _.capitalize(info.state) : '-';
+  document.querySelector('.js-state-name').innerHTML = info.state ?  _.capitalize(info.state) : '-';
   document.querySelector('.js-biome-name').innerHTML = info.biome ? _.capitalize(info.biome) : '-';
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
@@ -94,7 +103,7 @@ const _init = () => {
 
   commodityDropdown.setTitle(defaults.commodity);
 
-  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId });
+  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId});
 
   fetch(placeFactsheetURL)
     .then((response) => {
@@ -108,9 +117,7 @@ const _init = () => {
       }
     })
     .then((result) => {
-      if (!result) {
-        return;
-      }
+      if (!result) return;
 
       document.querySelector('.c-loading').classList.add('is-hidden');
       document.querySelector('.wrap').classList.remove('is-hidden');
