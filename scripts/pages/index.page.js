@@ -80,12 +80,9 @@ const scrollIntro = () => {
   let index = state.activeIndex;
 
 
-  if (offsets[state.activeIndex + 1] < window.innerHeight / 2 && direction === 1) {
-    index += direction;
-  }
-  if (offsets[state.activeIndex] > window.innerHeight / 2 && direction === -1) {
-    index += direction;
-  }
+  if (offsets[state.activeIndex + 1] < window.innerHeight / 2 && direction === 1) index += direction;
+  if (offsets[state.activeIndex] > window.innerHeight / 2 && direction === -1) index += direction;
+
 
   state.scrollTop = window.scrollY;
 
