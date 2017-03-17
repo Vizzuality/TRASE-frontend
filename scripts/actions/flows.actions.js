@@ -297,8 +297,15 @@ export function loadMapVectorData() {
       mapVectorData[geoColumn.id] = geometryData;
       if (geoColumn.useGeometryFromColumnId === undefined) {
         const geometryPromise = fetch(`${geoColumn.name}.topo.json`)
-          .then(response => response.text())
+          .then(response => {
+            if (response.status >= 200 && response.status < 300) {
+              return response.text();
+            }
+          })
           .then(payload => {
+            if (payload === undefined) {
+              return;
+            }
             const topoJSON = JSON.parse(payload);
             const key = Object.keys(topoJSON.objects)[0];
             const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
