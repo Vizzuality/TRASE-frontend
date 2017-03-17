@@ -174,7 +174,7 @@ export function loadNodes() {
     const params = {
       context_id: getState().flows.selectedContextId,
       year_start: getState().flows.selectedYears[0],
-      year_end: getState().flows.selectedYears[1], // column_id: 2
+      year_end: getState().flows.selectedYears[1],
     };
 
     const getNodesURL = getURLFromParams(GET_NODES, params);
