@@ -13,7 +13,7 @@
 
   > .c-map-legend {
     position: absolute;
-    bottom: 28px;
+    bottom: 20px;
     width: 319px;
     z-index: 1001;
 
@@ -43,14 +43,13 @@
 
     .leaflet-control-scale {
       display: flex;
-      bottom: -74px;
       left: 0;
       justify-content: flex-end;
       width: 320px;
       margin: 0;
       padding: 5px 10px 4px 10px;
       background: $charcoal-grey-faded;
-      transform: translateY(24px);
+      transform: translateY(28px);
       transition: transform .3s;
 
       .leaflet-control-scale-line {
@@ -268,7 +267,7 @@
     .leaflet-bottom.leaflet-left .leaflet-control-scale {
 
       &.-visible {
-        transform: translateY(0);
+        transform: translateY(2px);
       }
     }
   }
