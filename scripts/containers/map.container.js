@@ -42,7 +42,8 @@ const mapMethodsToState = (state) => ({
     _returnedValue: (state) => {
       return {
         choropleth: state.flows.choropleth,
-        linkedGeoIds: state.flows.linkedGeoIds
+        linkedGeoIds: state.flows.linkedGeoIds,
+        selectedMapDimensions: state.flows.selectedMapDimensions
       };
     }
   },

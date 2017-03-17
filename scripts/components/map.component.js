@@ -17,6 +17,8 @@ export default class {
     new L.Control.Zoom({ position: 'bottomleft' }).addTo(this.map);
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(this.map);
 
+    this.map.on('layeradd', () => this._updateAttribution());
+
     Object.keys(MAP_PANES).forEach(paneKey => {
       this.map.createPane(paneKey);
       this.map.getPane(paneKey).style.zIndex = MAP_PANES_Z[paneKey];
@@ -54,8 +56,6 @@ export default class {
       this.basemapLabels = L.tileLayer(basemapOptions.labelsUrl, basemapOptions);
       this.map.addLayer(this.basemapLabels);
     }
-
-    this._updateAttribution();
   }
 
   showLoadedMap(payload) {
@@ -305,10 +305,11 @@ export default class {
     }, 850);
   }
 
-  setChoropleth({choropleth, linkedGeoIds}) {
+  setChoropleth({choropleth, linkedGeoIds, selectedMapDimensions}) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
       this.showLinkedGeoIds(linkedGeoIds);
