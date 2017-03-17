@@ -1,6 +1,8 @@
 @import '../../settings';
 
 .c-footer {
+  position: relative;
+  z-index: 2;
   padding: 48px 0 56px;
   bottom: 0;
   background-color: $charcoal-grey;

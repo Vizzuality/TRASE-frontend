@@ -23,8 +23,9 @@
   &.-content {
     position: relative;
     height: unset;
-    min-height: calc(100vh - #{$nav-height});
+    min-height: 100vh;
     z-index: 2;
     background: $background-white;
+    padding-bottom: 64px;
   }
 }
