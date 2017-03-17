@@ -9,7 +9,7 @@ export default class {
     this.title = this.el.querySelector('.js-dropdown-title');
     this.list = this.el.querySelector('.js-dropdown-list');
     this.list.classList.add('is-hidden');
-
+    if (this._uniqueChild()) this.el.classList.add('-unique-child');
     this._setEventListeners();
   }
 
@@ -46,15 +46,25 @@ export default class {
     });
   }
 
+  _uniqueChild() {
+    return (this.list.querySelectorAll('li').length === 1);
+  }
+
   selectValue(value) {
     // TODO friday hack, this should not happen
     if (value === undefined) {
       value = 'none';
     }
+    if(this.current) this.current.classList.remove('is-hidden');
+
     const valueTitle =
       this.list.querySelector(`[data-value="${value}"] .js-dropdown-item-title`) ||
       this.list.querySelector(`[data-value="${value}"]`);
     this.setTitle(valueTitle.innerHTML);
+
+    valueTitle.classList.add('is-hidden');
+    this.current = valueTitle;
+
   }
 
   setTitle(text) {
@@ -73,7 +83,7 @@ export default class {
   }
 
   _toggle() {
-    var isOpen = !this.list.classList.toggle('is-hidden');
+    const isOpen = !this.list.classList.toggle('is-hidden');
     if (this.child) {
       if (isOpen) {
         this.child.onDropdownOpen();

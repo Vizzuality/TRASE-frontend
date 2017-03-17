@@ -24,6 +24,14 @@
     }
   }
 
+  &.-unique-child {
+    pointer-events: none;
+    cursor: default;
+    .dropdown-title:after {
+      display: none;
+    }
+  }
+
   .dropdown-label {
     color: rgba($charcoal-grey, .6);
     font-family: $font-family-1;
