@@ -7,8 +7,7 @@ import Map from 'components/map.component.js';
 const mapMethodsToState = (state) => ({
   setMapView: state.flows.mapView,
   showLoadedMap: {
-    _comparedValue: (state) => state.flows.mapVectorData,
-    _returnedValue: (state) => {
+    _comparedValue: (state) => state.flows.mapVectorData, _returnedValue: (state) => {
       return {
         mapVectorData: state.flows.mapVectorData,
         currentPolygonType: state.flows.selectedColumnsIds,
@@ -20,26 +19,22 @@ const mapMethodsToState = (state) => ({
     }
   },
   selectPolygonType: state.flows.selectedColumnsIds,
-  selectPolygons:  {
-    _comparedValue: (state) => state.flows.selectedNodesGeoIds,
-    _returnedValue: (state) => {
+  selectPolygons: {
+    _comparedValue: (state) => state.flows.selectedNodesGeoIds, _returnedValue: (state) => {
       return {
         selectedGeoIds: state.flows.selectedNodesGeoIds
       };
     }
   },
-  highlightPolygon:  {
-    _comparedValue: (state) => state.flows.highlightedGeoIds,
-    _returnedValue: (state) => {
+  highlightPolygon: {
+    _comparedValue: (state) => state.flows.highlightedGeoIds, _returnedValue: (state) => {
       return {
-        selectedGeoIds: state.flows.selectedNodesGeoIds,
-        highlightedGeoId: state.flows.highlightedGeoIds[0]
+        selectedGeoIds: state.flows.selectedNodesGeoIds, highlightedGeoId: state.flows.highlightedGeoIds[0]
       };
     }
   },
   setChoropleth: {
-    _comparedValue: (state) => state.flows.choropleth,
-    _returnedValue: (state) => {
+    _comparedValue: (state) => state.flows.choropleth, _returnedValue: (state) => {
       return {
         choropleth: state.flows.choropleth,
         linkedGeoIds: state.flows.linkedGeoIds,

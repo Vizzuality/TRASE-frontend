@@ -19,7 +19,7 @@ const byHeight = (nodeA, nodeB) => {
 };
 
 // TODO: add sorting by selectedNodes in detailed mode here
-export default function(visibleNodesByColumn) {
+export default function (visibleNodesByColumn) {
   visibleNodesByColumn.forEach(column => {
     column.values.sort(byHeightOthersLast);
   });

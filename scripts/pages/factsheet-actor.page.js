@@ -9,14 +9,11 @@ import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/area-select.scss';
 import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
-import 'styles/components/loading.scss';
-
 import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
 // import AreaStack from 'components/graphs/area-stack.component';  stack area future
 import Top from 'components/factsheets/top.component';
 import Table from 'components/table/table.component';
-
 import { getURLParams } from 'utils/stateURL';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
@@ -25,7 +22,7 @@ const defaults = {
   commodity: 'soy',
 };
 
-const _onSelect = function(value) {
+const _onSelect = function (value) {
   this.setTitle(value);
   defaults[this.id] = value;
 };
@@ -33,11 +30,21 @@ const _onSelect = function(value) {
 const _setInfo = (type, name, forest_500, zero_deforestation) => {
   document.querySelector('.js-legend').innerHTML = type || '-';
   document.querySelector('.js-name').innerHTML = name ? _.capitalize(name) : '-';
-  if (forest_500 > 0) document.querySelector('.forest-500-score .star-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
-  if (forest_500 > 1) document.querySelector('.forest-500-score .star-icon[data-value="2"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
-  if (forest_500 > 2) document.querySelector('.forest-500-score .star-icon[data-value="3"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
-  if (forest_500 > 3) document.querySelector('.forest-500-score .star-icon[data-value="4"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
-  if (forest_500 > 4) document.querySelector('.forest-500-score .star-icon[data-value="5"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (forest_500 > 0) {
+    document.querySelector('.forest-500-score .star-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  }
+  if (forest_500 > 1) {
+    document.querySelector('.forest-500-score .star-icon[data-value="2"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  }
+  if (forest_500 > 2) {
+    document.querySelector('.forest-500-score .star-icon[data-value="3"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  }
+  if (forest_500 > 3) {
+    document.querySelector('.forest-500-score .star-icon[data-value="4"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  }
+  if (forest_500 > 4) {
+    document.querySelector('.forest-500-score .star-icon[data-value="5"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  }
   if (zero_deforestation === 'YES') {
     document.querySelector('.zero-deforestation-commitment span[data-value="yes"]').classList.remove('is-hidden');
   } else {
@@ -57,7 +64,7 @@ const _build = data => {
 
   if (data.top_countries.lines.length) {
     new Top({
-      el:document.querySelector('.js-top-destination'),
+      el: document.querySelector('.js-top-destination'),
       data: data.top_countries.lines,
       title: 'top destination countries in 2015'
     });
@@ -100,13 +107,13 @@ const _showErrorMessage = () => {
   el.querySelector('.js-error-message').classList.remove('is-hidden');
 };
 
-const _init = ()  => {
+const _init = () => {
   const url = window.location.search;
   const urlParams = getURLParams(url);
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId});
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId });
 
   fetch(actorFactsheetURL)
     .then((response) => {
@@ -120,7 +127,9 @@ const _init = ()  => {
       }
     })
     .then((result) => {
-      if (!result) return;
+      if (!result) {
+        return;
+      }
 
       document.querySelector('.c-loading').classList.add('is-hidden');
       document.querySelector('.content >.wrap').classList.remove('is-hidden');
@@ -136,7 +145,6 @@ const _init = ()  => {
     });
 
   new Nav();
-
 
 };
 

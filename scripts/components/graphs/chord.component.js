@@ -2,20 +2,20 @@ import { select as d3_select } from 'd3-selection';
 import { ribbon as d3_ribbon, chord as d3_chord } from 'd3-chord';
 import { descending as d3_descending } from 'd3-array';
 import { arc as d3_arc } from 'd3-shape';
-
 import { CHORD_COLORS } from 'constants';
-
 import 'styles/components/factsheets/chord.scss';
 
 export default class {
   constructor(className, orgMatrix, list, placeName) {
-    if (!orgMatrix.length || !list.length) return;
+    if (!orgMatrix.length || !list.length) {
+      return;
+    }
 
     document.querySelector(className).classList.remove('is-hidden');
 
     const allNames = [placeName].concat(list.map(node => node.name)).slice(0, orgMatrix.length);
 
-    const margin = {top: 40, right: 50, bottom: 0, left: 50};
+    const margin = { top: 40, right: 50, bottom: 0, left: 50 };
     const width = 550 - margin.left - margin.right;
     const height = 550 - margin.top - margin.bottom;
 
@@ -24,8 +24,8 @@ export default class {
 
     const svg = d3_select(className)
       .append('svg')
-          .attr('width', width + margin.left + margin.right)
-          .attr('height', height + margin.top + margin.bottom);
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom);
 
     const chord = d3_chord()
       .padAngle(0.05)
@@ -54,26 +54,26 @@ export default class {
     group.append('path')
       .attr('class', 'border')
       .attr('d', arc)
-      .style('fill', (d, i) => (i === 0) ? CHORD_COLORS[0] : CHORD_COLORS[1] );
-
+      .style('fill', (d, i) => (i === 0) ? CHORD_COLORS[0] : CHORD_COLORS[1]);
 
     container.append('g')
       .attr('class', 'ribbons')
       .selectAll('path')
       .data((chords) => chords)
       .enter().append('path')
-        .attr('d', ribbon)
-        .attr('class', 'links');
-
+      .attr('d', ribbon)
+      .attr('class', 'links');
 
     group.append('text')
-    .each(d => { d.angle = (d.startAngle + d.endAngle) / 2; })
-    .attr('dy', '.35em')
-    .attr('class', 'text-legend')
-    .attr('transform', d => {
-      return `rotate(${d.angle * 180 / Math.PI - 90}) translate(${innerRadius + 24}) ${d.angle > Math.PI ? 'rotate(180)' : ''}`;
-    })
-    .style('text-anchor', d => d.angle > Math.PI ? 'end' : null)
-    .text((d, i) => allNames[i]);
+      .each(d => {
+        d.angle = (d.startAngle + d.endAngle) / 2;
+      })
+      .attr('dy', '.35em')
+      .attr('class', 'text-legend')
+      .attr('transform', d => {
+        return `rotate(${d.angle * 180 / Math.PI - 90}) translate(${innerRadius + 24}) ${d.angle > Math.PI ? 'rotate(180)' : ''}`;
+      })
+      .style('text-anchor', d => d.angle > Math.PI ? 'end' : null)
+      .text((d, i) => allNames[i]);
   }
 }

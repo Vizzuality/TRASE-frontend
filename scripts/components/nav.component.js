@@ -4,7 +4,7 @@ const defaults = { el: '.c-nav', haveSolidBackground: false, pageOffset: 0 };
 
 export default class {
 
-  constructor(settings ) {
+  constructor(settings) {
     this.options = Object.assign({}, defaults, settings);
     this.el = document.querySelector(this.options.el);
     this._setEventListeners();
@@ -19,7 +19,7 @@ export default class {
     if (window.pageYOffset > pageOffset && !this.options.haveSolidBackground) {
       this.el.classList.add('-have-background');
       this.options.haveSolidBackground = true;
-    } else if(window.pageYOffset <= pageOffset && this.options.haveSolidBackground) {
+    } else if (window.pageYOffset <= pageOffset && this.options.haveSolidBackground) {
       this.el.classList.remove('-have-background');
       this.options.haveSolidBackground = false;
     }

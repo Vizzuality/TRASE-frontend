@@ -1,6 +1,5 @@
 import Nav from 'components/nav.component.js';
 import 'styles/data-methods.scss';
-
 import smoothScroll from 'utils/smoothScroll';
 import { calculateOffsets, scrollDocument } from 'utils/fixedScroll';
 import _ from 'lodash';
@@ -27,8 +26,7 @@ const _onScrollDocument = () => {
   const el = options.elems.anchorNav;
   const elemOffsets = options.elemOffsets;
   const cutOffsets = {
-    cutTopOffsets: options.cutTopOffsets,
-    cutBottomOffsets: options.cutBottomOffsets
+    cutTopOffsets: options.cutTopOffsets, cutBottomOffsets: options.cutBottomOffsets
   };
 
   _calculateOffsets();
@@ -37,8 +35,7 @@ const _onScrollDocument = () => {
 
 const _calculateOffsets = () => {
   Object.assign(options, {
-    cutTopOffsets: calculateOffsets(options.elems.cutTop),
-    cutBottomOffsets: calculateOffsets(options.elems.cutBottom),
+    cutTopOffsets: calculateOffsets(options.elems.cutTop), cutBottomOffsets: calculateOffsets(options.elems.cutBottom),
   });
 };
 

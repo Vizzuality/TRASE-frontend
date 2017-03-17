@@ -4,10 +4,8 @@ import Titlebar from 'components/titlebar.component.js';
 // this maps component methods to app state updates
 // keys correspond to method names, values to state prop path
 const mapMethodsToState = (state) => ({
-  selectNodes: state.flows.selectedNodesData,
-  highlightNode: {
-    _comparedValue: (state) => state.flows.highlightedNodeData,
-    _returnedValue: (state) => {
+  selectNodes: state.flows.selectedNodesData, highlightNode: {
+    _comparedValue: (state) => state.flows.highlightedNodeData, _returnedValue: (state) => {
       if (state.flows.highlightedNodeData.length === 0) {
         if (!state.flows.selectedNodesData) {
           return false;

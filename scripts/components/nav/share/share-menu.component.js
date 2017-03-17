@@ -42,7 +42,9 @@ export default class {
 
   // changes button's literal
   _resetCopyButton() {
-    if (!this.isCopied) return;
+    if (!this.isCopied) {
+      return;
+    }
 
     this.copyBtn.innerText = 'Copy';
     this.isCopied = !this.isCopied;

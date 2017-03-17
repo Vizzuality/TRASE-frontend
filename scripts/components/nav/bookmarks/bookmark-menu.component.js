@@ -1,5 +1,4 @@
 import Bookmark from 'components/nav/bookmarks/bookmark-item.component';
-
 import 'styles/components/nav/bookmark-dropdown.scss';
 import 'styles/components/button.scss';
 
@@ -8,11 +7,11 @@ export default class {
 
     // sample bookmark array. This class should receive or get
     // the bookmarks throught cookies or localStorage.
-    var bookmarks = [
-      {id: '1234', name: 'bookmark 1', state: '943875498357'},
-      {id: '4567', name: 'bookmark 2', state: '23322321132'},
-      {id: '7890', name: 'bookmark 3', state: '98798878798'},
-    ];
+    var bookmarks = [{ id: '1234', name: 'bookmark 1', state: '943875498357' }, {
+      id: '4567',
+      name: 'bookmark 2',
+      state: '23322321132'
+    }, { id: '7890', name: 'bookmark 3', state: '98798878798' },];
 
     this.data = bookmarks;
 
@@ -34,11 +33,11 @@ export default class {
   render() {
     this.data.forEach((bookmark) => {
       new Bookmark({
-        el: this.bookmarkList,
-        bookmark: bookmark
+        el: this.bookmarkList, bookmark: bookmark
       }).render();
     });
   }
 
-  _addBookmark() {}
+  _addBookmark() {
+  }
 }

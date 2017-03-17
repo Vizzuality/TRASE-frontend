@@ -3,7 +3,7 @@ import BookmarkTemplate from 'ejs!templates/bookmark.ejs';
 
 export default class {
   constructor(settings) {
-    this.el= settings.el;
+    this.el = settings.el;
     this.bookmark = settings.bookmark;
     this.actions = ['update', 'share-bookmark', 'delete'];
 
@@ -23,10 +23,8 @@ export default class {
 
   render() {
 
-
     var bookmarkHTML = stringToHTML(BookmarkTemplate({
-      bookmark: this.bookmark,
-      actions: this.actions
+      bookmark: this.bookmark, actions: this.actions
     }));
 
     this.el.appendChild(bookmarkHTML[0]);
@@ -35,9 +33,12 @@ export default class {
     this._setEventListeners();
   }
 
-  _update() {}
+  _update() {
+  }
 
-  _share() {}
+  _share() {
+  }
 
-  _delete() {}
+  _delete() {
+  }
 }

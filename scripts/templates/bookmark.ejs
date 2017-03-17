@@ -1,16 +1,16 @@
 <li
-  class="bookmark-item"
-  data-bookmark-id="<%= bookmark.id %>"
-  data-bookmark-state="<%= bookmark.state %>"
+        class="bookmark-item"
+        data-bookmark-id="<%= bookmark.id %>"
+        data-bookmark-state="<%= bookmark.state %>"
 >
   <%= bookmark.name %>
   <ul class="bookmark-options">
     <% actions.forEach(function(action) { %>
-      <li class="bookmark-action <%= action %>">
-        <svg class="icon icon-<%= action %>">
-          <use xlink:href="#icon-<%= action %>"></use>
-        </svg>
-      </li>
+    <li class="bookmark-action <%= action %>">
+      <svg class="icon icon-<%= action %>">
+        <use xlink:href="#icon-<%= action %>"></use>
+      </svg>
+    </li>
     <% }) %>
   </ul>
 </li>

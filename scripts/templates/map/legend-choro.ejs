@@ -5,30 +5,38 @@
   </div>
   <ul class="bucket-legend" data-colors="5">
     <% colors.forEach(function(color, i) { %>
-      <li class="bucket-item" >
-        <div class="bucket <%= color %>">
-          <% if (!isBidimensional && typeof bucket !== "undefined" && bucket !== null) { %>
-            <span><%= i === 0 ? '<' : '>' %><%= abbreviateNumber(bucket[i], 3) %></span>
-          <% } %>
-        </div>
-      </li>
+    <li class="bucket-item">
+      <div class="bucket <%= color %>">
+        <% if (!isBidimensional && typeof bucket !== "undefined" && bucket !== null) { %>
+        <span><%= i === 0 ? '<' : '>' %><%= abbreviateNumber(bucket[i], 3) %></span>
+        <% } %>
+      </div>
+    </li>
     <% }) %>
   </ul>
 
   <% if (isBidimensional && typeof bucket !== "undefined" && bucket[0] !== null && bucket[1] !== null) { %>
-    <ul class="bucket-values">
-      <% bucket[0].reverse().forEach(function(value) { %>
-        <li><%= abbreviateNumber(value, 3) %></li>
-      <% }) %>
-      <% bucket[1].forEach(function(value) { %>
-        <li><%= abbreviateNumber(value, 3) %></li>
-      <% }) %>
-    </ul>
+  <ul class="bucket-values">
+    <% bucket[0].reverse().forEach(function(value) { %>
+    <li><%= abbreviateNumber(value, 3) %></li>
+    <% }) %>
+    <% bucket[1].forEach(function(value) { %>
+    <li><%= abbreviateNumber(value, 3) %></li>
+    <% }) %>
+  </ul>
   <% } %>
 
-  <svg class="icon icon-bidimensional-legend-arrows"><use xlink:href="#icon-bidimensional-legend-arrows"></use></svg>
+  <svg class="icon icon-bidimensional-legend-arrows">
+    <use xlink:href="#icon-bidimensional-legend-arrows"></use>
+  </svg>
   <ul class="bullets">
-    <li><div class="bullet" style="background:#ebebeb"></div>N/A</li>
-    <li><div class="bullet" style="background:#ffffff"></div>0</li>
+    <li>
+      <div class="bullet" style="background:#ebebeb"></div>
+      N/A
+    </li>
+    <li>
+      <div class="bullet" style="background:#ffffff"></div>
+      0
+    </li>
   </ul>
 </div>

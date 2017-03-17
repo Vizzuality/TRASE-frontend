@@ -8,8 +8,7 @@ import Nav from 'components/nav-flows.component.js';
 
 const mapMethodsToState = (state) => ({
   render: {
-    _comparedValue: (state) => state.flows.selectedContext,
-    _returnedValue: (state) => {
+    _comparedValue: (state) => state.flows.selectedContext, _returnedValue: (state) => {
       return {
         contexts: state.flows.contexts, selectedContextId: state.flows.selectedContextId
       };
@@ -22,8 +21,7 @@ const mapMethodsToState = (state) => ({
   selectRecolorBy: state.flows.selectedRecolorBy,
   selectView: state.flows.detailedView,
   updateNodeSelectionColors: {
-    _comparedValue: (state) => state.flows.recolorGroups,
-    _returnedValue: (state) => {
+    _comparedValue: (state) => state.flows.recolorGroups, _returnedValue: (state) => {
       return (state.flows.selectedRecolorBy === undefined || state.flows.selectedRecolorBy.name === 'none')
         // TODO state.flows.recolorGroups should probably be cleaned up of all undefined values in the state
         ? state.flows.recolorGroups.filter(c => c !== undefined) : null;

@@ -1,4 +1,4 @@
-export default function(links, nodesDict, nodesMeta, columnIndexes) {
+export default function (links, nodesDict, nodesMeta, columnIndexes) {
   const nodeIdsList = [];
   const nodes = [];
 

@@ -1,10 +1,5 @@
 import actions from 'actions';
-import {
-  getURLFromParams,
-  GET_CONTEXTS,
-  GET_ALL_NODES,
-  GET_INDICATORS
-} from 'utils/getURLFromParams';
+import { getURLFromParams, GET_CONTEXTS, GET_ALL_NODES, GET_INDICATORS } from 'utils/getURLFromParams';
 
 export function loadContext() {
   return (dispatch) => {
@@ -27,8 +22,7 @@ export function loadContextNodes(contextId) {
 
     Promise.all([allNodesURL, indicatorsURL].map(url => fetch(url).then(resp => resp.text()))).then(rawPayload => {
       const payload = {
-        nodes: JSON.parse(rawPayload[0]).data,
-        indicators: JSON.parse(rawPayload[1]).indicators
+        nodes: JSON.parse(rawPayload[0]).data, indicators: JSON.parse(rawPayload[1]).indicators
       };
 
       const exporters = payload.nodes.filter(node => node.type === 'EXPORTER');

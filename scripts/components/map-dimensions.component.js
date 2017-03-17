@@ -3,7 +3,6 @@ import 'styles/components/shared/radio-btn.scss';
 import 'styles/components/shared/switcher.scss';
 import MapDimensionsTemplate from 'ejs!templates/mapDimensions.ejs';
 
-
 export default class {
 
   onCreated() {
@@ -15,25 +14,24 @@ export default class {
   loadMapDimensions(dimensionsByGroup) {
     this.mapDimensions = dimensionsByGroup;
 
-    this.layerList.innerHTML = MapDimensionsTemplate({dimensionGroups: dimensionsByGroup});
+    this.layerList.innerHTML = MapDimensionsTemplate({ dimensionGroups: dimensionsByGroup });
 
     this._setVars();
     this._setEventListeners();
   }
 
   selectMapDimensions(dimensions) {
-    const mapDimensions =  {
-      horizontal: dimensions.horizontal || null,
-      vertical: dimensions.vertical || null
+    const mapDimensions = {
+      horizontal: dimensions.horizontal || null, vertical: dimensions.vertical || null
     };
 
     this._setActiveMapDimensions(mapDimensions);
   }
 
   _setVars() {
-    this.infoBtns     = Array.prototype.slice.call(this.layerList.querySelectorAll('.js-layer-info'), 0);
+    this.infoBtns = Array.prototype.slice.call(this.layerList.querySelectorAll('.js-layer-info'), 0);
     this.downloadBtns = Array.prototype.slice.call(this.layerList.querySelectorAll('.js-layer-download'), 0);
-    this.radios       = Array.prototype.slice.call(this.layerList.querySelectorAll('.c-radio-btn'), 0);
+    this.radios = Array.prototype.slice.call(this.layerList.querySelectorAll('.c-radio-btn'), 0);
   }
 
   _setEventListeners() {
@@ -55,14 +53,14 @@ export default class {
     const directions = Object.keys(dimensions);
 
     directions.forEach((group) => {
-      const radios = Array.prototype.slice.call(
-        this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`), 0);
+      const radios = Array.prototype.slice.call(this.layerList.querySelectorAll(`.c-radio-btn[data-group="${group}"]`), 0);
 
       radios.forEach((radio) => {
-        if (radio.getAttribute('value') !== dimensions[group]['uid']) return;
+        if (radio.getAttribute('value') !== dimensions[group]['uid']) {
+          return;
+        }
         const layerItem = radio.closest('.layer-item');
-        const partnerRadio = radio.nextElementSibling ?
-          radio.nextElementSibling : radio.previousElementSibling;
+        const partnerRadio = radio.nextElementSibling ? radio.nextElementSibling : radio.previousElementSibling;
 
         layerItem.classList.add('-selected');
         radio.classList.add('-enabled');
@@ -73,23 +71,23 @@ export default class {
 
   _onToggleRadio(e) {
     const radio = e && e.currentTarget;
-    if (!radio) return;
+    if (!radio) {
+      return;
+    }
 
     const group = radio.getAttribute('data-group');
     const uid = radio.getAttribute('value');
     const title = this.layerList.querySelector(`.layer-item[data-layer-uid="${uid}"] .layer-name`).innerText;
     const currentSelectedRadio = this.layerList.querySelector('.c-radio-btn.-enabled');
-    const bucket =  this.mapDimensions[0].dimensions.filter(dimension => {
-      if (dimension.uid === uid){
+    const bucket = this.mapDimensions[0].dimensions.filter(dimension => {
+      if (dimension.uid === uid) {
         return dimension;
       }
-    }).concat(
-      this.mapDimensions[1].dimensions.filter(dimension => {
-        if (dimension.uid === uid){
-          return dimension;
-        }
-      })
-    );
+    }).concat(this.mapDimensions[1].dimensions.filter(dimension => {
+      if (dimension.uid === uid) {
+        return dimension;
+      }
+    }));
 
     if (radio === currentSelectedRadio) {
       this._disableRadio(radio);
@@ -99,17 +97,13 @@ export default class {
 
     this.callbacks.onMapDimensionsSelected({
       direction: group, // 'vertical' or 'horizontal'
-      title,
-      uid,
-      bucket3: bucket[0].bucket3,
-      bucket5: bucket[0].bucket5
+      title, uid, bucket3: bucket[0].bucket3, bucket5: bucket[0].bucket5
     });
   }
 
   _disableRadio(radio) {
     const layerItem = radio.closest('.layer-item');
-    const partnerRadio = radio.nextElementSibling ?
-      radio.nextElementSibling : radio.previousElementSibling;
+    const partnerRadio = radio.nextElementSibling ? radio.nextElementSibling : radio.previousElementSibling;
 
     layerItem.classList.remove('-selected');
     radio.classList.remove('-enabled');
@@ -118,12 +112,9 @@ export default class {
 
   _cleanRadiosByGroup(group) {
     this.radios.forEach((radio) => {
-      if (radio.getAttribute('data-group') === group
-        && radio.classList.contains('-enabled')) {
-        const partnerRadio = radio.nextElementSibling ?
-          radio.nextElementSibling : radio.previousElementSibling;
+      if (radio.getAttribute('data-group') === group && radio.classList.contains('-enabled')) {
+        const partnerRadio = radio.nextElementSibling ? radio.nextElementSibling : radio.previousElementSibling;
         const layerItem = radio.closest('.layer-item');
-
 
         layerItem.classList.remove('-selected');
         radio.classList.remove('-enabled');
@@ -131,7 +122,6 @@ export default class {
       }
     });
   }
-
 
   // TODO: develop info function once is clear how it works
   _onInfo(e) {
@@ -144,7 +134,7 @@ export default class {
     this.tooltip.classList.remove('is-hidden');
     this.tooltip.classList.add('is-visible');
 
-    const topTooltip = top - (this.tooltip.getBoundingClientRect().height/2) + 8;
+    const topTooltip = top - (this.tooltip.getBoundingClientRect().height / 2) + 8;
 
     this.tooltip.style.top = `${topTooltip}px`;
     this.tooltip.style.left = `${left}px`;

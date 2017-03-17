@@ -1,14 +1,11 @@
-import { select as d3_select } from 'd3-selection';
+import { select as d3_select, event as d3_event } from 'd3-selection';
 import { axisTop as d3_axis_top } from 'd3-axis';
 import { scaleTime as d3_scale_time } from 'd3-scale';
 import { timeYear as d3_time_timeYear } from 'd3-time';
 import { brushX as d3_brush_x } from 'd3-brush';
-import { event as d3_event } from 'd3-selection';
 import ThumbTemplate from 'ejs!templates/years-slider-thumb.ejs';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import 'styles/components/nav/years-slider.scss';
-
-
 
 export default class {
   constructor(id, callback) {
@@ -37,16 +34,13 @@ export default class {
     this._build(years);
   }
 
-  _build (years) {
+  _build(years) {
 
     const startYear = years[0];
     const endYear = years[years.length - 1];
 
     var margin = {
-      top: 5,
-      right: 5,
-      bottom: 10,
-      left: 5
+      top: 5, right: 5, bottom: 10, left: 5
     };
     const width = ((endYear - startYear + 1) * 40) - margin.left - margin.right;
     const height = 45 - margin.top - margin.bottom;
@@ -65,7 +59,6 @@ export default class {
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-
     this.brushBehavior = d3_brush_x()
       .extent([[0, 0], [width, height]])
       .on('brush', this._onBrushMove.bind(this))
@@ -75,9 +68,7 @@ export default class {
       .attr('class', 'brush')
       .call(this.brushBehavior);
 
-
     this._addAxis('axis', height);
-
 
     this.selectionOverlay = this.slider.append('g').attr('class', 'selection-overlay');
 
@@ -92,7 +83,6 @@ export default class {
     this.selectionOverlayThumbRight = this.selectionOverlay.append('g')
       .html(ThumbTemplate());
 
-
     this._addAxis('axis-front', height);
     this.slider.selectAll('.axis-front .tick text')
       .attr('x', 19);
@@ -105,8 +95,7 @@ export default class {
       .call(d3_axis_top(this.xScale)
         .ticks(d3_time_timeYear)
         .tickPadding(-18)
-        .tickSize(height)
-      );
+        .tickSize(height));
 
   }
 
@@ -115,11 +104,14 @@ export default class {
   }
 
   _onBrushEnd() {
-    if (!d3_event.sourceEvent) return;
-    if (!d3_event.selection) return;
+    if (!d3_event.sourceEvent) {
+      return;
+    }
+    if (!d3_event.selection) {
+      return;
+    }
 
-    var d0 = d3_event.selection.map(this.xScale.invert),
-      d1 = d0.map(d3_time_timeYear.round);
+    var d0 = d3_event.selection.map(this.xScale.invert), d1 = d0.map(d3_time_timeYear.round);
 
     if (d1[0] >= d1[1]) {
       d1[0] = d3_time_timeYear.floor(d0[0]);
@@ -133,8 +125,8 @@ export default class {
     this.brush.transition()
       .call(d3_event.target.move, pixelSelection);
 
-    var startYear = new Date (d1[0]).getFullYear();
-    var endYear = new Date (d1[1]).getFullYear() - 1;
+    var startYear = new Date(d1[0]).getFullYear();
+    var endYear = new Date(d1[1]).getFullYear() - 1;
 
     this.callback([startYear, endYear]);
   }
@@ -144,7 +136,7 @@ export default class {
     const width = pixelSelection[1] - x;
     this.selectionOverlay.attr('transform', `translate(${x}, 0)`);
     this.selectionOverlayRect.attr('width', width);
-    this.selectionOverlayThumbRight.attr('transform', `translate(${width-4}, -4)`);
+    this.selectionOverlayThumbRight.attr('transform', `translate(${width - 4}, -4)`);
 
     return pixelSelection;
   }

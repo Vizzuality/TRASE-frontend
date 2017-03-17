@@ -19,30 +19,21 @@ import { resize } from 'actions/app.actions';
 import { loadInitialData } from 'actions/flows.actions';
 import { getURLParams, decodeStateFromURL } from 'utils/stateURL';
 import { APP_DEFAULT_STATE, FLOWS_DEFAULT_STATE } from 'constants';
-
 import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
 
 const objParams = getURLParams(window.location.search);
 
 let modalState = {
-  visibility: false,
-  modalParams: null
+  visibility: false, modalParams: null
 };
 
 const start = (initialState) => {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  var store = createStore(
-    combineReducers({
-      app: AppReducer,
-      flows: FlowsReducer
-    }),
-    initialState,
-    composeEnhancers(
-      applyMiddleware(thunk)
-    )
-  );
+  var store = createStore(combineReducers({
+    app: AppReducer, flows: FlowsReducer
+  }), initialState, composeEnhancers(applyMiddleware(thunk)));
 
   new FlowContentContainer(store);
   new SankeyContainer(store);
@@ -78,8 +69,7 @@ if (objParams.story) {
     .then(modalParams => {
 
       modalState = {
-        visibility: true,
-        modalParams
+        visibility: true, modalParams
       };
 
       Object.assign(APP_DEFAULT_STATE.app, { modal: modalState });

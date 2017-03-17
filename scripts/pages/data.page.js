@@ -5,22 +5,14 @@ import Nav from 'components/nav.component.js';
 import DataReducer from 'reducers/data.reducer';
 import { loadContext } from 'actions/data.actions';
 import { DATA_DEFAULT_STATE } from 'constants';
-
 import 'styles/data.scss';
-
 
 const start = (initialState) => {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  var store = createStore(
-    combineReducers({
-      data: DataReducer
-    }),
-    initialState,
-    composeEnhancers(
-      applyMiddleware(thunk)
-    )
-  );
+  var store = createStore(combineReducers({
+    data: DataReducer
+  }), initialState, composeEnhancers(applyMiddleware(thunk)));
 
   new DataContentContainer(store);
 

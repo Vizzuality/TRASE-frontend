@@ -1,10 +1,7 @@
 export default (nodesIds, state) => {
   if (!nodesIds || !nodesIds[0]) {
     return {
-      ids: [],
-      data: [],
-      geoIds: [],
-      columnsPos: []
+      ids: [], data: [], geoIds: [], columnsPos: []
     };
   }
 
@@ -13,10 +10,7 @@ export default (nodesIds, state) => {
   const columnsPos = data.map(node => node.columnGroup);
 
   return {
-    ids: nodesIds,
-    data,
-    geoIds,
-    columnsPos
+    ids: nodesIds, data, geoIds, columnsPos
   };
 };
 
@@ -38,11 +32,15 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
       if (node.meta) {
         if (selectedMapDimensions.horizontal.uid) {
           meta = node.meta[selectedMapDimensions.horizontal.uid];
-          if (meta) node.selectedMetas.push(meta);
+          if (meta) {
+            node.selectedMetas.push(meta);
+          }
         }
         if (selectedMapDimensions.vertical.uid) {
           meta = node.meta[selectedMapDimensions.vertical.uid];
-          if (meta) node.selectedMetas.push(meta);
+          if (meta) {
+            node.selectedMetas.push(meta);
+          }
         }
       }
     }
