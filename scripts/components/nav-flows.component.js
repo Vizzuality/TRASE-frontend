@@ -19,7 +19,7 @@ export default class {
 
   }
 
-  render({ contexts, selectedContextId }) {
+  render({ contexts, selectedContextId, detailedView }) {
     let currentContext = contexts ? contexts.find(elem => elem.id === selectedContextId) : null;
     let filters = null;
     let resizeBy = null;
@@ -48,9 +48,11 @@ export default class {
       // right side
       this.resizeByDropdown = new Dropdown('resize-by', this.callbacks.onResizeBySelected);
       this.recolorByDropdown = new Dropdown('recolor-by', this.callbacks.onRecolorBySelected);
-      this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
 
       this.legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
+
+      this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
+      this.selectView(detailedView);
     }
 
   }
