@@ -70,9 +70,7 @@ const getPageOffset = (bounds) => {
   const body = document.querySelector('body').getBoundingClientRect();
   const padding = 65;
   const navHeight = 64;
-  const offset =  Math.abs(body.top) + Math.abs(bounds.top) - padding - navHeight;
-  if (offset >= 0) return offset;
-  return 0;
+  return Math.abs(body.top) + Math.abs(bounds.top) - padding - navHeight;
 };
 
 const scrollIntro = () => {
