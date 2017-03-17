@@ -27,7 +27,7 @@ export default class {
     nodeTitles.forEach((nodeTitle) => {
       nodeTitle.addEventListener('click', (e) => {
         if (e.currentTarget.dataset.nodeLink !== undefined) {
-          window.location.href = e.currentTarget.dataset.nodeLink
+          window.location.href = e.currentTarget.dataset.nodeLink;
         }
       });
     });

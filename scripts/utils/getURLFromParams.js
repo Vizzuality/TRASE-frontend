@@ -56,9 +56,9 @@ export function getURLFromParams(endpointKey, params = {}) {
 
   switch (endpointData.version) {
 
-  case 2:
-    return getURLForV2(endpointData.endpoint, params);
-  default:
-    return getURLForV1(`/v1${endpointData.endpoint}`, params);
+    case 2:
+      return getURLForV2(endpointData.endpoint, params);
+    default:
+      return getURLForV1(`/v1${endpointData.endpoint}`, params);
   }
 }

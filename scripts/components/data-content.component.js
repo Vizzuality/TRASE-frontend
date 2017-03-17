@@ -128,74 +128,74 @@ export default class {
     const isEnabled = selectedRadio.classList.contains('-enabled');
 
     switch (group) {
-    case 'countries':
-      this._cleanRadios(this.selectorCountries);
-      this._updateSelectorCommodities(value);
-      break;
-    case 'commodities':
-      this.callbacks.onContextSelected(value);
-      break;
-    case 'years':
-      if (allClosest !== null) {
-        allClosest.classList.remove('-enabled');
-      }
-      break;
-    case 'years-all':
-      if (this.selectorYears.classList.contains('-disabled')) return;
-      if (isEnabled) {
-        this._cleanRadios(this.selectorYears);
-      } else {
-        this._selectAllRadios(this.selectorYears);
-      }
-      break;
-    case 'companies':
-      if (allClosest !== null) {
-        allClosest.classList.remove('-enabled');
-      }
-      break;
-    case 'companies-all':
-      if (this.selectorCompanies.classList.contains('-disabled')) return;
-      if (isEnabled) {
-        this._cleanRadios(this.selectorCompanies);
-      } else {
-        this._selectAllRadios(this.selectorCompanies);
-      }
-      break;
-    case 'consumption-countries':
-      if (allClosest !== null) {
-        allClosest.classList.remove('-enabled');
-      }
-      break;
-    case 'consumption-countries-all':
-      if (this.selectorConsumptionCountries.classList.contains('-disabled')) return;
-      if (isEnabled) {
-        this._cleanRadios(this.selectorConsumptionCountries);
-      } else {
-        this._selectAllRadios(this.selectorConsumptionCountries);
-      }
-      break;
-    case 'indicators':
-      if (allClosest !== null) {
-        allClosest.classList.remove('-enabled');
-      }
-      break;
-    case 'indicators-all':
-      if (this.selectorIndicators.classList.contains('-disabled')) return;
-      if (isEnabled) {
-        this._cleanRadios(this.selectorIndicators);
-      } else {
-        this._selectAllRadios(this.selectorIndicators);
-      }
-      break;
-    case 'output-type':
-      this._cleanRadios(this.selectorOutputType);
-      break;
-    case 'formatting':
-      this._cleanRadios(this.selectorFormatting);
-      break;
-    case 'file':
-      this._cleanRadios(this.selectorFile);
-      break;
+      case 'countries':
+        this._cleanRadios(this.selectorCountries);
+        this._updateSelectorCommodities(value);
+        break;
+      case 'commodities':
+        this.callbacks.onContextSelected(value);
+        break;
+      case 'years':
+        if (allClosest !== null) {
+          allClosest.classList.remove('-enabled');
+        }
+        break;
+      case 'years-all':
+        if (this.selectorYears.classList.contains('-disabled')) return;
+        if (isEnabled) {
+          this._cleanRadios(this.selectorYears);
+        } else {
+          this._selectAllRadios(this.selectorYears);
+        }
+        break;
+      case 'companies':
+        if (allClosest !== null) {
+          allClosest.classList.remove('-enabled');
+        }
+        break;
+      case 'companies-all':
+        if (this.selectorCompanies.classList.contains('-disabled')) return;
+        if (isEnabled) {
+          this._cleanRadios(this.selectorCompanies);
+        } else {
+          this._selectAllRadios(this.selectorCompanies);
+        }
+        break;
+      case 'consumption-countries':
+        if (allClosest !== null) {
+          allClosest.classList.remove('-enabled');
+        }
+        break;
+      case 'consumption-countries-all':
+        if (this.selectorConsumptionCountries.classList.contains('-disabled')) return;
+        if (isEnabled) {
+          this._cleanRadios(this.selectorConsumptionCountries);
+        } else {
+          this._selectAllRadios(this.selectorConsumptionCountries);
+        }
+        break;
+      case 'indicators':
+        if (allClosest !== null) {
+          allClosest.classList.remove('-enabled');
+        }
+        break;
+      case 'indicators-all':
+        if (this.selectorIndicators.classList.contains('-disabled')) return;
+        if (isEnabled) {
+          this._cleanRadios(this.selectorIndicators);
+        } else {
+          this._selectAllRadios(this.selectorIndicators);
+        }
+        break;
+      case 'output-type':
+        this._cleanRadios(this.selectorOutputType);
+        break;
+      case 'formatting':
+        this._cleanRadios(this.selectorFormatting);
+        break;
+      case 'file':
+        this._cleanRadios(this.selectorFile);
+        break;
     }
     selectedRadio.classList.toggle('-enabled');
     container.classList.toggle('-selected');
