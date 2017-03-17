@@ -132,6 +132,7 @@ export default class {
       return;
     }
     this.contextDropdown.selectValue(selectedContext.id);
+    this.yearsMenu.setAvailableYears(selectedContext.years);
   }
 
   selectResizeBy(value) {
