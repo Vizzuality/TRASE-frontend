@@ -296,7 +296,7 @@ export function loadMapVectorData() {
       };
       mapVectorData[geoColumn.id] = geometryData;
       if (geoColumn.useGeometryFromColumnId === undefined) {
-        const geometryPromise = fetch(`${geoColumn.name}.topo.json`)
+        const geometryPromise = fetch(`vector_layers/${getState().flows.selectedContext.countryName}_${geoColumn.name}.topo.json`)
           .then(response => response.text())
           .then(payload => {
             const topoJSON = JSON.parse(payload);
