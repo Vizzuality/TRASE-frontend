@@ -133,7 +133,6 @@ const sankeyLayout = function() {
   // will be called at each relayouting (user clicks nodes, user scrolls, etc)
   const _computeLinksCoords = () => {
     const stackedHeightsByNodeId = {source:{},target:{}};
-
     links.forEach(link => {
       link.width = linksColumnWidth;
       link.x = columnWidth + _getColumnX(link.sourceColumnPosition);

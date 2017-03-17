@@ -180,6 +180,7 @@
     &.-no-active {
       .dropdown-item-title {
         color: $gray;
+        text-transform: capitalize;
       }
 
       .dropdown-item-legend-unit {

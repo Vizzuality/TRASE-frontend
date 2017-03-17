@@ -95,7 +95,7 @@
 
           <li class="js-dropdown-item dropdown-item"
                   <%= recolorByVar.isDisabled ? '' : 'data-value="' + recolorByVar.name + '" data-type="' + recolorByVar.type + '"' %>>
-            <div class="js-dropdown-item-title dropdown-item-title"><%= _.capitalize(recolorByVar.label) %></div>
+            <div class="js-dropdown-item-title dropdown-item-title"><%= recolorByVar.label %></div>
 
             <% if (recolorByVar.minValue) { %>
             <span class="dropdown-item-legend-unit"><%= recolorByVar.minValue %></span>

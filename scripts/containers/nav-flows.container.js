@@ -16,42 +16,18 @@ const mapMethodsToState = (state) => ({
     }
   },
   selectContext: state.flows.selectedContext,
-  selectResizeBy: {
-    _comparedValue: (state) => ({
-      selectedCommodityId: state.flows.selectedResizeBy,
-      selectedContextId: state.flows.selectedContextId
-    }), _returnedValue: (state) => state.flows.selectedResizeBy
-  },
-  selectBiomeFilter: {
-    _comparedValue: (state) => ({
-      selectedCommodityId: state.flows.selectedBiomeFilter,
-      selectedContextId: state.flows.selectedContextId
-    }), _returnedValue: (state) => state.flows.selectedBiomeFilter
-  },
-  selectYears: {
-    _comparedValue: (state) => ({
-      selectedCommodityId: state.flows.selectedYears,
-      selectedContextId: state.flows.selectedContextId
-    }), _returnedValue: (state) => state.flows.selectedYears
-  },
-  selectRecolorBy: {
-    _comparedValue: (state) => ({
-      selectedCommodityId: state.flows.selectedRecolorBy,
-      selectedContextId: state.flows.selectedContextId
-    }), _returnedValue: (state) => state.flows.selectedRecolorBy
-  },
+  selectResizeBy: state.flows.selectedResizeBy,
+  selectBiomeFilter: state.flows.selectedBiomeFilter,
+  selectYears: state.flows.selectedYears,
+  selectRecolorBy: state.flows.selectedRecolorBy,
+  selectView: state.flows.detailedView,
   updateNodeSelectionColors: {
-    _comparedValue: (state) => state.flows.recolorGroups, _returnedValue: (state) => {
-      return (state.flows.selectedRecolorBy === undefined || state.flows.selectedRecolorBy.value === undefined || state.flows.selectedRecolorBy.value === 'none')
+    _comparedValue: (state) => state.flows.recolorGroups,
+    _returnedValue: (state) => {
+      return (state.flows.selectedRecolorBy === undefined || state.flows.selectedRecolorBy.name === 'none')
         // TODO state.flows.recolorGroups should probably be cleaned up of all undefined values in the state
         ? state.flows.recolorGroups.filter(c => c !== undefined) : null;
     }
-  },
-  selectView: {
-    _comparedValue: (state) => ({
-      selectedCommodityId: state.flows.detailedView,
-      selectedContextId: state.flows.selectedContextId
-    }), _returnedValue: (state) => state.flows.detailedView
   },
 });
 

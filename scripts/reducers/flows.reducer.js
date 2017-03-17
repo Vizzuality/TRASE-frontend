@@ -88,11 +88,8 @@ export default function (state = {}, action) {
       selectedContext: context,
       selectedContextId: contextId,
       selectedYears: [context.defaultYear, context.defaultYear],
-
       selectedRecolorBy: defaultRecolorBy || { type: 'none', name: 'none' },
-
       selectedResizeBy: defaultResizeBy,
-
       selectedBiomeFilter: 'none',
       detailedView: false,
       selectedNodesColorGroups: [],
@@ -190,9 +187,14 @@ export default function (state = {}, action) {
     break;
 
   case actions.SELECT_RECOLOR_BY: {
-    const currentContext = state.contexts.find(context => context.id === state.selectedContextId);
-    const recolorBy = currentContext.recolorBy.find(recolorBy => recolorBy.name === action.value && recolorBy.type === action.value_type);
-    newState = Object.assign({}, state, { selectedRecolorBy: recolorBy });
+    let selectedRecolorBy;
+    if (action.value === 'none') {
+      selectedRecolorBy = { name: 'none' };
+    } else {
+      const currentContext = state.contexts.find(context => context.id === state.selectedContextId);
+      selectedRecolorBy = currentContext.recolorBy.find(recolorBy => recolorBy.name === action.value && recolorBy.type === action.value_type);
+    }
+    newState = Object.assign({}, state, { selectedRecolorBy });
     break;
   }
   case actions.SELECT_RESIZE_BY: {
@@ -232,7 +234,9 @@ export default function (state = {}, action) {
     // TODO this prevents spamming browser history, but we should avoid touching it when changed state props are not on th url whitelist (constants.URL_STATE_PROPS)
     updateURLState = false;
     newState = Object.assign({}, state, {
-      highlightedNodesIds: action.ids, highlightedNodeData: action.data, highlightedGeoIds: action.geoIds
+      highlightedNodesIds: action.ids,
+      highlightedNodeData: action.data,
+      highlightedGeoIds: action.geoIds
     });
     break;
   }
