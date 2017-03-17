@@ -23,9 +23,19 @@ export default class {
       recolorGroups: recolorGroups
     });
 
+    const nodeTitles = Array.prototype.slice.call(document.querySelectorAll('.js-node-title'), 0);
+    nodeTitles.forEach((nodeTitle) => {
+      nodeTitle.addEventListener('click', (e) => {
+        if (e.currentTarget.dataset.nodeLink !== undefined) {
+          window.location.href = e.currentTarget.dataset.nodeLink
+        }
+      });
+    });
+
     const closeButtons = Array.prototype.slice.call(document.querySelectorAll('.js-node-close'), 0);
     closeButtons.forEach((closeButton) => {
       closeButton.addEventListener('click', (e) => {
+        e.stopPropagation();
         this.callbacks.onCloseNodeClicked(parseInt(e.currentTarget.dataset.nodeId));
       });
     });

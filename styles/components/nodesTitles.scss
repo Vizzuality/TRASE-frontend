@@ -14,6 +14,16 @@
   margin-right: 8px;
   border-radius: 4px;
 
+  &[data-node-link] {
+    cursor: pointer;
+
+    &:hover {
+      .icon-link svg * {
+        fill: $charcoal-grey;
+      }
+    }
+  }
+
   .column {
     display: inline-block;
     margin-right: 7px;
