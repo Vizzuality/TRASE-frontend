@@ -201,7 +201,7 @@
     &.ch-default { fill: $ch-default; };
   }
 
-  .leaflet-vectorMain-pane:not(.-linkedActivated) path {
+  .leaflet-vectorMain-pane.-noDimensions path {
     &.ch-default { fill-opacity: 0; };
   }
 
