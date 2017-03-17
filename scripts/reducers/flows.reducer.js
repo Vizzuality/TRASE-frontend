@@ -74,10 +74,13 @@ export default function (state = {}, action) {
         biomeFilter = context.filterBy[0].nodes.find(filterBy => filterBy.name === state.selectedBiomeFilterName);
       }
 
+      // always create a new array to force a state update on the component
+      let selectedYears = (state.selectedYears) ? [state.selectedYears[0], state.selectedYears[1]] : [context.defaultYear, context.defaultYear];
+
       newState = Object.assign({}, state, {
         selectedContext: context,
         selectedContextId: context.id,
-        selectedYears: state.selectedYears || [context.defaultYear, context.defaultYear],
+        selectedYears: selectedYears,
         selectedRecolorBy: recolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: resizeBy,
         selectedBiomeFilter: biomeFilter || { value: 'none' },
