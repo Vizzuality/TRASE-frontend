@@ -38,16 +38,16 @@ export default class {
     if (currentContext) {
 
       // left side
-      this.contextDropdown = new Dropdown('context', this.callbacks.onContextSelected);
+      this.contextDropdown = new Dropdown('context', this.callbacks.onContextSelected, true);
       if (filters) {
-        this.biomeFilterDropdown = new Dropdown('biomeFilter', this.callbacks.onBiomeFilterSelected);
+        this.biomeFilterDropdown = new Dropdown('biomeFilter', this.callbacks.onBiomeFilterSelected, true);
       }
       this.yearsDropdown = new Dropdown('years', null);
       this.yearsMenu = new YearsMenu('js-years-slider', this.callbacks.onYearsSelected);
 
       // right side
-      this.resizeByDropdown = new Dropdown('resize-by', this.callbacks.onResizeBySelected);
-      this.recolorByDropdown = new Dropdown('recolor-by', this.callbacks.onRecolorBySelected);
+      this.resizeByDropdown = new Dropdown('resize-by', this.callbacks.onResizeBySelected, true);
+      this.recolorByDropdown = new Dropdown('recolor-by', this.callbacks.onRecolorBySelected, true);
 
       this.legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
 

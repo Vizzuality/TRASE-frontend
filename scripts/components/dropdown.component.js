@@ -1,15 +1,14 @@
 import 'styles/components/dropdown.scss';
 
 export default class {
-  constructor(id, callback, child) {
+  constructor(id, callback, hideOnlyChild) {
     this.id = id;
     this.callback = callback;
-    this.child = child;
     this.el = document.querySelector(`[data-dropdown=${id}]`);
     this.title = this.el.querySelector('.js-dropdown-title');
     this.list = this.el.querySelector('.js-dropdown-list');
     this.list.classList.add('is-hidden');
-    if (this._uniqueChild()) this.el.classList.add('-unique-child');
+    if (this._onlyChild() && hideOnlyChild) this.el.classList.add('-hide-only-child');
     this._setEventListeners();
   }
 
@@ -46,8 +45,8 @@ export default class {
     });
   }
 
-  _uniqueChild() {
-    return (this.list.querySelectorAll('li').length === 1);
+  _onlyChild() {
+    return (this.list.children.length <= 1);
   }
 
   selectValue(value) {
@@ -83,14 +82,7 @@ export default class {
   }
 
   _toggle() {
-    const isOpen = !this.list.classList.toggle('is-hidden');
-    if (this.child) {
-      if (isOpen) {
-        this.child.onDropdownOpen();
-      } else {
-        this.child.onDropdownClose();
-      }
-    }
+    !this.list.classList.toggle('is-hidden');
   }
 
   _close() {

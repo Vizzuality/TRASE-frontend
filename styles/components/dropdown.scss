@@ -24,9 +24,10 @@
     }
   }
 
-  &.-unique-child {
+  &.-hide-only-child {
     pointer-events: none;
     cursor: default;
+
     .dropdown-title:after {
       display: none;
     }
