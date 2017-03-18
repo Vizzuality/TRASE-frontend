@@ -10,11 +10,11 @@
     width: 100%;
 
     > thead {
-      > .row {
+      > .table-row {
         border-bottom: 1px solid $charcoal-grey;
       }
 
-      > .row > .header-cell {
+      > .table-row > .header-cell {
         padding: 0 0 8px;
 
         color: $charcoal-grey;
@@ -29,7 +29,7 @@
     }
 
     > tbody {
-      > .row {
+      > .table-row {
 
         &:not(:last-child) {
           border-bottom: 1px solid rgba($charcoal-grey, .2);
