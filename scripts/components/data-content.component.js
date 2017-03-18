@@ -1,8 +1,8 @@
 import SelectorItemsTemplate from 'ejs!templates/data/selector-items.ejs';
-import {
-  getURLFromParams,
-  GET_DATA_DOWNLOAD_FILE
-} from 'utils/getURLFromParams';
+import BulkDownloadTemplate from 'ejs!templates/data/bulk-download.ejs';
+import { getURLFromParams, GET_CSV_DATA_DOWNLOAD_FILE, GET_JSON_DATA_DOWNLOAD_FILE } from 'utils/getURLFromParams';
+import _ from 'lodash';
+
 export default class {
   onCreated() {
     this._setVars();
@@ -21,20 +21,28 @@ export default class {
     this.selectorOutputType = this.el.querySelector('.js-custom-dataset-selector-output-type');
     this.selectorFormatting = this.el.querySelector('.js-custom-dataset-selector-formatting');
     this.selectorFile = this.el.querySelector('.js-custom-dataset-selector-file');
+    this.bulkDownloadsSection = document.querySelector('.c-bulk-downloads');
   }
 
   fillContexts(contexts) {
     this.contexts = contexts;
-    const items = contexts
-      .map(context => ({
-        id: context.countryId,
-        name: context.countryName.toLowerCase(),
-        group: 'countries',
-        noSelfCancel: true
-      }))
-      .filter((elem, index, self) => self.findIndex((t) => {
-        return t.id === elem.id;
-      }) === index);
+
+    const enabledContexts = contexts.filter(elem => elem.isDisabled !== true);
+
+    const items = _.uniqBy(enabledContexts, context => context.countryId).map(context => ({
+      id: context.countryId,
+      name: context.countryName.toLowerCase(),
+      group: 'countries',
+      noSelfCancel: true
+    }));
+
+    this.bulkDownloadsSection.querySelector('.row').innerHTML = BulkDownloadTemplate({
+      contexts: enabledContexts
+    });
+    this.bulkDownloadsSection.querySelectorAll('.c-bulk-downloads__item').forEach(elem => {
+      elem.addEventListener('click', () => this._downloadFile({ context_id: elem.getAttribute('data-value') }));
+    });
+
     this.selectorCountries.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
     });
@@ -84,11 +92,10 @@ export default class {
     this._setSelectorEvents(this.selectorIndicators);
   }
 
-  _downloadFile() {
-    window.open(this._getDownloadURL());
-  }
-
-  _getDownloadURL() {
+  _getDownloadURLParams() {
+    if (this.selectorCommodities.querySelector('.c-radio-btn.-enabled') === null) {
+      return [];
+    }
     const contextId = this.selectorCommodities.querySelector('.c-radio-btn.-enabled').getAttribute('value');
     const fileRadio = this.selectorFile.querySelector('.c-radio-btn.-enabled');
     const file = fileRadio.getAttribute('value');
@@ -118,7 +125,30 @@ export default class {
     }
     params[outputType] = 1;
 
-    return getURLFromParams(GET_DATA_DOWNLOAD_FILE, params).replace('?', `${file}?`);
+    return params;
+  }
+
+  _downloadFile(params = null) {
+    params = params || this._getDownloadURLParams();
+
+    if (!params.context_id) {
+      return;
+    }
+
+    const fileRadio = this.selectorFile.querySelector('.c-radio-btn.-enabled');
+    const file = fileRadio.getAttribute('value');
+    let downloadURL;
+
+    switch (file) {
+      case '.json':
+        downloadURL = getURLFromParams(GET_JSON_DATA_DOWNLOAD_FILE, params);
+        break;
+      default:
+        downloadURL = getURLFromParams(GET_CSV_DATA_DOWNLOAD_FILE, params);
+        break;
+    }
+
+    window.open(downloadURL);
   }
 
   _setSelectorEvents(selector) {
@@ -128,9 +158,19 @@ export default class {
     });
   }
 
+  _unlockDownloadButton() {
+    this.downloadButton.classList.remove('-disabled');
+  }
+
+  _lockDownloadButton() {
+    this.downloadButton.classList.add('-disabled');
+  }
+
   _onToggleRadio(e) {
     const selectedRadio = e && e.currentTarget;
-    if (!selectedRadio) return;
+    if (!selectedRadio) {
+      return;
+    }
     const container = selectedRadio.closest('li');
     const value = selectedRadio.getAttribute('value');
     const group = selectedRadio.getAttribute('data-group');
@@ -140,10 +180,17 @@ export default class {
     switch (group) {
       case 'countries':
         this._cleanRadios(this.selectorCountries);
-        this._updateSelectorCommodities(value);
+        this._updateCommoditiesSelector(value);
+        this._lockDownloadButton();
         break;
       case 'commodities':
         this.callbacks.onContextSelected(value);
+        this._updateYearsSelector(value);
+        if (isEnabled) {
+          this._lockDownloadButton();
+        } else {
+          this._unlockDownloadButton();
+        }
         break;
       case 'years':
         if (allClosest !== null) {
@@ -151,7 +198,9 @@ export default class {
         }
         break;
       case 'years-all':
-        if (this.selectorYears.classList.contains('-disabled')) return;
+        if (this.selectorYears.classList.contains('-disabled')) {
+          return;
+        }
         if (isEnabled) {
           this._cleanRadios(this.selectorYears);
         } else {
@@ -164,7 +213,9 @@ export default class {
         }
         break;
       case 'companies-all':
-        if (this.selectorCompanies.classList.contains('-disabled')) return;
+        if (this.selectorCompanies.classList.contains('-disabled')) {
+          return;
+        }
         if (isEnabled) {
           this._cleanRadios(this.selectorCompanies);
         } else {
@@ -177,7 +228,9 @@ export default class {
         }
         break;
       case 'consumption-countries-all':
-        if (this.selectorConsumptionCountries.classList.contains('-disabled')) return;
+        if (this.selectorConsumptionCountries.classList.contains('-disabled')) {
+          return;
+        }
         if (isEnabled) {
           this._cleanRadios(this.selectorConsumptionCountries);
         } else {
@@ -190,7 +243,9 @@ export default class {
         }
         break;
       case 'indicators-all':
-        if (this.selectorIndicators.classList.contains('-disabled')) return;
+        if (this.selectorIndicators.classList.contains('-disabled')) {
+          return;
+        }
         if (isEnabled) {
           this._cleanRadios(this.selectorIndicators);
         } else {
@@ -252,7 +307,7 @@ export default class {
     });
   }
 
-  _updateSelectorCommodities(country) {
+  _updateCommoditiesSelector(country) {
     const items = this.contexts
       .filter(context => context.id === parseInt(country))
       .map(context => ({
@@ -266,5 +321,21 @@ export default class {
     });
     this.selectorCommodities.classList.remove('-disabled');
     this._setSelectorEvents(this.selectorCommodities);
+  }
+
+  _updateYearsSelector(contextId) {
+    const context = this.contexts.find(context => context.id === parseInt(contextId));
+
+    const items = context.years.map(year => ({
+      id: year,
+      name: year,
+      group: 'year',
+      noSelfCancel: true
+    }));
+
+    this.selectorYears.querySelector('.c-custom-dataset-selector__values').innerHTML = SelectorItemsTemplate({
+      items
+    });
+    this._setSelectorEvents(this.selectorYears);
   }
 }
