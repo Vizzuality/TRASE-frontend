@@ -89,26 +89,36 @@ export default class {
   }
 
   _getDownloadURL() {
-    const baseURL = getURLFromParams(GET_DATA_DOWNLOAD_FILE);
-    const file = this.selectorFile.querySelector('.c-radio-btn.-enabled').getAttribute('value');
-    let urlParams = `context_id=${this.selectorCommodities.querySelector('.c-radio-btn.-enabled').getAttribute('value')}`;
+    const contextId = this.selectorCommodities.querySelector('.c-radio-btn.-enabled').getAttribute('value');
+    const fileRadio = this.selectorFile.querySelector('.c-radio-btn.-enabled');
+    const file = fileRadio.getAttribute('value');
+    const outputType = this.selectorOutputType.querySelector('.c-radio-btn.-enabled').getAttribute('value');
+    let params = {
+      context_id: contextId
+    };
+
     const years = Array.prototype.slice.call(this.selectorYears.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn.-enabled'), 0);
     if (years.length > 0) {
-      urlParams += `&years[]=${years.map(item => item.getAttribute('value')).join(',')}`;
+      params.years = years.map(item => item.getAttribute('value'));
     }
     const exporters = Array.prototype.slice.call(this.selectorCompanies.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn.-enabled'), 0);
     if (exporters.length > 0) {
-      urlParams += `&exporters_ids[]=${exporters.map(item => item.getAttribute('value')).join(',')}`;
+      params.exporters_ids = exporters.map(item => item.getAttribute('value'));
     }
     const consumptionCountries = Array.prototype.slice.call(this.selectorConsumptionCountries.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn.-enabled'), 0);
     if (consumptionCountries.length > 0) {
-      urlParams += `&importers_ids[]=${consumptionCountries.map(item => item.getAttribute('value')).join(',')}`;
+      params.countries_ids = consumptionCountries.map(item => item.getAttribute('value'));
     }
     const indicators = Array.prototype.slice.call(this.selectorIndicators.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn.-enabled'), 0);
     if (indicators.length > 0) {
-      urlParams += `&quants_ids[]=${indicators.map(item => item.getAttribute('value')).join(',')}`;
+      params.indicators = indicators.map(item => item.getAttribute('value'));
     }
-    return `${baseURL}${urlParams}`.replace('?', `${file}?`);
+    if (file === '.csv') {
+      params.separator = fileRadio.getAttribute('data-separator-type');
+    }
+    params[outputType] = 1;
+
+    return getURLFromParams(GET_DATA_DOWNLOAD_FILE, params).replace('?', `${file}?`);
   }
 
   _setSelectorEvents(selector) {

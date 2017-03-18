@@ -79,7 +79,7 @@
                         <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values">
                           <li>
                             2016
-                            <div class="c-radio-btn -red -disabled" data-group="years" value="2016"></div>
+                            <div class="c-radio-btn -red" data-group="years" value="2016"></div>
                           </li>
                           <li>
                             2015
@@ -165,7 +165,7 @@
                       </ul>
                     </div>
 
-                    <div class="c-custom-dataset-selector js-custom-dataset-selector-formatting" data-type="format">
+                    <div class="c-custom-dataset-selector js-custom-dataset-selector-formatting" data-type="format" style="display: none;">
                       <div class="c-custom-dataset-selector__header">FORMATTING OPTIONS</div>
                       <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values">
                         <li class="-selected">
@@ -187,12 +187,16 @@
                       <div class="c-custom-dataset-selector__header">FILE</div>
                       <ul class="c-custom-dataset-selector__values js-custom-dataset-selector-values">
                         <li class="-selected">
-                          .csv
-                          <div class="c-radio-btn -no-self-cancel -enabled -grey" data-group="file" value=".csv"></div>
+                          .csv (commas)
+                          <div class="c-radio-btn -no-self-cancel -enabled -grey" data-group="file" value=".csv" data-separator-type="comma"></div>
+                        </li>
+                        <li>
+                          .csv (semicolon)
+                          <div class="c-radio-btn -no-self-cancel -grey" data-group="file" value=".csv" data-separator-type="semicolon"></div>
                         </li>
                         <li>
                           .json
-                          <div class="c-radio-btn -no-self-cancel -grey" data-group="file" value=".json"></div>
+                          <div class="c-radio-btn -no-self-cancel -grey" data-group="file" value=".json" data-separator-type=""></div>
                         </li>
                       </ul>
                     </div>
