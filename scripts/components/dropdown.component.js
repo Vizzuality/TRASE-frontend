@@ -29,8 +29,9 @@ export default class {
 
     this._bindMultipleEvents(['click', 'touchstart'], this.list, (e) => {
       e.preventDefault();
-      if (e.target.getAttribute('data-value')) {
-        this._onListClick(e.target.dataset);
+      if (e.target.getAttribute('data-value') || e.target.parentElement.getAttribute('data-value')) {
+        const dataset = (e.target.getAttribute('data-value')) ? e.target.dataset : e.target.parentElement.dataset;
+        this._onListClick(dataset);
       }
     });
 

@@ -1,4 +1,5 @@
 export const GET_CONTEXTS = 'GET_CONTEXTS';
+export const GET_TOOLTIPS = 'GET_TOOLTIPS';
 export const GET_ALL_NODES = 'GET_ALL_NODES';
 export const GET_COLUMNS = 'GET_COLUMNS';
 export const GET_NODES = 'GET_NODES';
@@ -12,18 +13,19 @@ export const GET_JSON_DATA_DOWNLOAD_FILE = 'GET_JSON_DATA_DOWNLOAD_FILE';
 export const GET_CSV_DATA_DOWNLOAD_FILE = 'GET_CSV_DATA_DOWNLOAD_FILE';
 
 const API_ENDPOINTS = {
-  [GET_CONTEXTS]: { version: 2, endpoint: '/get_contexts' },
-  [GET_ALL_NODES]: { version: 2, endpoint: '/get_all_nodes' },
-  [GET_COLUMNS]: { version: 2, endpoint: '/get_columns' },
-  [GET_NODES]: { version: 1, endpoint: '/get_nodes' },
-  [GET_FLOWS]: { version: 1, endpoint: '/get_flows' },
-  [GET_MAP_BASE_DATA]: { version: 2, endpoint: '/get_map_base_data' },
-  [GET_LINKED_GEO_IDS]: { version: 2, endpoint: '/get_linked_geoids' },
-  [GET_PLACE_FACTSHEET]: { version: 1, endpoint: '/get_place_node_attributes' },
-  [GET_ACTOR_FACTSHEET]: { version: 1, endpoint: '/get_actor_node_attributes' },
-  [GET_INDICATORS]: { version: 2, endpoint: '/indicators' },
-  [GET_CSV_DATA_DOWNLOAD_FILE]: { version: 2, endpoint: '/download.csv' },
-  [GET_JSON_DATA_DOWNLOAD_FILE]: { version: 2, endpoint: '/download.json' },
+  [GET_TOOLTIPS]: { api: 'local', endpoint: 'tooltips.json' },
+  [GET_CONTEXTS]: { api: 2, endpoint: '/get_contexts' },
+  [GET_ALL_NODES]: { api: 2, endpoint: '/get_all_nodes' },
+  [GET_COLUMNS]: { api: 2, endpoint: '/get_columns' },
+  [GET_NODES]: { api: 1, endpoint: '/get_nodes' },
+  [GET_FLOWS]: { api: 1, endpoint: '/get_flows' },
+  [GET_MAP_BASE_DATA]: { api: 2, endpoint: '/get_map_base_data' },
+  [GET_LINKED_GEO_IDS]: { api: 2, endpoint: '/get_linked_geoids' },
+  [GET_PLACE_FACTSHEET]: { api: 1, endpoint: '/get_place_node_attributes' },
+  [GET_ACTOR_FACTSHEET]: { api: 1, endpoint: '/get_actor_node_attributes' },
+  [GET_INDICATORS]: { api: 2, endpoint: '/indicators' },
+  [GET_CSV_DATA_DOWNLOAD_FILE]: { api: 2, endpoint: '/download.csv' },
+  [GET_JSON_DATA_DOWNLOAD_FILE]: { api: 2, endpoint: '/download.json' },
 };
 
 function getURLForV2(endpoint, params = {}) {
@@ -52,15 +54,28 @@ function getURLForV1(endpoint, params = {}) {
     return `${prev}&${current}=${params[current]}`;
   }, `${API_V1_URL}${endpoint}?`);
 }
+// builds an URL usable to call the API, using params
+function getURLForLocal(endpoint, params = {}) {
+  return Object.keys(params).reduce((prev, current) => {
+    const value = params[current];
+    if (Array.isArray(value)) {
+      const arrUrl = value.reduce((arrPrev, arrCurrent) => {
+        return `${arrPrev}&${current}=${arrCurrent}`;
+      }, '');
+      return `${prev}&${arrUrl}`;
+    }
+    return `${prev}&${current}=${params[current]}`;
+  }, `/${endpoint}?`);
+}
 
 export function getURLFromParams(endpointKey, params = {}) {
   const endpointData = API_ENDPOINTS[endpointKey];
-
-  switch (endpointData.version) {
-
+  switch (endpointData.api) {
     case 2:
       return getURLForV2(endpointData.endpoint, params);
-    default:
+    case 1:
       return getURLForV1(`/v1${endpointData.endpoint}`, params);
+    case 'local':
+      return getURLForLocal(endpointData.endpoint, params);
   }
 }

@@ -13,6 +13,7 @@ const mapMethodsToState = (state) => ({
       return {
         contexts: state.flows.contexts,
         selectedContextId: state.flows.selectedContextId,
+        tooltips: state.app.tooltips,
         detailedView: state.flows.detailedView
       };
     }

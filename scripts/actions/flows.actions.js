@@ -10,7 +10,8 @@ import {
   GET_NODES,
   GET_LINKED_GEO_IDS,
   GET_MAP_BASE_DATA,
-  GET_CONTEXTS
+  GET_CONTEXTS,
+  GET_TOOLTIPS
 } from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
 import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
@@ -120,21 +121,30 @@ export function loadInitialData() {
     });
 
     const contextURL = getURLFromParams(GET_CONTEXTS);
+    const tooltipsURL = getURLFromParams(GET_TOOLTIPS);
 
-    fetch(contextURL).then(resp => resp.text()).then(data => {
-      const payload = JSON.parse(data).data;
+    Promise.all([contextURL, tooltipsURL].map(url => fetch(url)
+      .then(resp => resp.text())))
+      .then(data => {
+        const tooltipsPayload = JSON.parse(data[1]);
 
-      // load contexts
-      dispatch({
-        type: actions.LOAD_CONTEXTS, payload
+        dispatch({
+          type: actions.SET_TOOLTIPS,
+          payload: tooltipsPayload
+        });
+        
+        const contextPayload = JSON.parse(data[0]).data;
+        // load contexts
+        dispatch({
+          type: actions.LOAD_CONTEXTS,
+          payload: contextPayload
+        });
+
+        const state = getState();
+        const defaultContextId = state.flows.selectedContextId || contextPayload.find(context => context.isDefault === true).id;
+
+        dispatch(setContext(defaultContextId, true));
       });
-
-      const state = getState();
-
-      const defaultContextId = state.flows.selectedContextId || payload.find(context => context.isDefault === true).id;
-
-      dispatch(setContext(defaultContextId, true));
-    });
   };
 }
 

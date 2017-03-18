@@ -3,13 +3,11 @@ import 'styles/components/shared/radio-btn.scss';
 import 'styles/components/shared/switcher.scss';
 import MapDimensionsTemplate from 'ejs!templates/mapDimensions.ejs';
 
-
 export default class {
 
   onCreated() {
     this.el = document.querySelector('.c-basemap-options');
     this.layerList = this.el.querySelector('.js-layer-list');
-    this.tooltip = document.querySelector('.tooltip-layout');
   }
 
   loadMapDimensions(dimensionsByGroup) {
@@ -19,6 +17,7 @@ export default class {
 
     this._setVars();
     this._setEventListeners();
+    this.callbacks.onMapDimensionsLoaded();
   }
 
   selectMapDimensions(dimensions) {
@@ -31,17 +30,11 @@ export default class {
   }
 
   _setVars() {
-    this.infoBtns     = Array.prototype.slice.call(this.layerList.querySelectorAll('.js-layer-info'), 0);
     this.downloadBtns = Array.prototype.slice.call(this.layerList.querySelectorAll('.js-layer-download'), 0);
     this.radios       = Array.prototype.slice.call(this.layerList.querySelectorAll('.c-radio-btn'), 0);
   }
 
   _setEventListeners() {
-    this.infoBtns.forEach((infoBtn) => {
-      infoBtn.addEventListener('mouseenter', (e) => this._onInfo(e));
-      infoBtn.addEventListener('mouseleave', () => this._outInfo());
-    });
-
     this.downloadBtns.forEach((downloadBtn) => {
       downloadBtn.addEventListener('click', (e) => this._onDownload(e));
     });
@@ -130,30 +123,6 @@ export default class {
         partnerRadio.classList.remove('-disabled');
       }
     });
-  }
-
-
-  // TODO: develop info function once is clear how it works
-  _onInfo(e) {
-    const target = e && e.currentTarget; //the information icon
-    const bounds = target.getBoundingClientRect(); //position of the icon
-    const top = bounds.top; // top
-    const left = bounds.left + 24; //left
-    const uid = target.closest('.layer-item').getAttribute('data-layer-uid');
-
-    this.tooltip.classList.remove('is-hidden');
-    this.tooltip.classList.add('is-visible');
-
-    const topTooltip = top - (this.tooltip.getBoundingClientRect().height/2) + 8;
-
-    this.tooltip.style.top = `${topTooltip}px`;
-    this.tooltip.style.left = `${left}px`;
-    this.tooltip.innerHTML = `showing info of ${uid}`;
-  }
-
-  _outInfo() {
-    this.tooltip.classList.remove('is-visible');
-    this.tooltip.classList.add('is-hidden');
   }
 
   // TODO: develop download function once is clear how it works

@@ -19,7 +19,7 @@ export default class {
 
   }
 
-  render({ contexts, selectedContextId, detailedView }) {
+  render({ contexts, selectedContextId, tooltips, detailedView}) {
     let currentContext = contexts ? contexts.find(elem => elem.id === selectedContextId) : null;
     let filters = null;
     let resizeBy = null;
@@ -32,7 +32,11 @@ export default class {
     }
 
     this.container.innerHTML = NavTemplate({
-      contexts, filters, resizeBy, recolorBy: this._generateRecolorByOption(recolorBy)
+      contexts,
+      filters,
+      resizeBy,
+      recolorBy: this._generateRecolorByOption(recolorBy),
+      tooltips
     });
 
     if (currentContext) {

@@ -13,6 +13,7 @@ import TitlebarContainer from 'containers/titlebar.container';
 import NodesTitlesContainer from 'containers/nodesTitles.container';
 import SearchContainer from 'containers/search.container';
 import ModalContainer from 'containers/shared/modal.container';
+import TooltipContainer from 'containers/tooltip.container';
 import AppReducer from 'reducers/app.reducer';
 import FlowsReducer from 'reducers/flows.reducer';
 import { resize } from 'actions/app.actions';
@@ -56,6 +57,7 @@ const start = (initialState) => {
   new TitlebarContainer(store);
   new NodesTitlesContainer(store);
   new SearchContainer(store);
+  new TooltipContainer(store);
   new ModalContainer(store);
 
   store.dispatch(loadInitialData());

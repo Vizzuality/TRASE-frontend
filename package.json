@@ -58,6 +58,7 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "siema": "^1.2.1",
+    "tether-tooltip": "^1.2.0",
     "topojson": "^1.6.27"
   },
   "engines": {
