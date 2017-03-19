@@ -36,7 +36,7 @@ export default function (state = {}, action) {
         selectedNodesIds: [],
         expandedNodesIds: [],
         areNodesExpanded: false,
-        selectedBiomeFilter: 'none',
+        selectedBiomeFilter: { value: 'none' },
         recolorByNodeIds: []
       });
       break;

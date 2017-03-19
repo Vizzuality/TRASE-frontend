@@ -92,17 +92,21 @@ export default class {
       this._setChoropleth(payload.choropleth);
     }
     if (payload.linkedGeoIds) {
-      this.showLinkedGeoIds(payload.linkedGeoIds);
+      this.showLinkedGeoIds({
+        selectedNodesGeoIds: payload.selectedNodesGeoIds,
+        linkedGeoIds: payload.linkedGeoIds
+      });
     }
   }
 
 
-  showLinkedGeoIds(linkedGeoIds) {
+  showLinkedGeoIds({selectedNodesGeoIds, linkedGeoIds}) {
+    const geoIdList = _.union(selectedNodesGeoIds, linkedGeoIds);
     if (!this.currentPolygonTypeLayer) {
       return;
     }
     // remove choropleth from main layer
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', geoIdList.length);
 
     window.clearTimeout(this.fitBoundsTimeout);
 
@@ -110,13 +114,13 @@ export default class {
       this.map.removeLayer(this.vectorLinked);
     }
 
-    if (!linkedGeoIds.length) {
+    if (!geoIdList.length) {
       return;
     }
 
     const linkedFeaturesClassNames = {};
 
-    const linkedFeatures = linkedGeoIds.map(geoId => {
+    const linkedFeatures = geoIdList.map(geoId => {
       const originalPolygon = this.polygonFeaturesDict[geoId];
       if (originalPolygon !== undefined) {
         // copy class names (ie choropleth from vectorMain's original polygon)
@@ -235,7 +239,7 @@ export default class {
     const northEast = L.latLng(18, -28);
     const bounds = L.latLngBounds(southWest, northEast);
 
-    var layer = L.tileLayer(url, {
+    const layer = L.tileLayer(url, {
       pane: MAP_PANES.context,
       tms: true,
       // TODO add those params in layer configuration
@@ -305,14 +309,17 @@ export default class {
     }, 850);
   }
 
-  setChoropleth({choropleth, linkedGeoIds, selectedMapDimensions}) {
+  setChoropleth({choropleth, selectedNodesGeoIds, linkedGeoIds, selectedMapDimensions}) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
-      this.showLinkedGeoIds(linkedGeoIds);
+      this.showLinkedGeoIds({
+        selectedNodesGeoIds,
+        linkedGeoIds
+      });
     }
   }
 
