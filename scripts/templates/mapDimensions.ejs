@@ -16,9 +16,11 @@
             <% } %>
             <ul class="layer-options-list">
               <li class="layer-option">
-                <!-- <svg class="icon icon-layer-info js-tooltip" data-tooltip-text="% of total private land that is legal reserve deficit for a given municipality. Legal Reserve deficit is the area of land that has been illegally deforested, as determined by the Brazilian Forest Code, and is required by law to be restored or compensated off-farm.">
-                  <use xlink:href="#icon-layer-info"></use>
-                </svg> -->
+                <% if (dimension.description) {  %>
+                  <svg class="icon icon-layer-info js-tooltip" data-tooltip-text="<%= dimension.description %>">
+                    <use xlink:href="#icon-layer-info"></use>
+                  </svg>
+                <% } %>
               </li>
               <!--<li class="layer-option">-->
                 <!--<svg class="icon icon-layer-download js-layer-download"><use xlink:href="#icon-layer-download"></use></svg>-->
