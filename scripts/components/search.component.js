@@ -1,11 +1,22 @@
 import 'styles/components/search.scss';
 import Awesomplete from 'awesomplete';
 import 'awesomplete/awesomplete.css';
-
+import _ from 'lodash';
 
 export default class {
   onCreated() {
-    this._setVars();
+    this._init_once = _.once(this._init);
+    this.initialize();
+  }
+
+  initialize() {
+    if (!this._setVars()) {
+      return;
+    }
+    this._init_once();
+  }
+
+  _init() {
     this.autocomplete = new Awesomplete(this.input, {
       data: node => {
         return {
@@ -34,7 +45,7 @@ export default class {
         return dom;
       },
       // sets the value that appear in the input when selecting a list item
-      // needs to be overriden because by default it will spit the whole item html
+      // needs to be overridden because by default it will spit the whole item html
       replace: text => {
         this.input.value = text;
       }
@@ -47,6 +58,8 @@ export default class {
     this.input = this.el.querySelector('.js-search-input');
     this.launcher = document.querySelector('.js-open-search');
     this.closer = document.querySelector('.js-close-search');
+
+    return (this.el && this.input && this.launcher && this.closer);
   }
 
   _setEventListeners() {
@@ -60,6 +73,7 @@ export default class {
   }
 
   loadNodes(nodes) {
+    this.initialize();
     this.autocomplete.list = nodes;
   }
 
