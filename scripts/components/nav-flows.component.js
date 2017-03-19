@@ -72,7 +72,7 @@ export default class {
         case 'qual': {
           recolorByElem.options = [];
           recolorByElem.nodes.forEach(node => recolorByElem.options.push({
-            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.name)}-${_.toLower(node)}`.replace(/ /g, '-'),
+            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.legendType)}-${_.toLower(recolorByElem.legendColorTheme)}-${_.toLower(node)}`.replace(/ /g, '-'),
             label: _.capitalize(node)
           }));
           break;
@@ -81,7 +81,7 @@ export default class {
         case 'linear': {
           recolorByElem.options = [];
           _.range(recolorByElem.intervalCount).forEach(node => recolorByElem.options.push({
-            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.name)}-${_.toLower(node)}`.replace(/ /g, '-'),
+            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.legendType)}-${_.toLower(recolorByElem.legendColorTheme)}-${_.toLower(node)}`.replace(/ /g, '-'),
             label: ''
           }));
           break;

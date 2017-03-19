@@ -53,40 +53,51 @@ $flow-8: #f3fb00;
 $flow-9: #7193ff;
 $flow-10: #b27200;
 
-$qual-biome-amazonia: #43f3f3;
-$qual-biome-cerrado: #517fee;
-$qual-biome-mata-atlantica: #8c28ff;
-$qual-biome-caatinga: #ff66e5;
-$qual-biome-pampa: #72ea28;
-$qual-biome-pantanal: #ffb314;
+$qual-qual-thematic-amazonia: #43f3f3;
+$qual-qual-thematic-cerrado: #517fee;
+$qual-qual-thematic-mata-atlantica: #8c28ff;
+$qual-qual-thematic-caatinga: #ff66e5;
+$qual-qual-thematic-pampa: #72ea28;
+$qual-qual-thematic-pantanal: #ffb314;
 
-$ind-forest_500-0: #e3a9a9;
-$ind-forest_500-1: #f4bda5;
-$ind-forest_500-2: #c2b5af;
-$ind-forest_500-3: #92c5de;
-$ind-forest_500-4: #4996c3;
+$ind-stars-red-blue-0: #e3a9a9;
+$ind-stars-red-blue-1: #f4bda5;
+$ind-stars-red-blue-2: #c2b5af;
+$ind-stars-red-blue-3: #92c5de;
+$ind-stars-red-blue-4: #4996c3;
 
-$qual-zero_deforestation-yes: #a4e332;
-$qual-zero_deforestation-no: #e36845;
+$qual-qual-yes-no-yes: #a4e332;
+$qual-qual-yes-no-no: #e36845;
 
-$ind-water_scarcity-0: #d73027;
-$ind-water_scarcity-1: #fc8d59;
-$ind-water_scarcity-2: #fee090;
-$ind-water_scarcity-3: #ffffbf;
-$ind-water_scarcity-4: #e0f3f8;
-$ind-water_scarcity-5: #91bfdb;
-$ind-water_scarcity-6: #4575b4;
+$ind-linear-red-blue-0: #d73027;
+$ind-linear-red-blue-1: #fc8d59;
+$ind-linear-red-blue-2: #fee090;
+$ind-linear-red-blue-3: #ffffbf;
+$ind-linear-red-blue-4: #e0f3f8;
+$ind-linear-red-blue-5: #91bfdb;
+$ind-linear-red-blue-6: #4575b4;
 
-$ind-smallholders-0: #ffc;
-$ind-smallholders-1: #c2e699;
-$ind-smallholders-2: #78c679;
-$ind-smallholders-3: #31a354;
-$ind-smallholders-4: #006837;
+$ind-linear-yellow-green-0: #ffc;
+$ind-linear-yellow-green-1: #c2e699;
+$ind-linear-yellow-green-2: #78c679;
+$ind-linear-yellow-green-3: #31a354;
+$ind-linear-yellow-green-4: #006837;
 
+$ind-linear-blue-green-0: #3300E8;
+$ind-linear-blue-green-1: #0D1AFF;
+$ind-linear-blue-green-2: #0C52E8;
+$ind-linear-blue-green-3: #0094FF;
+$ind-linear-blue-green-4: #0CC6E8;
+$ind-linear-blue-green-5: #0DFFE3;
+$ind-linear-blue-green-6: #0CE8AF;
+$ind-linear-blue-green-7: #0CE890;
+$ind-linear-blue-green-8: #00FF52;
+$ind-linear-blue-green-9: #4bff0f;
+$ind-linear-blue-green-10: #9AE80C;
 
-$qual-colors: $qual-biome-amazonia, $qual-biome-cerrado, $qual-biome-mata-atlantica, $qual-biome-caatinga, $qual-biome-pampa, $qual-biome-pantanal, $ind-forest_500-0, $ind-forest_500-1, $ind-forest_500-2, $ind-forest_500-3, $ind-forest_500-4, $qual-zero_deforestation-yes, $qual-zero_deforestation-no, $ind-water_scarcity-0, $ind-water_scarcity-1, $ind-water_scarcity-2, $ind-water_scarcity-3, $ind-water_scarcity-4, $ind-water_scarcity-5, $ind-water_scarcity-6, $ind-smallholders-0, $ind-smallholders-1, $ind-smallholders-2, $ind-smallholders-3, $ind-smallholders-4;
+$qual-colors: $qual-qual-thematic-amazonia, $qual-qual-thematic-cerrado, $qual-qual-thematic-mata-atlantica, $qual-qual-thematic-caatinga, $qual-qual-thematic-pampa, $qual-qual-thematic-pantanal, $ind-stars-red-blue-0, $ind-stars-red-blue-1, $ind-stars-red-blue-2, $ind-stars-red-blue-3, $ind-stars-red-blue-4, $qual-qual-yes-no-yes, $qual-qual-yes-no-no, $ind-linear-red-blue-0, $ind-linear-red-blue-1, $ind-linear-red-blue-2, $ind-linear-red-blue-3, $ind-linear-red-blue-4, $ind-linear-red-blue-5, $ind-linear-red-blue-6, $ind-linear-yellow-green-0, $ind-linear-yellow-green-1, $ind-linear-yellow-green-2, $ind-linear-yellow-green-3, $ind-linear-yellow-green-4, $ind-linear-blue-green-0, $ind-linear-blue-green-1, $ind-linear-blue-green-2, $ind-linear-blue-green-3, $ind-linear-blue-green-4, $ind-linear-blue-green-5, $ind-linear-blue-green-6, $ind-linear-blue-green-7, $ind-linear-blue-green-8, $ind-linear-blue-green-9, $ind-linear-blue-green-10;
 
-$qual-colors-names: '-qual-biome-amazonia', '-qual-biome-cerrado', '-qual-biome-mata-atlantica', '-qual-biome-caatinga', '-qual-biome-pampa', '-qual-biome-pantanal', '-ind-forest_500-0', '-ind-forest_500-1', '-ind-forest_500-2', '-ind-forest_500-3', '-ind-forest_500-4', '-qual-zero_deforestation-yes', '-qual-zero_deforestation-no', '-ind-water_scarcity-0', '-ind-water_scarcity-1', '-ind-water_scarcity-2', '-ind-water_scarcity-3', '-ind-water_scarcity-4', '-ind-water_scarcity-5', '-ind-water_scarcity-6', '-ind-smallholders-0', '-ind-smallholders-1', '-ind-smallholders-2', '-ind-smallholders-3', '-ind-smallholders-4';
+$qual-colors-names: '-qual-qual-thematic-amazonia', '-qual-qual-thematic-cerrado', '-qual-qual-thematic-mata-atlantica', '-qual-qual-thematic-caatinga', '-qual-qual-thematic-pampa', '-qual-qual-thematic-pantanal', '-ind-stars-red-blue-0', '-ind-stars-red-blue-1', '-ind-stars-red-blue-2', '-ind-stars-red-blue-3', '-ind-stars-red-blue-4', '-qual-qual-yes-no-yes', '-qual-qual-yes-no-no', '-ind-linear-red-blue-0', '-ind-linear-red-blue-1', '-ind-linear-red-blue-2', '-ind-linear-red-blue-3', '-ind-linear-red-blue-4', '-ind-linear-red-blue-5', '-ind-linear-red-blue-6', '-ind-linear-yellow-green-0', '-ind-linear-yellow-green-1', '-ind-linear-yellow-green-2', '-ind-linear-yellow-green-3', '-ind-linear-yellow-green-4', '-ind-linear-blue-green-0', '-ind-linear-blue-green-1', '-ind-linear-blue-green-2', '-ind-linear-blue-green-3', '-ind-linear-blue-green-4', '-ind-linear-blue-green-5', '-ind-linear-blue-green-6', '-ind-linear-blue-green-7', '-ind-linear-blue-green-8', '-ind-linear-blue-green-9', '-ind-linear-blue-green-10';
 
 $flow-colors: $flow-1, $flow-2, $flow-3, $flow-4, $flow-5, $flow-6, $flow-7, $flow-8, $flow-9, $flow-10;
 

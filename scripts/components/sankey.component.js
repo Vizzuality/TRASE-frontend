@@ -148,9 +148,9 @@ export default class {
     }
 
     if (selectedRecolorBy.type === 'qual') {
-      classPath = `${classPath} -qual-${_.toLower(selectedRecolorBy.name)}-${link.qual}`;
+      classPath = `${classPath} -qual-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${link.qual}`;
     } else if (selectedRecolorBy.type === 'ind') {
-      classPath = `${classPath} -ind-${_.toLower(selectedRecolorBy.name)}-${link.ind}`;
+      classPath = `${classPath} -ind-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${selectedRecolorBy.divisor ? Math.round(link.ind/selectedRecolorBy.divisor) : link.ind}`;
     } else if (link.recolorGroup) {
       classPath = `${classPath} -flow-${link.recolorGroup}`;
     }
