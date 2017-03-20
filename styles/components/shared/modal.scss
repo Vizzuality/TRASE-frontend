@@ -19,14 +19,14 @@
   > .content {
     position: relative;
     min-height: 345px;
-    padding: 16px 32px 32px;
+    padding: 16px 32px 90px;
     background-color: $pale-peach;
 
+    color: $charcoal-grey;
+    font-family: $font-family-1;
+    font-size: $font-size-xx-regular;
     // incoming DOM from CMS
     p, a, span {
-      color: $charcoal-grey;
-      font-family: $font-family-1;
-      font-size: $font-size-xx-regular;
       letter-spacing: -1.3px;
       line-height: 1.5;
     }
