@@ -8,7 +8,7 @@ export default class {
     this.el = document.querySelector('.js-columns-selector');
   }
 
-  buildColumns({columns, selectedColumnsIds}) {
+  buildColumns({columns, selectedColumnsIds, sankeySize}) {
     const columnsByGroup = [];
     columns.forEach(column => {
       if (!columnsByGroup[column.group]) {
@@ -21,6 +21,11 @@ export default class {
     this.dropdowns = columnsByGroup.map((columns, i) => new Dropdown(`column${i}`, this._onDropdownValueSelected.bind(this)));
 
     this.selectColumns(selectedColumnsIds);
+    this.resize(sankeySize);
+  }
+
+  resize(sankeySize) {
+    this.el.style.width = `${sankeySize[0]}px`;
   }
 
   selectColumns(columnIds) {

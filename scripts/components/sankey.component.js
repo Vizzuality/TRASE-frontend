@@ -5,7 +5,6 @@ import  'd3-transition';
 import { DETAILED_VIEW_MIN_LINK_HEIGHT, SANKEY_TRANSITION_TIME } from 'constants';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
-import getComputedSize from 'utils/getComputedSize';
 import 'styles/components/sankey.scss';
 import LinkTooltipTemplate from 'ejs!templates/sankey/linkTooltip.ejs';
 import 'styles/components/sankey/linkTooltip.scss';
@@ -17,8 +16,8 @@ export default class {
     this._build();
   }
 
-  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy}) {
-    this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
+  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, sankeySize}) {
+    this.layout.setViewportSize(sankeySize);
 
     if (this.layout.relayout()) {
       this._render(selectedRecolorBy);
@@ -40,7 +39,7 @@ export default class {
     if (linksPayload.detailedView === false) {
       this.svg.style('height', '100%');
     }
-    this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
+    this.layout.setViewportSize(linksPayload.sankeySize);
     this.layout.setLinksPayload(linksPayload);
     this.layout.relayout();
 

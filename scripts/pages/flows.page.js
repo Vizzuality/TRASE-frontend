@@ -61,10 +61,10 @@ const start = (initialState) => {
   new ModalContainer(store);
 
   store.dispatch(loadInitialData());
-  store.dispatch(resize(window.innerWidth, window.innerHeight));
+  store.dispatch(resize());
 
   window.addEventListener('resize', () => {
-    store.dispatch(resize(window.innerWidth, window.innerHeight));
+    store.dispatch(resize());
   });
 };
 
