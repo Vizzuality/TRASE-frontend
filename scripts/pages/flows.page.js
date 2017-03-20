@@ -12,38 +12,33 @@ import NavContainer from 'containers/nav-flows.container';
 import TitlebarContainer from 'containers/titlebar.container';
 import NodesTitlesContainer from 'containers/nodesTitles.container';
 import SearchContainer from 'containers/search.container';
-import ModalContainer from 'containers/shared/modal.container';
+import ModalContainer from 'containers/story-modal.container';
 import TooltipContainer from 'containers/tooltip.container';
 import AppReducer from 'reducers/app.reducer';
 import FlowsReducer from 'reducers/flows.reducer';
 import { resize } from 'actions/app.actions';
-import { loadInitialData } from 'actions/flows.actions';
+import { loadInitialData, loadDisclaimer } from 'actions/flows.actions';
 import { getURLParams, decodeStateFromURL } from 'utils/stateURL';
 import { APP_DEFAULT_STATE, FLOWS_DEFAULT_STATE } from 'constants';
-
 import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
 
 const objParams = getURLParams(window.location.search);
 
-let modalState = {
-  visibility: false,
-  modalParams: null
-};
+const start = () => {
+  if (objParams.state) {
+    const newState = decodeStateFromURL(objParams.state);
+    Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
+  }
 
-const start = (initialState) => {
+  const initialState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
+
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  var store = createStore(
-    combineReducers({
-      app: AppReducer,
-      flows: FlowsReducer
-    }),
-    initialState,
-    composeEnhancers(
-      applyMiddleware(thunk)
-    )
-  );
+  var store = createStore(combineReducers({
+    app: AppReducer,
+    flows: FlowsReducer
+  }), initialState, composeEnhancers(applyMiddleware(thunk)));
 
   new FlowContentContainer(store);
   new SankeyContainer(store);
@@ -60,6 +55,7 @@ const start = (initialState) => {
   new TooltipContainer(store);
   new ModalContainer(store);
 
+  store.dispatch(loadDisclaimer());
   store.dispatch(loadInitialData());
   store.dispatch(resize(window.innerWidth, window.innerHeight));
 
@@ -69,7 +65,6 @@ const start = (initialState) => {
 };
 
 if (objParams.story) {
-
   // TODO display loading state while loading service
 
   const storyId = objParams.story;
@@ -78,47 +73,21 @@ if (objParams.story) {
     .then(resp => resp.text())
     .then(resp => JSON.parse(resp))
     .then(modalParams => {
+      Object.assign(APP_DEFAULT_STATE.app, {
+        modal: {
+          visibility: true,
+          modalParams
+        }
+      });
 
-      modalState = {
-        visibility: true,
-        modalParams
-      };
-
-      Object.assign(APP_DEFAULT_STATE.app, { modal: modalState });
-
-      if (objParams.state) {
-        const newState = decodeStateFromURL(objParams.state);
-        Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
-      }
-
-      const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
-
-      start(globalState);
+      start();
     })
-    // if the API call fails, let the app flow continues
     .catch(() => {
-
-      if (objParams.state) {
-        const newState = decodeStateFromURL(objParams.state);
-        Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
-      }
-
-      const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
-      start(globalState);
+      start();
     });
 
 } else {
-
-  Object.assign(APP_DEFAULT_STATE.app, { modal: modalState });
-
-  if (objParams.state) {
-    const newState = decodeStateFromURL(objParams.state);
-    Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
-  }
-
-  const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
-
-  start(globalState);
+  start();
 }
 
 if (NODE_ENV_DEV === true) {

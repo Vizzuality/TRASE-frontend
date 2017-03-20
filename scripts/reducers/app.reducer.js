@@ -6,7 +6,8 @@ const initialState = {
   isMapVisible: false,
   isAppMenuVisible: false,
   tooltipCheck: 0,
-  tooltips: []
+  tooltips: [],
+  isDisclaimerModalVisible: false
 };
 
 export default function (state = initialState, action) {
@@ -26,6 +27,9 @@ export default function (state = initialState, action) {
 
     case actions.SET_TOOLTIPS:
       return Object.assign({}, state, { tooltips: action.payload });
+
+    case actions.TOGGLE_DISCLAIMER_MODAL:
+      return Object.assign({}, state, { isDisclaimerModalVisible: action.payload });
 
     default:
       return state;

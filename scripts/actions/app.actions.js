@@ -25,3 +25,9 @@ export function loadTooltip() {
     type: actions.LOAD_TOOLTIP
   };
 }
+
+export function closeStoryModal() {
+  return {
+    type: actions.CLOSE_STORY_MODAL
+  };
+}

@@ -11,8 +11,10 @@ import {
   GET_LINKED_GEO_IDS,
   GET_MAP_BASE_DATA,
   GET_CONTEXTS,
-  GET_TOOLTIPS
+  GET_TOOLTIPS,
+  GET_DISCLAIMER
 } from 'utils/getURLFromParams';
+import { getCookie } from 'utils/getCookie';
 import mapContextualLayers from './map/context_layers';
 import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
 import getNodesSelectionAction from './helpers/getNodesSelectionAction';
@@ -144,6 +146,27 @@ export function loadInitialData() {
         const defaultContextId = state.flows.selectedContextId || contextPayload.find(context => context.isDefault === true).id;
 
         dispatch(setContext(defaultContextId, true));
+      });
+  };
+}
+
+export function loadDisclaimer() {
+  return (dispatch) => {
+    const disclaimerCookieVersion = getCookie('disclaimerVersion');
+
+    const url = getURLFromParams(GET_DISCLAIMER);
+    fetch(url)
+      .then(resp => resp.text())
+      .then(resp => JSON.parse(resp))
+      .then(disclaimer => {
+        if (disclaimerCookieVersion !== null && disclaimerCookieVersion >= disclaimer.version) {
+          return;
+        }
+
+        dispatch({
+          type: actions.SHOW_DISCLAIMER,
+          payload: disclaimer.content
+        });
       });
   };
 }

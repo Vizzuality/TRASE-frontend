@@ -1,6 +1,6 @@
 const byHeightOthersLast = (nodeA, nodeB) => {
-  if (nodeA.isDomestic || nodeB.isDomestic) {
-    if (nodeA.isDomestic) {
+  if (nodeA.isDomesticConsumption || nodeB.isDomesticConsumption) {
+    if (nodeA.isDomesticConsumption) {
       return 1;
     } else {
       return -1;

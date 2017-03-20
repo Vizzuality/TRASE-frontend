@@ -6,7 +6,7 @@ import 'styles/components/shared/modal.scss';
 
 import ModalTemplate from 'ejs!templates/shared/modal.ejs';
 
-export default class {
+class ModalComponent {
 
   onCreated() {
     this.state = {
@@ -41,10 +41,10 @@ export default class {
   _toggleVisibility() {
     Object.assign(this.state, { visibility: !this.state.visibility});
     this._setVisibility();
+    this.callbacks.onClose();
   }
 
   getModal(modal) {
-
     if (_.isEqual(modal.modalParams, this.state.modalParams)) {
       Object.assign(this.state, {visibility: modal.visibility });
     } else {
@@ -67,3 +67,5 @@ export default class {
     this._setEventListeners();
   }
 }
+
+export default ModalComponent;
