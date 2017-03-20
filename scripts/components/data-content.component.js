@@ -184,6 +184,7 @@ export default class {
         this._lockDownloadButton();
         break;
       case 'commodities':
+        this._cleanRadios(this.selectorCommodities);
         this.callbacks.onContextSelected(value);
         this._updateYearsSelector(value);
         if (isEnabled) {
