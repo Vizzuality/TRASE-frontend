@@ -309,7 +309,7 @@ export default class {
 
   _updateCommoditiesSelector(country) {
     const items = this.contexts
-      .filter(context => context.id === parseInt(country))
+      .filter(context => context.countryId === parseInt(country))
       .map(context => ({
         id: context.id,
         name: context.commodityName.toLowerCase(),
