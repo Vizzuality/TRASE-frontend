@@ -31,6 +31,18 @@ export default function (state = initialState, action) {
     case actions.TOGGLE_DISCLAIMER_MODAL:
       return Object.assign({}, state, { isDisclaimerModalVisible: action.payload });
 
+    case actions.SHOW_DISCLAIMER: {
+      return Object.assign({}, state,
+        {
+          modal: {
+            visibility: true,
+            modalParams: {
+              description: action.disclaimerContent
+            }
+          }
+        });
+    }
+
     default:
       return state;
   }
