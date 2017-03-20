@@ -17,6 +17,7 @@ const mapMethodsToState = (state) => ({
     _comparedValue: (state) => state.flows.links,
     _returnedValue: (state) => {
       return {
+        sankeySize: state.app.sankeySize,
         links: state.flows.links,
         visibleNodes: state.flows.visibleNodes,
         visibleNodesByColumn: state.flows.visibleNodesByColumn,
@@ -28,9 +29,10 @@ const mapMethodsToState = (state) => ({
     }
   },
   resizeViewport: {
-    _comparedValue: (state) => state.app.windowSize,
+    _comparedValue: (state) => state.app.sankeySize,
     _returnedValue: (state) => {
       return {
+        sankeySize: state.app.sankeySize,
         selectedRecolorBy: state.flows.selectedRecolorBy,
         selectedNodesIds: state.flows.selectedNodesIds,
         shouldRepositionExpandButton: shouldRepositionExpandButton(state.flows.expandedNodesIds, state.flows.selectedNodesIds, state.flows.areNodesExpanded)

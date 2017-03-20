@@ -1,3 +1,6 @@
+### 1.0.7
+- map, sankey: performance improvements
+
 ### 1.0.6
 Add homepage anchors
 Fix google analytics detection on devel envs

@@ -4,7 +4,8 @@ import mapContext from 'components/map-context.component';
 
 const mapMethodsToState = (state) => ({
   buildLayers: state.flows.mapContextualLayers,
-  selectContextualLayers: state.flows.selectedMapContextualLayers
+  selectContextualLayers: state.flows.selectedMapContextualLayers,
+  toggle: state.flows.selectedContext
 });
 
 const mapViewCallbacksToActions = () => ({

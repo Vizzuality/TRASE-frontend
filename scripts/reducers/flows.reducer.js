@@ -121,7 +121,7 @@ export default function (state = {}, action) {
         }
       });
 
-    // TODO temp hacks while this gets implemented in the API
+      // TODO temp hacks while this gets implemented in the API
       columns.forEach(column => {
         if (column.group === 0) {
           column.isGeo = true;
@@ -154,7 +154,7 @@ export default function (state = {}, action) {
 
       const mapDimensionsFolders = mapDimensionsMeta.dimensionGroups;
 
-    // store dimension values in nodesDict as uid: dimensionValue
+      // store dimension values in nodesDict as uid: dimensionValue
       const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, mapDimensions);
 
       newState = Object.assign({}, state, { mapDimensions, mapDimensionsFolders, nodesDictWithMeta });
@@ -227,7 +227,7 @@ export default function (state = {}, action) {
       break;
 
     case actions.SELECT_COLUMN: {
-    // TODO also update choropleth with default selected indicators
+      // TODO also update choropleth with default selected indicators
       const selectedColumnsIds = [].concat(state.selectedColumnsIds);
       if (selectedColumnsIds.indexOf(action.columnId) === -1) {
         selectedColumnsIds[action.columnIndex] = action.columnId;
@@ -249,7 +249,7 @@ export default function (state = {}, action) {
     }
 
     case actions.HIGHLIGHT_NODE: {
-    // TODO this prevents spamming browser history, but we should avoid touching it when changed state props are not on th url whitelist (constants.URL_STATE_PROPS)
+      // TODO this prevents spamming browser history, but we should avoid touching it when changed state props are not on th url whitelist (constants.URL_STATE_PROPS)
       updateURLState = false;
       newState = Object.assign({}, state, {
         highlightedNodesIds: action.ids,
@@ -298,7 +298,7 @@ export default function (state = {}, action) {
         bucket5: action.dimensionData.bucket5,
       };
 
-    // get a geoId <-> color dict
+      // get a geoId <-> color dict
       const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
 
       newState = Object.assign({}, state, { selectedMapDimensions, choropleth });

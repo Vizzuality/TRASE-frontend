@@ -184,6 +184,7 @@ export default class {
         this._lockDownloadButton();
         break;
       case 'commodities':
+        this._cleanRadios(this.selectorCommodities);
         this.callbacks.onContextSelected(value);
         this._updateYearsSelector(value);
         if (isEnabled) {
@@ -309,7 +310,7 @@ export default class {
 
   _updateCommoditiesSelector(country) {
     const items = this.contexts
-      .filter(context => context.id === parseInt(country))
+      .filter(context => context.countryId === parseInt(country))
       .map(context => ({
         id: context.id,
         name: context.commodityName.toLowerCase(),

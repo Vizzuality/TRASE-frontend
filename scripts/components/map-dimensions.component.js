@@ -72,17 +72,15 @@ export default class {
     const uid = radio.getAttribute('value');
     const title = this.layerList.querySelector(`.layer-item[data-layer-uid="${uid}"] .layer-name`).innerText;
     const currentSelectedRadio = this.layerList.querySelector('.c-radio-btn.-enabled');
-    const bucket =  this.mapDimensions[0].dimensions.filter(dimension => {
-      if (dimension.uid === uid){
-        return dimension;
-      }
-    }).concat(
-      this.mapDimensions[1].dimensions.filter(dimension => {
-        if (dimension.uid === uid){
+
+    let layers = [];
+    this.mapDimensions.forEach(dimensionGroup => {
+      layers = layers.concat(dimensionGroup.dimensions.filter(dimension => {
+        if (dimension.uid === uid) {
           return dimension;
         }
-      })
-    );
+      }));
+    });
 
     if (radio === currentSelectedRadio) {
       this._disableRadio(radio);
@@ -94,8 +92,8 @@ export default class {
       direction: group, // 'vertical' or 'horizontal'
       title,
       uid,
-      bucket3: bucket[0].bucket3,
-      bucket5: bucket[0].bucket5
+      bucket3: layers[0].bucket3,
+      bucket5: layers[0].bucket5
     });
   }
 
