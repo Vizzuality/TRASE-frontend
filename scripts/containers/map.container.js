@@ -5,23 +5,60 @@ import connect from 'connect';
 import Map from 'components/map.component.js';
 
 const mapMethodsToState = (state) => ({
+  setMapView: state.flows.mapView,
   showLoadedMap: {
-    _comparedValue: (state) => state.flows.geoData,
+    _comparedValue: (state) => state.flows.mapVectorData,
     _returnedValue: (state) => {
       return {
-        geoData: state.flows.geoData,
-        currentLayer: state.flows.selectedColumnsIds[0],
+        mapVectorData: state.flows.mapVectorData,
+        currentPolygonType: state.flows.selectedColumnsIds,
         selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
-        recolourByNodeIds: state.flows.recolourByNodeIds
+        recolorByNodeIds: state.flows.recolorByNodeIds,
+        choropleth: state.flows.choropleth,
+        linkedGeoIds: state.flows.linkedGeoIds
       };
     }
   },
-  selectVectorLayer: state.flows.selectedColumnsIds,
-  selectPolygons: state.flows.selectedNodesGeoIds,
-  highlightPolygon: state.flows.highlightedGeoIds,
-  setChoropleth: state.flows.choropleth,
+  selectPolygonType: state.flows.selectedColumnsIds,
+  selectPolygons:  {
+    _comparedValue: (state) => state.flows.selectedNodesGeoIds,
+    _returnedValue: (state) => {
+      return {
+        selectedGeoIds: state.flows.selectedNodesGeoIds
+      };
+    }
+  },
+  highlightPolygon:  {
+    _comparedValue: (state) => state.flows.highlightedGeoIds,
+    _returnedValue: (state) => {
+      return {
+        selectedGeoIds: state.flows.selectedNodesGeoIds,
+        highlightedGeoId: state.flows.highlightedGeoIds[0]
+      };
+    }
+  },
+  setChoropleth: {
+    _comparedValue: (state) => state.flows.choropleth,
+    _returnedValue: (state) => {
+      return {
+        choropleth: state.flows.choropleth,
+        selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
+        linkedGeoIds: state.flows.linkedGeoIds,
+        selectedMapDimensions: state.flows.selectedMapDimensions
+      };
+    }
+  },
   loadContextLayers: state.flows.selectedMapContextualLayersData,
-  showLinkedGeoIds: state.flows.linkedGeoIds
+  loadBasemap: state.flows.selectedMapBasemap,
+  showLinkedGeoIds: {
+    _comparedValue: (state) => state.flows.linkedGeoIds,
+    _returnedValue: (state) => {
+      return {
+        selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
+        linkedGeoIds: state.flows.linkedGeoIds
+      };
+    }
+  }
 });
 
 const mapViewCallbacksToActions = () => ({

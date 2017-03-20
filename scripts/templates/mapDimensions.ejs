@@ -1,0 +1,38 @@
+<% dimensionGroups.forEach(function(dimensionGroup) { %>
+  <li>
+    <div class="dimension-group-title">
+      <%= dimensionGroup.dimensionGroup.name %>
+    </div>
+    <ul>
+      <% dimensionGroup.dimensions.forEach(function(dimension) { %>
+        <li
+          class="layer-item"
+          data-layer-uid="<%= dimension.uid %>"
+        >
+          <label class="layer-name">
+            <%= dimension.name %>
+            <% if (dimension.unit) { %>
+              (<%= dimension.unit %>)
+            <% } %>
+            <ul class="layer-options-list">
+              <li class="layer-option">
+                <% if (dimension.description) {  %>
+                  <svg class="icon icon-layer-info js-tooltip" data-tooltip-text="<%= dimension.description %>">
+                    <use xlink:href="#icon-layer-info"></use>
+                  </svg>
+                <% } %>
+              </li>
+              <!--<li class="layer-option">-->
+                <!--<svg class="icon icon-layer-download js-layer-download"><use xlink:href="#icon-layer-download"></use></svg>-->
+              <!--</li>-->
+            </ul>
+          </label>
+          <div class="radios">
+            <div class="c-radio-btn" data-group="vertical" value="<%= dimension.uid %>"></div>
+            <div class="c-radio-btn" data-group="horizontal" value="<%= dimension.uid %>"></div>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  </li>
+<% }) %>

@@ -1,5 +1,7 @@
+import Nav from 'components/nav.component.js';
 import 'styles/_base.scss';
 import 'styles/_texts.scss';
+import 'styles/_foundation.css';
 import 'styles/layouts/l-factsheets.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
@@ -8,6 +10,7 @@ import _ from 'lodash';
 
 import Search from 'components/search.component.js';
 import { FACT_SHEET_NODE_TYPE_WHITELIST } from 'constants';
+import { getURLFromParams, GET_ALL_NODES } from '../utils/getURLFromParams';
 
 const _setSearch = () => {
 
@@ -41,11 +44,13 @@ const _setSearch = () => {
     window.location.href = url;
   };
 
-  fetch(`${API_URL}/v1/get_all_nodes?&country=brazil&commodity=soy`)
+  const allNodesURL = getURLFromParams(GET_ALL_NODES);
+
+  fetch(allNodesURL)
     .then(response => response.json())
     .then((result) => {
 
-      document.querySelector('.js-search-container').classList.remove('is-hidden');
+      document.querySelector('.js-factsheets-search-container').classList.remove('is-hidden');
 
       const search = new Search();
       search.onCreated();
@@ -59,6 +64,8 @@ const _setSearch = () => {
 
 const _init = () => {
   _setSearch();
+  new Nav();
 };
+
 
 _init();

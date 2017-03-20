@@ -1,13 +1,24 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
+import _ from 'lodash';
 import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
-import getURLFromParams from 'utils/getURLFromParams';
+import {
+  getURLFromParams,
+  GET_ALL_NODES,
+  GET_COLUMNS,
+  GET_FLOWS,
+  GET_NODES,
+  GET_LINKED_GEO_IDS,
+  GET_MAP_BASE_DATA,
+  GET_CONTEXTS,
+  GET_TOOLTIPS
+} from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
 import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
 import getNodesSelectionAction from './helpers/getNodesSelectionAction';
 import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible';
 import setGeoJSONMeta from './helpers/setGeoJSONMeta';
-
+import getNodeMetaUid from 'reducers/helpers/getNodeMetaUid';
 
 export function resetState() {
   return (dispatch) => {
@@ -21,27 +32,24 @@ export function resetState() {
     dispatch(loadLinks());
   };
 }
-export function selectCountry(country, reloadLinks) {
-  return _reloadLinks('country', country, actions.SELECT_COUNTRY, reloadLinks);
+export function selectContext(context) {
+  return dispatch => {
+    dispatch(setContext(context));
+  };
 }
-export function selectCommodity(commodity, reloadLinks) {
-  return _reloadLinks('commodity', commodity, actions.SELECT_COMMODITY, reloadLinks);
-}
+
 export function selectBiomeFilter(biomeFilter, reloadLinks) {
   return _reloadLinks('biomeFilter', biomeFilter, actions.SELECT_BIOME_FILTER, reloadLinks);
 }
-export function selectQuant(quant, reloadLinks) {
-  return _reloadLinks('quant', quant, actions.SELECT_QUANT, reloadLinks);
+
+export function selectResizeBy(resizeBy, reloadLinks) {
+  return _reloadLinks('resizeBy', resizeBy, actions.SELECT_RESIZE_BY, reloadLinks);
 }
+
 export function selectRecolorBy(data) {
-  if (data.active !== undefined && data.active === 'false') {
-    return () => {};
-  }
   return dispatch => {
     dispatch({
-      type: actions.SELECT_RECOLOR_BY,
-      value: data.value,
-      value_type: data.type
+      type: actions.SELECT_RECOLOR_BY, value: data.value, value_type: data.type
     });
     dispatch(loadLinks());
   };
@@ -53,9 +61,7 @@ export function selectView(detailedView, reloadLinks) {
 export function selectColumn(columnIndex, columnId, reloadLinks = true) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_COLUMN,
-      columnIndex,
-      columnId
+      type: actions.SELECT_COLUMN, columnIndex, columnId
     });
     if (reloadLinks) {
       dispatch(loadLinks());
@@ -66,34 +72,36 @@ export function selectColumn(columnIndex, columnId, reloadLinks = true) {
 export function selectYears(years) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_YEARS,
-      years
+      type: actions.SELECT_YEARS, years
     });
     dispatch(loadNodes());
     dispatch(loadLinks());
   };
 }
 
-// we don't know at this moment waht to do with a vector layer.
-// this isan example of the implementation
-export function selectVectorLayers(layerData) {
+export function selectMapDimension(dimensionData) {
   return dispatch => {
     dispatch({
-      type: actions.SELECT_VECTOR_LAYERS,
-      layerData
+      type: actions.SELECT_MAP_DIMENSIONS, dimensionData
     });
   };
 }
 
 export function selectContextualLayers(contextualLayers) {
   return {
-    type: actions.SELECT_CONTEXTUAL_LAYERS,
-    contextualLayers
+    type: actions.SELECT_CONTEXTUAL_LAYERS, contextualLayers
+  };
+}
+
+export function selectMapBasemap(selectedMapBasemap) {
+  return dispatch => {
+    dispatch({
+      type: actions.SELECT_BASEMAP, selectedMapBasemap
+    });
   };
 }
 
 const _reloadLinks = (param, value, type, reloadLinks = true) => {
-  // console.log(param, value, type, reloadLinks)
   return dispatch => {
     const action = {
       type
@@ -112,24 +120,57 @@ export function loadInitialData() {
       type: actions.LOAD_INITIAL_DATA
     });
 
-    const params = {
-      country: getState().flows.selectedCountry,
-      commodity: getState().flows.selectedCommodity
-    };
-    const allNodesURL = getURLFromParams('/v1/get_all_nodes', params);
-    const columnsURL = getURLFromParams('/v1/get_columns', params);
+    const contextURL = getURLFromParams(GET_CONTEXTS);
+    const tooltipsURL = getURLFromParams(GET_TOOLTIPS);
 
-    Promise.all([allNodesURL, columnsURL].map(url =>
-      fetch(url).then(resp => resp.text())
-    )).then(payload => {
+    Promise.all([contextURL, tooltipsURL].map(url => fetch(url)
+      .then(resp => resp.text())))
+      .then(data => {
+        const tooltipsPayload = JSON.parse(data[1]);
+
+        dispatch({
+          type: actions.SET_TOOLTIPS,
+          payload: tooltipsPayload
+        });
+
+        const contextPayload = JSON.parse(data[0]).data;
+        // load contexts
+        dispatch({
+          type: actions.LOAD_CONTEXTS,
+          payload: contextPayload
+        });
+
+        const state = getState();
+        const defaultContextId = state.flows.selectedContextId || contextPayload.find(context => context.isDefault === true).id;
+
+        dispatch(setContext(defaultContextId, true));
+      });
+  };
+}
+
+export function setContext(contextId, isInitialContextSet = false) {
+  return dispatch => {
+
+    // load default params
+    dispatch({
+      type: (isInitialContextSet ? actions.LOAD_INITIAL_CONTEXT : actions.SET_CONTEXT), payload: contextId
+    });
+
+    const params = {
+      context_id: contextId
+    };
+    const allNodesURL = getURLFromParams(GET_ALL_NODES, params);
+    const columnsURL = getURLFromParams(GET_COLUMNS, params);
+
+    Promise.all([allNodesURL, columnsURL].map(url => fetch(url).then(resp => resp.text()))).then(payload => {
       // TODO do not wait for end of all promises/use another .all call
       dispatch({
-        type: actions.GET_COLUMNS,
-        payload: payload.slice(0, 2),
+        type: actions.GET_COLUMNS, payload: payload.slice(0, 2),
       });
+
       dispatch(loadNodes());
       dispatch(loadLinks());
-      dispatch(loadMapVectorLayers());
+      dispatch(loadMapVectorData());
       dispatch(loadMapContextLayers());
     });
   };
@@ -141,78 +182,88 @@ export function loadNodes() {
       type: actions.LOAD_NODES
     });
     const params = {
-      country: getState().flows.selectedCountry.toUpperCase(),
-      commodity: getState().flows.selectedCommodity.toUpperCase(),
+      context_id: getState().flows.selectedContextId,
       year_start: getState().flows.selectedYears[0],
       year_end: getState().flows.selectedYears[1],
-      // column_id: 2
     };
 
-    const url = getURLFromParams('/v1/get_nodes', params);
+    const getNodesURL = getURLFromParams(GET_NODES, params);
+    const getMapDimensionsMetadataURL = getURLFromParams(GET_MAP_BASE_DATA, params);
 
-    fetch(url)
-      .then(res => res.text())
-      .then(payload => {
-        dispatch({
-          type: actions.GET_NODES,
-          payload
-        });
+    Promise.all([getNodesURL, getMapDimensionsMetadataURL].map(url => fetch(url).then(resp => resp.text()))).then(rawPayload => {
+      const payload = {
+        nodesJSON: JSON.parse(rawPayload[0]), mapDimensionsMetaJSON: JSON.parse(rawPayload[1])
+      };
+
+      dispatch({
+        type: actions.GET_NODES, payload
       });
+
+      const selection = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
+      if (selection !== undefined) {
+        selection.forEach((selectedDimension, index) => {
+          const direction = (index === 0) ? 'vertical' : 'horizontal';
+          dispatch(selectMapDimension({
+            direction,
+            title: selectedDimension.name,
+            uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId),
+            bucket3: selectedDimension.bucket3,
+            bucket5: selectedDimension.bucket5
+          }));
+        });
+      }
+    });
   };
 }
 
 export function loadLinks() {
   return (dispatch, getState) => {
+
     dispatch({
       type: actions.LOAD_LINKS
     });
+    const state = getState();
     const params = {
-      country: getState().flows.selectedCountry.toUpperCase(),
-      commodity: getState().flows.selectedCommodity.toUpperCase(),
-      year_start: getState().flows.selectedYears[0],
-      year_end: getState().flows.selectedYears[1],
-      include_columns: getState().flows.selectedColumnsIds.join(','),
-      flow_quant: getState().flows.selectedQuant
+      context_id: state.flows.selectedContextId,
+      year_start: state.flows.selectedYears[0],
+      year_end: state.flows.selectedYears[1],
+      include_columns: state.flows.selectedColumnsIds.join(','),
+      flow_quant: state.flows.selectedResizeBy.name
     };
 
-    if (getState().flows.detailedView === true) {
+    if (state.flows.detailedView === true) {
       params.n_nodes = NUM_NODES_DETAILED;
-    } else if (getState().flows.areNodesExpanded === true) {
+    } else if (state.flows.areNodesExpanded === true) {
       params.n_nodes = NUM_NODES_EXPANDED;
     } else {
       params.n_nodes = NUM_NODES_SUMMARY;
-
     }
 
-    const selectRecolorByType = getState().flows.selectedRecolorBy.type;
-    const selectRecolorByValue = getState().flows.selectedRecolorBy.value;
-    if (selectRecolorByValue !== 'none') {
-      if (selectRecolorByType === 'qual') {
-        params.flow_qual = selectRecolorByValue;
-      } else if (selectRecolorByType === 'ind') {
-        params.flow_ind = selectRecolorByValue;
+    if (state.flows.selectedRecolorBy) {
+      if (state.flows.selectedRecolorBy.type === 'qual') {
+        params.flow_qual = state.flows.selectedRecolorBy.name;
+      } else if (state.flows.selectedRecolorBy.type === 'ind') {
+        params.flow_ind = state.flows.selectedRecolorBy.name;
       }
+
     }
 
-    const selectedBiomeFilter = getState().flows.selectedBiomeFilter;
-    if (selectedBiomeFilter !== 'none') {
-      params.biome_filter = selectedBiomeFilter;
+    const selectedBiomeFilter = state.flows.selectedBiomeFilter;
+    if (selectedBiomeFilter && selectedBiomeFilter.value && selectedBiomeFilter.value !== 'none') {
+      params.biome_filter_id = selectedBiomeFilter.nodeId;
     }
 
-    if (getState().flows.areNodesExpanded) {
-      // TODO temporary: pick the latest node selected. Eventually could be a set of nodes
-      // params.selected_nodes = getState().flows.selectedNodesIds.join(',');
-      params.selected_nodes = getState().flows.selectedNodesIds[0];
+    if (state.flows.areNodesExpanded) {
+      params.selected_nodes = state.flows.expandedNodesIds.join(',');
     }
 
-    const url = getURLFromParams('/v1/get_flows', params);
+    const url = getURLFromParams(GET_FLOWS, params);
 
     fetch(url)
       .then(res => res.text())
       .then(payload => {
         dispatch({
-          type: actions.GET_LINKS,
-          payload
+          type: actions.GET_LINKS, payload
         });
 
         // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
@@ -234,30 +285,43 @@ export function loadLinks() {
   };
 }
 
-
-export function loadMapVectorLayers() {
+export function loadMapVectorData() {
   return (dispatch, getState) => {
-    // get columns at position 0
-    // exclude logistics hubs which doesnt have its own topojson
-    const geoColumns = getState().flows.columns.filter(column => column.position === 0);
-    const geoColumnsWithTopoJSON = geoColumns.filter(column => column.id !== 2);
-    const geoJSONUrls = geoColumnsWithTopoJSON.map(geoColumn => `${geoColumn.name}.topo.json`);
-    Promise.all(geoJSONUrls.map(url =>
-      fetch(url).then(resp => resp.text())
-    )).then(payload => {
-      const geoData = {};
-      geoColumnsWithTopoJSON.forEach((geoColumn, i) => {
-        const layerPayload = payload[i];
-        const topoJSON = JSON.parse(layerPayload);
-        const key = Object.keys(topoJSON.objects)[0];
-        const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
-        setGeoJSONMeta(geoJSON, getState().flows.nodesDict, getState().flows.geoIdsDict, geoColumn.id);
-        geoData[geoColumn.name] = geoJSON;
-      });
+    const geoColumns = getState().flows.columns.filter(column => column.isGeo === true);
+    const geometriesPromises = [];
+    const mapVectorData = {};
 
+    geoColumns.forEach(geoColumn => {
+      const geometryData = {
+        name: geoColumn.name, useGeometryFromColumnId: geoColumn.useGeometryFromColumnId
+      };
+      mapVectorData[geoColumn.id] = geometryData;
+      if (geoColumn.useGeometryFromColumnId === undefined) {
+        const vectorLayerURL = `vector_layers/${getState().flows.selectedContext.countryName}_${geoColumn.name}.topo.json`;
+        const geometryPromise = fetch(vectorLayerURL)
+          .then(response => {
+            if (response.status >= 200 && response.status < 300) {
+              return response.text();
+            }
+          })
+          .then(payload => {
+            if (payload === undefined) {
+              console.warn('missing vector layer file', vectorLayerURL);
+              return;
+            }
+            const topoJSON = JSON.parse(payload);
+            const key = Object.keys(topoJSON.objects)[0];
+            const geoJSON = topojson.feature(topoJSON, topoJSON.objects[key]);
+            setGeoJSONMeta(geoJSON, getState().flows.nodesDict, getState().flows.geoIdsDict, geoColumn.id);
+            mapVectorData[geoColumn.id].geoJSON = geoJSON;
+          });
+        geometriesPromises.push(geometryPromise);
+      }
+    });
+
+    Promise.all(geometriesPromises).then(() => {
       dispatch({
-        type: actions.GET_GEO_DATA,
-        geoData
+        type: actions.GET_MAP_VECTOR_DATA, mapVectorData
       });
     });
   };
@@ -272,18 +336,28 @@ export function loadMapContextLayers() {
       return `${CARTO_NAMED_MAPS_BASE_URL}${layer.name}/jsonp?callback=cb`;
     }).filter(url => url !== null);
 
-    Promise.all(namedMapsURLs.map(url =>
-      fetch(url).then(resp => resp.text())
-    )).then(() => {
+    Promise.all(namedMapsURLs.map(url => fetch(url).then(resp => resp.text()))).then(() => {
       // we actually don't care about layergroupids because we already have them pregenerated
       // this is just about reinstanciating named maps, you know, because CARTO
       dispatch({
-        type: actions.GET_CONTEXT_LAYERS,
-        mapContextualLayers
+        type: actions.GET_CONTEXT_LAYERS, mapContextualLayers
       });
     });
 
   };
+}
+
+// remove or add nodeId from selectedNodesIds
+function getSelectedNodeIds(currentSelectedNodesIds, chengedNodeId) {
+  let selectedNodesIds;
+  let nodeIndex = currentSelectedNodesIds.indexOf(chengedNodeId);
+  if (nodeIndex > -1) {
+    selectedNodesIds = [].concat(currentSelectedNodesIds);
+    selectedNodesIds.splice(nodeIndex, 1);
+  } else {
+    selectedNodesIds = [chengedNodeId].concat(currentSelectedNodesIds);
+  }
+  return selectedNodesIds;
 }
 
 export function selectNode(nodeId, isAggregated = false) {
@@ -291,25 +365,13 @@ export function selectNode(nodeId, isAggregated = false) {
     if (isAggregated) {
       dispatch(selectView(true));
     } else {
-      const expandedNodesIds = getState().flows.expandedNodesIds;
-      // we are unselecting the node that is currently expanded: just shrink it and bail
-      if (expandedNodesIds && nodeId === expandedNodesIds[0]) {
-        dispatch(toggleNodesExpand());
-        return;
-      }
-
-      // remove or add nodeId from selectedNodesIds
       const currentSelectedNodesIds = getState().flows.selectedNodesIds;
-      let selectedNodesIds;
-      let nodeIndex = currentSelectedNodesIds.indexOf(nodeId);
-      if (nodeIndex > -1) {
-        selectedNodesIds = [].concat(currentSelectedNodesIds);
-        selectedNodesIds.splice(nodeIndex, 1);
-      } else {
-        selectedNodesIds = [nodeId].concat(currentSelectedNodesIds);
+      // we are unselecting the node that is currently expanded: just shrink it and bail
+      if (getState().flows.areNodesExpanded && currentSelectedNodesIds.length === 1 && currentSelectedNodesIds.indexOf(nodeId) > -1) {
+        dispatch(toggleNodesExpand());
       }
 
-
+      const selectedNodesIds = getSelectedNodeIds(currentSelectedNodesIds, nodeId);
 
       // send to state the new node selection allong with new data, geoIds, etc
       const action = getNodesSelectionAction(selectedNodesIds, getState().flows);
@@ -333,7 +395,9 @@ export function selectNodeFromGeoId(geoId) {
 
     // node not in visible Nodes ---> expand node (same behavior as search)
     if (!_isNodeVisible(getState, nodeId)) {
-      dispatch(toggleNodesExpand(true, nodeId));
+      const currentSelectedNodesIds = getState().flows.selectedNodesIds;
+      const selectedNodesIds = getSelectedNodeIds(currentSelectedNodesIds, nodeId);
+      dispatch(toggleNodesExpand(true, selectedNodesIds));
     } else {
       dispatch(selectNode(nodeId, false));
     }
@@ -343,10 +407,6 @@ export function selectNodeFromGeoId(geoId) {
 export function highlightNode(nodeId, isAggregated) {
   return (dispatch, getState) => {
     if (isAggregated) {
-      return;
-    }
-
-    if (getState().flows.selectedNodesIds.indexOf(nodeId) > -1) {
       return;
     }
 
@@ -363,35 +423,27 @@ export function highlightNodeFromGeoId(geoId) {
   };
 }
 
-export function toggleNodesExpand(forceExpand = false, forceExpandNodeId) {
+export function toggleNodesExpand(forceExpand = false, forceExpandNodeIds) {
   return (dispatch, getState) => {
     dispatch({
-      type: actions.TOGGLE_NODES_EXPAND,
-      forceExpand,
-      forceExpandNodeId
+      type: actions.TOGGLE_NODES_EXPAND, forceExpand, forceExpandNodeIds
     });
 
     // if expanding, and if in detailed mode, toggle to overview mode
     if (getState().flows.areNodesExpanded === true && getState().flows.detailedView === true) {
       dispatch({
-        type: actions.SELECT_VIEW,
-        detailedView: false,
-        forcedOverview: true
+        type: actions.SELECT_VIEW, detailedView: false, forcedOverview: true
       });
     }
 
     // if shrinking, and if overview was previously forced, go back to detailed
     else if (getState().flows.areNodesExpanded === false && getState().flows.forcedOverview === true) {
       dispatch({
-        type: actions.SELECT_VIEW,
-        detailedView: true,
-        forcedOverview: false
+        type: actions.SELECT_VIEW, detailedView: true, forcedOverview: false
       });
     }
 
     dispatch(loadLinks());
-    // load related geoIds to show on the map
-    dispatch(loadLinkedGeoIDs());
   };
 }
 
@@ -414,7 +466,7 @@ export function searchNode(nodeId) {
       // 1. before: go to detailed mode and select
       // dispatch(selectView(true));
       // 2. as per SEI request: go to expanded node
-      dispatch(toggleNodesExpand(true, nodeId));
+      dispatch(toggleNodesExpand(true, [nodeId]));
 
     } else {
       dispatch(selectNode(nodeId, false));
@@ -423,37 +475,37 @@ export function searchNode(nodeId) {
 }
 
 export function loadLinkedGeoIDs() {
-  return () => {};
-  //TODO: pending https://github.com/sei-international/TRASE/issues/165
-  // return (dispatch, getState) => {
-  //   return;
-  //   const selectedNodesIds = getState().flows.selectedNodesIds;
-  //   if (selectedNodesIds.length === 0) {
-  //     dispatch({
-  //       type: actions.GET_LINKED_GEOIDS,
-  //       payload: {data:{}}
-  //     });
-  //     return;
-  //   }
-  //   dispatch({
-  //     type: actions.LOAD_MAP
-  //   });
-  //   const params = {
-  //     node_ids: selectedNodesIds.join(','),
-  //     column_id: getState().flows.selectedColumnsIds[0]
-  //   };
-  //   // const url = getURLFromParams('/v1/get_linked_geoids', params);
-  //   const url = 'get_linked_geoids.json';
-  //
-  //   fetch(url)
-  //     .then(res => res.text())
-  //     .then(payload => {
-  //       dispatch({
-  //         type: actions.GET_LINKED_GEOIDS,
-  //         payload: JSON.parse(payload)
-  //       });
-  //     });
-  // };
+  return (dispatch, getState) => {
+    const state = getState();
+    const selectedNodesIds = state.flows.selectedNodesIds;
+
+    // when selection only contains geo nodes (column 0), we should not call get_linked_geoids
+    const selectedNodesColumnsPos = state.flows.selectedNodesColumnsPos;
+    const selectedNonGeoNodeIds = selectedNodesIds.filter((nodeId, index) => {
+      return selectedNodesColumnsPos[index] !== 0;
+    });
+    if (selectedNonGeoNodeIds.length === 0) {
+      dispatch({
+        type: actions.GET_LINKED_GEOIDS, payload: []
+      });
+      return;
+    }
+    const params = {
+      context_id: state.flows.selectedContextId,
+      years: _.uniq([state.flows.selectedYears[0], state.flows.selectedYears[1]]),
+      node_id: selectedNodesIds,
+      target_column_id: state.flows.selectedColumnsIds[0]
+    };
+    const url = getURLFromParams(GET_LINKED_GEO_IDS, params);
+
+    fetch(url)
+      .then(res => res.text())
+      .then(payload => {
+        dispatch({
+          type: actions.GET_LINKED_GEOIDS, payload: JSON.parse(payload)
+        });
+      });
+  };
 }
 
 const _isNodeVisible = (getState, nodeId) => getState().flows.visibleNodes.map(node => node.id).indexOf(nodeId) > -1;

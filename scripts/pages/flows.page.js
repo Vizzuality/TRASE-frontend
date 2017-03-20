@@ -1,19 +1,19 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-
 import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columns-selector.container';
-import MapLayersContainer from 'containers/map-layers.container';
+import MapDimensionsContainer from 'containers/map-dimensions.container.js';
 import MapContextContainer from 'containers/map-context.container';
 import MapLegendContainer from 'containers/map-legend.container';
+import MapBasemapsContainer from 'containers/map-basemaps.container';
 import MapContainer from 'containers/map.container';
-import NavContainer from 'containers/nav.container';
+import NavContainer from 'containers/nav-flows.container';
 import TitlebarContainer from 'containers/titlebar.container';
 import NodesTitlesContainer from 'containers/nodesTitles.container';
-import ClearContainer from 'containers/clear.container';
 import SearchContainer from 'containers/search.container';
 import ModalContainer from 'containers/shared/modal.container';
+import TooltipContainer from 'containers/tooltip.container';
 import AppReducer from 'reducers/app.reducer';
 import FlowsReducer from 'reducers/flows.reducer';
 import { resize } from 'actions/app.actions';
@@ -49,24 +49,24 @@ const start = (initialState) => {
   new SankeyContainer(store);
   new ColumnsSelectorContainer(store);
   new MapContainer(store);
-  new MapLayersContainer(store);
+  new MapDimensionsContainer(store);
   new MapContextContainer(store);
   new MapLegendContainer(store);
+  new MapBasemapsContainer(store);
   new NavContainer(store);
   new TitlebarContainer(store);
   new NodesTitlesContainer(store);
-  new ClearContainer(store);
   new SearchContainer(store);
+  new TooltipContainer(store);
   new ModalContainer(store);
 
   store.dispatch(loadInitialData());
-  store.dispatch(resize(window.innerWidth, window.innerHeight));
+  store.dispatch(resize());
 
   window.addEventListener('resize', () => {
-    store.dispatch(resize(window.innerWidth, window.innerHeight));
+    store.dispatch(resize());
   });
 };
-
 
 if (objParams.story) {
 
@@ -119,4 +119,13 @@ if (objParams.story) {
   const globalState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
 
   start(globalState);
+}
+
+if (NODE_ENV_DEV === true) {
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'r') {
+      // reload without the hash
+      window.location.href = './flows.html';
+    }
+  });
 }

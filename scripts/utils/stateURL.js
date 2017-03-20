@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { URL_STATE_PROPS } from 'constants';
 
 export const getURLParams = url => {
   let objParams = {};
@@ -23,8 +22,32 @@ export const getURLParams = url => {
   return objParams;
 };
 
+const URL_STATE_PROPS = [
+  'selectedContextId',
+  'selectedYears',
+  'detailedView',
+  'selectedNodesIds',
+  'expandedNodesIds',
+  'areNodesExpanded',
+  'selectedColumnsIds'
+];
+
+const filterStateToURL = state => {
+  if (_.isEmpty(state)) {
+    return {};
+  }
+
+  const stateToSave = _.pick(state, URL_STATE_PROPS);
+
+  stateToSave.selectedResizeByName = state.selectedResizeBy ? state.selectedResizeBy.name : null;
+  stateToSave.selectedRecolorByName = state.selectedRecolorBy ? state.selectedRecolorBy.name : null;
+  stateToSave.selectedBiomeFilterName = state.selectedBiomeFilter ? state.selectedBiomeFilter.name : null;
+
+  return stateToSave;
+};
+
 export const encodeStateToURL = state => {
-  const urlProps = JSON.stringify(_.pick(state, URL_STATE_PROPS));
+  const urlProps = JSON.stringify(filterStateToURL(state));
   const encoded = btoa(urlProps);
   window.history.pushState({}, 'Title', `?state=${encoded}`);
   return encoded;

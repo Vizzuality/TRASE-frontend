@@ -11,13 +11,13 @@ export default function(rawLinks, nodesDict) {
       links.push({
         sourceNodeId,
         targetNodeId,
-        sourceColumnId: sourceNode.columnId,
-        targetColumnId: targetNode.columnId,
+        sourceColumnPosition: sourceNode.columnGroup,
+        targetColumnPosition: targetNode.columnGroup,
         sourceNodeName: sourceNode.name,
         targetNodeName: targetNode.name,
         height: link.height,
         quant: parseFloat(link.quant),
-        qual: (link.qual === undefined || link.qual === null) ? 'none' : link.qual.replace(/\s/gi, '').toLowerCase(),
+        qual: (link.qual === undefined || link.qual === null) ? 'none' : link.qual.replace(/\s/gi, '-').toLowerCase(),
         ind: (link.ind === undefined || link.ind === null) ? 'none' : link.ind,
         originalPath: path
       });

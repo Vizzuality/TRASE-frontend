@@ -1,5 +1,6 @@
 import 'styles/_base.scss';
 import 'styles/_texts.scss';
+import 'styles/_foundation.css';
 import 'styles/layouts/l-factsheet-place.scss';
 import 'styles/components/dropdown.scss';
 import 'styles/components/button.scss';
@@ -10,6 +11,7 @@ import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
 import 'styles/components/loading.scss';
 
+import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
 import Line from 'components/graphs/line.component';
 import Chord from 'components/graphs/chord.component';
@@ -19,6 +21,7 @@ import Table from 'components/table/table.component';
 import { getURLParams } from 'utils/stateURL';
 import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
+import { getURLFromParams, GET_PLACE_FACTSHEET } from '../utils/getURLFromParams';
 
 const defaults = {
   country: 'Brazil',
@@ -95,14 +98,14 @@ const _init = () => {
   const url = window.location.search;
   const urlParams = getURLParams(url);
   const nodeId = urlParams.nodeId;
-  const country = urlParams.country || defaults.country;
-  const commodity = urlParams.commodity || defaults.commodity;
 
   const commodityDropdown = new Dropdown('commodity', _onSelect);
 
   commodityDropdown.setTitle(defaults.commodity);
 
-  fetch(`${API_URL}/v1/get_place_node_attributes?node_id=${nodeId}&country=${country}&commodity=${commodity}`)
+  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId});
+
+  fetch(placeFactsheetURL)
     .then((response) => {
       if (response.status === 404) {
         _showErrorMessage();
@@ -136,6 +139,9 @@ const _init = () => {
 
       _build(data);
     });
+
+  new Nav();
+
 };
 
 _init();

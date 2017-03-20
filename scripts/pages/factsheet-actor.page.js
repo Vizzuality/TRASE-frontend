@@ -1,5 +1,6 @@
 import 'styles/_base.scss';
 import 'styles/_texts.scss';
+import 'styles/_foundation.css';
 import 'styles/layouts/l-factsheet-actor.scss';
 import 'styles/components/button.scss';
 import 'styles/components/loading.scss';
@@ -10,6 +11,7 @@ import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
 import 'styles/components/loading.scss';
 
+import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
 // import AreaStack from 'components/graphs/area-stack.component';  stack area future
 import Top from 'components/factsheets/top.component';
@@ -17,6 +19,7 @@ import Table from 'components/table/table.component';
 
 import { getURLParams } from 'utils/stateURL';
 import _ from 'lodash';
+import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
 const defaults = {
   commodity: 'soy',
@@ -103,8 +106,9 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId});
 
-  fetch(`${API_URL}/v1/get_actor_node_attributes?node_id=${nodeId}&country=Brazil&commodity=soy`)
+  fetch(actorFactsheetURL)
     .then((response) => {
       if (response.status === 404) {
         _showErrorMessage();
@@ -130,6 +134,9 @@ const _init = ()  => {
 
       _build(data);
     });
+
+  new Nav();
+
 
 };
 

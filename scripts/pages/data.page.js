@@ -1,0 +1,34 @@
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import DataContentContainer from 'containers/data-content.container';
+import Nav from 'components/nav.component.js';
+import DataReducer from 'reducers/data.reducer';
+import { loadContext } from 'actions/data.actions';
+import { DATA_DEFAULT_STATE } from 'constants';
+
+import 'styles/data.scss';
+
+
+const start = (initialState) => {
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+  var store = createStore(
+    combineReducers({
+      data: DataReducer
+    }),
+    initialState,
+    composeEnhancers(
+      applyMiddleware(thunk)
+    )
+  );
+
+  new DataContentContainer(store);
+
+  store.dispatch(loadContext());
+};
+
+const globalState = Object.assign({}, DATA_DEFAULT_STATE);
+
+start(globalState);
+
+new Nav();

@@ -8,9 +8,9 @@ export default (nodesIds, state) => {
     };
   }
 
-  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedVectorLayers);
-  const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined);
-  const columnsPos = data.map(node => node.columnPosition);
+  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapDimensions);
+  const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined && geoId !== null);
+  const columnsPos = data.map(node => node.columnGroup);
 
   return {
     ids: nodesIds,
@@ -20,8 +20,8 @@ export default (nodesIds, state) => {
   };
 };
 
-const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta, selectedVectorLayers) => {
-  if (selectedNodesIds === undefined) {
+const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta, selectedMapDimensions) => {
+  if (selectedNodesIds === undefined || visibleNodes === undefined) {
     return [];
   }
 
@@ -36,12 +36,12 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
       node.selectedMetas = [];
       let meta;
       if (node.meta) {
-        if (selectedVectorLayers.horizontal.uid) {
-          meta = node.meta[selectedVectorLayers.horizontal.uid];
+        if (selectedMapDimensions.horizontal.uid) {
+          meta = node.meta[selectedMapDimensions.horizontal.uid];
           if (meta) node.selectedMetas.push(meta);
         }
-        if (selectedVectorLayers.vertical.uid) {
-          meta = node.meta[selectedVectorLayers.vertical.uid];
+        if (selectedMapDimensions.vertical.uid) {
+          meta = node.meta[selectedMapDimensions.vertical.uid];
           if (meta) node.selectedMetas.push(meta);
         }
       }

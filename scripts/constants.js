@@ -8,20 +8,21 @@ export const NUM_NODES_DETAILED = 999;
 export const DETAILED_VIEW_SCALE = 1200;
 export const DETAILED_VIEW_MIN_NODE_HEIGHT = 14;
 export const DETAILED_VIEW_MIN_LINK_HEIGHT = 1;
-export const AVAILABLE_YEARS = [2010, 2011, 2012, 2013, 2014, 2015, 2016];
-export const LEGEND_COLORS = {
+
+export const CHOROPLETH_CLASSES = {
   bidimensional: [
-    '#8db6ca', '#8f8d94', '#694d52',
-    '#aadad1', '#a8bebf', '#a15661',
-    '#f5f3ea', '#f6c7ad', '#f65e6e'], //9
-  horizontal: ['#f5f3ea', '#f5dfd0', '#f6c7ad', '#fa898d', '#f65e6e'], // 5
-  vertical: ['#F4F1E7', '#C8E1D8', '#A0D5CB', '#87B3C0', '#7297AA'], // 5
-  error_no_metadata: '#c7c7c7',
-  error_no_metadata_for_layer: '#c7c7c7',
+    'ch-bi-0-2', 'ch-bi-1-2', 'ch-bi-2-2',
+    'ch-bi-0-1', 'ch-bi-1-1', 'ch-bi-2-1',
+    'ch-bi-0-0', 'ch-bi-1-0', 'ch-bi-2-0'
+  ],
+  horizontal: ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'],
+  vertical: ['ch-blue-0', 'ch-blue-1', 'ch-blue-2', 'ch-blue-3', 'ch-blue-4'],
+  error_no_metadata: 'ch-no-meta',
+  error_no_metadata_for_layer: 'ch-no-meta-layer',
 };
 
-export const NODE_SELECTION_LINKS_NUM_COLORS = 3;
-
+export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
+export const SANKEY_TRANSITION_TIME = 1000;
 
 export const APP_DEFAULT_STATE = {
   app: {
@@ -34,21 +35,13 @@ export const APP_DEFAULT_STATE = {
 
 export const FLOWS_DEFAULT_STATE = {
   flows: {
-    selectedCountry: 'brazil',
-    selectedCommodity: 'soy',
-    selectedYears: [2015, 2015],
-    selectedQuant: 'volume',
-    detailedView: false,
-    // TODO value_type should be inferred from the value, not kept in state
-    selectedRecolorBy: { value: 'none', value_type: 'none' },
-    selectedBiomeFilter: 'none',
     selectedNodesIds: [],
-    selectedNodesColorGroups: [],
+    expandedNodesIds: [],
     areNodesExpanded: false,
+    detailedView: false,
     selectedNodesData: [],
-    selectedColumnsIds: [3, 4, 6, 7],
     // TODO title should be inferred from the uid, not kept in state
-    selectedVectorLayers: {
+    selectedMapDimensions: {
       horizontal: {
         uid: null,
         title: null
@@ -58,26 +51,14 @@ export const FLOWS_DEFAULT_STATE = {
         title: null
       }
     },
-    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts']
+    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
+    selectedMapBasemap: 'default',
   }
 };
 
-export const URL_STATE_PROPS = [
-  'selectedCountry',
-  'selectedCommodity',
-  'selectedYears',
-  'selectedQuant',
-  'detailedView',
-  'selectedRecolorBy',
-  'selectedBiomeFilter',
-  'selectedNodesIds',
-  'areNodesExpanded',
-  'selectedColumnsIds'
-];
-
-// index
-export const HOMEPAGE_COMMODITY_WHITELIST = ['SOY'];
-export const HOMEPAGE_COUNTRY_WHITELIST = ['BRAZIL'];
+export const DATA_DEFAULT_STATE = {
+  data: {}
+};
 
 
 // fact sheets
@@ -88,6 +69,49 @@ export const CHORD_COLORS = ['#ea6869', '#34444c'];
 // map
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';
 export const CARTO_NAMED_MAPS_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/named/';
+export const MAP_PANES = {
+  basemap: 'basemap',
+  vectorMain: 'vectorMain',
+  vectorLinked: 'vectorLinked',
+  vectorOutline: 'vectorOutline',
+  context: 'context',
+  basemapLabels: 'basemapLabels'
+};
+export const MAP_PANES_Z = {
+  [MAP_PANES.basemap]: 200,
+  [MAP_PANES.vectorMain]: 410,
+  [MAP_PANES.vectorLinked]: 411,
+  [MAP_PANES.vectorOutline]: 412,
+  [MAP_PANES.context]: 420,
+  [MAP_PANES.basemapLabels]: 490
+};
+export const BASEMAPS = {
+  default: {
+    title: 'Default',
+    url: '//api.mapbox.com/styles/v1/trasebase/cizi55y2r00122rl65a97ppz1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
+    labelsUrl: '//api.mapbox.com/styles/v1/traselabels/cizi59ohm00122spaghssyqsd/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2VsYWJlbHMiLCJhIjoiY2l6aTU4bm9sMDAyczMzazdwNWJ1MmFmbSJ9.zcNOZLokWun7cDwbArtV6g',
+    attribution: '<span>&copy;</span> <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <span>&copy;</span> <a href="https://www.mapbox.com/about/maps/">Mapbox</a>',
+    thumbnail: 'images/maps/thumb-basemap-default.png'
+  },
+  satellite: {
+    title: 'Satellite',
+    url: '//api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
+    attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>, <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>, <a href="https://www.digitalglobe.com/" target="_blank">DigitalGlobe</a>',
+    thumbnail: 'images/maps/thumb-basemap-satellite.jpeg'
+  },
+  topo: {
+    title: 'Topography',
+    url: '//{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy;<a href="http://opentopomap.org">opentopomap.org</a>',
+    thumbnail: 'images/maps/thumb-basemap-topo.png'
+  },
+  streets: {
+    title: 'Streets (OSM)',
+    url: '//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+    attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',
+    thumbnail: 'images/maps/thumb-basemap-streets.png'
+  },
+};
 
 // GA
 export const GA_ACTION_WHITELIST = [
@@ -108,7 +132,7 @@ export const GA_ACTION_WHITELIST = [
     getPayload: action => action.value
   },
   {
-    type: actions.SELECT_QUANT,
+    type: actions.SELECT_RESIZE_BY,
     getPayload: action => action.quant
   },
   {
@@ -126,10 +150,6 @@ export const GA_ACTION_WHITELIST = [
   },
   {
     type: actions.TOGGLE_MAP_LAYERS_MENU
-  },
-  {
-    type: actions.SELECT_VECTOR_LAYERS,
-    getPayload: action => [action.layerData.title, action.layerData.direction].join(' - ')
   },
   {
     type: actions.SELECT_CONTEXTUAL_LAYERS,

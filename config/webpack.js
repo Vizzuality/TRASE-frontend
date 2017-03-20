@@ -36,11 +36,16 @@ const pages = {
   },
   'data-methods': {
     title: 'TRASE - Data and methods'
+  },
+  'data': {
+    title: 'TRASE - Data'
   }
 };
 
 const htmlHeadTemplate = _.template(fs.readFileSync('./html/includes/_head.ejs', 'utf8'));
+const htmlSearchTemplate = _.template(fs.readFileSync('./html/includes/_search.ejs', 'utf8'));
 const htmlNavTemplate = _.template(fs.readFileSync('./html/includes/_nav.ejs', 'utf8'));
+const htmlNavFlowTemplate = _.template(fs.readFileSync('./html/includes/_nav-flow.ejs', 'utf8'));
 const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
 
 const htmlScriptsTemplate = _.template(fs.readFileSync('./html/includes/_scripts.ejs', 'utf8'));
@@ -55,7 +60,9 @@ const getPagePlugin = (id, params) => {
       dev: process.env.NODE_ENV === 'development',
       GOOGLE_ANALYTICS_KEY: JSON.stringify(process.env.GOOGLE_ANALYTICS_KEY),
     }),
+    search: htmlSearchTemplate(),
     nav: htmlNavTemplate({page: id}),
+    nav_flow: htmlNavFlowTemplate(),
     footer: htmlFooterTemplate(),
     scripts: htmlScriptsTemplate({bundle: id}),
     icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
@@ -74,7 +81,8 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({ name: 'common' }),
     new webpack.DefinePlugin({
       NODE_ENV_DEV: process.env.NODE_ENV === 'development',
-      API_URL: JSON.stringify(process.env.API_URL),
+      API_V1_URL: JSON.stringify(process.env.API_V1_URL),
+      API_V2_URL: JSON.stringify(process.env.API_V2_URL),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       API_CMS_URL: JSON.stringify(process.env.API_CMS_URL),
       API_STORY_CONTENT: JSON.stringify(process.env.API_STORY_CONTENT)
@@ -113,7 +121,18 @@ const config = {
       {
         test: /\.png$/,
         loader: 'url-loader',
-        query: { mimetype: 'image/png' }
+        query: {
+          mimetype: 'image/png',
+          limit: 380000
+        }
+      },
+      {
+        test: /\.jpg$/,
+        loader: 'url-loader',
+        query: {
+          mimetype: 'image/jpg',
+          limit: 30000
+        }
       }
     ]
   },

@@ -1,192 +1,115 @@
-import Dropdown from 'scripts/components/dropdown.component';
-import PostGridTemplate from 'ejs!templates/homepage/post-grid.ejs';
+import Nav from 'components/nav.component.js';
+import Slider from 'scripts/components/shared/slider.component';
+import PostsTemplate from 'ejs!templates/homepage/posts.ejs';
+// import UpdatesTemplate from 'ejs!templates/homepage/updates.ejs';
+// import TweetsTemplate from 'ejs!templates/homepage/tweets.ejs';
 import 'styles/homepage.scss';
 
-import { HOMEPAGE_COMMODITY_WHITELIST, HOMEPAGE_COUNTRY_WHITELIST }  from 'constants';
-
-const defaults = {
-  commodity: 'Soy',
-  country: 'Brazil',
-  postsPerColumn: 4
-};
-
-const _setMap = () => {
-  const imagesItem = Array.prototype.slice.call(document.querySelectorAll('.map-gallery-item'), 0);
-  const commodity = defaults.commodity.toLowerCase();
-  const country = defaults.country.toLowerCase();
-  const imageName = `${commodity}-${country}`;
-
-  imagesItem.forEach((imageItem) => {
-    imageItem.classList.toggle('is-hidden', imageItem.getAttribute('data-image-name') !== imageName);
-  });
-};
-
-const _onSelectCommodity = function (value) {
-  // updates dropdown's title with new value
-  this.setTitle(value);
-  // updates default values with incoming ones
-  defaults[this.id] = value;
-
-  // filters country options based on the commodity selected
-  _filterCountries(value);
-  _setButton();
-};
-
-const _filterCountries = function () {
-  const countryDropdownView = defaults.countryDropdown;
-  const countryDropdownElem = countryDropdownView.el;
-  const dropdownItems = Array.prototype.slice.call(countryDropdownElem.querySelectorAll('.js-dropdown-item'), 0);
-  const commodity = defaults.commodity.toLowerCase();
-
-  // checks if the commodity belongs to the country
-  dropdownItems.forEach((dropdownItem) => {
-    let commodities = dropdownItem.getAttribute('data-commodity');
-    commodities = commodities.split(',');
-
-    dropdownItem.classList.toggle('is-hidden', !commodities.includes(commodity));
-  });
-
-
-  const availableItems = countryDropdownElem.querySelectorAll('.js-dropdown-item:not(.is-hidden)');
-
-  // sets first item in the list if there's one available
-  if (availableItems.length) {
-    const value = availableItems[0].getAttribute('data-value');
-    countryDropdownView.setTitle(value);
-    _onSelectCountry.call(countryDropdownView, { value });
-  } else {
-    countryDropdownView.setTitle('-');
-  }
+const state = {
+  activeIndex: 0,
+  scrollTop: 0,
+  texts: [
+    {
+      text: 'Trase transforms our understanding of how companies and governments involved in the trade of agricultural commodities are linked to impacts and opportunities for more sustainable production.',
+      action: {
+        text: 'explore the tool',
+        href: '/flows.html'
+      }
+    },
+    {
+      text: 'Can companies and governments meet their 2020 sustainability goals? The blanket transparency provided by Trases helps address this question and identify priority actions for achieving success.',
+      action: {
+        text: 'explore company commitments',
+        href: '/factsheets.html'
+      }
+    },
+    {
+      text: 'The ability to address deforestation and promote sustainability is hampered by poor access to vital information. Trase is committed to free and open access to all the information provided on the platform.',
+      action: {
+        text: 'download trase data',
+        href: '/data.html'
+      }
+    }
+  ],
+  sliders: [
+    {
+      el: document.querySelector('.js-posts'),
+      selector: '.js-posts-slider',
+      endpoint: '/posts',
+      template: PostsTemplate,
+      perPage: 3,
+      next: '.js-posts-next'
+    },
+    // {
+    //   el: '.js-updates',
+    //   endpoint: '/updates',
+    //   perPage: 4,
+    //   template: UpdatesTemplate
+    // },
+    // {
+    //   el: '.js-tweets',
+    //   endpoint: '/tweets',
+    //   perPage: 3,
+    //   template: TweetsTemplate
+    // }
+  ]
 };
 
 
-const _setButton = () => {
-  const findOutButton = document.querySelector('.js-find-out');
-
-  const isValid = (HOMEPAGE_COMMODITY_WHITELIST.indexOf(defaults.commodity.toUpperCase()) !== -1) &&
-  (HOMEPAGE_COUNTRY_WHITELIST.indexOf(defaults.country.toUpperCase()) !== -1);
-
-  if (isValid) {
-    findOutButton.innerHTML = 'FIND OUT HERE';
-  } else {
-    findOutButton.innerHTML = 'COMING SOON';
-  }
-
-  findOutButton.classList.toggle('-disabled', !isValid);
-};
-
-const _onSelectCountry = function (data) {
-  // updates dropdown's title with new value
-  this.setTitle(data.value);
-  // updates default values with incoming ones
-  defaults[this.id] = data.value;
-
-  // change map image based on new values
-  _setMap();
-  _setButton();
-};
-
-const _getPosts = () => {
-  const postList = document.querySelector('.js-posts-grid');
-
-  fetch(API_CMS_URL + '/posts')
+const renderSlider = ({ el, selector, endpoint, perPage, next, template }) => {
+  fetch(API_CMS_URL + endpoint)
     .then(response => response.json())
-    .then((data) => {
-      let posts = data;
-      const totalPosts = posts.length;
-      let postsPerColumn = defaults.postsPerColumn;
-      let isLeft = true;
-      let rows;
-
-      if (!totalPosts) {
-        return;
-      }
-
-      const highlightPosts = posts.filter((post) => post.highlighted);
-
-      // remove highlighted and graph posts from post array.
-      highlightPosts.forEach((post) => {
-        const index = posts.indexOf(post);
-        posts.splice(index, 1);
-      });
-
-      // sorts posts by date
-      posts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      rows = ((totalPosts - (highlightPosts.length * 5)) / 8 ) + highlightPosts.length;
-
-      if (rows > Math.trunc(rows)) {
-        rows = Math.trunc(rows) + 1;
-      }
-
-      for (let i = 0; i < rows; i++) {
-        const highlightPost = highlightPosts[i];
-        let leftSidePosts = [];
-        let rightSidePosts = [];
-
-        // left side
-        // left side is only filled with posts if there's no highlighted post
-        if (highlightPost === undefined) {
-
-          leftSidePosts = posts.splice(0, postsPerColumn);
-
-          // if the number of posts is lower than the minimum (postsPerColumn)
-          // fills the rest of gaps with empty objects
-          if (leftSidePosts.length !== postsPerColumn) {
-
-            for (let i = leftSidePosts.length; i < postsPerColumn; i++) {
-              leftSidePosts.push({});
-            }
-          }
-        }
-
-        // right side
-        rightSidePosts = posts.splice(0, postsPerColumn);
-
-        if (rightSidePosts.length !== postsPerColumn) {
-          for (let i = rightSidePosts.length; i < postsPerColumn; i++) {
-            rightSidePosts.push({});
-          }
-        }
-
-        // alternates the position of the highlighted post in every row
-        if (highlightPost !== undefined) {
-          highlightPost.isLeft = isLeft;
-          isLeft = !isLeft;
-        }
-
-        const postsPerRow = PostGridTemplate({
-          highlightPost,
-          posts: {
-            left: leftSidePosts,
-            right: rightSidePosts,
-          }
-        });
-
-        postList.insertAdjacentHTML('beforeEnd', postsPerRow);
-      }
+    .then((data) => template({ posts: data }))
+    .then((slides) => {
+      el.insertAdjacentHTML('beforeend', slides);
+      new Slider({ selector, perPage, next });
     });
 };
 
-const _init = () => {
-
-  const commodityDropdown = new Dropdown('commodity', _onSelectCommodity);
-  const countryDropdown = new Dropdown('country', _onSelectCountry);
-
-  Object.assign(defaults, {
-    commodityDropdown,
-    countryDropdown
-  });
-
-  commodityDropdown.setTitle(defaults.commodity);
-  countryDropdown.setTitle(defaults.country);
-
-  // set initial dropdown values
-  _onSelectCommodity.call(commodityDropdown, defaults.commodity);
-  _onSelectCountry.call(countryDropdown, { value: defaults.country });
-
-  _setMap();
-  _getPosts();
+const getPageOffset = (bounds) => {
+  const body = document.querySelector('body').getBoundingClientRect();
+  const padding = 65;
+  const navHeight = 64;
+  return Math.abs(body.top) + Math.abs(bounds.top) - padding - navHeight;
 };
 
-_init();
+const scrollIntro = () => {
+  const sections = document.querySelectorAll('.js-scroll-change');
+  const offsets = Array.prototype.map.call(sections, (section) => section.getBoundingClientRect().top);
+  const direction = (state.scrollTop < window.scrollY) ? 1 : -1;
+  let index = state.activeIndex;
+
+
+  if (offsets[state.activeIndex + 1] < window.innerHeight / 2 && direction === 1) index += direction;
+  if (offsets[state.activeIndex] > window.innerHeight / 2 && direction === -1) index += direction;
+
+
+  state.scrollTop = window.scrollY;
+
+  if(typeof offsets[index] === 'undefined') return;
+  if (state.activeIndex !== index) {
+    const intro = document.querySelector('.js-intro-statement');
+    const { text, action } = state.texts[index];
+    const actionNode = intro.querySelector('.js-action');
+
+    state.activeIndex = index;
+
+    intro.querySelector('.js-text').innerText = text;
+
+    actionNode.setAttribute('href', action.href);
+    actionNode.innerText = action.text;
+  }
+};
+
+const init = () => {
+  const bounds = document.querySelector('.js-content-section').getBoundingClientRect();
+  const pageOffset = getPageOffset(bounds);
+  new Nav({ pageOffset });
+
+
+  state.sliders.forEach(renderSlider);
+
+  window.addEventListener('scroll', scrollIntro);
+};
+
+init();

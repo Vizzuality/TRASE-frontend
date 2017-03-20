@@ -4,7 +4,7 @@ export default class {
 
   onCreated() {
     this.el = document.querySelector('.js-layer-contextual');
-
+    this.title = document.querySelector('.js-layer-contextual-title');
   }
 
   buildLayers(layers) {
@@ -20,6 +20,11 @@ export default class {
     if (layers.length) {
       this._setActiveContextualLayers(layers);
     }
+  }
+
+  toggle(context) {
+    this.el.classList.toggle('is-hidden', context.countryName !== 'BRAZIL');
+    this.title.classList.toggle('is-hidden', context.countryName !== 'BRAZIL');
   }
 
   _setActiveContextualLayers(layers) {

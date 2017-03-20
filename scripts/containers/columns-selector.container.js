@@ -7,12 +7,14 @@ const mapMethodsToState = (state) => ({
     _comparedValue: (state) => state.flows.columns,
     _returnedValue: (state) => {
       return {
+        sankeySize: state.app.sankeySize,
         columns: state.flows.columns,
         selectedColumnsIds: state.flows.selectedColumnsIds
       };
     }
   },
-  selectColumns: state.flows.selectedColumnsIds
+  selectColumns: state.flows.selectedColumnsIds,
+  resize: state.app.sankeySize
 });
 
 const mapViewCallbacksToActions = () => ({

@@ -7,7 +7,8 @@ module.exports = {
     "rules": {
         "indent": [
             "warn",
-            2
+            2,
+            { "SwitchCase": 1 }
         ],
         "linebreak-style": [
             "error",
@@ -32,10 +33,12 @@ module.exports = {
     },
     "globals": {
       NODE_ENV_DEV: true,
-      API_URL: true,
+      API_V1_URL: true,
+      API_V2_URL: true,
       API_CMS_URL: true,
       API_STORY_CONTENT: true,
       GOOGLE_ANALYTICS_KEY: true,
-      ga: true
+      ga: true,
+      fetch: true
     }
 };

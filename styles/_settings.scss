@@ -1,14 +1,14 @@
 
 // layout
-$nav-height: 56px;
-$titlebar-height: 64px;
-$flow-content-y: $nav-height + $titlebar-height;
-$layer-map-width: 320px;
+$nav-height: 64px;
+$titlebar-height: 56px;
+$map-width: 320px;
+$layer-map-width: 376px;
 $content-max-width: 1040px;
 $anchor-list-max-width: calc(100% / 3);
 $max-width-grid: 1280px;
-$nav-padding: 16px;
-$sankey-x-padding: 16px;
+$nav-padding: 18px;
+$sankey-x-margin: 15px;
 
 $padding-wrap-mobile: 24px;
 $padding-wrap-tablet: 80px;
@@ -16,15 +16,16 @@ $padding-wrap-desktop: 120px;
 
 
 // colors
-$background-white: #e8e8e8;
+$background-white: #f3f3f3;
 $black: #000;
 $blue-map: #00f;
 $charcoal-grey: #34444c;
 $charcoal-grey-faded: rgba($charcoal-grey, .6);
 $gray: #ebebeb;
 $medium-pink: #ea6869;
-$medium-pink-faded: lighten(#ea6869, 20%);
+$medium-pink-faded: lighten($medium-pink, 20%);
 $manilla: #ffeb8b;
+$egg-shell: #fff0c2;
 $orange: #ffa500;
 $pale-grey: #e0e4e8;
 $pale-peach: #fff1ae;
@@ -44,44 +45,63 @@ $warm-pink: #f65e6e;
 $flow-1: $medium-pink;
 $flow-2: $manilla;
 $flow-3: #2d586e;
+$flow-4: #007d29;
+$flow-5: #b4008a;
+$flow-6: #06ff67;
+$flow-7: #8339aa;
+$flow-8: #f3fb00;
+$flow-9: #7193ff;
+$flow-10: #b27200;
 
-$qual-biome-amazonia: #43f3f3;
-$qual-biome-cerrado: #517fee;
-$qual-biome-mataatlantica: #8c28ff;
-$qual-biome-caatinga: #ff66e5;
-$qual-biome-pampa: #72ea28;
-$qual-biome-pantanal: #ffb314;
+$qual-qual-thematic-amazonia: #43f3f3;
+$qual-qual-thematic-cerrado: #517fee;
+$qual-qual-thematic-mata-atlantica: #8c28ff;
+$qual-qual-thematic-caatinga: #ff66e5;
+$qual-qual-thematic-pampa: #72ea28;
+$qual-qual-thematic-pantanal: #ffb314;
 
-$ind-forest_500-0: #e3a9a9;
-$ind-forest_500-1: #f4bda5;
-$ind-forest_500-2: #c2b5af;
-$ind-forest_500-3: #92c5de;
-$ind-forest_500-4: #4996c3;
+$ind-stars-red-blue-0: #e3a9a9;
+$ind-stars-red-blue-1: #f4bda5;
+$ind-stars-red-blue-2: #c2b5af;
+$ind-stars-red-blue-3: #92c5de;
+$ind-stars-red-blue-4: #4996c3;
 
-$qual-zero_deforestation-yes: #a4e332;
-$qual-zero_deforestation-no: #e36845;
+$qual-qual-yes-no-yes: #a4e332;
+$qual-qual-yes-no-no: #e36845;
 
-$ind-water_scarcity-0: #d73027;
-$ind-water_scarcity-1: #fc8d59;
-$ind-water_scarcity-2: #fee090;
-$ind-water_scarcity-3: #ffffbf;
-$ind-water_scarcity-4: #e0f3f8;
-$ind-water_scarcity-5: #91bfdb;
-$ind-water_scarcity-6: #4575b4;
+$ind-linear-red-blue-0: #d73027;
+$ind-linear-red-blue-1: #fc8d59;
+$ind-linear-red-blue-2: #fee090;
+$ind-linear-red-blue-3: #ffffbf;
+$ind-linear-red-blue-4: #e0f3f8;
+$ind-linear-red-blue-5: #91bfdb;
+$ind-linear-red-blue-6: #4575b4;
 
-$ind-smallholders-0: #ffc;
-$ind-smallholders-1: #c2e699;
-$ind-smallholders-2: #78c679;
-$ind-smallholders-3: #31a354;
-$ind-smallholders-4: #006837;
+$ind-linear-yellow-green-0: #ffc;
+$ind-linear-yellow-green-1: #c2e699;
+$ind-linear-yellow-green-2: #78c679;
+$ind-linear-yellow-green-3: #31a354;
+$ind-linear-yellow-green-4: #006837;
 
-$qual-colors: $qual-biome-amazonia, $qual-biome-cerrado, $qual-biome-mataatlantica, $qual-biome-caatinga, $qual-biome-pampa, $qual-biome-pantanal, $ind-forest_500-0, $ind-forest_500-1, $ind-forest_500-2, $ind-forest_500-3, $ind-forest_500-4, $qual-zero_deforestation-yes, $qual-zero_deforestation-no, $ind-water_scarcity-0, $ind-water_scarcity-1, $ind-water_scarcity-2, $ind-water_scarcity-3, $ind-water_scarcity-4, $ind-water_scarcity-5, $ind-water_scarcity-6, $ind-smallholders-0, $ind-smallholders-1, $ind-smallholders-2, $ind-smallholders-3, $ind-smallholders-4;
+$ind-linear-blue-green-0: #3300E8;
+$ind-linear-blue-green-1: #0D1AFF;
+$ind-linear-blue-green-2: #0C52E8;
+$ind-linear-blue-green-3: #0094FF;
+$ind-linear-blue-green-4: #0CC6E8;
+$ind-linear-blue-green-5: #0DFFE3;
+$ind-linear-blue-green-6: #0CE8AF;
+$ind-linear-blue-green-7: #0CE890;
+$ind-linear-blue-green-8: #00FF52;
+$ind-linear-blue-green-9: #4bff0f;
+$ind-linear-blue-green-10: #9AE80C;
 
-$qual-colors-names: '-qual-biome-amazonia', '-qual-biome-cerrado', '-qual-biome-mataatlantica', '-qual-biome-caatinga', '-qual-biome-pampa', '-qual-biome-pantanal', '-ind-forest_500-0', '-ind-forest_500-1', '-ind-forest_500-2', '-ind-forest_500-3', '-ind-forest_500-4', '-qual-zero_deforestation-yes', '-qual-zero_deforestation-no', '-ind-water_scarcity-0', '-ind-water_scarcity-1', '-ind-water_scarcity-2', '-ind-water_scarcity-3', '-ind-water_scarcity-4', '-ind-water_scarcity-5', '-ind-water_scarcity-6', '-ind-smallholders-0', '-ind-smallholders-1', '-ind-smallholders-2', '-ind-smallholders-3', '-ind-smallholders-4';
+$qual-colors: $qual-qual-thematic-amazonia, $qual-qual-thematic-cerrado, $qual-qual-thematic-mata-atlantica, $qual-qual-thematic-caatinga, $qual-qual-thematic-pampa, $qual-qual-thematic-pantanal, $ind-stars-red-blue-0, $ind-stars-red-blue-1, $ind-stars-red-blue-2, $ind-stars-red-blue-3, $ind-stars-red-blue-4, $qual-qual-yes-no-yes, $qual-qual-yes-no-no, $ind-linear-red-blue-0, $ind-linear-red-blue-1, $ind-linear-red-blue-2, $ind-linear-red-blue-3, $ind-linear-red-blue-4, $ind-linear-red-blue-5, $ind-linear-red-blue-6, $ind-linear-yellow-green-0, $ind-linear-yellow-green-1, $ind-linear-yellow-green-2, $ind-linear-yellow-green-3, $ind-linear-yellow-green-4, $ind-linear-blue-green-0, $ind-linear-blue-green-1, $ind-linear-blue-green-2, $ind-linear-blue-green-3, $ind-linear-blue-green-4, $ind-linear-blue-green-5, $ind-linear-blue-green-6, $ind-linear-blue-green-7, $ind-linear-blue-green-8, $ind-linear-blue-green-9, $ind-linear-blue-green-10;
 
-$flow-colors: $flow-1, $flow-2, $flow-3;
+$qual-colors-names: '-qual-qual-thematic-amazonia', '-qual-qual-thematic-cerrado', '-qual-qual-thematic-mata-atlantica', '-qual-qual-thematic-caatinga', '-qual-qual-thematic-pampa', '-qual-qual-thematic-pantanal', '-ind-stars-red-blue-0', '-ind-stars-red-blue-1', '-ind-stars-red-blue-2', '-ind-stars-red-blue-3', '-ind-stars-red-blue-4', '-qual-qual-yes-no-yes', '-qual-qual-yes-no-no', '-ind-linear-red-blue-0', '-ind-linear-red-blue-1', '-ind-linear-red-blue-2', '-ind-linear-red-blue-3', '-ind-linear-red-blue-4', '-ind-linear-red-blue-5', '-ind-linear-red-blue-6', '-ind-linear-yellow-green-0', '-ind-linear-yellow-green-1', '-ind-linear-yellow-green-2', '-ind-linear-yellow-green-3', '-ind-linear-yellow-green-4', '-ind-linear-blue-green-0', '-ind-linear-blue-green-1', '-ind-linear-blue-green-2', '-ind-linear-blue-green-3', '-ind-linear-blue-green-4', '-ind-linear-blue-green-5', '-ind-linear-blue-green-6', '-ind-linear-blue-green-7', '-ind-linear-blue-green-8', '-ind-linear-blue-green-9', '-ind-linear-blue-green-10';
 
-$flow-colors-names: '-flow-1', '-flow-2', '-flow-3';
+$flow-colors: $flow-1, $flow-2, $flow-3, $flow-4, $flow-5, $flow-6, $flow-7, $flow-8, $flow-9, $flow-10;
+
+$flow-colors-names: '-flow-1', '-flow-2', '-flow-3', '-flow-4', '-flow-5', '-flow-6', '-flow-7', '-flow-8', '-flow-9', '-flow-10';
 // typography
 $font-family-1: 'DecimaMonoPro', 'Courier New', sans-serif;
 $font-family-2: 'Merriweather', serif;
@@ -112,3 +132,30 @@ $ease-in-out-sine:  cubic-bezier(.445, .05, .55, .95);
 // Miscellaneous
 $box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
 $box-shadow-big: 0 3px 6px 0 rgba($black, .1), 0 3px 6px 0 rgba($black, .2);
+
+// choropleth
+$ch-red-0: #f5f3ea;
+$ch-red-1: #f5dfd0;
+$ch-red-2: #f6c7ad;
+$ch-red-3: #fa898d;
+$ch-red-4: #f65e6e;
+
+$ch-blue-0: #F4F1E7;
+$ch-blue-1: #C8E1D8;
+$ch-blue-2: #A0D5CB;
+$ch-blue-3: #87B3C0;
+$ch-blue-4: #7297AA;
+
+$ch-bi-0-2: #8db6ca;
+$ch-bi-1-2: #8f8d94;
+$ch-bi-2-2: #694d52;
+$ch-bi-0-1: #aadad1;
+$ch-bi-1-1: #a8bebf;
+$ch-bi-2-1: #a15661;
+$ch-bi-0-0: #f5f3ea;
+$ch-bi-1-0: #f6c7ad;
+$ch-bi-2-0: #f65e6e;
+
+$ch-no-meta: $gray;
+$ch-no-meta-layer: $gray;
+$ch-default: $gray;

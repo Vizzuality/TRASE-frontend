@@ -1,7 +1,7 @@
 <table>
   <% if(type === 't_head_places'){ %>
     <thead>
-      <tr class="row">
+      <tr class="table-row">
         <th class="header-cell">Key sustainability indicators</th>
         <th class="header-cell _text-align-right">Score</th>
         <!-- <th>State Ranking</th> -->
@@ -10,7 +10,7 @@
     <tbody>
       <% for(var i = 0; i < data['rows'].length; i++) { %>
         <%  for(var j = 0; j < data['rows'][i]['values'].length; j++){%>
-        <tr class="row">
+        <tr class="table-row">
           <td class="cell-name">
             <span class="node-name"><%= data['includedColumns'][j]['name'] %></span>
           </td>
@@ -25,7 +25,7 @@
     </tbody>
   <% } else if(type === 't_head_actors'){ %>
     <thead>
-      <tr class="row">
+      <tr class="table-row">
         <% for(var i = 0; i < data['includedColumns'].length; i++) { %>
           <th class="header-cell <% if(i > 0) { %> _text-align-right <% } %>">
             <%= data['includedColumns'][i]['name'] %>
@@ -35,7 +35,7 @@
     </thead>
     <tbody>
       <% for(var i = 0; i < data['rows'].length; i++) { %>
-      <tr class="row">
+      <tr class="table-row">
         <% for(var j = 0; j < data['rows'][i]['values'].length; j++){%>
           <td class="cell-score <% if(j > 0) { %> _text-align-right <% } %>">
             <% if(data['rows'][i]['values'][j] != null){ %>
@@ -53,7 +53,7 @@
   <% } else {%>
     <tbody>
       <% for(var i = 0; i < data.length; i++) { %>
-        <tr class="row">
+        <tr class="table-row">
           <td class="cell-name">
             <span class="node-name"><%= i+1 %>.<%= data[i]['name'] %></span>
             <% if (link !== null) {%>

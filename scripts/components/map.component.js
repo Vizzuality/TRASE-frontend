@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import _ from 'lodash';
 import 'leaflet.utfgrid';
-import { CARTO_BASE_URL } from 'constants';
+import { CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, BASEMAPS, SANKEY_TRANSITION_TIME } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/map.scss';
 import 'style/components/map/map-legend.scss';
@@ -13,103 +13,190 @@ export default class {
       zoomControl: false
     };
 
-    this.map = L.map('map', mapOptions).setView([-16, -50], 4);
+    this.map = L.map('js-map', mapOptions);
     new L.Control.Zoom({ position: 'bottomleft' }).addTo(this.map);
+    L.control.scale({ position: 'bottomleft', imperial: false }).addTo(this.map);
 
-    var basemap = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>' });
-    this.map.addLayer(basemap);
+    this.map.on('layeradd', () => this._updateAttribution());
 
-    this.map.createPane('main');
-    this.map.getPane('main').style.zIndex = 600;
-    this.map.createPane('context_above');
-    this.map.getPane('context_above').style.zIndex = 601;
+    Object.keys(MAP_PANES).forEach(paneKey => {
+      this.map.createPane(paneKey);
+      this.map.getPane(paneKey).style.zIndex = MAP_PANES_Z[paneKey];
+    });
 
     this.contextLayers = [];
+    this.polygonFeaturesDict = {};
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
     document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
+
+    this.attribution = document.querySelector('.js-map-attribution');
+    this.attributionSource = document.querySelector('.leaflet-control-attribution');
+  }
+
+  setMapView(mapView) {
+    this.map.setView([mapView.latitude, mapView.longitude], mapView.zoom);
+  }
+
+  loadBasemap(basemapId) {
+    if (this.basemap) {
+      this.map.removeLayer(this.basemap);
+    }
+    if (this.basemapLabels) {
+      this.map.removeLayer(this.basemapLabels);
+    }
+
+    const basemapOptions = BASEMAPS[basemapId];
+    basemapOptions.pane = MAP_PANES.basemap;
+    this.basemap = L.tileLayer(basemapOptions.url, basemapOptions);
+    this.map.addLayer(this.basemap);
+
+    if (basemapOptions.labelsUrl !== undefined) {
+      basemapOptions.pane = MAP_PANES.basemapLabels;
+      this.basemapLabels = L.tileLayer(basemapOptions.labelsUrl, basemapOptions);
+      this.map.addLayer(this.basemapLabels);
+    }
   }
 
   showLoadedMap(payload) {
-    const geoData = payload.geoData;
-    // TODO this statically maps vectorLayers indexes to column indexes, it should be dynamic
-    let municipalitiesLayer = this._getVectorLayer(geoData.MUNICIPALITY, 'map-polygon-municipality');
-    this.vectorLayers = [
-      this._getVectorLayer(geoData.BIOME, 'map-polygon-biome'),
-      this._getVectorLayer(geoData.STATE, 'map-polygon-state'),
-      municipalitiesLayer, // logistics hubs
-      municipalitiesLayer // municipalities
-    ];
-    this.selectVectorLayer([payload.currentLayer]);
-    if (payload.selectedNodesGeoIds) {
-      this.selectPolygons(payload.selectedNodesGeoIds);
-    }
-  }
+    const mapVectorData = payload.mapVectorData;
+    this.polygonTypesLayers = {};
 
-  selectPolygons(geoIds) {
-    this.selectedNodesLayer = this._paintPolygons(geoIds, this.selectedNodesLayer, '-selected');
-  }
-
-  showLinkedGeoIds(linkedGeoIds) {
-    this.linkedLayer = this._paintPolygons(linkedGeoIds, this.linkedLayer, '-linked');
-  }
-
-  _paintPolygons(geoIds, targetLayer, className) {
-    if (!this.currentLayer) {
-      return;
-    }
-
-    if (targetLayer) this.map.removeLayer(targetLayer);
-
-    const selectedFeatures = [];
-    this.currentLayer.eachLayer(layer => {
-      if (geoIds.indexOf(layer.feature.properties.geoid) > - 1) {
-        selectedFeatures.push(layer.feature);
+    // create geometry layers for all polygonTypes that have their own geometry
+    Object.keys(mapVectorData).forEach(polygonTypeId => {
+      const polygonType = mapVectorData[polygonTypeId];
+      if (polygonType.useGeometryFromColumnId === undefined) {
+        this.polygonTypesLayers[polygonTypeId] = this._getPolygonTypeLayer(
+          polygonType.geoJSON,
+          `map-polygon-${polygonType.name.toLowerCase()}`
+        );
       }
     });
 
-    // polygon appears 'burried', and SVG does nto support z-indexes
-    // so we have to recreate the clicked layers on top of all other polygons
-    let layer;
-    if (selectedFeatures.length > 0) {
-      layer = L.geoJSON(selectedFeatures, { pane: 'main' });
-      layer.setStyle(feature => this._getPolygonSyle(className, feature));
-      this.map.addLayer(layer);
-    }
-    return layer;
-  }
+    // for polygonTypes that don't have their geometry, link to actual geometry layers
+    Object.keys(mapVectorData).forEach(polygonTypeId => {
+      const polygonType = mapVectorData[polygonTypeId];
+      if (polygonType.useGeometryFromColumnId !== undefined) {
+        this.polygonTypesLayers[polygonTypeId] = this.polygonTypesLayers[polygonType.useGeometryFromColumnId];
+      }
+    });
 
-  // TODO use _paintPolygons
-  highlightPolygon(geoIds) {
-    if (!this.currentLayer) {
-      return;
+    this.selectPolygonType(payload.currentPolygonType);
+    if (payload.selectedNodesGeoIds) {
+      this._outlinePolygons({selectedGeoIds: payload.selectedNodesGeoIds});
     }
 
-    if (this.highlightedLayer) this.map.removeLayer(this.highlightedLayer);
-
-    if (geoIds.length > 0) {
-      const geoId = geoIds[0];
-      this.currentLayer.eachLayer(layer => {
-        if (geoId === layer.feature.properties.geoid) {
-          // polygon appears 'burried', and SVG does nto support z-indexes
-          // so we have to recreate the hover layer on top of all other polygons
-          this.highlightedLayer = L.geoJSON(layer.feature, { pane: 'main' });
-          this.highlightedLayer.setStyle(feature => this._getPolygonSyle(null, feature, true));
-          this.map.addLayer(this.highlightedLayer);
-        }
+    // under normal circumstances, choropleth (depends on loadNodes) and linkedGeoIds (depends on loadLinks)
+    // are not available yet, but this is just a fail-safe for race conditions
+    if (payload.choropleth) {
+      this._setChoropleth(payload.choropleth);
+    }
+    if (payload.linkedGeoIds) {
+      this.showLinkedGeoIds({
+        selectedNodesGeoIds: payload.selectedNodesGeoIds,
+        linkedGeoIds: payload.linkedGeoIds
       });
     }
   }
 
-  selectVectorLayer(columnIds) {
-    if (!this.vectorLayers) return;
-    const id = columnIds[0];
-    if (this.currentLayer) {
-      this.map.removeLayer(this.currentLayer);
+
+  showLinkedGeoIds({selectedNodesGeoIds, linkedGeoIds}) {
+    const geoIdList = _.union(selectedNodesGeoIds, linkedGeoIds);
+    if (!this.currentPolygonTypeLayer) {
+      return;
+    }
+    // remove choropleth from main layer
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', geoIdList.length);
+
+    window.clearTimeout(this.fitBoundsTimeout);
+
+    if (this.vectorLinked) {
+      this.map.removeLayer(this.vectorLinked);
     }
 
-    this.currentLayer = this.vectorLayers[id];
-    this.map.addLayer(this.currentLayer);
+    if (!geoIdList.length) {
+      return;
+    }
+
+    const linkedFeaturesClassNames = {};
+
+    const linkedFeatures = geoIdList.map(geoId => {
+      const originalPolygon = this.polygonFeaturesDict[geoId];
+      if (originalPolygon !== undefined) {
+        // copy class names (ie choropleth from vectorMain's original polygon)
+        linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
+        return originalPolygon.feature;
+      } else {
+        // this can potentially happen when geoId doesn't not match polygon type currently visible
+        return null;
+      }
+    });
+
+    _.pull(linkedFeatures, null);
+
+    if (linkedFeatures.length > 0) {
+      this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
+      this.map.addLayer(this.vectorLinked);
+      this.vectorLinked.eachLayer(layer => {
+        layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
+      });
+
+      this.fitBoundsTimeout = window.setTimeout(() => {
+        this.map.fitBounds(this.vectorLinked.getBounds());
+      }, SANKEY_TRANSITION_TIME);
+    }
+
+  }
+
+  selectPolygons(payload) { this._outlinePolygons(payload); }
+  highlightPolygon(payload) { this._outlinePolygons(payload); }
+
+  _outlinePolygons({selectedGeoIds, highlightedGeoId}) {
+    if (!this.currentPolygonTypeLayer || !selectedGeoIds) {
+      return;
+    }
+
+    if (this.vectorOutline) {
+      this.map.removeLayer(this.vectorOutline);
+    }
+
+    const selectedFeatures = selectedGeoIds.map(selectedGeoId => {
+      if (!selectedGeoId) return;
+      const originalPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === selectedGeoId);
+      return originalPolygon.feature;
+    });
+
+    if (highlightedGeoId && selectedGeoIds.indexOf(highlightedGeoId) === -1) {
+      const highlightedPolygon = this.currentPolygonTypeLayer.getLayers().find(polygon => polygon.feature.properties.geoid === highlightedGeoId);
+      if (highlightedPolygon !== undefined) {
+        selectedFeatures.push(highlightedPolygon.feature);
+      } else {
+        console.warn('no polygon found with geoId ', highlightedGeoId);
+      }
+    }
+
+    if (selectedFeatures.length > 0) {
+      this.vectorOutline = L.geoJSON(selectedFeatures, { pane: MAP_PANES.vectorOutline });
+      this.vectorOutline.setStyle(feature => {
+        return {
+          className: (feature.properties.geoid === highlightedGeoId) ? '-highlighted' : '-selected'
+        };
+      });
+      this.map.addLayer(this.vectorOutline);
+    }
+  }
+
+  selectPolygonType(columnIds) {
+    if (!this.polygonTypesLayers || !columnIds.length) return;
+    const id = columnIds[0];
+    if (this.currentPolygonTypeLayer) {
+      this.map.removeLayer(this.currentPolygonTypeLayer);
+    }
+
+    this.currentPolygonTypeLayer = this.polygonTypesLayers[id];
+    if (this.currentPolygonTypeLayer) {
+      this.map.addLayer(this.currentPolygonTypeLayer);
+    }
   }
 
   loadContextLayers(selectedMapContextualLayersData) {
@@ -138,12 +225,13 @@ export default class {
 
     // disable main choropleth layer when there are context layers
     // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
-    this.map.getPane('main').classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
-    this.map.getPane('main').classList.toggle('-hidden', hideMain);
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-hidden', hideMain);
+
+    this._updateAttribution();
   }
 
   _createRasterLayer(layerData) {
-    // const url = 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
     const url = `${layerData.rasterURL}{z}/{x}/{y}.png`;
 
     // TODO add those params in layer configuration
@@ -151,8 +239,8 @@ export default class {
     const northEast = L.latLng(18, -28);
     const bounds = L.latLngBounds(southWest, northEast);
 
-    var layer = L.tileLayer(url, {
-      pane: 'context_above',
+    const layer = L.tileLayer(url, {
+      pane: MAP_PANES.context,
       tms: true,
       // TODO add those params in layer configuration
       maxZoom: 11,
@@ -165,9 +253,8 @@ export default class {
   _createCartoLayer(layerData /*, i */  ) {
     const baseUrl = `${CARTO_BASE_URL}${layerData.layergroupid}/{z}/{x}/{y}`;
     const layerUrl = `${baseUrl}.png`;
-    // console.log(layerUrl)
     const layer = new L.tileLayer(layerUrl, {
-      pane: 'context_above'
+      pane: MAP_PANES.context
     });
 
     this.contextLayers.push(layer);
@@ -185,14 +272,16 @@ export default class {
     // }
   }
 
-  _getVectorLayer(geoJSON, polygonClassName) {
+  _getPolygonTypeLayer(geoJSON) {
     var topoLayer = new L.GeoJSON(geoJSON, {
-      pane: 'main'
+      pane: MAP_PANES.vectorMain,
+      style: {
+        smoothFactor: 0.9
+      }
     });
 
-    topoLayer.setStyle(feature => this._getPolygonSyle(polygonClassName, feature));
-
     topoLayer.eachLayer(layer => {
+      this.polygonFeaturesDict[layer.feature.properties.geoid] = layer;
       const that = this;
       layer.on({
         mouseover: function() {
@@ -211,20 +300,6 @@ export default class {
     return topoLayer;
   }
 
-  _getPolygonSyle(polygonClassName, feature, highlighted) {
-    let classNames = ['map-polygon'];
-    if (polygonClassName) {
-      classNames.push(polygonClassName);
-    }
-    if (!feature.properties.hasFlows) {
-      classNames.push('-disabled');
-    }
-    if (highlighted === true) {
-      classNames.push('-highlighted')
-    }
-    return {className: classNames.join(' ')};
-  }
-
   _onToggleMap () {
     this.callbacks.onToggleMap();
 
@@ -234,17 +309,35 @@ export default class {
     }, 850);
   }
 
-  setChoropleth(choropleth) {
-    this.currentLayer.eachLayer(layer => {
-      const choroItem = choropleth[layer.feature.properties.geoid];
-      // TODO use CSS classes instead
-      if (choroItem) {
-        layer._path.style.fill = choroItem;
-      } else {
-        layer._path.style.fill = '#c7c7c7';
-      }
-    });
+  setChoropleth({choropleth, selectedNodesGeoIds, linkedGeoIds, selectedMapDimensions}) {
+    if (!this.currentPolygonTypeLayer) {
+      return;
+    }
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null);
+    this._setChoropleth(choropleth);
+    if (linkedGeoIds && linkedGeoIds.length) {
+      this.showLinkedGeoIds({
+        selectedNodesGeoIds,
+        linkedGeoIds
+      });
+    }
   }
 
+  _setChoropleth(choropleth) {
+    this.currentPolygonTypeLayer.eachLayer(layer => {
+      const choroItem = choropleth[layer.feature.properties.geoid];
+      const classNames = [];
+      if (!layer.feature.properties.hasFlows) {
+        classNames.push('-disabled');
+      }
+      classNames.push((choroItem) ? choroItem : 'ch-default');
+      layer._path.setAttribute('class', classNames.join(' '));
+      layer._path.setAttribute('geoid', layer.feature.properties.geoid);
+    });
 
+  }
+
+  _updateAttribution() {
+    this.attribution.innerHTML = this.attributionSource.innerHTML;
+  }
 }

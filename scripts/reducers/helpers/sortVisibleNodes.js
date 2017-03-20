@@ -1,4 +1,11 @@
 const byHeightOthersLast = (nodeA, nodeB) => {
+  if (nodeA.isDomesticConsumption || nodeB.isDomesticConsumption) {
+    if (nodeA.isDomesticConsumption) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
   if (nodeA.isAggregated || nodeA.isUnknown) {
     return 1;
   } else if (nodeB.isAggregated || nodeB.isUnknown) {

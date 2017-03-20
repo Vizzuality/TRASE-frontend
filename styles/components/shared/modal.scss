@@ -9,7 +9,7 @@
 
   transform: translate(-50%, -50%);
 
-  z-index: 1;
+  z-index: 100;
 
   > .header {
     padding: 24px 32px;
@@ -50,5 +50,5 @@
 
   background-color: rgba($charcoal-grey, .7);
 
-  z-index: 1;
+  z-index: 100;
 }

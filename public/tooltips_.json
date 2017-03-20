@@ -1,0 +1,275 @@
+[
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "resizeBy",
+    "key": "",
+    "value": "Scale the thickness of flows connecting production regions to countries of consumption based either on tonnes of physical commodity, or embedded indicators of conditions in production regions (e.g. area of land in production, associated deforestation etc). "
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "resizeBy",
+    "key": "Trade Volume",
+    "value": "Amount of the traded commodity (tonnes). The total value is a composite of traded sub-products, which are converted to their original raw equivalents and then aggregated. For example exports of soy cake and soy oil are converted to soybean equivalents in the areas of production, where farmers are just producing beans. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "resizeBy",
+    "key": "Land use",
+    "value": "Area of land being used to produce the traded commodity. Based on exported volumes and yield values per jurisdiction."
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "resizeBy",
+    "key": "Financial flow",
+    "value": "Value of the traded product in US dollars as it flows along the supply chain based on the value of the shipment as reported at the port of export (termed Freight on Board value, or FOB). Based on customs and trade data."
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "resizeBy",
+    "key": "Territorial deforestation",
+    "value": "The total annual deforestation per jurisdiction in a given year allocated to downstream supply chain actors in proportion to the volume of a given commodity that they export from a given jurisdiction relative to the total production of that commodity (by all actors) in the same jurisdiction. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "resizeBy",
+    "key": "Potential soy-related deforestation",
+    "value": "The total area of soy expansion in a given year capped by the total deforestation in that same jurisdiction. It represents the maximum area of deforestation that could be attributed to soy expansion in a given region. This deforestation rate is allocated to the actors along the supply chain in proportion to the volume of a soy that they export from a given jurisdiction relative to the total production of soy (by all actors) in the same jurisdiction. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "resizeBy",
+    "key": "Soy-related deforestation",
+    "value": "Annual conversion of native vegetation due to direct conversion for soy (ha), based on soy cultivation maps from Agrosatellite. This deforestation rate is allocated to the actors along the supply chain in proportion to the volume of a soy that they export from a given jurisdiction relative to the total production of soy (by all actors) in the same jurisdiction. Currently available only for the cerrado. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "resizeBy",
+    "key": "Land-based CO2 emissions",
+    "value": "CO2 emissions attributable to deforestation in a jurisdiction, including from above and below-ground biomass. The emissions are allocated to the actors along the supply chain in proportion to the volume of a given commodity that they export from a given jurisdiction relative to the total production of that commodity (by all actors) in the same jurisdiction. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "resizeBy",
+    "key": "Loss of biodiversity",
+    "value": "Reduction of suitable habitat for amphibians as an indicator of biodiversity loss. Information currently available in the Cerrado biome only. Values attributed to the flows of a given actor directly reflect the conditions in the sourcing regions (i.e. it is not a cumulative measure, like deforestation, that an be distributed proportonately).See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "recolourBy",
+    "key": "",
+    "value": "Re-colour material flows by qualitative feature, such as the biome from which a given shipment was originally sourced. For each indicator below, a given color represents a specific value of that indicator as described in the legend."
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "recolourBy",
+    "key": "Node selection",
+    "value": "Select different elements (e.g. companies, countries) in the supply chain map and colour the trade flows associated with those elements differently"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "recolourBy",
+    "key": "Biome",
+    "value": "Colour supply chain flows in accordance with the biome of the sourcing region. "
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "recolourBy",
+    "key": "F500 score",
+    "value": "Colour supply chain flows based on the Foret 500 index, which ranks traders according to the strength of their sustainability commitments. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "recolourBy",
+    "key": "Soy zero deforestation commitment",
+    "value": "Colour supply chain flows based on whether different soy traders have zero deforestation commitments or not. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "recolourBy",
+    "key": "Forest code compliance",
+    "value": "Colour supply chain flows according to the level of compliance with the Forest Code in the municipalities of origin. Compliance is measured as the % of total private land that has a legal reserve deficit for a given municipality. Legal Reserve deficit is the area of land that has been illegally deforested in the past, as determined by the Brazilian Forest Code, and is required by law to be restored or compensated off-farm. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "recolourBy",
+    "key": "Water scarcity",
+    "value": "Colour supply chain flows according to levels of criticality of water stress, calculated as the median water stress level per municipality, in terms of percentage of available blue water. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "recolourBy",
+    "key": "Family farming dominance",
+    "value": "Colour the supply chain according to density of smallholder farms, defined as proportion of municipal areas in the hands of legally defined family farmers (as per Brazilian federal law) vs total farm area. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "changeview",
+    "key": "",
+    "value": "Change the supply chain view from a summary of the whole supply chain that fits within a single display or a complete view with the total map of supply chain flows connecting the production regions of a commodity of interest to traders and countries of import. Selections made within the complete view has slower response times due the volume of data being processed. "
+  },
+  {
+    "page": "sankey",
+    "location": "sankeyColumns",
+    "sublocation": "",
+    "key": "Jurisdiction of production column",
+    "value": "Select the spatial scale of interest: Municipalities of production, logistic hubs (municipalities hosting the supply chain infrastructure for a given commodity, such as silos and crushing facilities, as associated to each of the mapped supply chain pathways), State or Province, and Biome."
+  },
+  {
+    "page": "sankey",
+    "location": "sankeyColumns",
+    "sublocation": "",
+    "key": "Exporter",
+    "value": "Select between the export companies or the ports of export in the exporting country "
+  },
+  {
+    "page": "sankey",
+    "location": "sankeyColumns",
+    "sublocation": "",
+    "key": "Importer",
+    "value": "Select between the name of the company that has financial ownership of the imported commodity or the port of import in the country of destination "
+  },
+  {
+    "page": "sankey",
+    "location": "sankeyColumns",
+    "sublocation": "",
+    "key": "Country",
+    "value": "Select between the country of import or the country of first consumption following re-exports (not currently available)"
+  },
+  {
+    "page": "sankey",
+    "location": "upperBanner",
+    "sublocation": "",
+    "key": "Commodity",
+    "value": "A commodity is comprised of a grouping of traded products as identified by the international Harmonized Commodity Description and Coding System. The volumes of each of these traded products is converted into equivalents of the raw commodity (for example soy cake and soy oil into soybean equivalents) using standardized conversion factors. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "sankey",
+    "location": "ON TOP OF sankey, FIRST TIME THE USER ARRIVES, POPPING UP ONLY FIRST TIMES, AS DISCUSSED WITH JUAN CARLOS",
+    "sublocation": "",
+    "key": "",
+    "value": "This flow visualization (technically called a sankey diagram) depicts the individual pathways of all exports of a given commodity from a given country in a given year. It maps the connections betweeen subnational regions of production, traders and the countries of destination. The width of the flow lines connecting the different stages in the supply chain (nodes) is proportional  to the amount of the commodity that is being traded (i.e. material flows). This flow diagram is interactive and allows the user to isolate and zoom in on supply chains assoiate with specific suply chain actors and regions of sourcing. Trade-flows can also be visualized based on the quanitative characteristics and embedded impacts of production regions (under resize), qualitative characteristics of production regions and supply chain actors (under recolour). Finally, trade flows can be linked dynamically to specific sourcing regions of the map on the left side of the page - which can be expanded to illustrate different social and environmental indicators. See the demonstration video on Trase homepage for more information on how to explore our data using this this interactive sankey visualization. "
+  },
+  {
+    "page": "placeFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "commodity",
+    "value": "A commodity is comprised of a grouping of traded products as identified by their HS code from the international Harmonized Commodity Description and Coding System. The volumes of each of these traded products is converted into equivalents of the raw commodity (for example soy cake and soy oil into soybean equivalents) using standardized conversion factors. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "placeFactsheet",
+    "location": "tableTopTraders",
+    "sublocation": "",
+    "key": "top traders of.. in..",
+    "value": "Ranking based on the amount of raw commodity equivalents traded per company "
+  },
+  {
+    "page": "placeFactsheet",
+    "location": "tableTopConsumers",
+    "sublocation": "",
+    "key": "TOP CONSUMERS IN …",
+    "value": "Ranking based on the amount of raw commodity equivalents consumed per country of import.  This is not taking into account the fact that some countries may re-export the commodity, for example after transformation into other sub-products."
+  },
+  {
+    "page": "placeFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "AREA",
+    "value": "Area of the jurisdiction in Km2"
+  },
+  {
+    "page": "placeFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "AGRICULTURE LAND",
+    "value": "Percentage of the jurisdiction that is farmland (not only for the commodity of interest)"
+  },
+  {
+    "page": "placeFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "SOY LAND",
+    "value": "Percentage of agricultural land in the municipality that is made up of the commodity of interest"
+  },
+  {
+    "page": "placeFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "sankey ICON (NOT YET IMPLEMENTED)",
+    "value": "Click here to access a supply chain map of exports from this jurisdiction"
+  },
+  {
+    "page": "placeFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "MAP ICON (NOT YET IMPLEMENTED)",
+    "value": "Click here to link to a map of this jurisdiction"
+  },
+  {
+    "page": "ACTOR  FACTSHEET",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "commodity",
+    "value": "A commodity is comprised of a grouping of traded products as identified by their HS code from the international Harmonized Commodity Description and Coding System. The volumes of each of these traded products is converted into equivalents of the raw commodity (for example soy cake and soy oil into soybean equivalents) using standardized conversion factors. See https://trase.earth/data-methods.html for more details"
+  },
+  {
+    "page": "actorFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "ZERO DEFORESTATION COMMITMENT",
+    "value": "If a company holds a zero deforestation commitment (of any type)"
+  },
+  {
+    "page": "actorFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "FOREST 500 SCORE",
+    "value": "The Forest 500 index of strength of company commitments"
+  },
+  {
+    "page": "actorFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "sankey ICON (NOT YET IMPLEMENTED)",
+    "value": "Click here to access a supply chain map of exports associated to to this company"
+  },
+  {
+    "page": "actorFactsheet",
+    "location": "upperItems",
+    "sublocation": "",
+    "key": "MAP ICON (NOT YET IMPLEMENTED)",
+    "value": "Click here to access a map of the jurisdictions from which this company is sourcing  "
+  },
+  {
+    "page": "actorFactsheet",
+    "location": "tablesAndDiagrams",
+    "sublocation": "",
+    "key": "A VARIETY OF INDICATORS PRESENTED",
+    "value": "Retrieve definition from Tab 1"
+  },
+  {
+    "page": "dataPortal",
+    "location": "indicators",
+    "sublocation": "",
+    "key": "A VARIETY OF INDICATORS PRESENTED",
+    "value": "Retrieve definition from Tab 1"
+  }
+]

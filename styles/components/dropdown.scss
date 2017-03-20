@@ -28,7 +28,8 @@
     color: rgba($charcoal-grey, .6);
     font-family: $font-family-1;
     font-size: $font-size-small;
-    letter-spacing: -.2px;
+    font-weight: normal;
+    letter-spacing: -.5px;
     text-transform: uppercase;
 
     &.-big {
@@ -42,12 +43,12 @@
     padding: 0 20px 0 0;
     color: $charcoal-grey;
     font-family: $font-family-2;
-    font-size: $font-size-big;
+    font-size: $font-size-medium;
     font-weight: $font-weight-bold;
     cursor: pointer;
 
     &::after {
-      @include arrow(8px, 2px, $medium-pink, 'down'); //shoudl be more bigger than now, maybe 14px and border 3px or 4px
+      @include arrow(8px, 2px, rgba($charcoal-grey, .4), 'down');
       position: absolute;
       top: 50%;
       right: 0;
@@ -63,6 +64,8 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+      line-height: normal;
+      margin: -3px 0 -5px 0;
     }
   }
 
@@ -105,7 +108,7 @@
       pointer-events: none;
     }
 
-    .dropdown-item-title, .dropdown-item-legend {
+    .dropdown-item-legend {
       pointer-events: none;
     }
 
@@ -177,6 +180,7 @@
     &.-no-active {
       .dropdown-item-title {
         color: $gray;
+        text-transform: capitalize;
       }
 
       .dropdown-item-legend-unit {
@@ -197,8 +201,9 @@
 
   &.-small .dropdown-title,
   &.-small .dropdown-list > .dropdown-item {
-    font-size: $font-size-medium;
+    font-size: 16px;
     font-weight: normal;
+    margin: 1px 0 0 0;
   }
 
   &.-homepage {

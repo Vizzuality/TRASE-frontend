@@ -18,7 +18,6 @@ export default (name, height, _labelCharHeight, _labelCharsPerLine, _labelMaxLin
     // line is too long
     if (line.length > _labelCharsPerLine) {
       // last allowed line: show max length possible with ellipsis
-      // debugger
       if (lines.length === maxLinesForNode - 1) {
         currentLine = line.substr(0, _labelCharsPerLine - 1) + '…';
         break;

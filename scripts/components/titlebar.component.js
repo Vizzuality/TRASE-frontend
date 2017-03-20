@@ -1,7 +1,6 @@
 export default class {
   onCreated() {
-    this.search = document.querySelector('.js-search-container');
-    this.nodesTitles = document.querySelector('.js-nodes-titles-container');
+    this.nodesTitles = document.querySelector('.js-nodes-titles');
   }
 
   highlightNode(showTitles) {
@@ -13,7 +12,6 @@ export default class {
   }
 
   _toggle(showTitles) {
-    this.search.classList.toggle('is-hidden', showTitles);
     this.nodesTitles.classList.toggle('is-hidden', !showTitles);
   }
 }
