@@ -59,7 +59,7 @@ export default class {
     this.launcher = document.querySelector('.js-open-search');
     this.closer = document.querySelector('.js-close-search');
 
-    return (this.el && this.input && this.launcher && this.closer);
+    return (this.el && this.input && this.launcher);
   }
 
   _setEventListeners() {
