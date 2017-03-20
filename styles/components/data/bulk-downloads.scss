@@ -21,6 +21,7 @@
     padding: 0 16px;
     margin-bottom: 14px;
     border: solid 1px rgba($charcoal-grey, .3);
-    cursor: pointer;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 }
