@@ -11,8 +11,10 @@ export const GET_ACTOR_FACTSHEET = 'GET_ACTOR_FACTSHEET';
 export const GET_INDICATORS = 'GET_INDICATORS';
 export const GET_JSON_DATA_DOWNLOAD_FILE = 'GET_JSON_DATA_DOWNLOAD_FILE';
 export const GET_CSV_DATA_DOWNLOAD_FILE = 'GET_CSV_DATA_DOWNLOAD_FILE';
+export const GET_DISCLAIMER = 'GET_DISCLAIMER';
 
 const API_ENDPOINTS = {
+  [GET_DISCLAIMER]: { api: 'local', endpoint: 'disclaimer.json' },
   [GET_TOOLTIPS]: { api: 'local', endpoint: 'tooltips.json' },
   [GET_CONTEXTS]: { api: 2, endpoint: '/get_contexts' },
   [GET_ALL_NODES]: { api: 2, endpoint: '/get_all_nodes' },
