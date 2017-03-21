@@ -24,7 +24,7 @@ export default class {
           value: JSON.stringify({
             id: node.id,
             name: node.name.toLowerCase(),
-            columnName: node.columnName.toLowerCase()
+            columnName: node.type.toLowerCase()
           })
         };
       },
