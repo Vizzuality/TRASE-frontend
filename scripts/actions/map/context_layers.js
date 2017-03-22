@@ -15,7 +15,7 @@ export default [{
   layergroupid: 'p2cs-sei@a3fad343@2d97c2633c3ba5dcd2df36dccdd4302c:1476796237575'
 }, {
   name: 'indigenous_areas',
-  human_name: 'Indigenous Areas',
+  human_name: 'Indigenous areas',
   forceZoom: undefined,
   rasterURL: undefined,
   legend: '<div class=\'cartodb-legend custom\'><ul class="bullets"><li class="bkg"><div class="bullet" style="background-color:#ECC35F"></div>Indigenous areas</li></ul></div>',
