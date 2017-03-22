@@ -8,16 +8,27 @@ export default function(links, userecolorGroups) {
   for (var i = 0; i < links.length; i++) {
     var link = links[i];
 
-    let key = `${link.sourceNodeId}-${link.targetNodeId}`;
-    if (userecolorGroups === true) {
-      key = `${key}-colourGroup${link.recolorGroup}`;
-    } else {
-      key = `${key}--${link.qual}-${link.ind}`;
+    let baseKey = `${link.sourceNodeId}-${link.targetNodeId}`;
+    let key = baseKey;
+
+    if ((link.qual !== undefined && link.qual !== 'none') || (link.ind !== undefined && link.ind !== 'none')) {
+      key = `${baseKey}--${link.qual}-${link.ind}`;
+    } else if (userecolorGroups === true) {
+      key = `${baseKey}-colourGroup${link.recolorGroup}`;
+    }
+
+    let transitionKey = baseKey;
+    if (link.qual !== undefined && link.qual !== 'none') {
+      transitionKey = `${transitionKey}-${link.qual}`;
+    }
+    if (link.ind !== undefined && link.ind !== 'none') {
+      transitionKey = `${transitionKey}-${link.ind}`;
     }
 
     if (!dict[key]) {
       const mergedLink = _.cloneDeep(link);
       mergedLink.id = key;
+      mergedLink.transitionKey = transitionKey;
       mergedLinks.push(mergedLink);
       dict[key] = mergedLink;
     } else {

@@ -108,13 +108,12 @@ export default class {
     // remove choropleth from main layer
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', geoIdList.length);
 
-    window.clearTimeout(this.fitBoundsTimeout);
-
-    if (this.vectorLinked) {
-      this.map.removeLayer(this.vectorLinked);
-    }
+    window.clearTimeout(this.showLinkedFeaturesTimeout);
 
     if (!geoIdList.length) {
+      if (this.vectorLinked) {
+        this.map.removeLayer(this.vectorLinked);
+      }
       return;
     }
 
@@ -134,18 +133,20 @@ export default class {
 
     _.pull(linkedFeatures, null);
 
-    if (linkedFeatures.length > 0) {
-      this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
-      this.map.addLayer(this.vectorLinked);
-      this.vectorLinked.eachLayer(layer => {
-        layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
-      });
 
-      this.fitBoundsTimeout = window.setTimeout(() => {
+    this.showLinkedFeaturesTimeout = window.setTimeout(() => {
+      if (this.vectorLinked) {
+        this.map.removeLayer(this.vectorLinked);
+      }
+      if (linkedFeatures.length > 0) {
+        this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
+        this.map.addLayer(this.vectorLinked);
+        this.vectorLinked.eachLayer(layer => {
+          layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
+        });
         this.map.fitBounds(this.vectorLinked.getBounds());
-      }, SANKEY_TRANSITION_TIME);
-    }
-
+      }
+    }, SANKEY_TRANSITION_TIME * 1.1);
   }
 
   selectPolygons(payload) { this._outlinePolygons(payload); }

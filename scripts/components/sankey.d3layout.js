@@ -132,7 +132,40 @@ const sankeyLayout = function() {
   // compute links y and y deltas (later used by sankey.link generator)
   // will be called at each relayouting (user clicks nodes, user scrolls, etc)
   const _computeLinksCoords = () => {
+
+    // source and target are dicts (nodeIds are keys) containing the cumulated height of all links for each node
     const stackedHeightsByNodeId = {source:{},target:{}};
+
+    // retrieve node ys to bootstrap stackedHeights
+    links.forEach(link => {
+      const sId = link.sourceNodeId;
+      stackedHeightsByNodeId.source[sId] = _getNode(link.sourceColumnPosition, sId).y;
+
+      const tId = link.targetNodeId;
+      stackedHeightsByNodeId.target[tId] = _getNode(link.targetColumnPosition, tId).y;
+    });
+
+
+    // sort links by node source and target y positions
+    // TODO move sorting to reducer
+    links.sort((linkA, linkB) => {
+      const sIdAY = stackedHeightsByNodeId.source[linkA.sourceNodeId];
+      const sIdBY = stackedHeightsByNodeId.source[linkB.sourceNodeId];
+      const tIdAY = stackedHeightsByNodeId.target[linkA.targetNodeId];
+      const tIdBY = stackedHeightsByNodeId.target[linkB.targetNodeId];
+      let sort = sIdAY - sIdBY || tIdAY - tIdBY;
+      if (linkA.ind !== undefined && linkA.ind !== 'none' && linkB.ind !== undefined && linkB.ind !== 'none') {
+        sort = linkA.ind - linkB.ind || sort;
+      }
+      if (linkA.qual !== undefined && linkA.qual !== 'none' && linkB.qual !== undefined && linkB.qual !== 'none') {
+        // sorts alphabetically with quals
+        // TODO use the order presentend in the color by menu
+        sort = linkA.qual.charCodeAt(0) - linkB.qual.charCodeAt(0) || sort;
+      }
+
+      return sort;
+    });
+
     links.forEach(link => {
       link.width = linksColumnWidth;
       link.x = columnWidth + _getColumnX(link.sourceColumnPosition);
@@ -144,24 +177,12 @@ const sankeyLayout = function() {
       }
 
       const sId = link.sourceNodeId;
-      if (!stackedHeightsByNodeId.source[sId]) stackedHeightsByNodeId.source[sId] = _getNode(link.sourceColumnPosition, sId).y;
       link.sy = stackedHeightsByNodeId.source[sId];
       stackedHeightsByNodeId.source[sId] = link.sy + link.renderedHeight;
 
-      // const sLayerIndex = link.sourceNodeLayerIndex;
-      // if (layerOffsets && layerOffsets[sLayerIndex]) {
-      //   link.sy += layerOffsets[sLayerIndex];
-      // }
-
       const tId = link.targetNodeId;
-      if (!stackedHeightsByNodeId.target[tId]) stackedHeightsByNodeId.target[tId] = _getNode(link.targetColumnPosition, tId).y;
       link.ty = stackedHeightsByNodeId.target[tId];
       stackedHeightsByNodeId.target[tId] = link.ty + link.renderedHeight;
-
-      // const tLayerIndex = link.targetNodeLayerIndex;
-      // if (layerOffsets && layerOffsets[tLayerIndex]) {
-      //   link.ty += layerOffsets[tLayerIndex];
-      // }
     });
   };
 

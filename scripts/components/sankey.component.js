@@ -204,7 +204,7 @@ export default class {
     const linksData = this.layout.links();
     const links = this.linksContainer
       .selectAll('path')
-      .data(linksData , link => link.id);
+      .data(linksData , link => link.transitionKey);
 
     // update
     links.attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } ); // apply color from CSS class immediately
