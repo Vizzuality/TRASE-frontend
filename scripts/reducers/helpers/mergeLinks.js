@@ -9,7 +9,7 @@ export default function(links, userecolorGroups) {
     var link = links[i];
 
     let baseKey = `${link.sourceNodeId}-${link.targetNodeId}`;
-    let key;
+    let key = baseKey;
 
     if ((link.qual !== undefined && link.qual !== 'none') || (link.ind !== undefined && link.ind !== 'none')) {
       key = `${baseKey}--${link.qual}-${link.ind}`;
