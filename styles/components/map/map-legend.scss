@@ -100,6 +100,7 @@
       border: 1px solid #6C787D;
     }
 
+    .bucket-legend > .bucket-item,
     .bucket-legend > .bucket-item > .bucket {
       height: 100%;
     }
@@ -184,6 +185,7 @@
 
         > .bucket-item {
           flex-basis: calc(100% / 3);
+          height: calc(100% / 3);
         }
       }
 
