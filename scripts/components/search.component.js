@@ -1,22 +1,14 @@
 import 'styles/components/search.scss';
 import Awesomplete from 'awesomplete';
 import 'awesomplete/awesomplete.css';
-import _ from 'lodash';
 
 export default class {
   onCreated() {
-    this._init_once = _.once(this._init);
-    this.initialize();
-  }
+    this.el = document.querySelector('.js-search');
+    this.input = this.el.querySelector('.js-search-input');
+    this.launcher = document.querySelector('.js-open-search');
+    this.closer = document.querySelector('.js-close-search');
 
-  initialize() {
-    if (!this._setVars()) {
-      return;
-    }
-    this._init_once();
-  }
-
-  _init() {
     this.autocomplete = new Awesomplete(this.input, {
       data: node => {
         return {
@@ -24,7 +16,7 @@ export default class {
           value: JSON.stringify({
             id: node.id,
             name: node.name.toLowerCase(),
-            columnName: node.columnName.toLowerCase()
+            columnName: node.type.toLowerCase()
           })
         };
       },
@@ -53,15 +45,6 @@ export default class {
     this._setEventListeners();
   }
 
-  _setVars() {
-    this.el = document.querySelector('.js-search');
-    this.input = this.el.querySelector('.js-search-input');
-    this.launcher = document.querySelector('.js-open-search');
-    this.closer = document.querySelector('.js-close-search');
-
-    return (this.el && this.input && this.launcher);
-  }
-
   _setEventListeners() {
     if (this.launcher !== null) {
       this.launcher.addEventListener('click', this._openSearch.bind(this));
@@ -73,7 +56,6 @@ export default class {
   }
 
   loadNodes(nodes) {
-    this.initialize();
     this.autocomplete.list = nodes;
   }
 

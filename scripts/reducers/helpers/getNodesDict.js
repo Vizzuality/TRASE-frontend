@@ -12,6 +12,7 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       id: node.id,
       columnId: parseInt(node.columnId),
       columnName: column.name,
+      type: column.name,
       columnGroup: column.group,
       isDefault: column.isDefault,
       columnPosition: column.position,

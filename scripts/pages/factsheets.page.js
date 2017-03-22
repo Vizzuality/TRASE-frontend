@@ -14,34 +14,9 @@ import { getURLFromParams, GET_ALL_NODES } from '../utils/getURLFromParams';
 
 const _setSearch = () => {
 
-  const loadNodes = function(nodesDict) {
-    const nodesArray = _.values(nodesDict).filter(node =>
-      node.isUnknown !== true && node.isAggregated !== true && FACT_SHEET_NODE_TYPE_WHITELIST.indexOf(node.type) != -1
-    );
-
-    this.autocomplete.list = nodesArray;
-  };
-
-  const parseNode = (node) => {
-    return {
-      label: node.name.toLowerCase(),
-      value: JSON.stringify({
-        id: node.id,
-        name: node.name.toLowerCase(),
-        columnName: node.type.toLowerCase()
-      })
-    };
-  };
-
   const onNodeSelected = function(nodeId, type) {
-    let url = '';
-    if (type === 'exporter' || type === 'importer') {
-      url = `factsheet-actor.html?nodeId=${nodeId}`;
-    } else {
-      url = `factsheet-place.html?nodeId=${nodeId}`;
-    }
-
-    window.location.href = url;
+    const factsheetType = (type === 'exporter' || type === 'importer') ? 'actor' : 'place';
+    window.location.href = `factsheet-${factsheetType}.html?nodeId=${nodeId}`;
   };
 
   const allNodesURL = getURLFromParams(GET_ALL_NODES);
@@ -55,17 +30,17 @@ const _setSearch = () => {
       const search = new Search();
       search.onCreated();
 
-      search.autocomplete.data = parseNode;
-      loadNodes.apply(search, [result.data]);
-      search.callbacks = {};
-      search.callbacks.onNodeSelected = onNodeSelected;
+      const nodesArray = _.values(result.data).filter(node =>
+        node.isUnknown !== true && node.isAggregated !== true && FACT_SHEET_NODE_TYPE_WHITELIST.indexOf(node.type) != -1
+      );
+
+      search.callbacks = {
+        onNodeSelected
+      };
+
+      search.loadNodes(nodesArray);
     });
 };
 
-const _init = () => {
-  _setSearch();
-  new Nav();
-};
-
-
-_init();
+_setSearch();
+new Nav();
