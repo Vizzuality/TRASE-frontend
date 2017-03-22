@@ -147,12 +147,23 @@ const sankeyLayout = function() {
 
 
     // sort links by node source and target y positions
+    // TODO move sorting to reducer
     links.sort((linkA, linkB) => {
       const sIdAY = stackedHeightsByNodeId.source[linkA.sourceNodeId];
       const sIdBY = stackedHeightsByNodeId.source[linkB.sourceNodeId];
       const tIdAY = stackedHeightsByNodeId.target[linkA.targetNodeId];
       const tIdBY = stackedHeightsByNodeId.target[linkB.targetNodeId];
-      return sIdAY - sIdBY || tIdAY - tIdBY;
+      let sort = sIdAY - sIdBY || tIdAY - tIdBY;
+      if (linkA.ind !== undefined && linkA.ind !== 'none' && linkB.ind !== undefined && linkB.ind !== 'none') {
+        sort = linkA.ind - linkB.ind || sort;
+      }
+      if (linkA.qual !== undefined && linkA.qual !== 'none' && linkB.qual !== undefined && linkB.qual !== 'none') {
+        // sorts alphabetically with quals
+        // TODO use the order presentend in the color by menu
+        sort = linkA.qual.charCodeAt(0) - linkB.qual.charCodeAt(0) || sort;
+      }
+
+      return sort;
     });
 
     links.forEach(link => {
