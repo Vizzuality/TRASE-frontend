@@ -87,7 +87,7 @@
   },
   {
     "version": "0.0.1",
-    "human_name": "Deforestation Alerts",
+    "human_name": "Deforestation polygons",
     "name": "brazil_defor_alerts",
     "legend":"<div class='cartodb-legend custom'><ul><li><div class= \"bullet\" style= \"background:#850200\"></div>Deforestation</li></ul></div>",
     "layergroup": {

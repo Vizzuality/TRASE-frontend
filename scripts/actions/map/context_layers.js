@@ -36,7 +36,7 @@ export default [{
   layergroupid: 'p2cs-sei@909147cf@9c20e01d34445cd0e3d124eb13185b18:1476875895402'
 }, {
   name: 'brazil_defor_alerts',
-  human_name: 'Deforestation Alerts',
+  human_name: 'Deforestation polygons',
   forceZoom: undefined,
   rasterURL: undefined,
   legend: '<div class=\'cartodb-legend custom\'><ul class="bullets"><li><div class= "bullet" style= "background:#850200"></div>Deforestation</li></ul></div>',
