@@ -10,11 +10,10 @@ export default function(links, userecolorGroups) {
 
     let baseKey = `${link.sourceNodeId}-${link.targetNodeId}`;
     let key;
-
-    if ((link.qual !== undefined && link.qual !== 'none') || (link.ind !== undefined && link.ind !== 'none')) {
-      key = `${baseKey}--${link.qual}-${link.ind}`;
-    } else if (userecolorGroups === true) {
+    if (userecolorGroups === true) {
       key = `${baseKey}-colourGroup${link.recolorGroup}`;
+    } else {
+      key = `${baseKey}--${link.qual}-${link.ind}`;
     }
 
     let transitionKey = baseKey;
