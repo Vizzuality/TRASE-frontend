@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import CountryCommodity from 'containers/nav/country-commodity.container';
+import Filters from 'containers/nav/filters.container';
 
 const Nav = ({ tooltips, selectedContext }) => {
 
@@ -7,8 +8,7 @@ const Nav = ({ tooltips, selectedContext }) => {
     return;
   }
 
-  console.log(selectedContext)
-
+  const hasFilters = selectedContext.filterBy && selectedContext.filterBy.length > 0;
 
   return (
     <nav>
@@ -22,6 +22,10 @@ const Nav = ({ tooltips, selectedContext }) => {
         </div>
 
         <CountryCommodity />
+
+        {hasFilters === true &&
+          <Filters />
+        }
 
         <div class='nav-item js-context-filters' />
 

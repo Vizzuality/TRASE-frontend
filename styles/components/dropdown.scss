@@ -24,7 +24,7 @@
     }
   }
 
-  &.-countryCommodity {
+  &.-capitalize {
     .dropdown-title, .dropdown-item {
       text-transform: capitalize;
     }

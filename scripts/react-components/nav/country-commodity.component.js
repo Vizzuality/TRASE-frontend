@@ -4,7 +4,7 @@ import classNames from 'classnames';
 export default ({ onToggle, onSelected, tooltips, currentDropdown, contexts, selectedContextCountry, selectedContextCommodity }) => {
   return (
     <div class='nav-item' onClick={onToggle}>
-      <div class='c-dropdown -countryCommodity'>
+      <div class='c-dropdown -capitalize'>
         <span class='dropdown-label'>
           Country - Commodity
           <svg class='icon tooltip-icon js-tooltip' data-tooltip-text={tooltips.sankey.nav.context.main}>
