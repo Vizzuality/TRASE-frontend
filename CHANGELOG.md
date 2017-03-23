@@ -1,3 +1,6 @@
+### 2.0.2
+- Improved flows page dropdowns behaviour
+
 ### 2.0.1
 - Cross browser support improvements
 - Search component refactoring and improvements
