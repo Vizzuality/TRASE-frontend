@@ -1,14 +1,19 @@
 import 'styles/components/dropdown.scss';
 
 export default class {
-  constructor(id, callback, child) {
+  constructor(id, callback, hideCurrentSelected = false, hideOnlyChild = false) {
     this.id = id;
     this.callback = callback;
-    this.child = child;
     this.el = document.querySelector(`[data-dropdown=${id}]`);
     this.title = this.el.querySelector('.js-dropdown-title');
     this.list = this.el.querySelector('.js-dropdown-list');
     this.list.classList.add('is-hidden');
+
+    if (this._onlyChild() && hideOnlyChild === true) {
+      this.el.classList.add('-hide-only-child');
+    }
+
+    this.hideCurrentSelected = hideCurrentSelected;
 
     this._setEventListeners();
   }
@@ -47,15 +52,29 @@ export default class {
     });
   }
 
+  _onlyChild() {
+    return (this.list.children.length <= 1);
+  }
+
   selectValue(value) {
     // TODO friday hack, this should not happen
     if (value === undefined) {
       value = 'none';
     }
-    const valueTitle =
+
+    if (this.hideCurrentSelected === true && this.currentValueTitle) {
+      this.currentValueTitle.classList.remove('is-hidden');
+    }
+
+    this.currentValueTitle =
       this.list.querySelector(`[data-value="${value}"] .js-dropdown-item-title`) ||
       this.list.querySelector(`[data-value="${value}"]`);
-    this.setTitle(valueTitle.innerHTML);
+    this.setTitle(this.currentValueTitle.innerHTML);
+
+    if (this.hideCurrentSelected === true && this.currentValueTitle) {
+      this.currentValueTitle.classList.add('is-hidden');
+    }
+
   }
 
   setTitle(text) {
@@ -74,14 +93,7 @@ export default class {
   }
 
   _toggle() {
-    var isOpen = !this.list.classList.toggle('is-hidden');
-    if (this.child) {
-      if (isOpen) {
-        this.child.onDropdownOpen();
-      } else {
-        this.child.onDropdownClose();
-      }
-    }
+    !this.list.classList.toggle('is-hidden');
   }
 
   _close() {
