@@ -1,3 +1,18 @@
+### 2.0.1
+- Cross browser support improvements
+- Search component refactoring and improvements
+
+### 2.0.0
+- Improved design
+- Added data portal basic functionality
+- Added multi-context support for sankey
+- Added global search components
+- Improved map
+- Improved sankey
+
+### 1.0.7
+- map, sankey: performance improvements
+
 ### 1.0.6
 Add homepage anchors
 Fix google analytics detection on devel envs

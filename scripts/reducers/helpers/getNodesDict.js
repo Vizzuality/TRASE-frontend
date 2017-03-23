@@ -12,6 +12,7 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       id: node.id,
       columnId: parseInt(node.columnId),
       columnName: column.name,
+      type: column.name,
       columnGroup: column.group,
       isDefault: column.isDefault,
       columnPosition: column.position,
@@ -20,14 +21,8 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       // inds: []
     };
 
-    // TODO temp hack, wait for DB fix
-    if (node.name === 'None' || node.name === 'DOMESTIC CONSUMPTION' || node.id === 424) {
-      newNode.isDomestic = true;
-      newNode.name = 'DOMESTIC CONSUMPTION';
-    }
-
-    if (node.isDomestic === true || node.isDomestic === 'true') {
-      newNode.isDomestic = true;
+    if (node.isDomesticConsumption === true || node.isDomesticConsumption === 'true') {
+      newNode.isDomesticConsumption = true;
     }
 
     if (node.isAggregated === true || node.isAggregated === 'true') {

@@ -1,6 +1,6 @@
 import connect from 'connect';
 import { selectMapDimension } from 'actions/flows.actions';
-import { toggleModal } from 'actions/app.actions';
+import { toggleModal, loadTooltip } from 'actions/app.actions';
 import MapDimensions from 'components/map-dimensions.component.js';
 
 const mapMethodsToState = (state) => ({
@@ -20,7 +20,8 @@ const mapMethodsToState = (state) => ({
 
 const mapViewCallbacksToActions = () => ({
   onMapDimensionsSelected: dimensionData => selectMapDimension(dimensionData),
-  onToggleModal: (visibility, data) => toggleModal(visibility, data)
+  onToggleModal: (visibility, data) => toggleModal(visibility, data),
+  onMapDimensionsLoaded: () => loadTooltip(),
 });
 
 export default connect(MapDimensions, mapMethodsToState, mapViewCallbacksToActions);

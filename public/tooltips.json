@@ -1,0 +1,32 @@
+{
+  "sankey" : {
+    "nav" : {
+      "context": {
+        "main": "A commodity is comprised of a grouping of traded products as identified by the international Harmonized Commodity Description and Coding System. The volumes of each of these traded products is converted into equivalents of the raw commodity (for example soy cake and soy oil into soybean equivalents) using standardized conversion factors. See https://trase.earth/data-methods.html for more details"
+      },
+      "resizeBy": {
+        "main": "Scale the thickness of flows connecting production regions to countries of consumption based either on tonnes of physical commodity, or embedded indicators of conditions in production regions (e.g. area of land in production, associated deforestation etc).",
+        "Volume": "Amount of the traded commodity (tonnes). The total value is a composite of traded sub-products, which are converted to their original raw equivalents and then aggregated. For example exports of soy cake and soy oil are converted to soybean equivalents in the areas of production, where farmers are just producing beans. See https://trase.earth/data-methods.html for more details",
+        "LAND_USE": "Area of land being used to produce the traded commodity. Based on exported volumes and yield values per jurisdiction.",
+        "FOB": "Value of the traded product in US dollars as it flows along the supply chain based on the value of the shipment as reported at the port of export (termed Freight on Board value, or FOB). Based on customs and trade data.",
+        "DEFORESTATION": "The total annual deforestation per jurisdiction in a given year allocated to downstream supply chain actors in proportion to the volume of a given commodity that they export from a given jurisdiction relative to the total production of that commodity (by all actors) in the same jurisdiction. See https://trase.earth/data-methods.html for more details",
+        "POTENTIAL_SOY_RELATED_DEFOR": "The total area of soy expansion in a given year capped by the total deforestation in that same jurisdiction. It represents the maximum area of deforestation that could be attributed to soy expansion in a given region. This deforestation rate is allocated to the actors along the supply chain in proportion to the volume of a soy that they export from a given jurisdiction relative to the total production of soy (by all actors) in the same jurisdiction. See https://trase.earth/data-methods.html for more details",
+        "SOY_DEFORESTATION": "Annual conversion of native vegetation due to direct conversion for soy (ha), based on soy cultivation maps from Agrosatellite. This deforestation rate is allocated to the actors along the supply chain in proportion to the volume of a soy that they export from a given jurisdiction relative to the total production of soy (by all actors) in the same jurisdiction. Currently available only for the cerrado. See https://trase.earth/data-methods.html for more details",
+        "land based c02 emissions ?": "Reduction of suitable habitat for amphibians as an indicator of biodiversity loss. Information currently available in the Cerrado biome only. Values attributed to the flows of a given actor directly reflect the conditions in the sourcing regions (i.e. it is not a cumulative measure, like deforestation, that an be distributed proportonately).See https://trase.earth/data-methods.html for more details",
+        "Loss of biodiversity ?": "Reduction of suitable habitat for amphibians as an indicator of biodiversity loss. Information currently available in the Cerrado biome only. Values attributed to the flows of a given actor directly reflect the conditions in the sourcing regions (i.e. it is not a cumulative measure, like deforestation, that an be distributed proportonately).See https://trase.earth/data-methods.html for more details"
+      },
+      "colorBy": {
+        "main": "Re-colour material flows by qualitative feature, such as the biome from which a given shipment was originally sourced. For each indicator below, a given color represents a specific value of that indicator as described in the legend.",
+        "none": "Select different elements (e.g. companies, countries) in the supply chain map and colour the trade flows associated with those elements differently",
+        "ZERO_DEFORESTATION": "Colour supply chain flows based on whether different soy traders have zero deforestation commitments or not. See https://trase.earth/data-methods.html for more details",
+        "BIOME": "Colour supply chain flows in accordance with the biome of the sourcing region.",
+        "WATER_SCARCITY": "Colour supply chain flows according to levels of criticality of water stress, calculated as the median water stress level per municipality, in terms of percentage of available blue water. See https://trase.earth/data-methods.html for more details",
+        "FOREST_500": "Colour supply chain flows based on the Forest 500 index, which ranks traders according to the strength of their sustainability commitments. See https://trase.earth/data-methods.html for more details",
+        "SMALLHOLDERS": "Colour the supply chain according to density of smallholder farms, defined as proportion of municipal areas in the hands of legally defined family farmers (as per Brazilian federal law) vs total farm area. See https://trase.earth/data-methods.html for more details"
+      },
+      "view": {
+        "main": "Change the supply chain view from a summary of the whole supply chain that fits within a single display or a complete view with the total map of supply chain flows connecting the production regions of a commodity of interest to traders and countries of import. Selections made within the complete view has slower response times due the volume of data being processed. "
+      }
+    }
+  }
+}

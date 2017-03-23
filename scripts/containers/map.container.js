@@ -42,6 +42,7 @@ const mapMethodsToState = (state) => ({
     _returnedValue: (state) => {
       return {
         choropleth: state.flows.choropleth,
+        selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
         linkedGeoIds: state.flows.linkedGeoIds,
         selectedMapDimensions: state.flows.selectedMapDimensions
       };
@@ -49,7 +50,15 @@ const mapMethodsToState = (state) => ({
   },
   loadContextLayers: state.flows.selectedMapContextualLayersData,
   loadBasemap: state.flows.selectedMapBasemap,
-  showLinkedGeoIds: state.flows.linkedGeoIds
+  showLinkedGeoIds: {
+    _comparedValue: (state) => state.flows.linkedGeoIds,
+    _returnedValue: (state) => {
+      return {
+        selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
+        linkedGeoIds: state.flows.linkedGeoIds
+      };
+    }
+  }
 });
 
 const mapViewCallbacksToActions = () => ({

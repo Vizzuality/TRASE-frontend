@@ -9,7 +9,7 @@
 
     > .c-anchor-list {
       position: absolute;
-      top: 0;
+      top: 80px;
       width: $anchor-list-max-width;
 
       &.-bottom {
@@ -30,6 +30,13 @@
     > .content {
       max-width: $content-max-width;
       margin: 0 0 0 $anchor-list-max-width;
+
+      h2.-anchor::before {
+        content:"";
+        display:block;
+        height:90px; /* fixed header height*/
+        margin:-90px 0 0; /* negative fixed header height */
+      }
     }
   }
 }

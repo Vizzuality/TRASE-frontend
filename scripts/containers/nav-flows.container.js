@@ -7,16 +7,17 @@ import {
 import Nav from 'components/nav-flows.component.js';
 
 const mapMethodsToState = (state) => ({
-  render: {
+  renderContext: {
     _comparedValue: (state) => state.flows.selectedContext,
     _returnedValue: (state) => {
       return {
         contexts: state.flows.contexts,
         selectedContextId: state.flows.selectedContextId,
-        detailedView: state.flows.detailedView
+        tooltips: state.app.tooltips
       };
     }
   },
+  addTooltips: state.app.tooltips,
   selectContext: state.flows.selectedContext,
   selectResizeBy: state.flows.selectedResizeBy,
   selectBiomeFilter: state.flows.selectedBiomeFilter,

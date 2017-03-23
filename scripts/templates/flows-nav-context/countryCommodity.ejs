@@ -1,0 +1,19 @@
+<div class="c-dropdown" data-dropdown="context">
+  <span class="dropdown-label">
+    Country - Commodity
+    <svg class="icon tooltip-icon js-tooltip" data-tooltip-text="<%= tooltips.sankey.nav.context.main %>">
+      <use xlink:href="#icon-layer-info"></use>
+    </svg>
+  </span>
+  <span class="js-dropdown-title dropdown-title">
+    -
+  </span>
+  <ul class="js-dropdown-list dropdown-list">
+    <% contexts.forEach(function(context) { %>
+    <li class="js-dropdown-item dropdown-item" <%= context.isDisabled ? '' : 'data-value="' + context.id + '"'
+    %>><%= _.capitalize(context
+              .countryName) %> - <%=
+        _.capitalize(context.commodityName) %></li>
+    <% }) %>
+  </ul>
+</div>

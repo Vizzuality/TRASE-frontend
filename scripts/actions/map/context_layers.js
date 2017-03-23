@@ -15,7 +15,7 @@ export default [{
   layergroupid: 'p2cs-sei@a3fad343@2d97c2633c3ba5dcd2df36dccdd4302c:1476796237575'
 }, {
   name: 'indigenous_areas',
-  human_name: 'Indigenous Areas',
+  human_name: 'Indigenous areas',
   forceZoom: undefined,
   rasterURL: undefined,
   legend: '<div class=\'cartodb-legend custom\'><ul class="bullets"><li class="bkg"><div class="bullet" style="background-color:#ECC35F"></div>Indigenous areas</li></ul></div>',
@@ -36,7 +36,7 @@ export default [{
   layergroupid: 'p2cs-sei@909147cf@9c20e01d34445cd0e3d124eb13185b18:1476875895402'
 }, {
   name: 'brazil_defor_alerts',
-  human_name: 'Deforestation Alerts',
+  human_name: 'Deforestation polygons',
   forceZoom: undefined,
   rasterURL: undefined,
   legend: '<div class=\'cartodb-legend custom\'><ul class="bullets"><li><div class= "bullet" style= "background:#850200"></div>Deforestation</li></ul></div>',

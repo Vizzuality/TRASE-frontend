@@ -91,7 +91,6 @@ body, html {
     > .c-columns-selector {
       top: 8px;
       left: $map-width + $layer-map-width;
-      width: calc(100% - #{$map-width + $layer-map-width});
       transition: left .45s $ease-in-out-sine;
     }
 

@@ -10,7 +10,8 @@ import {
   GET_NODES,
   GET_LINKED_GEO_IDS,
   GET_MAP_BASE_DATA,
-  GET_CONTEXTS
+  GET_CONTEXTS,
+  GET_TOOLTIPS
 } from 'utils/getURLFromParams';
 import mapContextualLayers from './map/context_layers';
 import getNodeIdFromGeoId from './helpers/getNodeIdFromGeoId';
@@ -120,21 +121,30 @@ export function loadInitialData() {
     });
 
     const contextURL = getURLFromParams(GET_CONTEXTS);
+    const tooltipsURL = getURLFromParams(GET_TOOLTIPS);
 
-    fetch(contextURL).then(resp => resp.text()).then(data => {
-      const payload = JSON.parse(data).data;
+    Promise.all([contextURL, tooltipsURL].map(url => fetch(url)
+      .then(resp => resp.text())))
+      .then(data => {
+        const tooltipsPayload = JSON.parse(data[1]);
 
-      // load contexts
-      dispatch({
-        type: actions.LOAD_CONTEXTS, payload
+        dispatch({
+          type: actions.SET_TOOLTIPS,
+          payload: tooltipsPayload
+        });
+
+        const contextPayload = JSON.parse(data[0]).data;
+        // load contexts
+        dispatch({
+          type: actions.LOAD_CONTEXTS,
+          payload: contextPayload
+        });
+
+        const state = getState();
+        const defaultContextId = state.flows.selectedContextId || contextPayload.find(context => context.isDefault === true).id;
+
+        dispatch(setContext(defaultContextId, true));
       });
-
-      const state = getState();
-
-      const defaultContextId = state.flows.selectedContextId || payload.find(context => context.isDefault === true).id;
-
-      dispatch(setContext(defaultContextId, true));
-    });
   };
 }
 
@@ -239,7 +249,7 @@ export function loadLinks() {
     }
 
     const selectedBiomeFilter = state.flows.selectedBiomeFilter;
-    if (selectedBiomeFilter && selectedBiomeFilter.value !== 'none') {
+    if (selectedBiomeFilter && selectedBiomeFilter.value && selectedBiomeFilter.value !== 'none') {
       params.biome_filter_id = selectedBiomeFilter.nodeId;
     }
 
@@ -466,10 +476,11 @@ export function searchNode(nodeId) {
 
 export function loadLinkedGeoIDs() {
   return (dispatch, getState) => {
-    const selectedNodesIds = getState().flows.selectedNodesIds;
+    const state = getState();
+    const selectedNodesIds = state.flows.selectedNodesIds;
 
     // when selection only contains geo nodes (column 0), we should not call get_linked_geoids
-    const selectedNodesColumnsPos = getState().flows.selectedNodesColumnsPos;
+    const selectedNodesColumnsPos = state.flows.selectedNodesColumnsPos;
     const selectedNonGeoNodeIds = selectedNodesIds.filter((nodeId, index) => {
       return selectedNodesColumnsPos[index] !== 0;
     });
@@ -480,10 +491,10 @@ export function loadLinkedGeoIDs() {
       return;
     }
     const params = {
-      context_id: getState().flows.selectedContextId,
-      years: _.uniq([getState().flows.selectedYears[0], getState().flows.selectedYears[1]]),
+      context_id: state.flows.selectedContextId,
+      years: _.uniq([state.flows.selectedYears[0], state.flows.selectedYears[1]]),
       node_id: selectedNodesIds,
-      target_column_id: getState().flows.selectedColumnsIds[0]
+      target_column_id: state.flows.selectedColumnsIds[0]
     };
     const url = getURLFromParams(GET_LINKED_GEO_IDS, params);
 

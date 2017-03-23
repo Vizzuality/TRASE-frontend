@@ -1,13 +1,15 @@
 import Dropdown from 'components/dropdown.component';
 import YearsMenu from 'components/nav/years-brush/years-slider.component';
 import 'styles/components/shared/nav.scss';
-import NavTemplate from 'ejs!templates/flows-nav.ejs';
+import CountryCommodityTemplate from 'ejs!templates/flows-nav-context/countryCommodity.ejs';
+import FiltersTemplate from 'ejs!templates/flows-nav-context/filters.ejs';
+import ResizeByTemplate from 'ejs!templates/flows-nav-context/resizeBy.ejs';
+import RecolorByTemplate from 'ejs!templates/flows-nav-context/recolorBy.ejs';
+import Tooltip from 'tether-tooltip';
 import _ from 'lodash';
 
 export default class {
   onCreated() {
-    this.container = document.querySelector('.js-flows-nav-container');
-
     this._setVars();
     this._setEventListeners();
 
@@ -15,11 +17,22 @@ export default class {
       visibilityAppMenu: false
     };
 
+    this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
+
     this.setAppMenuVisibility();
 
   }
 
-  render({ contexts, selectedContextId, detailedView }) {
+  addTooltips(tooltips) {
+    new Tooltip({
+      target: document.querySelector('.js-context-view svg'),
+      content: tooltips.sankey.nav.view.main,
+      classes: 'c-tooltip',
+      position: 'top right'
+    });
+  }
+
+  renderContext({ contexts, selectedContextId, tooltips}) {
     let currentContext = contexts ? contexts.find(elem => elem.id === selectedContextId) : null;
     let filters = null;
     let resizeBy = null;
@@ -31,8 +44,17 @@ export default class {
       recolorBy = currentContext.recolorBy.sort((a, b) => (a.groupNumber === b.groupNumber) ? (a.position > b.position) : (a.groupNumber > b.groupNumber));
     }
 
-    this.container.innerHTML = NavTemplate({
-      contexts, filters, resizeBy, recolorBy: this._generateRecolorByOption(recolorBy)
+    document.querySelector('.js-context-countryCommodity').innerHTML = CountryCommodityTemplate({ contexts, tooltips });
+
+    if (filters) {
+      document.querySelector('.js-context-filters').innerHTML = FiltersTemplate({ filters, tooltips });
+    }
+    document.querySelector('.js-context-filters').classList.toggle('is-hidden', filters === null);
+
+    document.querySelector('.js-context-resizeBy').innerHTML = ResizeByTemplate({ resizeBy, tooltips });
+    document.querySelector('.js-context-recolorBy').innerHTML = RecolorByTemplate({
+      recolorBy: this._generateRecolorByOption(recolorBy),
+      tooltips
     });
 
     if (currentContext) {
@@ -50,9 +72,6 @@ export default class {
       this.recolorByDropdown = new Dropdown('recolor-by', this.callbacks.onRecolorBySelected, true);
 
       this.legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
-
-      this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
-      this.selectView(detailedView);
     }
 
   }
@@ -68,7 +87,7 @@ export default class {
         case 'qual': {
           recolorByElem.options = [];
           recolorByElem.nodes.forEach(node => recolorByElem.options.push({
-            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.name)}-${_.toLower(node)}`.replace(/ /g, '-'),
+            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.legendType)}-${_.toLower(recolorByElem.legendColorTheme)}-${_.toLower(node)}`.replace(/ /g, '-'),
             label: _.capitalize(node)
           }));
           break;
@@ -77,7 +96,7 @@ export default class {
         case 'linear': {
           recolorByElem.options = [];
           _.range(recolorByElem.intervalCount).forEach(node => recolorByElem.options.push({
-            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.name)}-${_.toLower(node)}`.replace(/ /g, '-'),
+            class: `-${_.toLower(recolorByElem.type)}-${_.toLower(recolorByElem.legendType)}-${_.toLower(recolorByElem.legendColorTheme)}-${_.toLower(node)}`.replace(/ /g, '-'),
             label: ''
           }));
           break;

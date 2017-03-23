@@ -5,7 +5,6 @@ import  'd3-transition';
 import { DETAILED_VIEW_MIN_LINK_HEIGHT, SANKEY_TRANSITION_TIME } from 'constants';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
-import getComputedSize from 'utils/getComputedSize';
 import 'styles/components/sankey.scss';
 import LinkTooltipTemplate from 'ejs!templates/sankey/linkTooltip.ejs';
 import 'styles/components/sankey/linkTooltip.scss';
@@ -17,8 +16,8 @@ export default class {
     this._build();
   }
 
-  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy}) {
-    this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
+  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, sankeySize}) {
+    this.layout.setViewportSize(sankeySize);
 
     if (this.layout.relayout()) {
       this._render(selectedRecolorBy);
@@ -40,7 +39,7 @@ export default class {
     if (linksPayload.detailedView === false) {
       this.svg.style('height', '100%');
     }
-    this.layout.setViewportSize(getComputedSize('.js-sankey-canvas'));
+    this.layout.setViewportSize(linksPayload.sankeySize);
     this.layout.setLinksPayload(linksPayload);
     this.layout.relayout();
 
@@ -148,9 +147,9 @@ export default class {
     }
 
     if (selectedRecolorBy.type === 'qual') {
-      classPath = `${classPath} -qual-${_.toLower(selectedRecolorBy.name)}-${link.qual}`;
+      classPath = `${classPath} -qual-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${link.qual}`;
     } else if (selectedRecolorBy.type === 'ind') {
-      classPath = `${classPath} -ind-${_.toLower(selectedRecolorBy.name)}-${link.ind}`;
+      classPath = `${classPath} -ind-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${selectedRecolorBy.divisor ? Math.round(link.ind/selectedRecolorBy.divisor) : link.ind}`;
     } else if (link.recolorGroup) {
       classPath = `${classPath} -flow-${link.recolorGroup}`;
     }
@@ -174,7 +173,7 @@ export default class {
       .attr('class', 'sankey-node')
       .attr('transform', node => `translate(0,${node.y})`)
       .classed('-is-aggregated', node => node.isAggregated)
-      .classed('-is-domestic', node => node.isDomestic)
+      .classed('-is-domestic', node => node.isDomesticConsumption)
       .on('mouseenter', function(node) { that._onNodeOver(d3_select(this), node.id, node.isAggregated); } )
       .on('mouseleave', () => { this._onNodeOut(); } )
       .on('click', node => { this.callbacks.onNodeClicked(node.id, node.isAggregated); } );
@@ -205,7 +204,7 @@ export default class {
     const linksData = this.layout.links();
     const links = this.linksContainer
       .selectAll('path')
-      .data(linksData , link => link.id);
+      .data(linksData , link => link.transitionKey);
 
     // update
     links.attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } ); // apply color from CSS class immediately

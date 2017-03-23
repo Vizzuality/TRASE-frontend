@@ -164,6 +164,11 @@
     color: $white;
     cursor: pointer;
 
+    &.-disabled {
+      pointer-events: none;
+      background-color: $charcoal-grey-faded;
+      cursor: not-allowed;
+    }
     svg {
       position: relative;
       margin-right: 9px;
