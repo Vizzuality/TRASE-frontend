@@ -62,3 +62,10 @@ export function loadDisclaimer() {
       });
   };
 }
+
+export function toggleDropdown(dropdownId) {
+  return {
+    type: actions.TOGGLE_DROPDOWN,
+    dropdownId
+  };
+}

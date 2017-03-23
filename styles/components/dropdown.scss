@@ -24,6 +24,12 @@
     }
   }
 
+  &.-countryCommodity {
+    .dropdown-title, .dropdown-item {
+      text-transform: capitalize;
+    }
+  }
+
   &.-hide-only-child {
     pointer-events: none;
     cursor: default;
@@ -112,7 +118,7 @@
       cursor: pointer;
     }
 
-    &:not([data-value]) {
+    &.-disabled {
       color: rgba($charcoal-grey, .3);
       pointer-events: none;
     }

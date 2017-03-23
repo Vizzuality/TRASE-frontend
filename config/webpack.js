@@ -101,6 +101,7 @@ const config = {
       templates: 'scripts/templates',
       style: 'styles',
       components: 'scripts/components',
+      'react-components': 'scripts/react-components',
       containers: 'scripts/containers',
       utils: 'scripts/utils',
       constants: 'scripts/constants',

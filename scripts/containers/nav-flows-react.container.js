@@ -1,10 +1,11 @@
 import { connect } from 'preact-redux';
-import Nav from 'components/nav/nav-flows-react.component.js';
+import Nav from 'react-components/nav-flows.component.js';
 
 const mapStateToProps = (state) => {
   // console.log(state)
   return {
-    text: state.flows.selectedYears[0]
+    tooltips: state.app.tooltips,
+    selectedContext: state.flows.selectedContext
   };
 };
 
