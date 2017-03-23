@@ -3,7 +3,7 @@ module.exports = {
         "browser": true,
         "es6": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "standard-preact"],
     "rules": {
         "indent": [
             "warn",
@@ -27,7 +27,8 @@ module.exports = {
     },
     "parserOptions": {
       "ecmaFeatures": {
-        "experimentalObjectRestSpread": true
+        "experimentalObjectRestSpread": true,
+        "jsx": true
       },
       "sourceType": "module"
     },
@@ -40,5 +41,8 @@ module.exports = {
       GOOGLE_ANALYTICS_KEY: true,
       ga: true,
       fetch: true
-    }
+    },
+    "plugins": [
+      "react"
+    ]
 };

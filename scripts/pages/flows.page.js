@@ -9,6 +9,7 @@ import MapLegendContainer from 'containers/map-legend.container';
 import MapBasemapsContainer from 'containers/map-basemaps.container';
 import MapContainer from 'containers/map.container';
 import NavContainer from 'containers/nav-flows.container';
+import NavContainer2 from 'containers/nav-flows-react.container';
 import TitlebarContainer from 'containers/titlebar.container';
 import NodesTitlesContainer from 'containers/nodesTitles.container';
 import SearchContainer from 'containers/search.container';
@@ -49,6 +50,7 @@ const start = () => {
   new MapLegendContainer(store);
   new MapBasemapsContainer(store);
   new NavContainer(store);
+  new NavContainer2(store);
   new TitlebarContainer(store);
   new NodesTitlesContainer(store);
   new SearchContainer(store);
