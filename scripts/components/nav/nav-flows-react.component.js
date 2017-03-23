@@ -1,9 +1,12 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 
-class Nav extends Component {
-  render() {
-    return <span id={'test'}>hello, preact</span>;
-  }
-}
+const Nav = ({ onTodoClick, text }) => (
+  <li
+    onClick={() => onTodoClick('pouettt')}
+  >
+    {text}DFGHJKLKJHGF
+  </li>
+
+);
 
 export default Nav;

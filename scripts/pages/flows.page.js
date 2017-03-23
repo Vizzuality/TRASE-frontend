@@ -1,5 +1,8 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { Provider } from 'preact-redux';
+import { h, render } from 'preact';
+
 import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
 import ColumnsSelectorContainer from 'containers/columns-selector.container';
@@ -50,12 +53,19 @@ const start = () => {
   new MapLegendContainer(store);
   new MapBasemapsContainer(store);
   new NavContainer(store);
-  new NavContainer2(store);
   new TitlebarContainer(store);
   new NodesTitlesContainer(store);
   new SearchContainer(store);
   new TooltipContainer(store);
   new ModalContainer(store);
+
+  render(
+    <Provider store={store}>
+      <NavContainer2 />
+    </Provider>,
+    document.getElementById('js-flows-nav-react')
+  );
+
 
   store.dispatch(loadDisclaimer());
   store.dispatch(loadInitialData());
