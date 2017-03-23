@@ -1,14 +1,20 @@
 import 'styles/components/dropdown.scss';
 
 export default class {
-  constructor(id, callback, hideOnlyChild) {
+  constructor(id, callback, hideCurrentSelected = false, hideOnlyChild = false) {
     this.id = id;
     this.callback = callback;
     this.el = document.querySelector(`[data-dropdown=${id}]`);
     this.title = this.el.querySelector('.js-dropdown-title');
     this.list = this.el.querySelector('.js-dropdown-list');
     this.list.classList.add('is-hidden');
-    if (this._onlyChild() && hideOnlyChild) this.el.classList.add('-hide-only-child');
+
+    if (this._onlyChild() && hideOnlyChild === true) {
+      this.el.classList.add('-hide-only-child');
+    }
+
+    this.hideCurrentSelected = hideCurrentSelected;
+
     this._setEventListeners();
   }
 
@@ -55,15 +61,19 @@ export default class {
     if (value === undefined) {
       value = 'none';
     }
-    if(this.current) this.current.classList.remove('is-hidden');
 
-    const valueTitle =
+    if (this.hideCurrentSelected === true && this.currentValueTitle) {
+      this.currentValueTitle.classList.remove('is-hidden');
+    }
+
+    this.currentValueTitle =
       this.list.querySelector(`[data-value="${value}"] .js-dropdown-item-title`) ||
       this.list.querySelector(`[data-value="${value}"]`);
-    this.setTitle(valueTitle.innerHTML);
+    this.setTitle(this.currentValueTitle.innerHTML);
 
-    valueTitle.classList.add('is-hidden');
-    this.current = valueTitle;
+    if (this.hideCurrentSelected === true && this.currentValueTitle) {
+      this.currentValueTitle.classList.add('is-hidden');
+    }
 
   }
 
