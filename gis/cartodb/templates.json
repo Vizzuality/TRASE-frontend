@@ -27,7 +27,7 @@
   {
     "version": "0.0.1",
     "name": "indigenous_areas",
-    "human_name": "Indigenous Areas",
+    "human_name": "Indigenous areas",
     "legend":"<div class='cartodb-legend custom'> <ul><li class=\"bkg\"><div class=\"bullet\" style=\"background-color:#ECC35F\"></div>Indigenous areas</li></ul></div>",
     "layergroup": {
       "version": "1.0.1",
@@ -87,7 +87,7 @@
   },
   {
     "version": "0.0.1",
-    "human_name": "Deforestation Alerts",
+    "human_name": "Deforestation polygons",
     "name": "brazil_defor_alerts",
     "legend":"<div class='cartodb-legend custom'><ul><li><div class= \"bullet\" style= \"background:#850200\"></div>Deforestation</li></ul></div>",
     "layergroup": {
