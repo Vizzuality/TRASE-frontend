@@ -18,7 +18,7 @@ export default class {
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(this.map);
 
     this.map.on('layeradd', () => this._updateAttribution());
-    this.map.on('dragend', () => this.callbacks.onMoveEnd(this.map.getCenter(), this.map.getZoom()));
+    this.map.on('dragend zoomend', () => this.callbacks.onMoveEnd(this.map.getCenter(), this.map.getZoom()));
 
     Object.keys(MAP_PANES).forEach(paneKey => {
       this.map.createPane(paneKey);
