@@ -58,7 +58,8 @@ const mapMethodsToState = (state) => ({
         linkedGeoIds: state.flows.linkedGeoIds
       };
     }
-  }
+  },
+  invalidate: state.flows.isMapVisible
 });
 
 const mapViewCallbacksToActions = () => ({

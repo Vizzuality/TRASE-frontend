@@ -29,14 +29,13 @@ export default class {
     this.polygonFeaturesDict = {};
 
     document.querySelector('.js-basemap-switcher').addEventListener('click', () => { this.callbacks.onToggleMapLayerMenu(); });
-    document.querySelector('.js-toggle-map').addEventListener('click', () => { this._onToggleMap(); });
+    document.querySelector('.js-toggle-map').addEventListener('click', () => { this.callbacks.onToggleMap(); });
 
     this.attribution = document.querySelector('.js-map-attribution');
     this.attributionSource = document.querySelector('.leaflet-control-attribution');
   }
 
   setMapView(mapView) {
-    console.log('setMapView', mapView)
     this.map.setView([mapView.latitude, mapView.longitude], mapView.zoom);
   }
 
@@ -303,14 +302,6 @@ export default class {
     return topoLayer;
   }
 
-  _onToggleMap () {
-    this.callbacks.onToggleMap();
-
-    // recalculates map size once CSS transition ends
-    setTimeout( () => {
-      this.map.invalidateSize(true);
-    }, 850);
-  }
 
   setChoropleth({choropleth, selectedNodesGeoIds, linkedGeoIds, selectedMapDimensions}) {
     if (!this.currentPolygonTypeLayer) {
@@ -342,5 +333,13 @@ export default class {
 
   _updateAttribution() {
     this.attribution.innerHTML = this.attributionSource.innerHTML;
+  }
+
+  invalidate () {
+    // recalculates map size once CSS transition ends
+    this.map.invalidateSize(true);
+    setTimeout( () => {
+      this.map.invalidateSize(true);
+    }, 850);
   }
 }
