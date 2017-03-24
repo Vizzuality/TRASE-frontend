@@ -18,6 +18,7 @@ export default class {
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(this.map);
 
     this.map.on('layeradd', () => this._updateAttribution());
+    this.map.on('dragend', () => this.callbacks.onMoveEnd(this.map.getCenter(), this.map.getZoom()));
 
     Object.keys(MAP_PANES).forEach(paneKey => {
       this.map.createPane(paneKey);
@@ -35,6 +36,7 @@ export default class {
   }
 
   setMapView(mapView) {
+    console.log('setMapView', mapView)
     this.map.setView([mapView.latitude, mapView.longitude], mapView.zoom);
   }
 

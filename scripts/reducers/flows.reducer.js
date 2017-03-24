@@ -74,17 +74,22 @@ export default function (state = {}, action) {
         biomeFilter = context.filterBy[0].nodes.find(filterBy => filterBy.name === state.selectedBiomeFilterName);
       }
 
-      // always create a new array to force a state update on the component
-      let selectedYears = (state.selectedYears) ? [state.selectedYears[0], state.selectedYears[1]] : [context.defaultYear, context.defaultYear];
+      // force state updates on the component
+      let selectedYears = (state.selectedYears) ? Object.assign([], state.selectedYears) : [context.defaultYear, context.defaultYear];
+      let mapView = (state.mapView) ? Object.assign({}, state.mapView) : context.map;
+
+
+      console.log(state.mapView)
+      console.log(mapView)
 
       newState = Object.assign({}, state, {
         selectedContext: context,
         selectedContextId: context.id,
-        selectedYears: selectedYears,
+        selectedYears,
         selectedRecolorBy: recolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: resizeBy,
         selectedBiomeFilter: biomeFilter || { value: 'none' },
-        mapView: context.map
+        mapView
       });
       break;
     }
@@ -339,8 +344,21 @@ export default function (state = {}, action) {
       break;
     }
 
-    case actions.TOGGLE_MAP:
-      return Object.assign({}, state, { isMapVisible: !state.isMapVisible });
+    case actions.TOGGLE_MAP: {
+      newState = Object.assign({}, state, { isMapVisible: !state.isMapVisible });
+      break
+    }
+
+    case actions.SAVE_MAP_VIEW: {
+      console.log(action)
+      console.log(state.mapView)
+      newState = Object.assign({}, state, { mapView: {
+        latitude: action.latlng.lat,
+        longitude: action.latlng.lng,
+        zoom: action.zoom
+      } });
+      break;
+    }
 
     default:
       newState = state;

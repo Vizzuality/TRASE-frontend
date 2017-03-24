@@ -508,4 +508,12 @@ export function loadLinkedGeoIDs() {
   };
 }
 
+export function saveMapView(latlng, zoom) {
+  return {
+    type: actions.SAVE_MAP_VIEW,
+    latlng,
+    zoom
+  };
+}
+
 const _isNodeVisible = (getState, nodeId) => getState().flows.visibleNodes.map(node => node.id).indexOf(nodeId) > -1;

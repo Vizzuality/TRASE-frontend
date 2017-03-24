@@ -30,7 +30,8 @@ const URL_STATE_PROPS = [
   'expandedNodesIds',
   'areNodesExpanded',
   'selectedColumnsIds',
-  'isMapVisible'
+  'isMapVisible',
+  'mapView'
 ];
 
 const filterStateToURL = state => {
