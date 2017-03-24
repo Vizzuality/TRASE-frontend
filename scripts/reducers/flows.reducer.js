@@ -78,10 +78,6 @@ export default function (state = {}, action) {
       let selectedYears = (state.selectedYears) ? Object.assign([], state.selectedYears) : [context.defaultYear, context.defaultYear];
       let mapView = (state.mapView) ? Object.assign({}, state.mapView) : context.map;
 
-
-      console.log(state.mapView)
-      console.log(mapView)
-
       newState = Object.assign({}, state, {
         selectedContext: context,
         selectedContextId: context.id,
@@ -346,12 +342,10 @@ export default function (state = {}, action) {
 
     case actions.TOGGLE_MAP: {
       newState = Object.assign({}, state, { isMapVisible: !state.isMapVisible });
-      break
+      break;
     }
 
     case actions.SAVE_MAP_VIEW: {
-      console.log(action)
-      console.log(state.mapView)
       newState = Object.assign({}, state, { mapView: {
         latitude: action.latlng.lat,
         longitude: action.latlng.lng,
