@@ -2,6 +2,7 @@ import { h } from 'preact';
 import CountryCommodity from 'containers/nav/country-commodity.container';
 import Filters from 'containers/nav/filters.container';
 import Years from 'containers/nav/years.container';
+import ResizeBy from 'containers/nav/resize-by.container';
 
 const Nav = ({ tooltips, selectedContext }) => {
 
@@ -32,7 +33,7 @@ const Nav = ({ tooltips, selectedContext }) => {
       </div>
 
       <div class='right-side'>
-        <div class='nav-item js-context-resizeBy' />
+        <ResizeBy />
 
         <div class='nav-item -color js-context-recolorBy js-qual-dropdown' />
 

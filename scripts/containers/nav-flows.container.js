@@ -1,6 +1,6 @@
 import connect from 'connect';
 import {
-  selectResizeBy, selectRecolorBy, selectView
+  selectRecolorBy, selectView
 } from 'actions/flows.actions';
 import Nav from 'components/nav-flows.component.js';
 
@@ -16,7 +16,6 @@ const mapMethodsToState = (state) => ({
     }
   },
   addTooltips: state.app.tooltips,
-  selectResizeBy: state.flows.selectedResizeBy,
   selectRecolorBy: state.flows.selectedRecolorBy,
   selectView: state.flows.detailedView,
   updateNodeSelectionColors: {
@@ -30,7 +29,6 @@ const mapMethodsToState = (state) => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  onResizeBySelected: resizeBy => selectResizeBy(resizeBy),
   onRecolorBySelected: value => selectRecolorBy(value),
   onViewSelected: detailedView => selectView(detailedView === 'true')
 });

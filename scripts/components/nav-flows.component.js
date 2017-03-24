@@ -1,6 +1,5 @@
 import Dropdown from 'components/dropdown.component';
 import 'styles/components/shared/nav.scss';
-import ResizeByTemplate from 'ejs!templates/flows-nav-context/resizeBy.ejs';
 import RecolorByTemplate from 'ejs!templates/flows-nav-context/recolorBy.ejs';
 import Tooltip from 'tether-tooltip';
 import _ from 'lodash';
@@ -31,15 +30,12 @@ export default class {
 
   renderContext({ contexts, selectedContextId, tooltips}) {
     let currentContext = contexts ? contexts.find(elem => elem.id === selectedContextId) : null;
-    let resizeBy = null;
     let recolorBy = null;
 
     if (currentContext) {
-      resizeBy = currentContext.resizeBy.sort((a, b) => a.position > b.position);
       recolorBy = currentContext.recolorBy.sort((a, b) => (a.groupNumber === b.groupNumber) ? (a.position > b.position) : (a.groupNumber > b.groupNumber));
     }
 
-    document.querySelector('.js-context-resizeBy').innerHTML = ResizeByTemplate({ resizeBy, tooltips });
     document.querySelector('.js-context-recolorBy').innerHTML = RecolorByTemplate({
       recolorBy: this._generateRecolorByOption(recolorBy),
       tooltips
@@ -47,7 +43,6 @@ export default class {
 
     if (currentContext) {
       // right side
-      this.resizeByDropdown = new Dropdown('resize-by', this.callbacks.onResizeBySelected, true, true);
       this.recolorByDropdown = new Dropdown('recolor-by', this.callbacks.onRecolorBySelected, false, true);
 
       this.legendContainer = document.querySelector('.js-dropdown-item-legend-summary');
@@ -107,13 +102,6 @@ export default class {
   setAppMenuVisibility() {
     this.AppNav.classList.toggle('is-hidden', !this.state.visibilityAppMenu);
     this.FlowsNav.classList.toggle('is-hidden', this.state.visibilityAppMenu);
-  }
-
-  selectResizeBy(value) {
-    if (!this.resizeByDropdown || !value || !value.name) {
-      return;
-    }
-    this.resizeByDropdown.selectValue(value.name);
   }
 
   selectRecolorBy(data) {
