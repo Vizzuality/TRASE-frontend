@@ -1,8 +1,5 @@
 import Dropdown from 'components/dropdown.component';
-import YearsMenu from 'components/nav/years-brush/years-slider.component';
 import 'styles/components/shared/nav.scss';
-import CountryCommodityTemplate from 'ejs!templates/flows-nav-context/countryCommodity.ejs';
-import FiltersTemplate from 'ejs!templates/flows-nav-context/filters.ejs';
 import ResizeByTemplate from 'ejs!templates/flows-nav-context/resizeBy.ejs';
 import RecolorByTemplate from 'ejs!templates/flows-nav-context/recolorBy.ejs';
 import Tooltip from 'tether-tooltip';
@@ -34,22 +31,13 @@ export default class {
 
   renderContext({ contexts, selectedContextId, tooltips}) {
     let currentContext = contexts ? contexts.find(elem => elem.id === selectedContextId) : null;
-    let filters = null;
     let resizeBy = null;
     let recolorBy = null;
 
     if (currentContext) {
-      filters = (currentContext.filterBy && currentContext.filterBy.length > 0) ? currentContext.filterBy[0] : null;
       resizeBy = currentContext.resizeBy.sort((a, b) => a.position > b.position);
       recolorBy = currentContext.recolorBy.sort((a, b) => (a.groupNumber === b.groupNumber) ? (a.position > b.position) : (a.groupNumber > b.groupNumber));
     }
-
-    document.querySelector('.js-context-countryCommodity').innerHTML = CountryCommodityTemplate({ contexts, tooltips });
-
-    if (filters) {
-      document.querySelector('.js-context-filters').innerHTML = FiltersTemplate({ filters, tooltips });
-    }
-    document.querySelector('.js-context-filters').classList.toggle('is-hidden', filters === null);
 
     document.querySelector('.js-context-resizeBy').innerHTML = ResizeByTemplate({ resizeBy, tooltips });
     document.querySelector('.js-context-recolorBy').innerHTML = RecolorByTemplate({
@@ -58,15 +46,6 @@ export default class {
     });
 
     if (currentContext) {
-
-      // left side
-      this.contextDropdown = new Dropdown('context', this.callbacks.onContextSelected, true, true);
-      if (filters) {
-        this.biomeFilterDropdown = new Dropdown('biomeFilter', this.callbacks.onBiomeFilterSelected, true, true);
-      }
-      this.yearsDropdown = new Dropdown('years', null);
-      this.yearsMenu = new YearsMenu('js-years-slider', this.callbacks.onYearsSelected);
-
       // right side
       this.resizeByDropdown = new Dropdown('resize-by', this.callbacks.onResizeBySelected, true, true);
       this.recolorByDropdown = new Dropdown('recolor-by', this.callbacks.onRecolorBySelected, false, true);
@@ -128,30 +107,6 @@ export default class {
   setAppMenuVisibility() {
     this.AppNav.classList.toggle('is-hidden', !this.state.visibilityAppMenu);
     this.FlowsNav.classList.toggle('is-hidden', this.state.visibilityAppMenu);
-  }
-
-  selectYears(years) {
-    if (!this.yearsDropdown) {
-      return;
-    }
-    const title = (years[0] === years[1]) ? years[0] : years.join('&thinsp;-&thinsp;');
-    this.yearsDropdown.setTitle(title);
-    this.yearsMenu.setYears(years);
-  }
-
-  selectBiomeFilter(value) {
-    if (!this.biomeFilterDropdown || !value) {
-      return;
-    }
-    this.biomeFilterDropdown.selectValue(value.name);
-  }
-
-  selectContext(selectedContext) {
-    if (!this.contextDropdown || !selectedContext) {
-      return;
-    }
-    this.contextDropdown.selectValue(selectedContext.id);
-    this.yearsMenu.setAvailableYears(selectedContext.years);
   }
 
   selectResizeBy(value) {

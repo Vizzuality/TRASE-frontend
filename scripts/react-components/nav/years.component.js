@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import YearsThumb from './years-thumb.component';
+import 'styles/components/nav/years-slider.scss';
 
 const YEAR_WIDTH = 40;
 
@@ -118,7 +119,7 @@ export default class Years extends Component {
           </span>
           {currentDropdown === 'years' &&
           <div class='dropdown-list'>
-            <div class='c-years-slider2' ref={(elem) => { this.slider = elem; }}>
+            <div class='c-years-slider' ref={(elem) => { this.slider = elem; }}>
               <ul class='background' style={totalWidthStyle}>
                 {years.map(() => <li />)}
               </ul>

@@ -1,6 +1,6 @@
 @import '../../settings';
 
-.c-years-slider2 {
+.c-years-slider {
   margin: 20px;
   position: relative;
 
@@ -64,51 +64,6 @@
       font-family: $font-family-1;
       font-size: $font-size-small;
       text-align: center;
-    }
-  }
-}
-
-.c-years-slider {
-  padding: 20px;
-
-  .axis, .axis-front {
-    pointer-events: none;
-  }
-
-  .axis .domain, .axis-front .domain, .axis text, .axis-front line {
-    display: none;
-  }
-
-  .axis-front text {
-    font-family: $font-family-1;
-    font-size: $font-size-small;
-  }
-
-  .axis .tick line {
-    stroke-width: .5;
-    stroke: $charcoal-grey;
-  }
-
-  .selection-overlay {
-    pointer-events: none;
-  }
-
-  .selection-overlay-rect {
-    transform: scaleY(1.2);
-    transform-origin: center;
-    fill: $white;
-  }
-
-  .brush > {
-
-    .overlay {
-      fill: $pale-grey;
-      stroke: $charcoal-grey;
-      stroke-width: .5;
-    }
-
-    .handle {
-      width: 8px;
     }
   }
 }

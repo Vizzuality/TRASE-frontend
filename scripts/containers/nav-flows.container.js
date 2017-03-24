@@ -1,8 +1,6 @@
-// see sankey.container for details on how to use those containers
-// import _ from 'lodash';
 import connect from 'connect';
 import {
-  selectResizeBy, selectContext, selectBiomeFilter, selectYears, selectRecolorBy, selectView
+  selectResizeBy, selectRecolorBy, selectView
 } from 'actions/flows.actions';
 import Nav from 'components/nav-flows.component.js';
 
@@ -18,10 +16,7 @@ const mapMethodsToState = (state) => ({
     }
   },
   addTooltips: state.app.tooltips,
-  selectContext: state.flows.selectedContext,
   selectResizeBy: state.flows.selectedResizeBy,
-  selectBiomeFilter: state.flows.selectedBiomeFilter,
-  selectYears: state.flows.selectedYears,
   selectRecolorBy: state.flows.selectedRecolorBy,
   selectView: state.flows.detailedView,
   updateNodeSelectionColors: {
@@ -35,10 +30,7 @@ const mapMethodsToState = (state) => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  onContextSelected: context => selectContext(parseInt(context)),
   onResizeBySelected: resizeBy => selectResizeBy(resizeBy),
-  onBiomeFilterSelected: biomeFilter => selectBiomeFilter(biomeFilter),
-  onYearsSelected: years => selectYears(years),
   onRecolorBySelected: value => selectRecolorBy(value),
   onViewSelected: detailedView => selectView(detailedView === 'true')
 });
