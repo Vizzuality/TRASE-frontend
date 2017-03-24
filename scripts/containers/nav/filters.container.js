@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(toggleDropdown('filters'));
     },
     onSelected: (filterNode) => {
-      console.log(filterNode)
       dispatch(selectBiomeFilter(filterNode));
     }
   };
