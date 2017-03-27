@@ -1,7 +1,7 @@
 import { connect } from 'preact-redux';
 import { toggleDropdown } from 'actions/app.actions';
 import { selectResizeBy } from 'actions/flows.actions';
-import loadTootlips from 'react-components/nav/loadTooltips.js';
+import loadTooltips from 'react-components/nav/loadTooltips.js';
 import ResizeBy from 'react-components/nav/resize-by.component.js';
 
 const mapStateToProps = (state) => {
@@ -27,4 +27,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(loadTootlips(ResizeBy));
+)(loadTooltips(ResizeBy));

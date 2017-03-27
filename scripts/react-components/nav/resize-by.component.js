@@ -38,7 +38,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
             <Tooltip position='bottom right' text={tooltips.sankey.nav.resizeBy[selectedResizeBy.name]} />
           }
         </span>
-        {currentDropdown === 'resize-by' &&
+        {resizeByElements.length > 0 &&
           <ul class='dropdown-list'>
             {resizeByElements}
           </ul>

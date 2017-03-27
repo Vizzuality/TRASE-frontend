@@ -29,7 +29,10 @@ const mapMethodsToState = (state) => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  onRecolorBySelected: value => selectRecolorBy(value),
+  onRecolorBySelected: value => {
+    console.log(value)
+    return selectRecolorBy(value);
+  },
   onViewSelected: detailedView => selectView(detailedView === 'true')
 });
 
