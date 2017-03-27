@@ -125,10 +125,17 @@
 
     .dropdown-item-legend {
       pointer-events: none;
+      margin-top: 10px;
     }
 
-    .dropdown-item-legend {
-      margin-top: 10px;
+    .dropdown-item-legend-unit {
+      &.-left {
+        margin-right: 4px;
+      }
+
+      &.-right {
+        margin-left: 4px;
+      }
     }
 
     .dropdown-item-legend-unit, .dropdown-item-legend, .dropdown-item-legend > li {

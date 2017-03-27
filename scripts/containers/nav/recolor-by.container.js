@@ -20,7 +20,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSelected: (recolorBy) => {
       recolorBy.value = recolorBy.name;
-      console.log(recolorBy)
       dispatch(selectRecolorBy(recolorBy));
     }
   };
