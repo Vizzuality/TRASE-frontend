@@ -1,4 +1,5 @@
 ### 2.0.2
+- Fixed regression where legend summary would not appear
 - Improved flows page dropdowns behaviour
 
 ### 2.0.1
