@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import classNames from 'classnames';
+import Tooltip from 'react-components/tooltip.component';
 
 export default ({ onToggle, onSelected, tooltips, currentDropdown, contexts, selectedContextCountry, selectedContextCommodity }) => {
   return (
@@ -7,9 +8,7 @@ export default ({ onToggle, onSelected, tooltips, currentDropdown, contexts, sel
       <div class='c-dropdown -capitalize'>
         <span class='dropdown-label'>
           Country - Commodity
-          <svg class='icon tooltip-icon js-tooltip' data-tooltip-text={tooltips.sankey.nav.context.main}>
-            <use xlinkHref='#icon-layer-info' />
-          </svg>
+          <Tooltip text={tooltips.sankey.nav.context.main} />
         </span>
         <span class='dropdown-title'>
           {selectedContextCountry.toLowerCase()} - {selectedContextCommodity.toLowerCase()}

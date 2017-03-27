@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import classNames from 'classnames';
+import Tooltip from 'react-components/tooltip.component';
 
 export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResizeBy, resizeBys }) => {
   resizeBys.sort((a, b) => a.position > b.position);
@@ -17,13 +18,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
           >
           {resizeBy.label.toLowerCase()}
           {resizeBy.name && tooltips.sankey.nav.resizeBy[resizeBy.name] &&
-            <svg
-              class='icon tooltip-icon js-tooltip'
-              data-tooltip-text={tooltips.sankey.nav.resizeBy[resizeBy.name]}
-              data-tooltip-position='top right'
-            >
-              <use xLinkHref='#icon-layer-info' />
-            </svg>
+            <Tooltip position='bottom right' text={tooltips.sankey.nav.resizeBy[resizeBy.name]} />
           }
         </li>);
       });
@@ -35,16 +30,13 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
       <div class='c-dropdown -small -capitalize'>
         <span class='dropdown-label'>
           Resize
-          <svg
-            class='icon tooltip-icon js-tooltip'
-            data-tooltip-text={tooltips.sankey.nav.resizeBy.main}
-            data-tooltip-position='top right'
-          >
-            <use xLinkHref='#icon-layer-info' />
-          </svg>
+          <Tooltip position='top right' text={tooltips.sankey.nav.resizeBy.main} />
         </span>
         <span class='dropdown-title -small'>
           {selectedResizeBy.label.toLowerCase()}
+          {selectedResizeBy.name && tooltips.sankey.nav.resizeBy[selectedResizeBy.name] &&
+            <Tooltip position='bottom right' text={tooltips.sankey.nav.resizeBy[selectedResizeBy.name]} />
+          }
         </span>
         {currentDropdown === 'resize-by' &&
           <ul class='dropdown-list'>
