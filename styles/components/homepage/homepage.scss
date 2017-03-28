@@ -61,7 +61,9 @@
       font-family: $font-family-1;
       color: rgba($white, 0.6);
       font-size: 14px;
-      max-width: 100%;
+      line-height: 18px;
+      margin-top: 7px;
+      max-width: 512px;
     }
   }
 
@@ -80,7 +82,7 @@
       &::after {
         content: '';
         height: 2px;
-        background-color: rgba($charcoal-grey-faded, 0.3);
+        background-color: rgba($charcoal-grey-faded, 0.15);
         flex: 1;
         margin-left: 8px;
       }
