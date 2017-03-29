@@ -29,7 +29,9 @@ const URL_STATE_PROPS = [
   'selectedNodesIds',
   'expandedNodesIds',
   'areNodesExpanded',
-  'selectedColumnsIds'
+  'selectedColumnsIds',
+  'isMapVisible',
+  'mapView'
 ];
 
 const filterStateToURL = state => {
