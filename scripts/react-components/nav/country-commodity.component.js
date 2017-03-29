@@ -1,10 +1,13 @@
 import { h } from 'preact';
 import classNames from 'classnames';
 import Tooltip from 'react-components/tooltip.component';
+import Dropdown from 'react-components/nav/dropdown.component';
+
+const id = 'country-commodity';
 
 export default ({ onToggle, onSelected, tooltips, currentDropdown, contexts, selectedContextCountry, selectedContextCommodity }) => {
   return (
-    <div class='nav-item' onClick={onToggle}>
+    <div class='nav-item' onClick={() => { onToggle(id); }}>
       <div class='c-dropdown -capitalize'>
         <span class='dropdown-label'>
           Country - Commodity
@@ -13,7 +16,7 @@ export default ({ onToggle, onSelected, tooltips, currentDropdown, contexts, sel
         <span class='dropdown-title'>
           {selectedContextCountry.toLowerCase()} - {selectedContextCommodity.toLowerCase()}
         </span>
-        {currentDropdown === 'country-commodity' &&
+        <Dropdown id={id} currentDropdown={currentDropdown} onClickOutside={onToggle}>
           <ul class='dropdown-list -medium'>
             {contexts
               .filter(context => context.countryName !== selectedContextCountry || context.commodityName !== selectedContextCommodity)
@@ -24,7 +27,7 @@ export default ({ onToggle, onSelected, tooltips, currentDropdown, contexts, sel
                 {context.countryName.toLowerCase()} - {context.commodityName.toLowerCase()}
               </li>)}
           </ul>
-        }
+        </Dropdown>
       </div>
     </div>
   );

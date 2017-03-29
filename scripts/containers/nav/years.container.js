@@ -13,8 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onToggle: () => {
-      dispatch(toggleDropdown('years'));
+    onToggle: (id) => {
+      dispatch(toggleDropdown(id));
     },
     onSelected: (years) => {
       dispatch(selectYears(years));

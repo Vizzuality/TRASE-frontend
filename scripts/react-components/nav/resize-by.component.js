@@ -1,6 +1,9 @@
 import { h } from 'preact';
 import classNames from 'classnames';
 import Tooltip from 'react-components/tooltip.component';
+import Dropdown from 'react-components/nav/dropdown.component';
+
+const id = 'resize-by';
 
 export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResizeBy, resizeBys }) => {
   resizeBys.sort((a, b) => a.position > b.position);
@@ -27,7 +30,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
   const hasZeroOrSingleElement = resizeBys.length <= 1;
 
   return (
-    <div class='nav-item' onClick={onToggle}>
+    <div class='nav-item' onClick={() => { onToggle(id); }}>
       <div class={classNames('c-dropdown -small -capitalize', {['-hide-only-child']: hasZeroOrSingleElement} )}>
         <span class='dropdown-label'>
           Resize
@@ -39,11 +42,11 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
             <Tooltip position='bottom right' text={tooltips.sankey.nav.resizeBy[selectedResizeBy.name]} />
           }
         </span>
-        {currentDropdown === 'resize-by' && !hasZeroOrSingleElement &&
+        <Dropdown id={id} currentDropdown={currentDropdown} onClickOutside={onToggle}>
           <ul class='dropdown-list -medium'>
             {resizeByElements}
           </ul>
-        }
+        </Dropdown>
       </div>
     </div>
   );

@@ -40,6 +40,7 @@
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-standard": "^2.1.1",
     "file-loader": "^0.9.0",
+    "find-parent": "^2.0.2",
     "html-webpack-plugin": "^2.22.0",
     "node-sass": "^3.8.0",
     "postcss-loader": "^0.11.0",

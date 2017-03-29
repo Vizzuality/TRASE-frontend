@@ -15,8 +15,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onToggle: () => {
-      dispatch(toggleDropdown('resize-by'));
+    onToggle: (id) => {
+      dispatch(toggleDropdown(id));
     },
     onSelected: (resizeBy) => {
       dispatch(selectResizeBy(resizeBy));

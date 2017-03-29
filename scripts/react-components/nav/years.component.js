@@ -1,8 +1,10 @@
 import { h, Component } from 'preact';
+import Dropdown from 'react-components/nav/dropdown.component';
 import YearsThumb from './years-thumb.component';
 import 'styles/components/nav/years-slider.scss';
 
 const YEAR_WIDTH = 40;
+const id = 'years';
 
 export default class Years extends Component {
   constructor(props) {
@@ -50,7 +52,7 @@ export default class Years extends Component {
     if (this.dragging === true) {
       return;
     }
-    this.props.onToggle();
+    this.props.onToggle(id);
   }
 
   moveSelector(x) {
@@ -117,29 +119,29 @@ export default class Years extends Component {
           <span class='dropdown-title'>
             {title}
           </span>
-          {currentDropdown === 'years' &&
-          <div class='dropdown-list'>
-            <div class='c-years-slider' ref={(elem) => { this.slider = elem; }}>
-              <ul class='background' style={totalWidthStyle}>
-                {years.map(() => <li />)}
-              </ul>
-              <div class='selector'
-                style={selectorWidthStyle}
-                onMouseDown={(mouseEvent) => { this.onSelectorDown(mouseEvent); }}
-              >
-                <YearsThumb id='left' />
-                <YearsThumb id='right' x={deltaWidth} />
+          <Dropdown id={id} currentDropdown={currentDropdown} onClickOutside={this.props.onToggle}>
+            <div class='dropdown-list'>
+              <div class='c-years-slider' ref={(elem) => { this.slider = elem; }}>
+                <ul class='background' style={totalWidthStyle}>
+                  {years.map(() => <li />)}
+                </ul>
+                <div class='selector'
+                  style={selectorWidthStyle}
+                  onMouseDown={(mouseEvent) => { this.onSelectorDown(mouseEvent); }}
+                >
+                  <YearsThumb id='left' />
+                  <YearsThumb id='right' x={deltaWidth} />
+                </div>
+                <ul class='years' style={totalWidthStyle}>
+                  {years
+                    .map(year => <li
+                      >
+                      {year}
+                    </li>)}
+                </ul>
               </div>
-              <ul class='years' style={totalWidthStyle}>
-                {years
-                  .map(year => <li
-                    >
-                    {year}
-                  </li>)}
-              </ul>
             </div>
-          </div>
-          }
+          </Dropdown>
         </div>
       </div>
     );

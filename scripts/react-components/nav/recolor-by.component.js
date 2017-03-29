@@ -2,7 +2,10 @@ import { h } from 'preact';
 import classNames from 'classnames';
 import _ from 'lodash';
 import Tooltip from 'react-components/tooltip.component';
+import Dropdown from 'react-components/nav/dropdown.component';
 import RecolorByNodeLegendSummary from 'containers/nav/recolor-by-node-legend-summary.container';
+
+const id = 'recolor-by';
 
 export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecolorBy, recolorBys }) => {
   recolorBys.sort((a, b) => (a.groupNumber === b.groupNumber) ? (a.position > b.position) : (a.groupNumber > b.groupNumber));
@@ -81,7 +84,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
   const hasZeroOrSingleElement = recolorBys.length <= 1;
 
   return (
-    <div class='nav-item' onClick={onToggle}>
+    <div class='nav-item' onClick={() => { onToggle(id); }}>
       <div class={classNames('c-dropdown -small -capitalize', {['-hide-only-child']: hasZeroOrSingleElement} )}>
         <span class='dropdown-label'>
           Recolor by
@@ -93,11 +96,11 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
             <Tooltip position='bottom right' text={tooltips.sankey.nav.colorBy[selectedRecolorBy.name]} />
           }
         </span>
-        {currentDropdown === 'recolor-by' && !hasZeroOrSingleElement &&
+        <Dropdown id={id} currentDropdown={currentDropdown} onClickOutside={onToggle}>
           <ul class='dropdown-list -large'>
             {recolorByElements}
           </ul>
-        }
+        </Dropdown>
       </div>
       {legendSummary}
     </div>

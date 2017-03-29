@@ -1,11 +1,14 @@
 import { h } from 'preact';
 import Tooltip from 'react-components/tooltip.component';
+import Dropdown from 'react-components/nav/dropdown.component';
+
+const id = 'view';
 
 export default ({ onToggle, onSelected, currentDropdown, tooltips, isDetailedView }) => {
   const title = (isDetailedView === true) ? 'Complete' : 'Summary';
   const other = (isDetailedView === true) ? 'Summary' : 'Complete';
   return (
-    <div class='nav-item' onClick={onToggle}>
+    <div class='nav-item' onClick={() => { onToggle(id); }}>
       <div class='c-dropdown -small'>
         <span class='dropdown-label'>
           Change view
@@ -14,7 +17,7 @@ export default ({ onToggle, onSelected, currentDropdown, tooltips, isDetailedVie
         <span class='dropdown-title'>
           {title}
         </span>
-        {currentDropdown === 'view' &&
+        <Dropdown id={id} currentDropdown={currentDropdown} onClickOutside={onToggle}>
           <ul class='dropdown-list -right'>
             <li
               class='dropdown-item'
@@ -22,7 +25,7 @@ export default ({ onToggle, onSelected, currentDropdown, tooltips, isDetailedVie
               {other}
             </li>
           </ul>
-        }
+        </Dropdown>
       </div>
     </div>
   );

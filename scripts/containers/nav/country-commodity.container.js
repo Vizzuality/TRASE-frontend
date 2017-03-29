@@ -16,8 +16,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onToggle: () => {
-      dispatch(toggleDropdown('country-commodity'));
+    onToggle: (id) => {
+      dispatch(toggleDropdown(id));
     },
     onSelected: (contextId) => {
       dispatch(selectContext(parseInt(contextId)));

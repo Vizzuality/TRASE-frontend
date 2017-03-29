@@ -14,8 +14,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onToggle: () => {
-      dispatch(toggleDropdown('view'));
+    onToggle: (id) => {
+      dispatch(toggleDropdown(id));
     },
     onSelected: (view) => {
       dispatch(selectView(view));

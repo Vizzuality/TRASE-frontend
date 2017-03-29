@@ -13,8 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onToggle: () => {
-      dispatch(toggleDropdown('filters'));
+    onToggle: (id) => {
+      dispatch(toggleDropdown(id));
     },
     onSelected: (filterNode) => {
       dispatch(selectBiomeFilter(filterNode));

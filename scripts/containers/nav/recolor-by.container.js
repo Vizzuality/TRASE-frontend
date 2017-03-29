@@ -15,8 +15,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onToggle: () => {
-      dispatch(toggleDropdown('recolor-by'));
+    onToggle: (id) => {
+      dispatch(toggleDropdown(id));
     },
     onSelected: (recolorBy) => {
       recolorBy.value = recolorBy.name;
