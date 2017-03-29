@@ -9,7 +9,7 @@ export default ({ onToggle, onSelected, currentDropdown, selectedFilter, filters
           {filters.name.toLowerCase()}
         </span>
         <span class='dropdown-title'>
-          {(selectedFilter.name !== undefined) ? selectedFilter.name.toLowerCase() : 'All'}
+          {(selectedFilter !== undefined && selectedFilter.name !== undefined) ? selectedFilter.name.toLowerCase() : 'All'}
         </span>
         {currentDropdown === 'filters' &&
           <ul class='dropdown-list -medium'>

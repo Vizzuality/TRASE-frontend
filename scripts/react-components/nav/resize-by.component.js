@@ -24,10 +24,11 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
       });
   }
 
+  const hasZeroOrSingleElement = resizeBys.length <= 1;
 
   return (
     <div class='nav-item' onClick={onToggle}>
-      <div class='c-dropdown -small -capitalize'>
+      <div class={classNames('c-dropdown -small -capitalize', {['-hide-only-child']: hasZeroOrSingleElement} )}>
         <span class='dropdown-label'>
           Resize
           <Tooltip position='top right' text={tooltips.sankey.nav.resizeBy.main} />
@@ -38,7 +39,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
             <Tooltip position='bottom right' text={tooltips.sankey.nav.resizeBy[selectedResizeBy.name]} />
           }
         </span>
-        {resizeByElements.length > 0 &&
+        {currentDropdown === 'resize-by' && !hasZeroOrSingleElement &&
           <ul class='dropdown-list -medium'>
             {resizeByElements}
           </ul>
