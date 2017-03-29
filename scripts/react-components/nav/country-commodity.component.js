@@ -14,7 +14,7 @@ export default ({ onToggle, onSelected, tooltips, currentDropdown, contexts, sel
           {selectedContextCountry.toLowerCase()} - {selectedContextCommodity.toLowerCase()}
         </span>
         {currentDropdown === 'country-commodity' &&
-          <ul class='dropdown-list'>
+          <ul class='dropdown-list -medium'>
             {contexts
               .filter(context => context.countryName !== selectedContextCountry || context.commodityName !== selectedContextCommodity)
               .map(context => <li

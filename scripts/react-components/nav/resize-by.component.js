@@ -39,7 +39,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
           }
         </span>
         {resizeByElements.length > 0 &&
-          <ul class='dropdown-list'>
+          <ul class='dropdown-list -medium'>
             {resizeByElements}
           </ul>
         }

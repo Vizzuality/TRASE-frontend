@@ -12,7 +12,7 @@ export default ({ onToggle, onSelected, currentDropdown, selectedFilter, filters
           {(selectedFilter.name !== undefined) ? selectedFilter.name.toLowerCase() : 'All'}
         </span>
         {currentDropdown === 'filters' &&
-          <ul class='dropdown-list'>
+          <ul class='dropdown-list -medium'>
             {[{ value: 'none' }]
               .concat(filters.nodes)
               .filter(node => node.name !== selectedFilter.name)
