@@ -6,10 +6,12 @@
 
     .update-title-wrapper {
       margin-bottom: 15px;
+
       .update-type {
         text-transform: uppercase;
         font-family: $font-family-1;
         font-size: $font-size-x-regular;
+        margin-bottom: 25px;
         color: $medium-pink;
       }
 
@@ -18,6 +20,7 @@
         color: $charcoal-grey;
         font-weight: $font-weight-light;
         font-size: $font-size-medium;
+        line-height: 32px;
       }
     }
 

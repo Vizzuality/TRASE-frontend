@@ -18,12 +18,14 @@
         width: 100%;
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: center;
+        background-position: center;    
+        border-radius: 4px;
       }
 
       .post-title {
         font-family: $font-family-2;
         font-size: $font-size-medium;
+        font-weight: $font-weight-light;
         color: $charcoal-grey;
       }
     }

@@ -79,7 +79,6 @@ const scrollIntro = () => {
   const direction = (state.scrollTop < window.scrollY) ? 1 : -1;
   let index = state.activeIndex;
 
-
   if (offsets[state.activeIndex + 1] < window.innerHeight / 2 && direction === 1) index += direction;
   if (offsets[state.activeIndex] > window.innerHeight / 2 && direction === -1) index += direction;
 
@@ -105,7 +104,6 @@ const init = () => {
   const bounds = document.querySelector('.js-content-section').getBoundingClientRect();
   const pageOffset = getPageOffset(bounds);
   new Nav({ pageOffset });
-
 
   state.sliders.forEach(renderSlider);
 
