@@ -89,6 +89,9 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
         </span>
         <span class='dropdown-title -small'>
           {selectedRecolorBy.label || 'Node selection'}
+          {selectedRecolorBy.name && tooltips.sankey.nav.colorBy[selectedRecolorBy.name] &&
+            <Tooltip position='bottom right' text={tooltips.sankey.nav.colorBy[selectedRecolorBy.name]} />
+          }
         </span>
         {currentDropdown === 'recolor-by' && !hasZeroOrSingleElement &&
           <ul class='dropdown-list -large'>
