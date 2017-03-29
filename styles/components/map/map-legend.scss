@@ -75,7 +75,7 @@
     span {
       position: absolute;
       top: 22px;
-      left: 0;
+      left: 22px;
       right: 0;
       margin: auto;
       font-size: 10px;
@@ -231,33 +231,23 @@
       color: rgba($charcoal-grey, 0.5);
 
       &:nth-child(1) {
-        bottom: 22px;
-        right: 97px;
+        bottom: 16px;
+        right: 92px;
       }
 
       &:nth-child(2) {
-        bottom: 11px;
-        right: 86px;
+        bottom: 5px;
+        right: 81px;
       }
 
       &:nth-child(3) {
-        bottom: -1px;
-        right: 75px;
+        bottom: 5px;
+        left: 80px;
       }
 
       &:nth-child(4) {
-        bottom: -1px;
-        left: 75px;
-      }
-
-      &:nth-child(5) {
-        bottom: 11px;
-        left: 86px;
-      }
-
-      &:nth-child(6) {
-        bottom: 22px;
-        left: 97px;
+        bottom: 16px;
+        left: 91px;
       }
     }
   }

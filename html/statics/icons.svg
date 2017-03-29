@@ -1,5 +1,6 @@
 <div class="is-hidden">
-<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
+       xmlns="http://www.w3.org/2000/svg">
 <defs>
 
 <symbol id="icon-supply-chain-1" viewBox="0 0 32 32">
@@ -159,16 +160,23 @@
 </symbol>
 <symbol id="icon-bidimensional-legend-arrows" viewBox="0 0 72 32">
   <title>Group</title>
-  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M19.2 28h7.986l4-3.999"></path>
-  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M10 18.4h7.986l4-3.997"></path>
-  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M1.040 9.178h7.986l4-3.996"></path>
-  <path fill="none" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M30.743 31.542l-29.455-30.255"></path>
-  <path fill="#6c787d" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M4.036 1.669l-3.201-0.8 0.8 3.201z"></path>
-  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M52.8 28h-7.986l-4-3.999"></path>
-  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M62 18.4h-7.986l-4-3.997"></path>
-  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M70.96 9.178h-7.986l-4-3.996"></path>
-  <path fill="none" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M41.257 31.542l29.455-30.255"></path>
-  <path fill="#6c787d" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="butt" stroke-linejoin="miter" d="M67.964 1.669l3.201-0.8-0.8 3.201z"></path>
+  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #34444c)" d="M14.8 23.2h7.987l4-3.997"></path>
+  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #34444c)" d="M5.84 13.978h7.987l4-3.996"></path>
+  <path fill="none" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color2, #6c787d)" d="M30.742 31.542l-29.455-30.255"></path>
+  <path fill="#6c787d" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color2, #6c787d)" style="fill: var(--color2, #6c787d)" d="M4.035 1.669l-3.2-0.8 0.8 3.201z"></path>
+  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #34444c)" d="M57.2 23.2h-7.987l-4-3.997"></path>
+  <path fill="none" opacity="0.3" stroke="#34444c" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #34444c)" d="M66.16 13.978h-7.987l-4-3.996"></path>
+  <path fill="none" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color2, #6c787d)" d="M41.258 31.542l29.455-30.255"></path>
+  <path fill="#6c787d" stroke="#6c787d" stroke-width="0.8" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color2, #6c787d)" style="fill: var(--color2, #6c787d)" d="M67.965 1.669l3.2-0.8-0.8 3.201z"></path>
+</symbol>
+<symbol id="icon-unidimensional-legend-arrows" viewBox="0 0 768 32">
+  <title>Single</title>
+  <path fill="none" stroke="#6c787d" stroke-width="5.3333" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #6c787d)" d="M2.659 15.274h742.129"></path>
+  <path fill="none" opacity="0.3" stroke="#6c787d" stroke-width="5.3333" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #6c787d)" d="M154.667 26.667v-21.333"></path>
+  <path fill="none" opacity="0.3" stroke="#6c787d" stroke-width="5.3333" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #6c787d)" d="M309.333 26.667v-21.333"></path>
+  <path fill="none" opacity="0.3" stroke="#6c787d" stroke-width="5.3333" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #6c787d)" d="M458.667 26.667v-21.333"></path>
+  <path fill="none" opacity="0.3" stroke="#6c787d" stroke-width="5.3333" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #6c787d)" d="M613.333 26.667v-21.333"></path>
+  <path fill="#6c787d" stroke="#6c787d" stroke-width="5.3333" stroke-miterlimit="4" stroke-linecap="square" stroke-linejoin="miter" style="stroke: var(--color1, #6c787d)" style="fill: var(--color1, #6c787d)" d="M748.307 2.667l18.856 11.314-18.86 11.317z"></path>
 </symbol>
 <symbol id="icon-download" viewBox="0 0 27 32">
   <title>download</title>
