@@ -159,7 +159,7 @@ export default class {
   }
 
   _unlockDownloadButton() {
-    // this.downloadButton.classList.remove('-disabled');
+    this.downloadButton.classList.remove('-disabled');
   }
 
   _lockDownloadButton() {
