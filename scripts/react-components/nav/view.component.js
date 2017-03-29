@@ -9,7 +9,7 @@ export default ({ onToggle, onSelected, currentDropdown, tooltips, isDetailedVie
       <div class='c-dropdown -small'>
         <span class='dropdown-label'>
           Change view
-          <Tooltip text={tooltips.sankey.nav.view.main} />
+          <Tooltip text={tooltips.sankey.nav.view.main} position='top right' />
         </span>
         <span class='dropdown-title'>
           {title}

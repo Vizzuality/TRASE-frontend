@@ -1,7 +1,7 @@
 import 'styles/components/shared/nav.scss';
 
 export default class {
-  onCreated() {
+  constructor() {
     this._setVars();
     this._setEventListeners();
 

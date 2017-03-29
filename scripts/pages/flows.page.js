@@ -11,8 +11,8 @@ import MapContextContainer from 'containers/map-context.container';
 import MapLegendContainer from 'containers/map-legend.container';
 import MapBasemapsContainer from 'containers/map-basemaps.container';
 import MapContainer from 'containers/map.container';
-import NavContainer from 'containers/nav-flows.container';
-import NavContainer2 from 'containers/nav-flows-react.container';
+import NavContainer from 'containers/nav-flows-react.container';
+import NavComponent from 'components/nav-flows.component';
 import TitlebarContainer from 'containers/titlebar.container';
 import NodesTitlesContainer from 'containers/nodesTitles.container';
 import SearchContainer from 'containers/search.container';
@@ -52,16 +52,16 @@ const start = () => {
   new MapContextContainer(store);
   new MapLegendContainer(store);
   new MapBasemapsContainer(store);
-  new NavContainer(store);
   new TitlebarContainer(store);
   new NodesTitlesContainer(store);
   new SearchContainer(store);
   new TooltipContainer(store);
   new ModalContainer(store);
 
+  new NavComponent();
   render(
     <Provider store={store}>
-      <NavContainer2 />
+      <NavContainer />
     </Provider>,
     document.getElementById('js-flows-nav-react')
   );

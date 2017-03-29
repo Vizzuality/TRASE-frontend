@@ -38,10 +38,6 @@ const Nav = ({ tooltips, selectedContext }) => {
         <ResizeBy />
         <RecolorBy />
         <View />
-
-        <div class='nav-item js-open-search'>
-          <svg class='icon icon-search'><use xlinkHref='#icon-search' /></svg>
-        </div>
       </div>
     </nav>
   );
