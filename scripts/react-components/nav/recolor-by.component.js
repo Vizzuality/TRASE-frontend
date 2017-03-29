@@ -2,11 +2,35 @@ import { h } from 'preact';
 import classNames from 'classnames';
 import _ from 'lodash';
 import Tooltip from 'react-components/tooltip.component';
+import RecolorByNodeLegendSummary from 'containers/nav/recolor-by-node-legend-summary.container';
 
 export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecolorBy, recolorBys }) => {
   recolorBys.sort((a, b) => (a.groupNumber === b.groupNumber) ? (a.position > b.position) : (a.groupNumber > b.groupNumber));
 
-  const getDropdownItem = (recolorBy) => {
+  // Collect the legend items classes (ie colors) for the currently selected recolorBy.
+  // It will be used to style the legend summary (colored bar at the bottom of the dropdown)
+  const currentLegendItemsClasses = [];
+
+  // Prepare legend item class names and values
+  const recolorBysData = recolorBys.map(recolorBy => {
+    const legendItems = (recolorBy.nodes.length > 0) ? recolorBy.nodes : [...Array(recolorBy.intervalCount).keys()];
+    const legendItemsData = legendItems.map(legendItem => {
+      const id = (_.isNumber(legendItem)) ? legendItem : legendItem.toLowerCase();
+      const classNames = `-${recolorBy.type.toLowerCase()}-${recolorBy.legendType.toLowerCase()}-${recolorBy.legendColorTheme.toLowerCase()}-${id}`.replace(/ /g, '-');
+      if (recolorBy.name === selectedRecolorBy.name) {
+        currentLegendItemsClasses.push(classNames);
+      }
+      return {
+        value: _.isNumber(legendItem) ? null : legendItem,
+        classNames
+      };
+    });
+    recolorBy.legendItemsData = legendItemsData;
+    return recolorBy;
+  });
+
+  // Renders a dropdown item using recolrBy data
+  const getRecolorByItem = (recolorBy) => {
     return <li
       class={classNames('dropdown-item', { '-disabled': recolorBy.isDisabled })}
       onClick={() => onSelected(recolorBy)}
@@ -21,17 +45,9 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
         <span class='dropdown-item-legend-unit -left'>{recolorBy.minValue}</span>
       }
       {recolorBy.legendType &&
-      <ul class={classNames('dropdown-item-legend', `-${recolorBy.legendType}`)}>
-        {((recolorBy.nodes.length > 0) ? recolorBy.nodes : [...Array(recolorBy.intervalCount).keys()])
-          .map(legendItem => {
-            const id = (_.isNumber(legendItem)) ? legendItem : legendItem.toLowerCase();
-            const className = `-${recolorBy.type.toLowerCase()}-${recolorBy.legendType.toLowerCase()}-${recolorBy.legendColorTheme.toLowerCase()}-${id}`.replace(/ /g, '-');
-            return <li class={className}>
-              {!_.isNumber(legendItem) && legendItem}
-            </li>;
-          })
-        }
-      </ul>
+        <ul class={classNames('dropdown-item-legend', `-${recolorBy.legendType}`)}>
+          {recolorBy.legendItemsData.map(legendItem => <li class={legendItem.classNames}>{legendItem.value}</li>)}
+        </ul>
       }
       {recolorBy.maxValue &&
         <span class='dropdown-item-legend-unit -right'>{recolorBy.maxValue}</span>
@@ -39,16 +55,27 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
     </li>;
   };
 
-  let recolorByElements = [];
+  // Render all the dropdown items
+  const recolorByElements = [];
   if (currentDropdown === 'recolor-by') {
     [{ label: 'Node selection', name: 'none' }]
-      .concat(recolorBys)
+      .concat(recolorBysData)
       .forEach((recolorBy, index, currentRecolorBys) => {
         if (index > 0 && currentRecolorBys[index - 1].groupNumber !== recolorBy.groupNumber) {
           recolorByElements.push(<li class='dropdown-item -separator' />);
         }
-        recolorByElements.push(getDropdownItem(recolorBy));
+        recolorByElements.push(getRecolorByItem(recolorBy));
       });
+  }
+
+  // Render legend summary (colored bar at the bottom of the dropdown)
+  let legendSummary;
+  if (currentLegendItemsClasses.length) {
+    legendSummary = <div class='dropdown-item-legend-summary'>
+      {currentLegendItemsClasses.map(legendItemClasses => <div class={`color ${legendItemClasses}`} />)}
+    </div>;
+  } else {
+    legendSummary = <RecolorByNodeLegendSummary />;
   }
 
   return (
@@ -67,6 +94,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
           </ul>
         }
       </div>
+      {legendSummary}
     </div>
   );
 };

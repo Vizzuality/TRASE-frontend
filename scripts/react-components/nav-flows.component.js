@@ -35,7 +35,6 @@ const Nav = ({ tooltips, selectedContext }) => {
 
       <div class='right-side'>
         <ResizeBy />
-
         <RecolorBy />
 
         <div class='nav-item -color js-context-recolorBy js-qual-dropdown' />
