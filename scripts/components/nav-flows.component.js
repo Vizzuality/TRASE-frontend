@@ -1,6 +1,4 @@
-import Dropdown from 'components/dropdown.component';
 import 'styles/components/shared/nav.scss';
-import Tooltip from 'tether-tooltip';
 
 export default class {
   onCreated() {
@@ -11,19 +9,7 @@ export default class {
       visibilityAppMenu: false
     };
 
-    this.viewDropdown = new Dropdown('view', this.callbacks.onViewSelected);
-
     this.setAppMenuVisibility();
-
-  }
-
-  addTooltips(tooltips) {
-    new Tooltip({
-      target: document.querySelector('.js-context-view svg'),
-      content: tooltips.sankey.nav.view.main,
-      classes: 'c-tooltip',
-      position: 'top right'
-    });
   }
 
   _setVars() {
@@ -48,12 +34,5 @@ export default class {
   setAppMenuVisibility() {
     this.AppNav.classList.toggle('is-hidden', !this.state.visibilityAppMenu);
     this.FlowsNav.classList.toggle('is-hidden', this.state.visibilityAppMenu);
-  }
-
-  selectView(value) {
-    if (!this.viewDropdown) {
-      return;
-    }
-    this.viewDropdown.selectValue(value);
   }
 }

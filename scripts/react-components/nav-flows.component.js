@@ -4,6 +4,7 @@ import Filters from 'containers/nav/filters.container';
 import Years from 'containers/nav/years.container';
 import ResizeBy from 'containers/nav/resize-by.container';
 import RecolorBy from 'containers/nav/recolor-by.container';
+import View from 'containers/nav/view.container';
 
 const Nav = ({ tooltips, selectedContext }) => {
 
@@ -36,8 +37,7 @@ const Nav = ({ tooltips, selectedContext }) => {
       <div class='right-side'>
         <ResizeBy />
         <RecolorBy />
-
-        <div class='nav-item -color js-context-recolorBy js-qual-dropdown' />
+        <View />
 
         <div class='nav-item js-open-search'>
           <svg class='icon icon-search'><use xlinkHref='#icon-search' /></svg>

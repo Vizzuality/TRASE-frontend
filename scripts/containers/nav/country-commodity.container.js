@@ -2,7 +2,7 @@ import { connect } from 'preact-redux';
 import { toggleDropdown } from 'actions/app.actions';
 import { selectContext } from 'actions/flows.actions';
 import CountryCommodity from 'react-components/nav/country-commodity.component.js';
-import loadTootlips from 'react-components/nav/loadTooltips.js';
+import loadTooltips from 'react-components/nav/loadTooltips.js';
 
 const mapStateToProps = (state) => {
   return {
@@ -28,4 +28,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(loadTootlips(CountryCommodity));
+)(loadTooltips(CountryCommodity));
