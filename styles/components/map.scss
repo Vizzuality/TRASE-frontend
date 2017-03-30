@@ -185,6 +185,7 @@
   }
 
   .leaflet-vectorMain-pane:not(.-linkedActivated) path, .leaflet-vectorLinked-pane path {
+    &.ch-zero { fill: $ch-zero; };
     &.ch-red-0 { fill: $ch-red-0; };
     &.ch-red-1 { fill: $ch-red-1; };
     &.ch-red-2 { fill: $ch-red-2; };
