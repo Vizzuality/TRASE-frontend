@@ -99,16 +99,16 @@ export default class {
 
     if (settings.isBidimensional) {
       colors = CHOROPLETH_CLASSES['bidimensional'];
-      title = [settings.vertical.title, settings.horizontal.title];
+      title = [this._shortenTitle(settings.vertical.title), this._shortenTitle(settings.horizontal.title)];
       cssClass = '-bidimensional';
       bucket = [settings.vertical.bucket3, settings.horizontal.bucket3];
     } else if (settings.vertical) {
       colors = CHOROPLETH_CLASSES['vertical'];
-      title = [settings.vertical.title, null];
+      title = [this._shortenTitle(settings.vertical.title), null];
       cssClass = '-vertical';
       bucket = settings.vertical.bucket5;
     } else {
-      title = [null, settings.horizontal.title];
+      title = [null, this._shortenTitle(settings.horizontal.title)];
       cssClass = '-horizontal';
       bucket = settings.horizontal.bucket5;
     }
@@ -128,6 +128,13 @@ export default class {
     }
 
     this.choro.innerHTML = html;
+  }
+
+  _shortenTitle(title) {
+    if (title.length < 50) {
+      return title;
+    }
+    return [title.slice(0, 34), title.slice(-12)].join('(…)');
   }
 
   _renderContext(layers) {
