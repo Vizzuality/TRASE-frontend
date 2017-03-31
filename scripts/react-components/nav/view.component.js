@@ -8,7 +8,7 @@ export default ({ onToggle, onSelected, currentDropdown, tooltips, isDetailedVie
   const title = (isDetailedView === true) ? 'Complete' : 'Summary';
   const other = (isDetailedView === true) ? 'Summary' : 'Complete';
   return (
-    <div class='nav-item' onClick={() => { onToggle(id); }}>
+    <div class='nav-item js-dropdown' onClick={() => { onToggle(id); }}>
       <div class='c-dropdown -small'>
         <span class='dropdown-label'>
           Change view

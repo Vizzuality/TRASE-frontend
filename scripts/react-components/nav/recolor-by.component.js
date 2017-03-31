@@ -84,7 +84,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
   const hasZeroOrSingleElement = recolorBys.length <= 1;
 
   return (
-    <div class='nav-item' onClick={() => { onToggle(id); }}>
+    <div class='nav-item js-dropdown' onClick={() => { onToggle(id); }}>
       <div class={classNames('c-dropdown -small -capitalize', {['-hide-only-child']: hasZeroOrSingleElement} )}>
         <span class='dropdown-label'>
           Recolor by

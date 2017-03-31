@@ -7,7 +7,7 @@ const id = 'country-commodity';
 
 export default ({ onToggle, onSelected, tooltips, currentDropdown, contexts, selectedContextCountry, selectedContextCommodity }) => {
   return (
-    <div class='nav-item' onClick={() => { onToggle(id); }}>
+    <div class='nav-item js-dropdown' onClick={() => { onToggle(id); }}>
       <div class='c-dropdown -capitalize'>
         <span class='dropdown-label'>
           Country - Commodity

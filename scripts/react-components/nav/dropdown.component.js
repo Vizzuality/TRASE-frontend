@@ -21,7 +21,7 @@ export default class ClickOutside extends Component {
   }
 
   handle(e) {
-    const isInside = this.container.contains(e.target) || findParent.byClassName(e.target, 'nav-item') !== undefined;
+    const isInside = this.container.contains(e.target) || findParent.byClassName(e.target, 'js-dropdown') !== undefined;
 
     if (isInside === false) {
       this.props.onClickOutside(null);

@@ -6,7 +6,7 @@ const id = 'filters';
 
 export default ({ onToggle, onSelected, currentDropdown, selectedFilter, filters }) => {
   return (
-    <div class='nav-item' onClick={() => { onToggle(id); }}>
+    <div class='nav-item js-dropdown' onClick={() => { onToggle(id); }}>
       <div class='c-dropdown -capitalize'>
         <span class='dropdown-label'>
           {filters.name.toLowerCase()}

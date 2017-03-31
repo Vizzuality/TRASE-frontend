@@ -111,7 +111,7 @@ export default class Years extends Component {
       left: `${this.state.left}px`
     };
     return (
-      <div class='nav-item' onMouseUp={() => { this.onDropdownUp(); }}>
+      <div class='nav-item js-dropdown' onMouseUp={() => { this.onDropdownUp(); }}>
         <div class='c-dropdown'>
           <span class='dropdown-label'>
             year{selectedYears[0] !== selectedYears[1] && <span>s</span>}

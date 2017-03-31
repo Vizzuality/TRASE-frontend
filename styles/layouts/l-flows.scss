@@ -34,7 +34,7 @@ body, html {
       transform: translate(-376px, 0);
 
       > .c-sankey,
-      > .c-columns-selector,
+      .c-columns-selector,
       > .c-titlebar {
         left: 91%;
       }
@@ -88,7 +88,7 @@ body, html {
       }
     }
 
-    > .c-columns-selector {
+    .c-columns-selector {
       top: 8px;
       left: $map-width + $layer-map-width;
       transition: left .45s $ease-in-out-sine;
