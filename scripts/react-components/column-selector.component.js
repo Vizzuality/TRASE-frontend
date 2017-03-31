@@ -9,8 +9,13 @@ export default ({ onToggle, onColumnSelected, currentDropdown, group, allColumns
   const columnItems = allColumns.filter(column => column.group === group);
   const selectedColumnItem = columnItems.filter(column => column.id === selectedColumnsIds[group])[0];
 
+  const hasSingleElement = columnItems.length <= 1;
+
   return (
-    <div class='js-dropdown c-dropdown -column-selector' onClick={() => { onToggle(id); }}>
+    <div
+      class={classNames('js-dropdown c-dropdown -column-selector', {['-hide-only-child']: hasSingleElement})}
+      onClick={() => { onToggle(id); }}
+    >
       <span class={classNames('dropdown-title', {['-is-open']: currentDropdown === id })}>
         {selectedColumnItem.name}
       </span>
