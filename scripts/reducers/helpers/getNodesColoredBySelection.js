@@ -6,5 +6,8 @@ export default selectedNodesPerColumns => {
       mostSelectedNodesColumn = i;
     }
   }
-  return selectedNodesPerColumns[mostSelectedNodesColumn] || [];
+  return {
+    nodesColoredBySelection: selectedNodesPerColumns[mostSelectedNodesColumn] || [],
+    nodesColoredAtColumn: mostSelectedNodesColumn
+  };
 };

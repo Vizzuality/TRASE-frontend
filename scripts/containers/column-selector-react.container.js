@@ -7,7 +7,8 @@ const mapStateToProps = (state) => {
   return {
     currentDropdown: state.app.currentDropdown,
     allColumns: state.flows.columns,
-    selectedColumnsIds: state.flows.selectedColumnsIds
+    selectedColumnsIds: state.flows.selectedColumnsIds,
+    nodesColoredAtColumn: state.flows.nodesColoredAtColumn
   };
 };
 
