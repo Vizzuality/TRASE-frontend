@@ -263,7 +263,7 @@ export default function (state = {}, action) {
     case actions.FILTER_LINKS_BY_NODES: {
       const selectedNodesAtColumns = getNodesAtColumns(state.selectedNodesIds, state.selectedNodesColumnsPos);
 
-      const nodesColoredBySelection = getNodesColoredBySelection(selectedNodesAtColumns);
+      const { nodesColoredBySelection, nodesColoredAtColumn } = getNodesColoredBySelection(selectedNodesAtColumns);
       let recolorGroups = getRecolorGroups(state.nodesColoredBySelection, nodesColoredBySelection, state.recolorGroups);
 
       let links;
@@ -274,7 +274,7 @@ export default function (state = {}, action) {
         links = mergeLinks(state.unmergedLinks);
       }
 
-      newState = Object.assign({}, state, { links, nodesColoredBySelection, recolorGroups });
+      newState = Object.assign({}, state, { links, nodesColoredBySelection, nodesColoredAtColumn, recolorGroups });
       break;
     }
 

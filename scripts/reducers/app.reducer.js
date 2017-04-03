@@ -6,7 +6,8 @@ const initialState = {
   isAppMenuVisible: false,
   tooltipCheck: 0,
   tooltips: [],
-  isDisclaimerModalVisible: false
+  isDisclaimerModalVisible: false,
+  currentDropdown: null
 };
 
 const isSankeyExpanded = (state) => state.isMapLayerVisible !== true && state.isMapVisible !== true;
@@ -44,6 +45,11 @@ export default function (state = initialState, action) {
             }
           }
         });
+    }
+
+    case actions.TOGGLE_DROPDOWN: {
+      const currentDropdown = (action.dropdownId === state.currentDropdown) ? null : action.dropdownId;
+      return Object.assign({}, state, { currentDropdown });
     }
 
     default:

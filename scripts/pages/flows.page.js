@@ -1,14 +1,18 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { Provider } from 'preact-redux';
+import { h, render } from 'preact';
+
 import FlowContentContainer from 'containers/flow-content.container';
 import SankeyContainer from 'containers/sankey.container';
-import ColumnsSelectorContainer from 'containers/columns-selector.container';
+import ColumnsSelectorContainer from 'containers/columns-selector-react.container';
 import MapDimensionsContainer from 'containers/map-dimensions.container.js';
 import MapContextContainer from 'containers/map-context.container';
 import MapLegendContainer from 'containers/map-legend.container';
 import MapBasemapsContainer from 'containers/map-basemaps.container';
 import MapContainer from 'containers/map.container';
-import NavContainer from 'containers/nav-flows.container';
+import NavContainer from 'containers/nav-flows-react.container';
+import NavComponent from 'components/nav-flows.component';
 import TitlebarContainer from 'containers/titlebar.container';
 import NodesTitlesContainer from 'containers/nodesTitles.container';
 import SearchContainer from 'containers/search.container';
@@ -22,6 +26,7 @@ import { getURLParams, decodeStateFromURL } from 'utils/stateURL';
 import { APP_DEFAULT_STATE, FLOWS_DEFAULT_STATE } from 'constants';
 import 'styles/layouts/l-flows.scss';
 import 'styles/components/loading.scss';
+import 'styles/components/dropdown.scss';
 
 const objParams = getURLParams(window.location.search);
 
@@ -42,18 +47,31 @@ const start = () => {
 
   new FlowContentContainer(store);
   new SankeyContainer(store);
-  new ColumnsSelectorContainer(store);
   new MapContainer(store);
   new MapDimensionsContainer(store);
   new MapContextContainer(store);
   new MapLegendContainer(store);
   new MapBasemapsContainer(store);
-  new NavContainer(store);
   new TitlebarContainer(store);
   new NodesTitlesContainer(store);
   new SearchContainer(store);
   new TooltipContainer(store);
   new ModalContainer(store);
+
+  new NavComponent();
+  render(
+    <Provider store={store}>
+      <NavContainer />
+    </Provider>,
+    document.getElementById('js-flows-nav-react')
+  );
+  render(
+    <Provider store={store}>
+      <ColumnsSelectorContainer />
+    </Provider>,
+    document.getElementById('js-columns-selector-react')
+  );
+
 
   store.dispatch(loadDisclaimer());
   store.dispatch(loadInitialData());

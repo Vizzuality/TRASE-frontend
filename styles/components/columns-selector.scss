@@ -6,13 +6,14 @@
   justify-content: space-between;
   padding: 0 0 0 21px;
 
-  > .c-dropdown {
+  .c-dropdown {
     width: 100px;
     height: 32px;
     padding: 0 7px;
     border-radius: 4px;
     background-color: $white;
     box-shadow: 0 1px 3px 0 rgba($black, 0.1), 0 1px 2px 0 rgba($black, 0.2);
+    cursor: pointer;
 
     &:first-child {
       width: 111px;
@@ -36,6 +37,14 @@
         &::after {
           transform: rotate(225deg);
         }
+      }
+    }
+
+    &.-hide-only-child {
+      cursor: auto;
+
+      .dropdown-title::after {
+        display: none;
       }
     }
 

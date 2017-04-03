@@ -2,6 +2,7 @@
 
 .tooltip-icon {
   font-size: 12px;
+  margin-left: 4px;
 }
 
 .dropdown-label, .dropdown-item, .dropdown-title, .dropdown-item-title, .dropdown-item-title-wrapper {
@@ -96,7 +97,7 @@ body >.c-tooltip {
 
   &.tooltip-element-attached-top.tooltip-element-attached-left.tooltip-target-attached-bottom .tooltip-content:before {
     bottom: 100%;
-    left: 9px;
+    left: 1px;
     border-bottom-color: $charcoal-grey;
   }
 
@@ -105,7 +106,7 @@ body >.c-tooltip {
 
   &.tooltip-element-attached-top.tooltip-element-attached-right.tooltip-target-attached-bottom .tooltip-content:before {
     bottom: 100%;
-    right: 9px;
+    right: 1px;
     border-bottom-color: $charcoal-grey;
   }
 
@@ -115,7 +116,7 @@ body >.c-tooltip {
 
   &.tooltip-element-attached-bottom.tooltip-element-attached-left.tooltip-target-attached-top .tooltip-content:before {
     top: 100%;
-    left: 9px;
+    left: 1px;
     border-top-color: $charcoal-grey;
   }
 
@@ -125,7 +126,7 @@ body >.c-tooltip {
 
   &.tooltip-element-attached-bottom.tooltip-element-attached-right.tooltip-target-attached-top .tooltip-content:before {
     top: 100%;
-    right: 9px;
+    right: 1px;
     border-top-color: $charcoal-grey;
   }
 
