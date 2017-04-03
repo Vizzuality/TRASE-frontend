@@ -9,6 +9,7 @@ export const DETAILED_VIEW_SCALE = 1200;
 export const DETAILED_VIEW_MIN_NODE_HEIGHT = 14;
 export const DETAILED_VIEW_MIN_LINK_HEIGHT = 1;
 
+export const CHOROPLETH_CLASS_ZERO = 'ch-zero';
 export const CHOROPLETH_CLASSES = {
   bidimensional: [
     'ch-bi-0-2', 'ch-bi-1-2', 'ch-bi-2-2',

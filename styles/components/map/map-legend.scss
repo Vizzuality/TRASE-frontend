@@ -113,6 +113,15 @@
       text-transform: uppercase;
     }
 
+    .icon-unidimensional-legend-arrows {
+      display: block;
+      position: absolute;
+      width: 45%;
+      height: 6px;
+      right: 10px;
+      bottom: 18px;
+    }
+
     .icon-bidimensional-legend-arrows {
       display: none;
       position: absolute;
@@ -197,9 +206,14 @@
         }
       }
 
+      .icon-unidimensional-legend-arrows {
+        display: none;
+      }
+
       .icon-bidimensional-legend-arrows {
         display: block;
       }
+
     }
   }
 
