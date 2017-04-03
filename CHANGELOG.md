@@ -1,3 +1,11 @@
+### 2.0.3
+- Added React-based views
+- Improved choropleth layers
+- Improved map legends
+- Enable data portal
+- Improved static pages
+- Expanded map view
+
 ### 2.0.2
 - Fixed regression where legend summary would not appear
 - Improved flows page dropdowns behaviour
