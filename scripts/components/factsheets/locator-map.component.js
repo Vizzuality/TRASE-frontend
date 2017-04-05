@@ -1,6 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 import { json as d3_json } from 'd3-request';
-import { geoPath as d3_geoPath, /*geoAlbersUsa as d3_geoAlbersUsa,*/ geoMercator as d3_geoMercator } from 'd3-geo';
+import { geoPath as d3_geoPath, geoMercator as d3_geoMercator } from 'd3-geo';
+import { geoRobinson as d3_geoRobinson } from 'd3-geo-projection';
 import * as topojson from 'topojson';
 
 function getFeaturesBox(featureBounds) {
@@ -22,7 +23,7 @@ function fitGeoInside(featureBounds, width, height) {
 }
 
 
-export default (className, {topoJSONPath, topoJSONRoot, isCurrent}) => {
+export default (className, {topoJSONPath, topoJSONRoot, isCurrent, useRobinsonProjection}) => {
 
   const d3Container =  d3_select(className);
   const containerComputedStyle = window.getComputedStyle(d3Container.node());
@@ -36,7 +37,7 @@ export default (className, {topoJSONPath, topoJSONRoot, isCurrent}) => {
   const geoParent = svg.append('g');
   const container = geoParent.append('g');
 
-  const projection = d3_geoMercator();
+  const projection = (useRobinsonProjection === true) ? d3_geoRobinson() : d3_geoMercator();
   const path = d3_geoPath()
     .projection(projection);
 
@@ -64,6 +65,6 @@ export default (className, {topoJSONPath, topoJSONRoot, isCurrent}) => {
       'scale(' + scale + ')'
     ].join(' '));
 
-    container.selectAll('path').style('stroke-width', 1 / scale);
+    container.selectAll('path').style('stroke-width', .5 / scale);
   });
 };

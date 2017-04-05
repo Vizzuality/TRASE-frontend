@@ -34,14 +34,19 @@ const defaults = {
 const _build = data => {
 
   const countryName = 'BRAZIL';
-  const biome_geoId = data.biome_geoId;
   const stateGeoID = data.state_geoId;
-  const municipGeoID = data.municip_geoId;
+
+  LocatorMap('.js-map-country', {
+    topoJSONPath: './vector_layers/WORLD.topo.json',
+    topoJSONRoot: 'WORLD',
+    isCurrent: d => d.properties.iso2 === data.country_geoId,
+    useRobinsonProjection: true
+  });
 
   LocatorMap('.js-map-biome', {
     topoJSONPath: `./vector_layers/${countryName}_BIOME.topo.json`,
     topoJSONRoot: `${countryName}_BIOME`,
-    isCurrent: d => d.properties.geoid === biome_geoId
+    isCurrent: d => d.properties.geoid === data.biome_geoId
   });
 
   LocatorMap('.js-map-state', {
@@ -53,7 +58,7 @@ const _build = data => {
   LocatorMap('.js-map-municipality', {
     topoJSONPath: `./vector_layers/municip_states/${countryName.toLowerCase()}/${stateGeoID}.topo.json`,
     topoJSONRoot: `${countryName}_${stateGeoID}`,
-    isCurrent: d => d.properties.geoid === municipGeoID
+    isCurrent: d => d.properties.geoid === data.municip_geoId
   });
 
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
