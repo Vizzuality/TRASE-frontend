@@ -34,8 +34,15 @@ const defaults = {
 const _build = data => {
 
   const countryName = 'BRAZIL';
+  const biome_geoId = data.biome_geoId;
   const stateGeoID = data.state_geoId;
   const municipGeoID = data.municip_geoId;
+
+  LocatorMap('.js-map-biome', {
+    topoJSONPath: `./vector_layers/${countryName}_BIOME.topo.json`,
+    topoJSONRoot: `${countryName}_BIOME`,
+    isCurrent: d => d.properties.geoid === biome_geoId
+  });
 
   LocatorMap('.js-map-state', {
     topoJSONPath: `./vector_layers/${countryName}_STATE.topo.json`,
