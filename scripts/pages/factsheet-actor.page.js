@@ -13,9 +13,9 @@ import 'styles/components/loading.scss';
 
 import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
-// import AreaStack from 'components/graphs/area-stack.component';  stack area future
+// import AreaStack from 'components/factsheets/area-stack.component';  stack area future
 import Top from 'components/factsheets/top.component';
-import Table from 'components/table/table.component';
+import Table from 'components/factsheets/table.component';
 
 import { getURLParams } from 'utils/stateURL';
 import _ from 'lodash';
