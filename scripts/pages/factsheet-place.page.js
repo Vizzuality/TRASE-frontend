@@ -9,6 +9,7 @@ import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
+import 'styles/components/factsheets/locator-map.scss';
 import 'styles/components/loading.scss';
 
 import Nav from 'components/nav.component.js';
@@ -18,6 +19,10 @@ import Chord from 'components/graphs/chord.component';
 import Top from 'components/factsheets/top.component';
 import Table from 'components/table/table.component';
 
+import { select as d3_select } from 'd3-selection';
+import { json as d3_json } from 'd3-request';
+import { geoPath as d3_geoPath, /*geoAlbersUsa as d3_geoAlbersUsa,*/ geoMercator as d3_geoMercator } from 'd3-geo';
+import * as topojson from 'topojson';
 import { getURLParams } from 'utils/stateURL';
 import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
@@ -28,7 +33,76 @@ const defaults = {
   commodity: 'Soy'
 };
 
+let featureBounds;
+let geo;
+const width = 300;
+const height = 200;
+
+function getFeaturesBox() {
+  return {
+    x: featureBounds[0][0],
+    y: featureBounds[0][1],
+    width: featureBounds[1][0] - featureBounds[0][0],
+    height: featureBounds[1][1] - featureBounds[0][1]
+  };
+}
+
+// fits the geometry layer inside the viewport
+function fitGeoInside() {
+  const bbox = getFeaturesBox();
+  const scale = 1 / Math.max(bbox.width / width, bbox.height / height);
+  const trans = [-(bbox.x + bbox.width / 2) * scale + width / 2, -(bbox.y + bbox.height / 2) * scale + height / 2];
+
+  geo.attr('transform', [
+    'translate(' + trans + ')',
+    'scale(' + scale + ')'
+  ].join(' '));
+
+  geo.selectAll('path').style('stroke-width', 1 / scale);
+}
+
 const _build = data => {
+
+  const svg = d3_select('.js-map-municipality').append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  const geoParent = svg.append('g');
+  geo = geoParent.append('g');
+
+  const projection = d3_geoMercator();
+  const path = d3_geoPath()
+    .projection(projection);
+
+  const countryName = 'BRAZIL';
+  const stateGeoID = data.state_geoId;
+  const municipGeoID = data.municip_geoId;
+
+  const filePath = `./vector_layers/municip_states/brazil/${stateGeoID}.topo.json`;
+  const topoJSONRoot = `${countryName}_${stateGeoID}`;
+
+  const isCurrentMunicipality = d => d.properties.geoid === municipGeoID;
+
+  d3_json(filePath, function(error, topoJSON) {
+  // d3_json('./us.json', function(error, topoJSON) {
+    const features = topojson.feature(topoJSON, topoJSON.objects[topoJSONRoot]);
+    // const features = topojson.feature(topoJSON, topoJSON.objects.states);
+    geo.selectAll('path')
+      .data(features.features)
+      .enter()
+      .append('path')
+      .attr('class', d => {
+        return isCurrentMunicipality(d) ? 'polygon -isCurrent' : 'polygon';
+      })
+      .attr('d', path);
+
+    const collection = {
+      'type': 'FeatureCollection',
+      'features' : features.features
+    };
+    featureBounds = path.bounds(collection);
+    fitGeoInside();
+  });
 
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
 
@@ -66,6 +140,8 @@ const _build = data => {
       type: 't_head_places'
     });
   }
+
+
 };
 
 const _onSelect = function(value) {
