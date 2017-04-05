@@ -37,8 +37,14 @@ const _build = data => {
   const stateGeoID = data.state_geoId;
   const municipGeoID = data.municip_geoId;
 
+  LocatorMap('.js-map-state', {
+    topoJSONPath: `./vector_layers/${countryName}_STATE.topo.json`,
+    topoJSONRoot: `${countryName}_STATE`,
+    isCurrent: d => d.properties.geoid === stateGeoID
+  });
+
   LocatorMap('.js-map-municipality', {
-    topoJSONPath: `./vector_layers/municip_states/brazil/${stateGeoID}.topo.json`,
+    topoJSONPath: `./vector_layers/municip_states/${countryName.toLowerCase()}/${stateGeoID}.topo.json`,
     topoJSONRoot: `${countryName}_${stateGeoID}`,
     isCurrent: d => d.properties.geoid === municipGeoID
   });

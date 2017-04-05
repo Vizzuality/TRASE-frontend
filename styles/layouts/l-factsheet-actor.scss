@@ -24,6 +24,11 @@
 
     .c-area-select > .c-dropdown {
       margin: 0 0 0 72px;
+
+      .dropdown-label {
+        margin-bottom: 0 !important;
+
+      }
     }
   }
 
