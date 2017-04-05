@@ -34,6 +34,11 @@ const URL_STATE_PROPS = [
   'mapView'
 ];
 
+const URL_PARAMS_PROPS = [
+  'isMapVisible',
+  'selectedNodesIds'
+];
+
 const filterStateToURL = state => {
   if (_.isEmpty(state)) {
     return {};
@@ -55,6 +60,34 @@ export const encodeStateToURL = state => {
   return encoded;
 };
 
+function _getURLParameterByName(name, url) {
+  if (!url) {
+    url = window.location.href;
+  }
+  name = name.replace(/[\[\]]/g, '\\$&');
+  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+  const results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
 export const decodeStateFromURL = urlHash => {
-  return JSON.parse(atob(urlHash));
+  const state = (urlHash === undefined) ? {} : JSON.parse(atob(urlHash));
+  console.log(state);
+
+  // if URL contains GET parameters, override hash state prop with it
+  URL_PARAMS_PROPS.forEach(prop => {
+    let urlParam = _getURLParameterByName(prop);
+    if (urlParam) {
+      if (prop === 'selectedNodesIds') {
+        urlParam = urlParam.replace(/\[|\]/gi, '').split(',').map(nodeId => parseInt(nodeId));
+      }
+      console.log(prop, urlParam);
+      state[prop] = urlParam;
+    }
+  });
+
+  console.log(state)
+  return state;
 };

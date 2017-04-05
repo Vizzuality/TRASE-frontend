@@ -31,10 +31,8 @@ import 'styles/components/dropdown.scss';
 const objParams = getURLParams(window.location.search);
 
 const start = () => {
-  if (objParams.state) {
-    const newState = decodeStateFromURL(objParams.state);
-    Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
-  }
+  const newState = decodeStateFromURL(objParams.state);
+  Object.assign(FLOWS_DEFAULT_STATE.flows, newState);
 
   const initialState = Object.assign({}, FLOWS_DEFAULT_STATE, APP_DEFAULT_STATE);
 
