@@ -22,8 +22,14 @@ function fitGeoInside(featureBounds, width, height) {
 }
 
 
-export default (className, {width, height, topoJSONPath, topoJSONRoot, isCurrent}) => {
-  const svg = d3_select('.js-map-municipality').append('svg')
+export default (className, {topoJSONPath, topoJSONRoot, isCurrent}) => {
+
+  const d3Container =  d3_select(className);
+  const containerComputedStyle = window.getComputedStyle(d3Container.node());
+  const width = parseInt(containerComputedStyle.width);
+  const height = parseInt(containerComputedStyle.height);
+
+  const svg = d3Container.append('svg')
     .attr('width', width)
     .attr('height', height);
 

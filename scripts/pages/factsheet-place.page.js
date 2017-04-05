@@ -38,8 +38,6 @@ const _build = data => {
   const municipGeoID = data.municip_geoId;
 
   LocatorMap('.js-map-municipality', {
-    width: 300,
-    height: 200,
     topoJSONPath: `./vector_layers/municip_states/brazil/${stateGeoID}.topo.json`,
     topoJSONRoot: `${countryName}_${stateGeoID}`,
     isCurrent: d => d.properties.geoid === municipGeoID
