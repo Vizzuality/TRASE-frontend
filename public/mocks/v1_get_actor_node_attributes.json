@@ -16,8 +16,6 @@
         {
           "name": "CHINA",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             6392774.5,
             6689568.95
@@ -26,8 +24,6 @@
         {
           "name": "THAILAND",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             588071.79,
             651347.46
@@ -36,8 +32,6 @@
         {
           "name": "NETHERLANDS",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             451999.62,
             346720.79
@@ -46,8 +40,6 @@
         {
           "name": "SPAIN",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             311777.15,
             331056.08
@@ -56,8 +48,6 @@
         {
           "name": "INDONESIA",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             302305.63,
             158144.7
@@ -66,8 +56,6 @@
         {
           "name": "FRANCE",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             289828.7,
             304808.66
@@ -76,8 +64,6 @@
         {
           "name": "UNITED KINGDOM",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             277289.93,
             359728.78
@@ -86,8 +72,6 @@
         {
           "name": "INDIA",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             253325.37,
             205511.61
@@ -96,8 +80,6 @@
         {
           "name": "TAIWAN",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             247101.7,
             112094.03
@@ -106,8 +88,6 @@
         {
           "name": "EGYPT",
           "geoId":"BR1702109",
-          "type": "line",
-          "style": "line-pink",
           "values": [
             230936.61,
             40066.22
