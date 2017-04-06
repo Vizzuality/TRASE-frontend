@@ -30,7 +30,7 @@ const _onSelect = function(value) {
   defaults[this.id] = value;
 };
 
-const _setInfo = (type, name, forest_500, zero_deforestation) => {
+const _setInfo = (type, name, forest_500, zero_deforestation, nodeId) => {
   document.querySelector('.js-legend').innerHTML = type || '-';
   document.querySelector('.js-name').innerHTML = name ? _.capitalize(name) : '-';
   if (forest_500 > 0) document.querySelector('.forest-500-score .star-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
@@ -43,6 +43,8 @@ const _setInfo = (type, name, forest_500, zero_deforestation) => {
   } else {
     document.querySelector('.zero-deforestation-commitment span[data-value="no"]').classList.remove('is-hidden');
   }
+  document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
+  document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
 };
 
 const _build = data => {
@@ -127,7 +129,7 @@ const _init = ()  => {
 
       const data = result.data;
 
-      _setInfo(data.column_name, data.node_name, data.forest_500, data.zero_deforestation);
+      _setInfo(data.column_name, data.node_name, data.forest_500, data.zero_deforestation, nodeId);
 
       const commodityDropdown = new Dropdown('commodity', _onSelect);
       commodityDropdown.setTitle(_.capitalize(commodity));

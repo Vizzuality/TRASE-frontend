@@ -75,7 +75,7 @@ const _onSelect = function(value) {
   defaults[this.id] = value;
 };
 
-const _setInfo = (info) => {
+const _setInfo = (info, nodeId) => {
   document.querySelector('.js-country-name').innerHTML = info.country ? _.capitalize(info.country) : '-';
   document.querySelector('.js-state-name').innerHTML = info.state ?  _.capitalize(info.state) : '-';
   document.querySelector('.js-biome-name').innerHTML = info.biome ? _.capitalize(info.biome) : '-';
@@ -84,6 +84,8 @@ const _setInfo = (info) => {
   document.querySelector('.js-area').innerHTML = info.area !== null ? info.area : '-';
   document.querySelector('.js-soy-land').innerHTML = info.soy_land !== null ? formatNumber(info.soy_land, 'percentage') : '-';
   document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? formatNumber(info.agriculture_land, 'percentage') : '-';
+  document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
+  document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
 };
 
 const _showErrorMessage = () => {
@@ -135,7 +137,7 @@ const _init = () => {
         type: data.column_name
       };
 
-      _setInfo(info);
+      _setInfo(info, nodeId);
 
       _build(data);
     });
