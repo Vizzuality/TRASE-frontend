@@ -136,7 +136,7 @@ const _init = () => {
 
   commodityDropdown.setTitle(defaults.commodity);
 
-  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId});
+  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId}, true);
 
   fetch(placeFactsheetURL)
     .then((response) => {

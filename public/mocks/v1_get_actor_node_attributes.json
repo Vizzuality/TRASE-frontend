@@ -1,0 +1,696 @@
+{
+  "data": {
+    "summary": "Amaggi was the 5th largest exporter of soy in Brazil in 2015, accounting for 3,917,933 tons. This is a 2% increase vs the previous year. Amaggi sources from 1,258 municipalities, or 23% of the soy production municipalities. The main destination of the soy exported by Amaggi is Russia, accounting for 32% of the total.",
+    "column_name": "IMPORTER",
+    "forest_500": 4.0,
+    "node_name": "CARGILL",
+    "rtrs_member": "YES",
+    "supply_change": "YES",
+    "supply_change_link": "HTTP://SUPPLY-CHANGE.ORG/COMPANY/CARGILL",
+    "top_countries": {
+      "includedYears": [
+        2015,
+        2016
+      ],
+      "lines": [
+        {
+          "name": "CHINA",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            6392774.5,
+            6689568.95
+          ]
+        },
+        {
+          "name": "THAILAND",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            588071.79,
+            651347.46
+          ]
+        },
+        {
+          "name": "NETHERLANDS",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            451999.62,
+            346720.79
+          ]
+        },
+        {
+          "name": "SPAIN",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            311777.15,
+            331056.08
+          ]
+        },
+        {
+          "name": "INDONESIA",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            302305.63,
+            158144.7
+          ]
+        },
+        {
+          "name": "FRANCE",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            289828.7,
+            304808.66
+          ]
+        },
+        {
+          "name": "UNITED KINGDOM",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            277289.93,
+            359728.78
+          ]
+        },
+        {
+          "name": "INDIA",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            253325.37,
+            205511.61
+          ]
+        },
+        {
+          "name": "TAIWAN",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            247101.7,
+            112094.03
+          ]
+        },
+        {
+          "name": "EGYPT",
+          "geoId":"BR1702109",
+          "type": "line",
+          "style": "line-pink",
+          "values": [
+            230936.61,
+            40066.22
+          ]
+        }
+      ]
+    },
+    "top_sources": {
+      "includedYears": [
+        2015,
+        2016
+      ],
+      "municipalities": {
+        "lines": [
+          {
+            "id": 2663,
+            "name": "SAPEZAL",
+            "geoId":"BR1702109",
+            "values": [
+              221858.26,
+              318469.45
+            ]
+          },
+          {
+            "id": 2299,
+            "name": "RIACHAO DAS NEVES",
+            "geoId":"BR1702109",
+            "values": [
+              192415.7,
+              4470.37
+            ]
+          },
+          {
+            "id": 68,
+            "name": "AGUA BOA",
+            "geoId":"BR1702109",
+            "values": [
+              164032.19,
+              90953.67
+            ]
+          },
+          {
+            "id": 2550,
+            "name": "SAO DESIDERIO",
+            "geoId":"BR1702109",
+            "values": [
+              149851.31,
+              107182.6
+            ]
+          },
+          {
+            "id": 1915,
+            "name": "NOVA UBIRATA",
+            "geoId":"BR1702109",
+            "values": [
+              109362.88,
+              56902.81
+            ]
+          },
+          {
+            "id": 1600,
+            "name": "LUCAS DO RIO VERDE",
+            "geoId":"BR1702109",
+            "values": [
+              108436.32,
+              70832.02
+            ]
+          },
+          {
+            "id": 2352,
+            "name": "RIO VERDE",
+            "geoId":"BR1702109",
+            "values": [
+              106836.59,
+              128832.13
+            ]
+          },
+          {
+            "id": 121,
+            "name": "ALTO GARCAS",
+            "geoId":"BR1702109",
+            "values": [
+              106832.25,
+              92979.02
+            ]
+          },
+          {
+            "id": 1491,
+            "name": "JATAI",
+            "geoId":"BR1702109",
+            "values": [
+              102753.13,
+              145091.99
+            ]
+          },
+          {
+            "id": 1095,
+            "name": "FORMOSA DO RIO PRETO",
+            "geoId":"BR1702109",
+            "values": [
+              94167.32,
+              166999.78
+            ]
+          }
+        ]
+      },
+      "biome": {
+        "lines": [
+          {
+            "id": 2663,
+            "name": "SAPEZAL",
+            "geoId":"BR1702109",
+            "values": [
+              221858.26,
+              318469.45
+            ]
+          },
+          {
+            "id": 2299,
+            "name": "RIACHAO DAS NEVES",
+            "geoId":"BR1702109",
+            "values": [
+              192415.7,
+              4470.37
+            ]
+          },
+          {
+            "id": 68,
+            "name": "AGUA BOA",
+            "geoId":"BR1702109",
+            "values": [
+              164032.19,
+              90953.67
+            ]
+          },
+          {
+            "id": 2550,
+            "name": "SAO DESIDERIO",
+            "geoId":"BR1702109",
+            "values": [
+              149851.31,
+              107182.6
+            ]
+          },
+          {
+            "id": 1915,
+            "name": "NOVA UBIRATA",
+            "geoId":"BR1702109",
+            "values": [
+              109362.88,
+              56902.81
+            ]
+          },
+          {
+            "id": 1600,
+            "name": "LUCAS DO RIO VERDE",
+            "geoId":"BR1702109",
+            "values": [
+              108436.32,
+              70832.02
+            ]
+          },
+          {
+            "id": 2352,
+            "name": "RIO VERDE",
+            "geoId":"BR1702109",
+            "values": [
+              106836.59,
+              128832.13
+            ]
+          },
+          {
+            "id": 121,
+            "name": "ALTO GARCAS",
+            "geoId":"BR1702109",
+            "values": [
+              106832.25,
+              92979.02
+            ]
+          },
+          {
+            "id": 1491,
+            "name": "JATAI",
+            "geoId":"BR1702109",
+            "values": [
+              102753.13,
+              145091.99
+            ]
+          },
+          {
+            "id": 1095,
+            "name": "FORMOSA DO RIO PRETO",
+            "geoId":"BR1702109",
+            "values": [
+              94167.32,
+              166999.78
+            ]
+          }
+        ]
+      },
+      "state": {
+        "lines": [
+          {
+            "id": 2663,
+            "name": "SAPEZAL",
+            "geoId":"BR1702109",
+            "values": [
+              221858.26,
+              318469.45
+            ]
+          },
+          {
+            "id": 2299,
+            "name": "RIACHAO DAS NEVES",
+            "geoId":"BR1702109",
+            "values": [
+              192415.7,
+              4470.37
+            ]
+          },
+          {
+            "id": 68,
+            "name": "AGUA BOA",
+            "geoId":"BR1702109",
+            "values": [
+              164032.19,
+              90953.67
+            ]
+          },
+          {
+            "id": 2550,
+            "name": "SAO DESIDERIO",
+            "geoId":"BR1702109",
+            "values": [
+              149851.31,
+              107182.6
+            ]
+          },
+          {
+            "id": 1915,
+            "name": "NOVA UBIRATA",
+            "geoId":"BR1702109",
+            "values": [
+              109362.88,
+              56902.81
+            ]
+          },
+          {
+            "id": 1600,
+            "name": "LUCAS DO RIO VERDE",
+            "geoId":"BR1702109",
+            "values": [
+              108436.32,
+              70832.02
+            ]
+          },
+          {
+            "id": 2352,
+            "name": "RIO VERDE",
+            "geoId":"BR1702109",
+            "values": [
+              106836.59,
+              128832.13
+            ]
+          },
+          {
+            "id": 121,
+            "name": "ALTO GARCAS",
+            "geoId":"BR1702109",
+            "values": [
+              106832.25,
+              92979.02
+            ]
+          },
+          {
+            "id": 1491,
+            "name": "JATAI",
+            "geoId":"BR1702109",
+            "values": [
+              102753.13,
+              145091.99
+            ]
+          },
+          {
+            "id": 1095,
+            "name": "FORMOSA DO RIO PRETO",
+            "geoId":"BR1702109",
+            "values": [
+              94167.32,
+              166999.78
+            ]
+          }
+        ]
+      }
+    },
+    "total_soy_2015": 8801293,
+    "zero_deforestation": "YES",
+    "zero_deforestation_link": "HTTP://WWW.CARGILL.COM/NEWS/ISSUES/DEFORESTATION/INDEX.JSP",
+    "sustainability": {
+      "biome": {
+        "includedColumns": [
+          {
+            "name": "Biome"
+          },
+          {
+            "name": "Maximum soy deforestation",
+            "unit": "ha"
+          },
+          {
+            "name": "Soy deforestation",
+            "unit": "ha"
+          },
+          {
+            "name": "Biodiversity loss"
+          }
+        ],
+        "rows": [
+          {
+            "values": [
+              {
+                "id": 151,
+                "value": "AMAZONIA"
+              },
+              {
+                "value": 90441.07
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 457,
+                "value": "CAATINGA"
+              },
+              {
+                "value": 0.33
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 652,
+                "value": "CERRADO"
+              },
+              {
+                "value": 39979.38
+              },
+              {
+                "value": 8099.14
+              },
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 1700,
+                "value": "MATA ATLANTICA"
+              },
+              {
+                "value": 8.45
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 2001,
+                "value": "PAMPA"
+              },
+              {
+                "value": 153.27
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 2005,
+                "value": "PANTANAL"
+              },
+              {
+                "value": 81.13
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "isTotal": true,
+            "values": [
+              {
+                "value": "Total"
+              },
+              {
+                "value": 130713.951563184
+              },
+              {
+                "value": 8099.14289900755
+              },
+              {
+                "value": null
+              }
+            ]
+          }
+        ]
+      },
+      "municipalities": {
+        "includedColumns": [
+          {
+            "name": "Municipality"
+          },
+          {
+            "name": "Maximum soy deforestation",
+            "unit": "ha"
+          },
+          {
+            "name": "Soy deforestation",
+            "unit": "ha"
+          },
+          {
+            "name": "Biodiversity loss"
+          }
+        ],
+        "rows": [
+          {
+            "values": [
+              {
+                "id": 110,
+                "value": "ALTAMIRA"
+              },
+              {
+                "value": 24893.07
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 1932,
+                "value": "NOVO PROGRESSO"
+              },
+              {
+                "value": 13656.5
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 2209,
+                "value": "PORTO VELHO"
+              },
+              {
+                "value": 10929.06
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 2153,
+                "value": "PLACAS"
+              },
+              {
+                "value": 7171.07
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 722,
+                "value": "COCOS"
+              },
+              {
+                "value": 6298.11
+              },
+              null,
+              null
+            ]
+          }
+        ]
+      }
+    },
+    "companies_exporting": {
+      "dimensions_y": {
+        "name": "Soy exported in 2015",
+        "unit": "TN"
+      },
+      "dimensions_x": [
+        {
+          "name": "Land use",
+          "unit": null
+        },
+        {
+          "name": "Territorial Deforestation",
+          "unit": null
+        },
+        {
+          "name": "Potential Soy related deforestation",
+          "unit": null
+        },
+        {
+          "name": "Soy related deforestation",
+          "unit": "ha"
+        },
+        {
+          "name": "Loss of biodiversity",
+          "unit": null
+        },
+        {
+          "name": "Land-based emmisions",
+          "unit": null
+        }
+      ],
+      "companies": [
+        {
+          "name": "Amaggi",
+          "y": 456.788,
+          "x": [
+            4567.688,
+            3467.8,
+            4567.688,
+            3467.8,
+            4567.688,
+            3467.8
+          ]
+        },
+        {
+          "name": "Bunge",
+          "y": 456.788,
+          "x": [
+            14567.688,
+            13467.8,
+            14567.688,
+            13467.8,
+            14567.688,
+            13467.8
+          ]
+        },
+        {
+          "name": "Cargill",
+          "y": 456.788,
+          "x": [
+            3567.688,
+            2467.8,
+            3567.688,
+            2467.8,
+            3567.688,
+            2467.8
+          ]
+        },
+        {
+          "name": "ADM",
+          "y": 456.788,
+          "x": [
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8
+          ]
+        }
+      ]
+    }
+  }
+}
