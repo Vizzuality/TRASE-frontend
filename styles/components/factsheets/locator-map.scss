@@ -1,0 +1,10 @@
+@import '../../settings';
+
+.polygon {
+  fill: $charcoal-grey-faded-a-lot;
+  stroke: $egg-shell;
+
+  &.-isCurrent {
+    fill: $medium-pink;
+  }
+}

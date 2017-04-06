@@ -9,14 +9,16 @@ import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
+import 'styles/components/factsheets/locator-map.scss';
 import 'styles/components/loading.scss';
 
 import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
-import Line from 'components/graphs/line.component';
-import Chord from 'components/graphs/chord.component';
 import Top from 'components/factsheets/top.component';
-import Table from 'components/table/table.component';
+import Line from 'components/factsheets/line.component';
+import Chord from 'components/factsheets/chord.component';
+import Table from 'components/factsheets/table.component';
+import LocatorMap from 'components/factsheets/locator-map.component';
 
 import { getURLParams } from 'utils/stateURL';
 import formatNumber from 'utils/formatNumber';
@@ -28,7 +30,36 @@ const defaults = {
   commodity: 'Soy'
 };
 
+
 const _build = data => {
+
+  const countryName = 'BRAZIL';
+  const stateGeoID = data.state_geoId;
+
+  LocatorMap('.js-map-country', {
+    topoJSONPath: './vector_layers/WORLD.topo.json',
+    topoJSONRoot: 'WORLD',
+    isCurrent: d => d.properties.iso2 === data.country_geoId,
+    useRobinsonProjection: true
+  });
+
+  LocatorMap('.js-map-biome', {
+    topoJSONPath: `./vector_layers/${countryName}_BIOME.topo.json`,
+    topoJSONRoot: `${countryName}_BIOME`,
+    isCurrent: d => d.properties.geoid === data.biome_geoId
+  });
+
+  LocatorMap('.js-map-state', {
+    topoJSONPath: `./vector_layers/${countryName}_STATE.topo.json`,
+    topoJSONRoot: `${countryName}_STATE`,
+    isCurrent: d => d.properties.geoid === stateGeoID
+  });
+
+  LocatorMap('.js-map-municipality', {
+    topoJSONPath: `./vector_layers/municip_states/${countryName.toLowerCase()}/${stateGeoID}.topo.json`,
+    topoJSONRoot: `${countryName}_${stateGeoID}`,
+    isCurrent: d => d.properties.geoid === data.municip_geoId
+  });
 
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
 
@@ -66,6 +97,8 @@ const _build = data => {
       type: 't_head_places'
     });
   }
+
+
 };
 
 const _onSelect = function(value) {

@@ -34,6 +34,11 @@
       flex-basis: calc(100% / 3);
       align-items: center;
     }
+
+    .locator-map {
+      width: 160px;
+      height: 90px;
+    }
   }
 
   .overall-info {
@@ -55,8 +60,7 @@
           }
 
           > .dropdown-label {
-            margin: 0 0 10px;
-
+            margin-bottom: 0 !important;
             font-size: $font-size-x-regular;
           }
 
