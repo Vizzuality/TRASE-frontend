@@ -84,7 +84,7 @@ export default class {
 
     this.selectPolygonType(payload.currentPolygonType);
     if (payload.selectedNodesGeoIds) {
-      this._outlinePolygons({selectedGeoIds: payload.selectedNodesGeoIds});
+      this.selectPolygons({selectedGeoIds: payload.selectedNodesGeoIds});
     }
 
     // under normal circumstances, choropleth (depends on loadNodes) and linkedGeoIds (depends on loadLinks)
@@ -93,25 +93,21 @@ export default class {
       this._setChoropleth(payload.choropleth);
     }
     if (payload.linkedGeoIds) {
-      this.showLinkedGeoIds({
-        selectedNodesGeoIds: payload.selectedNodesGeoIds,
-        linkedGeoIds: payload.linkedGeoIds
-      });
+      this.showLinkedGeoIds(payload.linkedGeoIds);
     }
   }
 
 
-  showLinkedGeoIds({selectedNodesGeoIds, linkedGeoIds}) {
-    const geoIdList = _.union(selectedNodesGeoIds, linkedGeoIds);
+  showLinkedGeoIds(linkedGeoIds) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
     // remove choropleth from main layer
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', geoIdList.length);
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
 
     window.clearTimeout(this.showLinkedFeaturesTimeout);
 
-    if (!geoIdList.length) {
+    if (!linkedGeoIds.length) {
       if (this.vectorLinked) {
         this.map.removeLayer(this.vectorLinked);
       }
@@ -120,7 +116,7 @@ export default class {
 
     const linkedFeaturesClassNames = {};
 
-    const linkedFeatures = geoIdList.map(geoId => {
+    const linkedFeatures = linkedGeoIds.map(geoId => {
       const originalPolygon = this.polygonFeaturesDict[geoId];
       if (originalPolygon !== undefined) {
         // copy class names (ie choropleth from vectorMain's original polygon)
@@ -150,7 +146,12 @@ export default class {
     }, SANKEY_TRANSITION_TIME * 1.1);
   }
 
-  selectPolygons(payload) { this._outlinePolygons(payload); }
+  selectPolygons(payload) {
+    this._outlinePolygons(payload);
+    if (this.vectorOutline !== undefined && payload.selectedGeoIds.length) {
+      this.map.fitBounds(this.vectorOutline.getBounds());
+    }
+  }
   highlightPolygon(payload) { this._outlinePolygons(payload); }
 
   _outlinePolygons({selectedGeoIds, highlightedGeoId}) {
