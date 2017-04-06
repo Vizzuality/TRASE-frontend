@@ -65,7 +65,7 @@
           },
           {
             "name": "State Ranking",
-            "stateRanking": [
+            "values": [
               13,
               27,
               4,
@@ -128,7 +128,7 @@
           },
           {
             "name": "State Ranking",
-            "stateRanking": [
+            "values": [
               13,
               27,
               4,
@@ -191,7 +191,7 @@
           },
           {
             "name": "State Ranking",
-            "stateRanking": [
+            "values": [
               13,
               27,
               4,
@@ -248,7 +248,7 @@
           },
           {
             "name": "State Ranking",
-            "stateRanking": [
+            "values": [
               13,
               27,
               4,
