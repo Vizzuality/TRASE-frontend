@@ -63,12 +63,12 @@ const _build = data => {
 
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
 
-  if (data.top_traders.length) {
-    new Chord('.js-chord-traders', data.top_traders_matrix, data.top_traders, data.municip_name);
+  if (data.top_traders.actors.length) {
+    new Chord('.js-chord-traders', data.top_traders.matrix, data.top_traders.actors, data.municip_name);
 
     new Top({
       el: document.querySelector('.js-top-trader'),
-      data: data.top_traders,
+      data: data.top_traders.actors,
       targetLink: 'actor',
       title: 'top traders',
       unit: '%'
@@ -77,12 +77,12 @@ const _build = data => {
     document.querySelector('.js-traders').classList.toggle('is-hidden', false);
   }
 
-  if (data.top_consumers.length) {
-    new Chord('.js-chord-consumers', data.top_consumers_matrix, data.top_consumers, data.municip_name);
+  if (data.top_consumers.countries.length) {
+    new Chord('.js-chord-consumers', data.top_consumers.matrix, data.top_consumers.countries, data.municip_name);
 
     new Top({
       el: document.querySelector('.js-top-consumer'),
-      data: data.top_consumers,
+      data: data.top_consumers.countries,
       title: 'top consumers',
       unit: '%'
     });
@@ -90,10 +90,10 @@ const _build = data => {
     document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
   }
 
-  if (data.sustainability_indicators.rows.length) {
+  if (data.indicators[0].rows.length) {
     new Table({
       el: document.querySelector('.js-score-table'),
-      data: data.sustainability_indicators,
+      data: data.indicators[0],
       type: 't_head_places'
     });
   }
@@ -136,7 +136,7 @@ const _init = () => {
 
   commodityDropdown.setTitle(defaults.commodity);
 
-  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId});
+  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId}, true);
 
   fetch(placeFactsheetURL)
     .then((response) => {

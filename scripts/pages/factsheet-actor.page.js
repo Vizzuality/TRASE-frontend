@@ -46,10 +46,10 @@ const _setInfo = (type, name, forest_500, zero_deforestation) => {
 };
 
 const _build = data => {
-  if (data.top_municipalities.lines.length) {
+  if (data.top_sources.municipalities.lines.length) {
     new Top({
       el: document.querySelector('.js-top-municipalities'),
-      data: data.top_municipalities.lines,
+      data: data.top_sources.municipalities.lines,
       targetLink: 'place',
       title: 'top source municipalities in 2015'
     });
@@ -73,19 +73,19 @@ const _build = data => {
   //   data: data.top_countries
   // });
 
-  if (data.risk_indicators_municip.rows.length) {
+  if (data.sustainability.municipalities.rows.length) {
     new Table({
       el: document.querySelector('.js-municipalities-table'),
-      data: data.risk_indicators_municip,
+      data: data.sustainability.municipalities,
       type: 't_head_actors',
       target: 'actor'
     });
   }
 
-  if (data.risk_indicators_biome.rows.length) {
+  if (data.sustainability.biome.rows.length) {
     new Table({
       el: document.querySelector('.js-biome-table'),
-      data: data.risk_indicators_biome,
+      data: data.sustainability.biome,
       type: 't_head_actors',
       target: 'actor'
     });
@@ -106,7 +106,7 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId});
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId}, true);
 
   fetch(actorFactsheetURL)
     .then((response) => {

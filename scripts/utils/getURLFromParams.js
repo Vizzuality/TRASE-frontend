@@ -23,8 +23,8 @@ const API_ENDPOINTS = {
   [GET_FLOWS]: { api: 1, endpoint: '/get_flows' },
   [GET_MAP_BASE_DATA]: { api: 2, endpoint: '/get_map_base_data' },
   [GET_LINKED_GEO_IDS]: { api: 2, endpoint: '/get_linked_geoids' },
-  [GET_PLACE_FACTSHEET]: { api: 1, endpoint: '/get_place_node_attributes' },
-  [GET_ACTOR_FACTSHEET]: { api: 1, endpoint: '/get_actor_node_attributes' },
+  [GET_PLACE_FACTSHEET]: { api: 1, endpoint: '/get_place_node_attributes', mock: 'mocks/v1_get_place_node_attributes.json' },
+  [GET_ACTOR_FACTSHEET]: { api: 1, endpoint: '/get_actor_node_attributes', mock: 'mocks/v1_get_actor_node_attributes.json' },
   [GET_INDICATORS]: { api: 2, endpoint: '/indicators' },
   [GET_CSV_DATA_DOWNLOAD_FILE]: { api: 2, endpoint: '/download.csv' },
   [GET_JSON_DATA_DOWNLOAD_FILE]: { api: 2, endpoint: '/download.json' },
@@ -70,14 +70,19 @@ function getURLForLocal(endpoint, params = {}) {
   }, `/${endpoint}?`);
 }
 
-export function getURLFromParams(endpointKey, params = {}) {
+export function getURLFromParams(endpointKey, params = {}, mock = false) {
   const endpointData = API_ENDPOINTS[endpointKey];
-  switch (endpointData.api) {
-    case 2:
-      return getURLForV2(endpointData.endpoint, params);
-    case 1:
-      return getURLForV1(`/v1${endpointData.endpoint}`, params);
-    case 'local':
-      return getURLForLocal(endpointData.endpoint, params);
+
+  if (!mock) {
+    switch (endpointData.api) {
+      case 2:
+        return getURLForV2(endpointData.endpoint, params);
+      case 1:
+        return getURLForV1(`/v1${endpointData.endpoint}`, params);
+      case 'local':
+        return getURLForLocal(endpointData.endpoint, params);
+    }
+  } else {
+    return endpointData.mock;
   }
 }
