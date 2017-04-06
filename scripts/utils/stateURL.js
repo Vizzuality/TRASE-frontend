@@ -72,22 +72,29 @@ function _getURLParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+// http://localhost:8081/flows.html?selectedNodesIds=[110]
 export const decodeStateFromURL = urlHash => {
   const state = (urlHash === undefined) ? {} : JSON.parse(atob(urlHash));
-  console.log(state);
 
   // if URL contains GET parameters, override hash state prop with it
   URL_PARAMS_PROPS.forEach(prop => {
     let urlParam = _getURLParameterByName(prop);
     if (urlParam) {
-      if (prop === 'selectedNodesIds') {
-        urlParam = urlParam.replace(/\[|\]/gi, '').split(',').map(nodeId => parseInt(nodeId));
+      switch (prop) {
+        case 'selectedNodesIds': {
+          urlParam = urlParam.replace(/\[|\]/gi, '').split(',').map(nodeId => parseInt(nodeId));
+          state.areNodesExpanded = true;
+          state.expandedNodesIds = urlParam;
+          break;
+        }
+        case 'isMapVisible': {
+          urlParam = (urlParam === 'true') ? true : false;
+          break;
+        }
       }
-      console.log(prop, urlParam);
       state[prop] = urlParam;
     }
   });
 
-  console.log(state)
   return state;
 };
