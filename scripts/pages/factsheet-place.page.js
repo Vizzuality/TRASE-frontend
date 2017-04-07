@@ -8,6 +8,7 @@ import 'styles/components/loading.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/info.scss';
+import 'styles/components/factsheets/link-buttons.scss';
 import 'styles/components/factsheets/error.scss';
 import 'styles/components/factsheets/locator-map.scss';
 import 'styles/components/loading.scss';
