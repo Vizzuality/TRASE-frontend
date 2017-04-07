@@ -50,15 +50,7 @@ const mapMethodsToState = (state) => ({
   },
   loadContextLayers: state.flows.selectedMapContextualLayersData,
   loadBasemap: state.flows.selectedMapBasemap,
-  showLinkedGeoIds: {
-    _comparedValue: (state) => state.flows.linkedGeoIds,
-    _returnedValue: (state) => {
-      return {
-        selectedNodesGeoIds: state.flows.selectedNodesGeoIds,
-        linkedGeoIds: state.flows.linkedGeoIds
-      };
-    }
-  },
+  showLinkedGeoIds: state.flows.linkedGeoIds,
   invalidate: state.flows.isMapVisible
 });
 
