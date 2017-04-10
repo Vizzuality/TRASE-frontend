@@ -7,14 +7,14 @@ import 'styles/components/loading.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/area-select.scss';
-import 'styles/components/factsheets/locator-map.scss';
+import 'styles/components/factsheets/map.scss';
 import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
 import 'styles/components/loading.scss';
 
 import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
-import LocatorMap from 'components/factsheets/locator-map.component';
+import Map from 'components/factsheets/map.component';
 // import AreaStack from 'components/factsheets/area-stack.component';  stack area future
 import Top from 'components/factsheets/top.component';
 import Table from 'components/factsheets/table.component';
@@ -49,10 +49,10 @@ const _build = data => {
       title: 'top destination countries in 2015'
     });
 
-    LocatorMap('.js-top-destination-map', {
+    Map('.js-top-destination-map', {
       topoJSONPath: './vector_layers/WORLD.topo.json',
       topoJSONRoot: 'WORLD',
-      isCurrent: () => false,
+      getPolygonClassName: () => '',
       useRobinsonProjection: true
     });
   }

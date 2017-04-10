@@ -23,7 +23,7 @@ function fitGeoInside(featureBounds, width, height) {
 }
 
 
-export default (className, {topoJSONPath, topoJSONRoot, isCurrent, useRobinsonProjection}) => {
+export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, useRobinsonProjection}) => {
 
   const d3Container =  d3_select(className);
   const containerComputedStyle = window.getComputedStyle(d3Container.node());
@@ -49,7 +49,8 @@ export default (className, {topoJSONPath, topoJSONRoot, isCurrent, useRobinsonPr
       .enter()
       .append('path')
       .attr('class', d => {
-        return isCurrent(d) ? 'polygon -isCurrent' : 'polygon';
+        return `polygon ${getPolygonClassName(d)}`;
+        // return isCurrent(d) ? 'polygon -isCurrent' : 'polygon';
       })
       .attr('d', path);
 
