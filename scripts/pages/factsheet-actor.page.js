@@ -11,6 +11,7 @@ import 'styles/components/factsheets/map.scss';
 import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
 import 'styles/components/loading.scss';
+import 'styles/components/infowindow.scss';
 
 import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
@@ -33,6 +34,11 @@ const _onSelect = function(value) {
 };
 
 const _build = data => {
+
+  const infowindow = document.querySelector('.js-infowindow');
+  const infowindowTitle = document.querySelector('.js-infowindow-title');
+  const infowindowBody = document.querySelector('.js-infowindow-body');
+
   if (data.top_sources.municipalities.lines.length) {
     new Top({
       el: document.querySelector('.js-top-municipalities'),
@@ -52,11 +58,22 @@ const _build = data => {
     Map('.js-top-destination-map', {
       topoJSONPath: './vector_layers/WORLD.topo.json',
       topoJSONRoot: 'WORLD',
-      getPolygonClassName: () => {
+      useRobinsonProjection: true,
+      getPolygonClassName: (country) => {
+        console.warn(country.properties.name, country.properties.iso2);
         const value = Math.floor(8 * Math.random());
         return `-outline ch-${value}`;
       },
-      useRobinsonProjection: true
+      showTooltipCallback: (country, x, y) => {
+        infowindow.style.left = x + 'px';
+        infowindow.style.top = y + 'px';
+        infowindow.classList.remove('is-hidden');
+        infowindowTitle.innerHTML = `${data.node_name} > ${country.properties.name.toUpperCase()}`;
+        infowindowBody.innerHTML = 'put choropleth value here';
+      },
+      hideTooltipCallback: () => {
+        infowindow.classList.add('is-hidden');
+      }
     });
   }
 

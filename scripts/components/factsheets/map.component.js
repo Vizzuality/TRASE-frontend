@@ -1,4 +1,4 @@
-import { select as d3_select } from 'd3-selection';
+import { select as d3_select, event as d3_event } from 'd3-selection';
 import { json as d3_json } from 'd3-request';
 import { geoPath as d3_geoPath, geoMercator as d3_geoMercator } from 'd3-geo';
 import { geoRobinson as d3_geoRobinson } from 'd3-geo-projection';
@@ -23,7 +23,7 @@ function fitGeoInside(featureBounds, width, height) {
 }
 
 
-export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, useRobinsonProjection}) => {
+export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, showTooltipCallback, hideTooltipCallback, useRobinsonProjection}) => {
 
   const d3Container =  d3_select(className);
   const containerComputedStyle = window.getComputedStyle(d3Container.node());
@@ -44,7 +44,7 @@ export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, use
   d3_json(topoJSONPath, function(error, topoJSON) {
     const features = topojson.feature(topoJSON, topoJSON.objects[topoJSONRoot]);
 
-    container.selectAll('path')
+    const polygons = container.selectAll('path')
       .data(features.features)
       .enter()
       .append('path')
@@ -53,6 +53,15 @@ export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, use
         // return isCurrent(d) ? 'polygon -isCurrent' : 'polygon';
       })
       .attr('d', path);
+
+    if (showTooltipCallback !== undefined) {
+      polygons.on('mouseenter', function(d) {
+        showTooltipCallback(d, d3_event.clientX, d3_event.clientY);
+      } )
+      .on('mouseout', function() {
+        hideTooltipCallback();
+      });
+    }
 
     const collection = {
       'type': 'FeatureCollection',
