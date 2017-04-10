@@ -108,8 +108,6 @@
     padding: 49px 0 46px;
   }
 
-
-
   .title {
     font-family: $font-family-1;
     font-weight: $font-weight-bold;
@@ -145,6 +143,7 @@
   }
 
   .score-table {
-    margin: 72px 0 0;
+    padding: 54px 0 42px 0;
+    background-color: rgba($white, 0.3);
   }
 }
