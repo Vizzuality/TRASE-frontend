@@ -7,12 +7,14 @@ import 'styles/components/loading.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/area-select.scss';
+import 'styles/components/factsheets/locator-map.scss';
 import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/error.scss';
 import 'styles/components/loading.scss';
 
 import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
+import LocatorMap from 'components/factsheets/locator-map.component';
 // import AreaStack from 'components/factsheets/area-stack.component';  stack area future
 import Top from 'components/factsheets/top.component';
 import Table from 'components/factsheets/table.component';
@@ -30,23 +32,6 @@ const _onSelect = function(value) {
   defaults[this.id] = value;
 };
 
-const _setInfo = (type, name, forest_500, zero_deforestation, nodeId) => {
-  document.querySelector('.js-legend').innerHTML = type || '-';
-  document.querySelector('.js-name').innerHTML = name ? _.capitalize(name) : '-';
-  if (forest_500 > 0) document.querySelector('.forest-500-score .star-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
-  if (forest_500 > 1) document.querySelector('.forest-500-score .star-icon[data-value="2"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
-  if (forest_500 > 2) document.querySelector('.forest-500-score .star-icon[data-value="3"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
-  if (forest_500 > 3) document.querySelector('.forest-500-score .star-icon[data-value="4"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
-  if (forest_500 > 4) document.querySelector('.forest-500-score .star-icon[data-value="5"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
-  if (zero_deforestation === 'YES') {
-    document.querySelector('.zero-deforestation-commitment span[data-value="yes"]').classList.remove('is-hidden');
-  } else {
-    document.querySelector('.zero-deforestation-commitment span[data-value="no"]').classList.remove('is-hidden');
-  }
-  document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
-  document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
-};
-
 const _build = data => {
   if (data.top_sources.municipalities.lines.length) {
     new Top({
@@ -62,6 +47,13 @@ const _build = data => {
       el:document.querySelector('.js-top-destination'),
       data: data.top_countries.lines,
       title: 'top destination countries in 2015'
+    });
+
+    LocatorMap('.js-top-destination-map', {
+      topoJSONPath: './vector_layers/WORLD.topo.json',
+      topoJSONRoot: 'WORLD',
+      isCurrent: () => false,
+      useRobinsonProjection: true
     });
   }
 
@@ -93,6 +85,24 @@ const _build = data => {
     });
   }
 };
+
+const _setInfo = (type, name, forest_500, zero_deforestation, nodeId) => {
+  document.querySelector('.js-legend').innerHTML = type || '-';
+  document.querySelector('.js-name').innerHTML = name ? _.capitalize(name) : '-';
+  if (forest_500 > 0) document.querySelector('.forest-500-score .star-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (forest_500 > 1) document.querySelector('.forest-500-score .star-icon[data-value="2"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (forest_500 > 2) document.querySelector('.forest-500-score .star-icon[data-value="3"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (forest_500 > 3) document.querySelector('.forest-500-score .star-icon[data-value="4"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (forest_500 > 4) document.querySelector('.forest-500-score .star-icon[data-value="5"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-star');
+  if (zero_deforestation === 'YES') {
+    document.querySelector('.zero-deforestation-commitment span[data-value="yes"]').classList.remove('is-hidden');
+  } else {
+    document.querySelector('.zero-deforestation-commitment span[data-value="no"]').classList.remove('is-hidden');
+  }
+  document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
+  document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
+};
+
 
 const _showErrorMessage = () => {
   const el = document.querySelector('.l-factsheet-actor');
