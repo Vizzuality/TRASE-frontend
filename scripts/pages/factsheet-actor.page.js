@@ -52,7 +52,10 @@ const _build = data => {
     Map('.js-top-destination-map', {
       topoJSONPath: './vector_layers/WORLD.topo.json',
       topoJSONRoot: 'WORLD',
-      getPolygonClassName: () => '',
+      getPolygonClassName: () => {
+        const value = Math.floor(8 * Math.random());
+        return `-outline ch-${value}`;
+      },
       useRobinsonProjection: true
     });
   }

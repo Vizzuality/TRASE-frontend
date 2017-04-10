@@ -7,4 +7,17 @@
   &.-isCurrent {
     fill: $medium-pink;
   }
+
+  &.ch-0 { fill: $ch-factsheet-red-0; };
+  &.ch-1 { fill: $ch-factsheet-red-1; };
+  &.ch-2 { fill: $ch-factsheet-red-2; };
+  &.ch-3 { fill: $ch-factsheet-red-3; };
+  &.ch-4 { fill: $ch-factsheet-red-4; };
+  &.ch-5 { fill: $ch-factsheet-red-5; };
+  &.ch-6 { fill: $ch-factsheet-red-6; };
+  &.ch-7 { fill: $ch-factsheet-red-7; };
+
+  &.-outline {
+    stroke: $charcoal-grey-faded;
+  }
 }
