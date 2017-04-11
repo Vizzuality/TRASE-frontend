@@ -119,6 +119,9 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
   document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
+  document.querySelector('.js-municipality').innerHTML =
+    document.querySelector('.js-link-button-municipality').innerHTML =
+    info.municipality ? _.capitalize(info.municipality) : '-';
 };
 
 const _showErrorMessage = () => {
