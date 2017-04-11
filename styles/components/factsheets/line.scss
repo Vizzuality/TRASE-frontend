@@ -1,23 +1,65 @@
 @import '../../settings';
 
 .c-line {
+  margin-top: 15px;
+
   path {
-    stroke-width: 2px;
+    stroke: none;
     fill: none;
   }
 
   .axis {
-    > text {
-      font-family: $font-family-2;
+
+    line {
+      fill: none;
+      stroke: $charcoal-grey;
+      stroke-opacity: .1;
+    }
+
+    text {
+      font-family: $font-family-1;
       font-size: $font-size-x-regular;
+      line-height: 0.92;
+      letter-spacing: -1px;
+      fill: rgba($charcoal-grey, .6);
+    }
+
+    &.axis--x path {
+      stroke: $charcoal-grey;
+      stroke-width: 2px;
     }
   }
 
-  .line--deforestation {
-    stroke: $medium-pink;
+  .area-pink {
+    fill: rgba($medium-pink, .3);
   }
 
-  .line--production {
-    stroke: $charcoal-grey;
+  .area-black {
+    fill: rgba($charcoal-grey, .3);
   }
+
+  .line-pink {
+    stroke: $medium-pink;
+    stroke-width: 3px;
+  }
+
+  .line-dashed-pink {
+    stroke: $medium-pink;
+    stroke-width: 3px;
+    stroke-dasharray: 1,8;
+    stroke-linecap: round;
+  }
+
+  .line-black {
+    stroke: $charcoal-grey;
+    stroke-width: 3px;
+  }
+
+  .line-dashed-black {
+    stroke: $charcoal-grey;
+    stroke-width: 3px;
+    stroke-dasharray: 1,8;
+    stroke-linecap: round;
+  }
+
 }

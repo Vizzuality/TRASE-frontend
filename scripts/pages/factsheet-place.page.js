@@ -62,7 +62,7 @@ const _build = data => {
     isCurrent: d => d.properties.geoid === data.municip_geoId
   });
 
-  new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
+  new Line('.js-line', data.trajectory_deforestation);
 
   if (data.top_traders.actors.length) {
     new Chord('.js-chord-traders', data.top_traders.matrix, data.top_traders.actors, data.municip_name);
@@ -118,7 +118,7 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? formatNumber(info.agriculture_land, 'percentage') : '-';
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
-  document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
+  document.querySelector('.js-line-title').innerHTML = info.municipality ? `Deforestation trajectory of ${info.municipality}` : '-';
 };
 
 const _showErrorMessage = () => {
