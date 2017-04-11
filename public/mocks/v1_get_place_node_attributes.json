@@ -295,6 +295,8 @@
       "lines": [
         {
           "name": "Soy related deforestation",
+          "type": "area",
+          "style": "area-pink",
           "values": [
             70,
             480,
@@ -306,6 +308,8 @@
         },
         {
           "name": "Potential Soy related deforestation",
+          "type": "line",
+          "style": "line-dashed-pink",
           "values": [
             460,
             700,
@@ -317,6 +321,8 @@
         },
         {
           "name": "Territorial Deforestation",
+          "type": "area",
+          "style": "area-black",
           "values": [
             740,
             770,
@@ -328,6 +334,8 @@
         },
         {
           "name": "State Average",
+          "type": "line",
+          "style": "line-dashed-black",
           "values": [
             560,
             400,
