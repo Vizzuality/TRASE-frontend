@@ -14,6 +14,8 @@ import {
 } from 'd3-shape';
 import { format as d3_format } from 'd3-format';
 import { timeFormat as d3_timeFormat } from 'd3-time-format';
+import stringToHTML from 'utils/stringToHTML';
+import LegendItemTemplate from 'ejs!templates/factsheets/legendItem.ejs';
 
 import 'styles/components/factsheets/line.scss';
 
@@ -21,6 +23,7 @@ import 'styles/components/factsheets/line.scss';
 export default class {
   constructor(className, data) {
     const elem = document.querySelector(className);
+    const legend = document.querySelector(`${className}-legend`);
     const margin = {top: 30, right: 40, bottom: 30, left: 94};
     const width = elem.clientWidth - margin.left - margin.right;
     const height = 425 - margin.top - margin.bottom;
@@ -78,6 +81,13 @@ export default class {
             .attr('d', line);
           break;
       }
+
+      const legendItemHTML = stringToHTML(LegendItemTemplate({
+        name: lineData.legend_name,
+        style: lineData.style
+      }));
+
+      legend.appendChild(legendItemHTML[0]);
     });
 
     let y = d3_scale_linear()

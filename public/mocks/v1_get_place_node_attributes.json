@@ -295,6 +295,7 @@
       "lines": [
         {
           "name": "Soy related deforestation",
+          "legend_name": "Soy related<br/>deforestation",
           "type": "area",
           "style": "area-pink",
           "values": [
@@ -308,6 +309,7 @@
         },
         {
           "name": "Potential Soy related deforestation",
+          "legend_name": "Potential Soy<br/>related deforestation",
           "type": "line",
           "style": "line-dashed-pink",
           "values": [
@@ -321,6 +323,7 @@
         },
         {
           "name": "Territorial Deforestation",
+          "legend_name": "Territorial<br/>Deforestation",
           "type": "area",
           "style": "area-black",
           "values": [
@@ -334,6 +337,7 @@
         },
         {
           "name": "State Average",
+          "legend_name": "State<br/>Average",
           "type": "line",
           "style": "line-dashed-black",
           "values": [
