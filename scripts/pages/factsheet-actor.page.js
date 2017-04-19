@@ -16,7 +16,6 @@ import 'styles/components/infowindow.scss';
 import Nav from 'components/nav.component.js';
 import Dropdown from 'components/dropdown.component';
 import Map from 'components/factsheets/map.component';
-// import AreaStack from 'components/factsheets/area-stack.component';  stack area future
 import Top from 'components/factsheets/top.component';
 import Table from 'components/factsheets/table.component';
 
