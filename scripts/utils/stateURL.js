@@ -56,7 +56,7 @@ const filterStateToURL = state => {
 export const encodeStateToURL = state => {
   const urlProps = JSON.stringify(filterStateToURL(state));
   const encoded = btoa(urlProps);
-  window.history.pushState({}, 'Title', `?state=${encoded}`);
+  window.history.replaceState({}, 'Title', `?state=${encoded}`);
   return encoded;
 };
 
