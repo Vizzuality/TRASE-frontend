@@ -65,8 +65,13 @@
 
 
             <div class="container-top">
-              <div class="c-top js-top-municipalities"></div>
+              <div class="c-top-map js-top-destination-map"></div>
               <div class="c-top js-top-destination"></div>
+            </div>
+
+            <div class="container-top">
+              <div class="c-top js-top-municipalities"></div>
+              <div class="c-top-map js-top-municipalities-map"></div>
             </div>
 
             <div class="c-area-table is-hidden">
@@ -85,6 +90,10 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="js-infowindow is-hidden c-sankey-tooltip">
+      <div class="js-infowindow-title title">title</div>
+      <div class="js-infowindow-body body">body</div>
     </div>
     <%= htmlWebpackPlugin.options.footer %>
   </div>

@@ -1,4 +1,5 @@
 @import '../../settings';
+@import '../../mixins';
 
 .c-link-buttons {
   position: relative;
@@ -13,6 +14,7 @@
   font-weight: bold;
   line-height: 1.23;
   letter-spacing: -0.6px;
+  text-transform: uppercase;
   color: $charcoal-grey;
   cursor: pointer;
 
@@ -24,5 +26,21 @@
     width: 1px;
     height: 100%;
     background-color: rgba($charcoal-grey, 0.3);
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &.-with-arrow:after {
+    @include arrow(11px, 1px, rgba($charcoal-grey, .3), 'down');
+    content: '';
+    position: absolute;
+    bottom: -13px;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
 }

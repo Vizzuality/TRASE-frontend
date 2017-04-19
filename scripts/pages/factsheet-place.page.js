@@ -10,7 +10,7 @@ import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/info.scss';
 import 'styles/components/factsheets/link-buttons.scss';
 import 'styles/components/factsheets/error.scss';
-import 'styles/components/factsheets/locator-map.scss';
+import 'styles/components/factsheets/map.scss';
 import 'styles/components/loading.scss';
 
 import Nav from 'components/nav.component.js';
@@ -19,7 +19,7 @@ import Top from 'components/factsheets/top.component';
 import Line from 'components/factsheets/line.component';
 import Chord from 'components/factsheets/chord.component';
 import MultiTable from 'components/factsheets/multi-table.component';
-import LocatorMap from 'components/factsheets/locator-map.component';
+import Map from 'components/factsheets/map.component';
 
 import { getURLParams } from 'utils/stateURL';
 import formatNumber from 'utils/formatNumber';
@@ -37,29 +37,29 @@ const _build = data => {
   const countryName = 'BRAZIL';
   const stateGeoID = data.state_geoId;
 
-  LocatorMap('.js-map-country', {
+  Map('.js-map-country', {
     topoJSONPath: './vector_layers/WORLD.topo.json',
     topoJSONRoot: 'WORLD',
-    isCurrent: d => d.properties.iso2 === data.country_geoId,
+    getPolygonClassName: d => (d.properties.iso2 === data.country_geoId) ? '-isCurrent' : '',
     useRobinsonProjection: true
   });
 
-  LocatorMap('.js-map-biome', {
+  Map('.js-map-biome', {
     topoJSONPath: `./vector_layers/${countryName}_BIOME.topo.json`,
     topoJSONRoot: `${countryName}_BIOME`,
-    isCurrent: d => d.properties.geoid === data.biome_geoId
+    getPolygonClassName: d => (d.properties.geoid === data.biome_geoId) ? '-isCurrent' : ''
   });
 
-  LocatorMap('.js-map-state', {
+  Map('.js-map-state', {
     topoJSONPath: `./vector_layers/${countryName}_STATE.topo.json`,
     topoJSONRoot: `${countryName}_STATE`,
-    isCurrent: d => d.properties.geoid === stateGeoID
+    getPolygonClassName: d => (d.properties.geoid === stateGeoID) ? '-isCurrent' : ''
   });
 
-  LocatorMap('.js-map-municipality', {
+  Map('.js-map-municipality', {
     topoJSONPath: `./vector_layers/municip_states/${countryName.toLowerCase()}/${stateGeoID}.topo.json`,
     topoJSONRoot: `${countryName}_${stateGeoID}`,
-    isCurrent: d => d.properties.geoid === data.municip_geoId
+    getPolygonClassName: d => (d.properties.geoid === data.municip_geoId) ? '-isCurrent' : ''
   });
 
   new Line('.js-line', data.trajectory_deforestation, data.trajectory_production);
@@ -119,6 +119,9 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
   document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
+  document.querySelector('.js-municipality').innerHTML =
+    document.querySelector('.js-link-button-municipality').innerHTML =
+    info.municipality ? _.capitalize(info.municipality) : '-';
 };
 
 const _showErrorMessage = () => {
