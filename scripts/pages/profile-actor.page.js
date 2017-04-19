@@ -24,18 +24,28 @@ import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
 const defaults = {
-  commodity: 'soy',
+  country: 'Brazil',
+  commodity: 'soy'
 };
+
+const infowindow = document.querySelector('.js-infowindow');
 
 const _onSelect = function(value) {
   this.setTitle(value);
   defaults[this.id] = value;
 };
 
-const _build = data => {
-  const countryName = 'BRAZIL';
+const _showTooltip = (x, y) => {
+  infowindow.style.left = x + 'px';
+  infowindow.style.top = y + 'px';
+  infowindow.classList.remove('is-hidden');
+};
 
-  const infowindow = document.querySelector('.js-infowindow');
+const _hideTooltip = () => {
+  infowindow.classList.add('is-hidden');
+};
+
+const _build = data => {
   const infowindowTitle = document.querySelector('.js-infowindow-title');
   const infowindowBody = document.querySelector('.js-infowindow-body');
 
@@ -48,23 +58,18 @@ const _build = data => {
     });
 
     Map('.js-top-municipalities-map', {
-      topoJSONPath: `./vector_layers/${countryName}_MUNICIPALITY.topo.json`,
-      topoJSONRoot: `${countryName}_MUNICIPALITY`,
+      topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_MUNICIPALITY.topo.json`,
+      topoJSONRoot: `${defaults.country.toUpperCase()}_MUNICIPALITY`,
       getPolygonClassName: (/*municipality*/) => {
         const value = Math.floor(8 * Math.random());
         return `-outline ch-${value}`;
       },
       showTooltipCallback: (municipality, x, y) => {
-        console.warn(municipality.properties);
-        infowindow.style.left = x + 'px';
-        infowindow.style.top = y + 'px';
-        infowindow.classList.remove('is-hidden');
+        _showTooltip(x, y);
         infowindowTitle.innerHTML = `${data.node_name} > ${municipality.properties.nome.toUpperCase()}`;
         infowindowBody.innerHTML = 'put choropleth value here';
       },
-      hideTooltipCallback: () => {
-        infowindow.classList.add('is-hidden');
-      }
+      hideTooltipCallback: _hideTooltip
     });
   }
 
@@ -79,21 +84,16 @@ const _build = data => {
       topoJSONPath: './vector_layers/WORLD.topo.json',
       topoJSONRoot: 'WORLD',
       useRobinsonProjection: true,
-      getPolygonClassName: (country) => {
-        console.warn(country.properties.name, country.properties.iso2);
+      getPolygonClassName: (/*country*/) => {
         const value = Math.floor(8 * Math.random());
         return `-outline ch-${value}`;
       },
       showTooltipCallback: (country, x, y) => {
-        infowindow.style.left = x + 'px';
-        infowindow.style.top = y + 'px';
-        infowindow.classList.remove('is-hidden');
+        _showTooltip(x, y);
         infowindowTitle.innerHTML = `${data.node_name} > ${country.properties.name.toUpperCase()}`;
         infowindowBody.innerHTML = 'put choropleth value here';
       },
-      hideTooltipCallback: () => {
-        infowindow.classList.add('is-hidden');
-      }
+      hideTooltipCallback: _hideTooltip
     });
 
   }

@@ -33,8 +33,6 @@ const defaults = {
 
 
 const _build = data => {
-
-  const countryName = 'BRAZIL';
   const stateGeoID = data.state_geoId;
 
   Map('.js-map-country', {
@@ -45,20 +43,20 @@ const _build = data => {
   });
 
   Map('.js-map-biome', {
-    topoJSONPath: `./vector_layers/${countryName}_BIOME.topo.json`,
-    topoJSONRoot: `${countryName}_BIOME`,
+    topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_BIOME.topo.json`,
+    topoJSONRoot: `${defaults.country.toUpperCase()}_BIOME`,
     getPolygonClassName: d => (d.properties.geoid === data.biome_geoId) ? '-isCurrent' : ''
   });
 
   Map('.js-map-state', {
-    topoJSONPath: `./vector_layers/${countryName}_STATE.topo.json`,
-    topoJSONRoot: `${countryName}_STATE`,
+    topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_STATE.topo.json`,
+    topoJSONRoot: `${defaults.country.toUpperCase()}_STATE`,
     getPolygonClassName: d => (d.properties.geoid === stateGeoID) ? '-isCurrent' : ''
   });
 
   Map('.js-map-municipality', {
-    topoJSONPath: `./vector_layers/municip_states/${countryName.toLowerCase()}/${stateGeoID}.topo.json`,
-    topoJSONRoot: `${countryName}_${stateGeoID}`,
+    topoJSONPath: `./vector_layers/municip_states/${defaults.country.toUpperCase().toLowerCase()}/${stateGeoID}.topo.json`,
+    topoJSONRoot: `${defaults.country.toUpperCase()}_${stateGeoID}`,
     getPolygonClassName: d => (d.properties.geoid === data.municip_geoId) ? '-isCurrent' : ''
   });
 
