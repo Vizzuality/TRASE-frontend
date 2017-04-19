@@ -5,19 +5,14 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120px;
-  height: 40px;
-  padding: 10px;
   transform: translate(-50%, -50%);
 
+  width: 56px;
+  height: 56px;
   background: $white;
-
-  font-family: $font-family-1;
-  line-height: 20px;
-  text-align: center;
+  border-radius: 99px;
 
   box-shadow: 5px 5px 10px 0 rgba($black, .5);
-
   z-index: 2;
 
   &.-visible {
@@ -26,5 +21,31 @@
 
   &.-top {
     top: 140px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    border: 2px solid $charcoal-grey;
+    border-radius: 99px;
+    width: 26px;
+    height: 26px;
+    clip: rect(0, 20px, 13px, 0);
+
+    animation: rotate 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }
