@@ -7,7 +7,7 @@ import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import 'styles/components/sankey.scss';
 import LinkTooltipTemplate from 'ejs!templates/sankey/linkTooltip.ejs';
-import 'styles/components/sankey/linkTooltip.scss';
+import 'styles/components/infowindow.scss';
 
 
 export default class {

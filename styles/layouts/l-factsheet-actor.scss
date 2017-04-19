@@ -37,8 +37,12 @@
     justify-content: space-between;
     margin: 56px 0 112px;
 
-    > .c-top {
-      width: calc(50% - 24px);
+    .c-top {
+      width: 40%;
+    }
+
+    .c-top-map {
+      width: 60%;
     }
   }
 
