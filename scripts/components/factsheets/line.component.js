@@ -4,76 +4,119 @@ import {
   axisLeft as d3_axis_left
 } from 'd3-axis';
 import {
-    scaleLinear as d3_scale_linear,
-    scaleTime as d3_scale_time
-  } from 'd3-scale';
+  scaleLinear as d3_scale_linear,
+  scaleTime as d3_scale_time
+} from 'd3-scale';
 import { extent as d3_extent } from 'd3-array';
-import { line as d3_line } from 'd3-shape';
+import {
+  line as d3_line,
+  area as d3_area
+} from 'd3-shape';
+import { format as d3_format } from 'd3-format';
+import { timeFormat as d3_timeFormat } from 'd3-time-format';
+import stringToHTML from 'utils/stringToHTML';
+import LegendItemTemplate from 'ejs!templates/factsheets/legendItem.ejs';
 
 import 'styles/components/factsheets/line.scss';
 
 
 export default class {
-  constructor(className, trajectory_deforestation, trajectory_production) {
-    if (!trajectory_deforestation.length || !trajectory_production.length) {
-      document.querySelector('.deforestation').classList.add('is-hidden');
-      return;
-    }
-
+  constructor(className, data) {
     const elem = document.querySelector(className);
-    const margin = {top: 30, right: 40, bottom: 30, left: 50};
+    const legend = document.querySelector(`${className}-legend`);
+    const margin = {top: 30, right: 40, bottom: 30, left: 94};
     const width = elem.clientWidth - margin.left - margin.right;
-    const height = 270 - margin.top - margin.bottom;
-
-    let x = d3_scale_time().range([0, width]);
-
-    let y0 = d3_scale_linear().rangeRound([height, 0]);
-    let y1 = d3_scale_linear().rangeRound([height, 0]);
-
-    const xAxis = d3_axis_bottom(x).tickSize(0).tickPadding(8);
-    const yAxis = d3_axis_left(y0).tickSize(0).tickPadding(8);
+    const height = 425 - margin.top - margin.bottom;
+    let allValues = [];
 
     let container = d3_select(elem)
       .append('svg')
-          .attr('width', width + margin.left + margin.right)
-          .attr('height', height + margin.top + margin.bottom)
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
       .append('g')
-          .attr('transform',
-                'translate(' + margin.left + ',' + margin.top + ')');
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-    const extentProduction = d3_extent(trajectory_production.includedYears, y => new Date(y, 0));
-    const extentDeforestation = d3_extent(trajectory_deforestation.includedYears, y => new Date(y, 0));
+    let x = d3_scale_time()
+      .range([0, width])
+      .domain(d3_extent(data.includedYears, y => new Date(y, 0)));
 
+    data.lines.forEach((lineData) => {
+      allValues = [...allValues, ...lineData.values];
+      const y0 = d3_scale_linear()
+        .rangeRound([height, 0])
+        .domain(d3_extent(lineData.values));
+      const lineValuesWithFormat = prepareData(data.includedYears, lineData);
+      let area = null,
+        line = null;
 
-    if (extentProduction[1] - extentProduction[0] > extentDeforestation[1] - extentDeforestation[0]) {
-      x.domain(extentProduction);
-    } else {
-      x.domain(extentDeforestation);
-    }
+      switch (lineData.type) {
+        case 'area':
+          area = d3_area()
+            .x(d => x(d.date))
+            .y0(height)
+            .y1(d => y0(d.value));
 
-    y0.domain(d3_extent(trajectory_deforestation.lines[0].values));
-    y1.domain(d3_extent(trajectory_production.lines[0].values));
+          line = d3_line()
+            .x(d => x(d.date))
+            .y(d => y0(d.value));
 
-    const dataDeforestation = prepareData(trajectory_deforestation);
-    const dataProduction = prepareData(trajectory_production);
+          container.append('path')
+            .datum(lineValuesWithFormat)
+            .attr('class', lineData.style)
+            .attr('d', area);
 
-    const line0 = d3_line()
-      .x(d => x(d.date))
-      .y(d => y0(d.value));
+          container.append('path')
+            .datum(lineValuesWithFormat)
+            .attr('class', `line-${lineData.style}`)
+            .attr('d', line);
+          break;
+        case 'line':
+          line = d3_line()
+            .x(d => x(d.date))
+            .y(d => y0(d.value));
 
-    const line1 = d3_line()
-      .x(d => x(d.date))
-      .y(d => y1(d.value));
+          container.append('path')
+            .datum(lineValuesWithFormat)
+            .attr('class', lineData.style)
+            .attr('d', line);
+          break;
+      }
 
-    container.append('path')
-      .datum(dataDeforestation)
-      .attr('class', 'line--deforestation')
-      .attr('d', line0);
+      const legendItemHTML = stringToHTML(LegendItemTemplate({
+        name: lineData.legend_name,
+        style: lineData.style
+      }));
 
-    container.append('path')
-      .datum(dataProduction)
-      .attr('class', 'line--production')
-      .attr('d', line1);
+      legend.appendChild(legendItemHTML[0]);
+    });
+
+    let y = d3_scale_linear()
+      .rangeRound([height, 0])
+      .domain(d3_extent([0, ...allValues]));
+
+    const xAxis = d3_axis_bottom(x)
+      .tickSize(0)
+      .tickPadding(15)
+      .tickFormat((value, i) => {
+          let format = d3_timeFormat('%y');
+          if (i === 0) {
+            format = d3_timeFormat('%Y');
+          }
+
+          return format(value) ;
+        });
+    const yAxis = d3_axis_left(y)
+      .ticks(7)
+      .tickSize(-width, 0)
+      .tickPadding(52)
+      .tickFormat((value, i) => {
+        const format = d3_format('0');
+
+        if (i === 6) {
+          return `${format(value)}${data.unit}`;
+        }
+        return format(value) ;
+      });
 
     container.append('g')
       .attr('transform', `translate(0, ${height} )`)
@@ -83,28 +126,14 @@ export default class {
     container.append('g')
       .attr('class', 'axis axis--y axis--deforestation')
       .call(yAxis);
-
-    // container.append('text')
-    //   .attr('class', 'axis-title axis-title--deforestation')
-    //   .html(trajectory_deforestation.lines[0].name);
-    //
-    // container.append('g')
-    //   .attr('transform', `translate(${width}, 0)`)
-    //   .attr('class', 'axis axis--y axis--production')
-    //   .call(d3_axis_right(y1));
-    //
-    // container.append('text')
-    //   .attr('transform', `translate(${width - 100}, 0)`)
-    //   .attr('class', 'axis-title axis-title--production')
-    //   .html(trajectory_production.lines[0].name);
   }
 }
 
-const prepareData = data => {
-  return data.includedYears.map((year, index) => {
+const prepareData = (includedYears, data) => {
+  return includedYears.map((year, index) => {
     return {
       date: new Date(year, 0),
-      value: data.lines[0].values[index]
+      value: data.values[index]
     };
   });
 };

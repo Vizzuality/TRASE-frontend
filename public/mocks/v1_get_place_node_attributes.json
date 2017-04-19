@@ -285,13 +285,6 @@
     ],
     "trajectory_deforestation": {
       "includedYears": [
-        2003,
-        2004,
-        2005,
-        2006,
-        2007,
-        2008,
-        2009,
         2010,
         2011,
         2012,
@@ -302,85 +295,62 @@
       "lines": [
         {
           "name": "Soy related deforestation",
+          "legend_name": "Soy related<br/>deforestation",
           "type": "area",
           "style": "area-pink",
           "values": [
-            150790.0,
-            220800.0,
-            335576.0,
-            461100.0,
-            449500.0,
-            534240.0,
-            574308.0,
-            709500.0,
-            841427.0,
-            882126.0,
-            840000.0,
-            970536.0,
-            1017600.0
+            70,
+            480,
+            520,
+            505,
+            510,
+            755
           ]
         },
         {
           "name": "Potential Soy related deforestation",
+          "legend_name": "Potential Soy<br/>related deforestation",
           "type": "line",
           "style": "line-dashed-pink",
           "values": [
-            140290.0,
-            220100.0,
-            332576.0,
-            451100.0,
-            419500.0,
-            524240.0,
-            544308.0,
-            689500.0,
-            821427.0,
-            852126.0,
-            820000.0,
-            910536.0,
-            1010000.0
+            460,
+            700,
+            765,
+            730,
+            750,
+            1030
           ]
         },
         {
           "name": "Territorial Deforestation",
+          "legend_name": "Territorial<br/>Deforestation",
           "type": "area",
           "style": "area-black",
           "values": [
-            100290.0,
-            200100.0,
-            302576.0,
-            421100.0,
-            409500.0,
-            514240.0,
-            504308.0,
-            609500.0,
-            841427.0,
-            822126.0,
-            800000.0,
-            900536.0,
-            1000000.0
+            740,
+            770,
+            780,
+            1125,
+            1100,
+            1300
           ]
         },
         {
           "name": "State Average",
-          "type": "area",
-          "style": "area-dashed-black",
+          "legend_name": "State<br/>Average",
+          "type": "line",
+          "style": "line-dashed-black",
           "values": [
-            99029.0,
-            150100.0,
-            202576.0,
-            351100.0,
-            399500.0,
-            424240.0,
-            594308.0,
-            609500.0,
-            751427.0,
-            782126.0,
-            790000.0,
-            850536.0,
-            980000.0
+            560,
+            400,
+            465,
+            430,
+            450,
+            630
           ]
         }
-      ]
+      ],
+      "unit": "ha"
     },
     "top_consumers": {
       "countries": [
