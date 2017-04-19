@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import DataContentContainer from 'containers/data-content.container';
-import Nav from 'components/nav.component.js';
+import DataContentContainer from 'containers/data/data-content.container';
+import Nav from 'components/shared/nav.component.js';
 import DataReducer from 'reducers/data.reducer';
 import { loadContext } from 'actions/data.actions';
 import { DATA_DEFAULT_STATE } from 'constants';

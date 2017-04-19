@@ -1,6 +1,6 @@
 import 'styles/about.scss';
 
-import Nav from 'components/nav.component.js';
+import Nav from 'components/shared/nav.component.js';
 import smoothScroll from 'utils/smoothScroll';
 import { calculateOffsets, scrollDocument } from 'utils/fixedScroll';
 import _ from 'lodash';

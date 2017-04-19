@@ -1,5 +1,5 @@
-import Nav from 'components/nav.component.js';
-import Slider from 'scripts/components/shared/slider.component';
+import Nav from 'components/shared/nav.component.js';
+import Slider from 'scripts/components/home/slider.component';
 import PostsTemplate from 'ejs!templates/homepage/posts.ejs';
 // import UpdatesTemplate from 'ejs!templates/homepage/updates.ejs';
 // import TweetsTemplate from 'ejs!templates/homepage/tweets.ejs';

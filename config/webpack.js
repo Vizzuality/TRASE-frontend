@@ -13,17 +13,21 @@ const pages = {
   index: {
     title: 'TRASE'
   },
-  flows: {
-    title: 'TRASE flows'
+  tool: {
+    title: 'TRASE Tool',
+    pageName: 'flows'
   },
-  factsheets: {
-    title: 'TRASE - Factsheets'
+  profiles: {
+    title: 'TRASE - Profiles',
+    pageName: 'factsheets'
   },
-  'factsheet-actor': {
-    title: 'TRASE - Factsheet'
+  'profile-actor': {
+    title: 'TRASE - Actor profile',
+    pageName: 'factsheet-actor'
   },
-  'factsheet-place': {
-    title: 'TRASE - Factsheet'
+  'profile-place': {
+    title: 'TRASE - Place profile',
+    pageName: 'factsheet-place'
   },
   FAQ: {
     title: 'TRASE - FAQ'
@@ -45,13 +49,14 @@ const pages = {
 const htmlHeadTemplate = _.template(fs.readFileSync('./html/includes/_head.ejs', 'utf8'));
 const htmlSearchTemplate = _.template(fs.readFileSync('./html/includes/_search.ejs', 'utf8'));
 const htmlNavTemplate = _.template(fs.readFileSync('./html/includes/_nav.ejs', 'utf8'));
-const htmlNavFlowTemplate = _.template(fs.readFileSync('./html/includes/_nav-flow.ejs', 'utf8'));
+const htmlNavFlowTemplate = _.template(fs.readFileSync('./html/includes/_nav-tool.ejs', 'utf8'));
 const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
 
 const htmlScriptsTemplate = _.template(fs.readFileSync('./html/includes/_scripts.ejs', 'utf8'));
 const getPagePlugin = (id, params) => {
   const title = params.title || 'TRASE';
   const description = params.description || 'Trase brings unprecedented transparency to commodity supply chains revealing new pathways towards achieving a deforestation-free economy.';
+
   return new HtmlWebpackPlugin({
     inject: false,
     head: htmlHeadTemplate({
@@ -66,13 +71,15 @@ const getPagePlugin = (id, params) => {
     footer: htmlFooterTemplate(),
     scripts: htmlScriptsTemplate({bundle: id}),
     icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
-    filename: id+'.html',
+    filename: (params.pageName || id)+'.html',
     template: './html/'+id+'.ejs',
   });
 };
 
 const pagePlugins = Object.keys(pages).map(id => getPagePlugin(id, pages[id]));
-const entry = _.mapValues(pages, (page, id) => './scripts/pages/' + id + '.page.js' );
+const entry = _.mapValues(pages, (page, id) => {
+  return './scripts/pages/' + id + '.page.js';
+} );
 
 const config = {
   entry: entry,

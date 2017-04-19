@@ -34,8 +34,8 @@ export const APP_DEFAULT_STATE = {
   }
 };
 
-export const FLOWS_DEFAULT_STATE = {
-  flows: {
+export const TOOL_DEFAULT_STATE = {
+  tool: {
     selectedNodesIds: [],
     expandedNodesIds: [],
     areNodesExpanded: false,

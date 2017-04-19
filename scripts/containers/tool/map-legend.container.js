@@ -1,0 +1,30 @@
+import connect from 'connect';
+import { toggleMapLayerMenu } from 'actions/app.actions';
+import MapLegend from 'components/tool/map-legend.component';
+
+const mapMethodsToState = () => ({
+  updateChoroplethLegend: {
+    _comparedValue: (state) => state.tool.selectedMapDimensions,
+    _returnedValue: (state) => {
+      return {
+        selectedMapDimensions: state.tool.selectedMapDimensions,
+        selectedMapContextualLayersData: state.tool.selectedMapContextualLayersData,
+      };
+    }
+  },
+  updateContextLegend: {
+    _comparedValue: (state) => state.tool.selectedMapContextualLayersData,
+    _returnedValue: (state) => {
+      return {
+        selectedMapDimensions: state.tool.selectedMapDimensions,
+        selectedMapContextualLayersData: state.tool.selectedMapContextualLayersData,
+      };
+    }
+  }
+});
+
+const mapViewCallbacksToActions = () => ({
+  onToggleMapLayerMenu: () => toggleMapLayerMenu()
+});
+
+export default connect(MapLegend, mapMethodsToState, mapViewCallbacksToActions);

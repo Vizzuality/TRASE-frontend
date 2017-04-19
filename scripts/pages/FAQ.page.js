@@ -1,4 +1,4 @@
-import Nav from 'components/nav.component.js';
+import Nav from 'components/shared/nav.component.js';
 import 'styles/FAQ.scss';
 
 import smoothScroll from 'utils/smoothScroll';
