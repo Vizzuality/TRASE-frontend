@@ -59,7 +59,7 @@ const _build = data => {
         infowindow.style.left = x + 'px';
         infowindow.style.top = y + 'px';
         infowindow.classList.remove('is-hidden');
-        infowindowTitle.innerHTML = 'pouet';
+        infowindowTitle.innerHTML = `${data.node_name} > ${municipality.properties.nome.toUpperCase()}`;
         infowindowBody.innerHTML = 'put choropleth value here';
       },
       hideTooltipCallback: () => {
