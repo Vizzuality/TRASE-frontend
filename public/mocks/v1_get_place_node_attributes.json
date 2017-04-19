@@ -51,6 +51,7 @@
         "rows": [
           {
             "name": "Score",
+            "haveUnit": true,
             "values": [
               null,
               2.0,
@@ -65,6 +66,7 @@
           },
           {
             "name": "State Ranking",
+            "haveUnit": false,
             "values": [
               13,
               27,
@@ -72,7 +74,9 @@
               51,
               70,
               6,
-              30
+              30,
+              45,
+              36
             ]
           }
         ]
@@ -114,6 +118,7 @@
         "rows": [
           {
             "name": "Score",
+            "haveUnit": true,
             "values": [
               null,
               2.0,
@@ -128,6 +133,7 @@
           },
           {
             "name": "State Ranking",
+            "haveUnit": false,
             "values": [
               13,
               27,
@@ -135,7 +141,9 @@
               51,
               70,
               6,
-              30
+              30,
+              45,
+              36
             ]
           }
         ]
@@ -177,6 +185,7 @@
         "rows": [
           {
             "name": "Score",
+            "haveUnit": true,
             "values": [
               null,
               2.0,
@@ -191,6 +200,7 @@
           },
           {
             "name": "State Ranking",
+            "haveUnit": false,
             "values": [
               13,
               27,
@@ -198,7 +208,9 @@
               51,
               70,
               6,
-              30
+              30,
+              45,
+              36
             ]
           }
         ]
@@ -207,33 +219,40 @@
         "name": "Socio-economic indicators",
         "includedColumns": [
           {
-            "name": "Soy production (2015)",
-            "unit": "Tn"
+            "name": "Soy deforestation (until 2014)",
+            "unit": "ha"
           },
           {
-            "name": "Cattle",
-            "unit": "heads"
+            "name": "Number of environmental embargoes (2015)"
           },
           {
-            "name": "Soy yield",
-            "unit": "Tn/ha"
+            "name": "Area affected by fires (2013)",
+            "unit": "km2"
           },
           {
-            "name": "Area soy",
-            "unit": "%"
+            "name": "Cases of forced labor (2014)"
           },
           {
-            "name": "Area maize",
-            "unit": "%"
+            "name": "Cases of land conflicts (2014)"
           },
           {
-            "name": "Area cotton",
-            "unit": "%"
+            "name": "Biodiversity (loss of amphibian habitat)"
+          },
+          {
+            "name": "Annual deforestation rate (2015)",
+            "unit": "ha"
+          },
+          {
+            "name": "Human development index (2013)"
+          },
+          {
+            "name": "Criticality of water scarcity (2013)"
           }
         ],
         "rows": [
           {
             "name": "Score",
+            "haveUnit": true,
             "values": [
               null,
               2.0,
@@ -248,6 +267,7 @@
           },
           {
             "name": "State Ranking",
+            "haveUnit": false,
             "values": [
               13,
               27,
@@ -255,7 +275,9 @@
               51,
               70,
               6,
-              30
+              30,
+              45,
+              36
             ]
           }
         ]

@@ -18,7 +18,7 @@ import Dropdown from 'components/dropdown.component';
 import Top from 'components/factsheets/top.component';
 import Line from 'components/factsheets/line.component';
 import Chord from 'components/factsheets/chord.component';
-import Table from 'components/factsheets/table.component';
+import MultiTable from 'components/factsheets/multi-table.component';
 import Map from 'components/factsheets/map.component';
 
 import { getURLParams } from 'utils/stateURL';
@@ -91,10 +91,10 @@ const _build = data => {
     document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
   }
 
-  if (data.indicators[0].rows.length) {
-    new Table({
+  if (data.indicators.length) {
+    new MultiTable({
       el: document.querySelector('.js-score-table'),
-      data: data.indicators[0],
+      data: data.indicators,
       type: 't_head_places'
     });
   }
