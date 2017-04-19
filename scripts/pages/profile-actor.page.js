@@ -33,6 +33,7 @@ const _onSelect = function(value) {
 };
 
 const _build = data => {
+  const countryName = 'BRAZIL';
 
   const infowindow = document.querySelector('.js-infowindow');
   const infowindowTitle = document.querySelector('.js-infowindow-title');
@@ -44,6 +45,26 @@ const _build = data => {
       data: data.top_sources.municipalities.lines,
       targetLink: 'place',
       title: 'top source municipalities in 2015'
+    });
+
+    Map('.js-top-municipalities-map', {
+      topoJSONPath: `./vector_layers/${countryName}_MUNICIPALITY.topo.json`,
+      topoJSONRoot: `${countryName}_MUNICIPALITY`,
+      getPolygonClassName: (/*municipality*/) => {
+        const value = Math.floor(8 * Math.random());
+        return `-outline ch-${value}`;
+      },
+      showTooltipCallback: (municipality, x, y) => {
+        console.warn(municipality.properties);
+        infowindow.style.left = x + 'px';
+        infowindow.style.top = y + 'px';
+        infowindow.classList.remove('is-hidden');
+        infowindowTitle.innerHTML = 'pouet';
+        infowindowBody.innerHTML = 'put choropleth value here';
+      },
+      hideTooltipCallback: () => {
+        infowindow.classList.add('is-hidden');
+      }
     });
   }
 
@@ -74,6 +95,7 @@ const _build = data => {
         infowindow.classList.add('is-hidden');
       }
     });
+
   }
 
   // new AreaStack({
