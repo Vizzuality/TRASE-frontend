@@ -1,7 +1,6 @@
 @import '../../settings';
 
-.c-loading {
-  display: none;
+.c-spinner {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -13,11 +12,7 @@
   border-radius: 99px;
 
   box-shadow: 5px 5px 10px 0 rgba($black, .5);
-  z-index: 2;
-
-  &.-visible {
-    display: block;
-  }
+  z-index: 101; // above veil
 
   &.-top {
     top: 140px;

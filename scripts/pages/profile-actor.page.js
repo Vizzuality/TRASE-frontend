@@ -3,14 +3,13 @@ import 'styles/_texts.scss';
 import 'styles/_foundation.css';
 import 'styles/layouts/l-profile-actor.scss';
 import 'styles/components/shared/button.scss';
-import 'styles/components/shared/loading.scss';
+import 'styles/components/shared/spinner.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/profiles/area-select.scss';
 import 'styles/components/profiles/map.scss';
 import 'styles/components/profiles/info.scss';
 import 'styles/components/profiles/error.scss';
-import 'styles/components/shared/loading.scss';
 import 'styles/components/shared/infowindow.scss';
 
 import Nav from 'components/shared/nav.component.js';

@@ -16,7 +16,14 @@
       <div class="veil js-veil"></div>
       <div class="c-modal js-modal"></div>
 
-      <div class="flow-content">
+      <div class="js-tool-content flow-content">
+        <div class="js-tool-loading tool-loading">
+          <div class="veil"></div>
+          <div class="c-spinner"></div>
+        </div>
+
+        <div class="js-sankey-veil sankey-veil veil"></div>
+
         <div class="c-basemap-options is-absolute">
           <div class="explanation">
             <span class="explanation-text">choose one layer on each column to draw comparisons</span>
@@ -42,9 +49,9 @@
           <ul class="layer-list js-layer-basemaps">
             <!-- this is rendered by map-basemaps.component -->
           </ul>
-      </div>
+        </div>
 
-        <div class="c-map is-absolute">
+        <div class="js-map-container c-map is-absolute">
           <div id="js-map" class="c-map-leaflet">
             <div class="btn-map -basemap js-basemap-switcher">
               <svg class="icon icon-layers"><use xlink:href="#icon-layers"></use></svg>
@@ -63,10 +70,8 @@
         <div id="js-columns-selector-react"></div>
 
         <div class="c-sankey is-absolute js-sankey">
-          <div class="c-loading js-loading"></div>
-          <div class="js-sankey-tooltip c-sankey-tooltip">
+          <div class="js-sankey-tooltip c-sankey-tooltip"></div>
 
-          </div>
           <svg class="js-sankey-canvas sankey">
             <defs>
               <pattern id="isAggregatedPattern" x="0" y="0" width="1" height="3" patternUnits="userSpaceOnUse">
@@ -109,7 +114,6 @@
           <div class="c-nodes-titles js-nodes-titles"></div>
         </div>
 
-        <div class="flow-veil is-hidden"></div>
       </div>
 
     </div>

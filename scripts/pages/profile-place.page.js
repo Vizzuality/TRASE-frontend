@@ -4,14 +4,13 @@ import 'styles/_foundation.css';
 import 'styles/layouts/l-profile-place.scss';
 import 'styles/components/shared/dropdown.scss';
 import 'styles/components/shared/button.scss';
-import 'styles/components/shared/loading.scss';
+import 'styles/components/shared/spinner.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/profiles/info.scss';
 import 'styles/components/profiles/link-buttons.scss';
 import 'styles/components/profiles/error.scss';
 import 'styles/components/profiles/map.scss';
-import 'styles/components/shared/loading.scss';
 
 import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
