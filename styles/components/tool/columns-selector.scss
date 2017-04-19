@@ -42,6 +42,12 @@
 
     &.-hide-only-child {
       cursor: auto;
+      box-shadow: none;
+      background: none;
+
+      .dropdown-title {
+        text-align: center;
+      }
 
       .dropdown-title::after {
         display: none;

@@ -30,6 +30,14 @@
       fill: $gray;
     }
 
+    &.-is-alone-in-column {
+      pointer-events: none;
+
+      & > .sankey-node-rect {
+        fill: $background-white;
+      }
+    }
+
     &.-selected {
       // disabled for now because of a Firefox rendering bug
       //filter: url(#drop-shadow); //ignore sasslint warning here

@@ -12,7 +12,13 @@ export default function(nodes) {
 
   columns.forEach(column => {
     column.columnId = parseInt(column.key);
+
+    // flag node as belonging to a single-node column
+    if (column.values.length === 1) {
+      column.values[0].isAloneInColumn = true;
+    }
   });
+
 
   return columns;
 
