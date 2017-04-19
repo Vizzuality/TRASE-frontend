@@ -8,6 +8,7 @@ import 'styles/components/loading.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/factsheets/info.scss';
+import 'styles/components/factsheets/link-buttons.scss';
 import 'styles/components/factsheets/error.scss';
 import 'styles/components/factsheets/map.scss';
 import 'styles/components/loading.scss';
@@ -97,8 +98,6 @@ const _build = data => {
       type: 't_head_places'
     });
   }
-
-
 };
 
 const _onSelect = function(value) {
@@ -119,13 +118,17 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? formatNumber(info.agriculture_land, 'percentage') : '-';
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
+  document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
+  document.querySelector('.js-municipality').innerHTML =
+    document.querySelector('.js-link-button-municipality').innerHTML =
+    info.municipality ? _.capitalize(info.municipality) : '-';
 };
 
 const _showErrorMessage = () => {
   const el = document.querySelector('.l-factsheet-place');
   document.querySelector('.c-loading').classList.add('is-hidden');
   el.classList.add('-error');
-  el.querySelector('.wrap').classList.add('is-hidden');
+  el.querySelector('.js-wrap').classList.add('is-hidden');
   el.querySelector('.js-error-message').classList.remove('is-hidden');
 };
 
@@ -155,7 +158,7 @@ const _init = () => {
       if (!result) return;
 
       document.querySelector('.c-loading').classList.add('is-hidden');
-      document.querySelector('.wrap').classList.remove('is-hidden');
+      document.querySelector('.js-wrap').classList.remove('is-hidden');
 
       const data = result.data;
 
@@ -167,7 +170,8 @@ const _init = () => {
         municipality: data.municip_name,
         soy_land: data.soy_farmland,
         state: data.state_name,
-        type: data.column_name
+        type: data.column_name,
+        summary: data.summary
       };
 
       _setInfo(info, nodeId);

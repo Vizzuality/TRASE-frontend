@@ -3,7 +3,7 @@
 .l-factsheet-place {
   position: relative;
   min-height: calc(100vh - #{$nav-height});
-  padding: 64px 0 96px;
+  padding: 54px 0 96px;
   background-color: $egg-shell;
 
   &.-error {
@@ -18,12 +18,7 @@
     }
   }
 
-  .container {
-    max-width: $content-max-width;
-    margin: 0 auto;
-  }
-
-  .overall-map {
+  .c-overall-map {
 
     > .map-list {
       display: flex;
@@ -34,84 +29,83 @@
       flex-basis: calc(100% / 3);
       align-items: center;
     }
+  }
 
-    .locator-map {
-      width: 160px;
-      height: 90px;
+  .c-overall-info {
+    margin-top: 47px;
+
+    .dropdown-item {
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 41px;
+      }
+
+      .c-dropdown {
+
+        > .dropdown-label {
+          margin-bottom: 0 !important;
+          font-size: $font-size-x-regular;
+          line-height: 1em;
+        }
+
+        > .dropdown-title {
+          font-size: $font-size-huge;
+          line-height: 1.2em;
+          padding-right: 31px;
+
+          &:after {
+            width: 14px;
+            height: 14px;
+            border: 3px solid $medium-pink;
+          }
+        }
+      }
+    }
+
+    .stat-item {
+      display: inline-block;
+      padding-top: 36px;
+      margin-right: 20px;
+
+      > .legend {
+        color: $charcoal-grey;
+        font-family: $font-family-1;
+        font-size: $font-size-x-regular;
+        font-weight: $font-weight-bold;
+        letter-spacing: -.6px;
+        line-height: 1.1;
+        text-transform: uppercase;
+      }
+
+      > .value {
+        display: inline-block;
+        color: $charcoal-grey;
+        font-family: $font-family-1;
+        font-size: $font-size-medium;
+        letter-spacing: -1px;
+      }
+
+      > .unit {
+        display: inline-block;
+        color: rgba($charcoal-grey, .6);
+        font-family: $font-family-1;
+        font-size: $font-size-medium;
+      }
+    }
+
+    .summary {
+      margin-top: 24px;
+      font-family: $font-family-2;
+      font-size: $font-size-xx-regular;
+      font-weight: 300;
+      line-height: 2;
+      color: $charcoal-grey;
     }
   }
 
-  .overall-info {
-    display: flex;
-    margin: 56px 0 0;
-
-    > .municipality-map {
-      flex-basis: calc(100% / 3);
-    }
-
-    > .municipality-data {
-
-      > .selectors  {
-        display: flex;
-
-        .c-dropdown {
-          &:not(:first-child) {
-            margin: 0 0 0 40px;
-          }
-
-          > .dropdown-label {
-            margin-bottom: 0 !important;
-            font-size: $font-size-x-regular;
-          }
-
-          > .dropdown-title {
-            font-size: $font-size-huge;
-          }
-        }
-      }
-
-      > .stats {
-        margin: 24px 0 0;
-
-        > .stat-list {
-          display: flex;
-        }
-
-        > .stat-list > .stat-item {
-          &:not(:first-child) {
-            margin: 0 0 0 40px;
-          }
-
-          > .legend {
-            margin: 0 0 4px;
-
-            color: $charcoal-grey;
-            font-family: $font-family-1;
-            font-size: $font-size-x-regular;
-            font-weight: $font-weight-bold;
-            letter-spacing: -.6px;
-            line-height: 1.2;
-            text-transform: uppercase;
-          }
-
-          > .value {
-            display: inline-block;
-
-            color: $charcoal-grey;
-            font-family: $font-family-1;
-            font-size: $font-size-medium;
-            letter-spacing: -1px;
-          }
-
-          > .unit {
-            display: inline-block;
-            color: rgba($charcoal-grey, .6);
-            font-family: $font-family-1;
-            font-size: $font-size-medium;
-          }
-        }
-      }
-    }
+  .c-anchor-buttons {
+    padding: 49px 0 46px;
   }
 
   .title {
