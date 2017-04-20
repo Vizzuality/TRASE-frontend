@@ -98,13 +98,13 @@ export default class {
       .tickSize(0)
       .tickPadding(15)
       .tickFormat((value, i) => {
-          let format = d3_timeFormat('%y');
-          if (i === 0) {
-            format = d3_timeFormat('%Y');
-          }
+        let format = d3_timeFormat('%y');
+        if (i === 0) {
+          format = d3_timeFormat('%Y');
+        }
 
-          return format(value) ;
-        });
+        return format(value) ;
+      });
     const yAxis = d3_axis_left(y)
       .ticks(7)
       .tickSize(-width, 0)

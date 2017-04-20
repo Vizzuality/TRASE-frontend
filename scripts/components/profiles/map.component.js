@@ -55,8 +55,8 @@ export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, sho
       .attr('d', path);
 
     if (showTooltipCallback !== undefined) {
-      polygons.on('mouseenter', function(d) {
-        showTooltipCallback(d, d3_event.clientX, d3_event.clientY);
+      polygons.on('mousemove', function(d) {
+        showTooltipCallback(d, d3_event.clientX + 10, d3_event.clientY + window.scrollY + 10);
       } )
       .on('mouseout', function() {
         hideTooltipCallback();
