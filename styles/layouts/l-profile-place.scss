@@ -51,16 +51,6 @@
   }
 
   .chords-container {
-    display: flex;
-    align-items: center;
-
-    > .c-chord {
-      width: 60%;
-    }
-
-    > .c-top {
-      width: 40%;
-    }
 
     &.-traders {
       margin: 32px auto 0;
