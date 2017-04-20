@@ -4,6 +4,8 @@
     "column_name": "IMPORTER",
     "forest_500": 4.0,
     "node_name": "CARGILL",
+    "country_geoId": "BR",
+    "country_name": "BRAZIL",
     "rtrs_member": "YES",
     "supply_change": "YES",
     "supply_change_link": "HTTP://SUPPLY-CHANGE.ORG/COMPANY/CARGILL",

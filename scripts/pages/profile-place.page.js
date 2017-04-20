@@ -7,6 +7,7 @@ import 'styles/components/shared/button.scss';
 import 'styles/components/shared/loading.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
+import 'styles/components/profiles/overall-info.scss';
 import 'styles/components/profiles/info.scss';
 import 'styles/components/profiles/link-buttons.scss';
 import 'styles/components/profiles/error.scss';

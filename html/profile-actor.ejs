@@ -6,91 +6,122 @@
 <body>
   <div class="loading-wrapper">
     <%= htmlWebpackPlugin.options.icons %>
-    <div class="js-factsheets">
-      <%= htmlWebpackPlugin.options.nav %>
-      <div class="l-factsheet-actor">
-        <div class="c-loading -visible">Loading...</div>
-        <div class="content ">
-          <div class="wrap is-hidden">
-            <div class="c-area-select">
-              <div class="c-info">
-                <div class="legend js-legend"> - </div>
-                <div class="name js-name"> - </div>
-              </div>
-              <div class="c-dropdown -factsheets" data-dropdown="commodity">
-                <span class="dropdown-label -big">Commodity</span>
-                <span class="js-dropdown-title dropdown-title">-</span>
-                <ul class="js-dropdown-list dropdown-list">
-                  <li class="js-dropdown-item dropdown-item" data-value="Soy">Soy</li>
-                  <li class="js-dropdown-item dropdown-item">Coffee</li>
-                  <li class="js-dropdown-item dropdown-item">Cocoa</li>
-                  <li class="js-dropdown-item dropdown-item">Cotton</li>
-                  <li class="js-dropdown-item dropdown-item">Oilpalm</li>
-                  <li class="js-dropdown-item dropdown-item">Sugar</li>
-                  <li class="js-dropdown-item dropdown-item">Beef</li>
-                </ul>
-              </div>
-              <div class="contain-information">
-                <div class="zero-deforestation-commitment">
-                  <span class="title-information">
-                    ZERO DEFORESTATION COMMITMENT
-                  </span>
-                  <span class="value-information is-hidden" data-value="yes">
-                    <svg class="icon icon-check"><use xlink:href="#icon-check-circle"/></svg>
-                    <span data-value="yes">Yes</span>
-                  </span>
-                  <span class="value-information is-hidden" data-value="no">
-                    <svg class="icon icon-no"><use xlink:href="#icon-no-circle"/></svg>
-                    <span data-value="no">No</span>
-                  </span>
+    <%= htmlWebpackPlugin.options.nav %>
+    <div class="l-factsheet-actor js-factsheets">
+      <div class="c-loading -visible">Loading...</div>
+      <div class="js-wrap is-hidden">
+        <div class="c-overall-info">
+          <div class="row">
+            <div class="small-12 columns">
+              <div class="dropdown-item">
+                <div class="c-dropdown" data-dropdown="name">
+                  <span class="dropdown-label js-legend">-</span>
+                  <span class="js-dropdown-title dropdown-title js-name">-</span>
+                  <ul class="js-dropdown-list dropdown-list is-hidden">
+                  </ul>
                 </div>
-
-                <div class="forest-500-score">
-                  <span class="title-information">
-                    FOREST 500 SCORE
-                  </span>
-                  <span class="value-information -stars">
-                    <svg class="icon star-icon" data-value="1"><use xlink:href="#icon-star-white"/></svg>
-                    <svg class="icon star-icon" data-value="2"><use xlink:href="#icon-star-white"/></svg>
-                    <svg class="icon star-icon" data-value="3"><use xlink:href="#icon-star-white"/></svg>
-                    <svg class="icon star-icon" data-value="4"><use xlink:href="#icon-star-white"/></svg>
-                    <svg class="icon star-icon" data-value="5"><use xlink:href="#icon-star-white"/></svg>
-                  </span>
+              </div>
+              <div class="dropdown-item">
+                <div class="c-dropdown" data-dropdown="country">
+                  <span class="dropdown-label">Country</span>
+                  <span class="js-dropdown-title dropdown-title js-country">-</span>
+                  <ul class="js-dropdown-list dropdown-list is-hidden">
+                  </ul>
+                </div>
+              </div>
+              <div class="dropdown-item">
+                <div class="c-dropdown" data-dropdown="commodity">
+                  <span class="dropdown-label">Commodity</span>
+                  <span class="js-dropdown-title dropdown-title">Soy</span>
+                  <ul class="js-dropdown-list dropdown-list">
+                  </ul>
+                </div>
+              </div>
+              <div class="dropdown-item">
+                <div class="c-dropdown" data-dropdown="year">
+                  <span class="dropdown-label">Year</span>
+                  <span class="js-dropdown-title dropdown-title">2015</span>
+                  <ul class="js-dropdown-list dropdown-list">
+                  </ul>
                 </div>
               </div>
             </div>
-
-            <a href="" class="js-link-map">Explore the map</a>
-            <a href="" class="js-link-supply-chain">Explore the supply chain</a>
-
-
-            <div class="container-top">
-              <div class="c-top-map js-top-destination-map"></div>
-              <div class="c-top js-top-destination"></div>
+            <div class="small-12 columns">
+              <div class="stat-item js-zero-deforestation-commitment">
+                <div class="legend">ZERO DEFORESTATION COMMITMENT</div>
+                <div class="value is-hidden" data-value="yes"><svg class="icon icon-check"><use xlink:href="#icon-check-circle"/></svg>Yes</div>
+                <div class="value is-hidden" data-value="no"><svg class="icon icon-no"><use xlink:href="#icon-no-circle"/></svg>No</div>
+              </div>
+              <div class="stat-item">
+                <div class="legend">FOREST 500 SCORE</div>
+                <div class="value js-forest-500-score">
+                  <svg class="icon circle-icon" data-value="1"><use xlink:href="#icon-circle-empty"/></svg>
+                  <svg class="icon circle-icon" data-value="2"><use xlink:href="#icon-circle-empty"/></svg>
+                  <svg class="icon circle-icon" data-value="3"><use xlink:href="#icon-circle-empty"/></svg>
+                  <svg class="icon circle-icon" data-value="4"><use xlink:href="#icon-circle-empty"/></svg>
+                  <svg class="icon circle-icon" data-value="5"><use xlink:href="#icon-circle-empty"/></svg>
+                </div>
+              </div>
             </div>
-
-            <div class="container-top">
-              <div class="c-top js-top-municipalities"></div>
-              <div class="c-top-map js-top-municipalities-map"></div>
+            <div class="small-7 columns">
+              <div class="summary js-summary-text"></div>
             </div>
-
-            <div class="c-area-table is-hidden">
-              <h3 class="title -small">Sustainability of source municipalities IN 2015</h3>
-              <div class="js-municipalities-table municipalities-table"></div>
-            </div>
-
-            <div class="c-area-table is-hidden">
-              <h3 class="title -small">Sustainability of source biome IN 2015</h3>
-              <div class="js-biome-table biome-table"></div>
-            </div>
-
-          </div>
-          <div class="c-error-message js-error-message is-hidden">
-            <p class="message">Data not found</p>
           </div>
         </div>
+
+        <div class="c-anchor-buttons">
+          <div class="row">
+            <div class="small-4 columns">
+              <a href="#profile-content-anchor" class="c-link-buttons -with-arrow js-link-profile">
+                <img src="/images/factsheets/factsheet-main-option-1.svg"/>
+                <svg class="icon icon-search"><use xlink:href="#icon-factsheet-main-option-1"></use></svg>
+                <span class="js-link-button-name">-</span>'s PROFILE
+              </a>
+            </div>
+            <div class="small-4 columns">
+              <a href="" class="c-link-buttons js-link-map">
+                <img src="/images/factsheets/factsheet-main-option-2.svg"/>
+                PRODUCTION REGIONS
+                <svg class="icon icon-external-link"><use xlink:href="#icon-external-link"></use></svg>
+              </a>
+            </div>
+            <div class="small-4 columns">
+              <a href="" class="c-link-buttons js-link-supply-chain">
+                <img src="/images/factsheets/factsheet-main-option-3.svg"/>
+                SUPPLY CHAIN ACTORS
+                <svg class="icon icon-external-link"><use xlink:href="#icon-external-link"></use></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div id="profile-content-anchor" class="profile-content-anchor"></div>
+
+        <div class="container-top">
+          <div class="c-top-map js-top-destination-map"></div>
+          <div class="c-top js-top-destination"></div>
+        </div>
+
+        <div class="container-top">
+          <div class="c-top js-top-municipalities"></div>
+          <div class="c-top-map js-top-municipalities-map"></div>
+        </div>
+
+        <div class="c-area-table is-hidden">
+          <h3 class="title -small">Sustainability of source municipalities IN 2015</h3>
+          <div class="js-municipalities-table municipalities-table"></div>
+        </div>
+
+        <div class="c-area-table is-hidden">
+          <h3 class="title -small">Sustainability of source biome IN 2015</h3>
+          <div class="js-biome-table biome-table"></div>
+        </div>
+
       </div>
-    </div>
+      <div class="c-error-message js-error-message is-hidden">
+        <p class="message">Data not found</p>
+      </div>
+      </div>
     <div class="js-infowindow is-hidden c-sankey-tooltip">
       <div class="js-infowindow-title title">title</div>
       <div class="js-infowindow-body body">body</div>
