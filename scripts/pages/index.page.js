@@ -1,9 +1,12 @@
+import plyr from 'plyr';
 import Nav from 'components/shared/nav.component.js';
 import Slider from 'scripts/components/home/slider.component';
 import PostsTemplate from 'ejs!templates/homepage/posts.ejs';
 // import UpdatesTemplate from 'ejs!templates/homepage/updates.ejs';
 // import TweetsTemplate from 'ejs!templates/homepage/tweets.ejs';
 import 'styles/homepage.scss';
+import 'node_modules/plyr/src/scss/plyr.scss';
+import 'styles/components/homepage/plyr.scss';
 
 const state = {
   activeIndex: 0,
@@ -106,6 +109,15 @@ const init = () => {
   new Nav({ pageOffset });
 
   state.sliders.forEach(renderSlider);
+
+  const player = plyr.setup()[0];
+
+  player.on('ready', () => {
+    const playButton = document.querySelector('.plyr__play-large');
+    playButton.addEventListener('click', () => {
+      player.toggleFullscreen();
+    });
+  });
 
   window.addEventListener('scroll', scrollIntro);
 };
