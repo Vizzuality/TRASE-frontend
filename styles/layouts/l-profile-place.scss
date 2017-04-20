@@ -145,4 +145,10 @@
     padding: 54px 0 42px 0;
     background-color: rgba($white, 0.3);
   }
+
+  .factsheet-content-anchor {
+    position: absolute;
+    left: 0;
+    margin-top: -64px;
+  }
 }

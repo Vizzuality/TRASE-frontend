@@ -23,6 +23,7 @@ import Map from 'components/profiles/map.component';
 
 import { getURLParams } from 'utils/stateURL';
 import formatNumber from 'utils/formatNumber';
+import smoothScroll from 'utils/smoothScroll';
 import _ from 'lodash';
 import { getURLFromParams, GET_PLACE_FACTSHEET } from '../utils/getURLFromParams';
 
@@ -123,6 +124,10 @@ const _setInfo = (info, nodeId) => {
     info.municipality ? _.capitalize(info.municipality) : '-';
 };
 
+const _setEventListeners = () => {
+  smoothScroll(document.querySelectorAll('.js-link-profile'));
+};
+
 const _showErrorMessage = () => {
   const el = document.querySelector('.l-factsheet-place');
   document.querySelector('.c-loading').classList.add('is-hidden');
@@ -174,6 +179,7 @@ const _init = () => {
       };
 
       _setInfo(info, nodeId);
+      _setEventListeners();
 
       _build(data);
     });
