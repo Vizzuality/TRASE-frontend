@@ -125,7 +125,7 @@ const _setInfo = (type, name, forest_500, zero_deforestation, nodeId) => {
 const _showErrorMessage = () => {
   const el = document.querySelector('.l-factsheet-actor');
   el.classList.add('-error');
-  document.querySelector('.c-loading').classList.add('is-hidden');
+  document.querySelector('.js-loading').classList.add('is-hidden');
   el.querySelector('.content >.wrap').classList.add('is-hidden');
   el.querySelector('.js-error-message').classList.remove('is-hidden');
 };
@@ -152,7 +152,7 @@ const _init = ()  => {
     .then((result) => {
       if (!result) return;
 
-      document.querySelector('.c-loading').classList.add('is-hidden');
+      document.querySelector('.js-loading').classList.add('is-hidden');
       document.querySelector('.content >.wrap').classList.remove('is-hidden');
 
       const data = result.data;
