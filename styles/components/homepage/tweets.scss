@@ -1,5 +1,6 @@
 .c-tweets {
   margin-bottom: 65px;
+
   .tweet {
 
     .tweet-user {
@@ -8,6 +9,7 @@
       text-transform: uppercase;
       color: $medium-pink;
       font-size: $font-size-x-regular;
+      margin-bottom: 18px;
     }
 
     .tweet-content {
@@ -15,6 +17,7 @@
       font-family: $font-family-2;
       font-size: $font-size-xx-regular;
       font-weight: $font-weight-light;
+      line-height: 1.8em;
 
       > a {
         text-decoration: underline;

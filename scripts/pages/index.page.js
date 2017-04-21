@@ -2,7 +2,7 @@ import Nav from 'components/shared/nav.component.js';
 import Slider from 'scripts/components/home/slider.component';
 import PostsTemplate from 'ejs!templates/homepage/posts.ejs';
 // import UpdatesTemplate from 'ejs!templates/homepage/updates.ejs';
-// import TweetsTemplate from 'ejs!templates/homepage/tweets.ejs';
+import TweetsTemplate from 'ejs!templates/homepage/tweets.ejs';
 import 'styles/homepage.scss';
 
 const state = {
@@ -33,9 +33,9 @@ const state = {
   ],
   sliders: [
     {
-      el: document.querySelector('.js-posts'),
+      el: '.js-posts',
       selector: '.js-posts-slider',
-      endpoint: '/posts',
+      endpoint: API_CMS_URL + '/posts',
       template: PostsTemplate,
       perPage: 3,
       next: '.js-posts-next'
@@ -46,22 +46,22 @@ const state = {
     //   perPage: 4,
     //   template: UpdatesTemplate
     // },
-    // {
-    //   el: '.js-tweets',
-    //   endpoint: '/tweets',
-    //   perPage: 3,
-    //   template: TweetsTemplate
-    // }
+    {
+      el: '.js-tweets',
+      endpoint: API_SOCIAL + '/tweets',
+      perPage: 3,
+      template: TweetsTemplate
+    }
   ]
 };
 
 
 const renderSlider = ({ el, selector, endpoint, perPage, next, template }) => {
-  fetch(API_CMS_URL + endpoint)
+  fetch(endpoint)
     .then(response => response.json())
     .then((data) => template({ posts: data }))
     .then((slides) => {
-      el.insertAdjacentHTML('beforeend', slides);
+      document.querySelector(el).insertAdjacentHTML('beforeend', slides);
       new Slider({ selector, perPage, next });
     });
 };
