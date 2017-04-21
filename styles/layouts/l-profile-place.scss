@@ -3,7 +3,7 @@
 .l-factsheet-place {
   position: relative;
   min-height: calc(100vh - #{$nav-height});
-  padding: 54px 0 96px;
+  padding-top: 54px;
   background-color: $egg-shell;
 
   section:nth-of-type(2n-1) {
@@ -55,14 +55,21 @@
   }
 
   .chords-container {
+    padding: 53px 0 51px 0;
 
-    &.-traders {
-      margin: 32px auto 0;
+    &.-traders .c-chord {
+      text-align: center;
     }
 
-    &.-consumers {
-      flex-direction: row-reverse;
-      margin: 24px auto 0;
+    &.-consumers .c-chord {
+      text-align: right;
+    }
+
+    .c-top {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
     }
   }
 

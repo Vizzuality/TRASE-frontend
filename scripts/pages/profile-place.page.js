@@ -70,7 +70,7 @@ const _build = data => {
       el: document.querySelector('.js-top-trader'),
       data: data.top_traders.actors,
       targetLink: 'actor',
-      title: 'top traders',
+      title: `Top traders of soy in ${data.municip_name}`,
       unit: '%'
     });
 
@@ -83,7 +83,7 @@ const _build = data => {
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers.countries,
-      title: 'top consumers',
+      title: `Top consumers of ${data.municip_name}'s soy`,
       unit: '%'
     });
 

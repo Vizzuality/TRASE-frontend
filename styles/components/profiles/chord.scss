@@ -10,9 +10,9 @@
 
     .text-legend {
       font-family: $font-family-1;
-      font-size: $font-size-x-regular;
+      font-size: $font-size-regular;
       text-transform: uppercase;
-
+      letter-spacing: -0.8px;
       fill: rgba($charcoal-grey, .8);
     }
   }
