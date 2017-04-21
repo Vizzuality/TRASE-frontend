@@ -34,11 +34,11 @@ const state = {
   sliders: [
     {
       el: '.js-posts',
-      selector: '.js-posts-slider',
       endpoint: API_CMS_URL + '/posts',
       template: PostsTemplate,
       perPage: 3,
-      next: '.js-posts-next'
+      next: '.js-posts-next',
+      prev: '.js-posts-prev'
     },
     // {
     //   el: '.js-updates',
@@ -56,13 +56,13 @@ const state = {
 };
 
 
-const renderSlider = ({ el, selector, endpoint, perPage, next, template }) => {
+const renderSlider = ({ el, endpoint, perPage, next, prev, template }) => {
   fetch(endpoint)
     .then(response => response.json())
     .then((data) => template({ posts: data }))
     .then((slides) => {
-      document.querySelector(el).insertAdjacentHTML('beforeend', slides);
-      new Slider({ selector, perPage, next });
+      document.querySelector(el).innerHTML = slides;
+      new Slider({ selector: el, perPage, next, prev });
     });
 };
 
