@@ -388,8 +388,95 @@
     "total_soy_2015": 8801293,
     "zero_deforestation": "YES",
     "zero_deforestation_link": "HTTP://WWW.CARGILL.COM/NEWS/ISSUES/DEFORESTATION/INDEX.JSP",
-    "sustainability": {
-      "biome": {
+    "sustainability": [
+      {
+        "name": "Municipalities",
+        "includedColumns": [
+          {
+            "name": "Municipality"
+          },
+          {
+            "name": "Maximum soy deforestation",
+            "unit": "ha"
+          },
+          {
+            "name": "Soy deforestation",
+            "unit": "ha"
+          },
+          {
+            "name": "Biodiversity loss"
+          }
+        ],
+        "rows": [
+          {
+            "values": [
+              {
+                "id": 110,
+                "value": "ALTAMIRA"
+              },
+              {
+                "value": 24893.07
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 1932,
+                "value": "NOVO PROGRESSO"
+              },
+              {
+                "value": 13656.5
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 2209,
+                "value": "PORTO VELHO"
+              },
+              {
+                "value": 10929.06
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 2153,
+                "value": "PLACAS"
+              },
+              {
+                "value": 7171.07
+              },
+              null,
+              null
+            ]
+          },
+          {
+            "values": [
+              {
+                "id": 722,
+                "value": "COCOS"
+              },
+              {
+                "value": 6298.11
+              },
+              null,
+              null
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Biomes",
         "includedColumns": [
           {
             "name": "Biome"
@@ -505,93 +592,8 @@
             ]
           }
         ]
-      },
-      "municipalities": {
-        "includedColumns": [
-          {
-            "name": "Municipality"
-          },
-          {
-            "name": "Maximum soy deforestation",
-            "unit": "ha"
-          },
-          {
-            "name": "Soy deforestation",
-            "unit": "ha"
-          },
-          {
-            "name": "Biodiversity loss"
-          }
-        ],
-        "rows": [
-          {
-            "values": [
-              {
-                "id": 110,
-                "value": "ALTAMIRA"
-              },
-              {
-                "value": 24893.07
-              },
-              null,
-              null
-            ]
-          },
-          {
-            "values": [
-              {
-                "id": 1932,
-                "value": "NOVO PROGRESSO"
-              },
-              {
-                "value": 13656.5
-              },
-              null,
-              null
-            ]
-          },
-          {
-            "values": [
-              {
-                "id": 2209,
-                "value": "PORTO VELHO"
-              },
-              {
-                "value": 10929.06
-              },
-              null,
-              null
-            ]
-          },
-          {
-            "values": [
-              {
-                "id": 2153,
-                "value": "PLACAS"
-              },
-              {
-                "value": 7171.07
-              },
-              null,
-              null
-            ]
-          },
-          {
-            "values": [
-              {
-                "id": 722,
-                "value": "COCOS"
-              },
-              {
-                "value": 6298.11
-              },
-              null,
-              null
-            ]
-          }
-        ]
       }
-    },
+    ],
     "companies_exporting": {
       "dimensions_y": {
         "name": "Soy exported in 2015",
