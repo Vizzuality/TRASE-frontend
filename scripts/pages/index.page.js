@@ -49,8 +49,10 @@ const state = {
     {
       el: '.js-tweets',
       endpoint: API_SOCIAL + '/tweets',
+      template: TweetsTemplate,
       perPage: 3,
-      template: TweetsTemplate
+      next: '.js-tweets-next',
+      prev: '.js-tweets-prev'
     }
   ]
 };

@@ -1,13 +1,9 @@
 
 <% posts.forEach(function(post) { %>
-  <div class="tweet column small-4">
-    <h4 class="tweet-user">@<%= post.screen_name %></h4>
+  <div class="tweet">
+    <h4 class="tweet-user"><%= post.screen_name %></h4>
     <p class="tweet-content">
       <%= post.text %>
-      <%= post.created_at %>
-      <!-- A succinct and thought-provoking piece on potential
-      <strong>#supplychain</strong> pitfalls for businesses aiming
-      to holistically reduce <strong>#deforestation</strong> -->
     </p>
   </div>
 <% }) %>
