@@ -27,11 +27,12 @@ export default class {
   }
 
   _renderTables() {
-    this.data.forEach((indicator, i) => {
+    this.data.forEach((item, i) => {
       new Table({
         el: document.querySelector(`.${this.key}_${i}`),
-        data: indicator,
-        type: this.type
+        data: item,
+        type: this.type,
+        target: this.target
       });
     });
   }

@@ -42,6 +42,13 @@
             <% if(data['rows'][i]['values'][j] != null){ %>
               <span class="unit" data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : null  %>">
                 <%= data['rows'][i]['values'][j]['value'] %>
+                <% if (link !== null && data['rows'][i]['values'][j]['id']) {%>
+                  <a class="node-link" href="<%= link + data['rows'][i]['values'][j]['id'] %>">
+                    <svg class="icon icon-check">
+                      <use xlink:href="#icon-outside-link" />
+                    </svg>
+                  </a>
+                <% } %>
               </span>
             <% } else{ %>
               <span class="unit">N/A</span>

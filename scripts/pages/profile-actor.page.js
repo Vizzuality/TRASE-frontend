@@ -19,7 +19,7 @@ import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
 import Map from 'components/profiles/map.component';
 import Top from 'components/profiles/top.component';
-import Table from 'components/profiles/table.component';
+import MultiTable from 'components/profiles/multi-table.component';
 
 import { getURLParams } from 'utils/stateURL';
 import smoothScroll from 'utils/smoothScroll';
@@ -101,33 +101,32 @@ const _build = data => {
 
   }
 
-  // new AreaStack({
-  //   el: document.querySelector('.js-municipalities-top'),
-  //   data: data.op_municipalities
-  // });
+  if (data.sustainability.length) {
+    new MultiTable({
+      el: document.querySelector('.js-sustainability-table'),
+      data: data.sustainability,
+      type: 't_head_actors',
+      target: 'actor'
+    });
+  }
+
+  // if (data.sustainability.municipalities.rows.length) {
+  //   new Table({
+  //     el: document.querySelector('.js-municipalities-table'),
+  //     data: data.sustainability.municipalities,
+  //     type: 't_head_actors',
+  //     target: 'actor'
+  //   });
+  // }
   //
-  // new AreaStack({
-  //   el: document.querySelector('.js-destination-top'),
-  //   data: data.top_countries
-  // });
-
-  if (data.sustainability.municipalities.rows.length) {
-    new Table({
-      el: document.querySelector('.js-municipalities-table'),
-      data: data.sustainability.municipalities,
-      type: 't_head_actors',
-      target: 'actor'
-    });
-  }
-
-  if (data.sustainability.biome.rows.length) {
-    new Table({
-      el: document.querySelector('.js-biome-table'),
-      data: data.sustainability.biome,
-      type: 't_head_actors',
-      target: 'actor'
-    });
-  }
+  // if (data.sustainability.biome.rows.length) {
+  //   new Table({
+  //     el: document.querySelector('.js-biome-table'),
+  //     data: data.sustainability.biome,
+  //     type: 't_head_actors',
+  //     target: 'actor'
+  //   });
+  // }
 };
 
 const _setInfo = (info, nodeId) => {
