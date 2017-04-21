@@ -24,9 +24,10 @@ import { resize, loadDisclaimer } from 'actions/app.actions';
 import { loadInitialData } from 'actions/tool.actions';
 import { getURLParams, decodeStateFromURL } from 'utils/stateURL';
 import { APP_DEFAULT_STATE, TOOL_DEFAULT_STATE } from 'constants';
-import 'styles/layouts/l-tool.scss';
-import 'styles/components/shared/loading.scss';
+import 'styles/components/shared/veil.scss';
+import 'styles/components/shared/spinner.scss';
 import 'styles/components/shared/dropdown.scss';
+import 'styles/layouts/l-tool.scss';
 
 const objParams = getURLParams(window.location.search);
 

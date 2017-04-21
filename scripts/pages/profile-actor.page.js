@@ -3,7 +3,7 @@ import 'styles/_texts.scss';
 import 'styles/_foundation.css';
 import 'styles/layouts/l-profile-actor.scss';
 import 'styles/components/shared/button.scss';
-import 'styles/components/shared/loading.scss';
+import 'styles/components/shared/spinner.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/profiles/area-select.scss';
@@ -12,7 +12,6 @@ import 'styles/components/profiles/overall-info.scss';
 import 'styles/components/profiles/info.scss';
 import 'styles/components/profiles/link-buttons.scss';
 import 'styles/components/profiles/error.scss';
-import 'styles/components/shared/loading.scss';
 import 'styles/components/shared/infowindow.scss';
 
 import Nav from 'components/shared/nav.component.js';
@@ -140,7 +139,7 @@ const _setEventListeners = () => {
 const _showErrorMessage = () => {
   const el = document.querySelector('.l-factsheet-actor');
   el.classList.add('-error');
-  document.querySelector('.c-loading').classList.add('is-hidden');
+  document.querySelector('.js-loading').classList.add('is-hidden');
   el.querySelector('.js-wrap').classList.add('is-hidden');
   el.querySelector('.js-error-message').classList.remove('is-hidden');
 };
@@ -167,7 +166,7 @@ const _init = ()  => {
     .then((result) => {
       if (!result) return;
 
-      document.querySelector('.c-loading').classList.add('is-hidden');
+      document.querySelector('.js-loading').classList.add('is-hidden');
       document.querySelector('.js-wrap').classList.remove('is-hidden');
 
       const data = result.data;

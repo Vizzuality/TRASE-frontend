@@ -8,11 +8,16 @@
     <%= htmlWebpackPlugin.options.icons %>
     <div class="loading-wrapper"></div>
     <%= htmlWebpackPlugin.options.nav %>
-    <div class="l-factsheets js-factsheets">
+    <div class="l-profiles js-profiles">
+      <div class="js-loading">
+        <div class="profiles-veil"></div>
+        <div class="c-spinner"></div>
+      </div>
+
       <div class="wrap">
 
         <div class="container">
-          <div class="search-container js-factsheets-search-container is-hidden">
+          <div class="search-container">
             <div class="c-search js-search">
               <label for="search-input">Search for</label>
               <input class="js-search-input" id="search-input" placeholder="trader or production place" />
