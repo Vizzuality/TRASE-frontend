@@ -108,7 +108,10 @@ const _onSelect = function(value) {
 
 const _setInfo = (info, nodeId) => {
   document.querySelector('.js-country-name').innerHTML = info.country ? _.capitalize(info.country) : '-';
-  document.querySelector('.js-state-name').innerHTML = info.state ?  _.capitalize(info.state) : '-';
+  document.querySelector('.js-state-name').innerHTML =
+    document.querySelector('.js-chord-traders-state-name').innerHTML =
+    document.querySelector('.js-chord-consumers-state-name').innerHTML =
+    info.state ?  _.capitalize(info.state) : '-';
   document.querySelector('.js-biome-name').innerHTML = info.biome ? _.capitalize(info.biome) : '-';
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
