@@ -1,6 +1,7 @@
 @import '../../settings';
 
 .c-area-table {
+  padding: 56px 0 42px 0;
 
   > .title {
     margin: 0 0 24px;
@@ -91,10 +92,6 @@
         }
       }
     }
-  }
-
-  & + .c-area-table {
-    margin: 56px 0 0;
   }
 }
 

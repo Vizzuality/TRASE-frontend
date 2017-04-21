@@ -3,7 +3,7 @@
 .l-factsheet-actor {
   position: relative;
   min-height: calc(100vh - #{$nav-height});
-  padding: 44px 0 96px;
+  padding: 44px 0 54px;
   background-color: $egg-shell;
 
   section:nth-of-type(2n-1) {
@@ -43,6 +43,10 @@
     padding: 49px 0 46px;
   }
 
+  .c-top-map,
+  .c-top-municipalities {
+    padding-top: 56px;
+  }
 
 
 
