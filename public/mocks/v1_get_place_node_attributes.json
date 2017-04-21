@@ -15,7 +15,7 @@
     "state_name": "MATO GROSSO",
     "indicators": [
       {
-        "name": "Key sustainability indicators",
+        "name": "Key indicators",
         "includedColumns": [
           {
             "name": "Soy deforestation (until 2014)",

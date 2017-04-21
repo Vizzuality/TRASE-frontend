@@ -110,13 +110,17 @@
   color: $charcoal-grey;
   text-transform: uppercase;
 
+  span {
+    margin-right: 20px;
+  }
+
   li {
     position: relative;
     opacity: 0.3;
     cursor: pointer;
 
     &:not(:last-child) {
-      margin-right: 40px;
+      margin-right: 21px;
     }
 
     &.selected {

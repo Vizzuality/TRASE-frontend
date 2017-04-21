@@ -95,6 +95,7 @@ const _build = data => {
     new MultiTable({
       el: document.querySelector('.js-score-table'),
       data: data.indicators,
+      tabsTitle: 'Sustainability indicators:',
       type: 't_head_places'
     });
   }

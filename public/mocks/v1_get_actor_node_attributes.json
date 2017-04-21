@@ -390,7 +390,7 @@
     "zero_deforestation_link": "HTTP://WWW.CARGILL.COM/NEWS/ISSUES/DEFORESTATION/INDEX.JSP",
     "sustainability": [
       {
-        "name": "Sustainability of source municipalities IN 2015",
+        "name": "Municipalities",
         "includedColumns": [
           {
             "name": "Municipality"
@@ -476,7 +476,7 @@
         ]
       },
       {
-        "name": "Sustainability of source biome IN 2015",
+        "name": "Biomes",
         "includedColumns": [
           {
             "name": "Biome"

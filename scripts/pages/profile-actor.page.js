@@ -105,28 +105,11 @@ const _build = data => {
     new MultiTable({
       el: document.querySelector('.js-sustainability-table'),
       data: data.sustainability,
+      tabsTitle: `Sustainability of ${data.node_name}\'s TOP source regions in 2015:`,
       type: 't_head_actors',
       target: 'actor'
     });
   }
-
-  // if (data.sustainability.municipalities.rows.length) {
-  //   new Table({
-  //     el: document.querySelector('.js-municipalities-table'),
-  //     data: data.sustainability.municipalities,
-  //     type: 't_head_actors',
-  //     target: 'actor'
-  //   });
-  // }
-  //
-  // if (data.sustainability.biome.rows.length) {
-  //   new Table({
-  //     el: document.querySelector('.js-biome-table'),
-  //     data: data.sustainability.biome,
-  //     type: 't_head_actors',
-  //     target: 'actor'
-  //   });
-  // }
 };
 
 const _setInfo = (info, nodeId) => {
