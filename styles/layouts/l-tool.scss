@@ -30,6 +30,13 @@ body, html {
     transition: transform .15s $ease-in-out-sine, width .15s $ease-in-out-sine;
     z-index: 2;
 
+    > .tool-loading {
+      display: none;
+      position: absolute;
+      width: calc(100% + #{$layer-map-width});
+      height: 100%;
+    }
+
     &.-center-map {
       transform: translate(-376px, 0);
 
@@ -108,13 +115,7 @@ body, html {
       }
     }
 
-    > .flow-veil {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba($charcoal-grey, .4);
+    > .sankey-veil {
       z-index: 1;
     }
   }

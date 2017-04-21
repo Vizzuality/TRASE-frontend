@@ -1,9 +1,11 @@
 import connect from 'connect';
-import flowContent from 'components/tool/tool-content.component';
+import ToolContent from 'components/tool/tool-content.component';
 
 const mapMethodsToState = (state) => ({
   toggleMapVisibility: state.tool.isMapVisible,
-  toggleMapLayersVisibility: state.app.isMapLayerVisible
+  toggleMapLayersVisibility: state.app.isMapLayerVisible,
+  showLoaderAtInitialLoad: state.tool.initialDataLoading,
+  showLoader: state.tool.linksLoading
 });
 
-export default connect(flowContent, mapMethodsToState);
+export default connect(ToolContent, mapMethodsToState);

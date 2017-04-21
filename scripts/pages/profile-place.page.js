@@ -4,14 +4,13 @@ import 'styles/_foundation.css';
 import 'styles/layouts/l-profile-place.scss';
 import 'styles/components/shared/dropdown.scss';
 import 'styles/components/shared/button.scss';
-import 'styles/components/shared/loading.scss';
+import 'styles/components/shared/spinner.scss';
 import 'styles/components/shared/nav.scss';
 import 'styles/components/shared/_footer.scss';
 import 'styles/components/profiles/info.scss';
 import 'styles/components/profiles/link-buttons.scss';
 import 'styles/components/profiles/error.scss';
 import 'styles/components/profiles/map.scss';
-import 'styles/components/shared/loading.scss';
 
 import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
@@ -125,7 +124,7 @@ const _setInfo = (info, nodeId) => {
 
 const _showErrorMessage = () => {
   const el = document.querySelector('.l-factsheet-place');
-  document.querySelector('.c-loading').classList.add('is-hidden');
+  document.querySelector('.js-loading').classList.add('is-hidden');
   el.classList.add('-error');
   el.querySelector('.js-wrap').classList.add('is-hidden');
   el.querySelector('.js-error-message').classList.remove('is-hidden');
@@ -156,7 +155,7 @@ const _init = () => {
     .then((result) => {
       if (!result) return;
 
-      document.querySelector('.c-loading').classList.add('is-hidden');
+      document.querySelector('.js-loading').classList.add('is-hidden');
       document.querySelector('.js-wrap').classList.remove('is-hidden');
 
       const data = result.data;

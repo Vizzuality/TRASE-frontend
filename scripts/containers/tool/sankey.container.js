@@ -11,8 +11,6 @@ const shouldRepositionExpandButton = (expandedNodesIds, selectedNodesIds, areNod
 // this maps component methods to app state updates
 // keys correspond to method names, values to state prop path
 const mapMethodsToState = (state) => ({
-  showLoaderAtInitialLoad: state.tool.initialDataLoading,
-  showLoader: state.tool.linksLoading,
   showLoadedLinks: {
     _comparedValue: (state) => state.tool.links,
     _returnedValue: (state) => {

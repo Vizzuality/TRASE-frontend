@@ -25,14 +25,6 @@ export default class {
     }
   }
 
-  showLoaderAtInitialLoad(loading) {
-    this._toggleLoading(loading);
-  }
-
-  showLoader(loading) {
-    this._toggleLoading(loading);
-  }
-
   showLoadedLinks(linksPayload) {
     this.el.classList.toggle('-detailed', linksPayload.detailedView);
 
@@ -133,10 +125,6 @@ export default class {
       }
     }
     this.expandButton.classList.remove('-visible');
-  }
-
-  _toggleLoading(loading) {
-    this.el.querySelector('.js-loading').classList.toggle('-visible', loading);
   }
 
   _getLinkColor(link, selectedRecolorBy) {
