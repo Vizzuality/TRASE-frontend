@@ -3,8 +3,12 @@
 .l-factsheet-actor {
   position: relative;
   min-height: calc(100vh - #{$nav-height});
-  padding: 64px 0 96px;
+  padding: 44px 0 54px;
   background-color: $egg-shell;
+
+  section:nth-of-type(2n-1) {
+    background-color: rgba($white, 0.3);
+  }
 
   &.-error {
     position: relative;
@@ -18,19 +22,35 @@
     }
   }
 
-  .content {
-    max-width: $max-width-grid;
-    margin: 0 auto;
+  .c-overall-info {
 
-    .c-area-select > .c-dropdown {
-      margin: 0 0 0 72px;
+    .stat-item .icon {
+      width: 16px;
+      height: 17px;
+    }
 
-      .dropdown-label {
-        margin-bottom: 0 !important;
+    .js-forest-500-score {
+      font-size: 0!important;
+      margin-top: 5px;
 
+      .icon:not(:last-child) {
+        margin-right: 4px;
       }
     }
   }
+
+  .c-anchor-buttons {
+    padding: 49px 0 46px;
+  }
+
+  .c-top-map,
+  .c-top-municipalities {
+    padding-top: 56px;
+  }
+
+
+
+
 
   .container-top {
     display: flex;

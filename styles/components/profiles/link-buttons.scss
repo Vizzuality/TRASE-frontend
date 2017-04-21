@@ -43,4 +43,19 @@
     right: 0;
     margin: auto;
   }
+
+  .icon-external-link {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 16px;
+    height: 16px;
+    fill: $charcoal-grey-faded-a-lot;
+  }
+}
+
+.profile-content-anchor {
+  position: absolute;
+  left: 0;
+  margin-top: -64px;
 }
