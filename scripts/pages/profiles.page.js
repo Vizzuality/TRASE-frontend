@@ -4,6 +4,7 @@ import 'styles/_texts.scss';
 import 'styles/_foundation.css';
 import 'styles/layouts/l-profiles.scss';
 import 'styles/components/shared/nav.scss';
+import 'styles/components/shared/spinner.scss';
 import 'styles/components/shared/_footer.scss';
 
 import _ from 'lodash';
@@ -25,7 +26,7 @@ const _setSearch = () => {
     .then(response => response.json())
     .then((result) => {
 
-      document.querySelector('.js-factsheets-search-container').classList.remove('is-hidden');
+      document.querySelector('.js-loading').classList.add('is-hidden');
 
       const search = new Search();
       search.onCreated();
