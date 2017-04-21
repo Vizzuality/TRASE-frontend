@@ -70,7 +70,7 @@ const _build = data => {
       el: document.querySelector('.js-top-trader'),
       data: data.top_traders.actors,
       targetLink: 'actor',
-      title: 'top traders',
+      title: `Top traders of soy in ${data.municip_name}`,
       unit: '%'
     });
 
@@ -83,7 +83,7 @@ const _build = data => {
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers.countries,
-      title: 'top consumers',
+      title: `Top consumers of ${data.municip_name}'s soy`,
       unit: '%'
     });
 
@@ -109,7 +109,10 @@ const _onSelect = function(value) {
 
 const _setInfo = (info, nodeId) => {
   document.querySelector('.js-country-name').innerHTML = info.country ? _.capitalize(info.country) : '-';
-  document.querySelector('.js-state-name').innerHTML = info.state ?  _.capitalize(info.state) : '-';
+  document.querySelector('.js-state-name').innerHTML =
+    document.querySelector('.js-chord-traders-state-name').innerHTML =
+    document.querySelector('.js-chord-consumers-state-name').innerHTML =
+    info.state ?  _.capitalize(info.state) : '-';
   document.querySelector('.js-biome-name').innerHTML = info.biome ? _.capitalize(info.biome) : '-';
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';

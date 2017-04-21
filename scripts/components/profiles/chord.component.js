@@ -13,14 +13,22 @@ export default class {
 
     document.querySelector(className).classList.remove('is-hidden');
 
-    const allNames = [placeName].concat(list.map(node => node.name)).slice(0, orgMatrix.length);
+    const nameLimit = 11;
+    const allNames = [placeName].concat(list.map(node => {
+      if (node.name.length > nameLimit) {
+        return `${node.name.substring(0, nameLimit)}...`;
+      } else {
+        return node.name;
+      }
+    })).slice(0, orgMatrix.length);
 
-    const margin = {top: 40, right: 50, bottom: 0, left: 50};
-    const width = 550 - margin.left - margin.right;
-    const height = 550 - margin.top - margin.bottom;
+    const elem = document.querySelector(className);
+    const margin = {top: 0, right: 0, bottom: 0, left: 0};
+    const width = elem.clientWidth - margin.left - margin.right;
+    const height = elem.clientWidth - margin.top - margin.bottom;
 
-    const outerRadius = Math.min(width, height) * 0.5 - 40;
-    const innerRadius = outerRadius - 15;
+    const outerRadius = Math.min(490, 490) * 0.5 - 40;
+    const innerRadius = outerRadius - 12;
 
     const svg = d3_select(className)
       .append('svg')
