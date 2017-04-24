@@ -1,6 +1,6 @@
 .c-homepage {
-
   .introduction {
+    pointer-events: none;
     position: fixed;
     height: 100%;
     width: 100%;
@@ -8,6 +8,7 @@
 
     .intro-wrapper {
       height: 100%;
+
       .intro-statement {
         > .paragraph {
           margin: 17px 0;
@@ -21,6 +22,7 @@
       }
 
       > .btn-explore {
+        pointer-events: all;
         display: inline-block;
         margin: 32px 0 0;
         padding: 16px 28px;
@@ -39,15 +41,15 @@
     left: 50%;
     overflow: hidden;
 
+    .video {
+      width: 100%;
+    }
+
     .screenshot {
       height: 500px;
       width: 800px;
       background-size: cover;
       border-radius: 4px;
-
-      &.-top {
-        background-image: url('./../public/images/backgrounds/app-screenshot-1@2x.jpg');
-      }
 
       &.-middle {
         background-image: url('./../public/images/backgrounds/app-screenshot-2@2x.jpg');
@@ -57,9 +59,10 @@
         background-image: url('./../public/images/backgrounds/app-screenshot-3@2x.jpg');
       }
     }
+
     .screenshot-caption {
       font-family: $font-family-1;
-      color: rgba($white, 0.6);
+      color: rgba($white, .6);
       font-size: 14px;
       line-height: 18px;
       margin-top: 7px;

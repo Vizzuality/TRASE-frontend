@@ -63,6 +63,7 @@
     "leaflet.utfgrid": "git+https://github.com/danzel/Leaflet.utfgrid.git",
     "lodash": "^4.15.0",
     "morgan": "^1.7.0",
+    "plyr": "^2.0.12",
     "preact": "^7.2.0",
     "preact-redux": "^2.0.0",
     "pretty-error": "^2.0.0",
