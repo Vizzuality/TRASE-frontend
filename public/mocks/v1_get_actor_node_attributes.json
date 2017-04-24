@@ -593,10 +593,6 @@
       }
     },
     "companies_exporting": {
-      "dimensions_y": {
-        "name": "Soy exported in 2015",
-        "unit": "TN"
-      },
       "dimensions_x": [
         {
           "name": "Land use",
@@ -626,7 +622,7 @@
       "companies": [
         {
           "name": "Amaggi",
-          "y": 456.788,
+          "y": 256.788,
           "x": [
             4567.688,
             3467.8,
@@ -650,7 +646,7 @@
         },
         {
           "name": "Cargill",
-          "y": 456.788,
+          "y": 556.788,
           "x": [
             3567.688,
             2467.8,
@@ -662,7 +658,7 @@
         },
         {
           "name": "ADM",
-          "y": 456.788,
+          "y": 206.788,
           "x": [
             6567.688,
             5467.8,

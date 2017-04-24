@@ -19,6 +19,7 @@ import Dropdown from 'components/shared/dropdown.component';
 import Map from 'components/profiles/map.component';
 import Top from 'components/profiles/top.component';
 import Table from 'components/profiles/table.component';
+import Scatterplot from 'components/profiles/scatterplot.component';
 
 import { getURLParams } from 'utils/stateURL';
 import smoothScroll from 'utils/smoothScroll';
@@ -127,6 +128,8 @@ const _build = data => {
       target: 'actor'
     });
   }
+
+  new Scatterplot('.js-companies-exporting', data.companies_exporting);
 };
 
 const _setInfo = (info, nodeId) => {
