@@ -1,7 +1,7 @@
 <ul class="c-scatterplot-switcher">
   <% Object.keys(data).forEach(function (i) { %>
-  <li class="js-scatterplot-switcher <%= i === "0" ? 'selected' : null %>" data-key="<%= i %>">
-    <span data-unit="<%= data[i].unit !== null ? `(${data[i].unit})` : null %>"><%= data[i].name %></span>
-  </li>
+    <li class="js-scatterplot-switcher <%= i === "0" ? 'selected' : null %>" data-key="<%= i %>">
+      <span data-unit="<%= data[i].unit !== null ? '(' +  data[i].unit + ')' : null %>"><%= data[i].name %></span>
+    </li>
   <%});%>
 </ul>
