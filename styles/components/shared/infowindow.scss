@@ -44,3 +44,21 @@
     }
   }
 }
+
+.c-profile-tooltip {
+  position: absolute;
+  box-shadow: $box-shadow-big;
+  font-family: $font-family-1;
+  background-color: $white;
+
+  .title {
+    padding: 10px;
+    background-color: $egg-shell;
+    letter-spacing: -1px;
+    font-family: $font-family-1;
+  }
+
+  .data {
+    padding: 10px;
+  }
+}

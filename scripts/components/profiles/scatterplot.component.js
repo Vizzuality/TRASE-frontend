@@ -1,4 +1,7 @@
-import { select as d3_select } from 'd3-selection';
+import {
+  select as d3_select,
+  event as d3_event
+} from 'd3-selection';
 import {
   axisBottom as d3_axis_bottom,
   axisLeft as d3_axis_left
@@ -13,10 +16,12 @@ import stringToHTML from 'utils/stringToHTML';
 import abbreviateNumber from 'utils/abbreviateNumber';
 
 export default class {
-  constructor(className, data, xDimension) {
+  constructor(className, settings) {
     this.el = document.querySelector(className);
-    this.data = data;
-    this.xDimension = xDimension;
+    this.data = settings.data;
+    this.xDimension = settings.xDimension;
+    this.showTooltipCallback = settings.showTooltipCallback;
+    this.hideTooltipCallback = settings.hideTooltipCallback;
 
     this._render();
     this._renderXswitcher();
@@ -82,7 +87,7 @@ export default class {
       .attr('class', 'axis axis--y')
       .call(d3_axis_left(this.y).ticks(0).tickSizeOuter(0));
 
-    this.svg.selectAll('circle')
+    this.circles = this.svg.selectAll('circle')
       .data(this._getFormatedData(0))
       .enter()
       .append('circle')
@@ -90,6 +95,25 @@ export default class {
       .attr('r', 5)
       .attr('cx', function(d) { return this.x(d.x); }.bind(this))
       .attr('cy', function(d) { return this.y(d.y); }.bind(this));
+
+    if (this.showTooltipCallback !== undefined) {
+      this.circles.on('mousemove', function(d) {
+        const selectedSwitcher = document.querySelector('.js-scatterplot-switcher.selected span');
+
+        this.showTooltipCallback(
+          d,
+          {
+            name: selectedSwitcher.getAttribute('data-name'),
+            unit: selectedSwitcher.getAttribute('data-unit'),
+          },
+          d3_event.clientX + 10,
+          d3_event.clientY + window.scrollY + 10
+        );
+      }.bind(this))
+      .on('mouseout', function() {
+        this.hideTooltipCallback();
+      }.bind(this));
+    }
   }
 
   _renderXswitcher() {
@@ -113,7 +137,7 @@ export default class {
       switcher.classList.remove('selected');
     });
 
-    this.svg.selectAll('circle')
+    this.circles
       .data(this._getFormatedData(selectedTabKey))
       .transition()
       .duration(500)
@@ -125,6 +149,7 @@ export default class {
   _getFormatedData(i) {
     return this.data.map(item => {
       return {
+        name: item.name,
         y: item.y,
         x: item.x[i]
       }

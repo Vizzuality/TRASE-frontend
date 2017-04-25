@@ -80,8 +80,8 @@
           background-color: $medium-pink;
         }
 
-        & span:after {
-          content: attr(data-unit);
+        &.unit span:after {
+          content: '(' attr(data-unit) ')';
           font-weight: normal;
           letter-spacing: -1.3px;
           text-transform: none;

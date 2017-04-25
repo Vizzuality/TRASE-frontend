@@ -111,10 +111,18 @@ const _build = data => {
     });
   }
 
-  new Scatterplot(
-    '.js-companies-exporting',
-    data.companies_exporting.companies,
-    data.companies_exporting.dimensions_x
+  new Scatterplot('.js-companies-exporting', {
+      data: data.companies_exporting.companies,
+      xDimension: data.companies_exporting.dimensions_x,
+      showTooltipCallback: (company, indicator, x, y) => {
+        console.log(company);
+        console.log(indicator);
+        _showTooltip(x, y);
+        infowindowTitle.innerHTML = company.name;
+        infowindowBody.innerHTML = `${company.y}<span>t</span>`;
+      },
+      hideTooltipCallback: _hideTooltip
+    }
   );
 };
 
@@ -196,8 +204,6 @@ const _init = ()  => {
     });
 
   new Nav();
-
-
 };
 
 _init();

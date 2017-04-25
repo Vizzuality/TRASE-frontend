@@ -1,0 +1,6 @@
+<div class="c-profile-tooltip">
+  <div class="js-infowindow-title title"><%= title %></div>
+  <% Object.keys(data).forEach(function (i) { %>
+    <div class="js-infowindow-data-<%= i %> data"><%= value %></div>
+  <%});%>
+</div>
