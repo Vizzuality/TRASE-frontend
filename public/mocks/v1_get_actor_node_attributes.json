@@ -595,28 +595,28 @@
     "companies_exporting": {
       "dimensions_x": [
         {
-          "name": "Land use",
-          "unit": null
-        },
-        {
-          "name": "Territorial Deforestation",
-          "unit": null
-        },
-        {
-          "name": "Potential Soy related deforestation",
-          "unit": null
-        },
-        {
-          "name": "Soy related deforestation",
+          "name": "Territorial<br/>Deforestation",
           "unit": "ha"
         },
         {
-          "name": "Loss of biodiversity",
+          "name": "Potential Soy related<br/>deforestation",
+          "unit": "ha"
+        },
+        {
+          "name": "Soy related<br/>deforestation",
+          "unit": "ha"
+        },
+        {
+          "name": "Loss of<br/>biodiversity",
           "unit": null
         },
         {
-          "name": "Land-based emmisions",
-          "unit": null
+          "name": "Land-based<br/>emmisions",
+          "unit": "Tn"
+        },
+        {
+          "name": "Land use",
+          "unit": "ha"
         }
       ],
       "companies": [
@@ -654,6 +654,54 @@
             2467.8,
             3567.688,
             2467.8
+          ]
+        },
+        {
+          "name": "ADM",
+          "y": 206.788,
+          "x": [
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8
+          ]
+        },
+        {
+          "name": "ADM",
+          "y": 206.788,
+          "x": [
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8
+          ]
+        },
+        {
+          "name": "ADM",
+          "y": 206.788,
+          "x": [
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8
+          ]
+        },
+        {
+          "name": "ADM",
+          "y": 206.788,
+          "x": [
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8,
+            6567.688,
+            5467.8
           ]
         },
         {

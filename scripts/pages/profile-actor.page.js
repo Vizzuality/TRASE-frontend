@@ -129,7 +129,11 @@ const _build = data => {
     });
   }
 
-  new Scatterplot('.js-companies-exporting', data.companies_exporting);
+  new Scatterplot(
+    '.js-companies-exporting',
+    data.companies_exporting.companies,
+    data.companies_exporting.dimensions_x
+  );
 };
 
 const _setInfo = (info, nodeId) => {
