@@ -3,19 +3,19 @@ import 'styles/components/shared/infowindow.scss';
 
 export default class {
   constructor(className) {
-    this.el = document.querySelector(className);
+    this.infowindow = document.querySelector(className);
   }
 
-  showTooltip = (x, y, data) => {
-    this.el.style.left = x + 'px';
-    this.el.style.top = y + 'px';
-    this.el.classList.remove('is-hidden');
+  showTooltip(x, y, data) {
+    this.infowindow.style.left = x + 'px';
+    this.infowindow.style.top = y + 'px';
 
-    const template = TooltipTemplate({data: this.data, tabsTitle: this.tabsTitle, key: this.key});
-    this.el.innerHTML = template;
-  };
+    const template = TooltipTemplate({title: data.title, values: data.values});
+    this.infowindow.innerHTML = template;
+    this.infowindow.classList.remove('is-hidden');
+  }
 
-  hideTooltip = () => {
-    this.el.classList.add('is-hidden');
-  };
+  hideTooltip() {
+    this.infowindow.classList.add('is-hidden');
+  }
 }
