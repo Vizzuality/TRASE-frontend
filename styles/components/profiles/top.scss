@@ -3,11 +3,7 @@
 .c-top {
 
   > .title {
-    margin: 0 0 24px;
-  }
-
-  > .top-list {
-    padding: 0 0 0 8px;
+    margin-bottom: 9px;
   }
 
   > .top-list > .top-item {
@@ -16,7 +12,7 @@
     justify-content: space-between;
 
     &:not(:first-child) {
-      margin: 16px 0 0;
+      margin-top: 8px;
     }
 
     > .item-name,

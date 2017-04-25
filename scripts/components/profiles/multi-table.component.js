@@ -6,6 +6,7 @@ export default class {
     this.el = settings.el; //place to show the table
     this.type = settings.type;
     this.data = settings.data;
+    this.tabsTitle = settings.tabsTitle;
     this.target = settings.target;
     this.key = `table_${new Date().getTime()}`;
 
@@ -13,7 +14,7 @@ export default class {
   }
 
   render() {
-    const template = MultiTableTemplate({data: this.data, key: this.key});
+    const template = MultiTableTemplate({data: this.data, tabsTitle: this.tabsTitle, key: this.key});
     this.el.innerHTML = template;
 
     this._renderTables();
@@ -27,11 +28,12 @@ export default class {
   }
 
   _renderTables() {
-    this.data.forEach((indicator, i) => {
+    this.data.forEach((item, i) => {
       new Table({
         el: document.querySelector(`.${this.key}_${i}`),
-        data: indicator,
-        type: this.type
+        data: item,
+        type: this.type,
+        target: this.target
       });
     });
   }
