@@ -1,3 +1,5 @@
+- Disabled data portal
+
 ### 2.0.3
 - Added React-based views
 - Improved choropleth layers
