@@ -1,6 +1,7 @@
 @import '../../settings';
 
 .c-scatterplot {
+  padding: 58px 0 63px 0;
 
   path {
     stroke: none;
@@ -23,14 +24,24 @@
       fill: rgba($charcoal-grey, .6);
     }
 
+    path {
+      stroke: $charcoal-grey;
+      stroke-opacity: .1;
+      stroke-width: 1px;
+    }
+
+    &.axis--y path,
     &.axis--x path {
       stroke: $charcoal-grey;
       stroke-width: 2px;
+      stroke-opacity: 1;
     }
   }
 
   .dot {
-    stroke: #000;
+    fill: $charcoal-grey;
+    stroke: $egg-shell;
+    stroke-width: 2;
   }
 
   .c-scatterplot-switcher {
@@ -39,6 +50,7 @@
     align-items: center;
     margin-left: 40px;
     width: 100%;
+    padding-top: 14px;
 
     li {
       flex: 1 100%;

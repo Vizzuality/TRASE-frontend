@@ -10,6 +10,7 @@ import 'd3-transition';
 import ScatterplotSwitcherTemplate from 'ejs!templates/profiles/scatterplot/scatterplot-switcher.ejs';
 import 'styles/components/profiles/scatterplot.scss';
 import stringToHTML from 'utils/stringToHTML';
+import abbreviateNumber from 'utils/abbreviateNumber';
 
 export default class {
   constructor(className, data, xDimension) {
@@ -22,9 +23,9 @@ export default class {
   }
 
   _render() {
-    const margin = {top: 20, right: 20, bottom: 30, left: 40},
+    const margin = {top: 4, right: 4, bottom: 30, left: 29},
       width = this.el.clientWidth - margin.left - margin.right,
-      height = 344 - margin.top - margin.bottom;
+      height = 394 - margin.top - margin.bottom;
     let allYValues = this.data.map(item => item.y);
     let allXValues = this.data.map(item => Math.max(...item.x));
 
@@ -37,12 +38,24 @@ export default class {
       .domain(d3_extent([0, ...allYValues]));
 
     const xAxis = d3_axis_bottom(this.x)
-      .ticks(8);
+      .ticks(8)
+      .tickSize(-height, 0)
+      .tickPadding(9)
+      .tickFormat((value, i) => {
+        if (i === 0) {
+          return null;
+        }
+
+        return abbreviateNumber(value, 3);
+      });
 
     const yAxis = d3_axis_left(this.y)
-      .ticks(8)
+      .ticks(7)
       .tickSize(-width, 0)
-      .tickPadding(0);
+      .tickPadding(9)
+      .tickFormat((value) => {
+        return abbreviateNumber(value, 3);
+      });
 
     this.svg = d3_select(this.el)
       .append('svg')
@@ -52,20 +65,29 @@ export default class {
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     this.svg.append('g')
-      .attr('class', 'axis axis--x')
+      .attr('class', 'axis')
       .attr('transform', 'translate(0,' + height + ')')
       .call(xAxis);
 
     this.svg.append('g')
-      .attr('class', 'axis axis--y')
+      .attr('class', 'axis axis--x')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(d3_axis_bottom(this.x).ticks(0).tickSizeOuter(0));
+
+    this.svg.append('g')
+      .attr('class', 'axis')
       .call(yAxis);
+
+    this.svg.append('g')
+      .attr('class', 'axis axis--y')
+      .call(d3_axis_left(this.y).ticks(0).tickSizeOuter(0));
 
     this.svg.selectAll('circle')
       .data(this._getFormatedData(0))
       .enter()
       .append('circle')
       .attr('class', 'dot')
-      .attr('r', 3.5)
+      .attr('r', 5)
       .attr('cx', function(d) { return this.x(d.x); }.bind(this))
       .attr('cy', function(d) { return this.y(d.y); }.bind(this));
   }
