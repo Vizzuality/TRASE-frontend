@@ -3,7 +3,7 @@ import Nav from 'components/shared/nav.component.js';
 import Slider from 'scripts/components/home/slider.component';
 import PostsTemplate from 'ejs!templates/homepage/posts.ejs';
 // import UpdatesTemplate from 'ejs!templates/homepage/updates.ejs';
-// import TweetsTemplate from 'ejs!templates/homepage/tweets.ejs';
+import TweetsTemplate from 'ejs!templates/homepage/tweets.ejs';
 import 'styles/homepage.scss';
 import 'node_modules/plyr/src/scss/plyr.scss';
 import 'styles/components/homepage/plyr.scss';
@@ -36,12 +36,12 @@ const state = {
   ],
   sliders: [
     {
-      el: document.querySelector('.js-posts'),
-      selector: '.js-posts-slider',
-      endpoint: '/posts',
+      el: '.js-posts',
+      endpoint: API_CMS_URL + '/posts',
       template: PostsTemplate,
       perPage: 3,
-      next: '.js-posts-next'
+      next: '.js-posts-next',
+      prev: '.js-posts-prev'
     },
     // {
     //   el: '.js-updates',
@@ -49,23 +49,25 @@ const state = {
     //   perPage: 4,
     //   template: UpdatesTemplate
     // },
-    // {
-    //   el: '.js-tweets',
-    //   endpoint: '/tweets',
-    //   perPage: 3,
-    //   template: TweetsTemplate
-    // }
+    {
+      el: '.js-tweets',
+      endpoint: API_SOCIAL + '/tweets',
+      template: TweetsTemplate,
+      perPage: 3,
+      next: '.js-tweets-next',
+      prev: '.js-tweets-prev'
+    }
   ]
 };
 
 
-const renderSlider = ({ el, selector, endpoint, perPage, next, template }) => {
-  fetch(API_CMS_URL + endpoint)
+const renderSlider = ({ el, endpoint, perPage, next, prev, template }) => {
+  fetch(endpoint)
     .then(response => response.json())
     .then((data) => template({ posts: data }))
     .then((slides) => {
-      el.insertAdjacentHTML('beforeend', slides);
-      new Slider({ selector, perPage, next });
+      document.querySelector(el).innerHTML = slides;
+      new Slider({ selector: el, perPage, next, prev });
     });
 };
 
