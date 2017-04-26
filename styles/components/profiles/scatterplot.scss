@@ -42,6 +42,16 @@
     fill: $charcoal-grey;
     stroke: $egg-shell;
     stroke-width: 2;
+
+    &:hover {
+      fill: $medium-pink;
+    }
+
+    &.current {
+      fill: $medium-pink;
+      stroke: rgba($medium-pink, .4);
+      stroke-width: 16px;
+    }
   }
 
   .c-scatterplot-switcher {

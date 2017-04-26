@@ -20,6 +20,7 @@ export default class {
     this.el = document.querySelector(className);
     this.data = settings.data;
     this.xDimension = settings.xDimension;
+    this.nodeId = settings.nodeId;
     this.showTooltipCallback = settings.showTooltipCallback;
     this.hideTooltipCallback = settings.hideTooltipCallback;
 
@@ -91,7 +92,7 @@ export default class {
       .data(this._getFormatedData(0))
       .enter()
       .append('circle')
-      .attr('class', 'dot')
+      .attr('class', function(d) { return d.nodeId.toString() === this.nodeId ? 'dot current' : 'dot' }.bind(this))
       .attr('r', 5)
       .attr('cx', function(d) { return this.x(d.x); }.bind(this))
       .attr('cy', function(d) { return this.y(d.y); }.bind(this));
@@ -149,6 +150,7 @@ export default class {
   _getFormatedData(i) {
     return this.data.map(item => {
       return {
+        nodeId: item.id,
         name: item.name,
         y: item.y,
         x: item.x[i]

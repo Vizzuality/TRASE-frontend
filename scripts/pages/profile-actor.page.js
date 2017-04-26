@@ -36,7 +36,7 @@ const _onSelect = function(value) {
   defaults[this.id] = value;
 };
 
-const _build = data => {
+const _build = (data, nodeId) => {
   const tooltip = new Tooltip('.js-infowindow');
 
   if (data.top_sources.municipalities.lines.length) {
@@ -113,6 +113,7 @@ const _build = data => {
   new Scatterplot('.js-companies-exporting', {
       data: data.companies_exporting.companies,
       xDimension: data.companies_exporting.dimensions_x,
+      nodeId: nodeId,
       showTooltipCallback: (company, indicator, x, y) => {
         tooltip.showTooltip(x, y, {
           title: company.name,
@@ -205,7 +206,7 @@ const _init = ()  => {
       const commodityDropdown = new Dropdown('commodity', _onSelect);
       commodityDropdown.setTitle(_.capitalize(commodity));
 
-      _build(data);
+      _build(data, nodeId);
     });
 
   new Nav();
