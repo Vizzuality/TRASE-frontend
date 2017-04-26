@@ -1,7 +1,11 @@
 @import '../../settings';
 
 .c-scatterplot {
-  padding: 58px 0 63px 0;
+  padding: 53px 0 63px 0;
+
+  .title {
+    margin-bottom: 46px;
+  }
 
   path {
     stroke: none;
