@@ -53,6 +53,10 @@
       .nav-link {
         padding-left: 0;
       }
+
+      .nav-submenu-item > .nav-link {
+        padding-left: 16px;
+      }
     }
 
     &:last-child {
