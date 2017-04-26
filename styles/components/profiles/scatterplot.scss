@@ -30,8 +30,7 @@
       stroke-width: 1px;
     }
 
-    &.axis--y path,
-    &.axis--x path {
+    &.axis-line path {
       stroke: $charcoal-grey;
       stroke-width: 2px;
       stroke-opacity: 1;

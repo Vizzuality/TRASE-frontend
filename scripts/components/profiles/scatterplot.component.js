@@ -29,23 +29,23 @@ export default class {
   }
 
   _render() {
-    const margin = {top: 4, right: 4, bottom: 30, left: 29},
-      width = this.el.clientWidth - margin.left - margin.right,
-      height = 394 - margin.top - margin.bottom;
+    const margin = {top: 4, right: 4, bottom: 30, left: 29};
+    this.width = this.el.clientWidth - margin.left - margin.right;
+    this.height = 394 - margin.top - margin.bottom;
     let allYValues = this.data.map(item => item.y);
-    let allXValues = this.data.map(item => Math.max(...item.x));
+    let allXValues = this.data.map(item => item.x[0]);
 
     this.x = d3_scale_linear()
-      .range([0, width])
+      .range([0, this.width])
       .domain(d3_extent([0, ...allXValues]));
 
     this.y = d3_scale_linear()
-      .range([height, 0])
+      .range([this.height, 0])
       .domain(d3_extent([0, ...allYValues]));
 
     const xAxis = d3_axis_bottom(this.x)
       .ticks(8)
-      .tickSize(-height, 0)
+      .tickSize(-this.height, 0)
       .tickPadding(9)
       .tickFormat((value, i) => {
         if (i === 0) {
@@ -57,7 +57,7 @@ export default class {
 
     const yAxis = d3_axis_left(this.y)
       .ticks(7)
-      .tickSize(-width, 0)
+      .tickSize(-this.width, 0)
       .tickPadding(9)
       .tickFormat((value) => {
         return abbreviateNumber(value, 3);
@@ -65,27 +65,27 @@ export default class {
 
     this.svg = d3_select(this.el)
       .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
+      .attr('width', this.width + margin.left + margin.right)
+      .attr('height', this.height + margin.top + margin.bottom)
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
     this.svg.append('g')
-      .attr('class', 'axis')
-      .attr('transform', 'translate(0,' + height + ')')
+      .attr('class', 'axis axis--x')
+      .attr('transform', 'translate(0,' + this.height + ')')
       .call(xAxis);
 
     this.svg.append('g')
-      .attr('class', 'axis axis--x')
-      .attr('transform', 'translate(0,' + height + ')')
+      .attr('class', 'axis axis-line')
+      .attr('transform', 'translate(0,' + this.height + ')')
       .call(d3_axis_bottom(this.x).ticks(0).tickSizeOuter(0));
 
     this.svg.append('g')
-      .attr('class', 'axis')
+      .attr('class', 'axis axis--y')
       .call(yAxis);
 
     this.svg.append('g')
-      .attr('class', 'axis axis--y')
+      .attr('class', 'axis axis-line')
       .call(d3_axis_left(this.y).ticks(0).tickSizeOuter(0));
 
     this.circles = this.svg.selectAll('circle')
@@ -137,14 +137,35 @@ export default class {
     this.switchers.forEach(switcher => {
       switcher.classList.remove('selected');
     });
+    selectedSwitch.classList.add('selected');
+
+    const newData = this._getFormatedData(selectedTabKey);
+    let allXValues = newData.map(item => item.x);
+    let x = d3_scale_linear()
+      .range([0, this.width])
+      .domain(d3_extent([0, ...allXValues]));
+    const xAxis = d3_axis_bottom(x)
+      .ticks(8)
+      .tickSize(-this.height, 0)
+      .tickPadding(9)
+      .tickFormat((value, i) => {
+        if (i === 0) {
+          return null;
+        }
+
+        return abbreviateNumber(value, 3);
+      });
 
     this.circles
-      .data(this._getFormatedData(selectedTabKey))
+      .data(newData)
+      .transition()
+      .duration(700)
+      .attr('cx', function(d) { return x(d.x); });
+
+    this.svg.select('.axis--x')
       .transition()
       .duration(500)
-      .attr('cx', function(d) { return this.x(d.x); }.bind(this));
-
-    selectedSwitch.classList.add('selected');
+      .call(xAxis);
   }
 
   _getFormatedData(i) {
