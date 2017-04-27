@@ -184,12 +184,20 @@
 
     .dropdown-item-legend.-stars > li {
       &::before {
-        content: '★';
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        margin-right: 4px;
+        border: 2px solid $white;
+        border-radius: 99px;
+        content: ' ';
       }
 
       @for $i from 1 through length($qual-colors) {
         &.#{nth($qual-colors-names, $i)} {
-          color: #{nth($qual-colors, $i)};
+          &::before {
+            background-color: #{nth($qual-colors, $i)};
+          }
         }
       }
     }
