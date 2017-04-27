@@ -94,6 +94,9 @@
       }
     }
 
+    &:not(:first-child) .nav-submenu {
+      margin-left: 16px;
+    }
   }
 
   .nav-submenu {
@@ -101,7 +104,6 @@
     position: absolute;
     left: 0;
     top: $nav-height - 11;
-    margin-left: 16px;
     white-space: nowrap;
     background-color: $white;
     box-shadow: 0 10px 20px 0 rgba($charcoal-grey, .2), 0 0 20px 0 rgba($charcoal-grey, .18);
