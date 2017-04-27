@@ -1,3 +1,6 @@
+- profiles: added hover effects on shortcut buttons
+- tool entry in menu now triggers a submenu with two entry points
+
 ### 2.0.4
 - improved loader and added it to profiles search page
 - home: added basic tweets section
