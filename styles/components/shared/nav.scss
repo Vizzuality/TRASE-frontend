@@ -49,7 +49,6 @@
     }
 
     &:first-child {
-
       .nav-link {
         padding-left: 0;
       }
@@ -63,14 +62,21 @@
       padding-right: 0;
     }
 
-    &.-selected > .nav-link:before {
-      content: "";
-      position: absolute;
-      left: 16px;
-      bottom: 0;
-      width: calc(100% - 32px);
-      height: 6px;
-      background-color: $medium-pink;
+    &.-selected, &:hover {
+      > .nav-link::before {
+        content: '';
+        position: absolute;
+        left: 16px;
+        bottom: 0;
+        width: calc(100% - 32px);
+        height: 6px;
+        background-color: $medium-pink;
+      }
+
+      &:first-child > .nav-link::before {
+        left: 0;
+        width: calc(100% - 16px);
+      }
     }
 
     &.-logo {

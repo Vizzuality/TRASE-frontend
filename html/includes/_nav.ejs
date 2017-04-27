@@ -18,8 +18,11 @@
               </li>
             </ul>
           </div>
-          <div class="<%= page.indexOf('factsheets') !== -1 ? 'nav-item -selected' : 'nav-item' %>">
+          <div class="<%= page.indexOf('profile') !== -1 ? 'nav-item -selected' : 'nav-item' %>">
             <a href="/factsheets.html" class="nav-link">PROFILES</a>
+          </div>
+          <div class="<%= page === 'data' ? 'nav-item -selected' : 'nav-item' %>">
+            <a href="/data.html" class="nav-link">DATA</a>
           </div>
           <div class="<%= page === 'about' ? 'nav-item -selected' : 'nav-item' %> -has-menu">
             <a href="/about.html" class="nav-link">ABOUT</a>
@@ -34,9 +37,6 @@
                 <a href="/FAQ.html" class="nav-link">FAQ</a>
               </li>
             </ul>
-          </div>
-          <div class="<%= page === 'data' ? 'nav-item -selected' : 'nav-item' %>">
-            <a href="/data.html" class="nav-link">DATA</a>
           </div>
         </div>
         <div class="right-side">
