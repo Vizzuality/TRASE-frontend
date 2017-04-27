@@ -287,7 +287,6 @@ export default class {
         value
       });
     }
-    console.log(this.currentSelectedRecolorBy, link.recolorBy)
     this.linkTooltip.innerHTML = TooltipTemplate(templateValues);
     this.linkTooltip.classList.remove('is-hidden');
     this.linkTooltip.style.left = d3_event.offsetX + 'px';
