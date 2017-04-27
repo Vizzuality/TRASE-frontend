@@ -132,18 +132,17 @@ export default class {
 
   _getLinkColor(link, selectedRecolorBy) {
     let classPath = 'sankey-link';
-
     if (!selectedRecolorBy) {
       return classPath;
     }
 
-    if (link.recolorBy !== null) {
+    if (selectedRecolorBy.name !== 'none') {
       let recolorBy = link.recolorBy;
       if (selectedRecolorBy.divisor) {
         recolorBy = Math.round(link.recolorBy / selectedRecolorBy.divisor);
       }
       classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${recolorBy}`;
-    } else if (link.recolorGroup) {
+    } else {
       classPath = `${classPath} -recolorgroup-${link.recolorGroup}`;
     }
 
