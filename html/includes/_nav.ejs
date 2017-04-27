@@ -7,8 +7,16 @@
               <a href="/" class="nav-link">HOME</a>
             </div>
           <% } %>
-          <div class="nav-item">
-            <a href="/flows.html" class="nav-link">TOOL</a>
+          <div class="nav-item -has-menu">
+            <a class="nav-link">TOOL</a>
+            <ul class="nav-submenu">
+              <li class="nav-submenu-item">
+                <a href="/flows.html" class="nav-link">SUPPLY CHAIN ACTORS</a>
+              </li>
+              <li class="nav-submenu-item">
+                <a href="/flows.html?isMapVisible=true" class="nav-link">PRODUCTION REGIONS</a>
+              </li>
+            </ul>
           </div>
           <div class="<%= page.indexOf('factsheets') !== -1 ? 'nav-item -selected' : 'nav-item' %>">
             <a href="/factsheets.html" class="nav-link">PROFILES</a>
