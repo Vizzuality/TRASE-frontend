@@ -185,9 +185,9 @@
     .dropdown-item-legend.-stars > li {
       &::before {
         display: inline-block;
-        width: 11px;
-        height: 11px;
-        margin-right: 4px;
+        width: 15px;
+        height: 15px;
+        margin-right: 2px;
         border: 2px solid $white;
         border-radius: 99px;
         content: ' ';
