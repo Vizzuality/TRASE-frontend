@@ -6,7 +6,7 @@ import { DETAILED_VIEW_MIN_LINK_HEIGHT, SANKEY_TRANSITION_TIME } from 'constants
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import 'styles/components/tool/sankey.scss';
-import LinkTooltipTemplate from 'ejs!templates/tool/linkTooltip.ejs';
+import TooltipTemplate from 'ejs!templates/shared/tooltip.ejs';
 import 'styles/components/shared/infowindow.scss';
 
 
@@ -207,19 +207,14 @@ export default class {
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
+    this.currentSelectedRecolorBy = selectedRecolorBy;
+
     // enter
     links.enter()
       .append('path')
       .attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } )
       .attr('d', this.layout.link())
-      .on('mouseover', function(link) {
-        that.linkTooltipHideDebounced.cancel();
-        that.linkTooltip.innerHTML = LinkTooltipTemplate({link});
-        that.linkTooltip.classList.remove('is-hidden');
-        that.linkTooltip.style.left = d3_event.offsetX + 'px';
-        that.linkTooltip.style.top = d3_event.offsetY + 'px';
-        this.classList.add('-hover');
-      })
+      .on('mouseover', function(link) { that._onLinkOver(link, this); })
       .on('mouseout', function() {
         that.linkTooltipHideDebounced();
         this.classList.remove('-hover');
@@ -258,6 +253,46 @@ export default class {
 
   _onNodeOut() {
     this.sankeyColumns.selectAll('.sankey-node').classed('-highlighted', false);
+  }
+
+  _onLinkOver(link, linkEl) {
+    this.linkTooltipHideDebounced.cancel();
+    const templateValues = {
+      title: `${link.sourceNodeName} > ${link.targetNodeName}`,
+      values: [{
+        title: 'p',
+        value: link.quant.toLocaleString(undefined, {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        })
+      }]
+    };
+    if (this.currentSelectedRecolorBy && this.currentSelectedRecolorBy.name !== 'none') {
+      let value;
+      if (link.recolorBy === null) {
+        value = 'unknown';
+      } else if (this.currentSelectedRecolorBy.type === 'ind') {
+        if (this.currentSelectedRecolorBy.maxValue === '100%') {
+          const rangeStart = (link.recolorBy / this.currentSelectedRecolorBy.intervalCount) * 100;
+          const rangeEnd = ((link.recolorBy + 1) / this.currentSelectedRecolorBy.intervalCount) * 100;
+          value = `${Math.round(rangeStart)}-${Math.round(rangeEnd)}%`;
+        } else {
+          value = `${link.recolorBy}/${this.currentSelectedRecolorBy.intervalCount}`;
+        }
+      } else {
+        value = _.capitalize(link.recolorBy);
+      }
+      templateValues.values.push({
+        title: this.currentSelectedRecolorBy.label,
+        value
+      });
+    }
+    console.log(this.currentSelectedRecolorBy, link.recolorBy)
+    this.linkTooltip.innerHTML = TooltipTemplate(templateValues);
+    this.linkTooltip.classList.remove('is-hidden');
+    this.linkTooltip.style.left = d3_event.offsetX + 'px';
+    this.linkTooltip.style.top = d3_event.offsetY + 'px';
+    linkEl.classList.add('-hover');
   }
 
   _onColumnOut() {
