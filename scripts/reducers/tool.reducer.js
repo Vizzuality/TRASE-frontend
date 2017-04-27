@@ -165,9 +165,9 @@ export default function (state = {}, action) {
     case actions.GET_LINKS: {
       const jsonPayload = JSON.parse(action.payload);
       const rawLinks = jsonPayload.data;
-      const nodesMeta = jsonPayload.include;
+      const linksMeta = jsonPayload.include;
 
-      const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, nodesMeta, state.selectedColumnsIds);
+      const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, linksMeta, state.selectedColumnsIds);
 
       let visibleNodesByColumn = splitVisibleNodesByColumn(visibleNodes);
       visibleNodesByColumn = sortVisibleNodes(visibleNodesByColumn);

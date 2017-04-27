@@ -165,18 +165,18 @@
         content: ' ';
       }
 
-      @for $i from 1 through length($qual-colors) {
-        &.#{nth($qual-colors-names, $i)} {
+      @for $i from 1 through length($recolorby-colors) {
+        &.#{nth($recolorby-colors-names, $i)} {
           &::before {
-            background-color: #{nth($qual-colors, $i)};
+            background-color: #{nth($recolorby-colors, $i)};
           }
         }
       }
 
-      @for $i from 1 through length($flow-colors) {
-        &.#{nth($flow-colors-names, $i)} {
+      @for $i from 1 through length($recolorgroup-colors) {
+        &.#{nth($recolorgroup-colors-names, $i)} {
           &::before {
-            background-color: #{nth($flow-colors, $i)};
+            background-color: #{nth($recolorgroup-colors, $i)};
           }
         }
       }
@@ -193,10 +193,10 @@
         content: ' ';
       }
 
-      @for $i from 1 through length($qual-colors) {
-        &.#{nth($qual-colors-names, $i)} {
+      @for $i from 1 through length($recolorby-colors) {
+        &.#{nth($recolorby-colors-names, $i)} {
           &::before {
-            background-color: #{nth($qual-colors, $i)};
+            background-color: #{nth($recolorby-colors, $i)};
           }
         }
       }
@@ -206,9 +206,9 @@
       width: 12px;
       height: 12px;
 
-      @for $i from 1 through length($qual-colors) {
-        &.#{nth($qual-colors-names, $i)} {
-          background-color: #{nth($qual-colors, $i)};
+      @for $i from 1 through length($recolorby-colors) {
+        &.#{nth($recolorby-colors-names, $i)} {
+          background-color: #{nth($recolorby-colors, $i)};
         }
       }
     }

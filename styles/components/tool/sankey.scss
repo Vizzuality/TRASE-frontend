@@ -65,24 +65,24 @@
       opacity: .7;
     }
 
-    @for $i from 1 through length($qual-colors) {
-      &.#{nth($qual-colors-names, $i)} {
+    @for $i from 1 through length($recolorby-colors) {
+      &.#{nth($recolorby-colors-names, $i)} {
         opacity: .5;
-        stroke: #{nth($qual-colors, $i)};
+        stroke: #{nth($recolorby-colors, $i)};
       }
 
-      &.#{nth($qual-colors-names, $i)}.-hover {
+      &.#{nth($recolorby-colors-names, $i)}.-hover {
         opacity: 1;
       }
     }
 
-    @for $i from 1 through length($flow-colors) {
-      &.#{nth($flow-colors-names, $i)} {
+    @for $i from 1 through length($recolorgroup-colors) {
+      &.#{nth($recolorgroup-colors-names, $i)} {
         opacity: .5;
-        stroke: #{nth($flow-colors, $i)};
+        stroke: #{nth($recolorgroup-colors, $i)};
       }
 
-      &.#{nth($flow-colors-names, $i)}.-hover {
+      &.#{nth($recolorgroup-colors-names, $i)}.-hover {
         opacity: 1;
       }
     }

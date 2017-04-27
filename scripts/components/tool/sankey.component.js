@@ -19,6 +19,8 @@ export default class {
   resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, sankeySize}) {
     this.layout.setViewportSize(sankeySize);
 
+    this.layout.setRecolorBy(selectedRecolorBy);
+
     if (this.layout.relayout()) {
       this._render(selectedRecolorBy);
       if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
@@ -33,6 +35,7 @@ export default class {
     }
     this.layout.setViewportSize(linksPayload.sankeySize);
     this.layout.setLinksPayload(linksPayload);
+    this.layout.setRecolorBy(linksPayload.selectedRecolorBy);
     this.layout.relayout();
 
     if (linksPayload.detailedView === true) {
@@ -134,12 +137,14 @@ export default class {
       return classPath;
     }
 
-    if (selectedRecolorBy.type === 'qual') {
-      classPath = `${classPath} -qual-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${link.qual}`;
-    } else if (selectedRecolorBy.type === 'ind') {
-      classPath = `${classPath} -ind-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${selectedRecolorBy.divisor ? Math.round(link.ind/selectedRecolorBy.divisor) : link.ind}`;
+    if (link.recolorBy !== null) {
+      let recolorBy = link.recolorBy;
+      if (selectedRecolorBy.divisor) {
+        recolorBy = Math.round(link.recolorBy / selectedRecolorBy.divisor);
+      }
+      classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${recolorBy}`;
     } else if (link.recolorGroup) {
-      classPath = `${classPath} -flow-${link.recolorGroup}`;
+      classPath = `${classPath} -recolorgroup-${link.recolorGroup}`;
     }
 
     return classPath;
@@ -193,7 +198,7 @@ export default class {
     const linksData = this.layout.links();
     const links = this.linksContainer
       .selectAll('path')
-      .data(linksData , link => link.transitionKey);
+      .data(linksData , link => link.id);
 
     // update
     links.attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } ); // apply color from CSS class immediately
