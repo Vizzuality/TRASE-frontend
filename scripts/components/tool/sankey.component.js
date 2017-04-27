@@ -16,13 +16,13 @@ export default class {
     this._build();
   }
 
-  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, sankeySize}) {
+  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, currentQuant, sankeySize}) {
     this.layout.setViewportSize(sankeySize);
 
     this.layout.setRecolorBy(selectedRecolorBy);
 
     if (this.layout.relayout()) {
-      this._render(selectedRecolorBy);
+      this._render(selectedRecolorBy, currentQuant);
       if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
     }
   }
@@ -42,7 +42,7 @@ export default class {
       this.svg.style('height', this.layout.getMaxHeight() + 'px');
     }
 
-    this._render(linksPayload.selectedRecolorBy);
+    this._render(linksPayload.selectedRecolorBy, linksPayload.currentQuant);
 
     this.selectNodes(linksPayload);
   }
@@ -150,7 +150,7 @@ export default class {
     return classPath;
   }
 
-  _render(selectedRecolorBy) {
+  _render(selectedRecolorBy, currentQuant) {
     this.sankeyColumns
       .data(this.layout.columns());
 
@@ -208,6 +208,7 @@ export default class {
       .attr('d', this.layout.link());
 
     this.currentSelectedRecolorBy = selectedRecolorBy;
+    this.currentQuant = currentQuant;
 
     // enter
     links.enter()
@@ -257,16 +258,19 @@ export default class {
 
   _onLinkOver(link, linkEl) {
     this.linkTooltipHideDebounced.cancel();
+
     const templateValues = {
       title: `${link.sourceNodeName} > ${link.targetNodeName}`,
       values: [{
-        title: 'p',
+        title: this.currentQuant.name,
+        unit: this.currentQuant.unit,
         value: link.quant.toLocaleString(undefined, {
           minimumFractionDigits: 1,
           maximumFractionDigits: 1
-        })
+        }),
       }]
     };
+
     if (this.currentSelectedRecolorBy && this.currentSelectedRecolorBy.name !== 'none') {
       let value;
       if (link.recolorBy === null) {
@@ -287,6 +291,7 @@ export default class {
         value
       });
     }
+
     this.linkTooltip.innerHTML = TooltipTemplate(templateValues);
     this.linkTooltip.classList.remove('is-hidden');
     this.linkTooltip.style.left = d3_event.offsetX + 'px';

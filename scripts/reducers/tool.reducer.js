@@ -167,6 +167,8 @@ export default function (state = {}, action) {
       const rawLinks = jsonPayload.data;
       const linksMeta = jsonPayload.include;
 
+      const currentQuant = linksMeta.quant;
+
       const visibleNodes = getVisibleNodes(rawLinks, state.nodesDict, linksMeta, state.selectedColumnsIds);
 
       let visibleNodesByColumn = splitVisibleNodesByColumn(visibleNodes);
@@ -178,7 +180,7 @@ export default function (state = {}, action) {
       const links = mergeLinks(unmergedLinks);
 
       newState = Object.assign({}, state, {
-        links, unmergedLinks, visibleNodes, visibleNodesByColumn, visibleColumns, linksLoading: false
+        links, unmergedLinks, visibleNodes, visibleNodesByColumn, visibleColumns, currentQuant, linksLoading: false
       });
       break;
     }

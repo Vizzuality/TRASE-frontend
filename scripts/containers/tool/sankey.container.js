@@ -21,6 +21,7 @@ const mapMethodsToState = (state) => ({
         visibleNodesByColumn: state.tool.visibleNodesByColumn,
         detailedView: state.tool.detailedView,
         selectedRecolorBy: state.tool.selectedRecolorBy,
+        currentQuant: state.tool.currentQuant,
         selectedNodesIds: state.tool.selectedNodesIds,
         shouldRepositionExpandButton: shouldRepositionExpandButton(state.tool.expandedNodesIds, state.tool.selectedNodesIds, state.tool.areNodesExpanded)
       };
@@ -32,6 +33,7 @@ const mapMethodsToState = (state) => ({
       return {
         sankeySize: state.app.sankeySize,
         selectedRecolorBy: state.tool.selectedRecolorBy,
+        currentQuant: state.tool.currentQuant,
         selectedNodesIds: state.tool.selectedNodesIds,
         shouldRepositionExpandButton: shouldRepositionExpandButton(state.tool.expandedNodesIds, state.tool.selectedNodesIds, state.tool.areNodesExpanded)
       };
