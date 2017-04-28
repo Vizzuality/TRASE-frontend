@@ -63,14 +63,23 @@ const _build = data => {
     Map('.js-top-municipalities-map', {
       topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_MUNICIPALITY.topo.json`,
       topoJSONRoot: `${defaults.country.toUpperCase()}_MUNICIPALITY`,
-      getPolygonClassName: (/*municipality*/) => {
-        const value = Math.floor(8 * Math.random());
+      getPolygonClassName: ({ properties }) => {
+        const municipality = data.top_sources.municipalities.lines
+          .find(m => (properties.nome.toUpperCase() === m.name));
+        let value = 0;
+        if (municipality) value = municipality.buckets && municipality.buckets.value9 || 0;
         return `-outline ch-${value}`;
       },
-      showTooltipCallback: (municipality, x, y) => {
+      showTooltipCallback: ({ properties }, x, y) => {
+        const municipality = data.top_sources.municipalities.lines
+          .find(m => (properties.nome.toUpperCase() === m.name));
+        let title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
+        let body = null;
+        if (municipality) body = municipality.values[0];
+
         _showTooltip(x, y);
-        infowindowTitle.innerHTML = `${data.node_name} > ${municipality.properties.nome.toUpperCase()}`;
-        infowindowBody.innerHTML = 'put choropleth value here';
+        infowindowTitle.textContent = title;
+        infowindowBody.textContent = formatNumber(body);
       },
       hideTooltipCallback: _hideTooltip
     });
@@ -88,13 +97,15 @@ const _build = data => {
       topoJSONRoot: 'WORLD',
       useRobinsonProjection: true,
       getPolygonClassName: ({ properties }) => {
-        const country = data.top_countries.lines.find(country => (properties.name.toUpperCase() === country.name));
+        const country = data.top_countries.lines
+          .find(c => (properties.name.toUpperCase() === c.name));
         let value = 0;
-        if (country) value = country.buckets &&  country.buckets.value9 || 0;
+        if (country) value = country.buckets && country.buckets.value9 || 0;
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
-        const country = data.top_countries.lines.find(c => (properties.name.toUpperCase() === c.name));
+        const country = data.top_countries.lines
+          .find(c => (properties.name.toUpperCase() === c.name));
         let title = `${data.node_name} > ${properties.name.toUpperCase()}`;
         let body = null;
         if (country) body = country.values[0];
