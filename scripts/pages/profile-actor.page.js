@@ -22,6 +22,7 @@ import MultiTable from 'components/profiles/multi-table.component';
 
 import { getURLParams } from 'utils/stateURL';
 import smoothScroll from 'utils/smoothScroll';
+import formatApostrophe from 'utils/formatApostrophe';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
@@ -104,7 +105,7 @@ const _build = data => {
     new MultiTable({
       el: document.querySelector('.js-sustainability-table'),
       data: data.sustainability,
-      tabsTitle: `Sustainability of ${data.node_name}\'s TOP source regions in 2015:`,
+      tabsTitle: `Sustainability of ${formatApostrophe(data.node_name)} TOP source regions in 2015:`,
       type: 't_head_actors',
       target: 'actor'
     });
@@ -112,9 +113,8 @@ const _build = data => {
 };
 
 const _setInfo = (info, nodeId) => {
-  document.querySelector('.js-name').innerHTML =
-    document.querySelector('.js-link-button-name').innerHTML =
-    info.name ? _.capitalize(info.name) : '-';
+  document.querySelector('.js-name').innerHTML = info.name ? _.capitalize(info.name) : '-';
+  document.querySelector('.js-link-button-name').innerHTML = formatApostrophe(_.capitalize(info.name)) + ' PROFILE';
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-country').innerHTML = info.country ? _.capitalize(info.country) : '-';
   if (info.forest_500 > 0) document.querySelector('.js-forest-500-score .circle-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-circle-filled');
