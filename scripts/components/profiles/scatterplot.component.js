@@ -104,7 +104,7 @@ export default class {
         this.showTooltipCallback(
           d,
           {
-            name: selectedSwitcher.getAttribute('data-name'),
+            name: selectedSwitcher.innerHTML,
             unit: selectedSwitcher.getAttribute('data-unit'),
           },
           d3_event.clientX + 10,

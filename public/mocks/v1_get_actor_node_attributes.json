@@ -598,32 +598,26 @@
       "dimensions_x": [
         {
           "name": "Territorial Deforestation",
-          "chart_name": "Territorial<br/>Deforestation",
           "unit": "ha"
         },
         {
           "name": "Potential Soy related deforestation",
-          "chart_name": "Potential Soy related<br/>deforestation",
           "unit": "ha"
         },
         {
           "name": "Soy related deforestation",
-          "chart_name": "Soy related<br/>deforestation",
           "unit": "ha"
         },
         {
           "name": "Loss of biodiversity",
-          "chart_name": "Loss of<br/>biodiversity",
           "unit": null
         },
         {
           "name": "Land-based emmisions",
-          "chart_name": "Land-based<br/>emmisions",
           "unit": "Tn"
         },
         {
           "name": "Land use",
-          "chart_name": "Land use",
           "unit": "ha"
         }
       ],
