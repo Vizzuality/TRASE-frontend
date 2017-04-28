@@ -99,8 +99,8 @@ const _build = data => {
         if (country) body = country.values[0];
 
         _showTooltip(x, y);
-        infowindowTitle.innerHTML = title;
-        infowindowBody.innerHTML = body;
+        infowindowTitle.textContent = title;
+        infowindowBody.textContent = body;
       },
       hideTooltipCallback: _hideTooltip
     });
