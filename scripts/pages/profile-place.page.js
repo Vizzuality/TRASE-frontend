@@ -22,6 +22,7 @@ import MultiTable from 'components/profiles/multi-table.component';
 import Map from 'components/profiles/map.component';
 
 import { getURLParams } from 'utils/stateURL';
+import formatApostrophe from 'utils/formatApostrophe';
 import formatNumber from 'utils/formatNumber';
 import smoothScroll from 'utils/smoothScroll';
 import _ from 'lodash';
@@ -82,7 +83,7 @@ const _build = data => {
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers.countries,
-      title: `Top consumers of ${_formatApostrophe(data.municip_name)} soy`,
+      title: `Top consumers of ${formatApostrophe(_.capitalize(data.municip_name))} soy`,
       unit: '%'
     });
 
@@ -122,17 +123,9 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
   document.querySelector('.js-line-title').innerHTML = info.municipality ? `Deforestation trajectory of ${info.municipality}` : '-';
   document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
-  document.querySelector('.js-municipality').innerHTML = info.municipality;
-  document.querySelector('.js-link-button-municipality').textContent = _formatApostrophe(info.municipality) + ' PROFILE';
+  document.querySelector('.js-municipality').innerHTML = info.municipality ? info.municipality : '-';
+  document.querySelector('.js-link-button-municipality').textContent = formatApostrophe(_.capitalize(info.municipality)) + ' PROFILE';
 
-};
-
-const  _formatApostrophe = (text) => {
-  if (text) {
-    const name =_.capitalize(text);
-    return _.endsWith(name, 's') ? name + '\'' : name + '\'s';
-  }
-  return '-';
 };
 
 const _setEventListeners = () => {
