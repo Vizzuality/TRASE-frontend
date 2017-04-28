@@ -43,7 +43,7 @@ export default class {
       .range([this.height, 0])
       .domain(d3_extent([0, ...allYValues]));
 
-    const xAxis = d3_axis_bottom(this.x)
+    this.xAxis = d3_axis_bottom(this.x)
       .ticks(8)
       .tickSize(-this.height, 0)
       .tickPadding(9)
@@ -55,7 +55,7 @@ export default class {
         return abbreviateNumber(value, 3);
       });
 
-    const yAxis = d3_axis_left(this.y)
+    this.yAxis = d3_axis_left(this.y)
       .ticks(7)
       .tickSize(-this.width, 0)
       .tickPadding(9)
@@ -73,7 +73,7 @@ export default class {
     this.svg.append('g')
       .attr('class', 'axis axis--x')
       .attr('transform', 'translate(0,' + this.height + ')')
-      .call(xAxis);
+      .call(this.xAxis);
 
     this.svg.append('g')
       .attr('class', 'axis axis-line')
@@ -82,7 +82,7 @@ export default class {
 
     this.svg.append('g')
       .attr('class', 'axis axis--y')
-      .call(yAxis);
+      .call(this.yAxis);
 
     this.svg.append('g')
       .attr('class', 'axis axis-line')
@@ -143,17 +143,7 @@ export default class {
     let x = d3_scale_linear()
       .range([0, this.width])
       .domain(d3_extent([0, ...allXValues]));
-    const xAxis = d3_axis_bottom(x)
-      .ticks(8)
-      .tickSize(-this.height, 0)
-      .tickPadding(9)
-      .tickFormat((value, i) => {
-        if (i === 0) {
-          return null;
-        }
-
-        return abbreviateNumber(value, 3);
-      });
+    this.xAxis.scale(x);
 
     this.circles
       .data(newData)
@@ -164,7 +154,7 @@ export default class {
     this.svg.select('.axis--x')
       .transition()
       .duration(500)
-      .call(xAxis);
+      .call(this.xAxis);
   }
 
   _getFormatedData(i) {
