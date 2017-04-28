@@ -12,12 +12,12 @@ import 'd3-transition';
 
 import ScatterplotSwitcherTemplate from 'ejs!templates/profiles/scatterplot/scatterplot-switcher.ejs';
 import 'styles/components/profiles/scatterplot.scss';
-import stringToHTML from 'utils/stringToHTML';
 import abbreviateNumber from 'utils/abbreviateNumber';
 
 export default class {
   constructor(className, settings) {
     this.el = document.querySelector(className);
+    this.switcherEl = document.querySelector('.js-scatterplot-switcher');
     this.data = settings.data;
     this.xDimension = settings.xDimension;
     this.nodeId = settings.nodeId;
@@ -99,7 +99,7 @@ export default class {
 
     if (this.showTooltipCallback !== undefined) {
       this.circles.on('mousemove', function(d) {
-        const selectedSwitcher = document.querySelector('.js-scatterplot-switcher.selected span');
+        const selectedSwitcher = document.querySelector('.js-scatterplot-switcher-item.selected span');
 
         this.showTooltipCallback(
           d,
@@ -118,10 +118,9 @@ export default class {
   }
 
   _renderXswitcher() {
-    const template = stringToHTML(ScatterplotSwitcherTemplate({data: this.xDimension}));
-    this.el.appendChild(template[0]);
+    this.switcherEl.innerHTML = ScatterplotSwitcherTemplate({data: this.xDimension});
 
-    this.switchers = Array.prototype.slice.call(this.el.querySelectorAll('.js-scatterplot-switcher'), 0);
+    this.switchers = Array.prototype.slice.call(this.switcherEl.querySelectorAll('.js-scatterplot-switcher-item'), 0);
     this.switchers.forEach(switcher => {
       switcher.addEventListener('click', (e) => this._switchTab(e));
     });
