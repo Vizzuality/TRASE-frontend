@@ -1,3 +1,5 @@
+- tool: added link tooltips resize by information
+- tool: added link tooltips quant units
 - profiles: added hover effects on shortcut buttons
 - tool entry in menu now triggers a submenu with two entry points
 
