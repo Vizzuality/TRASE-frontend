@@ -1,4 +1,4 @@
-import TooltipTemplate from 'ejs!templates/profiles/tooltip.ejs';
+import TooltipTemplate from 'ejs!templates/shared/tooltip.ejs';
 import 'styles/components/shared/infowindow.scss';
 
 export default class {
