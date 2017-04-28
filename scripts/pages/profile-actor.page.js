@@ -22,6 +22,7 @@ import MultiTable from 'components/profiles/multi-table.component';
 
 import { getURLParams } from 'utils/stateURL';
 import smoothScroll from 'utils/smoothScroll';
+import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
@@ -95,12 +96,12 @@ const _build = data => {
       showTooltipCallback: ({ properties }, x, y) => {
         const country = data.top_countries.lines.find(c => (properties.name.toUpperCase() === c.name));
         let title = `${data.node_name} > ${properties.name.toUpperCase()}`;
-        let body = 'N/A';
+        let body = null;
         if (country) body = country.values[0];
 
         _showTooltip(x, y);
         infowindowTitle.textContent = title;
-        infowindowBody.textContent = body;
+        infowindowBody.textContent = formatNumber(body);
       },
       hideTooltipCallback: _hideTooltip
     });
