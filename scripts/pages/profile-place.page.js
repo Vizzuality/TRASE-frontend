@@ -32,7 +32,6 @@ const defaults = {
   commodity: 'Soy'
 };
 
-
 const _build = data => {
   const stateGeoID = data.state_geoId;
 
@@ -83,7 +82,7 @@ const _build = data => {
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers.countries,
-      title: `Top consumers of ${data.municip_name}'s soy`,
+      title: `Top consumers of ${_formatApostrophe(data.municip_name)} soy`,
       unit: '%'
     });
 
@@ -123,9 +122,17 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
   document.querySelector('.js-line-title').innerHTML = info.municipality ? `Deforestation trajectory of ${info.municipality}` : '-';
   document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
-  document.querySelector('.js-municipality').innerHTML =
-    document.querySelector('.js-link-button-municipality').innerHTML =
-    info.municipality ? _.capitalize(info.municipality) : '-';
+  document.querySelector('.js-municipality').innerHTML = info.municipality;
+  document.querySelector('.js-link-button-municipality').textContent = _formatApostrophe(info.municipality) + ' PROFILE';
+
+};
+
+const  _formatApostrophe = (text) => {
+  if (text) {
+    const name =_.capitalize(text);
+    return _.endsWith(name, 's') ? name + '\'' : name + '\'s';
+  }
+  return '-';
 };
 
 const _setEventListeners = () => {
