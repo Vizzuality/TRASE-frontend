@@ -88,17 +88,19 @@ const _build = data => {
       useRobinsonProjection: true,
       getPolygonClassName: ({ properties }) => {
         const country = data.top_countries.lines.find(country => (properties.name.toUpperCase() === country.name));
-
-        if (country) {
-          const value = country.buckets &&  country.buckets.value9 || 0;
-          return `-outline ch-${value}`;
-        }
-        return '-outline ch-0';
+        let value = 0;
+        if (country) value = country.buckets &&  country.buckets.value9 || 0;
+        return `-outline ch-${value}`;
       },
-      showTooltipCallback: (country, x, y) => {
+      showTooltipCallback: ({ properties }, x, y) => {
+        const country = data.top_countries.lines.find(c => (properties.name.toUpperCase() === c.name));
+        let title = `${data.node_name} > ${properties.name.toUpperCase()}`;
+        let body = 'N/A';
+        if (country) body = country.values[0];
+
         _showTooltip(x, y);
-        infowindowTitle.innerHTML = `${data.node_name} > ${country.properties.name.toUpperCase()}`;
-        infowindowBody.innerHTML = 'put choropleth value here';
+        infowindowTitle.innerHTML = title;
+        infowindowBody.innerHTML = body;
       },
       hideTooltipCallback: _hideTooltip
     });
