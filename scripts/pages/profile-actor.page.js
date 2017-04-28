@@ -86,9 +86,14 @@ const _build = data => {
       topoJSONPath: './vector_layers/WORLD.topo.json',
       topoJSONRoot: 'WORLD',
       useRobinsonProjection: true,
-      getPolygonClassName: (/*country*/) => {
-        const value = Math.floor(8 * Math.random());
-        return `-outline ch-${value}`;
+      getPolygonClassName: ({ properties }) => {
+        const country = data.top_countries.lines.find(country => (properties.name.toUpperCase() === country.name));
+
+        if (country) {
+          const value = country.buckets &&  country.buckets.value9 || 0;
+          return `-outline ch-${value}`;
+        }
+        return '-outline ch-0';
       },
       showTooltipCallback: (country, x, y) => {
         _showTooltip(x, y);
