@@ -1,7 +1,7 @@
 <% if (isSelect) { %>
   <% nodes.forEach(function(node, i) { %>
     <% const color = recolorGroups === null ? -1 : recolorGroups[node.id] %>
-    <div class="js-node-title c-node-title -flow-<%= color %>" <% if (node.link) { %>data-node-link="<%= node.link %>"<% } %>>
+    <div class="js-node-title c-node-title -recolorgroup-<%= color %>" <% if (node.link) { %>data-node-link="<%= node.link %>"<% } %>>
       <div class="column">
         <div class="column-title"><%= node.columnName %></div>
         <div class="column-content"><%= node.name %></div>
@@ -28,7 +28,7 @@
   <% }) %>
 <% } else { %>
   <% const node = nodes[0] %>
-  <div class="c-node-title -flow--1">
+  <div class="c-node-title -recolorgroup--1">
     <div class="column">
       <div class="column-title"><%= node.columnName %></div>
       <div class="column-content"><%= node.name %></div>

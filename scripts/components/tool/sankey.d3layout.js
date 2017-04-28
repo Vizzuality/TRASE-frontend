@@ -20,6 +20,7 @@ const sankeyLayout = function() {
   let links;
   let detailedView;
   let maxHeight;
+  let recolorBy;
 
   // layout
   let linksColumnWidth;
@@ -35,6 +36,10 @@ const sankeyLayout = function() {
 
   sankeyLayout.setLinksPayload = (payload) => {
     linksPayload = payload;
+  };
+
+  sankeyLayout.setRecolorBy = (payload) => {
+    recolorBy = payload;
   };
 
   sankeyLayout.columnWidth = _ => {
@@ -153,17 +158,22 @@ const sankeyLayout = function() {
       const sIdBY = stackedHeightsByNodeId.source[linkB.sourceNodeId];
       const tIdAY = stackedHeightsByNodeId.target[linkA.targetNodeId];
       const tIdBY = stackedHeightsByNodeId.target[linkB.targetNodeId];
-      let sort = sIdAY - sIdBY || tIdAY - tIdBY;
-      if (linkA.ind !== undefined && linkA.ind !== 'none' && linkB.ind !== undefined && linkB.ind !== 'none') {
-        sort = linkA.ind - linkB.ind || sort;
-      }
-      if (linkA.qual !== undefined && linkA.qual !== 'none' && linkB.qual !== undefined && linkB.qual !== 'none') {
-        // sorts alphabetically with quals
-        // TODO use the order presentend in the color by menu
-        sort = linkA.qual.charCodeAt(0) - linkB.qual.charCodeAt(0) || sort;
-      }
+      let defaultSort = sIdAY - sIdBY || tIdAY - tIdBY;
 
-      return sort;
+      if (recolorBy.type !== 'none') {
+        // sorts alphabetically with quals, numerically with inds
+        // TODO for quals use the order presentend in the color by menu
+        let recolorBySort;
+        if (linkA.recolorBy === null) {
+          recolorBySort = 1;
+        } else if  (linkB.recolorBy === null) {
+          recolorBySort = -1;
+        } else {
+          recolorBySort = (recolorBy.type === 'ind') ?  linkA.recolorBy - linkB.recolorBy : linkA.recolorBy.charCodeAt(0) - linkB.recolorBy.charCodeAt(0);
+        }
+        return recolorBySort || defaultSort;
+      }
+      return defaultSort;
     });
 
     links.forEach(link => {

@@ -6,7 +6,7 @@ import { DETAILED_VIEW_MIN_LINK_HEIGHT, SANKEY_TRANSITION_TIME } from 'constants
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import 'styles/components/tool/sankey.scss';
-import LinkTooltipTemplate from 'ejs!templates/tool/linkTooltip.ejs';
+import TooltipTemplate from 'ejs!templates/shared/tooltip.ejs';
 import 'styles/components/shared/infowindow.scss';
 
 
@@ -16,11 +16,13 @@ export default class {
     this._build();
   }
 
-  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, sankeySize}) {
+  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, currentQuant, sankeySize}) {
     this.layout.setViewportSize(sankeySize);
 
+    this.layout.setRecolorBy(selectedRecolorBy);
+
     if (this.layout.relayout()) {
-      this._render(selectedRecolorBy);
+      this._render(selectedRecolorBy, currentQuant);
       if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
     }
   }
@@ -33,13 +35,14 @@ export default class {
     }
     this.layout.setViewportSize(linksPayload.sankeySize);
     this.layout.setLinksPayload(linksPayload);
+    this.layout.setRecolorBy(linksPayload.selectedRecolorBy);
     this.layout.relayout();
 
     if (linksPayload.detailedView === true) {
       this.svg.style('height', this.layout.getMaxHeight() + 'px');
     }
 
-    this._render(linksPayload.selectedRecolorBy);
+    this._render(linksPayload.selectedRecolorBy, linksPayload.currentQuant);
 
     this.selectNodes(linksPayload);
   }
@@ -129,23 +132,24 @@ export default class {
 
   _getLinkColor(link, selectedRecolorBy) {
     let classPath = 'sankey-link';
-
     if (!selectedRecolorBy) {
       return classPath;
     }
 
-    if (selectedRecolorBy.type === 'qual') {
-      classPath = `${classPath} -qual-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${link.qual}`;
-    } else if (selectedRecolorBy.type === 'ind') {
-      classPath = `${classPath} -ind-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${selectedRecolorBy.divisor ? Math.round(link.ind/selectedRecolorBy.divisor) : link.ind}`;
-    } else if (link.recolorGroup) {
-      classPath = `${classPath} -flow-${link.recolorGroup}`;
+    if (selectedRecolorBy.name !== 'none') {
+      let recolorBy = link.recolorBy;
+      if (selectedRecolorBy.divisor) {
+        recolorBy = Math.round(link.recolorBy / selectedRecolorBy.divisor);
+      }
+      classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${recolorBy}`;
+    } else {
+      classPath = `${classPath} -recolorgroup-${link.recolorGroup}`;
     }
 
     return classPath;
   }
 
-  _render(selectedRecolorBy) {
+  _render(selectedRecolorBy, currentQuant) {
     this.sankeyColumns
       .data(this.layout.columns());
 
@@ -193,7 +197,7 @@ export default class {
     const linksData = this.layout.links();
     const links = this.linksContainer
       .selectAll('path')
-      .data(linksData , link => link.transitionKey);
+      .data(linksData , link => link.id);
 
     // update
     links.attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } ); // apply color from CSS class immediately
@@ -202,19 +206,15 @@ export default class {
       .attr('stroke-width', d => Math.max(DETAILED_VIEW_MIN_LINK_HEIGHT, d.renderedHeight))
       .attr('d', this.layout.link());
 
+    this.currentSelectedRecolorBy = selectedRecolorBy;
+    this.currentQuant = currentQuant;
+
     // enter
     links.enter()
       .append('path')
       .attr('class', (link) => {return this._getLinkColor(link, selectedRecolorBy); } )
       .attr('d', this.layout.link())
-      .on('mouseover', function(link) {
-        that.linkTooltipHideDebounced.cancel();
-        that.linkTooltip.innerHTML = LinkTooltipTemplate({link});
-        that.linkTooltip.classList.remove('is-hidden');
-        that.linkTooltip.style.left = d3_event.offsetX + 'px';
-        that.linkTooltip.style.top = d3_event.offsetY + 'px';
-        this.classList.add('-hover');
-      })
+      .on('mouseover', function(link) { that._onLinkOver(link, this); })
       .on('mouseout', function() {
         that.linkTooltipHideDebounced();
         this.classList.remove('-hover');
@@ -253,6 +253,49 @@ export default class {
 
   _onNodeOut() {
     this.sankeyColumns.selectAll('.sankey-node').classed('-highlighted', false);
+  }
+
+  _onLinkOver(link, linkEl) {
+    this.linkTooltipHideDebounced.cancel();
+
+    const templateValues = {
+      title: `${link.sourceNodeName} > ${link.targetNodeName}`,
+      values: [{
+        title: this.currentQuant.name,
+        unit: this.currentQuant.unit,
+        value: link.quant.toLocaleString(undefined, {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        }),
+      }]
+    };
+
+    if (this.currentSelectedRecolorBy && this.currentSelectedRecolorBy.name !== 'none') {
+      let value;
+      if (link.recolorBy === null) {
+        value = 'unknown';
+      } else if (this.currentSelectedRecolorBy.type === 'ind') {
+        if (this.currentSelectedRecolorBy.maxValue === '100%') {
+          const rangeStart = (link.recolorBy / this.currentSelectedRecolorBy.intervalCount) * 100;
+          const rangeEnd = ((link.recolorBy + 1) / this.currentSelectedRecolorBy.intervalCount) * 100;
+          value = `${Math.round(rangeStart)}-${Math.round(rangeEnd)}%`;
+        } else {
+          value = `${link.recolorBy}/${this.currentSelectedRecolorBy.intervalCount}`;
+        }
+      } else {
+        value = _.capitalize(link.recolorBy);
+      }
+      templateValues.values.push({
+        title: this.currentSelectedRecolorBy.label,
+        value
+      });
+    }
+
+    this.linkTooltip.innerHTML = TooltipTemplate(templateValues);
+    this.linkTooltip.classList.remove('is-hidden');
+    this.linkTooltip.style.left = d3_event.offsetX + 'px';
+    this.linkTooltip.style.top = d3_event.offsetY + 'px';
+    linkEl.classList.add('-hover');
   }
 
   _onColumnOut() {
