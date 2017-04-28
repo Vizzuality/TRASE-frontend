@@ -1,3 +1,24 @@
+- tool: added link tooltips resize by information
+- tool: added link tooltips quant units
+- profiles: added hover effects on shortcut buttons
+- tool entry in menu now triggers a submenu with two entry points
+
+### 2.0.4
+- improved loader and added it to profiles search page
+- home: added basic tweets section
+- home: added tutorial video
+- tool: allow explicit linking to an expanded node and map state
+- tool: non-interactive/country wide columns
+- profiles: added direct links to tool
+- profiles: actor countries map (mock)
+- profiles: actor municipalities map (mock)
+- profiles: actor sustainability multitable (mock)
+- profiles: place indicators table (mock)
+- profiles: place deforestation chart (mock)
+- profiles: place improved chord diagrams styles
+- profiles: place header maps
+- Disabled data portal
+
 ### 2.0.3
 - Added React-based views
 - Improved choropleth layers

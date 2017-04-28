@@ -43,67 +43,68 @@ $cloudy-blue: #aadad1;
 $light-grey-blue: #8db6ca;
 $warm-pink: #f65e6e;
 
-$flow-1: $medium-pink;
-$flow-2: $manilla;
-$flow-3: #2d586e;
-$flow-4: #007d29;
-$flow-5: #b4008a;
-$flow-6: #06ff67;
-$flow-7: #8339aa;
-$flow-8: #f3fb00;
-$flow-9: #7193ff;
-$flow-10: #b27200;
+$recolorgroup-1: $medium-pink;
+$recolorgroup-2: $manilla;
+$recolorgroup-3: #2d586e;
+$recolorgroup-4: #007d29;
+$recolorgroup-5: #b4008a;
+$recolorgroup-6: #06ff67;
+$recolorgroup-7: #8339aa;
+$recolorgroup-8: #f3fb00;
+$recolorgroup-9: #7193ff;
+$recolorgroup-10: #b27200;
 
-$qual-qual-thematic-amazonia: #43f3f3;
-$qual-qual-thematic-cerrado: #517fee;
-$qual-qual-thematic-mata-atlantica: #8c28ff;
-$qual-qual-thematic-caatinga: #ff66e5;
-$qual-qual-thematic-pampa: #72ea28;
-$qual-qual-thematic-pantanal: #ffb314;
+$recolorby-qual-thematic-amazonia: #43f3f3;
+$recolorby-qual-thematic-cerrado: #517fee;
+$recolorby-qual-thematic-mata-atlantica: #8c28ff;
+$recolorby-qual-thematic-caatinga: #ff66e5;
+$recolorby-qual-thematic-pampa: #72ea28;
+$recolorby-qual-thematic-pantanal: #ffb314;
 
-$ind-stars-red-blue-0: #e3a9a9;
-$ind-stars-red-blue-1: #f4bda5;
-$ind-stars-red-blue-2: #c2b5af;
-$ind-stars-red-blue-3: #92c5de;
-$ind-stars-red-blue-4: #4996c3;
+$recolorby-stars-red-blue-0: #e3a9a9;
+$recolorby-stars-red-blue-1: #f4bda5;
+$recolorby-stars-red-blue-2: #c2b5af;
+$recolorby-stars-red-blue-3: #92c5de;
+$recolorby-stars-red-blue-4: #4996c3;
 
-$qual-qual-yes-no-yes: #a4e332;
-$qual-qual-yes-no-no: #e36845;
+$recolorby-qual-yes-no-yes: #a4e332;
+$recolorby-qual-yes-no-no: #e36845;
 
-$ind-linear-red-blue-0: #d73027;
-$ind-linear-red-blue-1: #fc8d59;
-$ind-linear-red-blue-2: #fee090;
-$ind-linear-red-blue-3: #ffffbf;
-$ind-linear-red-blue-4: #e0f3f8;
-$ind-linear-red-blue-5: #91bfdb;
-$ind-linear-red-blue-6: #4575b4;
+$recolorby-linear-red-blue-0: #d73027;
+$recolorby-linear-red-blue-1: #fc8d59;
+$recolorby-linear-red-blue-2: #fee090;
+$recolorby-linear-red-blue-3: #ffffbf;
+$recolorby-linear-red-blue-4: #e0f3f8;
+$recolorby-linear-red-blue-5: #91bfdb;
+$recolorby-linear-red-blue-6: #4575b4;
 
-$ind-linear-yellow-green-0: #ffc;
-$ind-linear-yellow-green-1: #c2e699;
-$ind-linear-yellow-green-2: #78c679;
-$ind-linear-yellow-green-3: #31a354;
-$ind-linear-yellow-green-4: #006837;
+$recolorby-linear-yellow-green-0: #ffc;
+$recolorby-linear-yellow-green-1: #c2e699;
+$recolorby-linear-yellow-green-2: #78c679;
+$recolorby-linear-yellow-green-3: #31a354;
+$recolorby-linear-yellow-green-4: #006837;
+
+$recolorby-linear-blue-green-0: #006837;
+$recolorby-linear-blue-green-1: #1a9850;
+$recolorby-linear-blue-green-2: #66bd63;
+$recolorby-linear-blue-green-3: #a6d96a;
+$recolorby-linear-blue-green-4: #d9ef8b;
+$recolorby-linear-blue-green-5: #ffffbf;
+$recolorby-linear-blue-green-6: #fee08b;
+$recolorby-linear-blue-green-7: #fdae61;
+$recolorby-linear-blue-green-8: #f46d43;
+$recolorby-linear-blue-green-9: #d73027;
+$recolorby-linear-blue-green-10: #a50026;
+
+$recolorby-colors: $recolorby-qual-thematic-amazonia, $recolorby-qual-thematic-cerrado, $recolorby-qual-thematic-mata-atlantica, $recolorby-qual-thematic-caatinga, $recolorby-qual-thematic-pampa, $recolorby-qual-thematic-pantanal, $recolorby-stars-red-blue-0, $recolorby-stars-red-blue-1, $recolorby-stars-red-blue-2, $recolorby-stars-red-blue-3, $recolorby-stars-red-blue-4, $recolorby-qual-yes-no-yes, $recolorby-qual-yes-no-no, $recolorby-linear-red-blue-0, $recolorby-linear-red-blue-1, $recolorby-linear-red-blue-2, $recolorby-linear-red-blue-3, $recolorby-linear-red-blue-4, $recolorby-linear-red-blue-5, $recolorby-linear-red-blue-6, $recolorby-linear-yellow-green-0, $recolorby-linear-yellow-green-1, $recolorby-linear-yellow-green-2, $recolorby-linear-yellow-green-3, $recolorby-linear-yellow-green-4, $recolorby-linear-blue-green-0, $recolorby-linear-blue-green-1, $recolorby-linear-blue-green-2, $recolorby-linear-blue-green-3, $recolorby-linear-blue-green-4, $recolorby-linear-blue-green-5, $recolorby-linear-blue-green-6, $recolorby-linear-blue-green-7, $recolorby-linear-blue-green-8, $recolorby-linear-blue-green-9, $recolorby-linear-blue-green-10;
+
+$recolorby-colors-names: '-recolorby-qual-thematic-amazonia', '-recolorby-qual-thematic-cerrado', '-recolorby-qual-thematic-mata-atlantica', '-recolorby-qual-thematic-caatinga', '-recolorby-qual-thematic-pampa', '-recolorby-qual-thematic-pantanal', '-recolorby-stars-red-blue-0', '-recolorby-stars-red-blue-1', '-recolorby-stars-red-blue-2', '-recolorby-stars-red-blue-3', '-recolorby-stars-red-blue-4', '-recolorby-qual-yes-no-yes', '-recolorby-qual-yes-no-no', '-recolorby-linear-red-blue-0', '-recolorby-linear-red-blue-1', '-recolorby-linear-red-blue-2', '-recolorby-linear-red-blue-3', '-recolorby-linear-red-blue-4', '-recolorby-linear-red-blue-5', '-recolorby-linear-red-blue-6', '-recolorby-linear-yellow-green-0', '-recolorby-linear-yellow-green-1', '-recolorby-linear-yellow-green-2', '-recolorby-linear-yellow-green-3', '-recolorby-linear-yellow-green-4', '-recolorby-linear-blue-green-0', '-recolorby-linear-blue-green-1', '-recolorby-linear-blue-green-2', '-recolorby-linear-blue-green-3', '-recolorby-linear-blue-green-4', '-recolorby-linear-blue-green-5', '-recolorby-linear-blue-green-6', '-recolorby-linear-blue-green-7', '-recolorby-linear-blue-green-8', '-recolorby-linear-blue-green-9', '-recolorby-linear-blue-green-10';
+
+$recolorgroup-colors: $recolorgroup-1, $recolorgroup-2, $recolorgroup-3, $recolorgroup-4, $recolorgroup-5, $recolorgroup-6, $recolorgroup-7, $recolorgroup-8, $recolorgroup-9, $recolorgroup-10;
+
+$recolorgroup-colors-names: '-recolorgroup-1', '-recolorgroup-2', '-recolorgroup-3', '-recolorgroup-4', '-recolorgroup-5', '-recolorgroup-6', '-recolorgroup-7', '-recolorgroup-8', '-recolorgroup-9', '-recolorgroup-10';
 
 
-$ind-linear-blue-green-0: #006837;
-$ind-linear-blue-green-1: #1a9850;
-$ind-linear-blue-green-2: #66bd63;
-$ind-linear-blue-green-3: #a6d96a;
-$ind-linear-blue-green-4: #d9ef8b;
-$ind-linear-blue-green-5: #ffffbf;
-$ind-linear-blue-green-6: #fee08b;
-$ind-linear-blue-green-7: #fdae61;
-$ind-linear-blue-green-8: #f46d43;
-$ind-linear-blue-green-9: #d73027;
-$ind-linear-blue-green-10: #a50026;
-
-$qual-colors: $qual-qual-thematic-amazonia, $qual-qual-thematic-cerrado, $qual-qual-thematic-mata-atlantica, $qual-qual-thematic-caatinga, $qual-qual-thematic-pampa, $qual-qual-thematic-pantanal, $ind-stars-red-blue-0, $ind-stars-red-blue-1, $ind-stars-red-blue-2, $ind-stars-red-blue-3, $ind-stars-red-blue-4, $qual-qual-yes-no-yes, $qual-qual-yes-no-no, $ind-linear-red-blue-0, $ind-linear-red-blue-1, $ind-linear-red-blue-2, $ind-linear-red-blue-3, $ind-linear-red-blue-4, $ind-linear-red-blue-5, $ind-linear-red-blue-6, $ind-linear-yellow-green-0, $ind-linear-yellow-green-1, $ind-linear-yellow-green-2, $ind-linear-yellow-green-3, $ind-linear-yellow-green-4, $ind-linear-blue-green-0, $ind-linear-blue-green-1, $ind-linear-blue-green-2, $ind-linear-blue-green-3, $ind-linear-blue-green-4, $ind-linear-blue-green-5, $ind-linear-blue-green-6, $ind-linear-blue-green-7, $ind-linear-blue-green-8, $ind-linear-blue-green-9, $ind-linear-blue-green-10;
-
-$qual-colors-names: '-qual-qual-thematic-amazonia', '-qual-qual-thematic-cerrado', '-qual-qual-thematic-mata-atlantica', '-qual-qual-thematic-caatinga', '-qual-qual-thematic-pampa', '-qual-qual-thematic-pantanal', '-ind-stars-red-blue-0', '-ind-stars-red-blue-1', '-ind-stars-red-blue-2', '-ind-stars-red-blue-3', '-ind-stars-red-blue-4', '-qual-qual-yes-no-yes', '-qual-qual-yes-no-no', '-ind-linear-red-blue-0', '-ind-linear-red-blue-1', '-ind-linear-red-blue-2', '-ind-linear-red-blue-3', '-ind-linear-red-blue-4', '-ind-linear-red-blue-5', '-ind-linear-red-blue-6', '-ind-linear-yellow-green-0', '-ind-linear-yellow-green-1', '-ind-linear-yellow-green-2', '-ind-linear-yellow-green-3', '-ind-linear-yellow-green-4', '-ind-linear-blue-green-0', '-ind-linear-blue-green-1', '-ind-linear-blue-green-2', '-ind-linear-blue-green-3', '-ind-linear-blue-green-4', '-ind-linear-blue-green-5', '-ind-linear-blue-green-6', '-ind-linear-blue-green-7', '-ind-linear-blue-green-8', '-ind-linear-blue-green-9', '-ind-linear-blue-green-10';
-
-$flow-colors: $flow-1, $flow-2, $flow-3, $flow-4, $flow-5, $flow-6, $flow-7, $flow-8, $flow-9, $flow-10;
-
-$flow-colors-names: '-flow-1', '-flow-2', '-flow-3', '-flow-4', '-flow-5', '-flow-6', '-flow-7', '-flow-8', '-flow-9', '-flow-10';
 // typography
 $font-family-1: 'DecimaMonoPro', 'Courier New', sans-serif;
 $font-family-2: 'Merriweather', serif;

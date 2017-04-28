@@ -1,8 +1,8 @@
-export default function(links, nodesDict, nodesMeta, columnIndexes) {
+export default function(links, nodesDict, linksMeta, columnIndexes) {
   const nodeIdsList = [];
   const nodes = [];
 
-  const nodesDictWithMeta = _setNodesMeta(nodesDict, nodesMeta);
+  const nodesDictWithMeta = _setNodesMeta(nodesDict, linksMeta);
 
   links.forEach(link => {
     const pathNodeIds = link.path;
@@ -28,16 +28,16 @@ export default function(links, nodesDict, nodesMeta, columnIndexes) {
 
 // TODO get data from get_nodes instead of flow meta (except for heights)
 // see setNodesMeta.js
-const _setNodesMeta = (nodesDict, nodesMeta) => {
+const _setNodesMeta = (nodesDict, linksMeta) => {
   const nodesDictWithMeta = {};
 
-  nodesMeta.nodeHeights.forEach(nodeHeight => {
+  linksMeta.nodeHeights.forEach(nodeHeight => {
     const nodeId = nodeHeight.id;
     const node = Object.assign({}, nodesDict[nodeId]);
     node.height = nodeHeight.height;
     node.quant = nodeHeight.quant;
-    node.quantName = nodesMeta.quant.name;
-    node.quantUnit = nodesMeta.quant.unit;
+    node.quantName = linksMeta.quant.name;
+    node.quantUnit = linksMeta.quant.unit;
 
     if (node.quantName === 'Deforestation risk') {
       node.quant = Math.round(node.quant);

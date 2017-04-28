@@ -49,9 +49,12 @@
     }
 
     &:first-child {
-
       .nav-link {
         padding-left: 0;
+      }
+
+      .nav-submenu-item > .nav-link {
+        padding-left: 16px;
       }
     }
 
@@ -59,14 +62,21 @@
       padding-right: 0;
     }
 
-    &.-selected > .nav-link:before {
-      content: "";
-      position: absolute;
-      left: 16px;
-      bottom: 0;
-      width: calc(100% - 32px);
-      height: 6px;
-      background-color: $medium-pink;
+    &.-selected, &:hover {
+      > .nav-link::before {
+        content: '';
+        position: absolute;
+        left: 16px;
+        bottom: 0;
+        width: calc(100% - 32px);
+        height: 6px;
+        background-color: $medium-pink;
+      }
+
+      &:first-child > .nav-link::before {
+        left: 0;
+        width: calc(100% - 16px);
+      }
     }
 
     &.-logo {
@@ -90,6 +100,9 @@
       }
     }
 
+    &:not(:first-child) .nav-submenu {
+      margin-left: 16px;
+    }
   }
 
   .nav-submenu {
@@ -97,7 +110,6 @@
     position: absolute;
     left: 0;
     top: $nav-height - 11;
-    margin-left: 16px;
     white-space: nowrap;
     background-color: $white;
     box-shadow: 0 10px 20px 0 rgba($charcoal-grey, .2), 0 0 20px 0 rgba($charcoal-grey, .18);
@@ -317,15 +329,15 @@
     flex-grow: 1;
     height: 5px;
 
-    @for $i from 1 through length($qual-colors) {
-      &.#{nth($qual-colors-names, $i)} {
-        background-color: #{nth($qual-colors, $i)};
+    @for $i from 1 through length($recolorby-colors) {
+      &.#{nth($recolorby-colors-names, $i)} {
+        background-color: #{nth($recolorby-colors, $i)};
       }
     }
 
-    @for $i from 1 through length($flow-colors) {
-      &.#{nth($flow-colors-names, $i)} {
-        background-color: #{nth($flow-colors, $i)};
+    @for $i from 1 through length($recolorgroup-colors) {
+      &.#{nth($recolorgroup-colors-names, $i)} {
+        background-color: #{nth($recolorgroup-colors, $i)};
       }
     }
   }

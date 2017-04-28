@@ -18,6 +18,16 @@
   color: $charcoal-grey;
   cursor: pointer;
 
+  &:hover {
+    .icon-external-link {
+      fill: $charcoal-grey;
+    }
+
+    &.-with-arrow:after {
+      @include arrow(11px, 1px, $charcoal-grey, 'down');
+    }
+  }
+
   &:before {
     content: '';
     position: absolute;

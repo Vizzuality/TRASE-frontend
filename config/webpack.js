@@ -92,7 +92,8 @@ const config = {
       API_V2_URL: JSON.stringify(process.env.API_V2_URL),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       API_CMS_URL: JSON.stringify(process.env.API_CMS_URL),
-      API_STORY_CONTENT: JSON.stringify(process.env.API_STORY_CONTENT)
+      API_STORY_CONTENT: JSON.stringify(process.env.API_STORY_CONTENT),
+      API_SOCIAL: JSON.stringify(process.env.API_SOCIAL),
     })
   ].concat(pagePlugins),
   output: {

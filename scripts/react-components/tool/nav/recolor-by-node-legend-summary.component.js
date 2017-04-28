@@ -5,6 +5,6 @@ export default ({ recolorGroups }) => {
     return;
   }
   return <div class='dropdown-item-legend-summary'>
-    {recolorGroups.map(color => <div class={`color -flow-${color}`} style={`order:${color};`} />)}
+    {recolorGroups.map(color => <div class={`color -recolorgroup-${color}`} style={`order:${color};`} />)}
   </div>;
 };

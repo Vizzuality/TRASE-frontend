@@ -91,6 +91,10 @@
     &:not(:last-child) {
       border-bottom: 1px solid #ebebeb;
     }
+
+    .unit {
+      color: rgba($charcoal-grey, .5);
+    }
   }
 
 
