@@ -114,7 +114,7 @@ const _build = data => {
 
 const _setInfo = (info, nodeId) => {
   document.querySelector('.js-name').innerHTML = info.name ? _.capitalize(info.name) : '-';
-  document.querySelector('.js-link-button-name').innerHTML = formatApostrophe(_.capitalize(info.name)) + ' PROFILE';
+  document.querySelector('.js-link-button-name').textContent = formatApostrophe(_.capitalize(info.name)) + ' PROFILE';
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-country').innerHTML = info.country ? _.capitalize(info.country) : '-';
   if (info.forest_500 > 0) document.querySelector('.js-forest-500-score .circle-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-circle-filled');
