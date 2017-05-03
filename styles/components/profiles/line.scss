@@ -67,7 +67,8 @@
     @while $i > 0 {
       &:nth-child(#{$i}) {
 
-        path {
+        path,
+        circle {
           stroke: rgba($medium-pink, 1 / $i);
         }
       }
@@ -81,7 +82,6 @@
     circle {
       display: none;
       fill: $egg-shell;
-      stroke: $medium-pink;
       stroke-width: 3px;
     }
 
@@ -94,15 +94,8 @@
       color: $charcoal-grey;
     }
 
-    &:hover {
-
-      path {
-        stroke: $medium-pink;
-      }
-
-      circle {
-        display: block;
-      }
+    &:hover circle {
+      display: block;
     }
   }
 }
