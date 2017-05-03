@@ -1,3 +1,4 @@
+- tool: fixed various issues with the map with contexts that don't have subnational granularity
 - tool: added link tooltips resize by information
 - tool: added link tooltips quant units
 - profiles: added hover effects on shortcut buttons
