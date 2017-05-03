@@ -1,3 +1,5 @@
+- home: only allow video playing on full screen
+- home: show screenshot instead of video when video playback has not started yet
 - tool: added link tooltips resize by information
 - tool: added link tooltips quant units
 - profiles: added hover effects on shortcut buttons
