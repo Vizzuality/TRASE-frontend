@@ -67,7 +67,7 @@ const _build = data => {
         const municipality = data.top_sources.municipalities.lines
           .find(m => (properties.nome.toUpperCase() === m.name));
         let value = 0;
-        if (municipality) value = municipality.buckets && municipality.buckets.value9 || 0;
+        if (municipality) value = municipality.value9 && municipality.value9[0] || 0;
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
@@ -100,7 +100,7 @@ const _build = data => {
         const country = data.top_countries.lines
           .find(c => (properties.name.toUpperCase() === c.name));
         let value = 0;
-        if (country) value = country.buckets && country.buckets.value9 || 0;
+        if (country) value = country.value9 && country.value9[0] || 0;
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
