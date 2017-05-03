@@ -25,6 +25,8 @@ export const CHOROPLETH_CLASSES = {
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
 export const SANKEY_TRANSITION_TIME = 1000;
 
+export const CONTEXT_WITHOUT_MAP_IDS = [3, 4, 5, 6];
+
 export const APP_DEFAULT_STATE = {
   app: {
     modal: {
