@@ -76,8 +76,7 @@
             <div class="small-4 columns">
               <a href="#profile-content-anchor" class="c-link-buttons -with-arrow js-link-profile">
                 <img src="/images/factsheets/factsheet-main-option-1.svg"/>
-                <svg class="icon icon-search"><use xlink:href="#icon-factsheet-main-option-1"></use></svg>
-                <span class="js-link-button-name">-</span>'s PROFILE
+                <span class="js-link-button-name">-</span>
               </a>
             </div>
             <div class="small-4 columns">
@@ -123,15 +122,22 @@
           </div>
         </section>
 
+        <section class="c-scatterplot">
+          <div class="row">
+            <div class="small-12 columns">
+              <h3 class="title -small">Companies exporting soy from Brazil by tons traded</h3>
+              <div class="js-companies-exporting"></div>
+              <ul class="c-scatterplot-switcher js-scatterplot-switcher"></ul>
+            </div>
+          </div>
+        </section>
+
       </div>
       <div class="c-error-message js-error-message is-hidden">
         <p class="message">Data not found</p>
       </div>
     </div>
-    <div class="js-infowindow is-hidden c-sankey-tooltip">
-      <div class="js-infowindow-title title">title</div>
-      <div class="js-infowindow-body body">body</div>
-    </div>
+    <div class="js-infowindow c-profile-tooltip is-hidden"></div>
     <%= htmlWebpackPlugin.options.footer %>
   </div>
   <%= htmlWebpackPlugin.options.scripts %>

@@ -63,7 +63,7 @@
   }
 
   .value {
-    padding: 10px 8px 8px 8px;
+    padding: 10px 8px;
 
     > .title {
       font-family: $font-family-1;
@@ -89,13 +89,11 @@
     }
 
     &:not(:last-child) {
-      border-bottom: 1px solid #ebebeb;
+      border-bottom: 1px solid $metal-grey;
     }
 
     .unit {
       color: rgba($charcoal-grey, .5);
     }
   }
-
-
 }

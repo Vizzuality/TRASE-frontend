@@ -22,6 +22,7 @@ import MultiTable from 'components/profiles/multi-table.component';
 import Map from 'components/profiles/map.component';
 
 import { getURLParams } from 'utils/stateURL';
+import formatApostrophe from 'utils/formatApostrophe';
 import formatNumber from 'utils/formatNumber';
 import smoothScroll from 'utils/smoothScroll';
 import _ from 'lodash';
@@ -31,7 +32,6 @@ const defaults = {
   country: 'Brazil',
   commodity: 'Soy'
 };
-
 
 const _build = data => {
   const stateGeoID = data.state_geoId;
@@ -90,7 +90,7 @@ const _build = data => {
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers.countries,
-      title: `Top consumers of ${data.municip_name}'s soy`,
+      title: `Top consumers of ${formatApostrophe(_.capitalize(data.municip_name))} soy`,
       unit: '%'
     });
 
@@ -130,9 +130,9 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
   document.querySelector('.js-line-title').innerHTML = info.municipality ? `Deforestation trajectory of ${info.municipality}` : '-';
   document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
-  document.querySelector('.js-municipality').innerHTML =
-    document.querySelector('.js-link-button-municipality').innerHTML =
-    info.municipality ? _.capitalize(info.municipality) : '-';
+  document.querySelector('.js-municipality').innerHTML = info.municipality ? info.municipality : '-';
+  document.querySelector('.js-link-button-municipality').textContent = formatApostrophe(_.capitalize(info.municipality)) + ' PROFILE';
+
 };
 
 const _setEventListeners = () => {

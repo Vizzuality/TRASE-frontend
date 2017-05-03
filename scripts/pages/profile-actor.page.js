@@ -12,7 +12,6 @@ import 'styles/components/profiles/overall-info.scss';
 import 'styles/components/profiles/info.scss';
 import 'styles/components/profiles/link-buttons.scss';
 import 'styles/components/profiles/error.scss';
-import 'styles/components/shared/infowindow.scss';
 
 import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
@@ -20,9 +19,12 @@ import Map from 'components/profiles/map.component';
 import Top from 'components/profiles/top.component';
 import Line from 'components/profiles/line.component';
 import MultiTable from 'components/profiles/multi-table.component';
+import Scatterplot from 'components/profiles/scatterplot.component';
+import Tooltip from 'components/profiles/tooltip.component';
 
 import { getURLParams } from 'utils/stateURL';
 import smoothScroll from 'utils/smoothScroll';
+import formatApostrophe from 'utils/formatApostrophe';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
@@ -31,26 +33,13 @@ const defaults = {
   commodity: 'soy'
 };
 
-const infowindow = document.querySelector('.js-infowindow');
-
 const _onSelect = function(value) {
   this.setTitle(value);
   defaults[this.id] = value;
 };
 
-const _showTooltip = (x, y) => {
-  infowindow.style.left = x + 'px';
-  infowindow.style.top = y + 'px';
-  infowindow.classList.remove('is-hidden');
-};
-
-const _hideTooltip = () => {
-  infowindow.classList.add('is-hidden');
-};
-
-const _build = data => {
-  const infowindowTitle = document.querySelector('.js-infowindow-title');
-  const infowindowBody = document.querySelector('.js-infowindow-body');
+const _build = (data, nodeId) => {
+  const tooltip = new Tooltip('.js-infowindow');
 
   if (data.top_sources.municipalities.lines.length) {
     new Top({
@@ -68,11 +57,17 @@ const _build = data => {
         return `-outline ch-${value}`;
       },
       showTooltipCallback: (municipality, x, y) => {
-        _showTooltip(x, y);
-        infowindowTitle.innerHTML = `${data.node_name} > ${municipality.properties.nome.toUpperCase()}`;
-        infowindowBody.innerHTML = 'put choropleth value here';
+        tooltip.showTooltip(x, y, {
+          title: `${data.node_name} > ${municipality.properties.nome.toUpperCase()}`,
+          values: [
+            { title: 'Trade Volume',
+              value: 'put choropleth value here' }
+          ]
+        });
       },
-      hideTooltipCallback: _hideTooltip
+      hideTooltipCallback: () => {
+        tooltip.hideTooltip();
+      }
     });
   }
 
@@ -103,11 +98,17 @@ const _build = data => {
         return `-outline ch-${value}`;
       },
       showTooltipCallback: (country, x, y) => {
-        _showTooltip(x, y);
-        infowindowTitle.innerHTML = `${data.node_name} > ${country.properties.name.toUpperCase()}`;
-        infowindowBody.innerHTML = 'put choropleth value here';
+        tooltip.showTooltip(x, y, {
+          title: `${data.node_name} > ${country.properties.name.toUpperCase()}`,
+          values: [
+            { title: 'Trade Volume',
+              value: 'put choropleth value here' }
+          ]
+        });
       },
-      hideTooltipCallback: _hideTooltip
+      hideTooltipCallback: () => {
+        tooltip.hideTooltip();
+      }
     });
 
   }
@@ -116,17 +117,37 @@ const _build = data => {
     new MultiTable({
       el: document.querySelector('.js-sustainability-table'),
       data: data.sustainability,
-      tabsTitle: `Sustainability of ${data.node_name}\'s TOP source regions in 2015:`,
+      tabsTitle: `Sustainability of ${formatApostrophe(data.node_name)} TOP source regions in 2015:`,
       type: 't_head_actors',
       target: 'actor'
     });
   }
+
+  new Scatterplot('.js-companies-exporting', {
+      data: data.companies_exporting.companies,
+      xDimension: data.companies_exporting.dimensions_x,
+      nodeId: nodeId,
+      showTooltipCallback: (company, indicator, x, y) => {
+        tooltip.showTooltip(x, y, {
+          title: company.name,
+          values: [
+            { title: 'Trade Volume',
+              value: `${company.y}<span>t</span>` },
+            { title: indicator.name,
+              value: `${company.x}<span>${indicator.unit}</span>` }
+          ]
+        });
+      },
+      hideTooltipCallback: () => {
+        tooltip.hideTooltip();
+      }
+    }
+  );
 };
 
 const _setInfo = (info, nodeId) => {
-  document.querySelector('.js-name').innerHTML =
-    document.querySelector('.js-link-button-name').innerHTML =
-    info.name ? _.capitalize(info.name) : '-';
+  document.querySelector('.js-name').innerHTML = info.name ? _.capitalize(info.name) : '-';
+  document.querySelector('.js-link-button-name').textContent = formatApostrophe(_.capitalize(info.name)) + ' PROFILE';
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-country').innerHTML = info.country ? _.capitalize(info.country) : '-';
   if (info.forest_500 > 0) document.querySelector('.js-forest-500-score .circle-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-circle-filled');
@@ -197,12 +218,10 @@ const _init = ()  => {
       const commodityDropdown = new Dropdown('commodity', _onSelect);
       commodityDropdown.setTitle(_.capitalize(commodity));
 
-      _build(data);
+      _build(data, nodeId);
     });
 
   new Nav();
-
-
 };
 
 _init();
