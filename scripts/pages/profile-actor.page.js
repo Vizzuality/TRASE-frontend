@@ -18,6 +18,7 @@ import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
 import Map from 'components/profiles/map.component';
 import Top from 'components/profiles/top.component';
+import Line from 'components/profiles/line.component';
 import MultiTable from 'components/profiles/multi-table.component';
 
 import { getURLParams } from 'utils/stateURL';
@@ -76,11 +77,22 @@ const _build = data => {
   }
 
   if (data.top_countries.lines.length) {
-    new Top({
-      el:document.querySelector('.js-top-destination'),
-      data: data.top_countries.lines,
-      title: 'top destination countries in 2015'
-    });
+    // new Top({
+    //   el:document.querySelector('.js-top-destination'),
+    //   data: data.top_countries.lines,
+    //   title: 'top destination countries in 2015'
+    // });
+
+    let topCountriesLines = data.top_countries;
+    topCountriesLines.lines = topCountriesLines.lines.slice(0, 5);
+    new Line(
+      '.js-top-destination',
+      topCountriesLines,
+      {
+        margin: {top: 30, right: 40, bottom: 30, left: 94},
+        height: 425
+      }
+    );
 
     Map('.js-top-destination-map', {
       topoJSONPath: './vector_layers/WORLD.topo.json',

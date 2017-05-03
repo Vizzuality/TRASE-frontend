@@ -14,19 +14,18 @@ import {
 } from 'd3-shape';
 import { format as d3_format } from 'd3-format';
 import { timeFormat as d3_timeFormat } from 'd3-time-format';
-import stringToHTML from 'utils/stringToHTML';
 import LegendItemTemplate from 'ejs!templates/profiles/legendItem.ejs';
 
 import 'styles/components/profiles/line.scss';
 
-
 export default class {
-  constructor(className, data) {
+  constructor(className, data, settings) {
     const elem = document.querySelector(className);
     const legend = document.querySelector(`${className}-legend`);
-    const margin = {top: 30, right: 40, bottom: 30, left: 94};
+    const margin = settings.margin;
     const width = elem.clientWidth - margin.left - margin.right;
-    const height = 425 - margin.top - margin.bottom;
+    const height = settings.height - margin.top - margin.bottom;
+
     let allValues = [];
 
     let container = d3_select(elem)
@@ -46,48 +45,64 @@ export default class {
         .rangeRound([height, 0])
         .domain(d3_extent(lineData.values));
       const lineValuesWithFormat = prepareData(data.includedYears, lineData);
-      let area = null,
-        line = null;
+      const line = d3_line()
+        .x(d => x(d.date))
+        .y(d => y0(d.value));
+      const type = typeof data.style !== 'undefined' ? data.style.type : lineData.type;
+      const style = typeof data.style !== 'undefined' ? data.style.style : lineData.style;
 
-      switch (lineData.type) {
+      let area = null,
+        pathContainers = null;
+      switch (type) {
         case 'area':
           area = d3_area()
             .x(d => x(d.date))
             .y0(height)
             .y1(d => y0(d.value));
 
-          line = d3_line()
-            .x(d => x(d.date))
-            .y(d => y0(d.value));
-
           container.append('path')
             .datum(lineValuesWithFormat)
-            .attr('class', lineData.style)
+            .attr('class', style)
             .attr('d', area);
 
           container.append('path')
             .datum(lineValuesWithFormat)
-            .attr('class', `line-${lineData.style}`)
+            .attr('class', `line-${style}`)
             .attr('d', line);
           break;
         case 'line':
-          line = d3_line()
-            .x(d => x(d.date))
-            .y(d => y0(d.value));
-
           container.append('path')
             .datum(lineValuesWithFormat)
-            .attr('class', lineData.style)
+            .attr('class', style)
             .attr('d', line);
+          break;
+        case 'line-points':
+          pathContainers = container.datum(lineValuesWithFormat)
+            .append('g')
+            .attr('class', style);
+
+          pathContainers.selectAll('path')
+            .data(d => [d])
+            .enter().append('path')
+            .attr('d', line);
+
+          pathContainers.selectAll('circle')
+            .data(function (d) { return d; })
+            .enter().append('circle')
+            .attr('cx', d => x(d.date))
+            .attr('cy', d => y0(d.value))
+            .attr('r', 4);
           break;
       }
 
-      const legendItemHTML = stringToHTML(LegendItemTemplate({
-        name: lineData.legend_name,
-        style: lineData.style
-      }));
+      if (typeof lineData.legend_name !== 'undefined') {
+        const legendItemHTML = LegendItemTemplate({
+          name: lineData.legend_name,
+          style: style
+        });
 
-      legend.appendChild(legendItemHTML[0]);
+        legend.innerHTML = legend.innerHTML + legendItemHTML;
+      }
     });
 
     let y = d3_scale_linear()

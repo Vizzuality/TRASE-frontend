@@ -61,7 +61,14 @@ const _build = data => {
     getPolygonClassName: d => (d.properties.geoid === data.municip_geoId) ? '-isCurrent' : ''
   });
 
-  new Line('.js-line', data.trajectory_deforestation);
+  new Line(
+    '.js-line',
+    data.trajectory_deforestation,
+    {
+      margin: {top: 30, right: 40, bottom: 30, left: 94},
+      height: 425
+    }
+  );
 
   if (data.top_traders.actors.length) {
     new Chord('.js-chord-traders', data.top_traders.matrix, data.top_traders.actors, data.municip_name);
