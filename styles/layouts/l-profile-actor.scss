@@ -43,14 +43,13 @@
     padding: 49px 0 46px;
   }
 
-  .c-top-map,
-  .c-top-municipalities {
-    padding-top: 56px;
+  .c-top-map {
+    padding: 52px 0;
+
+    .title {
+      margin-bottom: 40px;
+    }
   }
-
-
-
-
 
   .container-top {
     display: flex;

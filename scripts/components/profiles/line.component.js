@@ -1,4 +1,7 @@
-import { select as d3_select } from 'd3-selection';
+import {
+  select as d3_select,
+  event as d3_event
+} from 'd3-selection';
 import {
   axisBottom as d3_axis_bottom,
   axisLeft as d3_axis_left
@@ -15,7 +18,7 @@ import {
 import { format as d3_format } from 'd3-format';
 import { timeFormat as d3_timeFormat } from 'd3-time-format';
 import LegendItemTemplate from 'ejs!templates/profiles/legendItem.ejs';
-
+import abbreviateNumber from 'utils/abbreviateNumber';
 import 'styles/components/profiles/line.scss';
 
 export default class {
@@ -25,6 +28,9 @@ export default class {
     const margin = settings.margin;
     const width = elem.clientWidth - margin.left - margin.right;
     const height = settings.height - margin.top - margin.bottom;
+    const ticks = settings.ticks;
+    this.showTooltipCallback = settings.showTooltipCallback;
+    this.hideTooltipCallback = settings.hideTooltipCallback;
 
     let allValues = [];
 
@@ -39,7 +45,7 @@ export default class {
       .range([0, width])
       .domain(d3_extent(data.includedYears, y => new Date(y, 0)));
 
-    data.lines.forEach((lineData) => {
+    data.lines.forEach((lineData, i) => {
       allValues = [...allValues, ...lineData.values];
       const y0 = d3_scale_linear()
         .rangeRound([height, 0])
@@ -86,12 +92,31 @@ export default class {
             .enter().append('path')
             .attr('d', line);
 
-          pathContainers.selectAll('circle')
-            .data(function (d) { return d; })
+          pathContainers.selectAll('text')
+            .data(d => [d])
+            .enter().append('text')
+            .attr('transform', d => `translate(${width + 6},${y0(d[d.length - 1].value) + 4})`)
+            .text(d => `${i + 1}.${d[0].name}`);
+
+          this.circles = pathContainers.selectAll('circle')
+            .data(d => d)
             .enter().append('circle')
             .attr('cx', d => x(d.date))
             .attr('cy', d => y0(d.value))
             .attr('r', 4);
+
+          if (this.showTooltipCallback !== undefined) {
+            this.circles.on('mousemove', function(d) {
+              this.showTooltipCallback(
+                d,
+                d3_event.clientX + 10,
+                d3_event.clientY + window.scrollY + 10
+              );
+            }.bind(this))
+            .on('mouseout', function() {
+              this.hideTooltipCallback();
+            }.bind(this));
+          }
           break;
       }
 
@@ -109,29 +134,47 @@ export default class {
       .rangeRound([height, 0])
       .domain(d3_extent([0, ...allValues]));
 
-    const xAxis = d3_axis_bottom(x)
-      .tickSize(0)
-      .tickPadding(15)
-      .tickFormat((value, i) => {
-        let format = d3_timeFormat('%y');
-        if (i === 0) {
-          format = d3_timeFormat('%Y');
+    let yTickFormat = null,
+      xTickFormat = null;
+    if (ticks.yTickFormatType === 'top-location') {
+      yTickFormat = (value, i) => {
+        if (i === 6) {
+          return `${abbreviateNumber(value, 3)} ${data.unit}`;
         }
-
+        return abbreviateNumber(value, 3);
+      };
+      xTickFormat = (value) => {
+        let format = d3_timeFormat('%y');
         return format(value) ;
-      });
-    const yAxis = d3_axis_left(y)
-      .ticks(7)
-      .tickSize(-width, 0)
-      .tickPadding(52)
-      .tickFormat((value, i) => {
+      }
+    } else {
+      yTickFormat = (value, i) => {
         const format = d3_format('0');
 
         if (i === 6) {
           return `${format(value)}${data.unit}`;
         }
         return format(value) ;
-      });
+      };
+      xTickFormat = (value, i) => {
+        let format = d3_timeFormat('%y');
+        if (i === 0) {
+          format = d3_timeFormat('%Y');
+        }
+
+        return format(value) ;
+      }
+    }
+
+    const xAxis = d3_axis_bottom(x)
+      .tickSize(0)
+      .tickPadding(ticks.xTickPadding)
+      .tickFormat(xTickFormat);
+    const yAxis = d3_axis_left(y)
+      .ticks(ticks.yTicks)
+      .tickSize(-width, 0)
+      .tickPadding(ticks.yTickPadding)
+      .tickFormat(yTickFormat);
 
     container.append('g')
       .attr('transform', `translate(0, ${height} )`)
@@ -147,6 +190,7 @@ export default class {
 const prepareData = (includedYears, data) => {
   return includedYears.map((year, index) => {
     return {
+      name: data.name,
       date: new Date(year, 0),
       value: data.values[index]
     };

@@ -20,7 +20,7 @@
       ],
       "lines": [
         {
-          "name": "CHINA",
+          "name": "China",
           "geoId":"BR1702109",
           "values": [
             1400000,
@@ -32,7 +32,7 @@
           ]
         },
         {
-          "name": "THAILAND",
+          "name": "Thailand",
           "geoId":"BR1702109",
           "values": [
             900000,
@@ -44,7 +44,7 @@
           ]
         },
         {
-          "name": "NETHERLANDS",
+          "name": "Netherlands",
           "geoId":"BR1702109",
           "values": [
             100000,
@@ -56,7 +56,7 @@
           ]
         },
         {
-          "name": "SPAIN",
+          "name": "Spain",
           "geoId":"BR1702109",
           "values": [
             50000,
@@ -68,7 +68,19 @@
           ]
         },
         {
-          "name": "INDONESIA",
+          "name": "Indonesia",
+          "geoId":"BR1702109",
+          "values": [
+            600000,
+            100000,
+            500000,
+            700000,
+            1100000,
+            600000
+          ]
+        },
+        {
+          "name": "France",
           "geoId":"BR1702109",
           "values": [
             600000,
@@ -80,7 +92,7 @@
           ]
         },
         {
-          "name": "FRANCE",
+          "name": "United Kingdom",
           "geoId":"BR1702109",
           "values": [
             600000,
@@ -92,7 +104,7 @@
           ]
         },
         {
-          "name": "UNITED KINGDOM",
+          "name": "India",
           "geoId":"BR1702109",
           "values": [
             600000,
@@ -104,7 +116,7 @@
           ]
         },
         {
-          "name": "INDIA",
+          "name": "Taiwan",
           "geoId":"BR1702109",
           "values": [
             600000,
@@ -116,19 +128,7 @@
           ]
         },
         {
-          "name": "TAIWAN",
-          "geoId":"BR1702109",
-          "values": [
-            600000,
-            100000,
-            500000,
-            700000,
-            1100000,
-            1500000
-          ]
-        },
-        {
-          "name": "EGYPT",
+          "name": "Egypt",
           "geoId":"BR1702109",
           "values": [
             600000,
@@ -140,7 +140,7 @@
           ]
         }
       ],
-      "unit": "ha",
+      "unit": "t",
       "style": {
         "type": "line-points",
         "style": "line-pink-with-points"

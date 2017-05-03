@@ -1,7 +1,6 @@
 @import '../../settings';
 
 .c-line {
-  margin-top: 15px;
 
   path {
     stroke: none;
@@ -84,6 +83,26 @@
       fill: $egg-shell;
       stroke: $medium-pink;
       stroke-width: 3px;
+    }
+
+    text {
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      font-weight: $font-weight-bold;
+      line-height: 1.15;
+      letter-spacing: -0.6px;
+      color: $charcoal-grey;
+    }
+
+    &:hover {
+
+      path {
+        stroke: $medium-pink;
+      }
+
+      circle {
+        display: block;
+      }
     }
   }
 }

@@ -25,6 +25,7 @@ import Tooltip from 'components/profiles/tooltip.component';
 import { getURLParams } from 'utils/stateURL';
 import smoothScroll from 'utils/smoothScroll';
 import formatApostrophe from 'utils/formatApostrophe';
+import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
@@ -72,21 +73,34 @@ const _build = (data, nodeId) => {
   }
 
   if (data.top_countries.lines.length) {
-    // new Top({
-    //   el:document.querySelector('.js-top-destination'),
-    //   data: data.top_countries.lines,
-    //   title: 'top destination countries in 2015'
-    // });
-
+    document.querySelector('.js-top-map-title').innerHTML = `TOP DESTINATION COUNTRIES Of ${formatApostrophe(_.capitalize(data.node_name))} SOY`;
     let topCountriesLines = data.top_countries;
     topCountriesLines.lines = topCountriesLines.lines.slice(0, 5);
     new Line(
       '.js-top-destination',
       topCountriesLines,
       {
-        margin: {top: 30, right: 40, bottom: 30, left: 94},
-        height: 425
-      }
+        margin: {top: 10, right: 100, bottom: 25, left: 94},
+        height: 244,
+        ticks: {
+          yTicks: 6,
+          yTickPadding: 10,
+          yTickFormatType: 'top-location',
+          xTickPadding: 15
+        },
+        showTooltipCallback: (country, x, y) => {
+          tooltip.showTooltip(x, y, {
+            title: `${data.node_name} > ${country.name.toUpperCase()}, ${country.date.getFullYear()}`,
+            values: [
+              { title: 'Trade Volume',
+                value: `${formatNumber(country.value)}<span>Tons</span>` }
+            ]
+          });
+        },
+        hideTooltipCallback: () => {
+          tooltip.hideTooltip();
+        }
+      },
     );
 
     Map('.js-top-destination-map', {

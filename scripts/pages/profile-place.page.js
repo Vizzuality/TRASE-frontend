@@ -65,8 +65,14 @@ const _build = data => {
     '.js-line',
     data.trajectory_deforestation,
     {
-      margin: {top: 30, right: 40, bottom: 30, left: 94},
-      height: 425
+      margin: {top: 30, right: 40, bottom: 30, left: 99},
+      height: 425,
+      ticks: {
+        yTicks: 7,
+        yTickPadding: 52,
+        yTickFormatType: 'deforestation-trajectory',
+        xTickPadding: 15
+      }
     }
   );
 
