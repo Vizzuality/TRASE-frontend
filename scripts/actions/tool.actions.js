@@ -20,14 +20,16 @@ import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible
 import setGeoJSONMeta from './helpers/setGeoJSONMeta';
 import getNodeMetaUid from 'reducers/helpers/getNodeMetaUid';
 
-export function resetState() {
+export function resetState(refilter = true) {
   return (dispatch) => {
     dispatch({
       type: actions.RESET_SELECTION
     });
-    dispatch({
-      type: actions.FILTER_LINKS_BY_NODES
-    });
+    if (refilter === true) {
+      dispatch({
+        type: actions.FILTER_LINKS_BY_NODES
+      });
+    }
     selectView(false, true);
     dispatch(loadLinks());
   };
@@ -262,8 +264,16 @@ export function loadLinks() {
     fetch(url)
       .then(res => res.text())
       .then(payload => {
+        const jsonPayload = JSON.parse(payload);
+        if (jsonPayload.data === undefined || !jsonPayload.data.length) {
+          console.error('server returned empty flows/link list, with params:', params);
+          dispatch(resetState(false));
+          return;
+        }
+
         dispatch({
-          type: actions.GET_LINKS, payload
+          type: actions.GET_LINKS,
+          jsonPayload
         });
 
         // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
