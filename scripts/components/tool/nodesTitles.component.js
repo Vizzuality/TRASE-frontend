@@ -16,15 +16,17 @@ export default class {
 
   highlightNode({ isHighlight, nodesData, recolorGroups, coordinates, isMapVisible }) {
     // when map is full screen, show data as a tooltip instead of a nodeTitle
-    if (coordinates !== undefined && isMapVisible === true) {
+    if (coordinates !== undefined) {
       this._showTooltip(nodesData, coordinates);
     } else {
       this.tooltipHideDebounced();
+    }
 
-      // TODO nodesData[0] === undefined should never happen, this is a smell form the reducer
-      if (nodesData === undefined || nodesData.length === 0 || nodesData[0] === undefined) {
-        this.el.classList.add('is-hidden');
-      } else {
+    // TODO nodesData[0] === undefined should never happen, this is a smell form the reducer
+    if (nodesData === undefined || nodesData.length === 0 || nodesData[0] === undefined) {
+      this.el.classList.add('is-hidden');
+    } else {
+      if (isMapVisible === false) {
         this.el.classList.remove('is-hidden');
         this._update(!isHighlight, nodesData, recolorGroups);
       }
