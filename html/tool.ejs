@@ -6,6 +6,7 @@
 </head>
 <body>
   <div class="tooltip-layout is-hidden"></div>
+  <div class="js-tool-tooltip c-info-tooltip"></div>
   <div class="loading-wrapper">
     <%= htmlWebpackPlugin.options.icons %>
     <div class="l-flows">
@@ -70,8 +71,6 @@
         <div id="js-columns-selector-react"></div>
 
         <div class="c-sankey is-absolute js-sankey">
-          <div class="js-sankey-tooltip c-info-tooltip"></div>
-
           <svg class="js-sankey-canvas sankey">
             <defs>
               <pattern id="isAggregatedPattern" x="0" y="0" width="1" height="3" patternUnits="userSpaceOnUse">
