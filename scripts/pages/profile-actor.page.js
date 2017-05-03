@@ -16,7 +16,7 @@ import 'styles/components/profiles/error.scss';
 import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
 import Map from 'components/profiles/map.component';
-import Top from 'components/profiles/top.component';
+//import Top from 'components/profiles/top.component';
 import Line from 'components/profiles/line.component';
 import MultiTable from 'components/profiles/multi-table.component';
 import Scatterplot from 'components/profiles/scatterplot.component';
@@ -43,12 +43,36 @@ const _build = (data, nodeId) => {
   const tooltip = new Tooltip('.js-infowindow');
 
   if (data.top_sources.municipalities.lines.length) {
-    new Top({
-      el: document.querySelector('.js-top-municipalities'),
-      data: data.top_sources.municipalities.lines,
-      targetLink: 'place',
-      title: 'top source municipalities in 2015'
-    });
+    document.querySelector('.js-top-municipalities-title').innerHTML = `Top source regions of ${formatApostrophe(_.capitalize(data.node_name))} soy:`;
+    let topMunicipalitiesLines = data.top_sources.municipalities;
+    topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
+    new Line(
+      '.js-top-municipalities',
+      topMunicipalitiesLines,
+      data.top_sources.includedYears,
+      {
+        margin: {top: 10, right: 100, bottom: 25, left: 94},
+        height: 244,
+        ticks: {
+          yTicks: 6,
+          yTickPadding: 10,
+          yTickFormatType: 'top-location',
+          xTickPadding: 15
+        },
+        showTooltipCallback: (municipality, x, y) => {
+          tooltip.showTooltip(x, y, {
+            title: `${data.node_name} > ${municipality.name.toUpperCase()}, ${municipality.date.getFullYear()}`,
+            values: [
+              { title: 'Trade Volume',
+                value: `${formatNumber(municipality.value)}<span>Tons</span>` }
+            ]
+          });
+        },
+        hideTooltipCallback: () => {
+          tooltip.hideTooltip();
+        }
+      },
+    );
 
     Map('.js-top-municipalities-map', {
       topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_MUNICIPALITY.topo.json`,
@@ -79,6 +103,7 @@ const _build = (data, nodeId) => {
     new Line(
       '.js-top-destination',
       topCountriesLines,
+      data.top_countries.includedYears,
       {
         margin: {top: 10, right: 100, bottom: 25, left: 94},
         height: 244,

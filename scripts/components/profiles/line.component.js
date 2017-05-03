@@ -22,7 +22,7 @@ import abbreviateNumber from 'utils/abbreviateNumber';
 import 'styles/components/profiles/line.scss';
 
 export default class {
-  constructor(className, data, settings) {
+  constructor(className, data, xValues, settings) {
     const elem = document.querySelector(className);
     const legend = document.querySelector(`${className}-legend`);
     const margin = settings.margin;
@@ -43,14 +43,14 @@ export default class {
 
     let x = d3_scale_time()
       .range([0, width])
-      .domain(d3_extent(data.includedYears, y => new Date(y, 0)));
+      .domain(d3_extent(xValues, y => new Date(y, 0)));
 
     data.lines.forEach((lineData, i) => {
       allValues = [...allValues, ...lineData.values];
       const y0 = d3_scale_linear()
         .rangeRound([height, 0])
         .domain(d3_extent(lineData.values));
-      const lineValuesWithFormat = prepareData(data.includedYears, lineData);
+      const lineValuesWithFormat = prepareData(xValues, lineData);
       const line = d3_line()
         .x(d => x(d.date))
         .y(d => y0(d.value));
@@ -187,8 +187,8 @@ export default class {
   }
 }
 
-const prepareData = (includedYears, data) => {
-  return includedYears.map((year, index) => {
+const prepareData = (xValues, data) => {
+  return xValues.map((year, index) => {
     return {
       name: data.name,
       date: new Date(year, 0),

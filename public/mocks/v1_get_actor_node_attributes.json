@@ -148,102 +148,86 @@
     },
     "top_sources": {
       "includedYears": [
-        2015,
-        2016
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
       ],
       "municipalities": {
         "lines": [
           {
             "id": 2663,
-            "name": "SAPEZAL",
+            "name": "Querência",
             "geoId":"BR1702109",
             "values": [
-              221858.26,
-              318469.45
+              100000,
+              145000,
+              152000,
+              155000,
+              153000,
+              210000
             ]
           },
           {
             "id": 2299,
-            "name": "RIACHAO DAS NEVES",
+            "name": "Campo Novo",
             "geoId":"BR1702109",
             "values": [
-              192415.7,
-              4470.37
+              145000,
+              110000,
+              105000,
+              150000,
+              152000,
+              151000
             ]
           },
           {
             "id": 68,
-            "name": "AGUA BOA",
+            "name": "Maracaju",
             "geoId":"BR1702109",
             "values": [
-              164032.19,
-              90953.67
+              20000,
+              60000,
+              90000,
+              115000,
+              120000,
+              95000
             ]
           },
           {
             "id": 2550,
-            "name": "SAO DESIDERIO",
+            "name": "Barreiras",
             "geoId":"BR1702109",
             "values": [
-              149851.31,
-              107182.6
+              70000,
+              49000,
+              47000,
+              50000,
+              70000,
+              47000
             ]
           },
           {
             "id": 1915,
-            "name": "NOVA UBIRATA",
+            "name": "Sidrolândia",
             "geoId":"BR1702109",
             "values": [
-              109362.88,
-              56902.81
-            ]
-          },
-          {
-            "id": 1600,
-            "name": "LUCAS DO RIO VERDE",
-            "geoId":"BR1702109",
-            "values": [
-              108436.32,
-              70832.02
-            ]
-          },
-          {
-            "id": 2352,
-            "name": "RIO VERDE",
-            "geoId":"BR1702109",
-            "values": [
-              106836.59,
-              128832.13
-            ]
-          },
-          {
-            "id": 121,
-            "name": "ALTO GARCAS",
-            "geoId":"BR1702109",
-            "values": [
-              106832.25,
-              92979.02
-            ]
-          },
-          {
-            "id": 1491,
-            "name": "JATAI",
-            "geoId":"BR1702109",
-            "values": [
-              102753.13,
-              145091.99
-            ]
-          },
-          {
-            "id": 1095,
-            "name": "FORMOSA DO RIO PRETO",
-            "geoId":"BR1702109",
-            "values": [
-              94167.32,
-              166999.78
+              0,
+              25000,
+              35000,
+              15000,
+              30000,
+              20000
             ]
           }
-        ]
+        ],
+        "unit": "t",
+        "style": {
+          "type": "line-points",
+          "style": "line-pink-with-points"
+        }
       },
       "biome": {
         "lines": [
@@ -337,101 +321,12 @@
               166999.78
             ]
           }
-        ]
-      },
-      "state": {
-        "lines": [
-          {
-            "id": 2663,
-            "name": "SAPEZAL",
-            "geoId":"BR1702109",
-            "values": [
-              221858.26,
-              318469.45
-            ]
-          },
-          {
-            "id": 2299,
-            "name": "RIACHAO DAS NEVES",
-            "geoId":"BR1702109",
-            "values": [
-              192415.7,
-              4470.37
-            ]
-          },
-          {
-            "id": 68,
-            "name": "AGUA BOA",
-            "geoId":"BR1702109",
-            "values": [
-              164032.19,
-              90953.67
-            ]
-          },
-          {
-            "id": 2550,
-            "name": "SAO DESIDERIO",
-            "geoId":"BR1702109",
-            "values": [
-              149851.31,
-              107182.6
-            ]
-          },
-          {
-            "id": 1915,
-            "name": "NOVA UBIRATA",
-            "geoId":"BR1702109",
-            "values": [
-              109362.88,
-              56902.81
-            ]
-          },
-          {
-            "id": 1600,
-            "name": "LUCAS DO RIO VERDE",
-            "geoId":"BR1702109",
-            "values": [
-              108436.32,
-              70832.02
-            ]
-          },
-          {
-            "id": 2352,
-            "name": "RIO VERDE",
-            "geoId":"BR1702109",
-            "values": [
-              106836.59,
-              128832.13
-            ]
-          },
-          {
-            "id": 121,
-            "name": "ALTO GARCAS",
-            "geoId":"BR1702109",
-            "values": [
-              106832.25,
-              92979.02
-            ]
-          },
-          {
-            "id": 1491,
-            "name": "JATAI",
-            "geoId":"BR1702109",
-            "values": [
-              102753.13,
-              145091.99
-            ]
-          },
-          {
-            "id": 1095,
-            "name": "FORMOSA DO RIO PRETO",
-            "geoId":"BR1702109",
-            "values": [
-              94167.32,
-              166999.78
-            ]
-          }
-        ]
+        ],
+        "unit": "t",
+        "style": {
+          "type": "line-points",
+          "style": "line-pink-with-points"
+        }
       }
     },
     "total_soy_2015": 8801293,

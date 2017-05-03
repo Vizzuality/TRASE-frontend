@@ -64,6 +64,7 @@ const _build = data => {
   new Line(
     '.js-line',
     data.trajectory_deforestation,
+    data.trajectory_deforestation.includedYears,
     {
       margin: {top: 30, right: 40, bottom: 30, left: 99},
       height: 425,
