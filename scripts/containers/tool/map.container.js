@@ -56,7 +56,7 @@ const mapMethodsToState = (state) => ({
 
 const mapViewCallbacksToActions = () => ({
   onPolygonClicked: geoId => selectNodeFromGeoId(geoId),
-  onPolygonHighlighted: geoId => highlightNodeFromGeoId(geoId),
+  onPolygonHighlighted: (geoId, coordinates) => highlightNodeFromGeoId(geoId, coordinates),
   onToggleMap: () => toggleMap(),
   onToggleMapLayerMenu: () => toggleMapLayerMenu(),
   onMoveEnd: (latlng, zoom) => saveMapView(latlng, zoom)

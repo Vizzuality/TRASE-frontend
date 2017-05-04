@@ -287,8 +287,8 @@ export default class {
       this.polygonFeaturesDict[layer.feature.properties.geoid] = layer;
       const that = this;
       layer.on({
-        mouseover: function() {
-          that.callbacks.onPolygonHighlighted(this.feature.properties.geoid);
+        mouseover: function(event) {
+          that.callbacks.onPolygonHighlighted(this.feature.properties.geoid, { pageX: event.originalEvent.pageX, pageY: event.originalEvent.pageY});
         },
         mouseout: function() {
           that.callbacks.onPolygonHighlighted();

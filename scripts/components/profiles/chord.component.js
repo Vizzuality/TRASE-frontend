@@ -14,13 +14,13 @@ export default class {
     document.querySelector(className).classList.remove('is-hidden');
 
     const nameLimit = 11;
-    const allNames = [placeName].concat(list.map(node => {
+    const allNames = [{ name: placeName }].concat(list).map(node => {
       if (node.name.length > nameLimit) {
         return `${node.name.substring(0, nameLimit)}...`;
       } else {
         return node.name;
       }
-    })).slice(0, orgMatrix.length);
+    }).slice(0, orgMatrix.length);
 
     const elem = document.querySelector(className);
     const margin = {top: 0, right: 0, bottom: 0, left: 0};

@@ -22,6 +22,7 @@ import MultiTable from 'components/profiles/multi-table.component';
 import Map from 'components/profiles/map.component';
 
 import { getURLParams } from 'utils/stateURL';
+import formatApostrophe from 'utils/formatApostrophe';
 import formatNumber from 'utils/formatNumber';
 import smoothScroll from 'utils/smoothScroll';
 import _ from 'lodash';
@@ -31,7 +32,6 @@ const defaults = {
   country: 'Brazil',
   commodity: 'Soy'
 };
-
 
 const _build = data => {
   const stateGeoID = data.state_geoId;
@@ -61,7 +61,21 @@ const _build = data => {
     getPolygonClassName: d => (d.properties.geoid === data.municip_geoId) ? '-isCurrent' : ''
   });
 
-  new Line('.js-line', data.trajectory_deforestation);
+  new Line(
+    '.js-line',
+    data.trajectory_deforestation,
+    data.trajectory_deforestation.includedYears,
+    {
+      margin: {top: 30, right: 40, bottom: 30, left: 99},
+      height: 425,
+      ticks: {
+        yTicks: 7,
+        yTickPadding: 52,
+        yTickFormatType: 'deforestation-trajectory',
+        xTickPadding: 15
+      }
+    }
+  );
 
   if (data.top_traders.actors.length) {
     new Chord('.js-chord-traders', data.top_traders.matrix, data.top_traders.actors, data.municip_name);
@@ -83,7 +97,7 @@ const _build = data => {
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers.countries,
-      title: `Top consumers of ${data.municip_name}'s soy`,
+      title: `Top consumers of ${formatApostrophe(_.capitalize(data.municip_name))} soy`,
       unit: '%'
     });
 
@@ -123,9 +137,9 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
   document.querySelector('.js-line-title').innerHTML = info.municipality ? `Deforestation trajectory of ${info.municipality}` : '-';
   document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
-  document.querySelector('.js-municipality').innerHTML =
-    document.querySelector('.js-link-button-municipality').innerHTML =
-    info.municipality ? _.capitalize(info.municipality) : '-';
+  document.querySelector('.js-municipality').innerHTML = info.municipality ? info.municipality : '-';
+  document.querySelector('.js-link-button-municipality').textContent = formatApostrophe(_.capitalize(info.municipality)) + ' PROFILE';
+
 };
 
 const _setEventListeners = () => {

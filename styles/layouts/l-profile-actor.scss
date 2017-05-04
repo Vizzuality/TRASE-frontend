@@ -45,12 +45,12 @@
 
   .c-top-map,
   .c-top-municipalities {
-    padding-top: 56px;
+    padding: 52px 0;
+
+    .title {
+      margin-bottom: 40px;
+    }
   }
-
-
-
-
 
   .container-top {
     display: flex;
