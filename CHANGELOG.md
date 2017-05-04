@@ -1,3 +1,5 @@
+- home: only allow video playing on full screen
+- home: show screenshot instead of video when video playback has not started yet
 - tool: added tooltips on the map to show info that is otherwise displayed on the bottom of the sankey
 - tool: fixed water scarcity color scale
 - tool: added link tooltips resize by information
