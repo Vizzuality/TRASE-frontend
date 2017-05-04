@@ -54,7 +54,9 @@ const _build = (data, nodeId) => {
         title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
         values: [
           { title: 'Trade Volume',
-            value: `${formatNumber(location.value)}<span>Tons</span>` }
+            value: formatNumber(location.value),
+            unit: 'Tons'
+          }
         ]
       });
     },
@@ -64,14 +66,14 @@ const _build = (data, nodeId) => {
   };
 
 
-  if (data.top_sources.municipalities.lines.length) {
+  if (data.top_sources.municipality.lines.length) {
     document.querySelector('.js-top-municipalities-title').innerHTML = `Top source regions of ${formatApostrophe(_.capitalize(data.node_name))} soy: municipalities`;
-    let topMunicipalitiesLines = data.top_sources.municipalities;
+    let topMunicipalitiesLines = data.top_sources.municipality;
     topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
     new Line(
       '.js-top-municipalities',
       topMunicipalitiesLines,
-      data.top_sources.includedYears,
+      data.top_sources.included_years,
       lineSettings,
     );
 
@@ -92,9 +94,14 @@ const _build = (data, nodeId) => {
         let body = null;
         if (municipality) body = municipality.values[0];
 
-        _showTooltip(x, y);
-        infowindowTitle.textContent = title;
-        infowindowBody.textContent = formatNumber(body);
+        tooltip.showTooltip(x, y, {
+          title,
+          values: [{
+            title: 'Trade Volume',
+            value: formatNumber(body),
+            unit: 'Tons'
+          }]
+        });
       },
       hideTooltipCallback: () => {
         tooltip.hideTooltip();
@@ -109,7 +116,7 @@ const _build = (data, nodeId) => {
     new Line(
       '.js-top-destination',
       topCountriesLines,
-      data.top_countries.includedYears,
+      data.top_countries.included_years,
       lineSettings,
     );
 
@@ -131,9 +138,14 @@ const _build = (data, nodeId) => {
         let body = null;
         if (country) body = country.values[0];
 
-        _showTooltip(x, y);
-        infowindowTitle.textContent = title;
-        infowindowBody.textContent = formatNumber(body);
+        tooltip.showTooltip(x, y, {
+          title,
+          values: [{
+            title: 'Trade Volume',
+            value: formatNumber(body),
+            unit: 'Tons'
+          }]
+        });
       },
       hideTooltipCallback: () => {
         tooltip.hideTooltip();
@@ -160,10 +172,16 @@ const _build = (data, nodeId) => {
       tooltip.showTooltip(x, y, {
         title: company.name,
         values: [
-          { title: 'Trade Volume',
-            value: `${company.y}<span>t</span>` },
-          { title: indicator.name,
-            value: `${company.x}<span>${indicator.unit}</span>` }
+          {
+            title: 'Trade Volume',
+            value: company.y,
+            unit: 't'
+          },
+          {
+            title: indicator.name,
+            value: company.x,
+            unit: indicator.unit
+          }
         ]
       });
     },
@@ -211,7 +229,7 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId });
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, true);
 
   fetch(actorFactsheetURL)
     .then((response) => {
