@@ -7,7 +7,7 @@ export default class {
   }
 
   loadMapDimensions({ mapDimensionsGroups, expandedMapSidebarGroupsIds }) {
-    this.el.innerHTML = MapDimensionsTemplate({groups: mapDimensionsGroups});
+    this.el.innerHTML = MapDimensionsTemplate({ groups: mapDimensionsGroups });
 
     this.sidebarGroups = Array.prototype.slice.call(this.el.querySelectorAll('.js-map-sidebar-group'), 0);
     this.sidebarGroupsTitles = Array.prototype.slice.call(this.el.querySelectorAll('.js-map-sidebar-group-title'), 0);

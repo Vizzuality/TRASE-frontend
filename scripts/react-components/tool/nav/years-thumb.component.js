@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 export default ({ id, x }) => {
-  const style = (x === undefined) ? null : {left: `${x}px`};
+  const style = (x === undefined) ? null : { left: `${x}px` };
   return (
     <svg class='thumb' style={style} data-thumb={id}>
       <g fill='none' fillRule='evenodd'>

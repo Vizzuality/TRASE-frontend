@@ -45,7 +45,7 @@ export default class {
   }
 
   render() {
-    const template = TableTemplate({data: this.data, type: this.type, link: this.link});
+    const template = TableTemplate({ data: this.data, type: this.type, link: this.link });
     this.el.innerHTML = template;
     this.el.parentElement.classList.remove('is-hidden');
   }

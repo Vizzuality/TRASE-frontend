@@ -23,7 +23,7 @@ function fitGeoInside(featureBounds, width, height) {
 }
 
 
-export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, showTooltipCallback, hideTooltipCallback, useRobinsonProjection}) => {
+export default (className, { topoJSONPath, topoJSONRoot, getPolygonClassName, showTooltipCallback, hideTooltipCallback, useRobinsonProjection }) => {
 
   const d3Container =  d3_select(className);
   const containerComputedStyle = window.getComputedStyle(d3Container.node());
@@ -68,7 +68,7 @@ export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, sho
       'features' : features.features
     };
     const featureBounds = path.bounds(collection);
-    const {scale, trans } = fitGeoInside(featureBounds, width, height);
+    const { scale, trans } = fitGeoInside(featureBounds, width, height);
 
     container.attr('transform', [
       'translate(' + trans + ')',

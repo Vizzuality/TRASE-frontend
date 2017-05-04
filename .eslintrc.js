@@ -23,7 +23,8 @@ module.exports = {
             "always"
         ],
         "no-console": [1, { allow: ["warn", "error"] }],
-        "no-debugger": 1
+        "no-debugger": 1,
+        "object-curly-spacing": ["warn", "always"]
     },
     "parserOptions": {
       "ecmaFeatures": {

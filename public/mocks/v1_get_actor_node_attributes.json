@@ -10,198 +10,246 @@
     "supply_change": "YES",
     "supply_change_link": "HTTP://SUPPLY-CHANGE.ORG/COMPANY/CARGILL",
     "top_countries": {
-      "includedYears": [
-        2015,
-        2016
+      "included_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
       ],
       "lines": [
         {
-          "name": "CHINA",
-          "geoId":"BR1702109",
+          "name": "China",
+          "geo_id": "BR1702109",
           "values": [
-            6392774.5,
-            6689568.95
-          ]
+            1400000,
+            1600000,
+            1700000,
+            1750000,
+            1900000,
+            1900000
+          ],
+          "value9": 1
         },
         {
-          "name": "THAILAND",
-          "geoId":"BR1702109",
+          "name": "Thailand",
+          "geo_id": "BR1702109",
           "values": [
-            588071.79,
-            651347.46
-          ]
+            900000,
+            700000,
+            700000,
+            1100000,
+            1200000,
+            1300000
+          ],
+          "value9": 2
         },
         {
-          "name": "NETHERLANDS",
-          "geoId":"BR1702109",
+          "name": "Netherlands",
+          "geo_id": "BR1702109",
           "values": [
-            451999.62,
-            346720.79
-          ]
+            100000,
+            700000,
+            1100000,
+            1500000,
+            1600000,
+            1100000
+          ],
+          "value9": 2
         },
         {
-          "name": "SPAIN",
-          "geoId":"BR1702109",
+          "name": "Spain",
+          "geo_id": "BR1702109",
           "values": [
-            311777.15,
-            331056.08
-          ]
+            50000,
+            300000,
+            1100000,
+            500000,
+            100000,
+            1000
+          ],
+          "value9": 3
         },
         {
-          "name": "INDONESIA",
-          "geoId":"BR1702109",
+          "name": "Indonesia",
+          "geo_id": "BR1702109",
           "values": [
-            302305.63,
-            158144.7
-          ]
+            600000,
+            100000,
+            500000,
+            700000,
+            1100000,
+            600000
+          ],
+          "value9": 3
         },
         {
-          "name": "FRANCE",
-          "geoId":"BR1702109",
+          "name": "France",
+          "geo_id": "BR1702109",
           "values": [
-            289828.7,
-            304808.66
-          ]
+            600000,
+            100000,
+            500000,
+            700000,
+            1100000,
+            1500000
+          ],
+          "value9": 5
         },
         {
-          "name": "UNITED KINGDOM",
-          "geoId":"BR1702109",
+          "name": "United Kingdom",
+          "geo_id": "BR1702109",
           "values": [
-            277289.93,
-            359728.78
-          ]
+            600000,
+            100000,
+            500000,
+            700000,
+            1100000,
+            1500000
+          ],
+          "value9": 6
         },
         {
-          "name": "INDIA",
-          "geoId":"BR1702109",
+          "name": "India",
+          "geo_id": "BR1702109",
           "values": [
-            253325.37,
-            205511.61
-          ]
+            600000,
+            100000,
+            500000,
+            700000,
+            1100000,
+            1500000
+          ],
+          "value9": 7
         },
         {
-          "name": "TAIWAN",
-          "geoId":"BR1702109",
+          "name": "Taiwan",
+          "geo_id": "BR1702109",
           "values": [
-            247101.7,
-            112094.03
-          ]
+            600000,
+            100000,
+            500000,
+            700000,
+            1100000,
+            1500000
+          ],
+          "value9": 8
         },
         {
-          "name": "EGYPT",
-          "geoId":"BR1702109",
+          "name": "Egypt",
+          "geo_id": "BR1702109",
           "values": [
-            230936.61,
-            40066.22
-          ]
+            600000,
+            100000,
+            500000,
+            700000,
+            1100000,
+            1500000
+          ],
+          "value9": 8
         }
-      ]
+      ],
+      "unit": "t",
+      "style": {
+        "type": "line-points",
+        "style": "line-pink-with-points"
+      }
     },
     "top_sources": {
-      "includedYears": [
-        2015,
-        2016
+      "included_years": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
       ],
-      "municipalities": {
+      "municipality": {
         "lines": [
           {
             "id": 2663,
-            "name": "SAPEZAL",
-            "geoId":"BR1702109",
+            "name": "Querência",
+            "geo_id": "BR1702109",
             "values": [
-              221858.26,
-              318469.45
-            ]
+              100000,
+              145000,
+              152000,
+              155000,
+              153000,
+              210000
+            ],
+            "value9": 2
           },
           {
             "id": 2299,
-            "name": "RIACHAO DAS NEVES",
-            "geoId":"BR1702109",
+            "name": "Campo Novo",
+            "geo_id": "BR4304002",
             "values": [
-              192415.7,
-              4470.37
-            ]
+              145000,
+              110000,
+              105000,
+              150000,
+              152000,
+              151000
+            ],
+            "value9": 1
           },
           {
             "id": 68,
-            "name": "AGUA BOA",
-            "geoId":"BR1702109",
+            "name": "Maracaju",
+            "geo_id": "BR5005400",
             "values": [
-              164032.19,
-              90953.67
-            ]
+              20000,
+              60000,
+              90000,
+              115000,
+              120000,
+              95000
+            ],
+            "value9": 6
           },
           {
             "id": 2550,
-            "name": "SAO DESIDERIO",
-            "geoId":"BR1702109",
+            "name": "Barreiras",
+            "geo_id": "BR2903201",
             "values": [
-              149851.31,
-              107182.6
-            ]
+              70000,
+              49000,
+              47000,
+              50000,
+              70000,
+              47000
+            ],
+            "value9": 5
           },
           {
             "id": 1915,
-            "name": "NOVA UBIRATA",
-            "geoId":"BR1702109",
+            "name": "Sidrolândia",
+            "geo_id": "BR1702109",
             "values": [
-              109362.88,
-              56902.81
-            ]
-          },
-          {
-            "id": 1600,
-            "name": "LUCAS DO RIO VERDE",
-            "geoId":"BR1702109",
-            "values": [
-              108436.32,
-              70832.02
-            ]
-          },
-          {
-            "id": 2352,
-            "name": "RIO VERDE",
-            "geoId":"BR1702109",
-            "values": [
-              106836.59,
-              128832.13
-            ]
-          },
-          {
-            "id": 121,
-            "name": "ALTO GARCAS",
-            "geoId":"BR1702109",
-            "values": [
-              106832.25,
-              92979.02
-            ]
-          },
-          {
-            "id": 1491,
-            "name": "JATAI",
-            "geoId":"BR1702109",
-            "values": [
-              102753.13,
-              145091.99
-            ]
-          },
-          {
-            "id": 1095,
-            "name": "FORMOSA DO RIO PRETO",
-            "geoId":"BR1702109",
-            "values": [
-              94167.32,
-              166999.78
-            ]
+              0,
+              25000,
+              35000,
+              15000,
+              30000,
+              20000
+            ],
+            "value9": 8
           }
-        ]
+        ],
+        "unit": "t",
+        "style": {
+          "type": "line-points",
+          "style": "line-pink-with-points"
+        }
       },
       "biome": {
         "lines": [
           {
             "id": 2663,
             "name": "SAPEZAL",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               221858.26,
               318469.45
@@ -210,7 +258,7 @@
           {
             "id": 2299,
             "name": "RIACHAO DAS NEVES",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               192415.7,
               4470.37
@@ -219,7 +267,7 @@
           {
             "id": 68,
             "name": "AGUA BOA",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               164032.19,
               90953.67
@@ -228,7 +276,7 @@
           {
             "id": 2550,
             "name": "SAO DESIDERIO",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               149851.31,
               107182.6
@@ -237,7 +285,7 @@
           {
             "id": 1915,
             "name": "NOVA UBIRATA",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               109362.88,
               56902.81
@@ -246,7 +294,7 @@
           {
             "id": 1600,
             "name": "LUCAS DO RIO VERDE",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               108436.32,
               70832.02
@@ -255,7 +303,7 @@
           {
             "id": 2352,
             "name": "RIO VERDE",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               106836.59,
               128832.13
@@ -264,7 +312,7 @@
           {
             "id": 121,
             "name": "ALTO GARCAS",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               106832.25,
               92979.02
@@ -273,7 +321,7 @@
           {
             "id": 1491,
             "name": "JATAI",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               102753.13,
               145091.99
@@ -282,107 +330,18 @@
           {
             "id": 1095,
             "name": "FORMOSA DO RIO PRETO",
-            "geoId":"BR1702109",
+            "geo_id": "BR1702109",
             "values": [
               94167.32,
               166999.78
             ]
           }
-        ]
-      },
-      "state": {
-        "lines": [
-          {
-            "id": 2663,
-            "name": "SAPEZAL",
-            "geoId":"BR1702109",
-            "values": [
-              221858.26,
-              318469.45
-            ]
-          },
-          {
-            "id": 2299,
-            "name": "RIACHAO DAS NEVES",
-            "geoId":"BR1702109",
-            "values": [
-              192415.7,
-              4470.37
-            ]
-          },
-          {
-            "id": 68,
-            "name": "AGUA BOA",
-            "geoId":"BR1702109",
-            "values": [
-              164032.19,
-              90953.67
-            ]
-          },
-          {
-            "id": 2550,
-            "name": "SAO DESIDERIO",
-            "geoId":"BR1702109",
-            "values": [
-              149851.31,
-              107182.6
-            ]
-          },
-          {
-            "id": 1915,
-            "name": "NOVA UBIRATA",
-            "geoId":"BR1702109",
-            "values": [
-              109362.88,
-              56902.81
-            ]
-          },
-          {
-            "id": 1600,
-            "name": "LUCAS DO RIO VERDE",
-            "geoId":"BR1702109",
-            "values": [
-              108436.32,
-              70832.02
-            ]
-          },
-          {
-            "id": 2352,
-            "name": "RIO VERDE",
-            "geoId":"BR1702109",
-            "values": [
-              106836.59,
-              128832.13
-            ]
-          },
-          {
-            "id": 121,
-            "name": "ALTO GARCAS",
-            "geoId":"BR1702109",
-            "values": [
-              106832.25,
-              92979.02
-            ]
-          },
-          {
-            "id": 1491,
-            "name": "JATAI",
-            "geoId":"BR1702109",
-            "values": [
-              102753.13,
-              145091.99
-            ]
-          },
-          {
-            "id": 1095,
-            "name": "FORMOSA DO RIO PRETO",
-            "geoId":"BR1702109",
-            "values": [
-              94167.32,
-              166999.78
-            ]
-          }
-        ]
+        ],
+        "unit": "t",
+        "style": {
+          "type": "line-points",
+          "style": "line-pink-with-points"
+        }
       }
     },
     "total_soy_2015": 8801293,

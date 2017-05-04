@@ -84,7 +84,7 @@ export default class {
 
     this.selectPolygonType(payload.currentPolygonType);
     if (payload.selectedNodesGeoIds) {
-      this.selectPolygons({selectedGeoIds: payload.selectedNodesGeoIds});
+      this.selectPolygons({ selectedGeoIds: payload.selectedNodesGeoIds });
     }
 
     // under normal circumstances, choropleth (depends on loadNodes) and linkedGeoIds (depends on loadLinks)
@@ -154,7 +154,7 @@ export default class {
   }
   highlightPolygon(payload) { this._outlinePolygons(payload); }
 
-  _outlinePolygons({selectedGeoIds, highlightedGeoId}) {
+  _outlinePolygons({ selectedGeoIds, highlightedGeoId }) {
     if (!this.currentPolygonTypeLayer || !selectedGeoIds) {
       return;
     }
@@ -288,7 +288,7 @@ export default class {
       const that = this;
       layer.on({
         mouseover: function(event) {
-          that.callbacks.onPolygonHighlighted(this.feature.properties.geoid, { pageX: event.originalEvent.pageX, pageY: event.originalEvent.pageY});
+          that.callbacks.onPolygonHighlighted(this.feature.properties.geoid, { pageX: event.originalEvent.pageX, pageY: event.originalEvent.pageY });
         },
         mouseout: function() {
           that.callbacks.onPolygonHighlighted();
@@ -304,7 +304,7 @@ export default class {
   }
 
 
-  setChoropleth({choropleth, selectedNodesGeoIds, linkedGeoIds, selectedMapDimensions}) {
+  setChoropleth({ choropleth, selectedNodesGeoIds, linkedGeoIds, selectedMapDimensions }) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }

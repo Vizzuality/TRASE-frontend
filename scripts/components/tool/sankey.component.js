@@ -17,7 +17,7 @@ export default class {
     this._build();
   }
 
-  resizeViewport({selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, currentQuant, sankeySize}) {
+  resizeViewport({ selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, currentQuant, sankeySize }) {
     this.layout.setViewportSize(sankeySize);
 
     this.layout.setRecolorBy(selectedRecolorBy);
@@ -48,7 +48,7 @@ export default class {
     this.selectNodes(linksPayload);
   }
 
-  selectNodes({selectedNodesIds, shouldRepositionExpandButton}) {
+  selectNodes({ selectedNodesIds, shouldRepositionExpandButton }) {
     // let minimumY = Infinity;
     if (!this.layout.isReady()) {
       return;

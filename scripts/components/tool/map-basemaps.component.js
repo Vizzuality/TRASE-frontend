@@ -8,7 +8,7 @@ export default class {
   }
 
   buildBasemaps(basemaps) {
-    this.el.innerHTML = BasemapsTemplate({basemaps});
+    this.el.innerHTML = BasemapsTemplate({ basemaps });
 
     this.basemaps = Array.prototype.slice.call(this.el.querySelectorAll('.js-map-sidebar-group-item'), 0);
     this.basemaps.forEach((basemap) => {

@@ -28,10 +28,11 @@ export default class {
       return;
     }
     this._setupChoro(params);
+
     this._updateMapControlsPosition();
   }
 
-  updateContextLegend({selectedMapDimensions, selectedMapContextualLayersData}) {
+  updateContextLegend({ selectedMapDimensions, selectedMapContextualLayersData }) {
     this._toggleLegend(selectedMapDimensions, selectedMapContextualLayersData);
     this._renderContext(selectedMapContextualLayersData);
     this._updateMapControlsPosition();
@@ -41,7 +42,7 @@ export default class {
     this.el = document.querySelector('.js-map-legend');
   }
 
-  _setupChoro({selectedMapDimensions, selectedMapContextualLayersData, mapDimensions}) {
+  _setupChoro({ selectedMapDimensions, selectedMapContextualLayersData, mapDimensions }) {
     const _getDimension = (uid) => {
       const dimension = mapDimensions.find(mapDimension => mapDimension.uid === uid);
       return dimension || null;
