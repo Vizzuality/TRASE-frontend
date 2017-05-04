@@ -179,16 +179,20 @@ export function loadNodes() {
 
       const selection = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
       if (selection !== undefined) {
-        selection.forEach((selectedDimension, index) => {
-          const direction = (index === 0) ? 'vertical' : 'horizontal';
-          dispatch(toggleMapSidebarGroup({
-            direction,
-            title: selectedDimension.name,
-            uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId),
-            bucket3: selectedDimension.bucket3,
-            bucket5: selectedDimension.bucket5
-          }));
-        });
+        const uids = selection.map(selectedDimension => getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId));
+        if (uids[0] === undefined) uids[0] = null;
+        if (uids[1] === undefined) uids[1] = null;
+        dispatch(setMapDimensions(uids));
+        // selection.forEach((selectedDimension) => {
+          // const direction = (index === 0) ? 'vertical' : 'horizontal';
+          // dispatch(toggleMapSidebarGroup({
+          //   direction,
+          //   title: selectedDimension.name,
+          //   uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId),
+          //   bucket3: selectedDimension.bucket3,
+          //   bucket5: selectedDimension.bucket5
+          // }));
+        // });
       }
     });
   };
@@ -499,6 +503,13 @@ export function toggleMapDimension(uid) {
   return {
     type: actions.TOGGLE_MAP_DIMENSION,
     uid
+  };
+}
+
+export function setMapDimensions(uids) {
+  return {
+    type: actions.SET_MAP_DIMENSIONS,
+    uids
   };
 }
 

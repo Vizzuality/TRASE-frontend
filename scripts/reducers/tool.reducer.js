@@ -296,6 +296,25 @@ export default function (state = {}, action) {
       break;
     }
 
+    case actions.SET_MAP_DIMENSIONS: {
+      const selectedMapDimensions = {
+        horizontal: {
+          title: null,
+          uid: null
+        },
+        vertical: {
+          title: 'Territorial deforestation',
+          uid: 'ind3',
+          bucket3: [2000, 10000],
+          bucket5: [2000, 5000, 10000, 20000]
+        }
+      };
+      const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
+
+      newState = Object.assign({}, state, { selectedMapDimensions_: action.uids, selectedMapDimensions,  choropleth });
+      break;
+    }
+
     case actions.TOGGLE_MAP_DIMENSION: {
       // const selectedMapDimensions = Object.assign({}, state.selectedMapDimensions);
       // const currentUidForDirection = selectedMapDimensions[action.dimensionData.direction].uid;

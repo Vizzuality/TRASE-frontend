@@ -8,7 +8,7 @@ export default (nodesIds, state) => {
     };
   }
 
-  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapDimensions);
+  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapDimensions_);
   const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined && geoId !== null);
   const columnsPos = data.map(node => node.columnGroup);
 
@@ -36,12 +36,12 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
       node.selectedMetas = [];
       let meta;
       if (node.meta) {
-        if (selectedMapDimensions.horizontal.uid) {
-          meta = node.meta[selectedMapDimensions.horizontal.uid];
+        if (selectedMapDimensions[0] !== null) {
+          meta = node.meta[selectedMapDimensions[0]];
           if (meta) node.selectedMetas.push(meta);
         }
-        if (selectedMapDimensions.vertical.uid) {
-          meta = node.meta[selectedMapDimensions.vertical.uid];
+        if (selectedMapDimensions[1] !== null) {
+          meta = node.meta[selectedMapDimensions[1]];
           if (meta) node.selectedMetas.push(meta);
         }
       }
