@@ -1,6 +1,7 @@
 import connect from 'connect';
 import MapDimensions from 'components/tool/map-dimensions.component.js';
 import { toggleMapSidebarGroup, toggleMapDimension } from 'actions/tool.actions';
+import { loadTooltip } from 'actions/app.actions';
 
 const mapMethodsToState = (state) => ({
   loadMapDimensions: {
@@ -17,7 +18,7 @@ const mapMethodsToState = (state) => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  // onMapDimensionsLoaded: () => loadTooltip(),
+  onMapDimensionsLoaded: () => loadTooltip(),
   onToggleGroup: (id) => toggleMapSidebarGroup(id),
   onDimensionClick: (uid) => toggleMapDimension(uid)
 });

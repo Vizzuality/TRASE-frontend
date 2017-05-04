@@ -19,7 +19,7 @@ export default class {
     this.dimensions.forEach((dimension) => {
       dimension.addEventListener('click', this._onDimensionClicked.bind(this));
     });
-
+    this.callbacks.onMapDimensionsLoaded();
     this.toggleSidebarGroups(expandedMapSidebarGroupsIds);
   }
 

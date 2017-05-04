@@ -93,6 +93,18 @@
         border-bottom: 1px solid $charcoal-grey-faded-a-lot;
       }
 
+      .actions {
+        flex: 0 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .c-tooltip {
+        width: 16px;
+        height: 16px;
+      }
+
       .radio-btn {
         display: inline-block;
         position: relative;
