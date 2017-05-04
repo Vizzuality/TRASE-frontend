@@ -52,10 +52,10 @@ const _build = data => {
   const infowindowTitle = document.querySelector('.js-infowindow-title');
   const infowindowBody = document.querySelector('.js-infowindow-body');
 
-  if (data.top_sources.municipalities.lines.length) {
+  if (data.top_sources.municipality.lines.length) {
     new Top({
       el: document.querySelector('.js-top-municipalities'),
-      data: data.top_sources.municipalities.lines,
+      data: data.top_sources.municipality.lines,
       targetLink: 'place',
       title: 'top source municipalities in 2015'
     });
@@ -64,15 +64,15 @@ const _build = data => {
       topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_MUNICIPALITY.topo.json`,
       topoJSONRoot: `${defaults.country.toUpperCase()}_MUNICIPALITY`,
       getPolygonClassName: ({ properties }) => {
-        const municipality = data.top_sources.municipalities.lines
+        const municipality = data.top_sources.municipality.lines
           .find(m => (properties.nome.toUpperCase() === m.name));
         let value = 0;
-        if (municipality) value = municipality.value9 && municipality.value9[0] || 0;
+        if (municipality) value = municipality.value9 || 0;
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
-        const municipality = data.top_sources.municipalities.lines
-          .find(m => (properties.nome.toUpperCase() === m.name));
+        const municipality = data.top_sources.municipality.lines
+          .find(m => (properties.geoid === m.geo_id));
         let title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
         let body = null;
         if (municipality) body = municipality.values[0];
@@ -100,7 +100,7 @@ const _build = data => {
         const country = data.top_countries.lines
           .find(c => (properties.name.toUpperCase() === c.name));
         let value = 0;
-        if (country) value = country.value9 && country.value9[0] || 0;
+        if (country) value = country.value9 || 0;
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
@@ -169,7 +169,7 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId}, true);
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId });
 
   fetch(actorFactsheetURL)
     .then((response) => {
