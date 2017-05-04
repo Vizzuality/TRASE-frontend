@@ -140,7 +140,7 @@ export default class {
       };
       xTickFormat = (value) => {
         let format = d3_timeFormat('%y');
-        return format(value) ;
+        return format(value);
       };
     } else {
       yTickFormat = (value, i) => {
@@ -149,15 +149,14 @@ export default class {
         if (i === 6) {
           return `${format(value)}${data.unit}`;
         }
-        return format(value) ;
+        return format(value);
       };
       xTickFormat = (value, i) => {
         let format = d3_timeFormat('%y');
         if (i === 0) {
           format = d3_timeFormat('%Y');
         }
-
-        return format(value) ;
+        return format(value);
       };
     }
 
