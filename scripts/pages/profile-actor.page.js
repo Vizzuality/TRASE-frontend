@@ -227,7 +227,7 @@ const _showErrorMessage = () => {
 const _setTopSourceSwitcher = (data) => {
   const template = TopSourceTemplate({
     nodeName: formatApostrophe(_.capitalize(data.node_name)),
-    switchers: Object.keys(data.top_sources).filter(key => key !== 'includedYears')
+    switchers: Object.keys(data.top_sources).filter(key => key !== 'included_years')
   });
   document.querySelector('.js-top-municipalities-title').innerHTML = template;
 
@@ -255,7 +255,7 @@ const _switchTopSource = (e, data) => {
   new Line(
     '.js-top-municipalities',
     topMunicipalitiesLines,
-    data.top_sources.includedYears,
+    data.top_sources.included_years,
     {
       margin: {top: 10, right: 100, bottom: 25, left: 37},
       height: 244,
