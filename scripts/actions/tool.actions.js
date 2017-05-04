@@ -407,7 +407,7 @@ export function selectNodeFromGeoId(geoId) {
   };
 }
 
-export function highlightNode(nodeId, isAggregated) {
+export function highlightNode(nodeId, isAggregated, coordinates) {
   return (dispatch, getState) => {
     if (isAggregated) {
       return;
@@ -415,14 +415,15 @@ export function highlightNode(nodeId, isAggregated) {
 
     const action = getNodesSelectionAction([nodeId], getState().tool);
     action.type = actions.HIGHLIGHT_NODE;
+    action.coordinates = coordinates;
     dispatch(action);
   };
 }
 
-export function highlightNodeFromGeoId(geoId) {
+export function highlightNodeFromGeoId(geoId, coordinates) {
   return (dispatch, getState) => {
     const nodeId = getNodeIdFromGeoId(geoId, getState().tool.nodesDict, getState().tool.selectedColumnsIds[0]);
-    dispatch(highlightNode(nodeId, false));
+    dispatch(highlightNode(nodeId, false, coordinates));
   };
 }
 

@@ -6,6 +6,7 @@
 </head>
 <body>
   <div class="tooltip-layout is-hidden"></div>
+  <div class="js-tool-tooltip c-info-tooltip"></div>
   <div class="loading-wrapper">
     <%= htmlWebpackPlugin.options.icons %>
     <div class="l-flows">
@@ -70,8 +71,6 @@
         <div id="js-columns-selector-react"></div>
 
         <div class="c-sankey is-absolute js-sankey">
-          <div class="js-sankey-tooltip c-profile-tooltip"></div>
-
           <svg class="js-sankey-canvas sankey">
             <defs>
               <pattern id="isAggregatedPattern" x="0" y="0" width="1" height="3" patternUnits="userSpaceOnUse">
@@ -99,7 +98,7 @@
           </svg>
           <div class="expand-button js-expand">
             <svg class="icon icon-outside-link"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-more-options"></use></svg>
-            <div class="c-sankey-tooltip">
+            <div class="c-node-menu">
               <ul class="actions">
                 <li class="expand-action js-expand-action" data-collapsed-text="EXPAND SELECTED NODES" data-expanded-text="COLLAPSE SELECTED NODES">
                   <svg class="icon"><use xlink:href="#icon-more-options"></use></svg>
