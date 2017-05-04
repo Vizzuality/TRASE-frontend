@@ -19,55 +19,6 @@
       letter-spacing: -.5px;
       text-transform: uppercase;
     }
-
-    > .chroropleth-distribution-sample {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      > .sample {
-        display: inline-flex;
-        flex-direction: column;
-        width: 26px;
-        height: 26px;
-        border: 1px solid $pinkish-grey-two;
-
-        &::before,
-        &::after {
-          display: inline-block;
-          flex-basis: calc(100% / 3);
-          width: 100%;
-          height: 8px;
-          content: '';
-        }
-
-        &.-vertical {
-          background-color: $beige;
-          margin-right: 15px;
-
-          &::before {
-            background-color: $light-grey-blue;
-
-          }
-
-          &::after {
-            background-color: $cloudy-blue;
-          }
-        }
-
-        &.-horizontal {
-          background-color: $beige;
-
-          &::before {
-            background-color: $warm-pink;
-          }
-
-          &::after {
-            background-color: $blush;
-          }
-        }
-      }
-    }
   }
 
 

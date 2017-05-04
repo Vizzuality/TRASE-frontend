@@ -17,7 +17,7 @@
       <div class="veil js-veil"></div>
       <div class="c-modal js-modal"></div>
 
-      <div class="js-tool-content flow-content">
+      <div class="js-tool-content flow-content -open">
         <div class="js-tool-loading tool-loading">
           <div class="veil"></div>
           <div class="c-spinner"></div>
@@ -25,17 +25,10 @@
 
         <div class="js-sankey-veil sankey-veil veil"></div>
 
-        <div class="c-basemap-options is-absolute">
-          <div class="explanation">
-            <span class="explanation-text">choose one layer on each column to draw comparisons</span>
-            <div class="chroropleth-distribution-sample">
-              <div class="sample -vertical"></div>
-              <div class="sample -horizontal"></div>
-            </div>
+        <div class="c-basemap-options c-map-sidebar is-absolute">
+          <div class="js-dimensions">
+            <!-- this is rendered by map-dimensions.component -->
           </div>
-          <ul class="layer-list js-layer-list">
-            <!-- this is rendered by map-layers.component -->
-          </ul>
 
           <div class="explanation js-layer-contextual-title">
             <span class="explanation-text">Contextual layers</span>

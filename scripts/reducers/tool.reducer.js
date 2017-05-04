@@ -153,12 +153,17 @@ export default function (state = {}, action) {
       const rawMapDimensions = mapDimensionsMeta.dimensions;
       const mapDimensions = getMapDimensions(rawMapDimensions);
 
-      const mapDimensionsFolders = mapDimensionsMeta.dimensionGroups;
+      const mapDimensionsGroups = mapDimensionsMeta.dimensionGroups.map(group => {
+        return {
+          group,
+          dimensions: mapDimensions.filter(dimension => dimension.groupId === group.id)
+        };
+      });
 
       // store dimension values in nodesDict as uid: dimensionValue
       const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, mapDimensions);
 
-      newState = Object.assign({}, state, { mapDimensions, mapDimensionsFolders, nodesDictWithMeta });
+      newState = Object.assign({}, state, { mapDimensions, mapDimensionsGroups, nodesDictWithMeta });
       break;
     }
 
