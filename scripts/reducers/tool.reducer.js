@@ -362,6 +362,18 @@ export default function (state = {}, action) {
       break;
     }
 
+    case actions.TOGGLE_MAP_SIDEBAR_GROUP: {
+      let expandedMapSidebarGroupsIds = state.expandedMapSidebarGroupsIds.slice();
+      let idIndex = expandedMapSidebarGroupsIds.indexOf(action.id);
+      if (idIndex === -1) {
+        expandedMapSidebarGroupsIds.push(action.id);
+      } else {
+        expandedMapSidebarGroupsIds.splice(idIndex, 1);
+      }
+      newState = Object.assign({}, state, { expandedMapSidebarGroupsIds });
+      break;
+    }
+
     default:
       newState = state;
       break;

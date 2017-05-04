@@ -54,7 +54,8 @@ export const TOOL_DEFAULT_STATE = {
     },
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
     selectedMapBasemap: 'default',
-    isMapVisible: false
+    isMapVisible: false,
+    expandedMapSidebarGroupsIds: []
   }
 };
 

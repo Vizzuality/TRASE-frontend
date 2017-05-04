@@ -517,4 +517,11 @@ export function saveMapView(latlng, zoom) {
   };
 }
 
+export function toggleMapSidebarGroup(id) {
+  return {
+    type: actions.TOGGLE_MAP_SIDEBAR_GROUP,
+    id
+  };
+}
+
 const _isNodeVisible = (getState, nodeId) => getState().tool.visibleNodes.map(node => node.id).indexOf(nodeId) > -1;

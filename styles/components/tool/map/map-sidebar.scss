@@ -1,5 +1,18 @@
 @import '../../../settings';
 
 .c-map-sidebar {
-  
+  .map-sidebar-group {
+
+    .map-sidebar-group-items {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s;
+    }
+
+    &.-expanded {
+      .map-sidebar-group-items {
+        max-height: 500px;
+      }
+    }
+  }
 }
