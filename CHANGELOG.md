@@ -1,8 +1,12 @@
 - tool: fixed tool crash when links API fails
+- profiles: connects choropleth maps to real data in actors profile pages
+- home: only allow video playing on full screen
+- home: show screenshot instead of video when video playback has not started yet
 - tool: added tooltips on the map to show info that is otherwise displayed on the bottom of the sankey
 - tool: fixed water scarcity color scale
 - tool: added link tooltips resize by information
 - tool: added link tooltips quant units
+- profiles: added line chart locations on actors page
 - profiles: added hover effects on shortcut buttons
 - profiles: companies exporting chart (mock)
 - tool entry in menu now triggers a submenu with two entry points

@@ -12,10 +12,10 @@ export default ({ onToggle, onColumnSelected, currentDropdown, group, allColumns
 
   return (
     <div
-      class={classNames('js-dropdown c-dropdown -column-selector', {['-hide-only-child']: hasSingleElement})}
+      class={classNames('js-dropdown c-dropdown -column-selector', { ['-hide-only-child']: hasSingleElement })}
       onClick={() => { onToggle(id); }}
     >
-      <span class={classNames('dropdown-title', {['-is-open']: currentDropdown === id })}>
+      <span class={classNames('dropdown-title', { ['-is-open']: currentDropdown === id })}>
         {selectedColumnItem.name}
       </span>
       {nodesColoredAtColumn === group &&

@@ -139,7 +139,7 @@ const sankeyLayout = function() {
   const _computeLinksCoords = () => {
 
     // source and target are dicts (nodeIds are keys) containing the cumulated height of all links for each node
-    const stackedHeightsByNodeId = {source:{},target:{}};
+    const stackedHeightsByNodeId = { source:{},target:{} };
 
     // retrieve node ys to bootstrap stackedHeights
     links.forEach(link => {

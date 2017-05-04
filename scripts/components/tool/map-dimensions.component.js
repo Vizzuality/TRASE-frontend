@@ -13,7 +13,7 @@ export default class {
   loadMapDimensions(dimensionsByGroup) {
     this.mapDimensions = dimensionsByGroup;
 
-    this.layerList.innerHTML = MapDimensionsTemplate({dimensionGroups: dimensionsByGroup});
+    this.layerList.innerHTML = MapDimensionsTemplate({ dimensionGroups: dimensionsByGroup });
 
     this._setVars();
     this._setEventListeners();

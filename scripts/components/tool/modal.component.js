@@ -39,14 +39,14 @@ class ModalComponent {
   }
 
   _toggleVisibility() {
-    Object.assign(this.state, { visibility: !this.state.visibility});
+    Object.assign(this.state, { visibility: !this.state.visibility });
     this._setVisibility();
     this.callbacks.onClose();
   }
 
   getModal(modal) {
     if (_.isEqual(modal.modalParams, this.state.modalParams)) {
-      Object.assign(this.state, {visibility: modal.visibility });
+      Object.assign(this.state, { visibility: modal.visibility });
     } else {
       Object.assign(this.state, modal);
       this.render();

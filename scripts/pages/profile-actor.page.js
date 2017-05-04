@@ -16,7 +16,7 @@ import 'styles/components/profiles/error.scss';
 import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
 import Map from 'components/profiles/map.component';
-import Top from 'components/profiles/top.component';
+import Line from 'components/profiles/line.component';
 import MultiTable from 'components/profiles/multi-table.component';
 import Scatterplot from 'components/profiles/scatterplot.component';
 import Tooltip from 'components/profiles/tooltip.component';
@@ -24,6 +24,7 @@ import Tooltip from 'components/profiles/tooltip.component';
 import { getURLParams } from 'utils/stateURL';
 import smoothScroll from 'utils/smoothScroll';
 import formatApostrophe from 'utils/formatApostrophe';
+import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
@@ -39,29 +40,67 @@ const _onSelect = function(value) {
 
 const _build = (data, nodeId) => {
   const tooltip = new Tooltip('.js-infowindow');
+  const lineSettings = {
+    margin: { top: 10, right: 100, bottom: 25, left: 94 },
+    height: 244,
+    ticks: {
+      yTicks: 6,
+      yTickPadding: 10,
+      yTickFormatType: 'top-location',
+      xTickPadding: 15
+    },
+    showTooltipCallback: (location, x, y) => {
+      tooltip.showTooltip(x, y, {
+        title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
+        values: [
+          { title: 'Trade Volume',
+            value: formatNumber(location.value),
+            unit: 'Tons'
+          }
+        ]
+      });
+    },
+    hideTooltipCallback: () => {
+      tooltip.hideTooltip();
+    }
+  };
 
-  if (data.top_sources.municipalities.lines.length) {
-    new Top({
-      el: document.querySelector('.js-top-municipalities'),
-      data: data.top_sources.municipalities.lines,
-      targetLink: 'place',
-      title: 'top source municipalities in 2015'
-    });
+
+  if (data.top_sources.municipality.lines.length) {
+    document.querySelector('.js-top-municipalities-title').innerHTML = `Top source regions of ${formatApostrophe(_.capitalize(data.node_name))} soy: municipalities`;
+    let topMunicipalitiesLines = data.top_sources.municipality;
+    topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
+    new Line(
+      '.js-top-municipalities',
+      topMunicipalitiesLines,
+      data.top_sources.included_years,
+      lineSettings,
+    );
 
     Map('.js-top-municipalities-map', {
       topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_MUNICIPALITY.topo.json`,
       topoJSONRoot: `${defaults.country.toUpperCase()}_MUNICIPALITY`,
-      getPolygonClassName: (/*municipality*/) => {
-        const value = Math.floor(8 * Math.random());
+      getPolygonClassName: ({ properties }) => {
+        const municipality = data.top_sources.municipality.lines
+          .find(m => (properties.geoid === m.geo_id));
+        let value = 0;
+        if (municipality) value = municipality.value9 || 0;
         return `-outline ch-${value}`;
       },
-      showTooltipCallback: (municipality, x, y) => {
+      showTooltipCallback: ({ properties }, x, y) => {
+        const municipality = data.top_sources.municipality.lines
+          .find(m => (properties.geoid === m.geo_id));
+        let title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
+        let body = null;
+        if (municipality) body = municipality.values[0];
+
         tooltip.showTooltip(x, y, {
-          title: `${data.node_name} > ${municipality.properties.nome.toUpperCase()}`,
-          values: [
-            { title: 'Trade Volume',
-              value: 'put choropleth value here' }
-          ]
+          title,
+          values: [{
+            title: 'Trade Volume',
+            value: formatNumber(body),
+            unit: 'Tons'
+          }]
         });
       },
       hideTooltipCallback: () => {
@@ -71,27 +110,41 @@ const _build = (data, nodeId) => {
   }
 
   if (data.top_countries.lines.length) {
-    new Top({
-      el:document.querySelector('.js-top-destination'),
-      data: data.top_countries.lines,
-      title: 'top destination countries in 2015'
-    });
+    document.querySelector('.js-top-map-title').innerHTML = `Top destination countries of ${formatApostrophe(_.capitalize(data.node_name))} soy`;
+    let topCountriesLines = data.top_countries;
+    topCountriesLines.lines = topCountriesLines.lines.slice(0, 5);
+    new Line(
+      '.js-top-destination',
+      topCountriesLines,
+      data.top_countries.included_years,
+      lineSettings,
+    );
 
     Map('.js-top-destination-map', {
       topoJSONPath: './vector_layers/WORLD.topo.json',
       topoJSONRoot: 'WORLD',
       useRobinsonProjection: true,
-      getPolygonClassName: (/*country*/) => {
-        const value = Math.floor(8 * Math.random());
+      getPolygonClassName: ({ properties }) => {
+        const country = data.top_countries.lines
+          .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
+        let value = 0;
+        if (country) value = country.value9 || 0;
         return `-outline ch-${value}`;
       },
-      showTooltipCallback: (country, x, y) => {
+      showTooltipCallback: ({ properties }, x, y) => {
+        const country = data.top_countries.lines
+          .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
+        let title = `${data.node_name} > ${properties.name.toUpperCase()}`;
+        let body = null;
+        if (country) body = country.values[0];
+
         tooltip.showTooltip(x, y, {
-          title: `${data.node_name} > ${country.properties.name.toUpperCase()}`,
-          values: [
-            { title: 'Trade Volume',
-              value: 'put choropleth value here' }
-          ]
+          title,
+          values: [{
+            title: 'Trade Volume',
+            value: formatNumber(body),
+            unit: 'Tons'
+          }]
         });
       },
       hideTooltipCallback: () => {
@@ -119,10 +172,16 @@ const _build = (data, nodeId) => {
       tooltip.showTooltip(x, y, {
         title: company.name,
         values: [
-          { title: 'Trade Volume',
-            value: `${company.y}<span>t</span>` },
-          { title: indicator.name,
-            value: `${company.x}<span>${indicator.unit}</span>` }
+          {
+            title: 'Trade Volume',
+            value: company.y,
+            unit: 't'
+          },
+          {
+            title: indicator.name,
+            value: company.x,
+            unit: indicator.unit
+          }
         ]
       });
     },
@@ -170,7 +229,7 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId}, true);
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, true);
 
   fetch(actorFactsheetURL)
     .then((response) => {

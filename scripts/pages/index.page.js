@@ -116,8 +116,22 @@ const init = () => {
 
   player.on('ready', () => {
     const playButton = document.querySelector('.plyr__play-large');
+    const playerControls = document.querySelector('.plyr__controls');
+    const playerVideo = document.querySelector('.plyr__video-wrapper');
     playButton.addEventListener('click', () => {
-      player.toggleFullscreen();
+      if (player.isFullscreen() === false) {
+        player.toggleFullscreen();
+      }
+    });
+
+    player.on('enterfullscreen', function() {
+      playerControls.classList.add('-active');
+      playerVideo.classList.add('-active');
+    });
+    player.on('exitfullscreen', function() {
+      playerControls.classList.remove('-active');
+      playerVideo.classList.remove('-active');
+      player.pause();
     });
   });
 
