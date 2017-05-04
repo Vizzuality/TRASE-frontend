@@ -1,4 +1,5 @@
 - tool: added tooltips on the map to show info that is otherwise displayed on the bottom of the sankey
+- tool: fixed water scarcity color scale
 - tool: added link tooltips resize by information
 - tool: added link tooltips quant units
 - profiles: added hover effects on shortcut buttons

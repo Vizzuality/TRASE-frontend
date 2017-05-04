@@ -112,25 +112,24 @@ const _build = (data, nodeId) => {
   }
 
   new Scatterplot('.js-companies-exporting', {
-      data: data.companies_exporting.companies,
-      xDimension: data.companies_exporting.dimensions_x,
-      nodeId: nodeId,
-      showTooltipCallback: (company, indicator, x, y) => {
-        tooltip.showTooltip(x, y, {
-          title: company.name,
-          values: [
-            { title: 'Trade Volume',
-              value: `${company.y}<span>t</span>` },
-            { title: indicator.name,
-              value: `${company.x}<span>${indicator.unit}</span>` }
-          ]
-        });
-      },
-      hideTooltipCallback: () => {
-        tooltip.hideTooltip();
-      }
+    data: data.companies_exporting.companies,
+    xDimension: data.companies_exporting.dimensions_x,
+    nodeId: nodeId,
+    showTooltipCallback: (company, indicator, x, y) => {
+      tooltip.showTooltip(x, y, {
+        title: company.name,
+        values: [
+          { title: 'Trade Volume',
+            value: `${company.y}<span>t</span>` },
+          { title: indicator.name,
+            value: `${company.x}<span>${indicator.unit}</span>` }
+        ]
+      });
+    },
+    hideTooltipCallback: () => {
+      tooltip.hideTooltip();
     }
-  );
+  });
 };
 
 const _setInfo = (info, nodeId) => {

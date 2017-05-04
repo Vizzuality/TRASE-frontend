@@ -92,7 +92,7 @@ export default class {
       .data(this._getFormatedData(0))
       .enter()
       .append('circle')
-      .attr('class', function(d) { return d.nodeId.toString() === this.nodeId ? 'dot current' : 'dot' }.bind(this))
+      .attr('class', (function(d) { return d.nodeId.toString() === this.nodeId ? 'dot current' : 'dot'; }).bind(this))
       .attr('r', 5)
       .attr('cx', function(d) { return this.x(d.x); }.bind(this))
       .attr('cy', function(d) { return this.y(d.y); }.bind(this));
@@ -164,7 +164,7 @@ export default class {
         name: item.name,
         y: item.y,
         x: item.x[i]
-      }
+      };
     });
   }
 }
