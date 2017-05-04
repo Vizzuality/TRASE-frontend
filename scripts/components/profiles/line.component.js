@@ -32,8 +32,6 @@ export default class {
     this.showTooltipCallback = settings.showTooltipCallback;
     this.hideTooltipCallback = settings.hideTooltipCallback;
 
-    let allValues = [];
-
     let container = d3_select(elem)
       .append('svg')
       .attr('width', width + margin.left + margin.right)
@@ -41,19 +39,25 @@ export default class {
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+    let tempArr = data.lines.map(line => line.values);
+    let allYValues = [];
+    for(let i = 0; i < tempArr.length; i++) {
+      allYValues = [...allYValues, ...tempArr[i]];
+    }
+
     let x = d3_scale_time()
       .range([0, width])
       .domain(d3_extent(xValues, y => new Date(y, 0)));
 
+    let y = d3_scale_linear()
+      .rangeRound([height, 0])
+      .domain(d3_extent([0, ...allYValues]));
+
     data.lines.forEach((lineData, i) => {
-      allValues = [...allValues, ...lineData.values];
-      const y0 = d3_scale_linear()
-        .rangeRound([height, 0])
-        .domain(d3_extent(lineData.values));
       const lineValuesWithFormat = prepareData(xValues, lineData);
       const line = d3_line()
         .x(d => x(d.date))
-        .y(d => y0(d.value));
+        .y(d => y(d.value));
       const type = typeof data.style !== 'undefined' ? data.style.type : lineData.type;
       const style = typeof data.style !== 'undefined' ? data.style.style : lineData.style;
 
@@ -63,8 +67,8 @@ export default class {
         case 'area':
           area = d3_area()
             .x(d => x(d.date))
-            .y0(height)
-            .y1(d => y0(d.value));
+            .y(height)
+            .y1(d => y(d.value));
 
           container.append('path')
             .datum(lineValuesWithFormat)
@@ -95,14 +99,14 @@ export default class {
           pathContainers.selectAll('text')
             .data(d => [d])
             .enter().append('text')
-            .attr('transform', d => `translate(${width + 6},${y0(d[d.length - 1].value) + 4})`)
+            .attr('transform', d => `translate(${width + 6},${y(d[d.length - 1].value) + 4})`)
             .text(d => `${i + 1}.${d[0].name}`);
 
           this.circles = pathContainers.selectAll('circle')
             .data(d => d)
             .enter().append('circle')
             .attr('cx', d => x(d.date))
-            .attr('cy', d => y0(d.value))
+            .attr('cy', d => y(d.value))
             .attr('r', 4);
 
           if (this.showTooltipCallback !== undefined) {
@@ -129,10 +133,6 @@ export default class {
         legend.innerHTML = legend.innerHTML + legendItemHTML;
       }
     });
-
-    let y = d3_scale_linear()
-      .rangeRound([height, 0])
-      .domain(d3_extent([0, ...allValues]));
 
     let yTickFormat = null,
       xTickFormat = null;
