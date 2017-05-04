@@ -2,6 +2,7 @@
 @import '../../../mixins';
 
 .c-map-sidebar {
+  border-right: solid 1px rgba($charcoal-grey, .7);
 
   .map-sidebar-group {
 
@@ -26,9 +27,7 @@
     .map-sidebar-group-items {
       cursor: pointer;
       background-color: $white-two;
-      max-height: 0;
       padding-left: 16px;
-      overflow: hidden;
       transition: max-height .5s;
       border-bottom: 1px solid $charcoal-grey-faded-a-lot;
     }
@@ -36,6 +35,11 @@
     &.-expandable {
       cursor: pointer;
       position: relative;
+
+      .map-sidebar-group-items {
+        max-height: 0;
+        overflow: hidden;
+      }
 
       .map-sidebar-group-title {
         &::after {

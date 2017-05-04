@@ -25,24 +25,28 @@
 
         <div class="js-sankey-veil sankey-veil veil"></div>
 
-        <div class="c-basemap-options c-map-sidebar is-absolute">
+        <div class="c-map-sidebar is-absolute">
           <div class="js-dimensions">
             <!-- this is rendered by map-dimensions.component -->
           </div>
 
-          <div class="explanation js-layer-contextual-title">
-            <span class="explanation-text">Contextual layers</span>
+          <div class="map-sidebar-group c-map-context js-map-context">
+            <div class="map-sidebar-group-title">
+              Contextual layers
+            </div>
+            <ul class="map-sidebar-group-items js-map-context-items">
+              <!-- this is rendered by map-context.component -->
+            </ul>
           </div>
-          <ul class="layer-list js-layer-contextual">
-            <!-- this is rendered by map-context.component -->
-          </ul>
 
-          <div class="explanation">
-            <span class="explanation-text">Basemaps</span>
+          <div class="map-sidebar-group c-map-basemaps">
+            <div class="map-sidebar-group-title">
+              Basemaps
+            </div>
+            <ul class="map-sidebar-group-items js-map-basemaps-items">
+              <!-- this is rendered by map-context.component -->
+            </ul>
           </div>
-          <ul class="layer-list js-layer-basemaps">
-            <!-- this is rendered by map-basemaps.component -->
-          </ul>
         </div>
 
         <div class="js-map-container c-map is-absolute">

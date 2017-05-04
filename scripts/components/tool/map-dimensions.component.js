@@ -1,6 +1,3 @@
-import 'styles/components/tool/map/map-layers.scss';
-import 'styles/components/tool/map/map-sidebar.scss';
-import 'styles/components/shared/radio-btn.scss';
 import MapDimensionsTemplate from 'ejs!templates/tool/map/map-dimensions.ejs';
 
 export default class {
