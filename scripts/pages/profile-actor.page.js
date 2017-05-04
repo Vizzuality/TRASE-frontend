@@ -40,37 +40,38 @@ const _onSelect = function(value) {
 
 const _build = (data, nodeId) => {
   const tooltip = new Tooltip('.js-infowindow');
+  const lineSettings = {
+    margin: {top: 10, right: 100, bottom: 25, left: 94},
+    height: 244,
+    ticks: {
+      yTicks: 6,
+      yTickPadding: 10,
+      yTickFormatType: 'top-location',
+      xTickPadding: 15
+    },
+    showTooltipCallback: (location, x, y) => {
+      tooltip.showTooltip(x, y, {
+        title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
+        values: [
+          { title: 'Trade Volume',
+            value: `${formatNumber(location.value)}<span>Tons</span>` }
+        ]
+      });
+    },
+    hideTooltipCallback: () => {
+      tooltip.hideTooltip();
+    }
+  };
 
   if (data.top_sources.municipalities.lines.length) {
-    document.querySelector('.js-top-municipalities-title').innerHTML = `Top source regions of ${formatApostrophe(_.capitalize(data.node_name))} soy:`;
+    document.querySelector('.js-top-municipalities-title').innerHTML = `Top source regions of ${formatApostrophe(_.capitalize(data.node_name))} soy: municipalities`;
     let topMunicipalitiesLines = data.top_sources.municipalities;
     topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
     new Line(
       '.js-top-municipalities',
       topMunicipalitiesLines,
       data.top_sources.includedYears,
-      {
-        margin: {top: 10, right: 100, bottom: 25, left: 94},
-        height: 244,
-        ticks: {
-          yTicks: 6,
-          yTickPadding: 10,
-          yTickFormatType: 'top-location',
-          xTickPadding: 15
-        },
-        showTooltipCallback: (municipality, x, y) => {
-          tooltip.showTooltip(x, y, {
-            title: `${data.node_name} > ${municipality.name.toUpperCase()}, ${municipality.date.getFullYear()}`,
-            values: [
-              { title: 'Trade Volume',
-                value: `${formatNumber(municipality.value)}<span>Tons</span>` }
-            ]
-          });
-        },
-        hideTooltipCallback: () => {
-          tooltip.hideTooltip();
-        }
-      },
+      lineSettings,
     );
 
     Map('.js-top-municipalities-map', {
@@ -96,35 +97,14 @@ const _build = (data, nodeId) => {
   }
 
   if (data.top_countries.lines.length) {
-    document.querySelector('.js-top-map-title').innerHTML = `TOP DESTINATION COUNTRIES Of ${formatApostrophe(_.capitalize(data.node_name))} SOY`;
+    document.querySelector('.js-top-map-title').innerHTML = `Top destination countries of ${formatApostrophe(_.capitalize(data.node_name))} soy`;
     let topCountriesLines = data.top_countries;
     topCountriesLines.lines = topCountriesLines.lines.slice(0, 5);
     new Line(
       '.js-top-destination',
       topCountriesLines,
       data.top_countries.includedYears,
-      {
-        margin: {top: 10, right: 100, bottom: 25, left: 94},
-        height: 244,
-        ticks: {
-          yTicks: 6,
-          yTickPadding: 10,
-          yTickFormatType: 'top-location',
-          xTickPadding: 15
-        },
-        showTooltipCallback: (country, x, y) => {
-          tooltip.showTooltip(x, y, {
-            title: `${data.node_name} > ${country.name.toUpperCase()}, ${country.date.getFullYear()}`,
-            values: [
-              { title: 'Trade Volume',
-                value: `${formatNumber(country.value)}<span>Tons</span>` }
-            ]
-          });
-        },
-        hideTooltipCallback: () => {
-          tooltip.hideTooltip();
-        }
-      },
+      lineSettings,
     );
 
     Map('.js-top-destination-map', {
