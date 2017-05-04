@@ -65,7 +65,7 @@ const _build = data => {
       topoJSONRoot: `${defaults.country.toUpperCase()}_MUNICIPALITY`,
       getPolygonClassName: ({ properties }) => {
         const municipality = data.top_sources.municipality.lines
-          .find(m => (properties.nome.toUpperCase() === m.name));
+          .find(m => (properties.geoid === m.geo_id));
         let value = 0;
         if (municipality) value = municipality.value9 || 0;
         return `-outline ch-${value}`;
@@ -98,14 +98,14 @@ const _build = data => {
       useRobinsonProjection: true,
       getPolygonClassName: ({ properties }) => {
         const country = data.top_countries.lines
-          .find(c => (properties.name.toUpperCase() === c.name));
+          .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
         let value = 0;
         if (country) value = country.value9 || 0;
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
         const country = data.top_countries.lines
-          .find(c => (properties.name.toUpperCase() === c.name));
+          .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
         let title = `${data.node_name} > ${properties.name.toUpperCase()}`;
         let body = null;
         if (country) body = country.values[0];
