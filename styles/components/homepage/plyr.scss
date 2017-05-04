@@ -1,5 +1,15 @@
 @import '../../settings';
 
+.plyr__controls, .plyr__video-wrapper {
+  visibility: hidden;
+  pointer-events: none;
+
+  &.-active {
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
 .plyr__play-large {
   background: $medium-pink;
   border: 0;
