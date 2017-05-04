@@ -71,7 +71,7 @@ const _build = (data, nodeId) => {
       '.js-top-municipalities',
       topMunicipalitiesLines,
       data.top_sources.includedYears,
-      lineSettings,
+      Object.assign({}, lineSettings, {margin: {top: 10, right: 100, bottom: 25, left: 37}}),
     );
 
     Map('.js-top-municipalities-map', {

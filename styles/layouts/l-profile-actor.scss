@@ -43,12 +43,29 @@
     padding: 49px 0 46px;
   }
 
+  .c-line {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
   .c-top-map,
   .c-top-municipalities {
     padding: 52px 0;
+  }
+
+  .c-top-map .title {
+    margin-bottom: 40px;
+  }
+
+  .c-top-municipalities {
 
     .title {
-      margin-bottom: 40px;
+      margin-bottom: 0;
+    }
+
+    .js-top-municipalities-map {
+      height: 405px;
     }
   }
 
