@@ -39,6 +39,9 @@ export default class {
         dimension.classList.toggle('-disabled', isFull);
       }
     });
+    this.sidebarGroups.forEach((sidebarGroup) => {
+      sidebarGroup.classList.toggle('-has-selected-children', sidebarGroup.querySelectorAll('.-selected').length);
+    });
   }
 
   toggleSidebarGroups(expandedMapSidebarGroupsIds) {
