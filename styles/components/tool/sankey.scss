@@ -110,7 +110,7 @@
       margin: auto;
     }
 
-    .c-sankey-tooltip {
+    .c-node-menu {
       display: none;
       top: 2px;
       right: 0;
@@ -134,7 +134,7 @@
     &:hover {
       background-color: transparent;
       box-shadow: unset;
-      .c-sankey-tooltip {
+      .c-node-menu {
         display: block;
       }
     }

@@ -256,7 +256,8 @@ export default function (state = {}, action) {
       newState = Object.assign({}, state, {
         highlightedNodesIds: action.ids,
         highlightedNodeData: action.data,
-        highlightedGeoIds: action.geoIds
+        highlightedGeoIds: action.geoIds,
+        highlightedNodeCoordinates: action.coordinates
       });
       break;
     }

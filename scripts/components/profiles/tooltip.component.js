@@ -1,5 +1,5 @@
 import TooltipTemplate from 'ejs!templates/shared/tooltip.ejs';
-import 'styles/components/shared/infowindow.scss';
+import 'styles/components/shared/info-tooltip.scss';
 
 export default class {
   constructor(className) {
