@@ -141,7 +141,7 @@ export default class {
       xTickFormat = (value) => {
         let format = d3_timeFormat('%y');
         return format(value) ;
-      }
+      };
     } else {
       yTickFormat = (value, i) => {
         const format = d3_format('0');
@@ -158,7 +158,7 @@ export default class {
         }
 
         return format(value) ;
-      }
+      };
     }
 
     const xAxis = d3_axis_bottom(x)

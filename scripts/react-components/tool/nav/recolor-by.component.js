@@ -85,7 +85,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
 
   return (
     <div class='nav-item js-dropdown' onClick={() => { onToggle(id); }}>
-      <div class={classNames('c-dropdown -small -capitalize', {['-hide-only-child']: hasZeroOrSingleElement} )}>
+      <div class={classNames('c-dropdown -small -capitalize', { ['-hide-only-child']: hasZeroOrSingleElement } )}>
         <span class='dropdown-label'>
           Recolor by
           <Tooltip position='top right' text={tooltips.sankey.nav.colorBy.main} />
