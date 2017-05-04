@@ -1,6 +1,6 @@
 import connect from 'connect';
 import MapDimensions from 'components/tool/map-dimensions.component.js';
-import { toggleMapSidebarGroup } from 'actions/tool.actions';
+import { toggleMapSidebarGroup, toggleMapDimension } from 'actions/tool.actions';
 
 const mapMethodsToState = (state) => ({
   loadMapDimensions: {
@@ -12,7 +12,7 @@ const mapMethodsToState = (state) => ({
       };
     }
   },
-  selectMapDimensions: state.tool.selectedMapDimensions,
+  selectMapDimensions: state.tool.selectedMapDimensions_,
   toggleSidebarGroups: state.tool.expandedMapSidebarGroupsIds
 });
 
@@ -20,7 +20,8 @@ const mapViewCallbacksToActions = () => ({
   // onMapDimensionsSelected: dimensionData => selectMapDimension(dimensionData),
   // onToggleModal: (visibility, data) => toggleModal(visibility, data),
   // onMapDimensionsLoaded: () => loadTooltip(),
-  onToggleGroup: (id) => toggleMapSidebarGroup(id)
+  onToggleGroup: (id) => toggleMapSidebarGroup(id),
+  onDimensionClick: (uid) => toggleMapDimension(uid)
 });
 
 export default connect(MapDimensions, mapMethodsToState, mapViewCallbacksToActions);

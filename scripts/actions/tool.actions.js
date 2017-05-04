@@ -79,28 +79,6 @@ export function selectYears(years) {
   };
 }
 
-export function selectMapDimension(dimensionData) {
-  return dispatch => {
-    dispatch({
-      type: actions.SELECT_MAP_DIMENSIONS, dimensionData
-    });
-  };
-}
-
-export function selectContextualLayers(contextualLayers) {
-  return {
-    type: actions.SELECT_CONTEXTUAL_LAYERS, contextualLayers
-  };
-}
-
-export function selectMapBasemap(selectedMapBasemap) {
-  return dispatch => {
-    dispatch({
-      type: actions.SELECT_BASEMAP, selectedMapBasemap
-    });
-  };
-}
-
 const _reloadLinks = (param, value, type, reloadLinks = true) => {
   return dispatch => {
     const action = {
@@ -203,7 +181,7 @@ export function loadNodes() {
       if (selection !== undefined) {
         selection.forEach((selectedDimension, index) => {
           const direction = (index === 0) ? 'vertical' : 'horizontal';
-          dispatch(selectMapDimension({
+          dispatch(toggleMapSidebarGroup({
             direction,
             title: selectedDimension.name,
             uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId),
@@ -514,6 +492,27 @@ export function saveMapView(latlng, zoom) {
     type: actions.SAVE_MAP_VIEW,
     latlng,
     zoom
+  };
+}
+
+export function toggleMapDimension(uid) {
+  return {
+    type: actions.TOGGLE_MAP_DIMENSION,
+    uid
+  };
+}
+
+export function selectContextualLayers(contextualLayers) {
+  return {
+    type: actions.SELECT_CONTEXTUAL_LAYERS,
+    contextualLayers
+  };
+}
+
+export function selectMapBasemap(selectedMapBasemap) {
+  return {
+    type: actions.SELECT_BASEMAP,
+    selectedMapBasemap
   };
 }
 

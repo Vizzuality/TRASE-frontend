@@ -296,21 +296,46 @@ export default function (state = {}, action) {
       break;
     }
 
-    case actions.SELECT_MAP_DIMENSIONS: {
-      const selectedMapDimensions = Object.assign({}, state.selectedMapDimensions);
-      const currentUidForDirection = selectedMapDimensions[action.dimensionData.direction].uid;
-      const nextUid = action.dimensionData.uid;
-      selectedMapDimensions[action.dimensionData.direction] = {
-        title: action.dimensionData.title,
-        uid: (currentUidForDirection === nextUid) ? null : nextUid,
-        bucket3: action.dimensionData.bucket3,
-        bucket5: action.dimensionData.bucket5,
+    case actions.TOGGLE_MAP_DIMENSION: {
+      // const selectedMapDimensions = Object.assign({}, state.selectedMapDimensions);
+      // const currentUidForDirection = selectedMapDimensions[action.dimensionData.direction].uid;
+      // const nextUid = action.dimensionData.uid;
+      // selectedMapDimensions[action.dimensionData.direction] = {
+      //   title: action.dimensionData.title,
+      //   uid: (currentUidForDirection === nextUid) ? null : nextUid,
+      //   bucket3: action.dimensionData.bucket3,
+      //   bucket5: action.dimensionData.bucket5,
+      // };
+
+      const selectedMapDimensions = {
+        horizontal: {
+          title: null,
+          uid: null
+        },
+        vertical: {
+          title: 'Territorial deforestation',
+          uid: 'ind3',
+          bucket3: [2000, 10000],
+          bucket5: [2000, 5000, 10000, 20000]
+        }
       };
+
+      let selectedMapDimensions_ = state.selectedMapDimensions_.slice();
+      let uidIndex = selectedMapDimensions_.indexOf(action.uid);
+      if (uidIndex === -1) {
+        if      (selectedMapDimensions_[0] === null)   selectedMapDimensions_[0] = action.uid;
+        else if (selectedMapDimensions_[1] === null)   selectedMapDimensions_[1] = action.uid;
+        else {
+          newState = state;
+          break;
+        }
+      } else {
+        selectedMapDimensions_[uidIndex] = null;
+      }
 
       // get a geoId <-> color dict
       const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
-
-      newState = Object.assign({}, state, { selectedMapDimensions, choropleth });
+      newState = Object.assign({}, state, { selectedMapDimensions, selectedMapDimensions_, choropleth });
       break;
     }
     case actions.SELECT_CONTEXTUAL_LAYERS: {

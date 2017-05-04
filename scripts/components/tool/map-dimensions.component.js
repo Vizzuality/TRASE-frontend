@@ -19,11 +19,22 @@ export default class {
       sidebarGroupTitle.addEventListener('click', this._onGroupTitleClicked.bind(this));
     });
 
+    this.dimensions = Array.prototype.slice.call(this.el.querySelectorAll('.js-map-sidebar-group-item'), 0);
+    this.dimensions.forEach((dimension) => {
+      dimension.addEventListener('click', this._onDimensionClicked.bind(this));
+    });
+
     this.toggleSidebarGroups(expandedMapSidebarGroupsIds);
   }
 
   selectMapDimensions(selectedMapDimensions) {
-    console.log(selectedMapDimensions)
+    if (this.dimensions === undefined) {
+      return;
+    }
+    this.dimensions.forEach((dimension) => {
+      const uid = dimension.getAttribute('data-dimension-uid');
+      dimension.classList.toggle('-selected', selectedMapDimensions.indexOf(uid) !== -1);
+    });
   }
 
   toggleSidebarGroups(expandedMapSidebarGroupsIds) {
@@ -33,12 +44,17 @@ export default class {
     }
     this.sidebarGroups.forEach((sidebarGroup) => {
       const id = sidebarGroup.getAttribute('data-group-id');
-      sidebarGroup.classList.toggle('-expanded', expandedMapSidebarGroupsIds.indexOf(id) !== -1)
+      sidebarGroup.classList.toggle('-expanded', expandedMapSidebarGroupsIds.indexOf(id) !== -1);
     });
   }
 
   _onGroupTitleClicked(event) {
     const id = event.currentTarget.parentNode.getAttribute('data-group-id');
     this.callbacks.onToggleGroup(id);
+  }
+
+  _onDimensionClicked(event) {
+    const uid = event.currentTarget.getAttribute('data-dimension-uid');
+    this.callbacks.onDimensionClick(uid);
   }
 }

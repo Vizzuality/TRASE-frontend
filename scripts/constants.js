@@ -52,6 +52,7 @@ export const TOOL_DEFAULT_STATE = {
         title: null
       }
     },
+    selectedMapDimensions_: [null, null],
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
     selectedMapBasemap: 'default',
     isMapVisible: false,
