@@ -1,3 +1,4 @@
+- profiles: connects choropleth maps to real data in actors profile pages
 - tool: added link tooltips resize by information
 - tool: added link tooltips quant units
 - profiles: added hover effects on shortcut buttons
