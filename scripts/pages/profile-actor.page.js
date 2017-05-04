@@ -57,7 +57,9 @@ const _build = (data, nodeId) => {
         title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
         values: [
           { title: 'Trade Volume',
-            value: `${formatNumber(location.value)}<span>Tons</span>` }
+            value: formatNumber(location.value),
+            unit: 'Tons'
+          }
         ]
       });
     },
@@ -73,24 +75,34 @@ const _build = (data, nodeId) => {
     new Line(
       '.js-top-municipalities',
       topMunicipalitiesLines,
-      data.top_sources.includedYears,
+      data.top_sources.included_years,
       Object.assign({}, lineSettings, {margin: {top: 10, right: 100, bottom: 25, left: 37}}),
     );
 
     Map('.js-top-municipalities-map', {
       topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_MUNICIPALITY.topo.json`,
       topoJSONRoot: `${defaults.country.toUpperCase()}_MUNICIPALITY`,
-      getPolygonClassName: (/*municipality*/) => {
-        const value = Math.floor(8 * Math.random());
+      getPolygonClassName: ({ properties }) => {
+        const municipality = data.top_sources.municipality.lines
+          .find(m => (properties.geoid === m.geo_id));
+        let value = 0;
+        if (municipality) value = municipality.value9 || 0;
         return `-outline ch-${value}`;
       },
-      showTooltipCallback: (municipality, x, y) => {
+      showTooltipCallback: ({ properties }, x, y) => {
+        const municipality = data.top_sources.municipality.lines
+          .find(m => (properties.geoid === m.geo_id));
+        let title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
+        let body = null;
+        if (municipality) body = municipality.values[0];
+
         tooltip.showTooltip(x, y, {
-          title: `${data.node_name} > ${municipality.properties.nome.toUpperCase()}`,
-          values: [
-            { title: 'Trade Volume',
-              value: 'put choropleth value here' }
-          ]
+          title,
+          values: [{
+            title: 'Trade Volume',
+            value: formatNumber(body),
+            unit: 'Tons'
+          }]
         });
       },
       hideTooltipCallback: () => {
@@ -106,7 +118,7 @@ const _build = (data, nodeId) => {
     new Line(
       '.js-top-destination',
       topCountriesLines,
-      data.top_countries.includedYears,
+      data.top_countries.included_years,
       lineSettings,
     );
 
@@ -114,17 +126,27 @@ const _build = (data, nodeId) => {
       topoJSONPath: './vector_layers/WORLD.topo.json',
       topoJSONRoot: 'WORLD',
       useRobinsonProjection: true,
-      getPolygonClassName: (/*country*/) => {
-        const value = Math.floor(8 * Math.random());
+      getPolygonClassName: ({ properties }) => {
+        const country = data.top_countries.lines
+          .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
+        let value = 0;
+        if (country) value = country.value9 || 0;
         return `-outline ch-${value}`;
       },
-      showTooltipCallback: (country, x, y) => {
+      showTooltipCallback: ({ properties }, x, y) => {
+        const country = data.top_countries.lines
+          .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
+        let title = `${data.node_name} > ${properties.name.toUpperCase()}`;
+        let body = null;
+        if (country) body = country.values[0];
+
         tooltip.showTooltip(x, y, {
-          title: `${data.node_name} > ${country.properties.name.toUpperCase()}`,
-          values: [
-            { title: 'Trade Volume',
-              value: 'put choropleth value here' }
-          ]
+          title,
+          values: [{
+            title: 'Trade Volume',
+            value: formatNumber(body),
+            unit: 'Tons'
+          }]
         });
       },
       hideTooltipCallback: () => {
@@ -151,10 +173,16 @@ const _build = (data, nodeId) => {
       tooltip.showTooltip(x, y, {
         title: company.name,
         values: [
-          { title: 'Trade Volume',
-            value: `${company.y}<span>t</span>` },
-          { title: indicator.name,
-            value: `${company.x}<span>${indicator.unit}</span>` }
+          {
+            title: 'Trade Volume',
+            value: company.y,
+            unit: 't'
+          },
+          {
+            title: indicator.name,
+            value: company.x,
+            unit: indicator.unit
+          }
         ]
       });
     },
@@ -256,17 +284,27 @@ const _switchTopSource = (e, data) => {
   Map('.js-top-municipalities-map', {
     topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}.topo.json`,
     topoJSONRoot: `${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}`,
-    getPolygonClassName: () => {
-      const value = Math.floor(8 * Math.random());
+    getPolygonClassName: ({ properties }) => {
+      const municipality = data.top_sources.municipality.lines
+        .find(m => (properties.geoid === m.geo_id));
+      let value = 0;
+      if (municipality) value = municipality.value9 || 0;
       return `-outline ch-${value}`;
     },
-    showTooltipCallback: (location, x, y) => {
+    showTooltipCallback: ({ properties }, x, y) => {
+      const municipality = data.top_sources.municipality.lines
+        .find(m => (properties.geoid === m.geo_id));
+      let title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
+      let body = null;
+      if (municipality) body = municipality.values[0];
+
       tooltip.showTooltip(x, y, {
-        title: `${data.node_name} > ${location.properties.nome.toUpperCase()}`,
-        values: [
-          { title: 'Trade Volume',
-            value: 'put choropleth value here' }
-        ]
+        title,
+        values: [{
+          title: 'Trade Volume',
+          value: formatNumber(body),
+          unit: 'Tons'
+        }]
       });
     },
     hideTooltipCallback: () => {
@@ -281,7 +319,7 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId}, true);
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, true);
 
   fetch(actorFactsheetURL)
     .then((response) => {
