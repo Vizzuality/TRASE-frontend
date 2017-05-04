@@ -1,5 +1,6 @@
 import 'styles/components/tool/map/map-layers.scss';
 import 'styles/components/tool/map/map-sidebar.scss';
+import 'styles/components/shared/radio-btn.scss';
 import MapDimensionsTemplate from 'ejs!templates/tool/map/map-dimensions.ejs';
 
 export default class {
@@ -29,9 +30,14 @@ export default class {
     if (this.dimensions === undefined) {
       return;
     }
+    const isFull = selectedMapDimensions[0] !== null && selectedMapDimensions[1] !== null;
     this.dimensions.forEach((dimension) => {
       const uid = dimension.getAttribute('data-dimension-uid');
-      dimension.classList.toggle('-selected', selectedMapDimensions.indexOf(uid) !== -1);
+      const isSelected = selectedMapDimensions.indexOf(uid) !== -1;
+      dimension.classList.toggle('-selected', isSelected);
+      if (!isSelected) {
+        dimension.classList.toggle('-disabled', isFull);
+      }
     });
   }
 

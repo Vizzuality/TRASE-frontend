@@ -1,6 +1,8 @@
 @import '../../../settings';
 
 .c-map-sidebar {
+  cursor: pointer;
+
   .map-sidebar-group {
 
     margin-top: 28px;
@@ -50,6 +52,63 @@
 
       &:not(:last-child) {
         border-bottom: 1px solid $charcoal-grey-faded-a-lot;
+      }
+
+      .radio-btn {
+        display: inline-block;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba($charcoal-grey, .3);
+        border-radius: 50%;
+      }
+
+      &.-selected,
+      &:hover {
+        color: $charcoal-grey;
+        font-weight: $font-weight-bold;
+
+        .radio-btn {
+          border-color: $charcoal-grey;
+
+          &::before {
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 7px;
+            height: 7px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            content: ' ';
+            background-color: $charcoal-grey;
+          }
+        }
+      }
+
+      &.-selected:hover:not(.-no-self-cancel) {
+        .radio-btn {
+          align-items: center;
+          text-align: center;
+
+          &::before {
+            display: none;
+          }
+
+          &::after {
+            position: absolute;
+            top: -2px;
+            left: 1px;
+            font-size: 15px;
+            font-weight: $font-weight-bold;
+            content: '×';
+          }
+        }
+      }
+
+      &.-disabled {
+        pointer-events: none;
+        color: $medium-grey;
       }
     }
   }
