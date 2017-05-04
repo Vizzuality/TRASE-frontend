@@ -31,6 +31,7 @@ export default class {
     const ticks = settings.ticks;
     this.showTooltipCallback = settings.showTooltipCallback;
     this.hideTooltipCallback = settings.hideTooltipCallback;
+    let allYValues = [].concat.apply([], data.lines.map(line => line.values));
 
     let container = d3_select(elem)
       .append('svg')
@@ -38,12 +39,6 @@ export default class {
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-    let tempArr = data.lines.map(line => line.values);
-    let allYValues = [];
-    for(let i = 0; i < tempArr.length; i++) {
-      allYValues = [...allYValues, ...tempArr[i]];
-    }
 
     let x = d3_scale_time()
       .range([0, width])
