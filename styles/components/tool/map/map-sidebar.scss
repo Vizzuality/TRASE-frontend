@@ -3,15 +3,53 @@
 .c-map-sidebar {
   .map-sidebar-group {
 
+    margin-top: 28px;
+
+    .map-sidebar-group-title {
+      display: flex;
+      align-items: center;
+      height: 44px;
+      padding: 0 10px 0 16px;
+      background-color: $white;
+      border-bottom: 1px solid $charcoal-grey-faded-a-lot;
+
+
+      // padding-right: 30%;
+      color: $charcoal-grey;
+      font-family: $font-family-1;
+      font-size: $font-size-regular;
+      letter-spacing: -.5px;
+      text-transform: uppercase;
+    }
+
     .map-sidebar-group-items {
+      background-color: $white-two;
       max-height: 0;
+      padding-left: 16px;
       overflow: hidden;
       transition: max-height .5s;
+      border-bottom: 1px solid $charcoal-grey-faded-a-lot;
     }
 
     &.-expanded {
       .map-sidebar-group-items {
         max-height: 500px;
+      }
+    }
+
+    .map-sidebar-group-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 15px 0 0;
+      color: $charcoal-grey;
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      letter-spacing: -1px;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $charcoal-grey-faded-a-lot;
       }
     }
   }

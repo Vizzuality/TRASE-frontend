@@ -1,5 +1,5 @@
 import ContextLayersTemplate from 'ejs!templates/tool/map/map-context.ejs';
-
+import 'styles/components/shared/switcher.scss';
 export default class {
 
   onCreated() {

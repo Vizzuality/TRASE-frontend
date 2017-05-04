@@ -6,18 +6,18 @@
     <ul class="map-sidebar-group-items">
       <% group.dimensions.forEach(function(dimension) { %>
         <li class="map-sidebar-group-item js-map-sidebar-group-item" data-dimension-uid="<%= dimension.uid %>">
-          <label>
-            <%= dimension.name %>
-            <% if (dimension.unit) { %>
-              (<%= dimension.unit %>)
-            <% } %>
+          <%= dimension.name %>
+          <% if (dimension.unit) { %>
+            (<%= dimension.unit %>)
+          <% } %>
+          <div class="actions">
             <% if (dimension.description) {  %>
               <svg class="icon icon-layer-info js-tooltip" data-tooltip-text="<%= dimension.description %>">
                 <use xlink:href="#icon-layer-info"></use>
               </svg>
-            <% } %>
-          </label>
-          <div class="c-radio-btn" value="<%= dimension.uid %>"></div>
+              <% } %>
+            <div class="c-radio-btn" value="<%= dimension.uid %>"></div>
+          </div>
         </li>
       <% }) %>
     </ul>

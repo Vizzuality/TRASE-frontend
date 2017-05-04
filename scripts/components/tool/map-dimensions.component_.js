@@ -1,6 +1,5 @@
 import 'styles/components/tool/map/map-layers.scss';
 import 'styles/components/shared/radio-btn.scss';
-import 'styles/components/shared/switcher.scss';
 import MapDimensionsTemplate from 'ejs!templates/tool/mapDimensions.ejs';
 
 export default class {
