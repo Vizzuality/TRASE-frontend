@@ -1,8 +1,11 @@
 - home: only allow video playing on full screen
 - home: show screenshot instead of video when video playback has not started yet
+- tool: added tooltips on the map to show info that is otherwise displayed on the bottom of the sankey
+- tool: fixed water scarcity color scale
 - tool: added link tooltips resize by information
 - tool: added link tooltips quant units
 - profiles: added hover effects on shortcut buttons
+- profiles: companies exporting chart (mock)
 - tool entry in menu now triggers a submenu with two entry points
 
 ### 2.0.4

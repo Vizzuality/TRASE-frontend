@@ -15,7 +15,9 @@ const mapMethodsToState = (state) => ({
       return {
         nodesData: (state.tool.highlightedNodeData.length === 0) ? state.tool.selectedNodesData : state.tool.highlightedNodeData,
         isHighlight: state.tool.highlightedNodeData.length > 0,
-        recolorGroups: state.tool.recolorGroups
+        recolorGroups: state.tool.recolorGroups,
+        coordinates: state.tool.highlightedNodeCoordinates,
+        isMapVisible: state.tool.isMapVisible
       };
     }
   }
