@@ -41,18 +41,7 @@ export const TOOL_DEFAULT_STATE = {
     areNodesExpanded: false,
     detailedView: false,
     selectedNodesData: [],
-    // TODO title should be inferred from the uid, not kept in state
-    selectedMapDimensions: {
-      horizontal: {
-        uid: null,
-        title: null
-      },
-      vertical: {
-        uid: null,
-        title: null
-      }
-    },
-    selectedMapDimensions_: [null, null],
+    selectedMapDimensions: [null, null],
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
     selectedMapBasemap: 'default',
     isMapVisible: false,

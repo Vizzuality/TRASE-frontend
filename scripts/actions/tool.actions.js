@@ -183,16 +183,6 @@ export function loadNodes() {
         if (uids[0] === undefined) uids[0] = null;
         if (uids[1] === undefined) uids[1] = null;
         dispatch(setMapDimensions(uids));
-        // selection.forEach((selectedDimension) => {
-          // const direction = (index === 0) ? 'vertical' : 'horizontal';
-          // dispatch(toggleMapSidebarGroup({
-          //   direction,
-          //   title: selectedDimension.name,
-          //   uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId),
-          //   bucket3: selectedDimension.bucket3,
-          //   bucket5: selectedDimension.bucket5
-          // }));
-        // });
       }
     });
   };

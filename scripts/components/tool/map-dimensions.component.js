@@ -10,7 +10,6 @@ export default class {
   }
 
   loadMapDimensions({ mapDimensionsGroups, expandedMapSidebarGroupsIds }) {
-    console.log(mapDimensionsGroups);
     this.el.innerHTML = MapDimensionsTemplate({groups: mapDimensionsGroups});
 
     this.sidebarGroups = Array.prototype.slice.call(this.el.querySelectorAll('.js-map-sidebar-group'), 0);
@@ -38,7 +37,6 @@ export default class {
   }
 
   toggleSidebarGroups(expandedMapSidebarGroupsIds) {
-    console.log(expandedMapSidebarGroupsIds)
     if (this.sidebarGroups === undefined) {
       return;
     }

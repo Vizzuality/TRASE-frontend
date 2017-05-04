@@ -8,7 +8,7 @@ export default (nodesIds, state) => {
     };
   }
 
-  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapDimensions_);
+  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapDimensions);
   const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined && geoId !== null);
   const columnsPos = data.map(node => node.columnGroup);
 

@@ -12,13 +12,11 @@ const mapMethodsToState = (state) => ({
       };
     }
   },
-  selectMapDimensions: state.tool.selectedMapDimensions_,
+  selectMapDimensions: state.tool.selectedMapDimensions,
   toggleSidebarGroups: state.tool.expandedMapSidebarGroupsIds
 });
 
 const mapViewCallbacksToActions = () => ({
-  // onMapDimensionsSelected: dimensionData => selectMapDimension(dimensionData),
-  // onToggleModal: (visibility, data) => toggleModal(visibility, data),
   // onMapDimensionsLoaded: () => loadTooltip(),
   onToggleGroup: (id) => toggleMapSidebarGroup(id),
   onDimensionClick: (uid) => toggleMapDimension(uid)
