@@ -10,7 +10,7 @@ export default class {
     this.infowindow.style.left = x + 'px';
     this.infowindow.style.top = y + 'px';
 
-    const template = TooltipTemplate({title: data.title, values: data.values});
+    const template = TooltipTemplate({ title: data.title, values: data.values });
     this.infowindow.innerHTML = template;
     this.infowindow.classList.remove('is-hidden');
   }
