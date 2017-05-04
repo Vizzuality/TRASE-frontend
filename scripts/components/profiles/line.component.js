@@ -33,6 +33,7 @@ export default class {
     this.hideTooltipCallback = settings.hideTooltipCallback;
     let allYValues = [].concat.apply([], data.lines.map(line => line.values));
 
+    elem.innerHTML = '';
     let container = d3_select(elem)
       .append('svg')
       .attr('width', width + margin.left + margin.right)

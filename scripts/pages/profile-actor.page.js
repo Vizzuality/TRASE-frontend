@@ -28,10 +28,14 @@ import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
+import TopSourceTemplate from 'ejs!templates/profiles/top-source-switcher.ejs';
+
 const defaults = {
   country: 'Brazil',
   commodity: 'soy'
 };
+
+const tooltip = new Tooltip('.js-infowindow');
 
 const _onSelect = function(value) {
   this.setTitle(value);
@@ -39,7 +43,6 @@ const _onSelect = function(value) {
 };
 
 const _build = (data, nodeId) => {
-  const tooltip = new Tooltip('.js-infowindow');
   const lineSettings = {
     margin: {top: 10, right: 100, bottom: 25, left: 94},
     height: 244,
@@ -63,9 +66,9 @@ const _build = (data, nodeId) => {
     }
   };
 
-  if (data.top_sources.municipalities.lines.length) {
-    document.querySelector('.js-top-municipalities-title').innerHTML = `Top source regions of ${formatApostrophe(_.capitalize(data.node_name))} soy: municipalities`;
-    let topMunicipalitiesLines = data.top_sources.municipalities;
+  if (data.top_sources.municipality.lines.length) {
+    _setTopSourceSwitcher(data);
+    let topMunicipalitiesLines = data.top_sources.municipality;
     topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
     new Line(
       '.js-top-municipalities',
@@ -128,14 +131,13 @@ const _build = (data, nodeId) => {
         tooltip.hideTooltip();
       }
     });
-
   }
 
   if (data.sustainability.length) {
     new MultiTable({
       el: document.querySelector('.js-sustainability-table'),
       data: data.sustainability,
-      tabsTitle: `Sustainability of ${formatApostrophe(data.node_name)} TOP source regions in 2015:`,
+      tabsTitle: `Sustainability of ${formatApostrophe(data.node_name)} top source regions in 2015:`,
       type: 't_head_actors',
       target: 'actor'
     });
@@ -192,6 +194,85 @@ const _showErrorMessage = () => {
   document.querySelector('.js-loading').classList.add('is-hidden');
   el.querySelector('.js-wrap').classList.add('is-hidden');
   el.querySelector('.js-error-message').classList.remove('is-hidden');
+};
+
+const _setTopSourceSwitcher = (data) => {
+  const template = TopSourceTemplate({
+    nodeName: formatApostrophe(_.capitalize(data.node_name)),
+    switchers: Object.keys(data.top_sources).filter(key => key !== 'includedYears')
+  });
+  document.querySelector('.js-top-municipalities-title').innerHTML = template;
+
+  const switchers = Array.prototype.slice.call(document.querySelectorAll('.js-top-source-switcher'), 0);
+  switchers.forEach(switcher => {
+    switcher.addEventListener('click', (e) => _switchTopSource(e, data));
+  });
+};
+
+const _switchTopSource = (e, data) => {
+  const selectedSwitch = e && e.currentTarget;
+  if (!selectedSwitch) {
+    return;
+  }
+
+  const selectedSource = selectedSwitch.getAttribute('data-key');
+  const switchers = Array.prototype.slice.call(document.querySelectorAll('.js-top-source-switcher'), 0);
+  switchers.forEach(switcher => {
+    switcher.classList.remove('selected');
+  });
+  selectedSwitch.classList.add('selected');
+
+  let topMunicipalitiesLines = data.top_sources[selectedSource];
+  topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
+  new Line(
+    '.js-top-municipalities',
+    topMunicipalitiesLines,
+    data.top_sources.includedYears,
+    {
+      margin: {top: 10, right: 100, bottom: 25, left: 37},
+      height: 244,
+      ticks: {
+        yTicks: 6,
+        yTickPadding: 10,
+        yTickFormatType: 'top-location',
+        xTickPadding: 15
+      },
+      showTooltipCallback: (location, x, y) => {
+        tooltip.showTooltip(x, y, {
+          title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
+          values: [
+            { title: 'Trade Volume',
+              value: `${formatNumber(location.value)}<span>Tons</span>` }
+          ]
+        });
+      },
+      hideTooltipCallback: () => {
+        tooltip.hideTooltip();
+      }
+    },
+  );
+
+  document.querySelector('.js-top-municipalities-map').innerHTML = '';
+  Map('.js-top-municipalities-map', {
+    topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}.topo.json`,
+    topoJSONRoot: `${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}`,
+    getPolygonClassName: () => {
+      const value = Math.floor(8 * Math.random());
+      return `-outline ch-${value}`;
+    },
+    showTooltipCallback: (location, x, y) => {
+      tooltip.showTooltip(x, y, {
+        title: `${data.node_name} > ${location.properties.nome.toUpperCase()}`,
+        values: [
+          { title: 'Trade Volume',
+            value: 'put choropleth value here' }
+        ]
+      });
+    },
+    hideTooltipCallback: () => {
+      tooltip.hideTooltip();
+    }
+  });
 };
 
 const _init = ()  => {

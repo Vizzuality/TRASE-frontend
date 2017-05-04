@@ -2,6 +2,7 @@
 - tool: fixed water scarcity color scale
 - tool: added link tooltips resize by information
 - tool: added link tooltips quant units
+- profiles: actor municipalities/biome/state switcher
 - profiles: added line chart locations on actors page
 - profiles: added hover effects on shortcut buttons
 - profiles: companies exporting chart (mock)
