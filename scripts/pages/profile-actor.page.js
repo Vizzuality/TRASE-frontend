@@ -16,7 +16,6 @@ import 'styles/components/profiles/error.scss';
 import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
 import Map from 'components/profiles/map.component';
-//import Top from 'components/profiles/top.component';
 import Line from 'components/profiles/line.component';
 import MultiTable from 'components/profiles/multi-table.component';
 import Scatterplot from 'components/profiles/scatterplot.component';
