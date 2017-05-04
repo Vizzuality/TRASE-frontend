@@ -41,7 +41,7 @@ const _onSelect = function(value) {
 const _build = (data, nodeId) => {
   const tooltip = new Tooltip('.js-infowindow');
   const lineSettings = {
-    margin: {top: 10, right: 100, bottom: 25, left: 94},
+    margin: { top: 10, right: 100, bottom: 25, left: 94 },
     height: 244,
     ticks: {
       yTicks: 6,

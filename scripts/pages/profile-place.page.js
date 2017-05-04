@@ -66,7 +66,7 @@ const _build = data => {
     data.trajectory_deforestation,
     data.trajectory_deforestation.includedYears,
     {
-      margin: {top: 30, right: 40, bottom: 30, left: 99},
+      margin: { top: 30, right: 40, bottom: 30, left: 99 },
       height: 425,
       ticks: {
         yTicks: 7,
@@ -163,7 +163,7 @@ const _init = () => {
 
   commodityDropdown.setTitle(defaults.commodity);
 
-  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId}, true);
+  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId }, true);
 
   fetch(placeFactsheetURL)
     .then((response) => {

@@ -23,12 +23,12 @@ export default class {
     zoom.addEventListener('mouseleave', () => { scale.classList.toggle('-visible', false); });
   }
 
-  updateChoroplethLegend({selectedMapDimensions, selectedMapContextualLayersData}) {
+  updateChoroplethLegend({ selectedMapDimensions, selectedMapContextualLayersData }) {
     this._setupChoro(selectedMapDimensions, selectedMapContextualLayersData);
     this._updateMapControlsPosition();
   }
 
-  updateContextLegend({selectedMapDimensions, selectedMapContextualLayersData}) {
+  updateContextLegend({ selectedMapDimensions, selectedMapContextualLayersData }) {
     this._toggleLegend(selectedMapDimensions, selectedMapContextualLayersData);
     this._renderContext(selectedMapContextualLayersData);
     this._updateMapControlsPosition();

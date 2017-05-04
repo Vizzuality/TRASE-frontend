@@ -8,7 +8,7 @@ export default class {
   }
 
   buildLayers(layers) {
-    this.el.innerHTML = ContextLayersTemplate({layers});
+    this.el.innerHTML = ContextLayersTemplate({ layers });
     this.switchers = Array.prototype.slice.call(this.el.querySelectorAll('.c-switcher'), 0);
 
     this.switchers.forEach(switcher => {

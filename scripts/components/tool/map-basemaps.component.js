@@ -7,7 +7,7 @@ export default class {
   }
 
   buildBasemaps(basemaps) {
-    this.el.innerHTML = BasemapsTemplate({basemaps});
+    this.el.innerHTML = BasemapsTemplate({ basemaps });
 
     this.radios = Array.prototype.slice.call(this.el.querySelectorAll('.c-radio-btn'), 0);
     this.radios.forEach((radio) => {
