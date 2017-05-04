@@ -1,7 +1,6 @@
 @import '../../settings';
 
 .c-line {
-  margin-top: 15px;
 
   path {
     stroke: none;
@@ -62,6 +61,43 @@
     stroke-linecap: round;
   }
 
+  .line-pink-with-points {
+
+    $i: 5;
+    @while $i > 0 {
+      &:nth-child(#{$i}) {
+
+        path,
+        circle {
+          stroke: rgba($medium-pink, 1 / $i);
+        }
+      }
+      $i: $i - 1;
+    }
+
+    path {
+      stroke-width: 3px;
+    }
+
+    circle {
+      display: none;
+      fill: $egg-shell;
+      stroke-width: 3px;
+    }
+
+    text {
+      font-family: $font-family-1;
+      font-size: $font-size-x-regular;
+      font-weight: $font-weight-bold;
+      line-height: 1.15;
+      letter-spacing: -0.6px;
+      color: $charcoal-grey;
+    }
+
+    &:hover circle {
+      display: block;
+    }
+  }
 }
 
 .c-line-legend {

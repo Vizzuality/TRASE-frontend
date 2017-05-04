@@ -1,4 +1,7 @@
-import { select as d3_select } from 'd3-selection';
+import {
+  select as d3_select,
+  event as d3_event
+} from 'd3-selection';
 import {
   axisBottom as d3_axis_bottom,
   axisLeft as d3_axis_left
@@ -14,20 +17,21 @@ import {
 } from 'd3-shape';
 import { format as d3_format } from 'd3-format';
 import { timeFormat as d3_timeFormat } from 'd3-time-format';
-import stringToHTML from 'utils/stringToHTML';
 import LegendItemTemplate from 'ejs!templates/profiles/legendItem.ejs';
-
+import abbreviateNumber from 'utils/abbreviateNumber';
 import 'styles/components/profiles/line.scss';
 
-
 export default class {
-  constructor(className, data) {
+  constructor(className, data, xValues, settings) {
     const elem = document.querySelector(className);
     const legend = document.querySelector(`${className}-legend`);
-    const margin = {top: 30, right: 40, bottom: 30, left: 94};
+    const margin = settings.margin;
     const width = elem.clientWidth - margin.left - margin.right;
-    const height = 425 - margin.top - margin.bottom;
-    let allValues = [];
+    const height = settings.height - margin.top - margin.bottom;
+    const ticks = settings.ticks;
+    this.showTooltipCallback = settings.showTooltipCallback;
+    this.hideTooltipCallback = settings.hideTooltipCallback;
+    let allYValues = [].concat.apply([], data.lines.map(line => line.values));
 
     let container = d3_select(elem)
       .append('svg')
@@ -38,85 +42,134 @@ export default class {
 
     let x = d3_scale_time()
       .range([0, width])
-      .domain(d3_extent(data.includedYears, y => new Date(y, 0)));
+      .domain(d3_extent(xValues, y => new Date(y, 0)));
 
-    data.lines.forEach((lineData) => {
-      allValues = [...allValues, ...lineData.values];
-      const y0 = d3_scale_linear()
-        .rangeRound([height, 0])
-        .domain(d3_extent(lineData.values));
-      const lineValuesWithFormat = prepareData(data.includedYears, lineData);
+    let y = d3_scale_linear()
+      .rangeRound([height, 0])
+      .domain(d3_extent([0, ...allYValues]));
+
+    data.lines.forEach((lineData, i) => {
+      const lineValuesWithFormat = prepareData(xValues, lineData);
+      const line = d3_line()
+        .x(d => x(d.date))
+        .y(d => y(d.value));
+      const type = typeof data.style !== 'undefined' ? data.style.type : lineData.type;
+      const style = typeof data.style !== 'undefined' ? data.style.style : lineData.style;
+
       let area = null,
-        line = null;
-
-      switch (lineData.type) {
+        pathContainers = null;
+      switch (type) {
         case 'area':
           area = d3_area()
             .x(d => x(d.date))
-            .y0(height)
-            .y1(d => y0(d.value));
-
-          line = d3_line()
-            .x(d => x(d.date))
-            .y(d => y0(d.value));
+            .y(height)
+            .y1(d => y(d.value));
 
           container.append('path')
             .datum(lineValuesWithFormat)
-            .attr('class', lineData.style)
+            .attr('class', style)
             .attr('d', area);
 
           container.append('path')
             .datum(lineValuesWithFormat)
-            .attr('class', `line-${lineData.style}`)
+            .attr('class', `line-${style}`)
             .attr('d', line);
           break;
         case 'line':
-          line = d3_line()
-            .x(d => x(d.date))
-            .y(d => y0(d.value));
-
           container.append('path')
             .datum(lineValuesWithFormat)
-            .attr('class', lineData.style)
+            .attr('class', style)
             .attr('d', line);
+          break;
+        case 'line-points':
+          pathContainers = container.datum(lineValuesWithFormat)
+            .append('g')
+            .attr('class', style);
+
+          pathContainers.selectAll('path')
+            .data(d => [d])
+            .enter().append('path')
+            .attr('d', line);
+
+          pathContainers.selectAll('text')
+            .data(d => [d])
+            .enter().append('text')
+            .attr('transform', d => `translate(${width + 6},${y(d[d.length - 1].value) + 4})`)
+            .text(d => `${i + 1}.${d[0].name}`);
+
+          this.circles = pathContainers.selectAll('circle')
+            .data(d => d)
+            .enter().append('circle')
+            .attr('cx', d => x(d.date))
+            .attr('cy', d => y(d.value))
+            .attr('r', 4);
+
+          if (this.showTooltipCallback !== undefined) {
+            this.circles.on('mousemove', function(d) {
+              this.showTooltipCallback(
+                d,
+                d3_event.clientX + 10,
+                d3_event.clientY + window.scrollY + 10
+              );
+            }.bind(this))
+            .on('mouseout', function() {
+              this.hideTooltipCallback();
+            }.bind(this));
+          }
           break;
       }
 
-      const legendItemHTML = stringToHTML(LegendItemTemplate({
-        name: lineData.legend_name,
-        style: lineData.style
-      }));
+      if (typeof lineData.legend_name !== 'undefined') {
+        const legendItemHTML = LegendItemTemplate({
+          name: lineData.legend_name,
+          style: style
+        });
 
-      legend.appendChild(legendItemHTML[0]);
+        legend.innerHTML = legend.innerHTML + legendItemHTML;
+      }
     });
 
-    let y = d3_scale_linear()
-      .rangeRound([height, 0])
-      .domain(d3_extent([0, ...allValues]));
-
-    const xAxis = d3_axis_bottom(x)
-      .tickSize(0)
-      .tickPadding(15)
-      .tickFormat((value, i) => {
-        let format = d3_timeFormat('%y');
-        if (i === 0) {
-          format = d3_timeFormat('%Y');
+    let yTickFormat = null,
+      xTickFormat = null;
+    if (ticks.yTickFormatType === 'top-location') {
+      yTickFormat = (value, i) => {
+        if (i === 6) {
+          return `${abbreviateNumber(value, 3)} ${data.unit}`;
         }
-
+        return abbreviateNumber(value, 3);
+      };
+      xTickFormat = (value) => {
+        let format = d3_timeFormat('%y');
         return format(value) ;
-      });
-    const yAxis = d3_axis_left(y)
-      .ticks(7)
-      .tickSize(-width, 0)
-      .tickPadding(52)
-      .tickFormat((value, i) => {
+      }
+    } else {
+      yTickFormat = (value, i) => {
         const format = d3_format('0');
 
         if (i === 6) {
           return `${format(value)}${data.unit}`;
         }
         return format(value) ;
-      });
+      };
+      xTickFormat = (value, i) => {
+        let format = d3_timeFormat('%y');
+        if (i === 0) {
+          format = d3_timeFormat('%Y');
+        }
+
+        return format(value) ;
+      }
+    }
+
+    const xAxis = d3_axis_bottom(x)
+      .tickSize(0)
+      .tickPadding(ticks.xTickPadding)
+      .tickFormat(xTickFormat);
+    const yAxis = d3_axis_left(y)
+      .ticks(ticks.yTicks)
+      .tickSize(-width, 0)
+      .tickPadding(ticks.yTickPadding)
+      .tickFormat(yTickFormat);
 
     container.append('g')
       .attr('transform', `translate(0, ${height} )`)
@@ -129,9 +182,10 @@ export default class {
   }
 }
 
-const prepareData = (includedYears, data) => {
-  return includedYears.map((year, index) => {
+const prepareData = (xValues, data) => {
+  return xValues.map((year, index) => {
     return {
+      name: data.name,
       date: new Date(year, 0),
       value: data.values[index]
     };

@@ -16,7 +16,7 @@ import 'styles/components/profiles/error.scss';
 import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
 import Map from 'components/profiles/map.component';
-import Top from 'components/profiles/top.component';
+import Line from 'components/profiles/line.component';
 import MultiTable from 'components/profiles/multi-table.component';
 import Scatterplot from 'components/profiles/scatterplot.component';
 import Tooltip from 'components/profiles/tooltip.component';
@@ -24,6 +24,7 @@ import Tooltip from 'components/profiles/tooltip.component';
 import { getURLParams } from 'utils/stateURL';
 import smoothScroll from 'utils/smoothScroll';
 import formatApostrophe from 'utils/formatApostrophe';
+import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 
@@ -39,14 +40,39 @@ const _onSelect = function(value) {
 
 const _build = (data, nodeId) => {
   const tooltip = new Tooltip('.js-infowindow');
+  const lineSettings = {
+    margin: {top: 10, right: 100, bottom: 25, left: 94},
+    height: 244,
+    ticks: {
+      yTicks: 6,
+      yTickPadding: 10,
+      yTickFormatType: 'top-location',
+      xTickPadding: 15
+    },
+    showTooltipCallback: (location, x, y) => {
+      tooltip.showTooltip(x, y, {
+        title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
+        values: [
+          { title: 'Trade Volume',
+            value: `${formatNumber(location.value)}<span>Tons</span>` }
+        ]
+      });
+    },
+    hideTooltipCallback: () => {
+      tooltip.hideTooltip();
+    }
+  };
 
   if (data.top_sources.municipalities.lines.length) {
-    new Top({
-      el: document.querySelector('.js-top-municipalities'),
-      data: data.top_sources.municipalities.lines,
-      targetLink: 'place',
-      title: 'top source municipalities in 2015'
-    });
+    document.querySelector('.js-top-municipalities-title').innerHTML = `Top source regions of ${formatApostrophe(_.capitalize(data.node_name))} soy: municipalities`;
+    let topMunicipalitiesLines = data.top_sources.municipalities;
+    topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
+    new Line(
+      '.js-top-municipalities',
+      topMunicipalitiesLines,
+      data.top_sources.includedYears,
+      lineSettings,
+    );
 
     Map('.js-top-municipalities-map', {
       topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_MUNICIPALITY.topo.json`,
@@ -71,11 +97,15 @@ const _build = (data, nodeId) => {
   }
 
   if (data.top_countries.lines.length) {
-    new Top({
-      el:document.querySelector('.js-top-destination'),
-      data: data.top_countries.lines,
-      title: 'top destination countries in 2015'
-    });
+    document.querySelector('.js-top-map-title').innerHTML = `Top destination countries of ${formatApostrophe(_.capitalize(data.node_name))} soy`;
+    let topCountriesLines = data.top_countries;
+    topCountriesLines.lines = topCountriesLines.lines.slice(0, 5);
+    new Line(
+      '.js-top-destination',
+      topCountriesLines,
+      data.top_countries.includedYears,
+      lineSettings,
+    );
 
     Map('.js-top-destination-map', {
       topoJSONPath: './vector_layers/WORLD.topo.json',

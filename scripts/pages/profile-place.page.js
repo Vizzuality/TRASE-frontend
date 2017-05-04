@@ -61,7 +61,21 @@ const _build = data => {
     getPolygonClassName: d => (d.properties.geoid === data.municip_geoId) ? '-isCurrent' : ''
   });
 
-  new Line('.js-line', data.trajectory_deforestation);
+  new Line(
+    '.js-line',
+    data.trajectory_deforestation,
+    data.trajectory_deforestation.includedYears,
+    {
+      margin: {top: 30, right: 40, bottom: 30, left: 99},
+      height: 425,
+      ticks: {
+        yTicks: 7,
+        yTickPadding: 52,
+        yTickFormatType: 'deforestation-trajectory',
+        xTickPadding: 15
+      }
+    }
+  );
 
   if (data.top_traders.actors.length) {
     new Chord('.js-chord-traders', data.top_traders.matrix, data.top_traders.actors, data.municip_name);
