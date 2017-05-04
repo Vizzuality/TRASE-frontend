@@ -44,9 +44,8 @@ export default class {
   _setupChoro({selectedMapDimensions, selectedMapContextualLayersData, mapDimensions}) {
     const _getDimension = (uid) => {
       const dimension = mapDimensions.find(mapDimension => mapDimension.uid === uid);
-      console.log(dimension, mapDimensions);
       return dimension || null;
-    }
+    };
 
     const settings = {
       isBidimensional: selectedMapDimensions[0] !== null && selectedMapDimensions[1] !== null,

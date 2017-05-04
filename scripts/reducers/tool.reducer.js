@@ -309,9 +309,11 @@ export default function (state = {}, action) {
           bucket5: [2000, 5000, 10000, 20000]
         }
       };
-      const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
 
-      newState = Object.assign({}, state, { selectedMapDimensions_: action.uids, selectedMapDimensions,  choropleth });
+      const selectedMapDimensions_ = action.uids;
+      const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ? {} : getChoropleth(selectedMapDimensions_, state.nodesDictWithMeta);
+
+      newState = Object.assign({}, state, { selectedMapDimensions_, selectedMapDimensions,  choropleth });
       break;
     }
 
@@ -353,7 +355,7 @@ export default function (state = {}, action) {
       }
 
       // get a geoId <-> color dict
-      const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
+      const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ? {} : getChoropleth(selectedMapDimensions_, state.nodesDictWithMeta);
       newState = Object.assign({}, state, { selectedMapDimensions, selectedMapDimensions_, choropleth });
       break;
     }
