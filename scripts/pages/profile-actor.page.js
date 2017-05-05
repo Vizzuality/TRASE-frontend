@@ -76,7 +76,7 @@ const _build = (data, nodeId) => {
       '.js-top-municipalities',
       topMunicipalitiesLines,
       data.top_sources.included_years,
-      Object.assign({}, lineSettings, {margin: {top: 10, right: 100, bottom: 25, left: 37}}),
+      Object.assign({}, lineSettings, { margin: {top: 10, right: 100, bottom: 25, left: 37 } }),
     );
 
     Map('.js-top-municipalities-map', {
@@ -257,7 +257,7 @@ const _switchTopSource = (e, data) => {
     topMunicipalitiesLines,
     data.top_sources.included_years,
     {
-      margin: {top: 10, right: 100, bottom: 25, left: 37},
+      margin: { top: 10, right: 100, bottom: 25, left: 37 },
       height: 244,
       ticks: {
         yTicks: 6,
@@ -288,18 +288,18 @@ const _switchTopSource = (e, data) => {
     topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}.topo.json`,
     topoJSONRoot: `${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}`,
     getPolygonClassName: ({ properties }) => {
-      const municipality = data.top_sources.municipality.lines
-        .find(m => (properties.geoid === m.geo_id));
+      const source = data.top_sources[selectedSource].lines
+        .find(s => (properties.geoid === s.geo_id));
       let value = 0;
-      if (municipality) value = municipality.value9 || 0;
+      if (source) value = source.value9 || 0;
       return `-outline ch-${value}`;
     },
     showTooltipCallback: ({ properties }, x, y) => {
-      const municipality = data.top_sources.municipality.lines
-        .find(m => (properties.geoid === m.geo_id));
+      const source = data.top_sources[selectedSource].lines
+        .find(s => (properties.geoid === s.geo_id));
       let title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
       let body = null;
-      if (municipality) body = municipality.values[0];
+      if (source) body = source.values[0];
 
       tooltip.showTooltip(x, y, {
         title,
