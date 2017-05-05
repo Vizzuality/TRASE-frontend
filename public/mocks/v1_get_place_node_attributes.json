@@ -16,7 +16,7 @@
     "indicators": [
       {
         "name": "Key indicators",
-        "includedColumns": [
+        "included_columns": [
           {
             "name": "Soy deforestation (until 2014)",
             "unit": "ha"
@@ -51,7 +51,7 @@
         "rows": [
           {
             "name": "Score",
-            "haveUnit": true,
+            "have_unit": true,
             "values": [
               null,
               2.0,
@@ -66,7 +66,7 @@
           },
           {
             "name": "State Ranking",
-            "haveUnit": false,
+            "have_unit": false,
             "values": [
               13,
               27,
@@ -83,7 +83,7 @@
       },
       {
         "name": "Deforestation",
-        "includedColumns": [
+        "included_columns": [
           {
             "name": "Soy deforestation (until 2014)",
             "unit": "ha"
@@ -118,7 +118,7 @@
         "rows": [
           {
             "name": "Score",
-            "haveUnit": true,
+            "have_unit": true,
             "values": [
               null,
               2.0,
@@ -133,7 +133,7 @@
           },
           {
             "name": "State Ranking",
-            "haveUnit": false,
+            "have_unit": false,
             "values": [
               13,
               27,
@@ -150,7 +150,7 @@
       },
       {
         "name": "Other environmental indicators",
-        "includedColumns": [
+        "included_columns": [
           {
             "name": "Soy deforestation (until 2014)",
             "unit": "ha"
@@ -185,7 +185,7 @@
         "rows": [
           {
             "name": "Score",
-            "haveUnit": true,
+            "have_unit": true,
             "values": [
               null,
               2.0,
@@ -200,7 +200,7 @@
           },
           {
             "name": "State Ranking",
-            "haveUnit": false,
+            "have_unit": false,
             "values": [
               13,
               27,
@@ -217,7 +217,7 @@
       },
       {
         "name": "Socio-economic indicators",
-        "includedColumns": [
+        "included_columns": [
           {
             "name": "Soy deforestation (until 2014)",
             "unit": "ha"
@@ -252,7 +252,7 @@
         "rows": [
           {
             "name": "Score",
-            "haveUnit": true,
+            "have_unit": true,
             "values": [
               null,
               2.0,
@@ -267,7 +267,7 @@
           },
           {
             "name": "State Ranking",
-            "haveUnit": false,
+            "have_unit": false,
             "values": [
               13,
               27,
