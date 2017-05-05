@@ -81,28 +81,6 @@ export function selectYears(years) {
   };
 }
 
-export function selectMapDimension(dimensionData) {
-  return dispatch => {
-    dispatch({
-      type: actions.SELECT_MAP_DIMENSIONS, dimensionData
-    });
-  };
-}
-
-export function selectContextualLayers(contextualLayers) {
-  return {
-    type: actions.SELECT_CONTEXTUAL_LAYERS, contextualLayers
-  };
-}
-
-export function selectMapBasemap(selectedMapBasemap) {
-  return dispatch => {
-    dispatch({
-      type: actions.SELECT_BASEMAP, selectedMapBasemap
-    });
-  };
-}
-
 const _reloadLinks = (param, value, type, reloadLinks = true) => {
   return dispatch => {
     const action = {
@@ -203,16 +181,10 @@ export function loadNodes() {
 
       const selection = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
       if (selection !== undefined) {
-        selection.forEach((selectedDimension, index) => {
-          const direction = (index === 0) ? 'vertical' : 'horizontal';
-          dispatch(selectMapDimension({
-            direction,
-            title: selectedDimension.name,
-            uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId),
-            bucket3: selectedDimension.bucket3,
-            bucket5: selectedDimension.bucket5
-          }));
-        });
+        const uids = selection.map(selectedDimension => getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId));
+        if (uids[0] === undefined) uids[0] = null;
+        if (uids[1] === undefined) uids[1] = null;
+        dispatch(setMapDimensions(uids));
       }
     });
   };
@@ -524,6 +496,41 @@ export function saveMapView(latlng, zoom) {
     type: actions.SAVE_MAP_VIEW,
     latlng,
     zoom
+  };
+}
+
+export function toggleMapDimension(uid) {
+  return {
+    type: actions.TOGGLE_MAP_DIMENSION,
+    uid
+  };
+}
+
+export function setMapDimensions(uids) {
+  return {
+    type: actions.SET_MAP_DIMENSIONS,
+    uids
+  };
+}
+
+export function selectContextualLayers(contextualLayers) {
+  return {
+    type: actions.SELECT_CONTEXTUAL_LAYERS,
+    contextualLayers
+  };
+}
+
+export function selectMapBasemap(selectedMapBasemap) {
+  return {
+    type: actions.SELECT_BASEMAP,
+    selectedMapBasemap
+  };
+}
+
+export function toggleMapSidebarGroup(id) {
+  return {
+    type: actions.TOGGLE_MAP_SIDEBAR_GROUP,
+    id
   };
 }
 

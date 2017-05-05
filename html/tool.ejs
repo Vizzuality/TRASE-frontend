@@ -17,7 +17,7 @@
       <div class="veil js-veil"></div>
       <div class="c-modal js-modal"></div>
 
-      <div class="js-tool-content flow-content">
+      <div class="js-tool-content flow-content -open">
         <div class="js-tool-loading tool-loading">
           <div class="veil"></div>
           <div class="c-spinner"></div>
@@ -25,31 +25,28 @@
 
         <div class="js-sankey-veil sankey-veil veil"></div>
 
-        <div class="c-basemap-options is-absolute">
-          <div class="explanation">
-            <span class="explanation-text">choose one layer on each column to draw comparisons</span>
-            <div class="chroropleth-distribution-sample">
-              <div class="sample -vertical"></div>
-              <div class="sample -horizontal"></div>
+        <div class="c-map-sidebar is-absolute">
+          <div class="js-dimensions">
+            <!-- this is rendered by map-dimensions.component -->
+          </div>
+
+          <div class="map-sidebar-group c-map-context js-map-context">
+            <div class="map-sidebar-group-title">
+              Contextual layers
             </div>
+            <ul class="map-sidebar-group-items js-map-context-items">
+              <!-- this is rendered by map-context.component -->
+            </ul>
           </div>
-          <ul class="layer-list js-layer-list">
-            <!-- this is rendered by map-layers.component -->
-          </ul>
 
-          <div class="explanation js-layer-contextual-title">
-            <span class="explanation-text">Contextual layers</span>
+          <div class="map-sidebar-group c-map-basemaps">
+            <div class="map-sidebar-group-title">
+              Basemaps
+            </div>
+            <ul class="map-sidebar-group-items js-map-basemaps-items">
+              <!-- this is rendered by map-context.component -->
+            </ul>
           </div>
-          <ul class="layer-list js-layer-contextual">
-            <!-- this is rendered by map-context.component -->
-          </ul>
-
-          <div class="explanation">
-            <span class="explanation-text">Basemaps</span>
-          </div>
-          <ul class="layer-list js-layer-basemaps">
-            <!-- this is rendered by map-basemaps.component -->
-          </ul>
         </div>
 
         <div class="js-map-container c-map is-absolute">

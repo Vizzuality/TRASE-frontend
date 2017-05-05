@@ -9,6 +9,7 @@ const mapMethodsToState = () => ({
       return {
         selectedMapDimensions: state.tool.selectedMapDimensions,
         selectedMapContextualLayersData: state.tool.selectedMapContextualLayersData,
+        mapDimensions: state.tool.mapDimensions
       };
     }
   },
