@@ -108,7 +108,7 @@ const _build = (data, nodeId) => {
       },
       legend: {
         title: ['Soy exported in 2015', '(t)'],
-        bucket: data.top_sources.buckets
+        bucket: [data.top_countries.buckets[0], ...data.top_countries.buckets]
       }
     });
   }
@@ -156,7 +156,7 @@ const _build = (data, nodeId) => {
       },
       legend: {
         title: ['Soy exported in 2015', '(t)'],
-        bucket: data.top_countries.buckets
+        bucket: [data.top_countries.buckets[0], ...data.top_countries.buckets]
       }
     });
 
@@ -237,7 +237,7 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, true);
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, false);
 
   fetch(actorFactsheetURL)
     .then((response) => {
