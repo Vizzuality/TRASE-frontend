@@ -1,6 +1,6 @@
 <% layers.forEach(function(layer) {%>
-  <li class="layer-item">
-    <span class="layer-name"><%= layer.human_name %></span>
+  <li class="map-sidebar-group-item js-map-context-item">
+    <%= layer.human_name %>
     <div
       class="c-switcher"
       data-layer-slug="<%= layer.name %>">

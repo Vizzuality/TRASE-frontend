@@ -23,12 +23,16 @@ export default class {
     zoom.addEventListener('mouseleave', () => { scale.classList.toggle('-visible', false); });
   }
 
-  updateChoroplethLegend({selectedMapDimensions, selectedMapContextualLayersData}) {
-    this._setupChoro(selectedMapDimensions, selectedMapContextualLayersData);
+  updateChoroplethLegend(params) {
+    if (params.mapDimensions === undefined) {
+      return;
+    }
+    this._setupChoro(params);
+
     this._updateMapControlsPosition();
   }
 
-  updateContextLegend({selectedMapDimensions, selectedMapContextualLayersData}) {
+  updateContextLegend({ selectedMapDimensions, selectedMapContextualLayersData }) {
     this._toggleLegend(selectedMapDimensions, selectedMapContextualLayersData);
     this._renderContext(selectedMapContextualLayersData);
     this._updateMapControlsPosition();
@@ -38,35 +42,31 @@ export default class {
     this.el = document.querySelector('.js-map-legend');
   }
 
-  _setupChoro(vectorLayers, selectedMapContextualLayersData) {
-    const horizontalLayer = vectorLayers['horizontal'];
-    const verticalLayer = vectorLayers['vertical'];
-
-    // Error handling
-    if (horizontalLayer === 'undefined' && verticalLayer === 'undefined') {
-      throw ('At least one selected layer has to have colour palette');
-    }
+  _setupChoro({ selectedMapDimensions, selectedMapContextualLayersData, mapDimensions }) {
+    const _getDimension = (uid) => {
+      const dimension = mapDimensions.find(mapDimension => mapDimension.uid === uid);
+      return dimension || null;
+    };
 
     const settings = {
-      isBidimensional: horizontalLayer.uid !== null && verticalLayer.uid !== null,
-      horizontal: horizontalLayer.uid !== null ? horizontalLayer : null,
-      vertical: verticalLayer.uid !== null ? verticalLayer : null
+      isBidimensional: selectedMapDimensions[0] !== null && selectedMapDimensions[1] !== null,
+      horizontal: _getDimension(selectedMapDimensions[0]),
+      vertical: _getDimension(selectedMapDimensions[1])
     };
 
     if (this.el.hasChildNodes()) {
       this._cleanChoro();
     }
 
-    this._toggleLegend(vectorLayers, selectedMapContextualLayersData);
+    this._toggleLegend(selectedMapDimensions, selectedMapContextualLayersData);
 
     if (!!settings.horizontal || !!settings.vertical) {
       this._renderChoro(settings);
     }
   }
 
-  _toggleLegend(vectorLayers, selectedMapContextualLayersData) {
-    if ( (vectorLayers && vectorLayers['horizontal'] && vectorLayers['horizontal'].uid) ||
-         (vectorLayers && vectorLayers['vertical'] && vectorLayers['vertical'].uid) ||
+  _toggleLegend(selectedMapDimensions, selectedMapContextualLayersData) {
+    if ( selectedMapDimensions[0] !== null || selectedMapDimensions[1] !== null ||
          (selectedMapContextualLayersData && selectedMapContextualLayersData.length > 0)
        )
     {
@@ -99,16 +99,16 @@ export default class {
 
     if (settings.isBidimensional) {
       colors = CHOROPLETH_CLASSES['bidimensional'];
-      title = [this._shortenTitle(settings.vertical.title), this._shortenTitle(settings.horizontal.title)];
+      title = [this._shortenTitle(settings.vertical.name), this._shortenTitle(settings.horizontal.name)];
       cssClass = '-bidimensional';
       bucket = [settings.vertical.bucket3, settings.horizontal.bucket3];
     } else if (settings.vertical) {
       colors = CHOROPLETH_CLASSES['vertical'];
-      title = [this._shortenTitle(settings.vertical.title), null];
+      title = [this._shortenTitle(settings.vertical.name), null];
       cssClass = '-vertical';
       bucket = settings.vertical.bucket5;
     } else {
-      title = [null, this._shortenTitle(settings.horizontal.title)];
+      title = [null, this._shortenTitle(settings.horizontal.name)];
       cssClass = '-horizontal';
       bucket = settings.horizontal.bucket5;
     }

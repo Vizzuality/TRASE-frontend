@@ -44,5 +44,5 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       geoIdsDict[`${columnId}-${node.geoId}`] = node.id;
     }
   });
-  return { nodesDict, geoIdsDict};
+  return { nodesDict, geoIdsDict };
 }

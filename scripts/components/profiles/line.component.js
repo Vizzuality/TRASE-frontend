@@ -156,7 +156,6 @@ export default class {
         if (i === 0) {
           format = d3_timeFormat('%Y');
         }
-
         return format(value);
       };
     }
