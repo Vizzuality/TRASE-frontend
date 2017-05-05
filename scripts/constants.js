@@ -22,13 +22,7 @@ export const CHOROPLETH_CLASSES = {
   error_no_metadata_for_layer: 'ch-no-meta-layer',
 };
 
-export const PROFILE_CHOROPLETH_CLASSES = [
-  'ch-0',
-  'ch-1',
-  'ch-3',
-  'ch-4',
-  'ch-5'
-];
+export const PROFILE_CHOROPLETH_CLASSES = ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'];
 
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
 export const SANKEY_TRANSITION_TIME = 1000;
