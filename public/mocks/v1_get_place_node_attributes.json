@@ -2,16 +2,16 @@
   "data": {
     "summary": "In 2015, Querência exported 560,097 tons of soy occupying a total of 176,131ha of land. With 1% of the total production, it ranks 121st in Brazil in soy production, and 2nd in the state of Mato Grosso. The largest exporter of soy in Querência was Cargill, which accounted for 31% of the total exports, and the main destination was China.",
     "area": 17786.2,
-    "biome_geoId": "BR1",
+    "biome_geo_id": "BR1",
     "biome_name": "AMAZONIA",
     "column_name": "MUNICIPALITY",
-    "country_geoId": "BR",
+    "country_geo_id": "BR",
     "country_name": "BRAZIL",
     "farming_GDP": 0.506,
-    "municip_geoId": "BR5107065",
-    "municip_name": "QUERENCIA",
+    "municipality_geo_id": "BR5107065",
+    "municipality_name": "QUERENCIA",
     "soy_farmland": 0.7340000000000001,
-    "state_geoId": "BR51",
+    "state_geo_id": "BR51",
     "state_name": "MATO GROSSO",
     "indicators": [
       {
@@ -284,7 +284,7 @@
       }
     ],
     "trajectory_deforestation": {
-      "includedYears": [
+      "included_years": [
         2010,
         2011,
         2012,
