@@ -350,7 +350,7 @@
     "sustainability": [
       {
         "name": "Municipalities",
-        "includedColumns": [
+        "included_columns": [
           {
             "name": "Municipality"
           },
@@ -436,7 +436,7 @@
       },
       {
         "name": "Biomes",
-        "includedColumns": [
+        "included_columns": [
           {
             "name": "Biome"
           },
