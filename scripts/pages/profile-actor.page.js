@@ -108,8 +108,8 @@ const _build = (data, nodeId) => {
       },
       legend: {
         title: ['Soy exported in 2015', '(t)'],
-        bucket: [250,250,500,2000,3000]
-    }
+        bucket: data.top_sources.buckets
+      }
     });
   }
 
@@ -156,7 +156,7 @@ const _build = (data, nodeId) => {
       },
       legend: {
         title: ['Soy exported in 2015', '(t)'],
-        bucket: [250,250,500,2000,3000]
+        bucket: data.top_countries.buckets
       }
     });
 
