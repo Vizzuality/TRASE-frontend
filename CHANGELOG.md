@@ -1,3 +1,4 @@
+- profiles: includes map choropleth legend
 - tool: map dimensions groups are now collapsible
 - tool: map dimensions selecting is simpler (singl radio buttons column)
 - tool: fixed tool crash when links API fails
