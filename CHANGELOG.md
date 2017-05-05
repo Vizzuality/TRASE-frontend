@@ -1,3 +1,4 @@
+- profiles: includes the top sources' source switch.
 - profiles: connects choropleth maps to real data in actors profile pages
 - home: only allow video playing on full screen
 - home: show screenshot instead of video when video playback has not started yet
