@@ -168,9 +168,8 @@ export default function (state = {}, action) {
     }
 
     case actions.GET_LINKS: {
-      const jsonPayload = JSON.parse(action.payload);
-      const rawLinks = jsonPayload.data;
-      const linksMeta = jsonPayload.include;
+      const rawLinks = action.jsonPayload.data;
+      const linksMeta = action.jsonPayload.include;
 
       const currentQuant = linksMeta.quant;
 
