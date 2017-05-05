@@ -20,14 +20,16 @@ import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible
 import setGeoJSONMeta from './helpers/setGeoJSONMeta';
 import getNodeMetaUid from 'reducers/helpers/getNodeMetaUid';
 
-export function resetState() {
+export function resetState(refilter = true) {
   return (dispatch) => {
     dispatch({
       type: actions.RESET_SELECTION
     });
-    dispatch({
-      type: actions.FILTER_LINKS_BY_NODES
-    });
+    if (refilter === true) {
+      dispatch({
+        type: actions.FILTER_LINKS_BY_NODES
+      });
+    }
     selectView(false, true);
     dispatch(loadLinks());
   };
@@ -76,28 +78,6 @@ export function selectYears(years) {
     });
     dispatch(loadNodes());
     dispatch(loadLinks());
-  };
-}
-
-export function selectMapDimension(dimensionData) {
-  return dispatch => {
-    dispatch({
-      type: actions.SELECT_MAP_DIMENSIONS, dimensionData
-    });
-  };
-}
-
-export function selectContextualLayers(contextualLayers) {
-  return {
-    type: actions.SELECT_CONTEXTUAL_LAYERS, contextualLayers
-  };
-}
-
-export function selectMapBasemap(selectedMapBasemap) {
-  return dispatch => {
-    dispatch({
-      type: actions.SELECT_BASEMAP, selectedMapBasemap
-    });
   };
 }
 
@@ -201,16 +181,10 @@ export function loadNodes() {
 
       const selection = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
       if (selection !== undefined) {
-        selection.forEach((selectedDimension, index) => {
-          const direction = (index === 0) ? 'vertical' : 'horizontal';
-          dispatch(selectMapDimension({
-            direction,
-            title: selectedDimension.name,
-            uid: getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId),
-            bucket3: selectedDimension.bucket3,
-            bucket5: selectedDimension.bucket5
-          }));
-        });
+        const uids = selection.map(selectedDimension => getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId));
+        if (uids[0] === undefined) uids[0] = null;
+        if (uids[1] === undefined) uids[1] = null;
+        dispatch(setMapDimensions(uids));
       }
     });
   };
@@ -262,8 +236,16 @@ export function loadLinks() {
     fetch(url)
       .then(res => res.text())
       .then(payload => {
+        const jsonPayload = JSON.parse(payload);
+        if (jsonPayload.data === undefined || !jsonPayload.data.length) {
+          console.error('server returned empty flows/link list, with params:', params);
+          dispatch(resetState(false));
+          return;
+        }
+
         dispatch({
-          type: actions.GET_LINKS, payload
+          type: actions.GET_LINKS,
+          jsonPayload
         });
 
         // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
@@ -514,6 +496,41 @@ export function saveMapView(latlng, zoom) {
     type: actions.SAVE_MAP_VIEW,
     latlng,
     zoom
+  };
+}
+
+export function toggleMapDimension(uid) {
+  return {
+    type: actions.TOGGLE_MAP_DIMENSION,
+    uid
+  };
+}
+
+export function setMapDimensions(uids) {
+  return {
+    type: actions.SET_MAP_DIMENSIONS,
+    uids
+  };
+}
+
+export function selectContextualLayers(contextualLayers) {
+  return {
+    type: actions.SELECT_CONTEXTUAL_LAYERS,
+    contextualLayers
+  };
+}
+
+export function selectMapBasemap(selectedMapBasemap) {
+  return {
+    type: actions.SELECT_BASEMAP,
+    selectedMapBasemap
+  };
+}
+
+export function toggleMapSidebarGroup(id) {
+  return {
+    type: actions.TOGGLE_MAP_SIDEBAR_GROUP,
+    id
   };
 }
 

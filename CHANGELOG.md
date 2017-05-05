@@ -1,4 +1,7 @@
 - profiles: includes the top sources' source switch.
+- tool: map dimensions groups are now collapsible
+- tool: map dimensions selecting is simpler (singl radio buttons column)
+- tool: fixed tool crash when links API fails
 - profiles: connects choropleth maps to real data in actors profile pages
 - home: only allow video playing on full screen
 - home: show screenshot instead of video when video playback has not started yet

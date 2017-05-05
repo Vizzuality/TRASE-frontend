@@ -32,7 +32,7 @@ const _setSearch = () => {
       search.onCreated();
 
       const nodesArray = _.values(result.data).filter(node =>
-        node.isUnknown !== true && node.isAggregated !== true && FACT_SHEET_NODE_TYPE_WHITELIST.indexOf(node.type) != -1
+        node.isUnknown !== true && node.isAggregated !== true && FACT_SHEET_NODE_TYPE_WHITELIST.indexOf(node.type) !== -1
       );
 
       search.callbacks = {
