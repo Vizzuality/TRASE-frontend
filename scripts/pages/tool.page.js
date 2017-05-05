@@ -27,6 +27,7 @@ import { APP_DEFAULT_STATE, TOOL_DEFAULT_STATE } from 'constants';
 import 'styles/components/shared/veil.scss';
 import 'styles/components/shared/spinner.scss';
 import 'styles/components/shared/dropdown.scss';
+import 'styles/components/tool/map/map-sidebar.scss';
 import 'styles/layouts/l-tool.scss';
 
 const objParams = getURLParams(window.location.search);
