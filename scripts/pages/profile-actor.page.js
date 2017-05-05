@@ -269,8 +269,11 @@ const _switchTopSource = (e, data) => {
         tooltip.showTooltip(x, y, {
           title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
           values: [
-            { title: 'Trade Volume',
-              value: `${formatNumber(location.value)}<span>Tons</span>` }
+            {
+              title: 'Trade Volume',
+              value: formatNumber(location.value),
+              unit: 'Tons'
+            }
           ]
         });
       },
