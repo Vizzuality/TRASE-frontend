@@ -27,7 +27,7 @@ import formatApostrophe from 'utils/formatApostrophe';
 import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
-
+import { ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST } from 'constants';
 import TopSourceTemplate from 'ejs!templates/profiles/top-source-switcher.ejs';
 
 const defaults = {
@@ -227,7 +227,7 @@ const _showErrorMessage = () => {
 const _setTopSourceSwitcher = (data) => {
   const template = TopSourceTemplate({
     nodeName: formatApostrophe(_.capitalize(data.node_name)),
-    switchers: Object.keys(data.top_sources).filter(key => key !== 'included_years')
+    switchers: Object.keys(data.top_sources).filter(key => !(ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST.includes(key)))
   });
   document.querySelector('.js-top-municipalities-title').innerHTML = template;
 
