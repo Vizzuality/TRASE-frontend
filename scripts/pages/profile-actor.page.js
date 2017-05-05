@@ -149,6 +149,10 @@ const _build = (data, nodeId) => {
       },
       hideTooltipCallback: () => {
         tooltip.hideTooltip();
+      },
+      legend: {
+        title: ['Soy exported in 2015', '(t)'],
+        bucket: [250,250,500,2000,3000]
       }
     });
 
