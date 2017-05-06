@@ -1,3 +1,4 @@
+- profiles: includes map choropleth legend
 - profiles: includes the top sources' source switch.
 - tool: map dimensions groups are now collapsible
 - tool: map dimensions selecting is simpler (singl radio buttons column)

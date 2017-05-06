@@ -85,8 +85,8 @@ const _build = (data, nodeId) => {
       getPolygonClassName: ({ properties }) => {
         const municipality = data.top_sources.municipality.lines
           .find(m => (properties.geoid === m.geo_id));
-        let value = 0;
-        if (municipality) value = municipality.value9 || 0;
+        let value = 'n-a';
+        if (municipality) value = municipality.value9 || 'n-a';
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
@@ -107,6 +107,10 @@ const _build = (data, nodeId) => {
       },
       hideTooltipCallback: () => {
         tooltip.hideTooltip();
+      },
+      legend: {
+        title: ['Soy exported in 2015', '(t)'],
+        bucket: [data.top_countries.buckets[0], ...data.top_countries.buckets]
       }
     });
   }
@@ -129,8 +133,8 @@ const _build = (data, nodeId) => {
       getPolygonClassName: ({ properties }) => {
         const country = data.top_countries.lines
           .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
-        let value = 0;
-        if (country) value = country.value9 || 0;
+        let value = 'n-a';
+        if (country) value = country.value9 || 'n-a';
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
@@ -151,6 +155,10 @@ const _build = (data, nodeId) => {
       },
       hideTooltipCallback: () => {
         tooltip.hideTooltip();
+      },
+      legend: {
+        title: ['Soy exported in 2015', '(t)'],
+        bucket: [data.top_countries.buckets[0], ...data.top_countries.buckets]
       }
     });
   }
@@ -322,7 +330,7 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, true);
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, false);
 
   fetch(actorFactsheetURL)
     .then((response) => {

@@ -1,14 +1,14 @@
 <div class="bucket-container js-bucket-legend <%= cssClass %>">
   <div class="bucket-names">
     <div class="layer-name"><%= title[0] %></div>
-    <div class="layer-name "><%= title[1] %></div>
+    <div class="layer-name"><%= title[1] %></div>
   </div>
   <ul class="bucket-legend" data-colors="5">
     <% colors.forEach(function(color, i) { %>
       <li class="bucket-item" >
         <div class="bucket <%= color %>">
           <% if (!isBidimensional && typeof bucket !== "undefined" && bucket !== null) { %>
-            <span><%= abbreviateNumber(bucket[i], 3) %></span>
+            <span><%= abbreviateNumber(bucket[i], 3, i) %></span>
           <% } %>
         </div>
       </li>
