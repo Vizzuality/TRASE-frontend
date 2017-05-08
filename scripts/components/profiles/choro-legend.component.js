@@ -3,7 +3,10 @@ import 'style/components/tool/map/map-legend.scss';
 import { PROFILE_CHOROPLETH_CLASSES } from 'constants';
 import abbreviateNumber from 'utils/abbreviateNumber';
 
-export default (selector, { title, bucket }) => {
+export default (selector, legend, { title, bucket }) => {
+  const el = document.querySelector(selector);
+  el.classList.add('-with-legend');
+
   const legendTemplate = LegendChoroTemplate({
     title,
     cssClass: '-horizontal -profile',
@@ -13,7 +16,7 @@ export default (selector, { title, bucket }) => {
     isBidimensional: false
   });
 
-  const container = document.querySelector(selector);
+  const container = el.querySelector(legend);
   container.classList.add('c-map-legend-choro');
   container.innerHTML = legendTemplate;
 };
