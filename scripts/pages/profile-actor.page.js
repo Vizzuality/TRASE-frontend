@@ -298,8 +298,8 @@ const _switchTopSource = (e, data) => {
     getPolygonClassName: ({ properties }) => {
       const source = data.top_sources[selectedSource].lines
         .find(s => (properties.geoid === s.geo_id));
-      let value = 0;
-      if (source) value = source.value9 || 0;
+      let value = 'n-a';
+      if (source) value = source.value9 || 'n-a';
       return `-outline ch-${value}`;
     },
     showTooltipCallback: ({ properties }, x, y) => {
@@ -320,6 +320,10 @@ const _switchTopSource = (e, data) => {
     },
     hideTooltipCallback: () => {
       tooltip.hideTooltip();
+    },
+    legend: {
+      title: ['Soy exported in 2015', '(t)'],
+      bucket: [data.top_sources.buckets[0], ...data.top_sources.buckets]
     }
   });
 };

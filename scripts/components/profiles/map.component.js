@@ -79,7 +79,7 @@ export default (className, { topoJSONPath, topoJSONRoot, getPolygonClassName, sh
 
   if (legend) {
     d3Container.append('div').attr('class', 'legend-container');
-    choroLegend('.legend-container', legend);
+    choroLegend(className, '.legend-container', legend);
   }
 
 };
