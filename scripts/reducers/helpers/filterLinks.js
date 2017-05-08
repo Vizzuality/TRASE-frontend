@@ -18,10 +18,10 @@ export default function(links, selectedNodesAtColumns, nodesColoredBySelection, 
     const link = links[i];
     const linkPasses = filterPath(link.originalPath, selectedNodesAtColumns);
     if (linkPasses) {
-      let clonedLink = _.cloneDeep(link);
+      const clonedLink = _.cloneDeep(link);
       const nodeIds = _.intersection(link.originalPath, nodesColoredBySelection);
       if (nodeIds) {
-        let nodeId = nodeIds[0];
+        const nodeId = nodeIds[0];
         // clonedLink.recolorGroup = nodesColoredBySelection.length - nodesColoredBySelection.indexOf(nodeId);
         clonedLink.recolorGroup = recolorGroups[nodeId];
       }

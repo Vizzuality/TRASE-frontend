@@ -3,7 +3,7 @@ import _ from 'lodash';
 // merges same origin / same destination / same qual links
 export default function(links, userecolorGroups) {
   const mergedLinks = [];
-  let dict = {};
+  const dict = {};
 
   for (var i = 0; i < links.length; i++) {
     var link = links[i];

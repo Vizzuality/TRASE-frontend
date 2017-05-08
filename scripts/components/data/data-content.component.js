@@ -100,7 +100,7 @@ export default class {
     const fileRadio = this.selectorFile.querySelector('.c-radio-btn.-enabled');
     const file = fileRadio.getAttribute('value');
     const outputType = this.selectorOutputType.querySelector('.c-radio-btn.-enabled').getAttribute('value');
-    let params = {
+    const params = {
       context_id: contextId
     };
 

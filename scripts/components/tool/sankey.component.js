@@ -122,7 +122,7 @@ export default class {
           .data()
           .reduce((acc, val) => acc.y < val.y ? acc : val);
 
-        let y = Math.max(0, selectedColumnFirstNode.y - 12);
+        const y = Math.max(0, selectedColumnFirstNode.y - 12);
         this.expandButton.style.top = `${y}px`;
         this.expandButton.style.left = `${selectedColumnFirstNode.x - 12}px`;
         return;
@@ -160,7 +160,7 @@ export default class {
       .selectAll('g.sankey-node')
       .data(column => column.values, node => node.id);
 
-    let that = this;
+    const that = this;
     const nodesEnter = this.nodes.enter()
       .append('g')
       .attr('class', 'sankey-node')
