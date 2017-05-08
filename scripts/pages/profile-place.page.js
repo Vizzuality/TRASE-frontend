@@ -16,7 +16,7 @@ import 'styles/components/profiles/map.scss';
 import Nav from 'components/shared/nav.component.js';
 import Dropdown from 'components/shared/dropdown.component';
 import Top from 'components/profiles/top.component';
-//import Line from 'components/profiles/line.component';
+import Line from 'components/profiles/line.component';
 import Chord from 'components/profiles/chord.component';
 import MultiTable from 'components/profiles/multi-table.component';
 import Map from 'components/profiles/map.component';
@@ -61,23 +61,23 @@ const _build = data => {
     getPolygonClassName: d => (d.properties.geoid === data.municipality_geo_id) ? '-isCurrent' : ''
   });
 
-  // if (data.trajectory_deforestation.lines.length) {
-  //   new Line(
-  //     '.js-line',
-  //     data.trajectory_deforestation,
-  //     data.trajectory_deforestation.included_years,
-  //     {
-  //       margin: { top: 30, right: 40, bottom: 30, left: 99 },
-  //       height: 425,
-  //       ticks: {
-  //         yTicks: 7,
-  //         yTickPadding: 52,
-  //         yTickFormatType: 'deforestation-trajectory',
-  //         xTickPadding: 15
-  //       }
-  //     }
-  //   );
-  // }
+  if (data.trajectory_deforestation.lines.length) {
+    new Line(
+      '.js-line',
+      data.trajectory_deforestation,
+      data.trajectory_deforestation.included_years,
+      {
+        margin: { top: 30, right: 40, bottom: 30, left: 99 },
+        height: 425,
+        ticks: {
+          yTicks: 7,
+          yTickPadding: 52,
+          yTickFormatType: 'deforestation-trajectory',
+          xTickPadding: 15
+        }
+      }
+    );
+  }
 
   if (data.top_traders.actors.length) {
     new Chord('.js-chord-traders', data.top_traders.matrix, data.top_traders.actors, data.municipality_name);
