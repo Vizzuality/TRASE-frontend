@@ -76,7 +76,7 @@ const _build = (data, nodeId) => {
       '.js-top-municipalities',
       topMunicipalitiesLines,
       data.top_sources.included_years,
-      Object.assign({}, lineSettings, { margin: {top: 10, right: 100, bottom: 25, left: 37 } }),
+      Object.assign({}, lineSettings, { margin: { top: 10, right: 100, bottom: 25, left: 37 } }),
     );
 
     Map('.js-top-municipalities-map', {
@@ -176,7 +176,7 @@ const _build = (data, nodeId) => {
   new Scatterplot('.js-companies-exporting', {
     data: data.companies_exporting.companies,
     xDimension: data.companies_exporting.dimensions_x,
-    nodeId: nodeId,
+    node: { id: nodeId, name: data.node_name },
     showTooltipCallback: (company, indicator, x, y) => {
       tooltip.showTooltip(x, y, {
         title: company.name,
