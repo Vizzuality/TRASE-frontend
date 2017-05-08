@@ -71,7 +71,7 @@ const _build = (data, nodeId) => {
 
   if (data.top_sources.municipality.lines.length) {
     _setTopSourceSwitcher(data);
-    let topMunicipalitiesLines = data.top_sources.municipality;
+    const topMunicipalitiesLines = Object.assign({}, data.top_sources.municipality);
     topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
     new Line(
       '.js-top-municipalities',
@@ -118,7 +118,7 @@ const _build = (data, nodeId) => {
 
   if (data.top_countries.lines.length) {
     document.querySelector('.js-top-map-title').innerHTML = `Top destination countries of ${formatApostrophe(_.capitalize(data.node_name))} soy`;
-    let topCountriesLines = data.top_countries;
+    const topCountriesLines = Object.assign({}, data.top_countries);
     topCountriesLines.lines = topCountriesLines.lines.slice(0, 5);
     new Line(
       '.js-top-destination',
@@ -259,7 +259,7 @@ const _switchTopSource = (e, data) => {
   });
   selectedSwitch.classList.add('selected');
 
-  let topMunicipalitiesLines = data.top_sources[selectedSource];
+  const topMunicipalitiesLines = Object.assign({}, data.top_sources[selectedSource]);
   topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
   new Line(
     '.js-top-municipalities',
