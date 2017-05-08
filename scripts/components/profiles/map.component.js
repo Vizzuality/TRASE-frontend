@@ -25,6 +25,7 @@ function fitGeoInside(featureBounds, width, height) {
 
 export default (className, { topoJSONPath, topoJSONRoot, getPolygonClassName, showTooltipCallback, hideTooltipCallback, useRobinsonProjection, legend }) => {
   const d3Container =  d3_select(className);
+  d3Container.node().classList.remove('-with-legend');
   const containerComputedStyle = window.getComputedStyle(d3Container.node());
   const width = parseInt(containerComputedStyle.width);
   const height = parseInt(containerComputedStyle.height);

@@ -5,6 +5,7 @@ import abbreviateNumber from 'utils/abbreviateNumber';
 
 export default (selector, legend, { title, bucket }) => {
   const el = document.querySelector(selector);
+  el.classList.add('-with-legend');
 
   const legendTemplate = LegendChoroTemplate({
     title,
