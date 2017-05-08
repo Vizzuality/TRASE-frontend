@@ -29,7 +29,7 @@ export default class {
   }
 
   _render() {
-    const margin = {top: 4, right: 13, bottom: 30, left: 29};
+    const margin = { top: 4, right: 13, bottom: 30, left: 29 };
     this.width = this.el.clientWidth - margin.left - margin.right;
     this.height = 377 - margin.top - margin.bottom;
     let allYValues = this.data.map(item => item.y);
@@ -92,7 +92,7 @@ export default class {
       .data(this._getFormatedData(0))
       .enter()
       .append('circle')
-      .attr('class', function(d) { return d.nodeId.toString() === this.nodeId ? 'dot current' : 'dot' }.bind(this))
+      .attr('class', (function(d) { return d.nodeId.toString() === this.nodeId ? 'dot current' : 'dot'; }).bind(this))
       .attr('r', 5)
       .attr('cx', function(d) { return this.x(d.x); }.bind(this))
       .attr('cy', function(d) { return this.y(d.y); }.bind(this));
@@ -118,7 +118,7 @@ export default class {
   }
 
   _renderXswitcher() {
-    this.switcherEl.innerHTML = ScatterplotSwitcherTemplate({data: this.xDimension});
+    this.switcherEl.innerHTML = ScatterplotSwitcherTemplate({ data: this.xDimension });
 
     this.switchers = Array.prototype.slice.call(this.switcherEl.querySelectorAll('.js-scatterplot-switcher-item'), 0);
     this.switchers.forEach(switcher => {
@@ -164,7 +164,7 @@ export default class {
         name: item.name,
         y: item.y,
         x: item.x[i]
-      }
+      };
     });
   }
 }

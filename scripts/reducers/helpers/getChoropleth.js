@@ -2,11 +2,11 @@ import _ from 'lodash';
 import { CHOROPLETH_CLASSES, CHOROPLETH_CLASS_ZERO } from 'constants';
 
 export default function(selectedMapDimensions, nodesDictWithMeta) {
-  const horizontalLayer = selectedMapDimensions.horizontal;
-  const verticalLayer = selectedMapDimensions.vertical;
-  const isBidimensional = horizontalLayer.uid !== null && verticalLayer.uid !== null;
-  const isEmpty = horizontalLayer.uid === null && verticalLayer.uid === null;
-  const isHorizontal = horizontalLayer.uid !== null;
+  const horizontalLayer = selectedMapDimensions[0];
+  const verticalLayer = selectedMapDimensions[1];
+  const isBidimensional = horizontalLayer !== null && verticalLayer !== null;
+  const isEmpty = horizontalLayer === null && verticalLayer === null;
+  const isHorizontal = horizontalLayer !== null;
 
   const geoNodes = _.filter(nodesDictWithMeta, node => node.geoId !== undefined && node.geoId !== null);
   const geoNodesIds = Object.keys(geoNodes);
@@ -25,8 +25,8 @@ export default function(selectedMapDimensions, nodesDictWithMeta) {
       let colorIndex;
 
       if (isBidimensional) {
-        const nodeMetaHorizontal = node.meta[horizontalLayer.uid];
-        const nodeMetaVertical = node.meta[verticalLayer.uid];
+        const nodeMetaHorizontal = node.meta[horizontalLayer];
+        const nodeMetaVertical = node.meta[verticalLayer];
 
         if (!nodeMetaHorizontal || !nodeMetaVertical) {
           color = CHOROPLETH_CLASSES.error_no_metadata_layer;
@@ -46,7 +46,7 @@ export default function(selectedMapDimensions, nodesDictWithMeta) {
           }
         }
       } else {
-        const uid = (isHorizontal) ? horizontalLayer.uid : verticalLayer.uid;
+        const uid = (isHorizontal) ? horizontalLayer : verticalLayer;
         const nodeMeta = node.meta[uid];
         if (!nodeMeta) {
           color = CHOROPLETH_CLASSES.error_no_metadata_layer;  // no metadata on this node has been found for this layer

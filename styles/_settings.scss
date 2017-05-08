@@ -71,13 +71,13 @@ $recolorby-stars-red-blue-4: #4996c3;
 $recolorby-qual-yes-no-yes: #a4e332;
 $recolorby-qual-yes-no-no: #e36845;
 
-$recolorby-linear-red-blue-0: #d73027;
-$recolorby-linear-red-blue-1: #fc8d59;
-$recolorby-linear-red-blue-2: #fee090;
+$recolorby-linear-red-blue-6: #d73027;
+$recolorby-linear-red-blue-5: #fc8d59;
+$recolorby-linear-red-blue-4: #fee090;
 $recolorby-linear-red-blue-3: #ffffbf;
-$recolorby-linear-red-blue-4: #e0f3f8;
-$recolorby-linear-red-blue-5: #91bfdb;
-$recolorby-linear-red-blue-6: #4575b4;
+$recolorby-linear-red-blue-2: #e0f3f8;
+$recolorby-linear-red-blue-1: #91bfdb;
+$recolorby-linear-red-blue-0: #4575b4;
 
 $recolorby-linear-yellow-green-0: #ffc;
 $recolorby-linear-yellow-green-1: #c2e699;
@@ -167,11 +167,13 @@ $ch-no-meta-layer: $gray;
 $ch-default: $gray;
 
 // factsheet choropleth
-$ch-factsheet-red-0: #f6f5ed;
-$ch-factsheet-red-1: #f5decd;
-$ch-factsheet-red-2: #f6928d;
-$ch-factsheet-red-3: #f65e6e;
-$ch-factsheet-red-4: #e1384a;
+// For now we'll use the same color scheme as in the tool, when we include more buckets this has to change.
+$ch-factsheet-n-a: $metal-grey;
+$ch-factsheet-red-0: $ch-red-0; // #f6f5ed;
+$ch-factsheet-red-1: $ch-red-1; // #f5decd;
+$ch-factsheet-red-2: $ch-red-2; // #f6928d;
+$ch-factsheet-red-3: $ch-red-3; // #f65e6e;
+$ch-factsheet-red-4: $ch-red-4; // #e1384a;
 $ch-factsheet-red-5: #b41728;
 $ch-factsheet-red-6: #790916;
 $ch-factsheet-red-7: #4e0008;

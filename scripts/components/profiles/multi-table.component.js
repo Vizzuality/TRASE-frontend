@@ -14,7 +14,7 @@ export default class {
   }
 
   render() {
-    const template = MultiTableTemplate({data: this.data, tabsTitle: this.tabsTitle, key: this.key});
+    const template = MultiTableTemplate({ data: this.data, tabsTitle: this.tabsTitle, key: this.key });
     this.el.innerHTML = template;
 
     this._renderTables();

@@ -23,7 +23,7 @@ export default class {
     }).slice(0, orgMatrix.length);
 
     const elem = document.querySelector(className);
-    const margin = {top: 0, right: 0, bottom: 0, left: 0};
+    const margin = { top: 0, right: 0, bottom: 0, left: 0 };
     const width = elem.clientWidth - margin.left - margin.right;
     const height = elem.clientWidth - margin.top - margin.bottom;
 

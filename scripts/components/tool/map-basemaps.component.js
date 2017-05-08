@@ -1,17 +1,18 @@
 import BasemapsTemplate from 'ejs!templates/tool/map/map-basemaps.ejs';
+import 'styles/components/tool/map/map-basemaps.scss';
 
 export default class {
 
   onCreated() {
-    this.el = document.querySelector('.js-layer-basemaps');
+    this.el = document.querySelector('.js-map-basemaps-items');
   }
 
   buildBasemaps(basemaps) {
-    this.el.innerHTML = BasemapsTemplate({basemaps});
+    this.el.innerHTML = BasemapsTemplate({ basemaps });
 
-    this.radios = Array.prototype.slice.call(this.el.querySelectorAll('.c-radio-btn'), 0);
-    this.radios.forEach((radio) => {
-      radio.addEventListener('click', (e) => this._onToggleRadio(e));
+    this.basemaps = Array.prototype.slice.call(this.el.querySelectorAll('.js-map-sidebar-group-item'), 0);
+    this.basemaps.forEach((basemap) => {
+      basemap.addEventListener('click', (e) => this._onBasemapClicked(e));
     });
   }
 
@@ -20,24 +21,14 @@ export default class {
   }
 
   _setActiveBasemap(basemapId) {
-    this.radios.forEach((radio) => {
-      if (radio.getAttribute('value') !== basemapId) return;
-      radio.classList.add('-enabled');
+    this.basemaps.forEach((basemap) => {
+      basemap.classList.toggle('-selected', basemap.getAttribute('data-value') === basemapId);
     });
   }
 
-  _onToggleRadio(e) {
-    const selectedRadio = e && e.currentTarget;
-    if (!selectedRadio) return;
-
-    const value = selectedRadio.getAttribute('value');
-    const currentSelectedRadio = this.el.querySelector('.c-radio-btn.-enabled');
-
-    if (selectedRadio === currentSelectedRadio) return;
-    this.radios.forEach((radio) => {
-      radio.classList.remove('-enabled');
-    });
-
+  _onBasemapClicked(event) {
+    const selectedRadio = event.currentTarget;
+    const value = selectedRadio.getAttribute('data-value');
     this.callbacks.onMapBasemapSelected(value);
   }
 }

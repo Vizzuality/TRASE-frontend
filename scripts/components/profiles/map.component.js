@@ -3,6 +3,7 @@ import { json as d3_json } from 'd3-request';
 import { geoPath as d3_geoPath, geoMercator as d3_geoMercator } from 'd3-geo';
 import { geoRobinson as d3_geoRobinson } from 'd3-geo-projection';
 import * as topojson from 'topojson';
+import choroLegend from 'components/profiles/choro-legend.component';
 
 function getFeaturesBox(featureBounds) {
   return {
@@ -22,9 +23,7 @@ function fitGeoInside(featureBounds, width, height) {
   return { scale, trans };
 }
 
-
-export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, showTooltipCallback, hideTooltipCallback, useRobinsonProjection}) => {
-
+export default (className, { topoJSONPath, topoJSONRoot, getPolygonClassName, showTooltipCallback, hideTooltipCallback, useRobinsonProjection, legend }) => {
   const d3Container =  d3_select(className);
   const containerComputedStyle = window.getComputedStyle(d3Container.node());
   const width = parseInt(containerComputedStyle.width);
@@ -68,7 +67,7 @@ export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, sho
       'features' : features.features
     };
     const featureBounds = path.bounds(collection);
-    const {scale, trans } = fitGeoInside(featureBounds, width, height);
+    const { scale, trans } = fitGeoInside(featureBounds, width, height);
 
     container.attr('transform', [
       'translate(' + trans + ')',
@@ -77,4 +76,10 @@ export default (className, {topoJSONPath, topoJSONRoot, getPolygonClassName, sho
 
     container.selectAll('path').style('stroke-width', .5 / scale);
   });
+
+  if (legend) {
+    d3Container.append('div').attr('class', 'legend-container');
+    choroLegend('.legend-container', legend);
+  }
+
 };

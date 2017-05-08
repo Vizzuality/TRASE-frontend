@@ -153,19 +153,23 @@ export default function (state = {}, action) {
       const rawMapDimensions = mapDimensionsMeta.dimensions;
       const mapDimensions = getMapDimensions(rawMapDimensions);
 
-      const mapDimensionsFolders = mapDimensionsMeta.dimensionGroups;
+      const mapDimensionsGroups = mapDimensionsMeta.dimensionGroups.map(group => {
+        return {
+          group,
+          dimensions: mapDimensions.filter(dimension => dimension.groupId === group.id)
+        };
+      });
 
       // store dimension values in nodesDict as uid: dimensionValue
       const nodesDictWithMeta = setNodesMeta(state.nodesDict, nodesMeta, mapDimensions);
 
-      newState = Object.assign({}, state, { mapDimensions, mapDimensionsFolders, nodesDictWithMeta });
+      newState = Object.assign({}, state, { mapDimensions, mapDimensionsGroups, nodesDictWithMeta });
       break;
     }
 
     case actions.GET_LINKS: {
-      const jsonPayload = JSON.parse(action.payload);
-      const rawLinks = jsonPayload.data;
-      const linksMeta = jsonPayload.include;
+      const rawLinks = action.jsonPayload.data;
+      const linksMeta = action.jsonPayload.include;
 
       const currentQuant = linksMeta.quant;
 
@@ -257,7 +261,8 @@ export default function (state = {}, action) {
       newState = Object.assign({}, state, {
         highlightedNodesIds: action.ids,
         highlightedNodeData: action.data,
-        highlightedGeoIds: action.geoIds
+        highlightedGeoIds: action.geoIds,
+        highlightedNodeCoordinates: action.coordinates
       });
       break;
     }
@@ -290,20 +295,30 @@ export default function (state = {}, action) {
       break;
     }
 
-    case actions.SELECT_MAP_DIMENSIONS: {
-      const selectedMapDimensions = Object.assign({}, state.selectedMapDimensions);
-      const currentUidForDirection = selectedMapDimensions[action.dimensionData.direction].uid;
-      const nextUid = action.dimensionData.uid;
-      selectedMapDimensions[action.dimensionData.direction] = {
-        title: action.dimensionData.title,
-        uid: (currentUidForDirection === nextUid) ? null : nextUid,
-        bucket3: action.dimensionData.bucket3,
-        bucket5: action.dimensionData.bucket5,
-      };
+    case actions.SET_MAP_DIMENSIONS: {
+      const selectedMapDimensions = action.uids;
+      const choropleth = (selectedMapDimensions[0] === null && selectedMapDimensions[1] === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
+
+      newState = Object.assign({}, state, { selectedMapDimensions,  choropleth });
+      break;
+    }
+
+    case actions.TOGGLE_MAP_DIMENSION: {
+      let selectedMapDimensions = state.selectedMapDimensions.slice();
+      let uidIndex = selectedMapDimensions.indexOf(action.uid);
+      if (uidIndex === -1) {
+        if      (selectedMapDimensions[0] === null)   selectedMapDimensions[0] = action.uid;
+        else if (selectedMapDimensions[1] === null)   selectedMapDimensions[1] = action.uid;
+        else {
+          newState = state;
+          break;
+        }
+      } else {
+        selectedMapDimensions[uidIndex] = null;
+      }
 
       // get a geoId <-> color dict
-      const choropleth = (selectedMapDimensions.horizontal.uid === null && selectedMapDimensions.vertical.uid === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
-
+      const choropleth = (selectedMapDimensions[0] === null && selectedMapDimensions[1] === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
       newState = Object.assign({}, state, { selectedMapDimensions, choropleth });
       break;
     }
@@ -353,6 +368,18 @@ export default function (state = {}, action) {
         longitude: action.latlng.lng,
         zoom: action.zoom
       } });
+      break;
+    }
+
+    case actions.TOGGLE_MAP_SIDEBAR_GROUP: {
+      let expandedMapSidebarGroupsIds = state.expandedMapSidebarGroupsIds.slice();
+      let idIndex = expandedMapSidebarGroupsIds.indexOf(action.id);
+      if (idIndex === -1) {
+        expandedMapSidebarGroupsIds.push(action.id);
+      } else {
+        expandedMapSidebarGroupsIds.splice(idIndex, 1);
+      }
+      newState = Object.assign({}, state, { expandedMapSidebarGroupsIds });
       break;
     }
 

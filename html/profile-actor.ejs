@@ -100,15 +100,25 @@
 
         <section class="c-top-map">
           <div class="row">
-            <div class="small-6 columns c-top-map js-top-destination-map"></div>
-            <div class="small-6 columns c-top js-top-destination"></div>
+            <div class="small-12 columns">
+              <h3 class="title -small js-top-map-title">-</h3>
+            </div>
+            <div class="small-6 columns js-top-destination-map"></div>
+            <div class="small-6 columns">
+              <div class="c-line js-top-destination"></div>
+            </div>
           </div>
         </section>
 
         <section class="c-top-municipalities">
           <div class="row">
-            <div class="small-6 columns c-top js-top-municipalities"></div>
-            <div class="small-6 columns c-top-map js-top-municipalities-map"></div>
+            <div class="small-12 columns">
+              <ul class="title -small js-top-municipalities-title">-</ul>
+            </div>
+            <div class="small-6 columns">
+              <div class="c-line js-top-municipalities"></div>
+            </div>
+            <div class="small-6 columns js-top-municipalities-map"></div>
           </div>
         </section>
 
@@ -135,7 +145,7 @@
         <p class="message">Data not found</p>
       </div>
     </div>
-    <div class="js-infowindow c-profile-tooltip is-hidden"></div>
+    <div class="js-infowindow c-info-tooltip is-hidden"></div>
     <%= htmlWebpackPlugin.options.footer %>
   </div>
   <%= htmlWebpackPlugin.options.scripts %>

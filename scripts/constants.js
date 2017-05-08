@@ -45,6 +45,7 @@ export const MAP_DIMENSIONS_COLOR_SCALES = {
   'Reported cases of forced labour (2014)': 'reds',
   'Land conflicts (2014)': 'reds'
 };
+export const PROFILE_CHOROPLETH_CLASSES = ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'];
 
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
 export const SANKEY_TRANSITION_TIME = 1000;
@@ -65,20 +66,11 @@ export const TOOL_DEFAULT_STATE = {
     areNodesExpanded: false,
     detailedView: false,
     selectedNodesData: [],
-    // TODO title should be inferred from the uid, not kept in state
-    selectedMapDimensions: {
-      horizontal: {
-        uid: null,
-        title: null
-      },
-      vertical: {
-        uid: null,
-        title: null
-      }
-    },
+    selectedMapDimensions: [null, null],
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
     selectedMapBasemap: 'default',
-    isMapVisible: false
+    isMapVisible: false,
+    expandedMapSidebarGroupsIds: []
   }
 };
 
@@ -89,6 +81,7 @@ export const DATA_DEFAULT_STATE = {
 
 // fact sheets
 export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
+export const ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST = ['included_years', 'buckets'];
 export const CHORD_COLORS = ['#ea6869', '#34444c'];
 
 // map
