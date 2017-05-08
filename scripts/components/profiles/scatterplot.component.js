@@ -29,7 +29,7 @@ export default class {
   }
 
   _render() {
-    const margin = { top: 4, right: 13, bottom: 30, left: 29 };
+    const margin = { top: 20, right: 13, bottom: 30, left: 29 };
     this.width = this.el.clientWidth - margin.left - margin.right;
     this.height = 377 - margin.top - margin.bottom;
     let allYValues = this.data.map(item => item.y);
