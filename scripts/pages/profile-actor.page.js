@@ -269,6 +269,7 @@ const _switchTopSource = (e, data) => {
       margin: { top: 10, right: 100, bottom: 25, left: 37 },
       height: 244,
       ticks: {
+        xTicks: 6,
         yTicks: 6,
         yTickPadding: 10,
         yTickFormatType: 'top-location',
