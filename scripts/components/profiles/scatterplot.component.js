@@ -118,7 +118,9 @@ export default class {
   }
 
   _renderXswitcher() {
-    this.switcherEl.innerHTML = ScatterplotSwitcherTemplate({ data: this.xDimension });
+    // temporal fix to 3 last tabs being empty
+    const tabs = this.xDimension.filter((x, i) => i < 3);
+    this.switcherEl.innerHTML = ScatterplotSwitcherTemplate({ data: tabs });
 
     this.switchers = Array.prototype.slice.call(this.switcherEl.querySelectorAll('.js-scatterplot-switcher-item'), 0);
     this.switchers.forEach(switcher => {
