@@ -44,9 +44,10 @@ const _onSelect = function(value) {
 
 const _build = (data, nodeId) => {
   const lineSettings = {
-    margin: { top: 10, right: 100, bottom: 25, left: 94 },
+    margin: { top: 10, right: 100, bottom: 30, left: 94 },
     height: 244,
     ticks: {
+      xTicks: 6,
       yTicks: 6,
       yTickPadding: 10,
       yTickFormatType: 'top-location',
