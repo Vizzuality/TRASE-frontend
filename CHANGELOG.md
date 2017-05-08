@@ -1,3 +1,5 @@
+- profiles: fixes scatterplot not showing current node.
+- profiles: fixes municipalities legend not showing when switching source.
 - profiles: includes map choropleth legend
 - profiles: includes the top sources' source switch.
 - tool: map dimensions groups are now collapsible
