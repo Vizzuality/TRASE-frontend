@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { ribbon as d3_ribbon, chord as d3_chord } from 'd3-chord';
+import { chord as d3_chord, ribbon as d3_ribbon } from 'd3-chord';
 import { descending as d3_descending } from 'd3-array';
 import { arc as d3_arc } from 'd3-shape';
 
@@ -10,11 +10,20 @@ const TYPE_KEY_2 = 'list2';
 
 export default class {
   constructor(className, orgMatrix, list, list2) {
-    const nodes = [].concat(
-      list.map(item => { return {name: item.name, type: TYPE_KEY_1} }),
-      list2.map(item => { return {name: item.name, type: TYPE_KEY_2} })
-    );
-    if (!orgMatrix.length || !nodes.length) return;
+    const nodes = [].concat(list.map(item => {
+      return {
+        name: item.name,
+        type: TYPE_KEY_1
+      };
+    }), list2.map(item => {
+      return {
+        name: item.name,
+        type: TYPE_KEY_2
+      };
+    }));
+    if (!orgMatrix.length || !nodes.length) {
+      return;
+    }
 
     document.querySelector(className).classList.remove('is-hidden');
     const nameLimit = 11;
@@ -26,7 +35,12 @@ export default class {
     });
 
     const elem = document.querySelector(className);
-    const margin = { top: 0, right: 0, bottom: 0, left: 0 };
+    const margin = {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
+    };
     const width = elem.clientWidth - margin.left - margin.right;
     const height = elem.clientWidth - margin.top - margin.bottom;
 
@@ -35,8 +49,8 @@ export default class {
 
     const svg = d3_select(className)
       .append('svg')
-          .attr('width', width + margin.left + margin.right)
-          .attr('height', height + margin.top + margin.bottom);
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom);
 
     const chord = d3_chord()
       .padAngle(0.05)
@@ -82,15 +96,16 @@ export default class {
       .attr('d', ribbon)
       .attr('class', 'links');
 
-
     group.append('text')
-    .each(d => { d.angle = (d.startAngle + d.endAngle) / 2; })
-    .attr('dy', '.35em')
-    .attr('class', 'text-legend')
-    .attr('transform', d => {
-      return `rotate(${d.angle * 180 / Math.PI - 90}) translate(${innerRadius + 24}) ${d.angle > Math.PI ? 'rotate(180)' : ''}`;
-    })
-    .style('text-anchor', d => d.angle > Math.PI ? 'end' : null)
-    .text((d, i) => (i === 0 || allNames[i].type === TYPE_KEY_2) ? allNames[i].name : '');
+      .each(d => {
+        d.angle = (d.startAngle + d.endAngle) / 2;
+      })
+      .attr('dy', '.35em')
+      .attr('class', 'text-legend')
+      .attr('transform', d => {
+        return `rotate(${d.angle * 180 / Math.PI - 90}) translate(${innerRadius + 24}) ${d.angle > Math.PI ? 'rotate(180)' : ''}`;
+      })
+      .style('text-anchor', d => d.angle > Math.PI ? 'end' : null)
+      .text((d, i) => (i === 0 || allNames[i].type === TYPE_KEY_2) ? allNames[i].name : '');
   }
 }
