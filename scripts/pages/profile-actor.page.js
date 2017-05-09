@@ -44,9 +44,10 @@ const _onSelect = function(value) {
 
 const _build = (data, nodeId) => {
   const lineSettings = {
-    margin: { top: 10, right: 100, bottom: 25, left: 94 },
+    margin: { top: 10, right: 100, bottom: 30, left: 94 },
     height: 244,
     ticks: {
+      xTicks: 6,
       yTicks: 6,
       yTickPadding: 10,
       yTickFormatType: 'top-location',
@@ -70,7 +71,7 @@ const _build = (data, nodeId) => {
 
   if (data.top_sources.municipality.lines.length) {
     _setTopSourceSwitcher(data);
-    let topMunicipalitiesLines = data.top_sources.municipality;
+    const topMunicipalitiesLines = Object.assign({}, data.top_sources.municipality);
     topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
     new Line(
       '.js-top-municipalities',
@@ -117,7 +118,7 @@ const _build = (data, nodeId) => {
 
   if (data.top_countries.lines.length) {
     document.querySelector('.js-top-map-title').innerHTML = `Top destination countries of ${formatApostrophe(_.capitalize(data.node_name))} soy`;
-    let topCountriesLines = data.top_countries;
+    const topCountriesLines = Object.assign({}, data.top_countries);
     topCountriesLines.lines = topCountriesLines.lines.slice(0, 5);
     new Line(
       '.js-top-destination',
@@ -258,7 +259,7 @@ const _switchTopSource = (e, data) => {
   });
   selectedSwitch.classList.add('selected');
 
-  let topMunicipalitiesLines = data.top_sources[selectedSource];
+  const topMunicipalitiesLines = Object.assign({}, data.top_sources[selectedSource]);
   topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
   new Line(
     '.js-top-municipalities',
@@ -268,6 +269,7 @@ const _switchTopSource = (e, data) => {
       margin: { top: 10, right: 100, bottom: 25, left: 37 },
       height: 244,
       ticks: {
+        xTicks: 6,
         yTicks: 6,
         yTickPadding: 10,
         yTickFormatType: 'top-location',
