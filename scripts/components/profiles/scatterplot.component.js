@@ -20,7 +20,7 @@ export default class {
     this.switcherEl = document.querySelector('.js-scatterplot-switcher');
     this.data = settings.data;
     this.xDimension = settings.xDimension;
-    this.nodeId = settings.nodeId;
+    this.node = settings.node;
     this.showTooltipCallback = settings.showTooltipCallback;
     this.hideTooltipCallback = settings.hideTooltipCallback;
 
@@ -29,7 +29,7 @@ export default class {
   }
 
   _render() {
-    const margin = { top: 4, right: 13, bottom: 30, left: 29 };
+    const margin = { top: 20, right: 13, bottom: 30, left: 29 };
     this.width = this.el.clientWidth - margin.left - margin.right;
     this.height = 377 - margin.top - margin.bottom;
     let allYValues = this.data.map(item => item.y);
@@ -92,7 +92,7 @@ export default class {
       .data(this._getFormatedData(0))
       .enter()
       .append('circle')
-      .attr('class', (function(d) { return d.nodeId.toString() === this.nodeId ? 'dot current' : 'dot'; }).bind(this))
+      .attr('class', (function(d) { return d.name.toUpperCase() === this.node.name.toUpperCase() ? 'dot current' : 'dot'; }).bind(this))
       .attr('r', 5)
       .attr('cx', function(d) { return this.x(d.x); }.bind(this))
       .attr('cy', function(d) { return this.y(d.y); }.bind(this));

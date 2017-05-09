@@ -27,11 +27,15 @@ import formatApostrophe from 'utils/formatApostrophe';
 import formatNumber from 'utils/formatNumber';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
+import { ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST } from 'constants';
+import TopSourceTemplate from 'ejs!templates/profiles/top-source-switcher.ejs';
 
 const defaults = {
   country: 'Brazil',
   commodity: 'soy'
 };
+
+const tooltip = new Tooltip('.js-infowindow');
 
 const _onSelect = function(value) {
   this.setTitle(value);
@@ -39,7 +43,6 @@ const _onSelect = function(value) {
 };
 
 const _build = (data, nodeId) => {
-  const tooltip = new Tooltip('.js-infowindow');
   const lineSettings = {
     margin: { top: 10, right: 100, bottom: 25, left: 94 },
     height: 244,
@@ -65,16 +68,15 @@ const _build = (data, nodeId) => {
     }
   };
 
-
   if (data.top_sources.municipality.lines.length) {
-    document.querySelector('.js-top-municipalities-title').innerHTML = `Top source regions of ${formatApostrophe(_.capitalize(data.node_name))} soy: municipalities`;
+    _setTopSourceSwitcher(data);
     let topMunicipalitiesLines = data.top_sources.municipality;
     topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
     new Line(
       '.js-top-municipalities',
       topMunicipalitiesLines,
       data.top_sources.included_years,
-      lineSettings,
+      Object.assign({}, lineSettings, { margin: { top: 10, right: 100, bottom: 25, left: 37 } }),
     );
 
     Map('.js-top-municipalities-map', {
@@ -83,8 +85,8 @@ const _build = (data, nodeId) => {
       getPolygonClassName: ({ properties }) => {
         const municipality = data.top_sources.municipality.lines
           .find(m => (properties.geoid === m.geo_id));
-        let value = 0;
-        if (municipality) value = municipality.value9 || 0;
+        let value = 'n-a';
+        if (municipality) value = municipality.value9 || 'n-a';
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
@@ -105,6 +107,10 @@ const _build = (data, nodeId) => {
       },
       hideTooltipCallback: () => {
         tooltip.hideTooltip();
+      },
+      legend: {
+        title: ['Soy exported in 2015', '(t)'],
+        bucket: [data.top_countries.buckets[0], ...data.top_countries.buckets]
       }
     });
   }
@@ -127,8 +133,8 @@ const _build = (data, nodeId) => {
       getPolygonClassName: ({ properties }) => {
         const country = data.top_countries.lines
           .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
-        let value = 0;
-        if (country) value = country.value9 || 0;
+        let value = 'n-a';
+        if (country) value = country.value9 || 'n-a';
         return `-outline ch-${value}`;
       },
       showTooltipCallback: ({ properties }, x, y) => {
@@ -149,16 +155,19 @@ const _build = (data, nodeId) => {
       },
       hideTooltipCallback: () => {
         tooltip.hideTooltip();
+      },
+      legend: {
+        title: ['Soy exported in 2015', '(t)'],
+        bucket: [data.top_countries.buckets[0], ...data.top_countries.buckets]
       }
     });
-
   }
 
   if (data.sustainability.length) {
     new MultiTable({
       el: document.querySelector('.js-sustainability-table'),
       data: data.sustainability,
-      tabsTitle: `Sustainability of ${formatApostrophe(data.node_name)} TOP source regions in 2015:`,
+      tabsTitle: `Sustainability of ${formatApostrophe(data.node_name)} top source regions in 2015:`,
       type: 't_head_actors',
       target: 'actor'
     });
@@ -167,7 +176,7 @@ const _build = (data, nodeId) => {
   new Scatterplot('.js-companies-exporting', {
     data: data.companies_exporting.companies,
     xDimension: data.companies_exporting.dimensions_x,
-    nodeId: nodeId,
+    node: { id: nodeId, name: data.node_name },
     showTooltipCallback: (company, indicator, x, y) => {
       tooltip.showTooltip(x, y, {
         title: company.name,
@@ -223,13 +232,109 @@ const _showErrorMessage = () => {
   el.querySelector('.js-error-message').classList.remove('is-hidden');
 };
 
+const _setTopSourceSwitcher = (data) => {
+  const template = TopSourceTemplate({
+    nodeName: formatApostrophe(_.capitalize(data.node_name)),
+    switchers: Object.keys(data.top_sources).filter(key => !(ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST.includes(key)))
+  });
+  document.querySelector('.js-top-municipalities-title').innerHTML = template;
+
+  const switchers = Array.prototype.slice.call(document.querySelectorAll('.js-top-source-switcher'), 0);
+  switchers.forEach(switcher => {
+    switcher.addEventListener('click', (e) => _switchTopSource(e, data));
+  });
+};
+
+const _switchTopSource = (e, data) => {
+  const selectedSwitch = e && e.currentTarget;
+  if (!selectedSwitch) {
+    return;
+  }
+
+  const selectedSource = selectedSwitch.getAttribute('data-key');
+  const switchers = Array.prototype.slice.call(document.querySelectorAll('.js-top-source-switcher'), 0);
+  switchers.forEach(switcher => {
+    switcher.classList.remove('selected');
+  });
+  selectedSwitch.classList.add('selected');
+
+  let topMunicipalitiesLines = data.top_sources[selectedSource];
+  topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
+  new Line(
+    '.js-top-municipalities',
+    topMunicipalitiesLines,
+    data.top_sources.included_years,
+    {
+      margin: { top: 10, right: 100, bottom: 25, left: 37 },
+      height: 244,
+      ticks: {
+        yTicks: 6,
+        yTickPadding: 10,
+        yTickFormatType: 'top-location',
+        xTickPadding: 15
+      },
+      showTooltipCallback: (location, x, y) => {
+        tooltip.showTooltip(x, y, {
+          title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
+          values: [
+            {
+              title: 'Trade Volume',
+              value: formatNumber(location.value),
+              unit: 'Tons'
+            }
+          ]
+        });
+      },
+      hideTooltipCallback: () => {
+        tooltip.hideTooltip();
+      }
+    },
+  );
+
+  document.querySelector('.js-top-municipalities-map').innerHTML = '';
+  Map('.js-top-municipalities-map', {
+    topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}.topo.json`,
+    topoJSONRoot: `${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}`,
+    getPolygonClassName: ({ properties }) => {
+      const source = data.top_sources[selectedSource].lines
+        .find(s => (properties.geoid === s.geo_id));
+      let value = 'n-a';
+      if (source) value = source.value9 || 'n-a';
+      return `-outline ch-${value}`;
+    },
+    showTooltipCallback: ({ properties }, x, y) => {
+      const source = data.top_sources[selectedSource].lines
+        .find(s => (properties.geoid === s.geo_id));
+      let title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
+      let body = null;
+      if (source) body = source.values[0];
+
+      tooltip.showTooltip(x, y, {
+        title,
+        values: [{
+          title: 'Trade Volume',
+          value: formatNumber(body),
+          unit: 'Tons'
+        }]
+      });
+    },
+    hideTooltipCallback: () => {
+      tooltip.hideTooltip();
+    },
+    legend: {
+      title: ['Soy exported in 2015', '(t)'],
+      bucket: [data.top_sources.buckets[0], ...data.top_sources.buckets]
+    }
+  });
+};
+
 const _init = ()  => {
   const url = window.location.search;
   const urlParams = getURLParams(url);
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, true);
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, false);
 
   fetch(actorFactsheetURL)
     .then((response) => {

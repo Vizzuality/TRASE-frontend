@@ -1,3 +1,7 @@
+- profiles: fixes scatterplot not showing current node.
+- profiles: fixes municipalities legend not showing when switching source.
+- profiles: includes map choropleth legend
+- profiles: includes the top sources' source switch.
 - tool: map dimensions groups are now collapsible
 - tool: map dimensions selecting is simpler (singl radio buttons column)
 - tool: fixed tool crash when links API fails
@@ -8,6 +12,7 @@
 - tool: fixed water scarcity color scale
 - tool: added link tooltips resize by information
 - tool: added link tooltips quant units
+- profiles: actor municipalities/biome/state switcher
 - profiles: added line chart locations on actors page
 - profiles: added hover effects on shortcut buttons
 - profiles: companies exporting chart (mock)
