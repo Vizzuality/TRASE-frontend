@@ -80,7 +80,12 @@ const _build = data => {
   }
 
   if (data.top_traders.actors.length) {
-    new Chord('.js-chord-traders', data.top_traders.matrix, data.top_traders.actors, data.municipality_name);
+    new Chord(
+      '.js-chord-traders',
+      data.top_traders.matrix,
+      data.top_traders.municipalities,
+      data.top_traders.actors
+    );
 
     new Top({
       el: document.querySelector('.js-top-trader'),
@@ -94,7 +99,12 @@ const _build = data => {
   }
 
   if (data.top_consumers.countries.length) {
-    new Chord('.js-chord-consumers', data.top_consumers.matrix, data.top_consumers.countries, data.municipality_name);
+    new Chord(
+      '.js-chord-consumers',
+      data.top_consumers.matrix,
+      data.top_consumers.municipalities,
+      data.top_consumers.countries
+    );
 
     new Top({
       el: document.querySelector('.js-top-consumer'),
@@ -165,7 +175,7 @@ const _init = () => {
 
   commodityDropdown.setTitle(defaults.commodity);
 
-  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId });
+  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId }, true);
 
   fetch(placeFactsheetURL)
     .then((response) => {
