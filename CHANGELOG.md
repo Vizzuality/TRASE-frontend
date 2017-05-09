@@ -1,3 +1,7 @@
+- profiles: fixes order of lines in Line chart
+- profiles: improves xAxis ticks on Line chart (display months in number of years >2)
+- profiles: fixes loader showing up on top of nav.
+- profiles: fixes choropleth maps only showing 5 values.
 - profiles: fixes scatterplot not showing current node.
 - profiles: fixes municipalities legend not showing when switching source.
 - profiles: includes map choropleth legend
