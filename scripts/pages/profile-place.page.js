@@ -34,19 +34,19 @@ const defaults = {
 };
 
 const _build = data => {
-  const stateGeoID = data.state_geoId;
+  const stateGeoID = data.state_geo_id;
 
   Map('.js-map-country', {
     topoJSONPath: './vector_layers/WORLD.topo.json',
     topoJSONRoot: 'WORLD',
-    getPolygonClassName: d => (d.properties.iso2 === data.country_geoId) ? '-isCurrent' : '',
+    getPolygonClassName: d => (d.properties.iso2 === data.country_geo_id) ? '-isCurrent' : '',
     useRobinsonProjection: true
   });
 
   Map('.js-map-biome', {
     topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_BIOME.topo.json`,
     topoJSONRoot: `${defaults.country.toUpperCase()}_BIOME`,
-    getPolygonClassName: d => (d.properties.geoid === data.biome_geoId) ? '-isCurrent' : ''
+    getPolygonClassName: d => (d.properties.geoid === data.biome_geo_id) ? '-isCurrent' : ''
   });
 
   Map('.js-map-state', {
@@ -58,33 +58,40 @@ const _build = data => {
   Map('.js-map-municipality', {
     topoJSONPath: `./vector_layers/municip_states/${defaults.country.toUpperCase().toLowerCase()}/${stateGeoID}.topo.json`,
     topoJSONRoot: `${defaults.country.toUpperCase()}_${stateGeoID}`,
-    getPolygonClassName: d => (d.properties.geoid === data.municip_geoId) ? '-isCurrent' : ''
+    getPolygonClassName: d => (d.properties.geoid === data.municipality_geo_id) ? '-isCurrent' : ''
   });
 
-  new Line(
-    '.js-line',
-    data.trajectory_deforestation,
-    data.trajectory_deforestation.includedYears,
-    {
-      margin: { top: 30, right: 40, bottom: 30, left: 99 },
-      height: 425,
-      ticks: {
-        yTicks: 7,
-        yTickPadding: 52,
-        yTickFormatType: 'deforestation-trajectory',
-        xTickPadding: 15
+  if (data.trajectory_deforestation.lines.length) {
+    new Line(
+      '.js-line',
+      data.trajectory_deforestation,
+      data.trajectory_deforestation.included_years,
+      {
+        margin: { top: 30, right: 40, bottom: 30, left: 99 },
+        height: 425,
+        ticks: {
+          yTicks: 7,
+          yTickPadding: 52,
+          yTickFormatType: 'deforestation-trajectory',
+          xTickPadding: 15
+        }
       }
-    }
-  );
+    );
+  }
 
   if (data.top_traders.actors.length) {
-    new Chord('.js-chord-traders', data.top_traders.matrix, data.top_traders.actors, data.municip_name);
+    new Chord(
+      '.js-chord-traders',
+      data.top_traders.matrix,
+      data.top_traders.municipalities,
+      data.top_traders.actors
+    );
 
     new Top({
       el: document.querySelector('.js-top-trader'),
       data: data.top_traders.actors,
       targetLink: 'actor',
-      title: `Top traders of soy in ${data.municip_name}`,
+      title: `Top traders of soy in ${data.municipality_name}`,
       unit: '%'
     });
 
@@ -92,12 +99,17 @@ const _build = data => {
   }
 
   if (data.top_consumers.countries.length) {
-    new Chord('.js-chord-consumers', data.top_consumers.matrix, data.top_consumers.countries, data.municip_name);
+    new Chord(
+      '.js-chord-consumers',
+      data.top_consumers.matrix,
+      data.top_consumers.municipalities,
+      data.top_consumers.countries
+    );
 
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers.countries,
-      title: `Top consumers of ${formatApostrophe(_.capitalize(data.municip_name))} soy`,
+      title: `Top consumers of ${formatApostrophe(_.capitalize(data.municipality_name))} soy`,
       unit: '%'
     });
 
@@ -163,7 +175,7 @@ const _init = () => {
 
   commodityDropdown.setTitle(defaults.commodity);
 
-  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId }, true);
+  const placeFactsheetURL = getURLFromParams(GET_PLACE_FACTSHEET, { node_id: nodeId });
 
   fetch(placeFactsheetURL)
     .then((response) => {
@@ -189,7 +201,7 @@ const _init = () => {
         agriculture_land: data.farming_GDP,
         biome: data.biome_name,
         country: data.country_name,
-        municipality: data.municip_name,
+        municipality: data.municipality_name,
         soy_land: data.soy_farmland,
         state: data.state_name,
         type: data.column_name,

@@ -60,7 +60,6 @@ export const DATA_DEFAULT_STATE = {
 export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
 export const ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST = ['included_years', 'buckets'];
 export const STACK_AREA_COLORS = ['#ef6a68', '#ffae4f', '#76c370', '#69a4d0', '#9d7dbf'];
-export const CHORD_COLORS = ['#ea6869', '#34444c'];
 
 // map
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';
