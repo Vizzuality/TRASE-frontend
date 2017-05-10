@@ -202,10 +202,10 @@ const _build = (data, nodeId) => {
 };
 
 const _setInfo = (info, nodeId) => {
-  document.querySelector('.js-name').innerHTML = info.name ? _.capitalize(info.name) : '-';
+  document.querySelector('.js-name').textContent = info.name ? _.capitalize(info.name) : '-';
   document.querySelector('.js-link-button-name').textContent = formatApostrophe(_.capitalize(info.name)) + ' PROFILE';
-  document.querySelector('.js-legend').innerHTML = info.type || '-';
-  document.querySelector('.js-country').innerHTML = info.country ? _.capitalize(info.country) : '-';
+  document.querySelector('.js-legend').textContent = info.type || '-';
+  document.querySelector('.js-country').textContent = info.country ? _.capitalize(info.country) : '-';
   if (info.forest_500 > 0) document.querySelector('.js-forest-500-score .circle-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-circle-filled');
   if (info.forest_500 > 1) document.querySelector('.js-forest-500-score .circle-icon[data-value="2"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-circle-filled');
   if (info.forest_500 > 2) document.querySelector('.js-forest-500-score .circle-icon[data-value="3"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-circle-filled');
@@ -218,7 +218,7 @@ const _setInfo = (info, nodeId) => {
   }
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
-  document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
+  document.querySelector('.js-summary-text').textContent = info.summary ? info.summary : '-';
 };
 
 const _setEventListeners = () => {
@@ -336,7 +336,7 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, false);
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId });
 
   fetch(actorFactsheetURL)
     .then((response) => {
