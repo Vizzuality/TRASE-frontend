@@ -1,7 +1,7 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
 import _ from 'lodash';
-import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL } from 'constants';
+import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL, CONTEXT_WITHOUT_MAP_IDS } from 'constants';
 import {
   getURLFromParams,
   GET_ALL_NODES,
@@ -148,10 +148,13 @@ export function setContext(contextId, isInitialContextSet = false) {
         type: actions.GET_COLUMNS, payload: payload.slice(0, 2),
       });
 
-      dispatch(loadNodes());
       dispatch(loadLinks());
-      dispatch(loadMapVectorData());
-      dispatch(loadMapContextLayers());
+
+      if (CONTEXT_WITHOUT_MAP_IDS.indexOf(contextId) === -1) {
+        dispatch(loadNodes());
+        dispatch(loadMapVectorData());
+        dispatch(loadMapContextLayers());
+      }
     });
   };
 }

@@ -1,3 +1,5 @@
+
+- tool: fixed various issues with the map with contexts that don't have subnational granularity
 - profiles: fixes order of lines in Line chart
 - profiles: improves xAxis ticks on Line chart (display months in number of years >2)
 - profiles: fixes loader showing up on top of nav.
