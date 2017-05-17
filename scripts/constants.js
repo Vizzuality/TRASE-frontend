@@ -22,6 +22,8 @@ export const CHOROPLETH_CLASSES = {
   error_no_metadata_for_layer: 'ch-no-meta-layer',
 };
 
+export const PROFILE_CHOROPLETH_CLASSES = ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'];
+
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
 export const SANKEY_TRANSITION_TIME = 1000;
 
@@ -43,20 +45,11 @@ export const TOOL_DEFAULT_STATE = {
     areNodesExpanded: false,
     detailedView: false,
     selectedNodesData: [],
-    // TODO title should be inferred from the uid, not kept in state
-    selectedMapDimensions: {
-      horizontal: {
-        uid: null,
-        title: null
-      },
-      vertical: {
-        uid: null,
-        title: null
-      }
-    },
+    selectedMapDimensions: [null, null],
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
     selectedMapBasemap: 'default',
-    isMapVisible: false
+    isMapVisible: false,
+    expandedMapSidebarGroupsIds: []
   }
 };
 
@@ -67,8 +60,8 @@ export const DATA_DEFAULT_STATE = {
 
 // fact sheets
 export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
+export const ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST = ['included_years', 'buckets'];
 export const STACK_AREA_COLORS = ['#ef6a68', '#ffae4f', '#76c370', '#69a4d0', '#9d7dbf'];
-export const CHORD_COLORS = ['#ea6869', '#34444c'];
 
 // map
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';

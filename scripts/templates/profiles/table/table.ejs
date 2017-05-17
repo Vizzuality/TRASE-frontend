@@ -12,11 +12,11 @@
       <% for(var i = 0; i < data['rows'][0]['values'].length; i++){%>
         <tr class="table-row">
           <td class="cell-name">
-            <span class="node-name"><%= data['includedColumns'][i]['name'] %></span>
+            <span class="node-name"><%= data['included_columns'][i]['name'] %></span>
           </td>
           <% for(var j = 0; j < data['rows'].length; j++) { %>
             <td class="cell-score _text-align-right">
-              <span class="unit" <% if(data['rows'][j]['haveUnit']){ %>data-unit="<%= data['includedColumns'][i]['unit'] %>"<% } %>>
+              <span class="unit" <% if(data['rows'][j]['have_unit']){ %>data-unit="<%= data['included_columns'][i]['unit'] %>"<% } %>>
                 <%= data['rows'][j]['values'][i] %>
               </span>
             </td>
@@ -27,9 +27,9 @@
   <% } else if(type === 't_head_actors'){ %>
     <thead>
       <tr class="table-row">
-        <% for(var i = 0; i < data['includedColumns'].length; i++) { %>
+        <% for(var i = 0; i < data['included_columns'].length; i++) { %>
           <th class="header-cell <% if(i > 0) { %> _text-align-right <% } %>">
-            <%= data['includedColumns'][i]['name'] %>
+            <%= data['included_columns'][i]['name'] %>
           </th>
         <% } %>
       </tr>
@@ -40,7 +40,7 @@
         <% for(var j = 0; j < data['rows'][i]['values'].length; j++){%>
           <td class="cell-score <% if(j > 0) { %> _text-align-right <% } %>">
             <% if(data['rows'][i]['values'][j] != null){ %>
-              <span class="unit" data-unit="<%= i == 0 ? data['includedColumns'][j]['unit'] : null  %>">
+              <span class="unit" data-unit="<%= i == 0 ? data['included_columns'][j]['unit'] : null  %>">
                 <%= data['rows'][i]['values'][j]['value'] %>
                 <% if (link !== null && data['rows'][i]['values'][j]['id']) {%>
                   <a class="node-link" href="<%= link + data['rows'][i]['values'][j]['id'] %>">

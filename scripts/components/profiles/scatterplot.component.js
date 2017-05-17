@@ -20,7 +20,7 @@ export default class {
     this.switcherEl = document.querySelector('.js-scatterplot-switcher');
     this.data = settings.data;
     this.xDimension = settings.xDimension;
-    this.nodeId = settings.nodeId;
+    this.node = settings.node;
     this.showTooltipCallback = settings.showTooltipCallback;
     this.hideTooltipCallback = settings.hideTooltipCallback;
 
@@ -29,7 +29,7 @@ export default class {
   }
 
   _render() {
-    const margin = { top: 4, right: 13, bottom: 30, left: 29 };
+    const margin = { top: 20, right: 13, bottom: 30, left: 29 };
     this.width = this.el.clientWidth - margin.left - margin.right;
     this.height = 377 - margin.top - margin.bottom;
     let allYValues = this.data.map(item => item.y);
@@ -92,10 +92,10 @@ export default class {
       .data(this._getFormatedData(0))
       .enter()
       .append('circle')
-      .attr('class', (function(d) { return d.nodeId.toString() === this.nodeId ? 'dot current' : 'dot'; }).bind(this))
+      .attr('class', d => this._getCircleClass(d))
       .attr('r', 5)
-      .attr('cx', function(d) { return this.x(d.x); }.bind(this))
-      .attr('cy', function(d) { return this.y(d.y); }.bind(this));
+      .attr('cx', d => this.x(d.x))
+      .attr('cy', d => this.y(d.y));
 
     if (this.showTooltipCallback !== undefined) {
       this.circles.on('mousemove', function(d) {
@@ -118,7 +118,9 @@ export default class {
   }
 
   _renderXswitcher() {
-    this.switcherEl.innerHTML = ScatterplotSwitcherTemplate({ data: this.xDimension });
+    // temporal fix to 3 last tabs being empty
+    const tabs = this.xDimension.filter((x, i) => i < 3);
+    this.switcherEl.innerHTML = ScatterplotSwitcherTemplate({ data: tabs });
 
     this.switchers = Array.prototype.slice.call(this.switcherEl.querySelectorAll('.js-scatterplot-switcher-item'), 0);
     this.switchers.forEach(switcher => {
@@ -149,7 +151,8 @@ export default class {
       .data(newData)
       .transition()
       .duration(700)
-      .attr('cx', function(d) { return x(d.x); });
+      .attr('cx', d => x(d.x))
+      .attr('class', d => (d.x === null ? `${this._getCircleClass(d)} -hidden` : this._getCircleClass(d)));
 
     this.svg.select('.axis--x')
       .transition()
@@ -166,5 +169,9 @@ export default class {
         x: item.x[i]
       };
     });
+  }
+
+  _getCircleClass(d) {
+    return d.name.toUpperCase() === this.node.name.toUpperCase() ? 'dot current' : 'dot';
   }
 }
