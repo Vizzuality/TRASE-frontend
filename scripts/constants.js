@@ -27,6 +27,8 @@ export const PROFILE_CHOROPLETH_CLASSES = ['ch-red-0', 'ch-red-1', 'ch-red-2', '
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
 export const SANKEY_TRANSITION_TIME = 1000;
 
+export const CONTEXT_WITHOUT_MAP_IDS = [3, 4, 5, 6];
+
 export const APP_DEFAULT_STATE = {
   app: {
     modal: {
@@ -60,7 +62,6 @@ export const DATA_DEFAULT_STATE = {
 export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
 export const ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST = ['included_years', 'buckets'];
 export const STACK_AREA_COLORS = ['#ef6a68', '#ffae4f', '#76c370', '#69a4d0', '#9d7dbf'];
-export const CHORD_COLORS = ['#ea6869', '#34444c'];
 
 // map
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';

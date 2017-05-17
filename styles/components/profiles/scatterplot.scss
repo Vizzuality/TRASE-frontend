@@ -45,6 +45,7 @@
     fill: $charcoal-grey;
     stroke: $egg-shell;
     stroke-width: 2;
+    transition: opacity 150ms linear;
 
     &:hover {
       fill: $medium-pink;
@@ -54,6 +55,10 @@
       fill: $medium-pink;
       stroke: rgba($medium-pink, .4);
       stroke-width: 16px;
+    }
+
+    &.-hidden {
+      opacity: 0;
     }
   }
 

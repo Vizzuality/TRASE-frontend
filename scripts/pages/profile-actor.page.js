@@ -44,9 +44,10 @@ const _onSelect = function(value) {
 
 const _build = (data, nodeId) => {
   const lineSettings = {
-    margin: { top: 10, right: 100, bottom: 25, left: 94 },
+    margin: { top: 10, right: 100, bottom: 30, left: 94 },
     height: 244,
     ticks: {
+      xTicks: 6,
       yTicks: 6,
       yTickPadding: 10,
       yTickFormatType: 'top-location',
@@ -70,7 +71,8 @@ const _build = (data, nodeId) => {
 
   if (data.top_sources.municipality.lines.length) {
     _setTopSourceSwitcher(data);
-    const topMunicipalitiesLines = data.top_sources.municipality;
+
+    const topMunicipalitiesLines = Object.assign({}, data.top_sources.municipality);
     topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
     new Line(
       '.js-top-municipalities',
@@ -117,7 +119,9 @@ const _build = (data, nodeId) => {
 
   if (data.top_countries.lines.length) {
     document.querySelector('.js-top-map-title').innerHTML = `Top destination countries of ${formatApostrophe(_.capitalize(data.node_name))} soy`;
-    const topCountriesLines = data.top_countries;
+
+    const topCountriesLines = Object.assign({}, data.top_countries);
+
     topCountriesLines.lines = topCountriesLines.lines.slice(0, 5);
     new Line(
       '.js-top-destination',
@@ -201,10 +205,10 @@ const _build = (data, nodeId) => {
 };
 
 const _setInfo = (info, nodeId) => {
-  document.querySelector('.js-name').innerHTML = info.name ? _.capitalize(info.name) : '-';
+  document.querySelector('.js-name').textContent = info.name ? _.capitalize(info.name) : '-';
   document.querySelector('.js-link-button-name').textContent = formatApostrophe(_.capitalize(info.name)) + ' PROFILE';
-  document.querySelector('.js-legend').innerHTML = info.type || '-';
-  document.querySelector('.js-country').innerHTML = info.country ? _.capitalize(info.country) : '-';
+  document.querySelector('.js-legend').textContent = info.type || '-';
+  document.querySelector('.js-country').textContent = info.country ? _.capitalize(info.country) : '-';
   if (info.forest_500 > 0) document.querySelector('.js-forest-500-score .circle-icon[data-value="1"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-circle-filled');
   if (info.forest_500 > 1) document.querySelector('.js-forest-500-score .circle-icon[data-value="2"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-circle-filled');
   if (info.forest_500 > 2) document.querySelector('.js-forest-500-score .circle-icon[data-value="3"] use').setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#icon-circle-filled');
@@ -217,7 +221,7 @@ const _setInfo = (info, nodeId) => {
   }
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
-  document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
+  document.querySelector('.js-summary-text').textContent = info.summary ? info.summary : '-';
 };
 
 const _setEventListeners = () => {
@@ -258,7 +262,8 @@ const _switchTopSource = (e, data) => {
   });
   selectedSwitch.classList.add('selected');
 
-  const topMunicipalitiesLines = data.top_sources[selectedSource];
+  const topMunicipalitiesLines = Object.assign({}, data.top_sources[selectedSource]);
+
   topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
   new Line(
     '.js-top-municipalities',
@@ -268,6 +273,7 @@ const _switchTopSource = (e, data) => {
       margin: { top: 10, right: 100, bottom: 25, left: 37 },
       height: 244,
       ticks: {
+        xTicks: 6,
         yTicks: 6,
         yTickPadding: 10,
         yTickFormatType: 'top-location',
@@ -334,7 +340,7 @@ const _init = ()  => {
   const nodeId = urlParams.nodeId;
   const commodity = urlParams.commodity || defaults.commodity;
 
-  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId }, false);
+  const actorFactsheetURL = getURLFromParams(GET_ACTOR_FACTSHEET, { node_id: nodeId });
 
   fetch(actorFactsheetURL)
     .then((response) => {

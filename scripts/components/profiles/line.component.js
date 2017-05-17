@@ -49,86 +49,93 @@ export default class {
       .rangeRound([height, 0])
       .domain(d3_extent([0, ...allYValues]));
 
-    data.lines.forEach((lineData, i) => {
-      const lineValuesWithFormat = prepareData(xValues, lineData);
-      const line = d3_line()
-        .x(d => x(d.date))
-        .y(d => y(d.value));
-      const type = typeof data.style !== 'undefined' ? data.style.type : lineData.type;
-      const style = typeof data.style !== 'undefined' ? data.style.style : lineData.style;
+    data.lines
+      .sort((a, b) => {
+        const last = xValues.length - 1;
+        if (a.values[last] > b.values[last]) return -1;
+        if (a.values[last] < b.values[last]) return 1;
+        return 0;
+      })
+      .forEach((lineData, i) => {
+        const lineValuesWithFormat = prepareData(xValues, lineData);
+        const line = d3_line()
+          .x(d => x(d.date))
+          .y(d => y(d.value));
+        const type = typeof data.style !== 'undefined' ? data.style.type : lineData.type;
+        const style = typeof data.style !== 'undefined' ? data.style.style : lineData.style;
 
-      let area = null,
-        pathContainers = null;
-      switch (type) {
-        case 'area':
-          area = d3_area()
-            .x(d => x(d.date))
-            .y(height)
-            .y1(d => y(d.value));
+        let area = null,
+          pathContainers = null;
+        switch (type) {
+          case 'area':
+            area = d3_area()
+              .x(d => x(d.date))
+              .y(height)
+              .y1(d => y(d.value));
 
-          container.append('path')
-            .datum(lineValuesWithFormat)
-            .attr('class', style)
-            .attr('d', area);
+            container.append('path')
+              .datum(lineValuesWithFormat)
+              .attr('class', style)
+              .attr('d', area);
 
-          container.append('path')
-            .datum(lineValuesWithFormat)
-            .attr('class', `line-${style}`)
-            .attr('d', line);
-          break;
-        case 'line':
-          container.append('path')
-            .datum(lineValuesWithFormat)
-            .attr('class', style)
-            .attr('d', line);
-          break;
-        case 'line-points':
-          pathContainers = container.datum(lineValuesWithFormat)
-            .append('g')
-            .attr('class', style);
+            container.append('path')
+              .datum(lineValuesWithFormat)
+              .attr('class', `line-${style}`)
+              .attr('d', line);
+            break;
+          case 'line':
+            container.append('path')
+              .datum(lineValuesWithFormat)
+              .attr('class', style)
+              .attr('d', line);
+            break;
+          case 'line-points':
+            pathContainers = container.datum(lineValuesWithFormat)
+              .append('g')
+              .attr('class', style);
 
-          pathContainers.selectAll('path')
-            .data(d => [d])
-            .enter().append('path')
-            .attr('d', line);
+            pathContainers.selectAll('path')
+              .data(d => [d])
+              .enter().append('path')
+              .attr('d', line);
 
-          pathContainers.selectAll('text')
-            .data(d => [d])
-            .enter().append('text')
-            .attr('transform', d => `translate(${width + 6},${y(d[d.length - 1].value) + 4})`)
-            .text(d => `${i + 1}.${d[0].name}`);
+            pathContainers.selectAll('text')
+              .data(d => [d])
+              .enter().append('text')
+              .attr('transform', d => `translate(${width + 6},${y(d[d.length - 1].value) + 4})`)
+              .text(d => `${i + 1}.${d[0].name}`);
 
-          this.circles = pathContainers.selectAll('circle')
-            .data(d => d)
-            .enter().append('circle')
-            .attr('cx', d => x(d.date))
-            .attr('cy', d => y(d.value))
-            .attr('r', 4);
+            this.circles = pathContainers.selectAll('circle')
+              .data(d => d)
+              .enter().append('circle')
+              .attr('cx', d => x(d.date))
+              .attr('cy', d => y(d.value))
+              .attr('r', 4);
 
-          if (this.showTooltipCallback !== undefined) {
-            this.circles.on('mousemove', function(d) {
-              this.showTooltipCallback(
-                d,
-                d3_event.clientX + 10,
-                d3_event.clientY + window.scrollY + 10
-              );
-            }.bind(this))
-            .on('mouseout', function() {
-              this.hideTooltipCallback();
-            }.bind(this));
-          }
-          break;
-      }
+            if (this.showTooltipCallback !== undefined) {
+              this.circles.on('mousemove', function(d) {
+                this.showTooltipCallback(
+                  d,
+                  d3_event.clientX + 10,
+                  d3_event.clientY + window.scrollY + 10
+                );
+              }.bind(this))
+              .on('mouseout', function() {
+                this.hideTooltipCallback();
+              }.bind(this));
+            }
+            break;
+        }
 
-      if (typeof lineData.legend_name !== 'undefined') {
-        const legendItemHTML = LegendItemTemplate({
-          name: lineData.legend_name,
-          style: style
-        });
+        if (typeof lineData.legend_name !== 'undefined') {
+          const legendItemHTML = LegendItemTemplate({
+            name: lineData.legend_name,
+            style: style
+          });
 
-        legend.innerHTML = legend.innerHTML + legendItemHTML;
-      }
-    });
+          legend.innerHTML = legend.innerHTML + legendItemHTML;
+        }
+      });
 
     let yTickFormat = null,
       xTickFormat = null;
@@ -139,8 +146,18 @@ export default class {
         }
         return abbreviateNumber(value, 3);
       };
-      xTickFormat = (value) => {
-        const format = d3_timeFormat('%y');
+
+      xTickFormat = (value, i) => {
+        let format;
+        if (xValues.length > 2) {
+          format = d3_timeFormat('%y');
+        } else {
+          if (i === 0) {
+            format = d3_timeFormat('%b/%y');
+          } else {
+            format = d3_timeFormat('%b');
+          }
+        }
         return format(value);
       };
     } else {
@@ -162,6 +179,7 @@ export default class {
     }
 
     const xAxis = d3_axis_bottom(x)
+      .ticks(ticks.xTicks)
       .tickSize(0)
       .tickPadding(ticks.xTickPadding)
       .tickFormat(xTickFormat);
