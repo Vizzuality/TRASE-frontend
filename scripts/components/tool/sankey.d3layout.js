@@ -158,7 +158,7 @@ const sankeyLayout = function() {
       const sIdBY = stackedHeightsByNodeId.source[linkB.sourceNodeId];
       const tIdAY = stackedHeightsByNodeId.target[linkA.targetNodeId];
       const tIdBY = stackedHeightsByNodeId.target[linkB.targetNodeId];
-      let defaultSort = sIdAY - sIdBY || tIdAY - tIdBY;
+      const defaultSort = sIdAY - sIdBY || tIdAY - tIdBY;
 
       if (recolorBy.type !== 'none') {
         // sorts alphabetically with quals, numerically with inds

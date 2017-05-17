@@ -71,6 +71,7 @@ const _build = (data, nodeId) => {
 
   if (data.top_sources.municipality.lines.length) {
     _setTopSourceSwitcher(data);
+
     const topMunicipalitiesLines = Object.assign({}, data.top_sources.municipality);
     topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
     new Line(
@@ -93,7 +94,7 @@ const _build = (data, nodeId) => {
       showTooltipCallback: ({ properties }, x, y) => {
         const municipality = data.top_sources.municipality.lines
           .find(m => (properties.geoid === m.geo_id));
-        let title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
+        const title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
         let body = null;
         if (municipality) body = municipality.values[0];
 
@@ -118,7 +119,9 @@ const _build = (data, nodeId) => {
 
   if (data.top_countries.lines.length) {
     document.querySelector('.js-top-map-title').innerHTML = `Top destination countries of ${formatApostrophe(_.capitalize(data.node_name))} soy`;
+
     const topCountriesLines = Object.assign({}, data.top_countries);
+
     topCountriesLines.lines = topCountriesLines.lines.slice(0, 5);
     new Line(
       '.js-top-destination',
@@ -141,7 +144,7 @@ const _build = (data, nodeId) => {
       showTooltipCallback: ({ properties }, x, y) => {
         const country = data.top_countries.lines
           .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
-        let title = `${data.node_name} > ${properties.name.toUpperCase()}`;
+        const title = `${data.node_name} > ${properties.name.toUpperCase()}`;
         let body = null;
         if (country) body = country.values[0];
 
@@ -260,6 +263,7 @@ const _switchTopSource = (e, data) => {
   selectedSwitch.classList.add('selected');
 
   const topMunicipalitiesLines = Object.assign({}, data.top_sources[selectedSource]);
+
   topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
   new Line(
     '.js-top-municipalities',
@@ -307,7 +311,7 @@ const _switchTopSource = (e, data) => {
     showTooltipCallback: ({ properties }, x, y) => {
       const source = data.top_sources[selectedSource].lines
         .find(s => (properties.geoid === s.geo_id));
-      let title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
+      const title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
       let body = null;
       if (source) body = source.values[0];
 

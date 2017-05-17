@@ -31,21 +31,21 @@ export default class {
     const ticks = settings.ticks;
     this.showTooltipCallback = settings.showTooltipCallback;
     this.hideTooltipCallback = settings.hideTooltipCallback;
-    let allYValues = [].concat.apply([], data.lines.map(line => line.values));
+    const allYValues = [].concat.apply([], data.lines.map(line => line.values));
 
     elem.innerHTML = '';
-    let container = d3_select(elem)
+    const container = d3_select(elem)
       .append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-    let x = d3_scale_time()
+    const x = d3_scale_time()
       .range([0, width])
       .domain(d3_extent(xValues, y => new Date(y, 0)));
 
-    let y = d3_scale_linear()
+    const y = d3_scale_linear()
       .rangeRound([height, 0])
       .domain(d3_extent([0, ...allYValues]));
 
@@ -146,6 +146,7 @@ export default class {
         }
         return abbreviateNumber(value, 3);
       };
+
       xTickFormat = (value, i) => {
         let format;
         if (xValues.length > 2) {

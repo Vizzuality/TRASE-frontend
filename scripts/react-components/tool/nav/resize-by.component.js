@@ -7,7 +7,7 @@ const id = 'resize-by';
 
 export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResizeBy, resizeBys }) => {
   resizeBys.sort((a, b) => a.position > b.position);
-  let resizeByElements = [];
+  const resizeByElements = [];
   if (currentDropdown === 'resize-by') {
     resizeBys
       .filter(resizeBy => resizeBy.name !== selectedResizeBy.name)

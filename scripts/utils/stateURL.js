@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 export const getURLParams = url => {
-  let objParams = {};
+  const objParams = {};
 
   // removes '?' character from URL
   url = url.slice(1);

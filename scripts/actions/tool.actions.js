@@ -335,7 +335,7 @@ export function loadMapContextLayers() {
 // remove or add nodeId from selectedNodesIds
 function getSelectedNodeIds(currentSelectedNodesIds, chengedNodeId) {
   let selectedNodesIds;
-  let nodeIndex = currentSelectedNodesIds.indexOf(chengedNodeId);
+  const nodeIndex = currentSelectedNodesIds.indexOf(chengedNodeId);
   if (nodeIndex > -1) {
     selectedNodesIds = [].concat(currentSelectedNodesIds);
     selectedNodesIds.splice(nodeIndex, 1);

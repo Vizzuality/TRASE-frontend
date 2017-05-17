@@ -32,8 +32,8 @@ export default class {
     const margin = { top: 20, right: 13, bottom: 30, left: 29 };
     this.width = this.el.clientWidth - margin.left - margin.right;
     this.height = 377 - margin.top - margin.bottom;
-    let allYValues = this.data.map(item => item.y);
-    let allXValues = this.data.map(item => item.x[0]);
+    const allYValues = this.data.map(item => item.y);
+    const allXValues = this.data.map(item => item.x[0]);
 
     this.x = d3_scale_linear()
       .range([0, this.width])
@@ -141,8 +141,8 @@ export default class {
     selectedSwitch.classList.add('selected');
 
     const newData = this._getFormatedData(selectedTabKey);
-    let allXValues = newData.map(item => item.x);
-    let x = d3_scale_linear()
+    const allXValues = newData.map(item => item.x);
+    const x = d3_scale_linear()
       .range([0, this.width])
       .domain(d3_extent([0, ...allXValues]));
     this.xAxis.scale(x);
