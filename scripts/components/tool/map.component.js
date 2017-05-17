@@ -10,12 +10,19 @@ export default class {
   constructor() {
 
     const mapOptions = {
-      zoomControl: false
+      zoomControl: false,
+      minZoom: 2
     };
 
     this.map = L.map('js-map', mapOptions);
     new L.Control.Zoom({ position: 'bottomleft' }).addTo(this.map);
     L.control.scale({ position: 'bottomleft', imperial: false }).addTo(this.map);
+
+    const worldBounds = L.latLngBounds(L.latLng(-89, -180), L.latLng(89, 180));
+    this.map.setMaxBounds(worldBounds);
+    this.map.on('drag', () => {
+      this.map.panInsideBounds(worldBounds, { animate: false });
+    });
 
     this.map.on('layeradd', () => this._updateAttribution());
     this.map.on('dragend zoomend', () => this.callbacks.onMoveEnd(this.map.getCenter(), this.map.getZoom()));
