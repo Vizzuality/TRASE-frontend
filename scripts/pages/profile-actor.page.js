@@ -173,7 +173,7 @@ const _build = (data, nodeId) => {
       data: data.sustainability,
       tabsTitle: `Sustainability of ${formatApostrophe(data.node_name)} top source regions in 2015:`,
       type: 't_head_actors',
-      target: 'actor'
+      target: 'place'
     });
   }
 
