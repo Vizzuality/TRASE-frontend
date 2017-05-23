@@ -2,7 +2,6 @@ import { connect } from 'preact-redux';
 import { toggleDropdown } from 'actions/app.actions';
 import { selectView } from 'actions/tool.actions';
 import View from 'react-components/tool/nav/view.component.js';
-import loadTooltips from 'react-components/tool/nav/loadTooltips.js';
 
 const mapStateToProps = (state) => {
   return {
@@ -26,4 +25,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(loadTooltips(View));
+)(View);
