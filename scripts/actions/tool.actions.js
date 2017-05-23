@@ -439,15 +439,14 @@ export function searchNode(nodeId) {
 
       // check if we need to swap column
       const node = getState().tool.nodesDict[nodeId];
-      const columnPos = node.columnPosition;
-      const currentColumnAtPos = getState().tool.selectedColumnsIds[columnPos];
-
+      const columnGroup = node.columnGroup;
+      const currentColumnAtPos = getState().tool.selectedColumnsIds[columnGroup];
       if (!node) {
         console.warn(`requested node ${nodeId} does not exist in nodesDict`);
         return;
       }
       if (currentColumnAtPos !== node.columnId) {
-        dispatch(selectColumn(columnPos, node.columnId, false));
+        dispatch(selectColumn(columnGroup, node.columnId, false));
       }
       // 1. before: go to detailed mode and select
       // dispatch(selectView(true));

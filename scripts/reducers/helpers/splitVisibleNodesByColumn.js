@@ -3,7 +3,7 @@ import { nest as d3_nest } from 'd3-collection';
 export default function(nodes) {
   const columns = d3_nest()
   .key(el => {
-    return el.columnPosition;
+    return el.columnGroup;
   })
   .sortKeys((a, b) => {
     return (parseInt(a) < parseInt(b)) ? -1 : 1;

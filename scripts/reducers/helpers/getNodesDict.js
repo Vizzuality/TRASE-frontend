@@ -15,10 +15,8 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       type: column.name,
       columnGroup: column.group,
       isDefault: column.isDefault,
-      columnPosition: column.position,
       name: node.name,
       geoId: node.geoId
-      // inds: []
     };
 
     if (node.isDomesticConsumption === true || node.isDomesticConsumption === 'true') {
