@@ -17,10 +17,10 @@
   }
 }
 
-body >.c-tooltip {
+body > .c-tooltip {
   display: none;
   max-width: 464px;
-  z-index: 20;
+  z-index: 104;
 
   &.tooltip-enabled {
     display: block;
