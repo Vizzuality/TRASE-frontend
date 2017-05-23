@@ -20,7 +20,7 @@
 body > .c-tooltip {
   display: none;
   max-width: 464px;
-  z-index: 104;
+  z-index: $z-tooltip;
 
   &.tooltip-enabled {
     display: block;

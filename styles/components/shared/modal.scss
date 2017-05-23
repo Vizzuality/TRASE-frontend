@@ -9,7 +9,7 @@
 
   transform: translate(-50%, -50%);
 
-  z-index: 100;
+  z-index: $z-veil;
 
   > .header {
     padding: 24px 32px;
@@ -25,6 +25,7 @@
     color: $charcoal-grey;
     font-family: $font-family-1;
     font-size: $font-size-xx-regular;
+
     // incoming DOM from CMS
     p, a, span {
       letter-spacing: -1.3px;

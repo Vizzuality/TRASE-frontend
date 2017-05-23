@@ -15,6 +15,18 @@ $padding-wrap-tablet: 80px;
 $padding-wrap-desktop: 120px;
 
 
+// z-indexes
+$z-below-thumb: -1;
+$z-below: 0;
+$z-base: 1;
+$z-above: 2;
+$z-veil: 100;
+$z-above-veil: 101;
+$z-nav: 102;
+$z-search: 103;
+$z-tooltip: 104;
+
+
 // colors
 $background-white: #f2f2f2;
 $black: #000;

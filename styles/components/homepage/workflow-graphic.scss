@@ -22,7 +22,7 @@
       border-top: 2px solid $medium-pink;
 
       content: '';
-      z-index: 0;
+      z-index: $z-below;
      }
 
     > .supply-chain-item {
@@ -33,7 +33,7 @@
       align-items: center;
       justify-content: center;
       padding: 8px;
-      z-index: 1;
+      z-index: $z-base;
 
       > .icon-supply {
         background-color: $pale-peach;

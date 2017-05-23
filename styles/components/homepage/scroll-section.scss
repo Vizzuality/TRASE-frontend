@@ -24,7 +24,7 @@
     position: relative;
     height: unset;
     min-height: 100vh;
-    z-index: 2;
+    z-index: $z-above;
     background: $background-white;
     padding-bottom: 64px;
   }

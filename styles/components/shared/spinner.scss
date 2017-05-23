@@ -12,7 +12,7 @@
   border-radius: 99px;
 
   box-shadow: 5px 5px 10px 0 rgba($black, .5);
-  z-index: 101; // above veil
+  z-index: $z-above-veil;
 
   &.-top {
     top: 140px;

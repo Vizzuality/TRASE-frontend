@@ -27,7 +27,7 @@ body, html {
 
     transform: translate(-$layer-map-width, 0);
     transition: transform .15s $ease-in-out-sine, width .15s $ease-in-out-sine;
-    z-index: 2;
+    z-index: $z-above;
 
     > .tool-loading {
       display: none;
@@ -57,7 +57,7 @@ body, html {
       height: 100%;
       overflow-y: auto;
       background: $background-white;
-      z-index: 2;
+      z-index: $z-above;
     }
 
     > .c-map {
@@ -71,7 +71,7 @@ body, html {
 
       &.-fullscreen {
         width: calc(91% - 366px);
-        z-index: 2;
+        z-index: $z-above;
       }
     }
 
@@ -115,7 +115,7 @@ body, html {
     }
 
     > .sankey-veil {
-      z-index: 1;
+      z-index: $z-base;
     }
   }
 }

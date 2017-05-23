@@ -7,7 +7,7 @@
   width: 100%;
   height: $nav-height;
   font-family: $font-family-1;
-  z-index: 102;
+  z-index: $z-nav;
 
   > .columns {
     display: flex;
@@ -114,7 +114,7 @@
     background-color: $white;
     box-shadow: 0 10px 20px 0 rgba($charcoal-grey, .2), 0 0 20px 0 rgba($charcoal-grey, .18);
     border: solid 1px rgba($charcoal-grey, .2);
-    z-index: 1;
+    z-index: $z-base;
 
     > .nav-submenu-item {
       display: flex;
