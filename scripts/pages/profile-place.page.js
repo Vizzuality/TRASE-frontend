@@ -35,11 +35,12 @@ const defaults = {
 
 const _build = data => {
   const stateGeoID = data.state_geo_id;
+  const countryName = _.capitalize(data.country_name);
 
   Map('.js-map-country', {
     topoJSONPath: './vector_layers/WORLD.topo.json',
     topoJSONRoot: 'WORLD',
-    getPolygonClassName: d => (d.properties.iso2 === data.country_geo_id) ? '-isCurrent' : '',
+    getPolygonClassName: d => (d.properties.name === countryName) ? '-isCurrent' : '',
     useRobinsonProjection: true
   });
 
