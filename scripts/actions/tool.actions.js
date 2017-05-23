@@ -19,6 +19,7 @@ import getNodesSelectionAction from './helpers/getNodesSelectionAction';
 import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible';
 import setGeoJSONMeta from './helpers/setGeoJSONMeta';
 import getNodeMetaUid from 'reducers/helpers/getNodeMetaUid';
+import getProfileLink from 'utils/getProfileLink';
 
 export function resetState(refilter = true) {
   return (dispatch) => {
@@ -464,6 +465,13 @@ export function searchNode(nodeId) {
     } else {
       dispatch(selectNode(nodeId, false));
     }
+  };
+}
+
+export function navigateToProfile(nodeId) {
+  return (dispatch, getState) => {
+    const url = getProfileLink(getState().tool.nodesDict[nodeId]);
+    window.location.href = url;
   };
 }
 

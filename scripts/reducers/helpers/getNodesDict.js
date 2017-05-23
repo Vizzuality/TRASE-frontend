@@ -1,4 +1,4 @@
-import getFactSheetLink from 'utils/getFactSheetLink';
+import { FACT_SHEET_NODE_TYPE_WHITELIST } from 'constants';
 
 export default function (rawNodes, columns /*, nodesMeta*/) {
   // store in node dict for use in getVisibleNodes
@@ -35,7 +35,9 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       newNode.hasFlows = true;
     }
 
-    newNode.link = getFactSheetLink(newNode.id, newNode.columnId);
+    // TODO this should be done on the backend, see
+    // https://github.com/sei-international/TRASE/issues/269
+    newNode.profileType = FACT_SHEET_NODE_TYPE_WHITELIST[node.type];
 
     nodesDict[parseInt(node.id)] = newNode;
     if (node.geoId) {

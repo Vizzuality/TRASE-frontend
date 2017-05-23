@@ -88,7 +88,11 @@ export const DATA_DEFAULT_STATE = {
 
 
 // fact sheets
-export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
+export const FACT_SHEET_NODE_TYPE_WHITELIST = {
+  MUNICIPALITY: 'place',
+  EXPORTER: 'actor',
+  IMPORTER: 'actor'
+};
 export const ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST = ['included_years', 'buckets'];
 export const CHORD_COLORS = ['#ea6869', '#34444c'];
 export const LINE_LABEL_HEIGHT = 12;
