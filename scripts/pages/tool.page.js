@@ -112,7 +112,7 @@ if (NODE_ENV_DEV === true) {
   window.addEventListener('keydown', (event) => {
     if (event.key === 'r') {
       // reload without the hash
-      window.location.href = './flows.html?selectedNodesIds=[7100]';
+      window.location.href = './flows.html?selectedNodesIds=[1915]';
     }
   });
 }
