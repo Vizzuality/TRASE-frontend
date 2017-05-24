@@ -1,4 +1,10 @@
-
+- profiles: fixes missing link in actor's top municipalities list
+- tool: fixes issue where not shown columns on sankey would not be searchable
+- tool: fixes issue where sankey would not be filterable by biome
+- tool: fixes issue where invisible countries/actors would not show up on search results unless part of the top results
+- tool: fixes issue that prevented full sankey interaction when landing from profile page
+- tool: fixes issue on tooltips Z-index
+- tool: limit world map to prevent showing of multiple "worlds"
 - tool: fixed various issues with the map with contexts that don't have subnational granularity
 - profiles: fixes order of lines in Line chart
 - profiles: improves xAxis ticks on Line chart (display months in number of years >2)
