@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   select as d3_select,
   event as d3_event
@@ -51,6 +52,8 @@ export default class {
       .domain(d3_extent([0, ...allYValues]));
 
     let lastY = height + LINE_LABEL_HEIGHT;
+
+    const numLines = data.lines.length;
 
     data.lines
       .sort((a, b) => {
@@ -109,7 +112,6 @@ export default class {
             pathContainers.selectAll('text')
               .data(d => [d])
               .enter()
-              .sort()
               .append('text')
               .attr('transform', d => {
                 const last = d.length - 1;
@@ -121,7 +123,7 @@ export default class {
                 lastY = newY;
                 return `translate(${width + 6},${newY})`;
               })
-              .text(d => `${i + 1}.${d[0].name}`);
+              .text(d => `${numLines - i}.${_.capitalize(d[0].name)}`);
 
             this.circles = pathContainers.selectAll('circle')
               .data(d => d)
