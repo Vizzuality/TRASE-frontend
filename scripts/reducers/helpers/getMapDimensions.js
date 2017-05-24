@@ -11,7 +11,7 @@ export default function(mapDimensions) {
   Object.keys(MAP_DIMENSIONS_COLOR_SCALES).forEach(mapDimensionName => {
     const mapDimension = mapDimensions.find(mapDimension => mapDimension.name === mapDimensionName);
     if (mapDimension !== undefined) {
-      mapDimension.colorScale = MAP_DIMENSIONS_COLOR_SCALES[mapDimensionName];
+      mapDimension.color_scale = MAP_DIMENSIONS_COLOR_SCALES[mapDimensionName];
     }
   });
 

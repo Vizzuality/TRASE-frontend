@@ -14,6 +14,33 @@ $padding-wrap-mobile: 24px;
 $padding-wrap-tablet: 80px;
 $padding-wrap-desktop: 120px;
 
+// typography
+$font-family-1: 'DecimaMonoPro', 'Courier New', sans-serif;
+$font-family-2: 'Merriweather', serif;
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+$font-size-small: 10px;
+$font-size-regular: 12px;
+$font-size-x-regular: 13px;
+$font-size-xx-regular: 16px;
+$font-size-medium: 20px;
+$font-size-big: 24px;
+$font-size-x-big: 32px;
+$font-size-huge: 48px;
+
+// Breakpoints
+$breakpoint-mobile:  425px;
+$breakpoint-tablet:  768px;
+$breakpoint-laptop: 1024px;
+$breakpoint-desktop: 1280px;
+
+
+// Animations
+$ease-in-out-sine:  cubic-bezier(.445, .05, .55, .95);
+
 
 // colors
 $background-white: #f2f2f2;
@@ -44,6 +71,14 @@ $cloudy-blue: #aadad1;
 $light-grey-blue: #8db6ca;
 $warm-pink: #f65e6e;
 
+
+// Miscellaneous
+$box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
+$box-shadow-big: 0 3px 6px 0 rgba($black, .1), 0 3px 6px 0 rgba($black, .2);
+
+
+
+// color scales
 $recolorgroup-1: $medium-pink;
 $recolorgroup-2: $manilla;
 $recolorgroup-3: #2d586e;
@@ -106,36 +141,6 @@ $recolorgroup-colors: $recolorgroup-1, $recolorgroup-2, $recolorgroup-3, $recolo
 $recolorgroup-colors-names: '-recolorgroup-1', '-recolorgroup-2', '-recolorgroup-3', '-recolorgroup-4', '-recolorgroup-5', '-recolorgroup-6', '-recolorgroup-7', '-recolorgroup-8', '-recolorgroup-9', '-recolorgroup-10';
 
 
-// typography
-$font-family-1: 'DecimaMonoPro', 'Courier New', sans-serif;
-$font-family-2: 'Merriweather', serif;
-
-$font-weight-light: 300;
-$font-weight-regular: 400;
-$font-weight-bold: 700;
-
-$font-size-small: 10px;
-$font-size-regular: 12px;
-$font-size-x-regular: 13px;
-$font-size-xx-regular: 16px;
-$font-size-medium: 20px;
-$font-size-big: 24px;
-$font-size-x-big: 32px;
-$font-size-huge: 48px;
-
-// Breakpoints
-$breakpoint-mobile:  425px;
-$breakpoint-tablet:  768px;
-$breakpoint-laptop: 1024px;
-$breakpoint-desktop: 1280px;
-
-
-// Animations
-$ease-in-out-sine:  cubic-bezier(.445, .05, .55, .95);
-
-// Miscellaneous
-$box-shadow: 0 1px 3px 0 rgba($black, .1), 0 1px 2px 0 rgba($black, .2);
-$box-shadow-big: 0 3px 6px 0 rgba($black, .1), 0 3px 6px 0 rgba($black, .2);
 
 // choropleth
 $ch-zero: $white;
@@ -198,5 +203,17 @@ $choropleth-colors: (
   ch-bi-1-2: $ch-bi-1-2,
   ch-bi-2-0: $ch-bi-2-0,
   ch-bi-2-1: $ch-bi-2-1,
-  ch-bi-2-2: $ch-bi-2-2
+  ch-bi-2-2: $ch-bi-2-2,
+  recolorby-linear-yellow-green-0: $recolorby-linear-yellow-green-0,
+  recolorby-linear-yellow-green-1: $recolorby-linear-yellow-green-1,
+  recolorby-linear-yellow-green-2: $recolorby-linear-yellow-green-2,
+  recolorby-linear-yellow-green-3: $recolorby-linear-yellow-green-3,
+  recolorby-linear-yellow-green-4: $recolorby-linear-yellow-green-4,
+  recolorby-linear-red-blue-6: $recolorby-linear-red-blue-6,
+  recolorby-linear-red-blue-5: $recolorby-linear-red-blue-5,
+  recolorby-linear-red-blue-4: $recolorby-linear-red-blue-4,
+  recolorby-linear-red-blue-3: $recolorby-linear-red-blue-3,
+  recolorby-linear-red-blue-2: $recolorby-linear-red-blue-2,
+  recolorby-linear-red-blue-1: $recolorby-linear-red-blue-1,
+  recolorby-linear-red-blue-0: $recolorby-linear-red-blue-0
 )
