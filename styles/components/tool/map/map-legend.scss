@@ -52,25 +52,11 @@
     position: relative;
     text-align: center;
 
-    &.ch-red-0 { background-color: $ch-red-0; };
-    &.ch-red-1 { background-color: $ch-red-1; };
-    &.ch-red-2 { background-color: $ch-red-2; };
-    &.ch-red-3 { background-color: $ch-red-3; };
-    &.ch-red-4 { background-color: $ch-red-4; };
-    &.ch-blue-0 { background-color: $ch-blue-0; };
-    &.ch-blue-1 { background-color: $ch-blue-1; };
-    &.ch-blue-2 { background-color: $ch-blue-2; };
-    &.ch-blue-3 { background-color: $ch-blue-3; };
-    &.ch-blue-4 { background-color: $ch-blue-4; };
-    &.ch-bi-0-2 { background-color: $ch-bi-0-2; };
-    &.ch-bi-1-2 { background-color: $ch-bi-1-2; };
-    &.ch-bi-2-2 { background-color: $ch-bi-2-2; };
-    &.ch-bi-0-1 { background-color: $ch-bi-0-1; };
-    &.ch-bi-1-1 { background-color: $ch-bi-1-1; };
-    &.ch-bi-2-1 { background-color: $ch-bi-2-1; };
-    &.ch-bi-0-0 { background-color: $ch-bi-0-0; };
-    &.ch-bi-1-0 { background-color: $ch-bi-1-0; };
-    &.ch-bi-2-0 { background-color: $ch-bi-2-0; };
+    @each $item, $color in $choropleth-colors {
+      &.#{$item} {
+        background-color: $color;
+      }
+    }
 
     &.ch-n-a { background-color: $ch-factsheet-n-a; }
     &.ch-0 { background-color: $ch-factsheet-red-0; };
@@ -143,8 +129,7 @@
       height: 40px;
     }
 
-    &.-horizontal,
-    &.-vertical {
+    &.-horizontal {
       padding: 9px 0 24px 0;
       text-align: right;
 

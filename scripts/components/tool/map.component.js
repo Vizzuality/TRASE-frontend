@@ -311,11 +311,11 @@ export default class {
   }
 
 
-  setChoropleth({ choropleth, selectedNodesGeoIds, linkedGeoIds, selectedMapDimensions }) {
+  setChoropleth({ choropleth, selectedNodesGeoIds, linkedGeoIds, choroplethLegend }) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', selectedMapDimensions[0] === null && selectedMapDimensions[1] === null);
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', choroplethLegend === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
       this.showLinkedGeoIds({

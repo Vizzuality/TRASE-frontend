@@ -40,7 +40,7 @@ export default class {
         this._props[k] = comparedValue;
         // and call the method (k, the dict key) directly on the component
         if (this.view[k]) {
-          const returnedValue = (stateValue._returnedValue) ? stateValue._returnedValue(state) : comparedValue;
+          const returnedValue = (stateValue && stateValue._returnedValue) ? stateValue._returnedValue(state) : comparedValue;
           this.view[k](returnedValue);
         } else {
           console.warn(`trying to call ${k} on view but it doesn't exist`);

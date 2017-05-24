@@ -297,16 +297,18 @@ export default function (state = {}, action) {
 
     case actions.SET_MAP_DIMENSIONS: {
       const selectedMapDimensions = action.uids;
-      const choropleth = (selectedMapDimensions[0] === null && selectedMapDimensions[1] === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
+      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
 
-      newState = Object.assign({}, state, { selectedMapDimensions,  choropleth });
+      newState = Object.assign({}, state, { selectedMapDimensions,  choropleth, choroplethLegend });
       break;
     }
 
     case actions.TOGGLE_MAP_DIMENSION: {
       const selectedMapDimensions = state.selectedMapDimensions.slice();
       const uidIndex = selectedMapDimensions.indexOf(action.uid);
+
       if (uidIndex === -1) {
+        // dimension was not found: put it on a free slot
         if      (selectedMapDimensions[0] === null)   selectedMapDimensions[0] = action.uid;
         else if (selectedMapDimensions[1] === null)   selectedMapDimensions[1] = action.uid;
         else {
@@ -314,12 +316,13 @@ export default function (state = {}, action) {
           break;
         }
       } else {
+        // dimension was found: remove it from selection
         selectedMapDimensions[uidIndex] = null;
       }
 
       // get a geoId <-> color dict
-      const choropleth = (selectedMapDimensions[0] === null && selectedMapDimensions[1] === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta);
-      newState = Object.assign({}, state, { selectedMapDimensions, choropleth });
+      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
+      newState = Object.assign({}, state, { selectedMapDimensions, choropleth, choroplethLegend });
       break;
     }
     case actions.SELECT_CONTEXTUAL_LAYERS: {
