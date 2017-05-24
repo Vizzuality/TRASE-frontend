@@ -110,7 +110,7 @@ if (objParams.story) {
 
 if (NODE_ENV_DEV === true) {
   window.addEventListener('keydown', (event) => {
-    if (event.key === 'r') {
+    if (event.key === 'r' && event.ctrlKey) {
       // reload without the hash
       window.location.href = './flows.html?selectedNodesIds=[7100]';
     }

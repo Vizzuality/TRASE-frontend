@@ -98,6 +98,10 @@
 
     .js-top-municipalities-map {
       height: 405px;
+
+      &.-with-legend {
+        height: 480px;
+      }
     }
   }
 

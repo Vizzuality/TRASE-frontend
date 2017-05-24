@@ -16,7 +16,7 @@
           </td>
           <% for(var j = 0; j < data['rows'].length; j++) { %>
             <td class="cell-score _text-align-right">
-              <span class="unit" <% if(data['rows'][j]['haveUnit']){ %>data-unit="<%= data['included_columns'][i]['unit'] %>"<% } %>>
+              <span class="unit" <% if(data['rows'][j]['have_unit']){ %>data-unit="<%= data['included_columns'][i]['unit'] %>"<% } %>>
                 <%= data['rows'][j]['values'][i] %>
               </span>
             </td>

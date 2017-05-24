@@ -10,7 +10,7 @@ export default class {
 
   init() {
     const { selector, perPage, next, prev } = this.options;
-    this.slider = new Siema({ selector, perPage });
+    this.slider = new Siema({ selector, perPage, loop: true });
     if (next) document.querySelector(next).addEventListener('click', () => this.slider.next());
     if (prev) document.querySelector(prev).addEventListener('click', () => this.slider.prev());
   }

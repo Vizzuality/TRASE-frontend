@@ -32,7 +32,7 @@ export default class {
     const methodsToState = this._methodsToState(state);
     Object.keys(methodsToState).forEach(k => {
       const stateValue = methodsToState[k];
-      let comparedValue = (stateValue && stateValue._comparedValue) ? stateValue._comparedValue(state) : stateValue;
+      const comparedValue = (stateValue && stateValue._comparedValue) ? stateValue._comparedValue(state) : stateValue;
 
       // check if internal _prop differs from new app state value
       if (comparedValue !== undefined && comparedValue !== this._props[k]) {

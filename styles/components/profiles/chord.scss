@@ -16,6 +16,18 @@
       letter-spacing: -0.8px;
       fill: rgba($charcoal-grey, .8);
     }
+
+    .arc-current {
+      fill: $medium-pink;
+    }
+
+    .arc-active {
+      fill: $charcoal-grey;
+    }
+
+    .arc-default {
+      fill: rgba($charcoal-grey, .2);
+    }
   }
 
   .c-chord-legend {

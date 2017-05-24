@@ -75,8 +75,8 @@ export default function (state = {}, action) {
       }
 
       // force state updates on the component
-      let selectedYears = (state.selectedYears) ? Object.assign([], state.selectedYears) : [context.defaultYear, context.defaultYear];
-      let mapView = (state.mapView) ? Object.assign({}, state.mapView) : context.map;
+      const selectedYears = (state.selectedYears) ? Object.assign([], state.selectedYears) : [context.defaultYear, context.defaultYear];
+      const mapView = (state.mapView) ? Object.assign({}, state.mapView) : context.map;
 
       newState = Object.assign({}, state, {
         selectedContext: context,
@@ -271,7 +271,7 @@ export default function (state = {}, action) {
       const selectedNodesAtColumns = getNodesAtColumns(state.selectedNodesIds, state.selectedNodesColumnsPos);
 
       const { nodesColoredBySelection, nodesColoredAtColumn } = getNodesColoredBySelection(selectedNodesAtColumns);
-      let recolorGroups = getRecolorGroups(state.nodesColoredBySelection, nodesColoredBySelection, state.recolorGroups);
+      const recolorGroups = getRecolorGroups(state.nodesColoredBySelection, nodesColoredBySelection, state.recolorGroups);
 
       let links;
       if (state.selectedNodesIds.length > 0) {
@@ -304,8 +304,8 @@ export default function (state = {}, action) {
     }
 
     case actions.TOGGLE_MAP_DIMENSION: {
-      let selectedMapDimensions = state.selectedMapDimensions.slice();
-      let uidIndex = selectedMapDimensions.indexOf(action.uid);
+      const selectedMapDimensions = state.selectedMapDimensions.slice();
+      const uidIndex = selectedMapDimensions.indexOf(action.uid);
       if (uidIndex === -1) {
         if      (selectedMapDimensions[0] === null)   selectedMapDimensions[0] = action.uid;
         else if (selectedMapDimensions[1] === null)   selectedMapDimensions[1] = action.uid;
@@ -372,8 +372,8 @@ export default function (state = {}, action) {
     }
 
     case actions.TOGGLE_MAP_SIDEBAR_GROUP: {
-      let expandedMapSidebarGroupsIds = state.expandedMapSidebarGroupsIds.slice();
-      let idIndex = expandedMapSidebarGroupsIds.indexOf(action.id);
+      const expandedMapSidebarGroupsIds = state.expandedMapSidebarGroupsIds.slice();
+      const idIndex = expandedMapSidebarGroupsIds.indexOf(action.id);
       if (idIndex === -1) {
         expandedMapSidebarGroupsIds.push(action.id);
       } else {
