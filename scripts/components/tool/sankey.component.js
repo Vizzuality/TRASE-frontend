@@ -182,6 +182,8 @@ export default class {
     this.nodes.selectAll('text').remove();
     this._renderTitles(this.nodes);
 
+    this.nodes.classed('-is-alone-in-column', node => node.isAloneInColumn);
+
     const nodesUpdate = this.nodes.transition()
       .duration(SANKEY_TRANSITION_TIME)
       .attr('transform', d => `translate(0,${d.y})`);
