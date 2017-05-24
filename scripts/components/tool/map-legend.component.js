@@ -23,9 +23,6 @@ export default class {
   }
 
   updateChoroplethLegend(choroplethLegend) {
-    if (choroplethLegend === null) {
-      return;
-    }
     this._setupChoro(choroplethLegend);
 
     this._updateMapControlsPosition();
