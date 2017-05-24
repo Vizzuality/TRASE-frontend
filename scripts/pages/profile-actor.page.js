@@ -329,7 +329,7 @@ const _switchTopSource = (e, data) => {
     },
     legend: {
       title: ['Soy exported in 2015', '(t)'],
-      bucket: [data.top_sources.buckets[0], ...data.top_sources.buckets]
+      bucket: [[data.top_sources.buckets[0], ...data.top_sources.buckets]]
     }
   });
 };
