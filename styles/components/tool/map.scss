@@ -186,25 +186,12 @@
 
   .leaflet-vectorMain-pane:not(.-linkedActivated) path, .leaflet-vectorLinked-pane path {
     &.ch-zero { fill: $ch-zero; };
-    &.ch-red-0 { fill: $ch-red-0; };
-    &.ch-red-1 { fill: $ch-red-1; };
-    &.ch-red-2 { fill: $ch-red-2; };
-    &.ch-red-3 { fill: $ch-red-3; };
-    &.ch-red-4 { fill: $ch-red-4; };
-    &.ch-blue-0 { fill: $ch-blue-0; };
-    &.ch-blue-1 { fill: $ch-blue-1; };
-    &.ch-blue-2 { fill: $ch-blue-2; };
-    &.ch-blue-3 { fill: $ch-blue-3; };
-    &.ch-blue-4 { fill: $ch-blue-4; };
-    &.ch-bi-0-2 { fill: $ch-bi-0-2; };
-    &.ch-bi-1-2 { fill: $ch-bi-1-2; };
-    &.ch-bi-2-2 { fill: $ch-bi-2-2; };
-    &.ch-bi-0-1 { fill: $ch-bi-0-1; };
-    &.ch-bi-1-1 { fill: $ch-bi-1-1; };
-    &.ch-bi-2-1 { fill: $ch-bi-2-1; };
-    &.ch-bi-0-0 { fill: $ch-bi-0-0; };
-    &.ch-bi-1-0 { fill: $ch-bi-1-0; };
-    &.ch-bi-2-0 { fill: $ch-bi-2-0; };
+
+    @each $item, $color in $choropleth-colors {
+      &.#{$item} {
+        fill: $color;
+      }
+    }
   }
 
   .leaflet-vectorMain-pane:not(.-linkedActivated) path {

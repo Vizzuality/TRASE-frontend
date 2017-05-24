@@ -166,6 +166,7 @@ $ch-no-meta: $gray;
 $ch-no-meta-layer: $gray;
 $ch-default: $gray;
 
+
 // factsheet choropleth
 // For now we'll use the same color scheme as in the tool, when we include more buckets this has to change.
 $ch-factsheet-n-a: $metal-grey;
@@ -177,3 +178,25 @@ $ch-factsheet-red-4: $ch-red-4; // #e1384a;
 $ch-factsheet-red-5: $ch-red-4; // #b41728;
 $ch-factsheet-red-6: $ch-red-4; // #790916;
 $ch-factsheet-red-7: $ch-red-4; // #4e0008;
+
+$choropleth-colors: (
+  ch-red-0: $ch-red-0,
+  ch-red-1: $ch-red-1,
+  ch-red-2: $ch-red-2,
+  ch-red-3: $ch-red-3,
+  ch-red-4: $ch-red-4,
+  ch-blue-0: $ch-blue-0,
+  ch-blue-1: $ch-blue-1,
+  ch-blue-2: $ch-blue-2,
+  ch-blue-3: $ch-blue-3,
+  ch-blue-4: $ch-blue-4,
+  ch-bi-0-0: $ch-bi-0-0,
+  ch-bi-0-1: $ch-bi-0-1,
+  ch-bi-0-2: $ch-bi-0-2,
+  ch-bi-1-0: $ch-bi-1-0,
+  ch-bi-1-1: $ch-bi-1-1,
+  ch-bi-1-2: $ch-bi-1-2,
+  ch-bi-2-0: $ch-bi-2-0,
+  ch-bi-2-1: $ch-bi-2-1,
+  ch-bi-2-2: $ch-bi-2-2
+)
