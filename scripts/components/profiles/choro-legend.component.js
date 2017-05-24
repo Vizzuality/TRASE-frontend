@@ -13,7 +13,7 @@ export default (selector, legend, { title, bucket }) => {
     colors: PROFILE_CHOROPLETH_CLASSES,
     bucket,
     abbreviateNumber: (x, y, index) => (index === 0  ? `<${abbreviateNumber(x, 0)}` : `>${abbreviateNumber(x, 0)}`),
-    isBidimensional: false
+    isBivariate: false
   });
 
   const container = el.querySelector(legend);
