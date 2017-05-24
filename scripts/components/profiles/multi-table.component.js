@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import MultiTableTemplate from 'ejs!templates/profiles/table/multi-table.ejs';
 import Table from 'components/profiles/table.component';
 
@@ -33,7 +34,7 @@ export default class {
         el: document.querySelector(`.${this.key}_${i}`),
         data: item,
         type: this.type,
-        target: this.target
+        target: (_.isFunction(this.target)) ? this.target(item) : this.target
       });
     });
   }
