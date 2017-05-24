@@ -23,6 +23,7 @@ export const CHOROPLETH_CLASSES = {
   green: ['recolorby-linear-yellow-green-0', 'recolorby-linear-yellow-green-1', 'recolorby-linear-yellow-green-2', 'recolorby-linear-yellow-green-3', 'recolorby-linear-yellow-green-4'],
   bluered: ['recolorby-linear-red-blue-0','recolorby-linear-red-blue-1','recolorby-linear-red-blue-3','recolorby-linear-red-blue-5','recolorby-linear-red-blue-6'],
   redblue: ['recolorby-linear-red-blue-6','recolorby-linear-red-blue-5','recolorby-linear-red-blue-3','recolorby-linear-red-blue-1','recolorby-linear-red-blue-0'],
+  greenred: ['recolorby-linear-blue-green-0','recolorby-linear-blue-green-2','recolorby-linear-blue-green-5','recolorby-linear-blue-green-8','recolorby-linear-blue-green-10'],
   error_no_metadata: 'ch-no-meta',
   error_no_metadata_for_layer: 'ch-no-meta-layer',
 };
@@ -40,12 +41,12 @@ export const MAP_DIMENSIONS_COLOR_SCALES = {
   'Area affected by fires in 2013': 'red',
   'Permanent Protected Area (PPA) deficit': 'red',
   'Legal Reserve (LR) deficit': 'red',
-  'Forest Code deficit': 'red',
+  'Forest Code deficit': 'greenred',
   'Number of environmental embargos (2015)': 'red',
   '% of soy under zero deforestation commitments': 'redblue',
   'Human development index': 'redblue',
   'GDP per capita': 'blue',
-  '% GDP from agriculture': 'green',
+  '% GDP from agriculture': 'blue',
   'Smallholder dominance ': 'green',
   'Reported cases of forced labour (2014)': 'red',
   'Land conflicts (2014)': 'red'
