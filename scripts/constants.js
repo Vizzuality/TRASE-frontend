@@ -139,7 +139,7 @@ export const GA_ACTION_WHITELIST = [
   {
     type: actions.SELECT_COLUMN,
     getPayload: (action, state) => {
-      return state.columns[action.columnId].name;
+      return state.columns.find(col => col.id === action.columnId).name;
     }
   },
   {
