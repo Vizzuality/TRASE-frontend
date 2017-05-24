@@ -1,4 +1,3 @@
-import { CHOROPLETH_CLASSES } from 'constants';
 import LegendChoroTemplate from 'ejs!templates/tool/map/legend-choro.ejs';
 import LegendContextTemplate from 'ejs!templates/tool/map/legend-context.ejs';
 import 'style/components/tool/map/map-legend.scss';
@@ -23,17 +22,17 @@ export default class {
     zoom.addEventListener('mouseleave', () => { scale.classList.toggle('-visible', false); });
   }
 
-  updateChoroplethLegend(params) {
-    if (params.mapDimensions === undefined) {
+  updateChoroplethLegend(choroplethLegend) {
+    if (choroplethLegend === null) {
       return;
     }
-    this._setupChoro(params);
+    this._setupChoro(choroplethLegend);
 
     this._updateMapControlsPosition();
   }
 
-  updateContextLegend({ selectedMapDimensions, selectedMapContextualLayersData }) {
-    this._toggleLegend(selectedMapDimensions, selectedMapContextualLayersData);
+  updateContextLegend({ choroplethLegend, selectedMapContextualLayersData }) {
+    this._toggleLegend(choroplethLegend);
     this._renderContext(selectedMapContextualLayersData);
     this._updateMapControlsPosition();
   }
@@ -42,33 +41,20 @@ export default class {
     this.el = document.querySelector('.js-map-legend');
   }
 
-  _setupChoro({ selectedMapDimensions, selectedMapContextualLayersData, mapDimensions }) {
-    const _getDimension = (uid) => {
-      const dimension = mapDimensions.find(mapDimension => mapDimension.uid === uid);
-      return dimension || null;
-    };
-
-    const settings = {
-      isBidimensional: selectedMapDimensions[0] !== null && selectedMapDimensions[1] !== null,
-      horizontal: _getDimension(selectedMapDimensions[0]),
-      vertical: _getDimension(selectedMapDimensions[1])
-    };
-
+  _setupChoro(choroplethLegend) {
     if (this.el.hasChildNodes()) {
       this._cleanChoro();
     }
 
-    this._toggleLegend(selectedMapDimensions, selectedMapContextualLayersData);
+    this._toggleLegend(choroplethLegend);
 
-    if (!!settings.horizontal || !!settings.vertical) {
-      this._renderChoro(settings);
+    if (choroplethLegend !== null) {
+      this._renderChoro(choroplethLegend);
     }
   }
 
-  _toggleLegend(selectedMapDimensions, selectedMapContextualLayersData) {
-    if ( selectedMapDimensions[0] !== null || selectedMapDimensions[1] !== null ||
-         (selectedMapContextualLayersData && selectedMapContextualLayersData.length > 0)
-       )
+  _toggleLegend(choroplethLegend) {
+    if (choroplethLegend !== null)
     {
       this._showLegend();
     } else {
@@ -91,50 +77,19 @@ export default class {
     this.choro.innerHTML = '';
   }
 
-  _renderChoro(settings) {
-    let colors = CHOROPLETH_CLASSES['horizontal'];
-    let title = [];
-    let cssClass = '';
-    let bucket = [];
-
-    if (settings.isBidimensional) {
-      colors = CHOROPLETH_CLASSES['bidimensional'];
-      title = [this._shortenTitle(settings.vertical.name), this._shortenTitle(settings.horizontal.name)];
-      cssClass = '-bidimensional';
-      bucket = [settings.vertical.bucket3, settings.horizontal.bucket3];
-    } else if (settings.vertical) {
-      colors = CHOROPLETH_CLASSES['vertical'];
-      title = [this._shortenTitle(settings.vertical.name), null];
-      cssClass = '-vertical';
-      bucket = settings.vertical.bucket5;
-    } else {
-      title = [null, this._shortenTitle(settings.horizontal.name)];
-      cssClass = '-horizontal';
-      bucket = settings.horizontal.bucket5;
-    }
+  _renderChoro(choroplethLegend) {
+    const cssClass = (choroplethLegend.isBivariate) ? '-bidimensional' : '-horizontal';
 
     const html = LegendChoroTemplate({
-      title,
-      colors,
+      title: choroplethLegend.titles,
+      colors: choroplethLegend.colors,
       cssClass,
-      bucket,
-      isBidimensional: settings.isBidimensional,
+      bucket: choroplethLegend.bucket,
+      isBivariate: choroplethLegend.isBivariate,
       abbreviateNumber
     });
 
-    if (!settings.horizontal && !settings.vertical) {
-      this._cleanLegend();
-      return;
-    }
-
     this.choro.innerHTML = html;
-  }
-
-  _shortenTitle(title) {
-    if (title.length < 50) {
-      return title;
-    }
-    return [title.slice(0, 34), title.slice(-12)].join('(…)');
   }
 
   _renderContext(layers) {
@@ -150,6 +105,4 @@ export default class {
     this.mapControlZoom.style.bottom = `${mapFooterHeight + 48}px`;
     this.mapControlScale.style.bottom = `${mapFooterHeight + this.mapControlScale.offsetHeight - 88}px`;
   }
-
-
 }

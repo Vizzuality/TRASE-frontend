@@ -297,9 +297,9 @@ export default function (state = {}, action) {
 
     case actions.SET_MAP_DIMENSIONS: {
       const selectedMapDimensions = action.uids;
-      const choropleth = (selectedMapDimensions[0] === null && selectedMapDimensions[1] === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
+      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
 
-      newState = Object.assign({}, state, { selectedMapDimensions,  choropleth });
+      newState = Object.assign({}, state, { selectedMapDimensions,  choropleth, choroplethLegend });
       break;
     }
 
@@ -321,8 +321,8 @@ export default function (state = {}, action) {
       }
 
       // get a geoId <-> color dict
-      const choropleth = (selectedMapDimensions[0] === null && selectedMapDimensions[1] === null) ? {} : getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
-      newState = Object.assign({}, state, { selectedMapDimensions, choropleth });
+      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
+      newState = Object.assign({}, state, { selectedMapDimensions, choropleth, choroplethLegend });
       break;
     }
     case actions.SELECT_CONTEXTUAL_LAYERS: {

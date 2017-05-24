@@ -44,7 +44,7 @@ const mapMethodsToState = (state) => ({
         choropleth: state.tool.choropleth,
         selectedNodesGeoIds: state.tool.selectedNodesGeoIds,
         linkedGeoIds: state.tool.linkedGeoIds,
-        selectedMapDimensions: state.tool.selectedMapDimensions
+        choroplethLegend: state.tool.choroplethLegend
       };
     }
   },

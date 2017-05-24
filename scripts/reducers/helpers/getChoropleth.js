@@ -1,8 +1,23 @@
 import _ from 'lodash';
 import { CHOROPLETH_CLASSES, CHOROPLETH_CLASS_ZERO } from 'constants';
 
+const _shortenTitle = (title) => {
+  if (title.length < 50) {
+    return title;
+  }
+  return [title.slice(0, 34), title.slice(-12)].join('(…)');
+};
+
 export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensions) {
   const uids = _.compact(selectedMapDimensionsUids);
+
+  if (!uids.length) {
+    return {
+      choropleth: {},
+      choroplethLegend: null
+    };
+  }
+
   const selectedMapDimensions = uids.map(uid => mapDimensions.find(dimension => dimension.uid === uid));
   const selectedMapDimension = selectedMapDimensions[0];
   const uid = uids[0];
@@ -16,6 +31,13 @@ export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensi
   const geoNodesIds = Object.keys(geoNodes);
   const choropleth = {};
 
+
+  const choroplethLegend = {
+    colors,
+    isBivariate,
+    titles: selectedMapDimensions.map(d => _shortenTitle(d.name)),
+    bucket: selectedMapDimensions.map(d => (isBivariate) ? d.bucket3.slice(0) : d.bucket5.slice(0)),
+  };
 
   geoNodesIds.forEach(nodeId => {
     const node = geoNodes[nodeId];
@@ -67,5 +89,5 @@ export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensi
     choropleth[node.geoId] = color;
   });
 
-  return choropleth;
+  return { choropleth, choroplethLegend };
 }
