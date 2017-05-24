@@ -38,10 +38,10 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
         </span>
         <span class='dropdown-title -small'>
           {selectedResizeBy.label.toLowerCase()}
-          {selectedResizeBy.name && tooltips.sankey.nav.resizeBy[selectedResizeBy.name] &&
-            <Tooltip position='bottom right' text={tooltips.sankey.nav.resizeBy[selectedResizeBy.name]} />
-          }
         </span>
+        {selectedResizeBy.name && tooltips.sankey.nav.resizeBy[selectedResizeBy.name] &&
+          <Tooltip position='bottom right' floating text={tooltips.sankey.nav.resizeBy[selectedResizeBy.name]} />
+        }
         <Dropdown id={id} currentDropdown={currentDropdown} onClickOutside={onToggle}>
           <ul class='dropdown-list -medium'>
             {resizeByElements}

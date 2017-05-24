@@ -4,7 +4,7 @@
     position: fixed;
     height: 100%;
     width: 100%;
-    z-index: 1;
+    z-index: $z-base;
 
     .intro-wrapper {
       height: 100%;
@@ -103,7 +103,7 @@
 
   .newsletter {
     position: relative;
-    z-index: 2;
+    z-index: $z-above;
     height: 160px;
     width: 100%;
     background-color: $white;
