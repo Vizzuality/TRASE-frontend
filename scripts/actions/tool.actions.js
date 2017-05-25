@@ -237,8 +237,16 @@ export function loadLinks() {
     const url = getURLFromParams(GET_FLOWS, params);
 
     fetch(url)
-      .then(res => res.text())
+      .then((response) => {
+        if (response.status === 404) {
+          return null
+        }
+        return response.text();
+      })
       .then(payload => {
+        if (!payload) {
+          return;
+        }
         const jsonPayload = JSON.parse(payload);
         if (jsonPayload.data === undefined || !jsonPayload.data.length) {
           console.error('server returned empty flows/link list, with params:', params);
