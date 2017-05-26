@@ -34,6 +34,7 @@ const _setSearch = () => {
         .filter(node =>
           node.isUnknown !== true &&
           node.isAggregated !== true &&
+          node.isDomesticConsumption !== true &&
           node.profileType !== undefined && node.profileType !== null
       );
 
