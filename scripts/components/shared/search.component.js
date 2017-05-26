@@ -16,7 +16,8 @@ export default class {
           value: JSON.stringify({
             id: node.id,
             name: node.name.toLowerCase(),
-            columnName: node.type.toLowerCase()
+            columnName: node.type.toLowerCase(),
+            profileType: node.profileType,
           })
         };
       },
@@ -62,7 +63,7 @@ export default class {
   _onAutocompleteSelected(event) {
     this._closeSearch();
     const node = JSON.parse(event.text.value);
-    this.callbacks.onNodeSelected(node.id, node.columnName);
+    this.callbacks.onNodeSelected(node);
   }
 
   _openSearch() {

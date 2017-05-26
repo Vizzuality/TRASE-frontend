@@ -1,5 +1,3 @@
-import getFactSheetLink from 'utils/getFactSheetLink';
-
 export default function (rawNodes, columns /*, nodesMeta*/) {
   // store in node dict for use in getVisibleNodes
 
@@ -16,6 +14,7 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       columnGroup: column.group,
       isDefault: column.isDefault,
       name: node.name,
+      profileType: node.profileType,
       geoId: node.geoId
     };
 
@@ -34,8 +33,6 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
     if (node.hasFlows === true || node.hasFlows === 'true') {
       newNode.hasFlows = true;
     }
-
-    newNode.link = getFactSheetLink(newNode.id, newNode.columnId);
 
     nodesDict[parseInt(node.id)] = newNode;
     if (node.geoId) {
