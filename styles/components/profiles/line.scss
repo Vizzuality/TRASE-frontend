@@ -62,18 +62,12 @@
   }
 
   .line-pink-with-points {
-
-    $i: 5;
-    @while $i > 0 {
-      &:nth-child(#{$i}) {
-
-        path,
-        circle {
-          stroke: rgba($medium-pink, 1 / $i);
-        }
-      }
-      $i: $i - 1;
-    }
+    path, circle { stroke: $medium-pink; }
+    &:nth-child(5) path, circle { stroke-opacity: 1; }
+    &:nth-child(4) path, circle { stroke-opacity: .9; }
+    &:nth-child(3) path, circle { stroke-opacity: .8; }
+    &:nth-child(2) path, circle { stroke-opacity: .7; }
+    &:nth-child(1) path, circle { stroke-opacity: .6; }
 
     path {
       stroke-width: 3px;
