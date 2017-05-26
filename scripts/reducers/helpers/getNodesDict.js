@@ -1,5 +1,3 @@
-import { FACT_SHEET_NODE_TYPE_WHITELIST } from 'constants';
-
 export default function (rawNodes, columns /*, nodesMeta*/) {
   // store in node dict for use in getVisibleNodes
 
@@ -16,6 +14,7 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       columnGroup: column.group,
       isDefault: column.isDefault,
       name: node.name,
+      profileType: node.profileType,
       geoId: node.geoId
     };
 
@@ -34,10 +33,6 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
     if (node.hasFlows === true || node.hasFlows === 'true') {
       newNode.hasFlows = true;
     }
-
-    // TODO this should be done on the backend, see
-    // https://github.com/sei-international/TRASE/issues/269
-    newNode.profileType = FACT_SHEET_NODE_TYPE_WHITELIST[node.type];
 
     nodesDict[parseInt(node.id)] = newNode;
     if (node.geoId) {
