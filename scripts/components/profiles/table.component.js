@@ -11,9 +11,9 @@ export default class {
     this.target = settings.target;
 
     if (this.target === 'actor') {
-      this.link = 'factsheet-actor.html?nodeId=';
+      this.link = 'profile-actor.html?nodeId=';
     } else if (this.target === 'place') {
-      this.link = 'factsheet-place.html?nodeId=';
+      this.link = 'profile-place.html?nodeId=';
     } else {
       this.link = null;
     }

@@ -21,7 +21,7 @@ export default class {
 
   _parseData() {
     const baseUrlLink = this.targetLink ?
-      `/factsheet-${this.targetLink}.html?nodeId=` : null;
+      `/profile-${this.targetLink}.html?nodeId=` : null;
 
     this.data.forEach(d => {
       // this verification shouldn't exist. All list must have same data format.

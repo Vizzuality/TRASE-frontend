@@ -23,7 +23,7 @@ const state = {
       text: 'Can companies and governments meet their 2020 sustainability goals? The blanket transparency provided by Trase helps address this question and identify priority actions for achieving success.',
       action: {
         text: 'explore company commitments',
-        href: '/factsheets.html'
+        href: '/profiles.html'
       }
     },
     {
