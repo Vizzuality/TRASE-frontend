@@ -36,7 +36,7 @@
           "type": "cartodb",
           "options": {
             "sql": "SELECT * FROM indigenous_areas",
-            "cartocss": "#indigenous_areas{   polygon-opacity: 1;   polygon-fill:transparent;   line-color:  #ECC35F;   line-width: 1;   line-opacity: 1;}",
+            "cartocss": "#indigenous_areas{  polygon-fill:#ECC35F;  polygon-opacity: 0.5;  line-color:  #ECC35F;   line-width: 1;   line-opacity: 1;}",
             "cartocss_version": "2.3.0",
             "interactivity":[ "cartodb_id", "situacao13", "populaa_a_8", "nome_are22", "grupos9", "datadoc16","areaetno7"]
           }
@@ -56,7 +56,7 @@
           "type": "cartodb",
           "options": {
             "sql": "SELECT * FROM brazil_protected",
-            "cartocss": "#brazil_protected{   polygon-opacity:1;   polygon-fill:transparent;   line-color: #B4D84F;   line-width: 1;   line-opacity: 1;}",
+            "cartocss": "#brazil_protected{   polygon-opacity: 0.5;   polygon-fill:#B4D84F;   line-color: #B4D84F;   line-width: 1;   line-opacity: 1;}",
             "cartocss_version": "2.3.0",
             "interactivity":["cartodb_id", "type"]
           }
