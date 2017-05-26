@@ -19,15 +19,15 @@ const pages = {
   },
   profiles: {
     title: 'TRASE - Profiles',
-    pageName: 'factsheets'
+    pageName: 'profiles'
   },
   'profile-actor': {
     title: 'TRASE - Actor profile',
-    pageName: 'factsheet-actor'
+    pageName: 'profile-actor'
   },
   'profile-place': {
     title: 'TRASE - Place profile',
-    pageName: 'factsheet-place'
+    pageName: 'profile-place'
   },
   FAQ: {
     title: 'TRASE - FAQ'
