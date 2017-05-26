@@ -240,7 +240,7 @@ export function loadLinks() {
     fetch(url)
       .then((response) => {
         if (response.status === 404) {
-          return null
+          return null;
         }
         return response.text();
       })
