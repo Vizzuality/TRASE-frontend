@@ -1,4 +1,5 @@
-- profiles:fix overlapping chart labels on profile pages
+- profiles: remove biome states profiles
+- profiles: fix overlapping chart labels on profile pages
 - tool: improve sorting of recoloured sankey flows
 - tool: add shading to contextual layers
 - profiles: fixes missing link in actor's top municipalities list
@@ -88,7 +89,7 @@ Fix google analytics detection on devel envs
 - sankey: Fixed issue with wrong merging of links coloured by node selection
 
 ### 1.0.3
-- Change cloropleth rendering to match new API data
+- Change choropleth rendering to match new API data
 
 ### 1.0.2
 - Extracted Google Analytics key to ENV variable
@@ -96,7 +97,7 @@ Fix google analytics detection on devel envs
 - support and various bugfixes for IE11
 - sankey: node selection coloring improvements
 - actor fact sheet: rendered biome data
-- change overall number formating
+- change overall number formatting
 
 ### 1.0.1
 - Added recolour by selected node
