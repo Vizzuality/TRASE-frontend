@@ -159,10 +159,12 @@ const sankeyLayout = function() {
       const tIdAY = stackedHeightsByNodeId.target[linkA.targetNodeId];
       const tIdBY = stackedHeightsByNodeId.target[linkB.targetNodeId];
       const defaultSort = sIdAY - sIdBY || tIdAY - tIdBY;
-
-      if (recolorBy.type !== 'none') {
+      if (recolorBy.name !== 'none') {
         // sorts alphabetically with quals, numerically with inds
         // TODO for quals use the order presentend in the color by menu
+        if (linkA.recolorBy === linkB.recolorBy) {
+          return defaultSort;
+        }
         let recolorBySort;
         if (linkA.recolorBy === null) {
           recolorBySort = 1;
@@ -171,9 +173,13 @@ const sankeyLayout = function() {
         } else {
           recolorBySort = (recolorBy.type === 'ind') ?  linkA.recolorBy - linkB.recolorBy : linkA.recolorBy.charCodeAt(0) - linkB.recolorBy.charCodeAt(0);
         }
-        return recolorBySort || defaultSort;
+        return recolorBySort;
+      } else {
+        if (linkA.recolorGroup === linkB.recolorGroup) {
+          return defaultSort;
+        }
+        return linkA.recolorGroup - linkB.recolorGroup;
       }
-      return defaultSort;
     });
 
     links.forEach(link => {
