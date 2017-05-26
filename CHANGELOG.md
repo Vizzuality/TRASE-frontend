@@ -1,3 +1,6 @@
+- profiles:fix overlapping chart labels on profile pages
+- tool: improve sorting of recoloured sankey flows
+- tool: add shading to contextual layers
 - profiles: fixes missing link in actor's top municipalities list
 - tool: fixes issue where not shown columns on sankey would not be searchable
 - tool: fixes issue where sankey would not be filterable by biome
