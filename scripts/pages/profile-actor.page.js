@@ -36,15 +36,66 @@ const defaults = {
 };
 
 const tooltip = new Tooltip('.js-infowindow');
-
 const LINE_MARGINS = { top: 10, right: 100, bottom: 25, left: 50 };
+let lineSettings;
 
 const _onSelect = function(value) {
   this.setTitle(value);
   defaults[this.id] = value;
 };
 
-let lineSettings;
+const _initSource = (selectedSource, data) => {
+  const sourceLines = Object.assign({}, data.top_sources[selectedSource]);
+
+  sourceLines.lines = sourceLines.lines.slice(0, 5);
+
+  new Line(
+    '.js-top-municipalities',
+    sourceLines,
+    data.top_sources.included_years,
+    Object.assign({}, lineSettings, {
+      margin: LINE_MARGINS,
+      height: 244
+    })
+  );
+
+  document.querySelector('.js-top-municipalities-map').innerHTML = '';
+
+  Map('.js-top-municipalities-map', {
+    topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}.topo.json`,
+    topoJSONRoot: `${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}`,
+    getPolygonClassName: ({ properties }) => {
+      const source = data.top_sources[selectedSource].lines
+        .find(s => (properties.geoid === s.geo_id));
+      let value = 'n-a';
+      if (source) value = source.value9 || 'n-a';
+      return `-outline ch-${value}`;
+    },
+    showTooltipCallback: ({ properties }, x, y) => {
+      const source = data.top_sources[selectedSource].lines
+        .find(s => (properties.geoid === s.geo_id));
+      const title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
+      let body = null;
+      if (source) body = source.values[0];
+
+      tooltip.showTooltip(x, y, {
+        title,
+        values: [{
+          title: 'Trade Volume',
+          value: formatNumber(body),
+          unit: 'Tons'
+        }]
+      });
+    },
+    hideTooltipCallback: () => {
+      tooltip.hideTooltip();
+    },
+    legend: {
+      title: ['Soy exported in 2015', '(t)'],
+      bucket: [[data.top_sources.buckets[0], ...data.top_sources.buckets]]
+    }
+  });
+};
 
 const _build = (data, nodeId) => {
   lineSettings = {
@@ -77,50 +128,7 @@ const _build = (data, nodeId) => {
 
   if (data.top_sources.municipality.lines.length) {
     _setTopSourceSwitcher(data);
-
-    const topMunicipalitiesLines = Object.assign({}, data.top_sources.municipality);
-    topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
-    new Line(
-      '.js-top-municipalities',
-      topMunicipalitiesLines,
-      data.top_sources.included_years,
-      Object.assign({}, lineSettings, { margin: LINE_MARGINS })
-    );
-
-    Map('.js-top-municipalities-map', {
-      topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_MUNICIPALITY.topo.json`,
-      topoJSONRoot: `${defaults.country.toUpperCase()}_MUNICIPALITY`,
-      getPolygonClassName: ({ properties }) => {
-        const municipality = data.top_sources.municipality.lines
-          .find(m => (properties.geoid === m.geo_id));
-        let value = 'n-a';
-        if (municipality) value = municipality.value9 || 'n-a';
-        return `-outline ch-${value}`;
-      },
-      showTooltipCallback: ({ properties }, x, y) => {
-        const municipality = data.top_sources.municipality.lines
-          .find(m => (properties.geoid === m.geo_id));
-        const title = `${properties.nome.toUpperCase()} > ${data.node_name}`;
-        let body = null;
-        if (municipality) body = municipality.values[0];
-
-        tooltip.showTooltip(x, y, {
-          title,
-          values: [{
-            title: 'Trade Volume',
-            value: formatNumber(body),
-            unit: 'Tons'
-          }]
-        });
-      },
-      hideTooltipCallback: () => {
-        tooltip.hideTooltip();
-      },
-      legend: {
-        title: ['Soy exported in 2015', '(t)'],
-        bucket: [[data.top_countries.buckets[0], ...data.top_countries.buckets]]
-      }
-    });
+    _initSource('municipality', data);
   }
 
   if (data.top_countries.lines.length) {
@@ -280,54 +288,7 @@ const _switchTopSource = (e, data) => {
   });
   selectedSwitch.classList.add('selected');
 
-  const topMunicipalitiesLines = Object.assign({}, data.top_sources[selectedSource]);
-
-  topMunicipalitiesLines.lines = topMunicipalitiesLines.lines.slice(0, 5);
-  new Line(
-    '.js-top-municipalities',
-    topMunicipalitiesLines,
-    data.top_sources.included_years,
-    Object.assign({}, lineSettings, {
-      margin: LINE_MARGINS,
-      height: 244
-    })
-  );
-
-  document.querySelector('.js-top-municipalities-map').innerHTML = '';
-  Map('.js-top-municipalities-map', {
-    topoJSONPath: `./vector_layers/${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}.topo.json`,
-    topoJSONRoot: `${defaults.country.toUpperCase()}_${selectedSource.toUpperCase()}`,
-    getPolygonClassName: ({ properties }) => {
-      const source = data.top_sources[selectedSource].lines
-        .find(s => (properties.geoid === s.geo_id));
-      let value = 'n-a';
-      if (source) value = source.value9 || 'n-a';
-      return `-outline ch-${value}`;
-    },
-    showTooltipCallback: ({ properties }, x, y) => {
-      const source = data.top_sources[selectedSource].lines
-        .find(s => (properties.geoid === s.geo_id));
-      const title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
-      let body = null;
-      if (source) body = source.values[0];
-
-      tooltip.showTooltip(x, y, {
-        title,
-        values: [{
-          title: 'Trade Volume',
-          value: formatNumber(body),
-          unit: 'Tons'
-        }]
-      });
-    },
-    hideTooltipCallback: () => {
-      tooltip.hideTooltip();
-    },
-    legend: {
-      title: ['Soy exported in 2015', '(t)'],
-      bucket: [[data.top_sources.buckets[0], ...data.top_sources.buckets]]
-    }
-  });
+  _initSource(selectedSource, data);
 };
 
 const _init = ()  => {
