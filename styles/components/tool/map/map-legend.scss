@@ -83,6 +83,12 @@
     }
   }
 
+  &.-left {
+    .bucket-container {
+
+    }
+  }
+
   .bucket-container {
     position: relative;
     border-bottom: 1px solid rgba($charcoal-grey, .2);
@@ -213,10 +219,16 @@
 
     &.-profile {
       border-bottom: 0;
+      margin-bottom: 30px;
+      padding: 0;
+      width: 100%;
+
+      .bucket-names {
+        padding: 0;
+      }
 
       .layer-name {
         font-size: 13px;
-        font-weight: $font-weight-bold;
 
         &:last-child {
           font-weight: $font-weight-regular;
@@ -227,9 +239,25 @@
         }
       }
 
+      .icon-unidimensional-legend-arrows {
+        display: none;
+      }
+
+      .bucket-legend {
+        display: inline-flex;
+        justify-content: flex-end;
+        height: 14px;
+        margin: 4px 0 0;
+
+        &[data-colors = '5'] {
+          width: 80%;
+        }
+      }
+
       .bucket {
         span {
           left: 0;
+          top: 14px;
         }
       }
 
@@ -238,8 +266,8 @@
       }
 
       .bullets {
-        right: 50%;
-        left: auto;
+        left: 30px;
+        bottom: 0;
 
         li {
           display: flex;
