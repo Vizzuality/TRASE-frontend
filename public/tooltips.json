@@ -20,9 +20,10 @@
         "none": "Select different elements (e.g. companies, countries) in the supply chain map and colour the trade flows associated with those elements differently",
         "ZERO_DEFORESTATION": "Colour supply chain flows based on whether different soy traders have zero deforestation commitments or not. See https://trase.earth/data-methods.html for more details",
         "BIOME": "Colour supply chain flows in accordance with the biome of the sourcing region.",
-        "WATER_SCARCITY": "Colour supply chain flows according to levels of criticality of water stress, calculated as the median water stress level per municipality, in terms of percentage of available blue water. See https://trase.earth/data-methods.html for more details",
+        "WATER_SCARCITY": "Colour supply chain flows according to levels of critically of water stress, calculated as the median water stress level per municipality, in terms of percentage of available blue water. See https://trase.earth/data-methods.html for more details",
         "FOREST_500": "Colour supply chain flows based on the Forest 500 index, which ranks traders according to the strength of their sustainability commitments. See https://trase.earth/data-methods.html for more details",
-        "SMALLHOLDERS": "Colour the supply chain according to density of smallholder farms, defined as proportion of municipal areas in the hands of legally defined family farmers (as per Brazilian federal law) vs total farm area. See https://trase.earth/data-methods.html for more details"
+        "SMALLHOLDERS": "Colour the supply chain according to density of smallholder farms, defined as proportion of municipal areas in the hands of legally defined family farmers (as per Brazilian federal law) vs total farm area. See https://trase.earth/data-methods.html for more details",
+        "PROTECTED_DEFICIT_PERC": "Area of land in Permanent Protected Areas and Legal reserves that must be restored or compensated for (LR only) to acheive in compliance with the Brazilian Forest Code - as a percentage of the total area of private land."
       },
       "view": {
         "main": "Change the supply chain view from a summary of the whole supply chain that fits within a single display or a complete view with the total map of supply chain flows connecting the production regions of a commodity of interest to traders and countries of import. Selections made within the complete view has slower response times due the volume of data being processed. "

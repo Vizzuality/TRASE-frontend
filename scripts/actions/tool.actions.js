@@ -19,6 +19,7 @@ import getNodesSelectionAction from './helpers/getNodesSelectionAction';
 import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible';
 import setGeoJSONMeta from './helpers/setGeoJSONMeta';
 import getNodeMetaUid from 'reducers/helpers/getNodeMetaUid';
+import getProfileLink from 'utils/getProfileLink';
 
 export function resetState(refilter = true) {
   return (dispatch) => {
@@ -237,8 +238,16 @@ export function loadLinks() {
     const url = getURLFromParams(GET_FLOWS, params);
 
     fetch(url)
-      .then(res => res.text())
+      .then((response) => {
+        if (response.status === 404) {
+          return null;
+        }
+        return response.text();
+      })
       .then(payload => {
+        if (!payload) {
+          return;
+        }
         const jsonPayload = JSON.parse(payload);
         if (jsonPayload.data === undefined || !jsonPayload.data.length) {
           console.error('server returned empty flows/link list, with params:', params);
@@ -456,6 +465,13 @@ export function searchNode(nodeId) {
     } else {
       dispatch(selectNode(nodeId, false));
     }
+  };
+}
+
+export function navigateToProfile(nodeId) {
+  return (dispatch, getState) => {
+    const url = getProfileLink(getState().tool.nodesDict[nodeId]);
+    window.location.href = url;
   };
 }
 

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   select as d3_select,
   event as d3_event
@@ -17,6 +18,7 @@ import {
 } from 'd3-shape';
 import { format as d3_format } from 'd3-format';
 import { timeFormat as d3_timeFormat } from 'd3-time-format';
+import { LINE_LABEL_HEIGHT } from 'constants';
 import LegendItemTemplate from 'ejs!templates/profiles/legendItem.ejs';
 import abbreviateNumber from 'utils/abbreviateNumber';
 import 'styles/components/profiles/line.scss';
@@ -49,11 +51,15 @@ export default class {
       .rangeRound([height, 0])
       .domain(d3_extent([0, ...allYValues]));
 
+    let lastY = height + LINE_LABEL_HEIGHT;
+
+    const numLines = data.lines.length;
+
     data.lines
       .sort((a, b) => {
         const last = xValues.length - 1;
-        if (a.values[last] > b.values[last]) return -1;
-        if (a.values[last] < b.values[last]) return 1;
+        if (a.values[last] > b.values[last]) return 1;
+        if (a.values[last] < b.values[last]) return -1;
         return 0;
       })
       .forEach((lineData, i) => {
@@ -66,6 +72,7 @@ export default class {
 
         let area = null,
           pathContainers = null;
+
         switch (type) {
           case 'area':
             area = d3_area()
@@ -83,13 +90,15 @@ export default class {
               .attr('class', `line-${style}`)
               .attr('d', line);
             break;
+
           case 'line':
             container.append('path')
               .datum(lineValuesWithFormat)
               .attr('class', style)
               .attr('d', line);
             break;
-          case 'line-points':
+
+          case 'line-points': {
             pathContainers = container.datum(lineValuesWithFormat)
               .append('g')
               .attr('class', style);
@@ -99,11 +108,22 @@ export default class {
               .enter().append('path')
               .attr('d', line);
 
+
             pathContainers.selectAll('text')
               .data(d => [d])
-              .enter().append('text')
-              .attr('transform', d => `translate(${width + 6},${y(d[d.length - 1].value) + 4})`)
-              .text(d => `${i + 1}.${d[0].name}`);
+              .enter()
+              .append('text')
+              .attr('transform', d => {
+                const last = d.length - 1;
+                const value = d[last].value;
+                let newY = y(value) + 4;
+                if (newY + LINE_LABEL_HEIGHT > lastY) {
+                  newY = lastY - LINE_LABEL_HEIGHT;
+                }
+                lastY = newY;
+                return `translate(${width + 6},${newY})`;
+              })
+              .text(d => `${numLines - i}.${_.capitalize(d[0].name)}`);
 
             this.circles = pathContainers.selectAll('circle')
               .data(d => d)
@@ -125,6 +145,7 @@ export default class {
               }.bind(this));
             }
             break;
+          }
         }
 
         if (typeof lineData.legend_name !== 'undefined') {

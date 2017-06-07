@@ -10,14 +10,13 @@ import 'styles/components/shared/_footer.scss';
 import _ from 'lodash';
 
 import Search from 'components/shared/search.component.js';
-import { FACT_SHEET_NODE_TYPE_WHITELIST } from 'constants';
 import { getURLFromParams, GET_ALL_NODES } from '../utils/getURLFromParams';
+import getProfileLink from 'utils/getProfileLink';
 
 const _setSearch = () => {
 
-  const onNodeSelected = function(nodeId, type) {
-    const factsheetType = (type === 'exporter' || type === 'importer') ? 'actor' : 'place';
-    window.location.href = `factsheet-${factsheetType}.html?nodeId=${nodeId}`;
+  const onNodeSelected = function(node) {
+    window.location.href = getProfileLink(node);
   };
 
   const allNodesURL = getURLFromParams(GET_ALL_NODES);
@@ -31,8 +30,12 @@ const _setSearch = () => {
       const search = new Search();
       search.onCreated();
 
-      const nodesArray = _.values(result.data).filter(node =>
-        node.isUnknown !== true && node.isAggregated !== true && FACT_SHEET_NODE_TYPE_WHITELIST.indexOf(node.type) !== -1
+      const nodesArray = _.values(result.data)
+        .filter(node =>
+          node.isUnknown !== true &&
+          node.isAggregated !== true &&
+          node.isDomesticConsumption !== true &&
+          node.profileType !== undefined && node.profileType !== null
       );
 
       search.callbacks = {

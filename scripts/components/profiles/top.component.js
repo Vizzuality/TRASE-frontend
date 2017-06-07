@@ -21,13 +21,13 @@ export default class {
 
   _parseData() {
     const baseUrlLink = this.targetLink ?
-      `/factsheet-${this.targetLink}.html?nodeId=` : null;
+      `/profile-${this.targetLink}.html?nodeId=` : null;
 
     this.data.forEach(d => {
       // this verification shouldn't exist. All list must have same data format.
       // Though this is a temporal patch.
       d.value = _.isArray(d.values) ? formatNumber(d.values[0]) : formatNumber(d.value, true);
-      d.link = baseUrlLink ? `${baseUrlLink}${d.id}` : null;
+      d.link = baseUrlLink && !d.is_domestic_consumption ? `${baseUrlLink}${d.id}` : null;
     });
   }
 

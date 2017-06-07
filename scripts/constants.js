@@ -28,29 +28,6 @@ export const CHOROPLETH_CLASSES = {
   error_no_metadata_for_layer: 'ch-no-meta-layer',
 };
 
-export const MAP_DIMENSIONS_COLOR_SCALES = {
-  'Production of soy': 'blue',
-  'Average soy yield': 'blue',
-  '% soy of total farming land': 'blue',
-  'Territorial deforestation': 'red',
-  'Maximum soy deforestation': 'red',
-  'Soy deforestation (currently only available for the Cerrado and only up until 2014)': 'red',
-  'Land based CO2 emissions': 'red',
-  'Water scarcity ': 'bluered',
-  'Loss of amphibian habitat': 'red',
-  'Area affected by fires in 2013': 'red',
-  'Permanent Protected Area (PPA) deficit': 'red',
-  'Legal Reserve (LR) deficit': 'red',
-  'Forest Code deficit': 'greenred',
-  'Number of environmental embargos (2015)': 'red',
-  '% of soy under zero deforestation commitments': 'redblue',
-  'Human development index': 'redblue',
-  'GDP per capita': 'blue',
-  '% GDP from agriculture': 'blue',
-  'Smallholder dominance ': 'green',
-  'Reported cases of forced labour (2014)': 'red',
-  'Land conflicts (2014)': 'red'
-};
 export const PROFILE_CHOROPLETH_CLASSES = ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'];
 
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
@@ -88,9 +65,8 @@ export const DATA_DEFAULT_STATE = {
 
 
 // fact sheets
-export const FACT_SHEET_NODE_TYPE_WHITELIST = ['MUNICIPALITY', 'STATE', 'BIOME', 'EXPORTER', 'IMPORTER'];
 export const ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST = ['included_years', 'buckets'];
-export const CHORD_COLORS = ['#ea6869', '#34444c'];
+export const LINE_LABEL_HEIGHT = 12;
 
 // map
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';

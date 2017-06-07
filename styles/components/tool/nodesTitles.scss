@@ -14,7 +14,7 @@
   margin-right: 8px;
   border-radius: 4px;
 
-  &[data-node-link] {
+  &.-link {
     cursor: pointer;
 
     &:hover {

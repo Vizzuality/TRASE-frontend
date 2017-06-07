@@ -43,9 +43,7 @@ export default class {
     const nodeTitles = Array.prototype.slice.call(document.querySelectorAll('.js-node-title'), 0);
     nodeTitles.forEach((nodeTitle) => {
       nodeTitle.addEventListener('click', (e) => {
-        if (e.currentTarget.dataset.nodeLink !== undefined) {
-          window.location.href = e.currentTarget.dataset.nodeLink;
-        }
+        this.callbacks.onProfileLinkClicked(parseInt(e.currentTarget.dataset.nodeId));
       });
     });
 

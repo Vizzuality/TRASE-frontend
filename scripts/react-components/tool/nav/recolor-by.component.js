@@ -32,7 +32,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
     return recolorBy;
   });
 
-  // Renders a dropdown item using recolrBy data
+  // Renders a dropdown item using recolorBy data
   const getRecolorByItem = (recolorBy) => {
     return <li
       class={classNames('dropdown-item', { '-disabled': recolorBy.isDisabled })}

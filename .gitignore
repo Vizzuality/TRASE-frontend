@@ -12,4 +12,4 @@ dist
 
 tmp
 
-bin/cartodb/cartodb-config.json
+gis/cartodb/cartodb-config.json

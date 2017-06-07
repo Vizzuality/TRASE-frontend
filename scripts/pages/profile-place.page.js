@@ -160,7 +160,7 @@ const _setEventListeners = () => {
 };
 
 const _showErrorMessage = () => {
-  const el = document.querySelector('.l-factsheet-place');
+  const el = document.querySelector('.l-profile-place');
   document.querySelector('.js-loading').classList.add('is-hidden');
   el.classList.add('-error');
   el.querySelector('.js-wrap').classList.add('is-hidden');

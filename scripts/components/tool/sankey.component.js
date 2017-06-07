@@ -138,11 +138,7 @@ export default class {
     }
 
     if (selectedRecolorBy.name !== 'none') {
-      let recolorBy = link.recolorBy;
-      if (selectedRecolorBy.divisor) {
-        recolorBy = Math.round(link.recolorBy / selectedRecolorBy.divisor);
-      }
-      classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${recolorBy}`;
+      classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${link.recolorBy}`;
     } else {
       classPath = `${classPath} -recolorgroup-${link.recolorGroup}`;
     }

@@ -13,7 +13,7 @@ const mapMethodsToState = () => ({
 });
 
 const mapViewCallbacksToActions = () => ({
-  onNodeSelected: id => searchNode(parseInt(id, 10)),
+  onNodeSelected: node => searchNode(parseInt(node.id, 10)),
 });
 
 

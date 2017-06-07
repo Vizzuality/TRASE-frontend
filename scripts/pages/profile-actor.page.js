@@ -229,7 +229,7 @@ const _setEventListeners = () => {
 };
 
 const _showErrorMessage = () => {
-  const el = document.querySelector('.l-factsheet-actor');
+  const el = document.querySelector('.l-profile-actor');
   el.classList.add('-error');
   document.querySelector('.js-loading').classList.add('is-hidden');
   el.querySelector('.js-wrap').classList.add('is-hidden');

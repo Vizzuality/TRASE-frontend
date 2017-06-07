@@ -25,7 +25,7 @@ export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensi
   const isBivariate = selectedMapDimensions.length === 2;
   const isEmpty = selectedMapDimensions.length === 0;
 
-  const colors = (isBivariate) ? CHOROPLETH_CLASSES.bidimensional : CHOROPLETH_CLASSES[selectedMapDimension.color_scale || 'red'];
+  const colors = (isBivariate) ? CHOROPLETH_CLASSES.bidimensional : CHOROPLETH_CLASSES[selectedMapDimension.colorScale || 'red'];
 
   const geoNodes = _.filter(nodesDictWithMeta, node => node.geoId !== undefined && node.geoId !== null);
   const geoNodesIds = Object.keys(geoNodes);
