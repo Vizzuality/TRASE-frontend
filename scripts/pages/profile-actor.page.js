@@ -58,7 +58,7 @@ const _build = (data, nodeId) => {
     },
     showTooltipCallback: (location, x, y) => {
       tooltip.showTooltip(x, y, {
-        title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
+        title: `${location.name.toUpperCase()} > ${data.node_name}, ${location.date.getFullYear()}`,
         values: [
           { title: 'Trade Volume',
             value: formatNumber(location.value),
@@ -100,7 +100,7 @@ const _build = (data, nodeId) => {
       showTooltipCallback: ({ properties }, x, y) => {
         const municipality = data.top_sources.municipality.lines
           .find(m => (properties.geoid === m.geo_id));
-        const title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
+        const title = `${properties.nome.toUpperCase()} > ${data.node_name}`;
         let body = null;
         if (municipality) body = municipality.values[0];
 
@@ -133,7 +133,19 @@ const _build = (data, nodeId) => {
       '.js-top-destination',
       topCountriesLines,
       data.top_countries.included_years,
-      lineSettings,
+      Object.assign({}, lineSettings, {
+        showTooltipCallback: (location, x, y) => {
+          tooltip.showTooltip(x, y, {
+            title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
+            values: [
+              { title: 'Trade Volume',
+                value: formatNumber(location.value),
+                unit: 'Tons'
+              }
+            ]
+          });
+        },
+      }),
     );
 
     Map('.js-top-destination-map', {
@@ -150,7 +162,7 @@ const _build = (data, nodeId) => {
       showTooltipCallback: ({ properties }, x, y) => {
         const country = data.top_countries.lines
           .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
-        const title = `${data.node_name} > ${properties.name.toUpperCase()}`;
+        const title = `${properties.name.toUpperCase()} > ${data.node_name}`;
         let body = null;
         if (country) body = country.values[0];
 
