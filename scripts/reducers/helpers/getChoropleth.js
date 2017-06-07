@@ -62,7 +62,7 @@ export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensi
 
           // use zero class only when both A and B values are zero
           if (valueA === 0 || valueB === 0) {
-            color = CHOROPLETH_CLASS_ZERO;
+            color = CHOROPLETH_CLASSES.default;
           }
           // in case only one is zero, just ignore and use lowest bucket (Math.max zero)
           else {
