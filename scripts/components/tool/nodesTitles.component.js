@@ -35,7 +35,9 @@ export default class {
 
   _update(isSelect, nodesData, recolorGroups = null) {
     this.el.innerHTML = NodeTitleTemplate({
-      nodes: nodesData,
+      nodes: nodesData.map(node => {
+        return Object.assign(node, {}, { hasLink: node.isUnknown !== true && node.profileType !== undefined && node.profileType !== null })
+      }),
       isSelect: isSelect || nodesData.length > 1,
       recolorGroups: recolorGroups
     });

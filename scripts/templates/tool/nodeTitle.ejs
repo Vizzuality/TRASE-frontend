@@ -2,14 +2,14 @@
   <% nodes.forEach(function(node, i) { %>
     <% const color = recolorGroups === null ? -1 : recolorGroups[node.id] %>
     <div
-      class="js-node-title c-node-title -recolorgroup-<%= color %> <% if (node.profileType) { %>-link<% } %>"
+      class="js-node-title c-node-title -recolorgroup-<%= color %> <% if (node.hasLink) { %>-link<% } %>"
       data-node-id="<%= node.id %>"
     >
       <div class="column">
         <div class="column-title"><%= node.columnName %></div>
         <div class="column-content"><%= node.name %></div>
       </div>
-      <% if (node.profileType) { %>
+      <% if (node.hasLink) { %>
         <div class="column">
           <div class="column-content">
             <span href="<%= node.link %>" class="icon-link">
