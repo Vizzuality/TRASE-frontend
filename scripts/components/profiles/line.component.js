@@ -168,17 +168,8 @@ export default class {
         return abbreviateNumber(value, 3);
       };
 
-      xTickFormat = (value, i) => {
-        let format;
-        if (xValues.length > 2) {
-          format = d3_timeFormat('%y');
-        } else {
-          if (i === 0) {
-            format = d3_timeFormat('%b/%y');
-          } else {
-            format = d3_timeFormat('%b');
-          }
-        }
+      xTickFormat = (value) => {
+        const format = d3_timeFormat('%Y');
         return format(value);
       };
     } else {
@@ -200,7 +191,7 @@ export default class {
     }
 
     const xAxis = d3_axis_bottom(x)
-      .ticks(ticks.xTicks)
+      .ticks(ticks.xTicks || xValues.length)
       .tickSize(0)
       .tickPadding(ticks.xTickPadding)
       .tickFormat(xTickFormat);

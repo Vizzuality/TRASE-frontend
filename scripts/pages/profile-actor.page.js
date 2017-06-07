@@ -37,6 +37,8 @@ const defaults = {
 
 const tooltip = new Tooltip('.js-infowindow');
 
+const LINE_MARGINS = { top: 10, right: 100, bottom: 25, left: 50 };
+
 const _onSelect = function(value) {
   this.setTitle(value);
   defaults[this.id] = value;
@@ -47,7 +49,6 @@ const _build = (data, nodeId) => {
     margin: { top: 10, right: 100, bottom: 30, left: 94 },
     height: 244,
     ticks: {
-      xTicks: 6,
       yTicks: 6,
       yTickPadding: 10,
       yTickFormatType: 'top-location',
@@ -78,7 +79,7 @@ const _build = (data, nodeId) => {
       '.js-top-municipalities',
       topMunicipalitiesLines,
       data.top_sources.included_years,
-      Object.assign({}, lineSettings, { margin: { top: 10, right: 100, bottom: 25, left: 37 } }),
+      Object.assign({}, lineSettings, { margin: LINE_MARGINS }),
     );
 
     Map('.js-top-municipalities-map', {
@@ -270,10 +271,9 @@ const _switchTopSource = (e, data) => {
     topMunicipalitiesLines,
     data.top_sources.included_years,
     {
-      margin: { top: 10, right: 100, bottom: 25, left: 37 },
+      margin: LINE_MARGINS,
       height: 244,
       ticks: {
-        xTicks: 6,
         yTicks: 6,
         yTickPadding: 10,
         yTickFormatType: 'top-location',
