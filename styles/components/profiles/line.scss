@@ -63,11 +63,20 @@
 
   .line-pink-with-points {
     path, circle { stroke: $medium-pink; }
-    &:nth-child(5) path, circle { stroke-opacity: 1; }
-    &:nth-child(4) path, circle { stroke-opacity: .9; }
-    &:nth-child(3) path, circle { stroke-opacity: .8; }
-    &:nth-child(2) path, circle { stroke-opacity: .7; }
-    &:nth-child(1) path, circle { stroke-opacity: .6; }
+    // &:nth-child(5) path, circle { stroke-opacity: 1; }
+    // &:nth-child(4) path, circle { stroke-opacity: .9; }
+    // &:nth-child(3) path, circle { stroke-opacity: .8; }
+    // &:nth-child(2) path, circle { stroke-opacity: .7; }
+    // &:nth-child(1) path, circle { stroke-opacity: .6; }
+
+    &.line-0 { path, circle { stroke: $ch-profile-red-0; } };
+    &.line-1 { path, circle { stroke: $ch-profile-red-1; } };
+    &.line-2 { path, circle { stroke: $ch-profile-red-2; } };
+    &.line-3 { path, circle { stroke: $ch-profile-red-3; } };
+    &.line-4 { path, circle { stroke: $ch-profile-red-4; } };
+    &.line-5 { path, circle { stroke: $ch-profile-red-5; } };
+    &.line-6 { path, circle { stroke: $ch-profile-red-6; } };
+    &.line-7 { path, circle { stroke: $ch-profile-red-7; } };
 
     path {
       stroke-width: 3px;

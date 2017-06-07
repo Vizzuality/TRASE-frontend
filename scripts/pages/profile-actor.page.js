@@ -44,8 +44,10 @@ const _onSelect = function(value) {
   defaults[this.id] = value;
 };
 
+let lineSettings;
+
 const _build = (data, nodeId) => {
-  const lineSettings = {
+  lineSettings = {
     margin: { top: 10, right: 100, bottom: 30, left: 94 },
     height: 244,
     ticks: {
@@ -67,6 +69,9 @@ const _build = (data, nodeId) => {
     },
     hideTooltipCallback: () => {
       tooltip.hideTooltip();
+    },
+    lineClassNameCallback: (lineData, lineDefaultStyle) => {
+      return `${lineDefaultStyle} line-${lineData[0].value9}`;
     }
   };
 
@@ -79,7 +84,7 @@ const _build = (data, nodeId) => {
       '.js-top-municipalities',
       topMunicipalitiesLines,
       data.top_sources.included_years,
-      Object.assign({}, lineSettings, { margin: LINE_MARGINS }),
+      Object.assign({}, lineSettings, { margin: LINE_MARGINS })
     );
 
     Map('.js-top-municipalities-map', {
@@ -270,31 +275,10 @@ const _switchTopSource = (e, data) => {
     '.js-top-municipalities',
     topMunicipalitiesLines,
     data.top_sources.included_years,
-    {
+    Object.assign({}, lineSettings, {
       margin: LINE_MARGINS,
-      height: 244,
-      ticks: {
-        yTicks: 6,
-        yTickPadding: 10,
-        yTickFormatType: 'top-location',
-        xTickPadding: 15
-      },
-      showTooltipCallback: (location, x, y) => {
-        tooltip.showTooltip(x, y, {
-          title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
-          values: [
-            {
-              title: 'Trade Volume',
-              value: formatNumber(location.value),
-              unit: 'Tons'
-            }
-          ]
-        });
-      },
-      hideTooltipCallback: () => {
-        tooltip.hideTooltip();
-      }
-    },
+      height: 244
+    })
   );
 
   document.querySelector('.js-top-municipalities-map').innerHTML = '';

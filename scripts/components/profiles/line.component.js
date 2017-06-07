@@ -101,7 +101,7 @@ export default class {
           case 'line-points': {
             pathContainers = container.datum(lineValuesWithFormat)
               .append('g')
-              .attr('class', style);
+              .attr('class', d => (_.isFunction(settings.lineClassNameCallback)) ? settings.lineClassNameCallback(d, style) : style);
 
             pathContainers.selectAll('path')
               .data(d => [d])
@@ -217,7 +217,8 @@ const prepareData = (xValues, data) => {
     return {
       name: data.name,
       date: new Date(year, 0),
-      value: data.values[index]
+      value: data.values[index],
+      value9: data.value9
     };
   });
 };
