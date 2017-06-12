@@ -36,13 +36,13 @@ export default class {
   _update(isSelect, nodesData, recolorGroups = null) {
     this.el.innerHTML = NodeTitleTemplate({
       nodes: nodesData.map(node => {
-        return Object.assign(node, {}, { hasLink: node.isUnknown !== true && node.profileType !== undefined && node.profileType !== null })
+        return Object.assign(node, {}, { hasLink: node.isUnknown !== true && node.isDomesticConsumption !== true && node.profileType !== undefined && node.profileType !== null })
       }),
       isSelect: isSelect || nodesData.length > 1,
       recolorGroups: recolorGroups
     });
 
-    const nodeTitles = Array.prototype.slice.call(document.querySelectorAll('.js-node-title'), 0);
+    const nodeTitles = Array.prototype.slice.call(document.querySelectorAll('.js-node-title.-link'), 0);
     nodeTitles.forEach((nodeTitle) => {
       nodeTitle.addEventListener('click', (e) => {
         this.callbacks.onProfileLinkClicked(parseInt(e.currentTarget.dataset.nodeId));
