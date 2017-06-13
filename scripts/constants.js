@@ -26,6 +26,7 @@ export const CHOROPLETH_CLASSES = {
   greenred: ['recolorby-linear-blue-green-0','recolorby-linear-blue-green-2','recolorby-linear-blue-green-5','recolorby-linear-blue-green-8','recolorby-linear-blue-green-10'],
   error_no_metadata: 'ch-no-meta',
   error_no_metadata_for_layer: 'ch-no-meta-layer',
+  default: 'ch-default'
 };
 
 export const PROFILE_CHOROPLETH_CLASSES = ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'];
