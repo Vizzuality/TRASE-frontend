@@ -137,8 +137,12 @@ export default class {
       return classPath;
     }
 
-    if (selectedRecolorBy.name !== 'none') {
-      classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${link.recolorBy}`;
+    if (selectedRecolorBy.name !== 'none' && link.recolorBy !== null) {
+      let recolorBy = link.recolorBy;
+      if (selectedRecolorBy.divisor) {
+        recolorBy = Math.round(link.recolorBy / selectedRecolorBy.divisor);
+      }
+      classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${recolorBy}`;
     } else {
       classPath = `${classPath} -recolorgroup-${link.recolorGroup}`;
     }
@@ -274,12 +278,18 @@ export default class {
       if (link.recolorBy === null) {
         value = 'unknown';
       } else if (this.currentSelectedRecolorBy.type === 'ind') {
+        let intervalCount = this.currentSelectedRecolorBy.intervalCount +1 ;
+        if (this.currentSelectedRecolorBy.divisor) {
+          intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount +1 ;
+        }
         if (this.currentSelectedRecolorBy.maxValue === '100%') {
-          const rangeStart = (link.recolorBy / this.currentSelectedRecolorBy.intervalCount) * 100;
-          const rangeEnd = ((link.recolorBy + 1) / this.currentSelectedRecolorBy.intervalCount) * 100;
+          const rangeSize = (100/intervalCount);
+
+          const rangeStart = link.recolorBy === 0 ? 0 : 1 + link.recolorBy * rangeSize;
+          const rangeEnd = (link.recolorBy+1) * rangeSize;
           value = `${Math.round(rangeStart)}-${Math.round(rangeEnd)}%`;
         } else {
-          value = `${link.recolorBy}/${this.currentSelectedRecolorBy.intervalCount}`;
+          value = `${link.recolorBy}/${intervalCount}`;
         }
       } else {
         value = _.capitalize(link.recolorBy);
