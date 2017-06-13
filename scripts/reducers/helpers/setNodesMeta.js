@@ -20,7 +20,7 @@ export default function(nodesDict, nodesMeta, layers) {
         value3: layerValue.value3,
         value5: layerValue.value5,
         name: layerByUID.name
-      }
+      };
 
       if (layerByUID.unit !== undefined && layerByUID.unit !== 'Unitless') {
         dimensionMeta.unit = layerByUID.unit;
