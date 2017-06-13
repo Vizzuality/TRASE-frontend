@@ -8,7 +8,7 @@ export default (nodesIds, state) => {
     };
   }
 
-  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapDimensions);
+  const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapDimensions, state.selectedResizeBy.label);
   const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined && geoId !== null);
   const columnsPos = data.map(node => node.columnGroup);
 
@@ -20,7 +20,7 @@ export default (nodesIds, state) => {
   };
 };
 
-const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta, selectedMapDimensions) => {
+const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta, selectedMapDimensions, selectedResizeByLabel) => {
   if (selectedNodesIds === undefined || visibleNodes === undefined) {
     return [];
   }
@@ -38,11 +38,11 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
       if (node.meta) {
         if (selectedMapDimensions[0] !== null) {
           meta = node.meta[selectedMapDimensions[0]];
-          if (meta) node.selectedMetas.push(meta);
+          if (meta && meta.name !== selectedResizeByLabel) node.selectedMetas.push(meta);
         }
         if (selectedMapDimensions[1] !== null) {
           meta = node.meta[selectedMapDimensions[1]];
-          if (meta) node.selectedMetas.push(meta);
+          if (meta && meta.name !== selectedResizeByLabel) node.selectedMetas.push(meta);
         }
       }
     }
