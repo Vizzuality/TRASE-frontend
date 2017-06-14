@@ -62,7 +62,7 @@ export default function (state = {}, action) {
         resizeBy = { type: 'none', name: 'none' };
       } else {
         resizeBy = context.resizeBy.find(resizeBy => resizeBy.name === state.selectedResizeByName);
-        if (!recolorBy) {
+        if (!resizeBy) {
           resizeBy = context.resizeBy.find(resizeBy => resizeBy.isDefault === true);
         }
       }
