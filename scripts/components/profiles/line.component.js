@@ -101,7 +101,7 @@ export default class {
           case 'line-points': {
             pathContainers = container.datum(lineValuesWithFormat)
               .append('g')
-              .attr('class', style);
+              .attr('class', d => (_.isFunction(settings.lineClassNameCallback)) ? settings.lineClassNameCallback(d, style) : style);
 
             pathContainers.selectAll('path')
               .data(d => [d])
@@ -168,17 +168,8 @@ export default class {
         return abbreviateNumber(value, 3);
       };
 
-      xTickFormat = (value, i) => {
-        let format;
-        if (xValues.length > 2) {
-          format = d3_timeFormat('%y');
-        } else {
-          if (i === 0) {
-            format = d3_timeFormat('%b/%y');
-          } else {
-            format = d3_timeFormat('%b');
-          }
-        }
+      xTickFormat = (value) => {
+        const format = d3_timeFormat('%Y');
         return format(value);
       };
     } else {
@@ -200,7 +191,7 @@ export default class {
     }
 
     const xAxis = d3_axis_bottom(x)
-      .ticks(ticks.xTicks)
+      .ticks(ticks.xTicks || xValues.length)
       .tickSize(0)
       .tickPadding(ticks.xTickPadding)
       .tickFormat(xTickFormat);
@@ -226,7 +217,8 @@ const prepareData = (xValues, data) => {
     return {
       name: data.name,
       date: new Date(year, 0),
-      value: data.values[index]
+      value: data.values[index],
+      value9: data.value9
     };
   });
 };
