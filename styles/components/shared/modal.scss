@@ -31,7 +31,7 @@
       line-height: 1.5;
     }
 
-    > .c-button {
+    .c-button {
       position: absolute;
       right: 16px;
       bottom: 16px;
@@ -39,5 +39,19 @@
       background-color: $white;
       font-weight: bold;
     }
+  }
+}
+
+.modal-container {
+  display: none;
+  @media screen and (min-width: $breakpoint-tablet) {
+    display: block;
+  }
+}
+
+.mobile-warning {
+  display: block;
+  @media screen and (min-width: $breakpoint-tablet) {
+    display: none;
   }
 }
