@@ -33,7 +33,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
     <div class='nav-item js-dropdown' onClick={() => { onToggle(id); }}>
       <div class={classNames('c-dropdown -small -capitalize', { ['-hide-only-child']: hasZeroOrSingleElement } )}>
         <span class='dropdown-label'>
-          Resize
+          Resize by
           <Tooltip position='top right' text={tooltips.sankey.nav.resizeBy.main} />
         </span>
         <span class='dropdown-title -small'>
