@@ -46,6 +46,7 @@ const _onSelect = function(value) {
 };
 
 const _initSource = (selectedSource, data) => {
+  console.log(data)
   const sourceLines = Object.assign({}, data.top_sources[selectedSource]);
 
   sourceLines.lines = sourceLines.lines.slice(0, 5);
@@ -127,7 +128,7 @@ const _build = (data, nodeId) => {
     _setTopSourceSwitcher(data);
 
     choroLegend(null, '.js-source-legend', {
-      title: ['Soy exported in 2015', '(t)'],
+      title: ['Soy exported in 2015', '(tonnes)'],
       bucket: [[data.top_sources.buckets[0], ...data.top_sources.buckets]]
     });
 
@@ -138,7 +139,7 @@ const _build = (data, nodeId) => {
     document.querySelector('.js-top-map-title').innerHTML = `Top destination countries of ${formatApostrophe(_.capitalize(data.node_name))} soy`;
 
     choroLegend(null, '.js-destination-legend', {
-      title: ['Soy exported in 2015', '(t)'],
+      title: ['Soy exported in 2015', '(tonnes)'],
       bucket: [[data.top_countries.buckets[0], ...data.top_countries.buckets]]
     });
 
