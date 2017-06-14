@@ -93,7 +93,11 @@
     }
 
     .js-top-municipalities-map {
-      height: 480px;
+      height: 400px;
+
+      svg {
+        margin-left: 50px;
+      }
     }
   }
 

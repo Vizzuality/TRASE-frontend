@@ -49,7 +49,6 @@ export default (className, { topoJSONPath, topoJSONRoot, getPolygonClassName, sh
       .append('path')
       .attr('class', d => {
         return `polygon ${getPolygonClassName(d)}`;
-        // return isCurrent(d) ? 'polygon -isCurrent' : 'polygon';
       })
       .attr('d', path);
 
