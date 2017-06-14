@@ -50,7 +50,7 @@ export function loadDisclaimer() {
       .then(resp => JSON.parse(resp))
       .then(disclaimer => {
         if (disclaimerLocal !== null && parseInt(disclaimerLocal) >= disclaimer.version) {
-          return;
+          // return;
         }
 
         localStorage.setItem('disclaimerVersion', disclaimer.version);

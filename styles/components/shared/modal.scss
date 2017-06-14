@@ -9,7 +9,7 @@
 
   transform: translate(-50%, -50%);
 
-  z-index: $z-veil;
+  z-index: $z-above-veil;
 
   > .header {
     padding: 24px 32px;
@@ -19,25 +19,25 @@
   > .content {
     position: relative;
     min-height: 345px;
-    padding: 16px 32px 90px;
-    background-color: $pale-peach;
+    padding: 16px 16px 90px;
+    background-color: $charcoal-grey;
 
-    color: $charcoal-grey;
-    font-family: $font-family-1;
-    font-size: $font-size-xx-regular;
+    color: $white;
+    font-family: $font-family-2;
+    font-size: $font-size-regular;
+    line-height: 1.5;
 
-    // incoming DOM from CMS
     p, a, span {
-      letter-spacing: -1.3px;
       line-height: 1.5;
     }
 
     > .c-button {
       position: absolute;
-      right: 32px;
-      bottom: 32px;
-
-      border: 1px solid $charcoal-grey;
+      right: 16px;
+      bottom: 16px;
+      color: $charcoal-grey;
+      background-color: $white;
+      font-weight: bold;
     }
   }
 }
