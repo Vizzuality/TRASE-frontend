@@ -38,11 +38,29 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
       if (node.meta) {
         if (selectedMapDimensions[0] !== null) {
           meta = node.meta[selectedMapDimensions[0]];
-          if (meta && meta.name !== selectedResizeByLabel) node.selectedMetas.push(meta);
+          if (meta && meta.name !== selectedResizeByLabel) {
+            node.selectedMetas.push(meta);
+          } else if (visibleNode && visibleNode.quant && meta.rawValue !== visibleNode.quant) {
+            // See https://basecamp.com/1756858/projects/12498794/todos/312319406
+            console.warn(
+              'Attempting to show different values two dimensions with the same name.',
+              'ResizeBy: ' + selectedResizeByLabel + ' with value ' + visibleNode.quant,
+              'Map layer: ' + meta.name + ' with value ' + meta.rawValue
+            );
+          }
         }
         if (selectedMapDimensions[1] !== null) {
           meta = node.meta[selectedMapDimensions[1]];
-          if (meta && meta.name !== selectedResizeByLabel) node.selectedMetas.push(meta);
+          if (meta && meta.name !== selectedResizeByLabel) {
+            node.selectedMetas.push(meta);
+          } else if (visibleNode && visibleNode.quant && meta.rawValue !== visibleNode.quant) {
+            // See https://basecamp.com/1756858/projects/12498794/todos/312319406
+            console.warn(
+              'Attempting to show different values two dimensions with the same name.',
+              'ResizeBy: ' + selectedResizeByLabel + ' with value ' + visibleNode.quant,
+              'Map layer: ' + meta.name + ' with value ' + meta.rawValue
+            );
+          }
         }
       }
     }
