@@ -27,7 +27,7 @@
       position: relative;
       top: 1px;
       margin-right: 2px;
-      border: solid 1px #6c787d;
+      border: solid 1px $charcoal-grey;
       text-align: center;
 
       span {
@@ -41,7 +41,12 @@
         letter-spacing: -1px;
         white-space: nowrap;
       }
+
+      &.-highlighted {
+        border: solid 3px $charcoal-grey;
+      }
     }
+
   }
 }
 
@@ -80,6 +85,18 @@
       white-space: nowrap;
       color: rgba($charcoal-grey, .5);
       font-family: $font-family-1;
+    }
+
+    &.-highlighted {
+      &::after {
+        content: '';
+        border: 3px solid $white;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        margin-left: -50%;
+      }
     }
   }
 
