@@ -251,8 +251,6 @@ export function loadLinks() {
         const jsonPayload = JSON.parse(payload);
         if (jsonPayload.data === undefined || !jsonPayload.data.length) {
           console.error('server returned empty flows/link list, with params:', params);
-          dispatch(resetState(false));
-          return;
         }
 
         dispatch({
