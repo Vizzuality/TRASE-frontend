@@ -29,7 +29,7 @@ const getNodeSelectedMeta = (selectedMapDimension, node, selectedResizeByLabel, 
   const meta = node.meta[selectedMapDimension];
   if (meta && meta.name !== selectedResizeByLabel) {
     return meta;
-  } else if (visibleNode && visibleNode.quant && meta.rawValue !== visibleNode.quant) {
+  } else if (visibleNode && visibleNode.quant && meta.rawValue !== visibleNode.quant && NODE_ENV_DEV === true) {
     // See https://basecamp.com/1756858/projects/12498794/todos/312319406
     console.warn(
       'Attempting to show different values two dimensions with the same name.',
