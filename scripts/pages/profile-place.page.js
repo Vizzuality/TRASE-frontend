@@ -145,6 +145,7 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
   document.querySelector('.js-area').innerHTML = info.area !== null ? info.area : '-';
   document.querySelector('.js-soy-land').innerHTML = info.soy_land !== null ? formatNumber(info.soy_land, 'percentage') : '-';
+  document.querySelector('.js-soy-production').innerHTML = info.soy_production !== null ? info.soy_production : '-';
   document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? formatNumber(info.agriculture_land, 'percentage') : '-';
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
@@ -204,6 +205,7 @@ const _init = () => {
         country: data.country_name,
         municipality: data.municipality_name,
         soy_land: data.soy_farmland,
+        soy_production: data.soy_production,
         state: data.state_name,
         type: data.column_name,
         summary: data.summary
