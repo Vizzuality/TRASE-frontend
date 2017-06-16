@@ -1,5 +1,16 @@
 import actions from 'actions';
 
+export const NUM_DECIMALS = {
+  'Trade volume': 0,
+  'Land use': 0,
+  'Financial flow': 0,
+  'Territorial deforestation': 0,
+  'Maximum soy deforestation': 0,
+  'Soy deforestation (currently only available for the Cerrado and only up until 2014)': 0,
+};
+export const NUM_DECIMALS_DEFAULT = 1;
+
+
 // flows
 export const NUM_COLUMNS = 4;
 export const NUM_NODES_SUMMARY = 10;

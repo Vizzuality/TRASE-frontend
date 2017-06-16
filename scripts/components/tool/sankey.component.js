@@ -3,6 +3,7 @@ import { select as d3_select /*, selectAll as d3_selectAll*/ } from 'd3-selectio
 import { event as d3_event } from 'd3-selection';
 import  'd3-transition';
 import { DETAILED_VIEW_MIN_LINK_HEIGHT, SANKEY_TRANSITION_TIME } from 'constants';
+import formatValue from 'utils/formatValue';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import 'styles/components/tool/sankey.scss';
@@ -266,10 +267,7 @@ export default class {
       values: [{
         title: this.currentQuant.name,
         unit: this.currentQuant.unit,
-        value: link.quant.toLocaleString(undefined, {
-          minimumFractionDigits: 1,
-          maximumFractionDigits: 1
-        }),
+        value: formatValue(link.quant, null, this.currentQuant.name)
       }]
     };
 

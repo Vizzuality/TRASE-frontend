@@ -13,7 +13,6 @@ export default function(nodesDict, nodesMeta, layers) {
       const uid = getNodeMetaUid(layerValue.type, layerValue.id);
       nodeWithMeta.meta[uid] = {
         rawValue: layerValue.rawValue,
-        rawValueNice: layerValue.rawValue.toFixed(1),
         value3: layerValue.value3,
         value5: layerValue.value5,
         name: layersByUID[uid].name,
