@@ -258,11 +258,13 @@ export default function (state = {}, action) {
     case actions.HIGHLIGHT_NODE: {
       // TODO this prevents spamming browser history, but we should avoid touching it when changed state props are not on th url whitelist (constants.URL_STATE_PROPS)
       updateURLState = false;
+
       newState = Object.assign({}, state, {
         highlightedNodesIds: action.ids,
         highlightedNodeData: action.data,
         highlightedGeoIds: action.geoIds,
-        highlightedNodeCoordinates: action.coordinates
+        highlightedNodeCoordinates: action.coordinates,
+        currentHighlightedChoroplethBucket: action.choroplethBucket
       });
       break;
     }

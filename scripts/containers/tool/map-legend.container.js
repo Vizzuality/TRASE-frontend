@@ -12,7 +12,8 @@ const mapMethodsToState = (state) => ({
         selectedMapContextualLayersData: state.tool.selectedMapContextualLayersData,
       };
     }
-  }
+  },
+  highlightChoroplethBucket: state.tool.currentHighlightedChoroplethBucket
 });
 
 const mapViewCallbacksToActions = () => ({

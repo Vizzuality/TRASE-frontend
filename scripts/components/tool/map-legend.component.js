@@ -34,6 +34,23 @@ export default class {
     this._updateMapControlsPosition();
   }
 
+  highlightChoroplethBucket(bucketClass) {
+    if (this.currentBuckets === undefined) {
+      return;
+    }
+    for (var i = 0; i < this.currentBuckets.length; i++) {
+      this.currentBuckets[i].classList.toggle('-highlighted', false);
+    }
+    if (bucketClass === undefined || bucketClass === null) {
+      return;
+    }
+    const bucket = this.choro.getElementsByClassName(bucketClass)[0];
+    if (bucket === undefined) {
+      return;
+    }
+    bucket.classList.toggle('-highlighted', true);
+  }
+
   _setVars() {
     this.el = document.querySelector('.js-map-legend');
   }
@@ -87,6 +104,8 @@ export default class {
     });
 
     this.choro.innerHTML = html;
+    this.currentBuckets = Array.prototype.slice.call(this.choro.getElementsByClassName('bucket'))
+                  .concat(Array.prototype.slice.call(this.choro.getElementsByClassName('bullet')));
   }
 
   _renderContext(layers) {

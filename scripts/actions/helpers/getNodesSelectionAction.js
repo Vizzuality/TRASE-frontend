@@ -1,10 +1,12 @@
 export default (nodesIds, state) => {
+  let choroplethBucket = null;
   if (!nodesIds || !nodesIds[0]) {
     return {
       ids: [],
       data: [],
       geoIds: [],
-      columnsPos: []
+      columnsPos: [],
+      choroplethBucket
     };
   }
 
@@ -12,11 +14,16 @@ export default (nodesIds, state) => {
   const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined && geoId !== null);
   const columnsPos = data.map(node => node.columnGroup);
 
+  if (data.length === 1 && data[0].geoId !== null && state.choropleth !== undefined) {
+    choroplethBucket = state.choropleth[data[0].geoId] || 'ch-default';
+  }
+
   return {
     ids: nodesIds,
     data,
     geoIds,
-    columnsPos
+    columnsPos,
+    choroplethBucket
   };
 };
 
