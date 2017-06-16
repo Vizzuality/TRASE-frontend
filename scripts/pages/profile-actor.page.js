@@ -46,7 +46,6 @@ const _onSelect = function(value) {
 };
 
 const _initSource = (selectedSource, data) => {
-  console.log(data)
   const sourceLines = Object.assign({}, data.top_sources[selectedSource]);
 
   sourceLines.lines = sourceLines.lines.slice(0, 5);
