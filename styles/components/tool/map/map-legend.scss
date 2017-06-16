@@ -43,7 +43,7 @@
       }
 
       &.-highlighted {
-        border: solid 3px $charcoal-grey;
+        border: solid 2px $charcoal-grey;
       }
     }
 
@@ -90,12 +90,18 @@
     &.-highlighted {
       &::after {
         content: '';
-        border: 3px solid $white;
+        border: 2px solid $white;
         position: absolute;
         width: 100%;
         height: 100%;
         z-index: 99;
         margin-left: -50%;
+      }
+    }
+
+    &.ch-red-0, &.ch-blue-0, &.ch-bi-0-0, &.recolorby-linear-red-blue-3, &.recolorby-linear-blue-green-5, &.recolorby-linear-yellow-green-0 {
+      &::after {
+        border-color: $charcoal-grey;
       }
     }
   }

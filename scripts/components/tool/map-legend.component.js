@@ -45,6 +45,9 @@ export default class {
       return;
     }
     const bucket = this.choro.getElementsByClassName(bucketClass)[0];
+    if (bucket === undefined) {
+      return;
+    }
     bucket.classList.toggle('-highlighted', true);
   }
 
