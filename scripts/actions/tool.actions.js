@@ -261,9 +261,7 @@ export function loadLinks() {
         // reselect nodes ---> FILTER NODE IDS THAT ARE NOT VISIBLE ANYMORE + UPDATE DATA for titlebar
         const selectedNodesIds = getSelectedNodesStillVisible(getState().tool.visibleNodes, getState().tool.selectedNodesIds);
 
-        const action = getNodesSelectionAction(selectedNodesIds, getState().tool);
-        action.type = actions.UPDATE_NODE_SELECTION;
-        dispatch(action);
+        dispatch(updateNodes(selectedNodesIds));
 
         if (getState().tool.selectedNodesIds && getState().tool.selectedNodesIds.length > 0) {
           dispatch({
@@ -366,9 +364,7 @@ export function selectNode(nodeId, isAggregated = false) {
       const selectedNodesIds = getSelectedNodeIds(currentSelectedNodesIds, nodeId);
 
       // send to state the new node selection allong with new data, geoIds, etc
-      const action = getNodesSelectionAction(selectedNodesIds, getState().tool);
-      action.type = actions.UPDATE_NODE_SELECTION;
-      dispatch(action);
+      dispatch(updateNodes(selectedNodesIds));
 
       // refilter links by selected nodes
       dispatch({
@@ -378,6 +374,14 @@ export function selectNode(nodeId, isAggregated = false) {
       // load related geoIds to show on the map
       dispatch(loadLinkedGeoIDs());
     }
+  };
+}
+
+export function updateNodes(selectedNodesIds) {
+  return (dispatch, getState) => {
+    const action = getNodesSelectionAction(selectedNodesIds, getState().tool);
+    action.type = actions.UPDATE_NODE_SELECTION;
+    dispatch(action);
   };
 }
 
@@ -516,16 +520,22 @@ export function saveMapView(latlng, zoom) {
 }
 
 export function toggleMapDimension(uid) {
-  return {
-    type: actions.TOGGLE_MAP_DIMENSION,
-    uid
+  return (dispatch, getState) => {
+    dispatch({
+      type: actions.TOGGLE_MAP_DIMENSION,
+      uid
+    });
+    dispatch(updateNodes(getState().tool.selectedNodesIds));
   };
 }
 
 export function setMapDimensions(uids) {
-  return {
-    type: actions.SET_MAP_DIMENSIONS,
-    uids
+  return (dispatch, getState) => {
+    dispatch({
+      type: actions.SET_MAP_DIMENSIONS,
+      uids
+    });
+    dispatch(updateNodes(getState().tool.selectedNodesIds));
   };
 }
 

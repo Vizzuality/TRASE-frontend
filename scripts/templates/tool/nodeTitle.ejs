@@ -27,8 +27,7 @@
       <% if (node.selectedMetas) { node.selectedMetas.forEach(function(meta) { %>
         <div class="column">
           <div class="column-title"><%= meta.name %></div>
-          <div class="column-content"><span class="value"><%= meta.valueNice %></span><% if (meta.unit) { %><span class="unit"><%= meta.unit %></span><% } %>
-          </div>
+          <div class="column-content"><span class="value"><%= meta.valueNice %></span><% if (meta.unit) { %><span class="unit"><%= meta.unit %></span><% } %></div>
         </div>
       <% })} %>
       <div class="column">

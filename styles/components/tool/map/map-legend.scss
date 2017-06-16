@@ -27,7 +27,7 @@
       position: relative;
       top: 1px;
       margin-right: 2px;
-      border: solid 1px #6c787d;
+      border: solid 1px $charcoal-grey;
       text-align: center;
 
       span {
@@ -41,7 +41,12 @@
         letter-spacing: -1px;
         white-space: nowrap;
       }
+
+      &.-highlighted {
+        border: solid 2px $charcoal-grey;
+      }
     }
+
   }
 }
 
@@ -80,6 +85,24 @@
       white-space: nowrap;
       color: rgba($charcoal-grey, .5);
       font-family: $font-family-1;
+    }
+
+    &.-highlighted {
+      &::after {
+        content: '';
+        border: 2px solid $white;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+        margin-left: -50%;
+      }
+    }
+
+    &.ch-red-0, &.ch-blue-0, &.ch-bi-0-0, &.recolorby-linear-red-blue-3, &.recolorby-linear-blue-green-5, &.recolorby-linear-yellow-green-0 {
+      &::after {
+        border-color: $charcoal-grey;
+      }
     }
   }
 
