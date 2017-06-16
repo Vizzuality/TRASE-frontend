@@ -22,6 +22,13 @@
         <div class="column-title"><%= node.quantName %></div>
         <div class="column-content"><%= parseFloat(node.quantNice).toLocaleString('en') %><span class="unit"><%= node.quantUnit %></span></div>
       </div>
+      <% if (node.selectedMetas) { node.selectedMetas.forEach(function(meta) { %>
+        <div class="column">
+          <div class="column-title"><%= meta.name %></div>
+          <div class="column-content"><span class="value"><%= meta.rawValueNice %></span><% if (meta.unit) { %><span class="unit"><%= meta.unit %></span><% } %>
+          </div>
+        </div>
+      <% })} %>
       <div class="column">
         <div class="column-content">
           <svg class="icon icon-close js-node-close" data-node-id="<%= node.id %>"><use xlink:href="#icon-close"></use></svg>
