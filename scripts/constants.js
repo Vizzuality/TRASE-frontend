@@ -7,6 +7,23 @@ export const NUM_DECIMALS = {
   'Territorial deforestation': 0,
   'Maximum soy deforestation': 0,
   'Soy deforestation (currently only available for the Cerrado and only up until 2014)': 0,
+  'Average soy yield': 3,
+  '% soy of total farming land': 1,
+  'Land based CO2 emissions': 0,
+  'Water scarcity': 0,
+  'Loss of amphibian habitat': 0,
+  'Area affected by fires in 2013': 0,
+  'Permanent Protected Area (PPA) deficit': 0,
+  'Legal Reserve (LR) deficit': 0,
+  'Forest Code deficit': 1,
+  'Number of environmental embargos (2015)': 0,
+  '% of soy under zero deforestation commitments': 1,
+  'Human development index': 0,
+  'GDP per capita': 0,
+  '% GDP from agriculture': 3,
+  'Smallholder dominance': 3,
+  'Reported cases of forced labour (2014)': 0,
+  'Land conflicts (2014)': 0
 };
 export const NUM_DECIMALS_DEFAULT = 1;
 
