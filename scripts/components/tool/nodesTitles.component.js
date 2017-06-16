@@ -15,6 +15,9 @@ export default class {
   }
 
   highlightNode({ isHighlight, nodesData, recolorGroups, coordinates, isMapVisible }) {
+    if (nodesData === undefined || !nodesData.length) {
+      return;
+    }
     // when map is full screen, show data as a tooltip instead of a nodeTitle
     if (coordinates !== undefined) {
       this._showTooltip(nodesData, coordinates);
