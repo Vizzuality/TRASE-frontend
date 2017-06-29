@@ -37,13 +37,16 @@ export default class {
   }
 
   _update(isSelect, nodesData, recolorGroups = null) {
-    this.el.innerHTML = NodeTitleTemplate({
+    const templateData = {
       nodes: nodesData.map(node => {
-        return Object.assign(node, {}, { hasLink: node.isUnknown !== true && node.isDomesticConsumption !== true && node.profileType !== undefined && node.profileType !== null });
+        return Object.assign(node, {}, {
+          hasLink: node.isUnknown !== true && node.isDomesticConsumption !== true && node.profileType !== undefined && node.profileType !== null
+        });
       }),
       isSelect: isSelect || nodesData.length > 1,
       recolorGroups: recolorGroups
-    });
+    };
+    this.el.innerHTML = NodeTitleTemplate(templateData);
 
     const nodeTitles = Array.prototype.slice.call(document.querySelectorAll('.js-node-title.-link'), 0);
     nodeTitles.forEach((nodeTitle) => {
