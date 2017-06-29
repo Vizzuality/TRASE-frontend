@@ -7,7 +7,12 @@ const mapMethodsToState = () => ({
   loadNodes: {
     _comparedValue: (state) => state.tool.nodesDict,
     _returnedValue: (state) => {
-      return _.values(state.tool.nodesDict).filter(node => node.hasFlows === true && node.isAggregated !== true);
+      return _.values(state.tool.nodesDict)
+        .filter(
+          node => node.hasFlows === true &&
+          node.isAggregated !== true &&
+          node.isUnknown !== true
+        );
     }
   }
 });

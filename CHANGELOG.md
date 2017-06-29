@@ -1,4 +1,5 @@
-- profile:  add soy production to place profile
+- tool: prevent 'unknown' type nodes from appearing as a search result
+- profile: add soy production to place profile
 - tool: highlight bucket on map hover
 - tool: fix map dimensions display in node cards
 - tool: display "not mobile compatible" message when viewing with smartphone/tablet
