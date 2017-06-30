@@ -122,12 +122,6 @@ export default function (state = {}, action) {
         }
       });
 
-      // TODO temp hacks while this gets implemented in the API
-      columns.forEach(column => {
-        if (column.group === 0) {
-          column.isGeo = true;
-        }
-      });
       const municipalitiesColumn = columns.find(column => column.name === 'MUNICIPALITY');
       const logisticsHubColumn = columns.find(column => column.name === 'LOGISTICS HUB');
       if (logisticsHubColumn && municipalitiesColumn) {

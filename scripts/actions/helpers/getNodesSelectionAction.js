@@ -13,7 +13,7 @@ export default (nodesIds, state) => {
   }
 
   const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapDimensions, state.selectedResizeBy.label);
-  const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined && geoId !== null);
+  const geoIds = data.filter(node => node.isGeo === true && node.geoId !== undefined && node.geoId !== null).map(node => node.geoId);
   const columnsPos = data.map(node => node.columnGroup);
 
   if (data.length === 1 && data[0].geoId !== null && state.choropleth !== undefined) {
@@ -38,11 +38,7 @@ const getNodeSelectedMeta = (selectedMapDimension, node, selectedResizeByLabel, 
     return meta;
   } else if (visibleNode && visibleNode.quant && meta.rawValue !== visibleNode.quant && NODE_ENV_DEV === true) {
     // See https://basecamp.com/1756858/projects/12498794/todos/312319406
-    console.warn(
-      'Attempting to show different values two dimensions with the same name.',
-      'ResizeBy: ' + selectedResizeByLabel + ' with value ' + visibleNode.quant,
-      'Map layer: ' + meta.name + ' with value ' + meta.rawValue
-    );
+    console.warn('Attempting to show different values two dimensions with the same name.', 'ResizeBy: ' + selectedResizeByLabel + ' with value ' + visibleNode.quant, 'Map layer: ' + meta.name + ' with value ' + meta.rawValue);
   }
   return null;
 };
@@ -60,10 +56,7 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
     if (nodesDictWithMeta) {
       node = Object.assign(node, nodesDictWithMeta[nodeId]);
       // add metas from the map layers to the selected nodes data
-      node.selectedMetas = _.compact([
-        getNodeSelectedMeta(selectedMapDimensions[0], node, selectedResizeByLabel, visibleNode),
-        getNodeSelectedMeta(selectedMapDimensions[1], node, selectedResizeByLabel, visibleNode),
-      ]);
+      node.selectedMetas = _.compact([getNodeSelectedMeta(selectedMapDimensions[0], node, selectedResizeByLabel, visibleNode), getNodeSelectedMeta(selectedMapDimensions[1], node, selectedResizeByLabel, visibleNode),]);
     }
 
     if (visibleNode) {
