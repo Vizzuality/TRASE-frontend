@@ -21,7 +21,7 @@ export default function(nodesDict, nodesMeta, layers) {
         name: layerByUID.name
       };
 
-      if (layerByUID.unit !== undefined && layerByUID.unit !== 'Unitless') {
+      if (layerByUID.unit !== undefined && layerByUID.unit !== 'Unitless' &&  layerByUID.unit !== 'Number') {
         dimensionMeta.unit = layerByUID.unit;
       }
 
