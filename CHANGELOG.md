@@ -1,3 +1,15 @@
+- tool: fixed issue when selecting/hovering countries
+- tool: prevent 'unknown' type nodes from appearing as a search result
+- profile: add soy production to place profile
+- tool: highlight bucket on map hover
+- tool: fix map dimensions display in node cards
+- tool: display "not mobile compatible" message when viewing with smartphone/tablet
+- about: add partner links
+- footer: add partner links
+- tool: fix issue on loading and saving resize by configuration
+- tool: remove link to "unknown ..." and "domestic consumption" nodes profile
+- tool: fixed context layer legend
+- tool: use default choropleth bucket when one of the values is zero
 - profiles: remove biome states profiles
 - profiles: fix overlapping chart labels on profile pages
 - tool: improve sorting of recoloured sankey flows

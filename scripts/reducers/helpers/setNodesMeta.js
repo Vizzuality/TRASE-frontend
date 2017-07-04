@@ -10,14 +10,22 @@ export default function(nodesDict, nodesMeta, layers) {
     const nodeWithMeta = _.cloneDeep(nodesDict[nodeId]);
     nodeMeta.values.forEach(layerValue => {
       if (!nodeWithMeta.meta) nodeWithMeta.meta = {};
+
       const uid = getNodeMetaUid(layerValue.type, layerValue.id);
-      nodeWithMeta.meta[uid] = {
+      const layerByUID = layersByUID[uid];
+
+      const dimensionMeta = {
         rawValue: layerValue.rawValue,
         value3: layerValue.value3,
         value5: layerValue.value5,
-        name: layersByUID[uid].name,
-        unit: layersByUID[uid].unit,
+        name: layerByUID.name
       };
+
+      if (layerByUID.unit !== undefined && layerByUID.unit !== 'Unitless') {
+        dimensionMeta.unit = layerByUID.unit;
+      }
+
+      nodeWithMeta.meta[uid] = dimensionMeta;
     });
     nodesDictWithMeta[nodeId] = nodeWithMeta;
   });

@@ -39,9 +39,13 @@ export default class {
     this.bulkDownloadsSection.querySelector('.row').innerHTML = BulkDownloadTemplate({
       contexts: enabledContexts
     });
-    this.bulkDownloadsSection.querySelectorAll('.c-bulk-downloads__item').forEach(elem => {
-      elem.addEventListener('click', () => this._downloadFile({ context_id: elem.getAttribute('data-value') }));
-    });
+
+    if (DATA_DOWNLOAD_ENABLED) {
+      this.bulkDownloadsSection.querySelectorAll('.c-bulk-downloads__item').forEach(elem => {
+        elem.classList.remove('-disabled');
+        elem.addEventListener('click', () => this._downloadFile({ context_id: elem.getAttribute('data-value') }));
+      });
+    }
 
     this.selectorCountries.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
@@ -159,7 +163,9 @@ export default class {
   }
 
   _unlockDownloadButton() {
-    this.downloadButton.classList.remove('-disabled');
+    if (DATA_DOWNLOAD_ENABLED) {
+      this.downloadButton.classList.remove('-disabled');
+    }
   }
 
   _lockDownloadButton() {
