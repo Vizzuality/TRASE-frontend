@@ -13,7 +13,7 @@ export default (nodesIds, state) => {
   }
 
   const data = getSelectedNodesData(nodesIds, state.visibleNodes, state.nodesDictWithMeta, state.selectedMapDimensions, state.selectedResizeBy.label);
-  const geoIds = data.map(node => node.geoId).filter(geoId => geoId !== undefined && geoId !== null);
+  const geoIds = data.filter(node => node.isGeo === true && node.geoId !== undefined && node.geoId !== null).map(node => node.geoId);
   const columnsPos = data.map(node => node.columnGroup);
 
   if (data.length === 1 && data[0].geoId !== null && state.choropleth !== undefined) {
@@ -62,7 +62,7 @@ const getSelectedNodesData = (selectedNodesIds, visibleNodes, nodesDictWithMeta,
       // add metas from the map layers to the selected nodes data
       node.selectedMetas = _.compact([
         getNodeSelectedMeta(selectedMapDimensions[0], node, selectedResizeByLabel, visibleNode),
-        getNodeSelectedMeta(selectedMapDimensions[1], node, selectedResizeByLabel, visibleNode),
+        getNodeSelectedMeta(selectedMapDimensions[1], node, selectedResizeByLabel, visibleNode)
       ]);
     }
 

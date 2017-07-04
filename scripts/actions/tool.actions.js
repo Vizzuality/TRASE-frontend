@@ -338,14 +338,14 @@ export function loadMapContextLayers() {
 }
 
 // remove or add nodeId from selectedNodesIds
-function getSelectedNodeIds(currentSelectedNodesIds, chengedNodeId) {
+function getSelectedNodeIds(currentSelectedNodesIds, changedNodeId) {
   let selectedNodesIds;
-  const nodeIndex = currentSelectedNodesIds.indexOf(chengedNodeId);
+  const nodeIndex = currentSelectedNodesIds.indexOf(changedNodeId);
   if (nodeIndex > -1) {
     selectedNodesIds = [].concat(currentSelectedNodesIds);
     selectedNodesIds.splice(nodeIndex, 1);
   } else {
-    selectedNodesIds = [chengedNodeId].concat(currentSelectedNodesIds);
+    selectedNodesIds = [changedNodeId].concat(currentSelectedNodesIds);
   }
   return selectedNodesIds;
 }
