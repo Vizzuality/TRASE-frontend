@@ -25,7 +25,7 @@ import choroLegend from 'components/profiles/choro-legend.component';
 import { getURLParams } from 'utils/stateURL';
 import smoothScroll from 'utils/smoothScroll';
 import formatApostrophe from 'utils/formatApostrophe';
-import formatNumber from 'utils/formatNumber';
+import formatValue from 'utils/formatValue';
 import _ from 'lodash';
 import { getURLFromParams, GET_ACTOR_FACTSHEET } from '../utils/getURLFromParams';
 import { ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST } from 'constants';
@@ -76,17 +76,18 @@ const _initSource = (selectedSource, data) => {
       const source = data.top_sources[selectedSource].lines
         .find(s => (properties.geoid === s.geo_id));
       const title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
-      let body = null;
-      if (source) body = source.values[0];
 
-      tooltip.showTooltip(x, y, {
-        title,
-        values: [{
-          title: 'Trade Volume',
-          value: formatNumber(body),
-          unit: 'Tons'
-        }]
-      });
+      if (source) {
+        tooltip.showTooltip(x, y, {
+          title,
+          values: [{
+            title: 'Trade Volume',
+            value: formatValue(source.values[0], 'Trade volume'),
+            unit: 'Tons'
+          }]
+        });
+      }
+
     },
     hideTooltipCallback: () => {
       tooltip.hideTooltip();
@@ -108,8 +109,8 @@ const _build = (data, nodeId) => {
       tooltip.showTooltip(x, y, {
         title: `${location.name.toUpperCase()} > ${data.node_name}, ${location.date.getFullYear()}`,
         values: [
-          { title: 'Trade Volume',
-            value: formatNumber(location.value),
+          { title: 'Trade volume',
+            value: formatValue(location.value, 'Trade volume'),
             unit: 'Tons'
           }
         ]
@@ -154,8 +155,8 @@ const _build = (data, nodeId) => {
           tooltip.showTooltip(x, y, {
             title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
             values: [
-              { title: 'Trade Volume',
-                value: formatNumber(location.value),
+              { title: 'Trade volume',
+                value: formatValue(location.value, 'Trade volume'),
                 unit: 'Tons'
               }
             ]
@@ -179,17 +180,17 @@ const _build = (data, nodeId) => {
         const country = data.top_countries.lines
           .find(c => (properties.name.toUpperCase() === c.name.toUpperCase()));
         const title = `${properties.name.toUpperCase()} > ${data.node_name}`;
-        let body = null;
-        if (country) body = country.values[0];
-
-        tooltip.showTooltip(x, y, {
-          title,
-          values: [{
-            title: 'Trade Volume',
-            value: formatNumber(body),
-            unit: 'Tons'
-          }]
-        });
+        if (country)
+        {
+          tooltip.showTooltip(x, y, {
+            title,
+            values: [{
+              title: 'Trade Volume',
+              value: formatValue(country.values[0], 'Trade volume'),
+              unit: 'Tons'
+            }]
+          });
+        }
       },
       hideTooltipCallback: () => {
         tooltip.hideTooltip();
@@ -216,13 +217,13 @@ const _build = (data, nodeId) => {
         title: company.name,
         values: [
           {
-            title: 'Trade Volume',
-            value: company.y,
+            title: 'Trade volume',
+            value: formatValue(company.y, 'Trade volume'),
             unit: 't'
           },
           {
             title: indicator.name,
-            value: company.x,
+            value: formatValue(company.x, indicator.name),
             unit: indicator.unit
           }
         ]

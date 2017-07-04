@@ -267,7 +267,7 @@ export default class {
       values: [{
         title: this.currentQuant.name,
         unit: this.currentQuant.unit,
-        value: formatValue(link.quant, null, this.currentQuant.name)
+        value: formatValue(link.quant, this.currentQuant.name)
       }]
     };
 

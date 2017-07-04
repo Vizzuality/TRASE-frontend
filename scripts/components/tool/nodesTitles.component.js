@@ -43,7 +43,7 @@ export default class {
         let renderedQuant;
         if (node.quant !== undefined) {
           renderedQuant = {
-            valueNice: formatValue(node.quant, null, currentQuant.name),
+            valueNice: formatValue(node.quant, currentQuant.name),
             unit: currentQuant.unit,
             name: currentQuant.name,
           };
@@ -52,7 +52,7 @@ export default class {
         let renderedMetas;
         if (node.selectedMetas !== undefined) {
           renderedMetas = node.selectedMetas.map(originalMeta => ({
-            valueNice: formatValue(originalMeta.rawValue, null, originalMeta.name),
+            valueNice: formatValue(originalMeta.rawValue, originalMeta.name),
             name: originalMeta.name,
             unit: originalMeta.unit,
           }));
@@ -107,7 +107,7 @@ export default class {
         return {
           title: meta.name,
           unit: meta.unit,
-          value: formatValue(meta.rawValue, null, meta.name)
+          value: formatValue(meta.rawValue, meta.name)
         };
       }).concat(templateValues.values);
     }
@@ -117,7 +117,7 @@ export default class {
       templateValues.values.push({
         title: currentQuant.name,
         unit: currentQuant.unit,
-        value: formatValue(node.quant, null, currentQuant.name)
+        value: formatValue(node.quant, currentQuant.name)
       });
     }
 
