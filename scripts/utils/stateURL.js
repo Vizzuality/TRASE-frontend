@@ -30,6 +30,7 @@ const URL_STATE_PROPS = [
   'expandedNodesIds',
   'areNodesExpanded',
   'selectedColumnsIds',
+  'selectedMapDimensions',
   'isMapVisible',
   'mapView',
   'expandedMapSidebarGroupsIds'
