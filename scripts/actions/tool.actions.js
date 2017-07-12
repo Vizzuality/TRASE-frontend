@@ -173,6 +173,7 @@ export function loadNodes() {
 
     const getNodesURL = getURLFromParams(GET_NODES, params);
     const getMapDimensionsMetadataURL = getURLFromParams(GET_MAP_BASE_DATA, params);
+    const currentMapDimensions = getState().tool.selectedMapDimensions;
 
     Promise.all([getNodesURL, getMapDimensionsMetadataURL].map(url => fetch(url).then(resp => resp.text()))).then(rawPayload => {
       const payload = {
@@ -183,12 +184,21 @@ export function loadNodes() {
         type: actions.GET_NODES, payload
       });
 
-      const selection = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
-      if (selection !== undefined) {
-        const uids = selection.map(selectedDimension => getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId));
-        if (uids[0] === undefined) uids[0] = null;
-        if (uids[1] === undefined) uids[1] = null;
-        dispatch(setMapDimensions(uids));
+      const allAvailableMapDimensionsUids = payload.mapDimensionsMetaJSON.dimensions.map(dimension => getNodeMetaUid(dimension.type, dimension.layerAttributeId));
+      const currentMapDimensionsSet = _.compact(currentMapDimensions);
+
+      // are all currenttly selected map dimensions available ?
+      if (currentMapDimensionsSet.length && (_.difference(currentMapDimensionsSet, allAvailableMapDimensionsUids)).length === 0) {
+        dispatch(setMapDimensions(currentMapDimensions.concat([])));
+      } else {
+        // use default map dimensions
+        const defaultMapDimensions = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
+        if (defaultMapDimensions !== undefined) {
+          const uids = defaultMapDimensions.map(selectedDimension => getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId));
+          if (uids[0] === undefined) uids[0] = null;
+          if (uids[1] === undefined) uids[1] = null;
+          dispatch(setMapDimensions(uids));
+        }
       }
     });
   };
