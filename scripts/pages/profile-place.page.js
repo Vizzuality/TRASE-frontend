@@ -23,7 +23,7 @@ import Map from 'components/profiles/map.component';
 
 import { getURLParams } from 'utils/stateURL';
 import formatApostrophe from 'utils/formatApostrophe';
-import formatNumber from 'utils/formatNumber';
+import formatValue from 'utils/formatValue';
 import smoothScroll from 'utils/smoothScroll';
 import _ from 'lodash';
 import { getURLFromParams, GET_PLACE_FACTSHEET } from '../utils/getURLFromParams';
@@ -143,10 +143,10 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-biome-name').innerHTML = info.biome ? _.capitalize(info.biome) : '-';
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
-  document.querySelector('.js-area').innerHTML = info.area !== null ? info.area : '-';
-  document.querySelector('.js-soy-land').innerHTML = info.soy_land !== null ? formatNumber(info.soy_land, 'percentage') : '-';
-  document.querySelector('.js-soy-production').innerHTML = info.soy_production !== null ? info.soy_production : '-';
-  document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? formatNumber(info.agriculture_land, 'percentage') : '-';
+  document.querySelector('.js-area').innerHTML = info.area !== null ? formatValue(info.area, 'area') : '-';
+  document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? formatValue(info.agriculture_land, 'percentage') : '-';
+  document.querySelector('.js-soy-land').innerHTML = info.soy_land !== null ? formatValue(info.soy_land, 'percentage') : '-';
+  document.querySelector('.js-soy-production').innerHTML = info.soy_production !== null ? formatValue(info.soy_production, 'tons'): '-';
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
   document.querySelector('.js-line-title').innerHTML = info.municipality ? `Deforestation trajectory of ${info.municipality}` : '-';

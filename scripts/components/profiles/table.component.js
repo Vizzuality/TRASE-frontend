@@ -1,5 +1,6 @@
 import TableTemplate from 'ejs!templates/profiles/table/table.ejs';
-import formatNumber from 'utils/formatNumber';
+import formatValue from 'utils/formatValue';
+import { UNITLESS_UNITS } from 'constants';
 
 import 'styles/components/profiles/area-table.scss';
 
@@ -18,6 +19,11 @@ export default class {
       this.link = null;
     }
 
+    // remove unneeded units
+    this.data.included_columns.forEach(includedColumn => {
+      includedColumn.unit = (UNITLESS_UNITS.indexOf(includedColumn.unit) === -1) ? includedColumn.unit : '';
+    });
+
     // this parse would not exist in the future.
     if (this.type === 't_head_actors') {
       for (let i = 0; i < this.data.rows.length; i++) {
@@ -26,7 +32,7 @@ export default class {
             if (this.data.rows[i].values[j] !== null && this.data.rows[i].values[j].hasOwnProperty('value')) {
               // there are string values, this way we avoid parse them.
               if (typeof this.data.rows[i].values[j].value !== 'number') continue;
-              this.data.rows[i].values[j].value = formatNumber(this.data.rows[i].values[j].value);
+              this.data.rows[i].values[j].value = formatValue(this.data.rows[i].values[j].value, this.data.included_columns[j].name);
             }
           }
         }
@@ -36,7 +42,7 @@ export default class {
     if(this.type === 't_head_places') {
       for(let i = 0; i < this.data.rows.length; i++) {
         for(let j = 0; j < this.data.rows[i].values.length; j++){
-          this.data.rows[i].values[j] = formatNumber(this.data.rows[i].values[j]);
+          this.data.rows[i].values[j] = formatValue(this.data.rows[i].values[j], this.data.included_columns[j].name);
         }
       }
     }

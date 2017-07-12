@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import getNodeMetaUid from './getNodeMetaUid';
+import { UNITLESS_UNITS } from 'constants';
 
 export default function(nodesDict, nodesMeta, layers) {
   const layersByUID =_.keyBy(layers, 'uid');
@@ -16,13 +17,12 @@ export default function(nodesDict, nodesMeta, layers) {
 
       const dimensionMeta = {
         rawValue: layerValue.rawValue,
-        rawValueNice: layerValue.rawValue.toFixed(1),
         value3: layerValue.value3,
         value5: layerValue.value5,
         name: layerByUID.name
       };
 
-      if (layerByUID.unit !== undefined && layerByUID.unit !== 'Unitless') {
+      if (layerByUID.unit !== undefined && UNITLESS_UNITS.indexOf(layerByUID.unit) === -1) {
         dimensionMeta.unit = layerByUID.unit;
       }
 

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import formatValue from 'utils/formatValue';
 import NodeTitleTemplate from 'ejs!templates/tool/nodeTitle.ejs';
 import 'styles/components/tool/nodesTitles.scss';
 import TooltipTemplate from 'ejs!templates/shared/tooltip.ejs';
@@ -11,16 +12,16 @@ export default class {
   }
 
   selectNodes(data) {
-    this._update(true, data.nodesData, data.recolorGroups);
+    this._update(true, data.nodesData, data.recolorGroups, data.currentQuant);
   }
 
-  highlightNode({ isHighlight, nodesData, recolorGroups, coordinates, isMapVisible }) {
+  highlightNode({ isHighlight, nodesData, recolorGroups, coordinates, isMapVisible, currentQuant }) {
     if (nodesData === undefined || !nodesData.length) {
       return;
     }
     // when map is full screen, show data as a tooltip instead of a nodeTitle
     if (coordinates !== undefined) {
-      this._showTooltip(nodesData, coordinates);
+      this._showTooltip(nodesData, coordinates, currentQuant);
     } else {
       this.tooltipHideDebounced();
     }
@@ -31,21 +32,44 @@ export default class {
     } else {
       if (isMapVisible === false) {
         this.el.classList.remove('is-hidden');
-        this._update(!isHighlight, nodesData, recolorGroups);
+        this._update(!isHighlight, nodesData, recolorGroups, currentQuant);
       }
     }
   }
 
-  _update(isSelect, nodesData, recolorGroups = null) {
+  _update(isSelect, nodesData, recolorGroups = null, currentQuant) {
     const templateData = {
       nodes: nodesData.map(node => {
-        return Object.assign(node, {}, {
-          hasLink: node.isUnknown !== true && node.isDomesticConsumption !== true && node.profileType !== undefined && node.profileType !== null
+        let renderedQuant;
+        if (node.quant !== undefined) {
+          renderedQuant = {
+            valueNice: formatValue(node.quant, currentQuant.name),
+            unit: currentQuant.unit,
+            name: currentQuant.name,
+          };
+        }
+
+        let renderedMetas;
+        if (node.selectedMetas !== undefined) {
+          renderedMetas = node.selectedMetas.map(originalMeta => ({
+            valueNice: formatValue(originalMeta.rawValue, originalMeta.name),
+            name: originalMeta.name,
+            unit: originalMeta.unit,
+          }));
+        }
+
+        const renderedNode = Object.assign(node, {}, {
+          hasLink: node.isUnknown !== true && node.isDomesticConsumption !== true && node.profileType !== undefined && node.profileType !== null,
+          selectedMetas: renderedMetas,
+          renderedQuant
         });
+
+        return renderedNode;
       }),
       isSelect: isSelect || nodesData.length > 1,
       recolorGroups: recolorGroups
     };
+
     this.el.innerHTML = NodeTitleTemplate(templateData);
 
     const nodeTitles = Array.prototype.slice.call(document.querySelectorAll('.js-node-title.-link'), 0);
@@ -64,7 +88,7 @@ export default class {
     });
   }
 
-  _showTooltip(nodesData, coordinates) {
+  _showTooltip(nodesData, coordinates, currentQuant) {
     this.tooltipHideDebounced.cancel();
     const node = nodesData[0];
 
@@ -83,17 +107,17 @@ export default class {
         return {
           title: meta.name,
           unit: meta.unit,
-          value: meta.rawValueNice,
+          value: formatValue(meta.rawValue, meta.name)
         };
       }).concat(templateValues.values);
     }
 
     // if node is visible in sankey, quant is available
-    if (node.quantName !== undefined) {
+    if (node.quant !== undefined) {
       templateValues.values.push({
-        title: node.quantName,
-        unit: node.quantUnit,
-        value: node.quantNice
+        title: currentQuant.name,
+        unit: currentQuant.unit,
+        value: formatValue(node.quant, currentQuant.name)
       });
     }
 

@@ -7,7 +7,8 @@ import NodesTitles from 'components/tool/nodesTitles.component.js';
 const mapMethodsToState = (state) => ({
   selectNodes: {
     nodesData: state.tool.selectedNodesData,
-    recolorGroups: state.tool.recolorGroups
+    recolorGroups: state.tool.recolorGroups,
+    currentQuant: state.tool.currentQuant
   },
   highlightNode: {
     _comparedValue: (state) => state.tool.highlightedNodeData,
@@ -17,7 +18,8 @@ const mapMethodsToState = (state) => ({
         isHighlight: state.tool.highlightedNodeData.length > 0,
         recolorGroups: state.tool.recolorGroups,
         coordinates: state.tool.highlightedNodeCoordinates,
-        isMapVisible: state.tool.isMapVisible
+        isMapVisible: state.tool.isMapVisible,
+        currentQuant: state.tool.currentQuant
       };
     }
   }

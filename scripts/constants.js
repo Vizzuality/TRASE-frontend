@@ -1,5 +1,41 @@
 import actions from 'actions';
 
+export const NUM_DECIMALS = {
+  // resize by
+  'trade volume': 0,
+  'land use': 0,
+  'financial flow': 0,
+  'territorial deforestation': 0,
+  'maximum soy deforestation': 0,
+  'soy deforestation (currently only available for the cerrado and only up until 2014)': 0,
+  'soy deforestation': 0,
+  // map dimensions
+  'average soy yield': 3,
+  '% soy of total farming land': 1,
+  'land based co2 emissions': 0,
+  'water scarcity': 0,
+  'loss of amphibian habitat': 0,
+  'area affected by fires in 2013': 0,
+  'permanent protected area (ppa) deficit': 0,
+  'legal reserve (lr) deficit': 0,
+  'forest code deficit': 1,
+  'number of environmental embargos (2015)': 0,
+  '% of soy under zero deforestation commitments': 1,
+  'human development index': 0,
+  'gdp per capita': 0,
+  '% gdp from agriculture': 3,
+  'smallholder dominance': 3,
+  'reported cases of forced labour (2014)': 0,
+  'land conflicts (2014)': 0,
+  // generic
+  'area': 0,
+  'percentage': 1,
+  'tons': 0
+};
+export const NUM_DECIMALS_DEFAULT = 1;
+
+export const UNITLESS_UNITS = ['Unitless', 'Number', 'Head', 'Number', 'NA'];
+
 // flows
 export const NUM_COLUMNS = 4;
 export const NUM_NODES_SUMMARY = 10;

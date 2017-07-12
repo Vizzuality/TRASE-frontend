@@ -26,8 +26,6 @@ export default function(links, nodesDict, linksMeta, columnIndexes) {
   return nodes;
 }
 
-// TODO get data from get_nodes instead of flow meta (except for heights)
-// see setNodesMeta.js
 const _setNodesMeta = (nodesDict, linksMeta) => {
   const nodesDictWithMeta = {};
 
@@ -36,15 +34,6 @@ const _setNodesMeta = (nodesDict, linksMeta) => {
     const node = Object.assign({}, nodesDict[nodeId]);
     node.height = nodeHeight.height;
     node.quant = nodeHeight.quant;
-    node.quantName = linksMeta.quant.name;
-    node.quantUnit = linksMeta.quant.unit;
-
-    if (node.quantName === 'Deforestation risk') {
-      node.quant = Math.round(node.quant);
-    }
-
-    node.quantNice = node.quant.toFixed(1);
-
     nodesDictWithMeta[nodeId] = node;
   });
 
