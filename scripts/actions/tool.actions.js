@@ -62,10 +62,24 @@ export function selectView(detailedView, reloadLinks) {
 }
 
 export function selectColumn(columnIndex, columnId, reloadLinks = true) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const state = getState();
+
+    // Action triggered but the column is already present - do nothing
+    if (state.tool.selectedColumnsIds.indexOf(columnId) !== -1) {
+      return;
+    }
+
     dispatch({
       type: actions.SELECT_COLUMN, columnIndex, columnId
     });
+    const selectedNodesIds = getSelectedNodeIdsNotInColumnIndex(state.tool.selectedNodesIds, columnIndex, state.tool.nodesDict);
+    dispatch(updateNodes(selectedNodesIds));
+
+    dispatch({
+      type: actions.FILTER_LINKS_BY_NODES
+    });
+
     if (reloadLinks) {
       dispatch(loadLinks());
     }
@@ -347,6 +361,15 @@ export function loadMapContextLayers() {
   };
 }
 
+// Get a list of selected node that are NOT part of the given column index
+function getSelectedNodeIdsNotInColumnIndex(currentSelectedNodesIds, columnIndex, nodesDict) {
+  const selectedNodesIds = currentSelectedNodesIds.filter(nodeId => {
+    return nodesDict[nodeId].columnGroup !== columnIndex;
+  });
+
+  return selectedNodesIds;
+}
+
 // remove or add nodeId from selectedNodesIds
 function getSelectedNodeIds(currentSelectedNodesIds, changedNodeId) {
   let selectedNodesIds;
@@ -373,7 +396,7 @@ export function selectNode(nodeId, isAggregated = false) {
 
       const selectedNodesIds = getSelectedNodeIds(currentSelectedNodesIds, nodeId);
 
-      // send to state the new node selection allong with new data, geoIds, etc
+      // send to state the new node selection along with new data, geoIds, etc
       dispatch(updateNodes(selectedNodesIds));
 
       // refilter links by selected nodes
