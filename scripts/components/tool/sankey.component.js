@@ -272,29 +272,9 @@ export default class {
     };
 
     if (this.currentSelectedRecolorBy && this.currentSelectedRecolorBy.name !== 'none') {
-      let value;
-      if (link.recolorBy === null) {
-        value = 'unknown';
-      } else if (this.currentSelectedRecolorBy.type === 'ind') {
-        let intervalCount = this.currentSelectedRecolorBy.intervalCount +1 ;
-        if (this.currentSelectedRecolorBy.divisor) {
-          intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount +1 ;
-        }
-        if (this.currentSelectedRecolorBy.maxValue === '100%') {
-          const rangeSize = (100/intervalCount);
-
-          const rangeStart = link.recolorBy === 0 ? 0 : 1 + link.recolorBy * rangeSize;
-          const rangeEnd = (link.recolorBy+1) * rangeSize;
-          value = `${Math.round(rangeStart)}-${Math.round(rangeEnd)}%`;
-        } else {
-          value = `${link.recolorBy}/${intervalCount}`;
-        }
-      } else {
-        value = _.capitalize(link.recolorBy);
-      }
       templateValues.values.push({
         title: this.currentSelectedRecolorBy.label,
-        value
+        value: this._getLinkValue(link)
       });
     }
 
@@ -304,6 +284,33 @@ export default class {
     this.linkTooltip.style.top = `${d3_event.pageY + 10}px`;
     linkEl.classList.add('-hover');
   }
+
+  _getLinkValue(link) {
+    if (link.recolorBy === null) {
+      return 'unknown';
+    } else if (this.currentSelectedRecolorBy.type !== 'ind') {
+      return _.capitalize(link.recolorBy);
+    }
+
+    let intervalCount = this.currentSelectedRecolorBy.intervalCount + 1;
+    if (this.currentSelectedRecolorBy.divisor) {
+      intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount + 1;
+    }
+    if (this.currentSelectedRecolorBy.legendType !== 'percentual') {
+      return `${link.recolorBy}/${intervalCount}`;
+    }
+
+    if (this.currentSelectedRecolorBy.maxValue === '100%') {
+      const rangeSize = (100 / intervalCount);
+
+      const rangeStart = link.recolorBy === 0 ? 0 : 1 + link.recolorBy * rangeSize;
+      const rangeEnd = (link.recolorBy + 1) * rangeSize;
+      return `${Math.round(rangeStart)}-${Math.round(rangeEnd)}%`;
+    } else {
+      return `${Math.round(link.recolorBy)}%`;
+    }
+  }
+
 
   _onLinkOut() {
     this.linkTooltip.classList.add('is-hidden');

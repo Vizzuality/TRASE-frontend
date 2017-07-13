@@ -56,10 +56,10 @@ export const CHOROPLETH_CLASSES = {
   vertical: ['ch-blue-0', 'ch-blue-1', 'ch-blue-2', 'ch-blue-3', 'ch-blue-4'],
   red: ['ch-red-0', 'ch-red-1', 'ch-red-2', 'ch-red-3', 'ch-red-4'],
   blue: ['ch-blue-0', 'ch-blue-1', 'ch-blue-2', 'ch-blue-3', 'ch-blue-4'],
-  green: ['recolorby-linear-yellow-green-0', 'recolorby-linear-yellow-green-1', 'recolorby-linear-yellow-green-2', 'recolorby-linear-yellow-green-3', 'recolorby-linear-yellow-green-4'],
+  green: ['recolorby-percentual-yellow-green-0', 'recolorby-percentual-yellow-green-1', 'recolorby-percentual-yellow-green-2', 'recolorby-percentual-yellow-green-3', 'recolorby-percentual-yellow-green-4'],
   bluered: ['recolorby-linear-red-blue-0','recolorby-linear-red-blue-1','recolorby-linear-red-blue-3','recolorby-linear-red-blue-5','recolorby-linear-red-blue-6'],
   redblue: ['recolorby-linear-red-blue-6','recolorby-linear-red-blue-5','recolorby-linear-red-blue-3','recolorby-linear-red-blue-1','recolorby-linear-red-blue-0'],
-  greenred: ['recolorby-linear-blue-green-0','recolorby-linear-blue-green-2','recolorby-linear-blue-green-5','recolorby-linear-blue-green-8','recolorby-linear-blue-green-10'],
+  greenred: ['recolorby-percentual-blue-green-0','recolorby-percentual-blue-green-2','recolorby-percentual-blue-green-5','recolorby-percentual-blue-green-8','recolorby-percentual-blue-green-10'],
   error_no_metadata: 'ch-no-meta',
   error_no_metadata_for_layer: 'ch-no-meta-layer',
   default: 'ch-default'
