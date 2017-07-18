@@ -106,7 +106,13 @@ export default function (state = {}, action) {
         detailedView: false,
         selectedNodesColorGroups: [],
         recolorGroups: [],
-        mapView: context.map
+        mapView: context.map,
+        selectedNodesIds: [],
+        selectedNodesData: [],
+        selectedNodesGeoIds: [],
+        selectedNodesColumnsPos: [],
+        expandedNodesIds: [],
+        areNodesExpanded: false
       });
       break;
     }
