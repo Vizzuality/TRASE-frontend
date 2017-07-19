@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import _ from 'lodash';
 import 'leaflet.utfgrid';
-import { CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, BASEMAPS, SANKEY_TRANSITION_TIME } from 'constants';
+import { BASEMAPS, CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, SANKEY_TRANSITION_TIME } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/tool/map.scss';
 import 'style/components/tool/map/map-legend.scss';
@@ -89,7 +89,7 @@ export default class {
       }
     });
 
-    this.selectPolygonType(payload.currentPolygonType);
+    this.selectPolygonType({ selectedColumnsIds: payload.currentPolygonType });
     if (payload.selectedNodesGeoIds) {
       this.selectPolygons({ selectedGeoIds: payload.selectedNodesGeoIds });
     }
@@ -196,9 +196,11 @@ export default class {
     }
   }
 
-  selectPolygonType(columnIds) {
-    if (!this.polygonTypesLayers || !columnIds.length) return;
-    const id = columnIds[0];
+  selectPolygonType({ selectedColumnsIds, choropleth }) {
+    if (!this.polygonTypesLayers || !selectedColumnsIds.length) {
+      return;
+    }
+    const id = selectedColumnsIds[0];
     if (this.currentPolygonTypeLayer) {
       this.map.removeLayer(this.currentPolygonTypeLayer);
     }
@@ -206,6 +208,9 @@ export default class {
     this.currentPolygonTypeLayer = this.polygonTypesLayers[id];
     if (this.currentPolygonTypeLayer) {
       this.map.addLayer(this.currentPolygonTypeLayer);
+      if (choropleth) {
+        this._setChoropleth(choropleth);
+      }
     }
   }
 

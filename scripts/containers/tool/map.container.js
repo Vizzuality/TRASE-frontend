@@ -19,7 +19,15 @@ const mapMethodsToState = (state) => ({
       };
     }
   },
-  selectPolygonType: state.tool.selectedColumnsIds,
+  selectPolygonType: {
+    _comparedValue: (state) => state.tool.selectedColumnsIds ? state.tool.selectedColumnsIds[0] : undefined,
+    _returnedValue: (state) => {
+      return {
+        selectedColumnsIds: state.tool.selectedColumnsIds,
+        choropleth: state.tool.choropleth
+      };
+    }
+  },
   selectPolygons:  {
     _comparedValue: (state) => state.tool.selectedNodesGeoIds,
     _returnedValue: (state) => {
