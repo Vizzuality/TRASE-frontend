@@ -2,10 +2,6 @@ import wrapSVGText from 'utils/wrapSVGText';
 import { NUM_COLUMNS, DETAILED_VIEW_MIN_NODE_HEIGHT, DETAILED_VIEW_SCALE } from 'constants';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 
-const PADDING_X = 16;
-const PADDING_Y_TOP = 16;
-const PADDING_Y_BOTTOM = 0;
-
 const sankeyLayout = function() {
   const sankeyLayout = {};
 
@@ -102,21 +98,21 @@ const sankeyLayout = function() {
   };
 
   const _computeNodeCoords = () => {
-    const availableLinkSpace = viewportWidth - NUM_COLUMNS * columnWidth - PADDING_X * 2;
+    const availableLinkSpace = viewportWidth - NUM_COLUMNS * columnWidth;
     linksColumnWidth = availableLinkSpace/(NUM_COLUMNS - 1);
 
     maxHeight = 0;
 
     columns.forEach((column, i) => {
       column.x = _getColumnX(i);
-      let columnY = PADDING_Y_TOP;
+      let columnY = 0;
       column.values.forEach(node => {
         node.x = column.x;
         node.y = columnY;
         if (detailedView === true) {
           node.renderedHeight = Math.max(DETAILED_VIEW_MIN_NODE_HEIGHT, DETAILED_VIEW_SCALE * node.height);
         } else {
-          node.renderedHeight = node.height * (viewportHeight - PADDING_Y_TOP + PADDING_Y_BOTTOM);
+          node.renderedHeight = node.height * viewportHeight;
         }
         columnY += node.renderedHeight;
       });
@@ -189,7 +185,7 @@ const sankeyLayout = function() {
       if (detailedView === true) {
         link.renderedHeight = link.height * DETAILED_VIEW_SCALE;
       } else {
-        link.renderedHeight = link.height * (viewportHeight - PADDING_Y_TOP + PADDING_Y_BOTTOM);
+        link.renderedHeight = link.height * (viewportHeight);
       }
 
       const sId = link.sourceNodeId;
@@ -202,7 +198,7 @@ const sankeyLayout = function() {
     });
   };
 
-  const _getColumnX = (columnIndex) => PADDING_X + columnIndex * (columnWidth + linksColumnWidth);
+  const _getColumnX = (columnIndex) => columnIndex * (columnWidth + linksColumnWidth);
 
   const _getNode = (columnPosition, nodeId) => {
     const column = columns[columnPosition];
