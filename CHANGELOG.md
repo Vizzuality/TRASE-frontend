@@ -1,3 +1,12 @@
+- home: update images to include profile page preview 
+- tool: maintain cloropeth on map when non geo column is changed on sankey
+- tool: clear node selection on context change
+- tool: improve support for percentual recolor by
+- tool: clear selected nodes when column is changed
+- profile: fix missing "total" label on top source regions for actor profile
+- tool: save and load map dimensions in URL
+- general: harmonize decimal and unit rendering
+- tool: fix issue when selecting non-existent geo ids on map
 - tool: fixed issue when selecting/hovering countries
 - tool: prevent 'unknown' type nodes from appearing as a search result
 - profile: add soy production to place profile
