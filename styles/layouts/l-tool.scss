@@ -76,11 +76,11 @@ body, html {
     }
 
     > .c-sankey {
-      top: 32px;
+      top: 48px;
       left: $map-width + $layer-map-width;
       width: calc(100% - #{$map-width + $layer-map-width + ($sankey-x-margin * 2)});
-      height: calc(100% - 96px);
-      margin: 0 $sankey-x-margin;
+      height: calc(100% - 110px);
+      margin-left: $sankey-x-margin + 5px;
       transition: left .45s $ease-in-out-sine;
 
       .sankey {

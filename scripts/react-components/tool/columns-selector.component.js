@@ -6,7 +6,7 @@ export default ({ sankeySize, columns }) => {
   if (sankeySize === undefined || columns === undefined) {
     return;
   }
-  return <div style={`width: ${sankeySize[0]}px`} class='c-columns-selector is-absolute'>
+  return <div style={`width: ${sankeySize[0] + 8}px`} class='c-columns-selector is-absolute'>
     <ColumnSelector group={0} />
     <ColumnSelector group={1} />
     <ColumnSelector group={2} />

@@ -18,7 +18,7 @@ export default function (state = initialState, action) {
     case actions.SET_SANKEY_SIZE:
       if (isSankeyExpanded(state)) {
         return Object.assign({}, state, {
-          sankeySize: [window.innerWidth - 354, window.innerHeight - 160]
+          sankeySize: [window.innerWidth - 392, window.innerHeight - 180]
         });
       }
       return state;
