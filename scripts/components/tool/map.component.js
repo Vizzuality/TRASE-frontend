@@ -26,6 +26,11 @@ export default class {
 
     this.map.on('layeradd', () => this._updateAttribution());
     this.map.on('dragend zoomend', () => this.callbacks.onMoveEnd(this.map.getCenter(), this.map.getZoom()));
+    this.map.on('zoomend', () => {
+      const z = this.map.getZoom();
+      this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-high-zoom', z >= 6);
+      this.map.getPane(MAP_PANES.vectorLinked).classList.toggle('-high-zoom', z >= 6);
+    });
 
     Object.keys(MAP_PANES).forEach(paneKey => {
       this.map.createPane(paneKey);
