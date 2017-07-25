@@ -138,11 +138,15 @@ export default class {
       return classPath;
     }
 
-    if (selectedRecolorBy.name !== 'none' && link.recolorBy !== null) {
+    if (selectedRecolorBy.name !== 'none') {
+      if (link.recolorBy === null) {
+        return classPath;
+      }
       let recolorBy = link.recolorBy;
       if (selectedRecolorBy.divisor) {
         recolorBy = Math.round(link.recolorBy / selectedRecolorBy.divisor);
       }
+
       classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${recolorBy}`;
     } else {
       classPath = `${classPath} -recolorgroup-${link.recolorGroup}`;
