@@ -1,3 +1,5 @@
+- tool: on percentual resize by, display value instead of bucket range
+- tool: fix column selector overlap in complete mode
 - home: update images to include profile page preview 
 - tool: maintain cloropeth on map when non geo column is changed on sankey
 - tool: clear node selection on context change
