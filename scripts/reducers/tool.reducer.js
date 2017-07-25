@@ -20,7 +20,7 @@ import getRecolorGroups from './helpers/getRecolorGroups';
 export default function (state = {}, action) {
   let newState;
   let updateURLState = true;
-
+  console.log(action.type);
   switch (action.type) {
 
     case actions.LOAD_INITIAL_DATA: {
@@ -104,7 +104,6 @@ export default function (state = {}, action) {
         selectedResizeBy: defaultResizeBy,
         selectedBiomeFilter: defaultFilterBy,
         detailedView: false,
-        selectedNodesColorGroups: [],
         recolorGroups: [],
         mapView: context.map,
         selectedNodesIds: [],
@@ -249,8 +248,7 @@ export default function (state = {}, action) {
         selectedNodesIds: action.ids,
         selectedNodesData: action.data,
         selectedNodesGeoIds: action.geoIds,
-        selectedNodesColumnsPos: action.columnsPos,
-        selectedNodesColorGroups: action.colorGroups,
+        selectedNodesColumnsPos: action.columnsPos
       });
       break;
     }

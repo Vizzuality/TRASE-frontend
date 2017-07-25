@@ -157,7 +157,7 @@ const sankeyLayout = function() {
       const defaultSort = sIdAY - sIdBY || tIdAY - tIdBY;
       if (recolorBy.name !== 'none') {
         // sorts alphabetically with quals, numerically with inds
-        // TODO for quals use the order presentend in the color by menu
+        // TODO for quals use the order presented in the color by menu
         if (linkA.recolorBy === linkB.recolorBy) {
           return defaultSort;
         }
