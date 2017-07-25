@@ -300,15 +300,7 @@ export default class {
       return `${link.recolorBy}/${intervalCount}`;
     }
 
-    if (this.currentSelectedRecolorBy.maxValue === '100%') {
-      const rangeSize = (100 / intervalCount);
-
-      const rangeStart = link.recolorBy === 0 ? 0 : 1 + link.recolorBy * rangeSize;
-      const rangeEnd = (link.recolorBy + 1) * rangeSize;
-      return `${Math.round(rangeStart)}-${Math.round(rangeEnd)}%`;
-    } else {
-      return `${Math.round(link.recolorBy)}%`;
-    }
+    return `${Math.round(link.recolorBy)}%`;
   }
 
 
