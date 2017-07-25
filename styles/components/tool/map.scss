@@ -197,6 +197,14 @@
       stroke: $charcoal-grey;
       stroke-width: 6px;
     }
+
+    &.-noDimensions path {
+      stroke-width: 2px;
+    }
+
+    &.-noDimensions.-high-zoom path {
+      stroke-width: 3px;
+    }
   }
 
   .leaflet-vectorMain-pane:not(.-linkedActivated) path, .leaflet-vectorLinked-pane path {
