@@ -115,6 +115,6 @@ export default class {
       });
     }
 
-    this.tooltip.show(coordinates.pageX + 10, coordinates.pageY + 10, node.name, values);
+    this.tooltip.show(coordinates.pageX, coordinates.pageY, node.name, values);
   }
 }
