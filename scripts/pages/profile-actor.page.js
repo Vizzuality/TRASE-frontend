@@ -19,7 +19,7 @@ import Map from 'components/profiles/map.component';
 import Line from 'components/profiles/line.component';
 import MultiTable from 'components/profiles/multi-table.component';
 import Scatterplot from 'components/profiles/scatterplot.component';
-import Tooltip from 'components/profiles/tooltip.component';
+import Tooltip from 'components/shared/info-tooltip.component';
 import choroLegend from 'components/profiles/choro-legend.component';
 
 import { getURLParams } from 'utils/stateURL';

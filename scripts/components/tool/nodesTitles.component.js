@@ -2,7 +2,7 @@ import _ from 'lodash';
 import formatValue from 'utils/formatValue';
 import NodeTitleTemplate from 'ejs!templates/tool/nodeTitle.ejs';
 import 'styles/components/tool/nodesTitles.scss';
-import TooltipTemplate from 'ejs!templates/shared/tooltip.ejs';
+import TooltipTemplate from 'ejs!templates/shared/info-tooltip.ejs';
 
 export default class {
   onCreated() {

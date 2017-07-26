@@ -17,7 +17,7 @@ import TitlebarContainer from 'containers/tool/titlebar.container';
 import NodesTitlesContainer from 'containers/tool/nodesTitles.container';
 import SearchContainer from 'containers/tool/search.container';
 import ModalContainer from 'containers/tool/story-modal.container';
-import TooltipContainer from 'containers/shared/tooltip.container';
+import TooltipContainer from 'containers/shared/help-tooltip.container';
 import AppReducer from 'reducers/app.reducer';
 import ToolReducer from 'reducers/tool.reducer';
 import { resize, loadDisclaimer } from 'actions/app.actions';

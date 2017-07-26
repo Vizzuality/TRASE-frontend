@@ -7,7 +7,7 @@ import formatValue from 'utils/formatValue';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
 import 'styles/components/tool/sankey.scss';
-import TooltipTemplate from 'ejs!templates/shared/tooltip.ejs';
+import TooltipTemplate from 'ejs!templates/shared/info-tooltip.ejs';
 import 'styles/components/shared/info-tooltip.scss';
 import 'styles/components/tool/node-menu.scss';
 

@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import classNames from 'classnames';
-import 'styles/components/shared/tooltip-react.scss';
+import 'styles/components/shared/help-tooltip-react.scss';
 
 
 export default class Tooltip extends Component {
