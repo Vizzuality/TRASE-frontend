@@ -326,6 +326,7 @@ export default class {
       return;
     }
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', choroplethLegend === null);
+    this.map.getPane(MAP_PANES.vectorLinked).classList.toggle('-noDimensions', choroplethLegend === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
       this.showLinkedGeoIds(linkedGeoIds);

@@ -88,7 +88,7 @@ export const TOOL_DEFAULT_STATE = {
     areNodesExpanded: false,
     detailedView: false,
     selectedNodesData: [],
-    selectedMapDimensions: [null, null],
+    selectedMapDimensions: undefined,
     selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
     selectedMapBasemap: 'default',
     isMapVisible: false,
