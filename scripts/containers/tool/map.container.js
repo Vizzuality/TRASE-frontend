@@ -50,7 +50,6 @@ const mapMethodsToState = (state) => ({
     _returnedValue: (state) => {
       return {
         choropleth: state.tool.choropleth,
-        selectedNodesGeoIds: state.tool.selectedNodesGeoIds,
         linkedGeoIds: state.tool.linkedGeoIds,
         choroplethLegend: state.tool.choroplethLegend
       };
