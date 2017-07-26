@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import classNames from 'classnames';
-import Tooltip from 'react-components/tool/tooltip.component';
+import Tooltip from 'react-components/tool/help-tooltip.component';
 import Dropdown from 'react-components/tool/nav/dropdown.component';
 
 const id = 'country-commodity';

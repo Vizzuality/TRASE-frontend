@@ -1,5 +1,5 @@
 import Tooltip from 'tether-tooltip';
-import 'styles/components/shared/tooltip.scss';
+import 'styles/components/shared/help-tooltip.scss';
 
 export default class {
   onCreated() {

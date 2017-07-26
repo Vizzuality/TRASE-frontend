@@ -1,14 +1,12 @@
-import _ from 'lodash';
 import formatValue from 'utils/formatValue';
 import NodeTitleTemplate from 'ejs!templates/tool/nodeTitle.ejs';
 import 'styles/components/tool/nodesTitles.scss';
-import TooltipTemplate from 'ejs!templates/shared/tooltip.ejs';
+import Tooltip from 'components/shared/info-tooltip.component';
 
 export default class {
   onCreated() {
     this.el = document.querySelector('.js-nodes-titles');
-    this.tooltip = document.querySelector('.js-tool-tooltip');
-    this.tooltipHideDebounced = _.debounce(this._hideTooltip, 10);
+    this.tooltip = new Tooltip('.js-tool-tooltip');
   }
 
   selectNodes(data) {
@@ -16,14 +14,13 @@ export default class {
   }
 
   highlightNode({ isHighlight, nodesData, recolorGroups, coordinates, isMapVisible, currentQuant }) {
+    this.tooltip.hide();
     if (nodesData === undefined || !nodesData.length) {
       return;
     }
     // when map is full screen, show data as a tooltip instead of a nodeTitle
     if (coordinates !== undefined) {
       this._showTooltip(nodesData, coordinates, currentQuant);
-    } else {
-      this.tooltipHideDebounced();
     }
 
     // TODO nodesData[0] === undefined should never happen, this is a smell form the reducer
@@ -89,45 +86,34 @@ export default class {
   }
 
   _showTooltip(nodesData, coordinates, currentQuant) {
-    this.tooltipHideDebounced.cancel();
     const node = nodesData[0];
 
     if (node.selectedMetas === undefined) {
       return;
     }
 
-    const templateValues = {
-      title: node.name,
-      values: []
-    };
+    let values = [];
 
     // map metas might not be loaded yet
     if (node.selectedMetas !== undefined) {
-      templateValues.values = node.selectedMetas.map(meta => {
+      values = node.selectedMetas.map(meta => {
         return {
           title: meta.name,
           unit: meta.unit,
           value: formatValue(meta.rawValue, meta.name)
         };
-      }).concat(templateValues.values);
+      }).concat(values);
     }
 
     // if node is visible in sankey, quant is available
     if (node.quant !== undefined) {
-      templateValues.values.push({
+      values.push({
         title: currentQuant.name,
         unit: currentQuant.unit,
         value: formatValue(node.quant, currentQuant.name)
       });
     }
 
-    this.tooltip.innerHTML = TooltipTemplate(templateValues);
-    this.tooltip.classList.remove('is-hidden');
-    this.tooltip.style.left = `${coordinates.pageX + 10}px`;
-    this.tooltip.style.top = `${coordinates.pageY + 10}px`;
-  }
-
-  _hideTooltip() {
-    this.tooltip.classList.add('is-hidden');
+    this.tooltip.show(coordinates.pageX, coordinates.pageY, node.name, values);
   }
 }

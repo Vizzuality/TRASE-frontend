@@ -6,9 +6,8 @@ import { DETAILED_VIEW_MIN_LINK_HEIGHT, SANKEY_TRANSITION_TIME } from 'constants
 import formatValue from 'utils/formatValue';
 import addSVGDropShadowDef from 'utils/addSVGDropShadowDef';
 import sankeyLayout from './sankey.d3layout.js';
+import Tooltip from 'components/shared/info-tooltip.component';
 import 'styles/components/tool/sankey.scss';
-import TooltipTemplate from 'ejs!templates/shared/tooltip.ejs';
-import 'styles/components/shared/info-tooltip.scss';
 import 'styles/components/tool/node-menu.scss';
 
 
@@ -90,8 +89,7 @@ export default class {
     this.sankeyColumns = this.svg.selectAll('.sankey-column');
     this.linksContainer = this.svg.select('.sankey-links');
 
-    this.linkTooltip = document.querySelector('.js-tool-tooltip');
-    this.linkTooltipHideDebounced = _.debounce(this._onLinkOut, 10);
+    this.linkTooltip = new Tooltip('.js-tool-tooltip');
 
     this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
 
@@ -224,7 +222,7 @@ export default class {
       .attr('d', this.layout.link())
       .on('mouseover', function(link) { that._onLinkOver(link, this); })
       .on('mouseout', function() {
-        that.linkTooltipHideDebounced();
+        that.linkTooltip.hide();
         this.classList.remove('-hover');
       })
       .transition()
@@ -264,28 +262,21 @@ export default class {
   }
 
   _onLinkOver(link, linkEl) {
-    this.linkTooltipHideDebounced.cancel();
-
-    const templateValues = {
-      title: `${link.sourceNodeName} > ${link.targetNodeName}`,
-      values: [{
-        title: this.currentQuant.name,
-        unit: this.currentQuant.unit,
-        value: formatValue(link.quant, this.currentQuant.name)
-      }]
-    };
+    const title = `${link.sourceNodeName} > ${link.targetNodeName}`;
+    const values = [{
+      title: this.currentQuant.name,
+      unit: this.currentQuant.unit,
+      value: formatValue(link.quant, this.currentQuant.name)
+    }];
 
     if (this.currentSelectedRecolorBy && this.currentSelectedRecolorBy.name !== 'none') {
-      templateValues.values.push({
+      values.push({
         title: this.currentSelectedRecolorBy.label,
         value: this._getLinkValue(link)
       });
     }
 
-    this.linkTooltip.innerHTML = TooltipTemplate(templateValues);
-    this.linkTooltip.classList.remove('is-hidden');
-    this.linkTooltip.style.left = `${d3_event.pageX + 10}px`;
-    this.linkTooltip.style.top = `${d3_event.pageY + 10}px`;
+    this.linkTooltip.show(d3_event.pageX, d3_event.pageY, title, values);
     linkEl.classList.add('-hover');
   }
 
@@ -305,11 +296,6 @@ export default class {
     }
 
     return `${Math.round(link.recolorBy)}%`;
-  }
-
-
-  _onLinkOut() {
-    this.linkTooltip.classList.add('is-hidden');
   }
 
   _onColumnOut() {

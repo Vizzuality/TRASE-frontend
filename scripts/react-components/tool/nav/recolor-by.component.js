@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import classNames from 'classnames';
 import _ from 'lodash';
-import Tooltip from 'react-components/tool/tooltip.component';
+import Tooltip from 'react-components/tool/help-tooltip.component';
 import Dropdown from 'react-components/tool/nav/dropdown.component';
 import RecolorByNodeLegendSummary from 'containers/tool/nav/recolor-by-node-legend-summary.container';
 
