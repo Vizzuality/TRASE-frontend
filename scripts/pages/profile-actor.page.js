@@ -78,14 +78,14 @@ const _initSource = (selectedSource, data) => {
       const title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
 
       if (source) {
-        tooltip.showTooltip(x, y, {
+        tooltip.showTooltip(x, y,
           title,
-          values: [{
+          [{
             title: 'Trade Volume',
             value: formatValue(source.values[0], 'Trade volume'),
             unit: 'Tons'
           }]
-        });
+        );
       }
 
     },
@@ -106,15 +106,15 @@ const _build = (data, nodeId) => {
       xTickPadding: 15
     },
     showTooltipCallback: (location, x, y) => {
-      tooltip.showTooltip(x, y, {
-        title: `${location.name.toUpperCase()} > ${data.node_name}, ${location.date.getFullYear()}`,
-        values: [
+      tooltip.showTooltip(x, y,
+        `${location.name.toUpperCase()} > ${data.node_name}, ${location.date.getFullYear()}`,
+        [
           { title: 'Trade volume',
             value: formatValue(location.value, 'Trade volume'),
             unit: 'Tons'
           }
         ]
-      });
+      );
     },
     hideTooltipCallback: () => {
       tooltip.hideTooltip();
@@ -152,15 +152,15 @@ const _build = (data, nodeId) => {
       data.top_countries.included_years,
       Object.assign({}, lineSettings, {
         showTooltipCallback: (location, x, y) => {
-          tooltip.showTooltip(x, y, {
-            title: `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
-            values: [
+          tooltip.showTooltip(x, y,
+            `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
+            [
               { title: 'Trade volume',
                 value: formatValue(location.value, 'Trade volume'),
                 unit: 'Tons'
               }
             ]
-          });
+          );
         },
       }),
     );
@@ -182,14 +182,14 @@ const _build = (data, nodeId) => {
         const title = `${properties.name.toUpperCase()} > ${data.node_name}`;
         if (country)
         {
-          tooltip.showTooltip(x, y, {
+          tooltip.showTooltip(x, y,
             title,
-            values: [{
+            [{
               title: 'Trade Volume',
               value: formatValue(country.values[0], 'Trade volume'),
               unit: 'Tons'
             }]
-          });
+          );
         }
       },
       hideTooltipCallback: () => {
@@ -213,9 +213,9 @@ const _build = (data, nodeId) => {
     xDimension: data.companies_exporting.dimensions_x,
     node: { id: nodeId, name: data.node_name },
     showTooltipCallback: (company, indicator, x, y) => {
-      tooltip.showTooltip(x, y, {
-        title: company.name,
-        values: [
+      tooltip.showTooltip(x, y,
+        company.name,
+        [
           {
             title: 'Trade volume',
             value: formatValue(company.y, 'Trade volume'),
@@ -227,7 +227,7 @@ const _build = (data, nodeId) => {
             unit: indicator.unit
           }
         ]
-      });
+      );
     },
     hideTooltipCallback: () => {
       tooltip.hideTooltip();

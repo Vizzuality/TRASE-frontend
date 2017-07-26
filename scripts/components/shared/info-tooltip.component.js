@@ -6,11 +6,11 @@ export default class {
     this.infowindow = document.querySelector(className);
   }
 
-  showTooltip(x, y, data) {
-    this.infowindow.style.left = x + 'px';
-    this.infowindow.style.top = y + 'px';
+  showTooltip(x, y, title, values) {
+    this.infowindow.style.left = `${x}px`;
+    this.infowindow.style.top = `${y}px`;
 
-    const template = TooltipTemplate({ title: data.title, values: data.values });
+    const template = TooltipTemplate({ title, values });
     this.infowindow.innerHTML = template;
     this.infowindow.classList.remove('is-hidden');
   }
