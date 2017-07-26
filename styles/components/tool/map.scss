@@ -163,9 +163,7 @@
     &.-hidden {
       opacity: 0;
     }
-  }
 
-  .leaflet-vectorMain-pane {
     path {
       fill: $gray;
       fill-opacity: 1;
@@ -186,24 +184,25 @@
   }
 
   .leaflet-vectorLinked-pane {
+
     path {
-      fill: $gray;
+      fill: $white;
       fill-opacity: 1;
       stroke: $charcoal-grey-toned-down;
       stroke-width: .45px;
+
+      &.ch-no-meta { fill: $white; };
+      &.ch-no-meta-layer { fill: $white; };
+      &.ch-default { fill: $white; };
     }
 
     &.-high-zoom path {
       stroke: $charcoal-grey;
-      stroke-width: 6px;
+      stroke-width: .6px;
     }
 
     &.-noDimensions path {
-      stroke-width: 2px;
-    }
-
-    &.-noDimensions.-high-zoom path {
-      stroke-width: 3px;
+      fill: $recolorgroup-2;
     }
   }
 
@@ -221,16 +220,6 @@
     &.ch-no-meta { fill: $ch-no-meta; };
     &.ch-no-meta-layer { fill: $ch-no-meta-layer; };
     &.ch-default { fill: $ch-default; };
-  }
-
-  .leaflet-vectorMain-pane.-noDimensions path {
-    &.ch-default { fill-opacity: 0; };
-  }
-
-  .leaflet-vectorLinked-pane path {
-    &.ch-no-meta { fill: $white; };
-    &.ch-no-meta-layer { fill: $white; };
-    &.ch-default { fill: $white; };
   }
 
   .leaflet-vectorOutline-pane {
