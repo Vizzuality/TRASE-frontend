@@ -78,7 +78,7 @@ const _initSource = (selectedSource, data) => {
       const title = `${data.node_name} > ${properties.nome.toUpperCase()}`;
 
       if (source) {
-        tooltip.showTooltip(x, y,
+        tooltip.show(x, y,
           title,
           [{
             title: 'Trade Volume',
@@ -90,7 +90,7 @@ const _initSource = (selectedSource, data) => {
 
     },
     hideTooltipCallback: () => {
-      tooltip.hideTooltip();
+      tooltip.hide();
     }
   });
 };
@@ -106,7 +106,7 @@ const _build = (data, nodeId) => {
       xTickPadding: 15
     },
     showTooltipCallback: (location, x, y) => {
-      tooltip.showTooltip(x, y,
+      tooltip.show(x, y,
         `${location.name.toUpperCase()} > ${data.node_name}, ${location.date.getFullYear()}`,
         [
           { title: 'Trade volume',
@@ -117,7 +117,7 @@ const _build = (data, nodeId) => {
       );
     },
     hideTooltipCallback: () => {
-      tooltip.hideTooltip();
+      tooltip.hide();
     },
     lineClassNameCallback: (lineData, lineDefaultStyle) => {
       return `${lineDefaultStyle} line-${lineData[0].value9}`;
@@ -152,7 +152,7 @@ const _build = (data, nodeId) => {
       data.top_countries.included_years,
       Object.assign({}, lineSettings, {
         showTooltipCallback: (location, x, y) => {
-          tooltip.showTooltip(x, y,
+          tooltip.show(x, y,
             `${data.node_name} > ${location.name.toUpperCase()}, ${location.date.getFullYear()}`,
             [
               { title: 'Trade volume',
@@ -182,7 +182,7 @@ const _build = (data, nodeId) => {
         const title = `${properties.name.toUpperCase()} > ${data.node_name}`;
         if (country)
         {
-          tooltip.showTooltip(x, y,
+          tooltip.show(x, y,
             title,
             [{
               title: 'Trade Volume',
@@ -193,7 +193,7 @@ const _build = (data, nodeId) => {
         }
       },
       hideTooltipCallback: () => {
-        tooltip.hideTooltip();
+        tooltip.hide();
       }
     });
   }
@@ -213,7 +213,7 @@ const _build = (data, nodeId) => {
     xDimension: data.companies_exporting.dimensions_x,
     node: { id: nodeId, name: data.node_name },
     showTooltipCallback: (company, indicator, x, y) => {
-      tooltip.showTooltip(x, y,
+      tooltip.show(x, y,
         company.name,
         [
           {
@@ -230,7 +230,7 @@ const _build = (data, nodeId) => {
       );
     },
     hideTooltipCallback: () => {
-      tooltip.hideTooltip();
+      tooltip.hide();
     }
   });
 };
