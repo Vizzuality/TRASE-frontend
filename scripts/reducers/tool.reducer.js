@@ -20,7 +20,6 @@ import getRecolorGroups from './helpers/getRecolorGroups';
 export default function (state = {}, action) {
   let newState;
   let updateURLState = true;
-  console.log(action.type);
   switch (action.type) {
 
     case actions.LOAD_INITIAL_DATA: {
@@ -190,7 +189,6 @@ export default function (state = {}, action) {
 
     case actions.GET_LINKED_GEOIDS: {
       const linkedGeoIds = (action.payload.length) ? action.payload.map(node => node.geo_id) : [];
-
       newState = Object.assign({}, state, { linkedGeoIds });
       break;
     }
