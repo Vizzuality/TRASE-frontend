@@ -202,7 +202,7 @@ export function loadNodes() {
       const currentMapDimensionsSet = _.compact(currentMapDimensions);
 
       // are all currenttly selected map dimensions available ?
-      if (currentMapDimensionsSet.length && (_.difference(currentMapDimensionsSet, allAvailableMapDimensionsUids)).length === 0) {
+      if (currentMapDimensions !== undefined && (_.difference(currentMapDimensionsSet, allAvailableMapDimensionsUids)).length === 0) {
         dispatch(setMapDimensions(currentMapDimensions.concat([])));
       } else {
         // use default map dimensions
