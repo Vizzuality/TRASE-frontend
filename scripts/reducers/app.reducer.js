@@ -6,7 +6,6 @@ const initialState = {
   isAppMenuVisible: false,
   tooltipCheck: 0,
   tooltips: [],
-  isDisclaimerModalVisible: false,
   currentDropdown: null
 };
 
@@ -31,9 +30,6 @@ export default function (state = initialState, action) {
 
     case actions.SET_TOOLTIPS:
       return Object.assign({}, state, { tooltips: action.payload });
-
-    case actions.TOGGLE_DISCLAIMER_MODAL:
-      return Object.assign({}, state, { isDisclaimerModalVisible: action.payload });
 
     case actions.SHOW_DISCLAIMER: {
       return Object.assign({}, state,

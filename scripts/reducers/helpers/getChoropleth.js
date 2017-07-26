@@ -31,7 +31,6 @@ export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensi
   const geoNodesIds = Object.keys(geoNodes);
   const choropleth = {};
 
-
   const choroplethLegend = {
     colors,
     isBivariate,
