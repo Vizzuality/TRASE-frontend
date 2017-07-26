@@ -16,13 +16,13 @@ const mapMethodsToState = (state) => ({
     _returnedValue: (state) => {
       return {
         sankeySize: state.app.sankeySize,
-        links: state.tool.links,
-        visibleNodes: state.tool.visibleNodes,
-        visibleNodesByColumn: state.tool.visibleNodesByColumn,
-        detailedView: state.tool.detailedView,
         selectedRecolorBy: state.tool.selectedRecolorBy,
         currentQuant: state.tool.currentQuant,
         selectedNodesIds: state.tool.selectedNodesIds,
+        links: state.tool.links,
+        detailedView: state.tool.detailedView,
+        visibleNodesByColumn: state.tool.visibleNodesByColumn,
+        nodesColoredAtColumn: state.tool.nodesColoredAtColumn,
         shouldRepositionExpandButton: shouldRepositionExpandButton(state.tool.expandedNodesIds, state.tool.selectedNodesIds, state.tool.areNodesExpanded)
       };
     }
