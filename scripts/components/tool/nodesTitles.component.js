@@ -14,14 +14,13 @@ export default class {
   }
 
   highlightNode({ isHighlight, nodesData, recolorGroups, coordinates, isMapVisible, currentQuant }) {
+    this.tooltip.hide();
     if (nodesData === undefined || !nodesData.length) {
       return;
     }
     // when map is full screen, show data as a tooltip instead of a nodeTitle
     if (coordinates !== undefined) {
       this._showTooltip(nodesData, coordinates, currentQuant);
-    } else {
-      this.tooltip.hide();
     }
 
     // TODO nodesData[0] === undefined should never happen, this is a smell form the reducer
