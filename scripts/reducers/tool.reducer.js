@@ -119,10 +119,19 @@ export default function (state = {}, action) {
       const rawNodes = JSON.parse(action.payload[0]).data;
       const columns = JSON.parse(action.payload[1]).data;
 
+      // context-dependant columns
+      const columnsByGroupObj = _.groupBy(columns, 'group');
+      const columnsByGroup = [0,0,0,0].map((e,i) => columnsByGroupObj[i]);
+
       const selectedColumnsIds = [];
-      columns.forEach(column => {
-        if (column.isDefault) {
-          selectedColumnsIds.push(column.id);
+      columnsByGroup.forEach((group, i) => {
+        const defaultColumn = group.find(g => g.isDefault === true).id;
+        if (state.selectedColumnsIds === undefined || state.selectedColumnsIds.length < 4) {
+          selectedColumnsIds.push(defaultColumn);
+        } else {
+          const currentColumnForGroup = state.selectedColumnsIds[i];
+          const columnId = (group.find(g => g.id === currentColumnForGroup) !== undefined) ? currentColumnForGroup : defaultColumn;
+          selectedColumnsIds.push(columnId);
         }
       });
 
