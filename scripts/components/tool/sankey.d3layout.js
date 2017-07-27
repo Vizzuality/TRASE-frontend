@@ -153,7 +153,7 @@ const sankeyLayout = function() {
         const entry = (nodesColoredAtColumn === 0) ? link.sourceColumnPosition : link.targetColumnPosition;
         return entry === nodesColoredAtColumn;
       });
-      // removed duplicates (ie links with same connected node)
+      // remove duplicates (ie links with same connected node)
       coloredColumnLinks = _.uniqBy(coloredColumnLinks, (nodesColoredAtColumn === 0) ? 'sourceNodeId' : 'targetNodeId');
       // sort by node Y
       coloredColumnLinks.sort((linkA, linkB) => {
@@ -192,13 +192,21 @@ const sankeyLayout = function() {
         }
         return recolorBySort;
       } else if (links[0].recolorGroup !== undefined) {
-        // when using a recolorGroup, columns directly adjacent to the column where nodes are selected
-        // are sorted by y coords (defaultSort).
-        // For other columns, links should be sorted by the *y order of recolor groups*
+        // When using a recolorGroup
+        // For columns outside of adjacent columns, links should be sorted by the original *y order of recolored nodes*
+        // (mapped to recolor groups before sorting, see recolorGroupsOrderedByY bit above)
+        // Columns directly adjacent to the column where nodes are selected
+        // are sorted by y coords (source or target, depedning on if column is at the left or the right of the selected colun).
         if (linkA.sourceColumnPosition > nodesColoredAtColumn || linkA.targetColumnPosition < nodesColoredAtColumn) {
           const recolorGroupsYA = recolorGroupsOrderedByY.indexOf(linkA.recolorGroup);
           const recolorGroupsYB = recolorGroupsOrderedByY.indexOf(linkB.recolorGroup);
           return (recolorGroupsYA === recolorGroupsYB) ? defaultSort : recolorGroupsYA - recolorGroupsYB;
+        } else {
+          if (linkA.targetColumnPosition <= nodesColoredAtColumn) {
+            return tIdAY - tIdBY || sIdAY - sIdBY;
+          } else if (linkA.sourceColumnPosition >= nodesColoredAtColumn) {
+            return sIdAY - sIdBY || tIdAY - tIdBY;
+          }
         }
         return defaultSort;
       } else {
