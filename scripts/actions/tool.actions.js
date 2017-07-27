@@ -301,7 +301,7 @@ export function loadLinks() {
 
 export function loadMapVectorData() {
   return (dispatch, getState) => {
-    const geoColumns = getState().tool.columns.filter(column => column.isGeo === true);
+    const geoColumns = getState().tool.columns.filter(column => column.isGeo === true || column.name === 'DEPARTMENT');
     const geometriesPromises = [];
     const mapVectorData = {};
 
