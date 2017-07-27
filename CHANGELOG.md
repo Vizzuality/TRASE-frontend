@@ -1,3 +1,10 @@
+- tool: improved link sorting
+- tool: fix issue where selected columns were not properly saved and loaded into the URL
+- tool/profiles: prevent tooltips from showing off screen
+- tool: highlight linked map areas when no map layer is selected
+- tool: fix map area selection on layer change
+- tool: prevent coloring unknown flow on recolor by
+- general: code cleanup and improvement
 - tool: on percentual resize by, display value instead of bucket range
 - tool: fix column selector overlap in complete mode
 - home: update images to include profile page preview 
