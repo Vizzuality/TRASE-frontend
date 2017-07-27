@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import wrapSVGText from 'utils/wrapSVGText';
 import { NUM_COLUMNS, DETAILED_VIEW_MIN_NODE_HEIGHT, DETAILED_VIEW_SCALE } from 'constants';
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
@@ -8,7 +9,6 @@ const sankeyLayout = function() {
   // in
   let viewportWidth;
   let viewportHeight;
-  let linksPayload;
   let columnWidth;
 
   // data
@@ -17,6 +17,7 @@ const sankeyLayout = function() {
   let detailedView;
   let maxHeight;
   let recolorBy;
+  let nodesColoredAtColumn;
 
   // layout
   let linksColumnWidth;
@@ -31,11 +32,11 @@ const sankeyLayout = function() {
   };
 
   sankeyLayout.setLinksPayload = (payload) => {
-    linksPayload = payload;
-  };
-
-  sankeyLayout.setRecolorBy = (payload) => {
-    recolorBy = payload;
+    columns = payload.visibleNodesByColumn;
+    links = payload.links;
+    detailedView = payload.detailedView;
+    recolorBy = payload.selectedRecolorBy;
+    nodesColoredAtColumn = payload.nodesColoredAtColumn;
   };
 
   sankeyLayout.columnWidth = _ => {
@@ -54,7 +55,7 @@ const sankeyLayout = function() {
   };
 
   sankeyLayout.isReady = () => {
-    return viewportWidth && linksPayload;
+    return viewportWidth && columns && recolorBy;
   };
 
   sankeyLayout.relayout = () => {
@@ -62,9 +63,6 @@ const sankeyLayout = function() {
       console.warn('not ready');
       return false;
     }
-    columns = linksPayload.visibleNodesByColumn;
-    links = linksPayload.links;
-    detailedView = linksPayload.detailedView;
 
     _computeNodeCoords();
     _computeLinksCoords();
@@ -146,6 +144,28 @@ const sankeyLayout = function() {
       stackedHeightsByNodeId.target[tId] = _getNode(link.targetColumnPosition, tId).y;
     });
 
+    // this is only used for sorting links with color groups
+    let recolorGroupsOrderedByY;
+
+    if (links[0].recolorGroup !== undefined) {
+      // get all links of the colored column
+      let coloredColumnLinks = links.filter(link => {
+        const entry = (nodesColoredAtColumn === 0) ? link.sourceColumnPosition : link.targetColumnPosition;
+        return entry === nodesColoredAtColumn;
+      });
+      // remove duplicates (ie links with same connected node)
+      coloredColumnLinks = _.uniqBy(coloredColumnLinks, (nodesColoredAtColumn === 0) ? 'sourceNodeId' : 'targetNodeId');
+      // sort by node Y
+      coloredColumnLinks.sort((linkA, linkB) => {
+        const nodeIdA = (nodesColoredAtColumn === 0) ? linkA.sourceNodeId : linkA.targetNodeId;
+        const nodeIdB = (nodesColoredAtColumn === 0) ? linkB.sourceNodeId : linkB.targetNodeId;
+        const nodes = columns[nodesColoredAtColumn].values;
+        return nodes.find(n => n.id === nodeIdA).y - nodes.find(n => n.id === nodeIdB).y;
+      });
+      // map to color groups
+      recolorGroupsOrderedByY = coloredColumnLinks.map(l => l.recolorGroup);
+    }
+
 
     // sort links by node source and target y positions
     // TODO move sorting to reducer
@@ -155,6 +175,7 @@ const sankeyLayout = function() {
       const tIdAY = stackedHeightsByNodeId.target[linkA.targetNodeId];
       const tIdBY = stackedHeightsByNodeId.target[linkB.targetNodeId];
       const defaultSort = sIdAY - sIdBY || tIdAY - tIdBY;
+
       if (recolorBy.name !== 'none') {
         // sorts alphabetically with quals, numerically with inds
         // TODO for quals use the order presented in the color by menu
@@ -170,11 +191,26 @@ const sankeyLayout = function() {
           recolorBySort = (recolorBy.type === 'ind') ?  linkA.recolorBy - linkB.recolorBy : linkA.recolorBy.charCodeAt(0) - linkB.recolorBy.charCodeAt(0);
         }
         return recolorBySort;
-      } else {
-        if (linkA.recolorGroup === linkB.recolorGroup) {
-          return defaultSort;
+      } else if (links[0].recolorGroup !== undefined) {
+        // When using a recolorGroup
+        // For columns outside of adjacent columns, links should be sorted by the original *y order of recolored nodes*
+        // (mapped to recolor groups before sorting, see recolorGroupsOrderedByY bit above)
+        // Columns directly adjacent to the column where nodes are selected
+        // are sorted by y coords (source or target, depedning on if column is at the left or the right of the selected colun).
+        if (linkA.sourceColumnPosition > nodesColoredAtColumn || linkA.targetColumnPosition < nodesColoredAtColumn) {
+          const recolorGroupsYA = recolorGroupsOrderedByY.indexOf(linkA.recolorGroup);
+          const recolorGroupsYB = recolorGroupsOrderedByY.indexOf(linkB.recolorGroup);
+          return (recolorGroupsYA === recolorGroupsYB) ? defaultSort : recolorGroupsYA - recolorGroupsYB;
+        } else {
+          if (linkA.targetColumnPosition <= nodesColoredAtColumn) {
+            return tIdAY - tIdBY || sIdAY - sIdBY;
+          } else if (linkA.sourceColumnPosition >= nodesColoredAtColumn) {
+            return sIdAY - sIdBY || tIdAY - tIdBY;
+          }
         }
-        return linkA.recolorGroup - linkB.recolorGroup;
+        return defaultSort;
+      } else {
+        return defaultSort;
       }
     });
 

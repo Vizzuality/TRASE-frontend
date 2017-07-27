@@ -20,8 +20,6 @@ export default class {
   resizeViewport({ selectedNodesIds, shouldRepositionExpandButton, selectedRecolorBy, currentQuant, sankeySize }) {
     this.layout.setViewportSize(sankeySize);
 
-    this.layout.setRecolorBy(selectedRecolorBy);
-
     if (this.layout.relayout()) {
       this._render(selectedRecolorBy, currentQuant);
       if (shouldRepositionExpandButton) this._repositionExpandButton(selectedNodesIds);
@@ -34,13 +32,18 @@ export default class {
     if (linksPayload.detailedView === false) {
       this.svg.style('height', '100%');
     }
+
     this.layout.setViewportSize(linksPayload.sankeySize);
     this.layout.setLinksPayload(linksPayload);
-    this.layout.setRecolorBy(linksPayload.selectedRecolorBy);
-    this.layout.relayout();
+
+    const relayout = this.layout.relayout();
 
     if (linksPayload.detailedView === true) {
       this.svg.style('height', this.layout.getMaxHeight() + 'px');
+    }
+
+    if (relayout === false) {
+      return;
     }
 
     this._render(linksPayload.selectedRecolorBy, linksPayload.currentQuant);
