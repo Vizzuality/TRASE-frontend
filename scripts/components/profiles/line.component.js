@@ -162,7 +162,7 @@ export default class {
       xTickFormat = null;
     if (ticks.yTickFormatType === 'top-location') {
       yTickFormat = (value, i) => {
-        if (i === 6) {
+        if (i === 6 && data.unit !== undefined) {
           return `${abbreviateNumber(value, 3)} ${data.unit}`;
         }
         return abbreviateNumber(value, 3);
@@ -176,7 +176,7 @@ export default class {
       yTickFormat = (value, i) => {
         const format = d3_format('0');
 
-        if (i === 6) {
+        if (i === 6 && data.unit !== undefined) {
           return `${format(value)}${data.unit}`;
         }
         return format(value);
