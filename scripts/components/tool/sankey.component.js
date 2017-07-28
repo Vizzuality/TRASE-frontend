@@ -290,9 +290,11 @@ export default class {
       return _.capitalize(link.recolorBy);
     }
 
-    let intervalCount = this.currentSelectedRecolorBy.intervalCount + 1;
+    let intervalCount = this.currentSelectedRecolorBy.intervalCount;
     if (this.currentSelectedRecolorBy.divisor) {
-      intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount + 1;
+      intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount;
+    } else if (this.currentSelectedRecolorBy.legendType === 'stars') {
+      intervalCount = this.currentSelectedRecolorBy.maxValue;
     }
     if (this.currentSelectedRecolorBy.legendType !== 'percentual') {
       return `${link.recolorBy}/${intervalCount}`;
