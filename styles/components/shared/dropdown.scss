@@ -129,9 +129,14 @@
       pointer-events: none;
     }
 
+    .dropdown-item-legend-container {
+      display: flex;
+      margin-top: 10px;
+      align-items: center;
+    }
+
     .dropdown-item-legend {
       pointer-events: none;
-      margin-top: 10px;
     }
 
     .dropdown-item-legend-unit {
@@ -145,10 +150,13 @@
     }
 
     .dropdown-item-legend-unit, .dropdown-item-legend, .dropdown-item-legend > li {
-      display: inline-block;
       color: $charcoal-grey;
       font-family: $font-family-1;
       font-size: $font-size-small;
+    }
+
+    .dropdown-item-legend, .dropdown-item-legend > li {
+      display: inline-block;
     }
 
     .dropdown-item-legend.-qual > li {

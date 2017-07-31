@@ -44,17 +44,19 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
           <Tooltip position='bottom right' text={tooltips.sankey.nav.colorBy[recolorBy.name]} />
         }
       </div>
-      {recolorBy.minValue &&
-        <span class='dropdown-item-legend-unit -left'>{recolorBy.minValue}</span>
-      }
-      {recolorBy.legendType &&
-        <ul class={classNames('dropdown-item-legend', `-${recolorBy.legendType}`)}>
-          {recolorBy.legendItemsData.map(legendItem => <li class={legendItem.classNames}>{legendItem.value}</li>)}
-        </ul>
-      }
-      {recolorBy.maxValue &&
-        <span class='dropdown-item-legend-unit -right'>{recolorBy.maxValue}</span>
-      }
+      <div class='dropdown-item-legend-container'>
+        {recolorBy.minValue &&
+          <span class='dropdown-item-legend-unit -left'>{recolorBy.minValue}</span>
+        }
+        {recolorBy.legendType &&
+          <ul class={classNames('dropdown-item-legend', `-${recolorBy.legendType}`)}>
+            {recolorBy.legendItemsData.map(legendItem => <li class={legendItem.classNames}>{legendItem.value}</li>)}
+          </ul>
+        }
+        {recolorBy.maxValue &&
+          <span class='dropdown-item-legend-unit -right'>{recolorBy.maxValue}</span>
+        }
+      </div>
     </li>;
   };
 
