@@ -75,7 +75,8 @@ body, html {
       }
     }
 
-    > .c-sankey {
+
+    .c-sankey {
       top: 48px;
       left: $map-width + $layer-map-width;
       width: calc(100% - #{$map-width + $layer-map-width + ($sankey-x-margin * 2)});
@@ -83,15 +84,21 @@ body, html {
       margin-left: $sankey-x-margin + 5px;
       transition: left .45s $ease-in-out-sine;
 
-      .sankey {
+      .sankey-scroll-container {
         width: 100%;
         height: 100%;
+
+        &.-detailed {
+          overflow-y: scroll;
+          overflow-x: hidden;
+        }
+
+        .sankey {
+          width: 100%;
+          height: 100%;
+        }
       }
 
-      &.-detailed {
-        overflow-y: scroll;
-        overflow-x: hidden;
-      }
     }
 
     .c-columns-selector {
