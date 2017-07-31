@@ -27,7 +27,7 @@ export default class {
   }
 
   showLoadedLinks(linksPayload) {
-    this.el.classList.toggle('-detailed', linksPayload.detailedView);
+    this.scrollContainer.classList.toggle('-detailed', linksPayload.detailedView);
 
     if (linksPayload.detailedView === false) {
       this.svg.style('height', '100%');
@@ -88,6 +88,7 @@ export default class {
       .columnWidth(100);
 
     this.el = document.querySelector('.js-sankey');
+    this.scrollContainer = document.querySelector('.js-sankey-scroll-container');
     this.svg = d3_select('.js-sankey-canvas');
     this.sankeyColumns = this.svg.selectAll('.sankey-column');
     this.linksContainer = this.svg.select('.sankey-links');
