@@ -1,3 +1,8 @@
+- profile: prevent charts from displaying undefined units
+- tool: improve displaying of flow tooltips on certain recolor by criteria
+- tool: push 'unknown' type nodes below 'other' type
+- tool: fix recolor by legend vertical alignment
+- tool: fix styling issue on node options in complete view
 - tool: improved link sorting
 - tool: fix issue where selected columns were not properly saved and loaded into the URL
 - tool/profiles: prevent tooltips from showing off screen
