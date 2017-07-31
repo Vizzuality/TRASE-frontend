@@ -290,12 +290,12 @@ export default class {
       return _.capitalize(link.recolorBy);
     }
 
-    let intervalCount = this.currentSelectedRecolorBy.intervalCount + 1;
+    let intervalCount = this.currentSelectedRecolorBy.intervalCount;
     if (this.currentSelectedRecolorBy.divisor) {
-      intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount + 1;
+      intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount;
     }
     if (this.currentSelectedRecolorBy.legendType !== 'percentual') {
-      return `${link.recolorBy}/${intervalCount}`;
+      return `${link.recolorBy}/${intervalCount-1}`;
     }
 
     return `${Math.round(link.recolorBy)}%`;
