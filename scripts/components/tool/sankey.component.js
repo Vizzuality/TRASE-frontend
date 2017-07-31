@@ -293,11 +293,9 @@ export default class {
     let intervalCount = this.currentSelectedRecolorBy.intervalCount;
     if (this.currentSelectedRecolorBy.divisor) {
       intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount;
-    } else if (this.currentSelectedRecolorBy.legendType === 'stars') {
-      intervalCount = this.currentSelectedRecolorBy.maxValue;
     }
     if (this.currentSelectedRecolorBy.legendType !== 'percentual') {
-      return `${link.recolorBy}/${intervalCount}`;
+      return `${link.recolorBy}/${intervalCount-1}`;
     }
 
     return `${Math.round(link.recolorBy)}%`;
