@@ -1,3 +1,4 @@
+- tool: reset linked polygons layer when switching context
 - profile: prevent charts from displaying undefined units
 - tool: improve displaying of flow tooltips on certain recolor by criteria
 - tool: push 'unknown' type nodes below 'other' type
