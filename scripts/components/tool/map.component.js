@@ -111,9 +111,6 @@ export default class {
 
 
   showLinkedGeoIds(linkedGeoIds) {
-    if (!this.currentPolygonTypeLayer) {
-      return;
-    }
     // remove choropleth from main layer
     this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
 
@@ -126,6 +123,9 @@ export default class {
       return;
     }
 
+    if (!this.currentPolygonTypeLayer) {
+      return;
+    }
     const linkedFeaturesClassNames = {};
 
     const linkedFeatures = linkedGeoIds.map(geoId => {
