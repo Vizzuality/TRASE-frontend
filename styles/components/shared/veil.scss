@@ -8,4 +8,8 @@
   height: 100%;
   background-color: rgba($charcoal-grey, .7);
   z-index: $z-veil;
+
+  &.-below-nav {
+    z-index: $z-veil-below-nav;
+  }
 }

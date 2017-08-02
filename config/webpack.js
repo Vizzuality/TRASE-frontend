@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var _ = require('lodash');
-require('dotenv').config({silent: true});
+require('dotenv').config({ silent: true });
 
 
 // base object that will be used to generate individual html pages (with HtmlWebpackPlugin instances)
@@ -66,13 +66,14 @@ const getPagePlugin = (id, params) => {
       GOOGLE_ANALYTICS_KEY: JSON.stringify(process.env.GOOGLE_ANALYTICS_KEY),
     }),
     search: htmlSearchTemplate(),
-    nav: htmlNavTemplate({page: id}),
+    nav: htmlNavTemplate({ page: id }),
     nav_flow: htmlNavFlowTemplate(),
     footer: htmlFooterTemplate(),
-    scripts: htmlScriptsTemplate({bundle: id}),
+    scripts: htmlScriptsTemplate({ bundle: id }),
     icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
     filename: (params.pageName || id)+'.html',
     template: './html/'+id+'.ejs',
+    DATA_DOWNLOAD_ENABLED: process.env.DATA_DOWNLOAD_ENABLED === 'true'
   });
 };
 
