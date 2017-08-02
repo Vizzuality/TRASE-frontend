@@ -1,3 +1,7 @@
+- site: temporarily disable homepage video
+- profile: update labels
+- general: update node and sass versions
+
 ### 2.5.0
 - data: add message informing that data portal is temporarily disabled
 - tool: reset linked polygons layer when switching context
