@@ -7,6 +7,8 @@ import { loadContext } from 'actions/data.actions';
 import { DATA_DEFAULT_STATE } from 'constants';
 
 import 'styles/data.scss';
+import 'styles/components/shared/veil.scss';
+import 'styles/components/shared/modal.scss';
 
 
 const start = (initialState) => {

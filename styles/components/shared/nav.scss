@@ -71,6 +71,7 @@
         width: calc(100% - 32px);
         height: 6px;
         background-color: $medium-pink;
+        z-index: $z-base;
       }
 
       &:first-child > .nav-link::before {
@@ -114,7 +115,7 @@
     background-color: $white;
     box-shadow: 0 10px 20px 0 rgba($charcoal-grey, .2), 0 0 20px 0 rgba($charcoal-grey, .18);
     border: solid 1px rgba($charcoal-grey, .2);
-    z-index: $z-base;
+    z-index: $z-above;
 
     > .nav-submenu-item {
       display: flex;

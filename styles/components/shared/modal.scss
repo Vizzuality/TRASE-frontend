@@ -11,6 +11,10 @@
 
   z-index: $z-above-veil;
 
+  &.-below-nav {
+    z-index: $z-above-veil-below-nav;
+  }
+
   > .header {
     padding: 24px 32px;
     background-color: $white;
@@ -31,6 +35,11 @@
       line-height: 1.5;
     }
 
+    a {
+      color: $medium-pink;
+      text-decoration: underline;
+    }
+
     .c-button {
       position: absolute;
       right: 16px;
@@ -38,6 +47,10 @@
       color: $charcoal-grey;
       background-color: $white;
       font-weight: bold;
+    }
+
+    &.-big {
+      font-size: $font-size-xx-regular;
     }
   }
 }
