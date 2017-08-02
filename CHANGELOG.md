@@ -1,3 +1,5 @@
+### 2.5.0
+- data: add message informing that data portal is temporarily disabled
 - tool: reset linked polygons layer when switching context
 - profile: prevent charts from displaying undefined units
 - tool: improve displaying of flow tooltips on certain recolor by criteria
