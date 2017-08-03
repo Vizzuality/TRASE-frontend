@@ -106,7 +106,7 @@ const scrollIntro = () => {
 };
 
 const init = () => {
-  const bounds = document.querySelector('.js-content-section').getBoundingClientRect();
+  const bounds = document.querySelector('.js-trigger-menu-bg').getBoundingClientRect();
   const pageOffset = getPageOffset(bounds);
   new Nav({ pageOffset });
 

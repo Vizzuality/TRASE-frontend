@@ -249,6 +249,9 @@
     visibility: hidden;
   }
 
+  .-dark { display: none; }
+  .-light { display: block; }
+
   &.-have-background {
     background-color: $white;
     box-shadow: 0 10px 20px 0 rgba($charcoal-grey, 0.2);
@@ -256,6 +259,9 @@
     .nav-link {
       color: $charcoal-grey;
     }
+
+    .-dark { display: block; }
+    .-light { display: none; }
   }
 
   .l-flows & {
