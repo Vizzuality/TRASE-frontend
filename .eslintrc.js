@@ -46,6 +46,7 @@ module.exports = {
       GOOGLE_ANALYTICS_KEY: true,
       API_SOCIAL: true,
       DATA_DOWNLOAD_ENABLED: true,
+      DATA_FORM_ENDPOINT: true,
       ga: true,
       fetch: true
     },

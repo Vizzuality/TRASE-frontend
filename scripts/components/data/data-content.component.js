@@ -6,7 +6,18 @@ import _ from 'lodash';
 export default class {
   onCreated() {
     this._setVars();
-    this.downloadButton.addEventListener('click', () => this._downloadFile());
+    this.downloadButton.addEventListener('click', () => {
+      this.currentDownloadParams = null;
+      this._showForm();
+    });
+    this.formSubmitButton.addEventListener('click', () => {
+      this._sendForm();
+      this._downloadFile();
+      this._closeForm();
+    });
+    this.formVeil.addEventListener('click', () => {
+      this._closeForm();
+    });
   }
 
   _setVars() {
@@ -22,6 +33,10 @@ export default class {
     this.selectorFormatting = this.el.querySelector('.js-custom-dataset-selector-formatting');
     this.selectorFile = this.el.querySelector('.js-custom-dataset-selector-file');
     this.bulkDownloadsSection = document.querySelector('.c-bulk-downloads');
+    this.formContainer = document.querySelector('.js-form-container');
+    this.formSubmitButton = document.querySelector('.js-form-submit');
+    this.form = document.querySelector('.js-form');
+    this.formVeil = document.querySelector('.js-form-veil');
   }
 
   fillContexts(contexts) {
@@ -43,7 +58,10 @@ export default class {
     if (DATA_DOWNLOAD_ENABLED) {
       this.bulkDownloadsSection.querySelectorAll('.c-bulk-downloads__item').forEach(elem => {
         elem.classList.remove('-disabled');
-        elem.addEventListener('click', () => this._downloadFile({ context_id: elem.getAttribute('data-value') }));
+        elem.addEventListener('click', () => {
+          this.currentDownloadParams = { context_id: elem.getAttribute('data-value') };
+          this._showForm();
+        });
       });
     }
 
@@ -132,8 +150,38 @@ export default class {
     return params;
   }
 
-  _downloadFile(params = null) {
-    params = params || this._getDownloadURLParams();
+  _showForm() {
+    this.formContainer.classList.remove('is-hidden');
+  }
+
+  _closeForm() {
+    this.formContainer.classList.add('is-hidden');
+  }
+
+  _sendForm() {
+    const payload = {};
+    for (var i = 0; i < this.form.length; i++) {
+      const formEl = this.form.elements[i];
+      payload[formEl.id] = formEl.value;
+    }
+
+    if (payload.country_alt !== '') {
+      payload.country = payload.country_alt;
+    }
+    delete payload.country_alt;
+
+    const body = new FormData();
+    Object.keys(payload).forEach(key => { body.append(key, payload[key]); });
+
+    // const url = [DATA_FORM_ENDPOINT, Object.keys(values).map(key => `${key}=${encodeURIComponent(values[key])}`).join('&')].join('?');
+    fetch(DATA_FORM_ENDPOINT, {
+      method: 'POST',
+      body
+    });
+  }
+
+  _downloadFile() {
+    const params = this.currentDownloadParams || this._getDownloadURLParams();
 
     if (!params.context_id) {
       return;

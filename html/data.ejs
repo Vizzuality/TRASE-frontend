@@ -9,7 +9,7 @@
     <%= htmlWebpackPlugin.options.nav %>
       <div class="l-data">
         <% if (DATA_DOWNLOAD_ENABLED === false) { %>
-        <div class="modal-container">
+        <div>
           <div class="veil -below-nav"></div>
           <div class="c-modal -below-nav">
             <div class="content -big">
@@ -18,6 +18,52 @@
           </div>
         </div>
         <% } %>
+        <div class="is-hidden js-form-container">
+          <div class="veil -below-nav js-form-veil"></div>
+          <div class="c-modal -below-nav">
+            <div class="content -white -big-margin">
+              <form class="js-form c-download-form">
+                <p class="description">Please provide the following info before downloading the data</p>
+                <label for="name">
+                  Name
+                  <input type="text" placeholder="name" id="name">
+                </label>
+                <label for="email">
+                  Email
+                  <input type="email" placeholder="email" id="email">
+                </label>
+                <label for="country">
+                  Country
+                  <input type="text" placeholder="type country..." id="country" list="countriesList">
+                  <datalist id="countriesList">
+                    <select id="country_alt">
+                      <%= htmlWebpackPlugin.options.autocomplete_countries %>
+                    </select>
+                  </datalist>
+                </label>
+                <label for="area_of_interest">
+                  Main area of interest
+                  <div class="select">
+                    <select id="area_of_interest" name="area_of_interest">
+                      <option value="">Select interest</option>
+                      <option>a</option>
+                      <option>b</option>
+                      <option>c</option>
+                    </select>
+                  </div>
+                </label>
+                <label class="submit">
+                  <div class="download-button js-form-submit">
+                    <svg class="icon icon-download"><use xlink:href="#icon-download"></use></svg>
+                    DOWNLOAD DATA
+                  </div>
+                </label>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="small-12 columns">
             <div class="c-bulk-downloads">
@@ -177,7 +223,7 @@
                       </ul>
                     </div>
 
-                    <div class="c-custom-dataset-submit-button js-custom-dataset-download-button -disabled">
+                    <div class="download-button js-custom-dataset-download-button -disabled">
                       <svg class="icon icon-download"><use xlink:href="#icon-download"></use></svg>
                       DOWNLOAD DATA
                     </div>
