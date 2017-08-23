@@ -40,6 +40,8 @@ export default class {
   }
 
   _update(isSelect, nodesData, recolorGroups = null, currentQuant) {
+    this.clear.classList.toggle('is-hidden', !isSelect);
+
     const templateData = {
       nodes: nodesData.map(node => {
         let renderedQuant;
