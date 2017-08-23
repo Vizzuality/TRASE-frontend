@@ -12,6 +12,11 @@
     font-weight: bold;
   }
 
+  .missing {
+    color: $medium-pink;
+    font-weight: bold;
+  }
+
   label {
     flex: 1 0 50%;
     padding: 15px 20px 0 0;

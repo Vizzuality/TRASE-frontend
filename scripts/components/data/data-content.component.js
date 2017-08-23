@@ -13,7 +13,6 @@ export default class {
     this.formSubmitButton.addEventListener('click', () => {
       this._sendForm();
       this._downloadFile();
-      this._closeForm();
     });
     this.formVeil.addEventListener('click', () => {
       this._closeForm();
@@ -37,6 +36,7 @@ export default class {
     this.formSubmitButton = document.querySelector('.js-form-submit');
     this.form = document.querySelector('.js-form');
     this.formVeil = document.querySelector('.js-form-veil');
+    this.formMissing = document.querySelector('.js-missing');
   }
 
   fillContexts(contexts) {
@@ -165,6 +165,12 @@ export default class {
       payload[formEl.id] = formEl.value;
     }
 
+    this.formMissing.classList.toggle('is-hidden', payload.email !== '');
+
+    if (payload.email === '') {
+      return;
+    }
+
     if (payload.country_alt !== '') {
       payload.country = payload.country_alt;
     }
@@ -173,11 +179,13 @@ export default class {
     const body = new FormData();
     Object.keys(payload).forEach(key => { body.append(key, payload[key]); });
 
-    // const url = [DATA_FORM_ENDPOINT, Object.keys(values).map(key => `${key}=${encodeURIComponent(values[key])}`).join('&')].join('?');
     fetch(DATA_FORM_ENDPOINT, {
       method: 'POST',
       body
     });
+
+    this._closeForm();
+
   }
 
   _downloadFile() {
