@@ -2,15 +2,16 @@
 
 .c-nodes-titles {
   padding-bottom: 8px;
-  font-size: 0;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
 }
 
 .c-node-title {
   display: inline-flex;
   align-items: center;
   height: 48px;
-  padding: 0 7px 4px 7px;
+  padding: 0 7px 4px;
   margin-right: 8px;
   border-radius: 4px;
 
