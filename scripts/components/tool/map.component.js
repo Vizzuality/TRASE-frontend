@@ -228,7 +228,7 @@ export default class {
     let hideMain = false;
     selectedMapContextualLayersData.forEach((layerData, i) => {
       if (layerData.rasterURL) {
-        hideMain = true;
+        // hideMain = true;
         this._createRasterLayer(layerData);
       } else {
         this._createCartoLayer(layerData, i);
@@ -260,7 +260,7 @@ export default class {
     const bounds = L.latLngBounds(southWest, northEast);
 
     const layer = L.tileLayer(url, {
-      pane: MAP_PANES.context,
+      pane: MAP_PANES.contextBelow,
       tms: true,
       // TODO add those params in layer configuration
       maxZoom: 11,

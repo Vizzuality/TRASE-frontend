@@ -110,6 +110,7 @@ export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';
 export const CARTO_NAMED_MAPS_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/named/';
 export const MAP_PANES = {
   basemap: 'basemap',
+  contextBelow: 'contextBelow',
   vectorMain: 'vectorMain',
   vectorLinked: 'vectorLinked',
   vectorOutline: 'vectorOutline',
@@ -118,6 +119,7 @@ export const MAP_PANES = {
 };
 export const MAP_PANES_Z = {
   [MAP_PANES.basemap]: 200,
+  [MAP_PANES.contextBelow]: 400,
   [MAP_PANES.vectorMain]: 410,
   [MAP_PANES.vectorLinked]: 411,
   [MAP_PANES.vectorOutline]: 412,
