@@ -46,30 +46,29 @@ const pages = {
   }
 };
 
-const htmlHeadTemplate = _.template(fs.readFileSync('./html/includes/_head.ejs', 'utf8'));
-const htmlSearchTemplate = _.template(fs.readFileSync('./html/includes/_search.ejs', 'utf8'));
-const htmlNavTemplate = _.template(fs.readFileSync('./html/includes/_nav.ejs', 'utf8'));
-const htmlNavFlowTemplate = _.template(fs.readFileSync('./html/includes/_nav-tool.ejs', 'utf8'));
-const htmlFooterTemplate = _.template(fs.readFileSync('./html/includes/_footer.ejs', 'utf8'));
+const templates = {};
+['head', 'search', 'nav', 'navtool', 'footer', 'scripts', 'autocomplete_countries'].forEach(key => {
+  templates[key] = _.template(fs.readFileSync(`./html/includes/_${key}.ejs`, 'utf8'));
+});
 
-const htmlScriptsTemplate = _.template(fs.readFileSync('./html/includes/_scripts.ejs', 'utf8'));
 const getPagePlugin = (id, params) => {
   const title = params.title || 'TRASE';
   const description = params.description || 'Trase brings unprecedented transparency to commodity supply chains revealing new pathways towards achieving a deforestation-free economy.';
 
   return new HtmlWebpackPlugin({
     inject: false,
-    head: htmlHeadTemplate({
+    head: templates.head({
       title,
       description,
       dev: process.env.NODE_ENV === 'development',
       GOOGLE_ANALYTICS_KEY: JSON.stringify(process.env.GOOGLE_ANALYTICS_KEY),
     }),
-    search: htmlSearchTemplate(),
-    nav: htmlNavTemplate({ page: id }),
-    nav_flow: htmlNavFlowTemplate(),
-    footer: htmlFooterTemplate(),
-    scripts: htmlScriptsTemplate({ bundle: id }),
+    search: templates.search(),
+    nav: templates.nav({ page: id }),
+    navtool: templates.navtool(),
+    footer: templates.footer(),
+    scripts: templates.scripts({ bundle: id }),
+    autocomplete_countries: templates.autocomplete_countries({ bundle: id }),
     icons: fs.readFileSync('./html/statics/icons.svg', 'utf8'),
     filename: (params.pageName || id)+'.html',
     template: './html/'+id+'.ejs',
@@ -96,6 +95,8 @@ const config = {
       API_CMS_URL: JSON.stringify(process.env.API_CMS_URL),
       API_STORY_CONTENT: JSON.stringify(process.env.API_STORY_CONTENT),
       API_SOCIAL: JSON.stringify(process.env.API_SOCIAL),
+      DATA_FORM_ENDPOINT: JSON.stringify(process.env.DATA_FORM_ENDPOINT),
+      DATA_FORM_ENABLED: process.env.DATA_FORM_ENABLED === 'true',
     })
   ].concat(pagePlugins),
   output: {
