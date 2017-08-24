@@ -6,6 +6,16 @@
   font-family: $font-family-1;
   font-size: $font-size-x-regular;
 
+  .form-submit-download { display: block; }
+  .form-submit-submit { display: none; }
+  .tos { display: block; }
+
+  &.-downloaded {
+    .form-submit-download { display: none; }
+    .form-submit-submit { display: block; }
+    .tos { display: none; }
+  }
+
   .description {
     flex: 2 0 100%;
     text-transform: uppercase;
@@ -23,7 +33,12 @@
     font-weight: bold;
   }
 
+  .tos {
+    margin-top: 30px;
+  }
+
   .submit {
+    text-transform: uppercase;
     margin: 26px 0 0 50%;
   }
 

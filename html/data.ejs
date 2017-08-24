@@ -24,7 +24,7 @@
             <div class="content -white -big-margin">
               <form class="js-form c-download-form">
                 <p class="description">Please provide the following info before downloading the data</p>
-                <p class="missing js-missing is-hidden">We'd love to hear about how you use the data and how we could improve it. Please fill in your email below and click on 'download data' again:</p>
+                <p class="missing js-missing is-hidden">We'd love to hear about how you use the data and how we could improve it. Please fill in your email below and click on 'submit':</p>
                 <label for="name">
                   Name
                   <input type="text" placeholder="name" id="name">
@@ -53,10 +53,16 @@
                     </select>
                   </div>
                 </label>
+                <p class="tos">By clicking "download data" below I agree to the <a href="http://trase.earth/terms-of-use.html">Terms of use</a>.</p>
                 <label class="submit">
                   <div class="download-button js-form-submit">
-                    <svg class="icon icon-download"><use xlink:href="#icon-download"></use></svg>
-                    DOWNLOAD DATA
+                    <div class="form-submit-download">
+                      <svg class="icon icon-download"><use xlink:href="#icon-download"></use></svg>
+                      download data
+                    </div>
+                    <div class="form-submit-submit">
+                      Submit
+                    </div>
                   </div>
                 </label>
 

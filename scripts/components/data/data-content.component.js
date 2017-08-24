@@ -151,6 +151,7 @@ export default class {
   }
 
   _showForm() {
+    this._setFormStatus(false);
     this.formContainer.classList.remove('is-hidden');
   }
 
@@ -165,9 +166,8 @@ export default class {
       payload[formEl.id] = formEl.value;
     }
 
-    this.formMissing.classList.toggle('is-hidden', payload.email !== '');
-
     if (payload.email === '') {
+      this._setFormStatus(true);
       return;
     }
 
@@ -185,7 +185,11 @@ export default class {
     });
 
     this._closeForm();
+  }
 
+  _setFormStatus(downloaded) {
+    this.formMissing.classList.toggle('is-hidden', !downloaded);
+    this.form.classList.toggle('-downloaded', downloaded);
   }
 
   _downloadFile() {
