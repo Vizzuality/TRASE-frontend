@@ -1,7 +1,7 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
 import _ from 'lodash';
-import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL, CONTEXT_WITHOUT_MAP_IDS } from 'constants';
+import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL, CONTEXT_WITHOUT_MAP_IDS, YEARS_DISABLED_NO_AGGR, YEARS_DISABLED_UNAVAILABLE } from 'constants';
 import {
   getURLFromParams,
   GET_ALL_NODES,
@@ -193,6 +193,31 @@ export function loadNodes() {
       const payload = {
         nodesJSON: JSON.parse(rawPayload[0]), mapDimensionsMetaJSON: JSON.parse(rawPayload[1])
       };
+
+      // TODO remove: this is a mock, waiting for API to implement
+      payload.mapDimensionsMetaJSON.dimensions.forEach(dimension => {
+        dimension.years = [2015];
+        // when yearsAggregation is set to null, no aggregation over years is allowed, ie this should be explained to the user
+        // dimension.yearsAggregation = 'SUM';
+        dimension.yearsAggregation = null;
+      });
+
+      const currentYearBoundaries = getState().tool.selectedYears;
+      const allSelectedYears = [];
+      for (var i = currentYearBoundaries[0]; i <= currentYearBoundaries[1]; i++) {
+        allSelectedYears.push(i);
+      }
+
+      payload.mapDimensionsMetaJSON.dimensions.forEach(dimension => {
+        if (dimension.yearsAggregation === null && allSelectedYears.length > 1) {
+          dimension.disabledYearRangeReason = YEARS_DISABLED_NO_AGGR.replace('$layer', dimension.name);
+        } else {
+          const allYearsCovered = allSelectedYears.every(year => dimension.years.indexOf(year) > -1);
+          if (!allYearsCovered) {
+            dimension.disabledYearRangeReason = YEARS_DISABLED_UNAVAILABLE.replace('$layer', dimension.name);
+          }
+        }
+      });
 
       dispatch({
         type: actions.GET_NODES, payload

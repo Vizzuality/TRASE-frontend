@@ -94,10 +94,13 @@
       }
 
       .actions {
-        flex: 0 0 40px;
+        // flex: 0 0 40px;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        // align-items: center;
+        // justify-content: space-between;
+        svg {
+          margin-right: 6px;
+        }
       }
 
       .c-tooltip {
@@ -110,7 +113,7 @@
         position: relative;
         width: 16px;
         height: 16px;
-        border: 2px solid rgba($charcoal-grey, .3);
+        border: 2px solid $charcoal-grey-faded-a-lot;
         border-radius: 50%;
       }
 
@@ -158,8 +161,17 @@
 
       &.-disabled {
         cursor: default;
-        pointer-events: none;
         color: $medium-grey;
+
+        &:hover {
+          .radio-btn {
+            border: 2px solid $charcoal-grey-faded-a-lot;
+
+            &::before, &::after {
+              display: none;
+            }
+          }
+        }
       }
     }
   }

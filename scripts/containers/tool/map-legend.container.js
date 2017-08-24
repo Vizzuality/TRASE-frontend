@@ -13,7 +13,8 @@ const mapMethodsToState = (state) => ({
       };
     }
   },
-  highlightChoroplethBucket: state.tool.currentHighlightedChoroplethBucket
+  highlightChoroplethBucket: state.tool.currentHighlightedChoroplethBucket,
+  selectMapDimensions: state.tool.selectedMapDimensionsWarnings,
 });
 
 const mapViewCallbacksToActions = () => ({

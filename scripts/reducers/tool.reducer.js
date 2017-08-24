@@ -16,6 +16,7 @@ import getChoropleth from './helpers/getChoropleth';
 import getNodesAtColumns from './helpers/getNodesAtColumns';
 import getNodesColoredBySelection from './helpers/getNodesColoredBySelection';
 import getRecolorGroups from './helpers/getRecolorGroups';
+import getMapDimensionsWarnings from './helpers/getMapDimensionsWarnings';
 
 export default function (state = {}, action) {
   let newState;
@@ -305,8 +306,9 @@ export default function (state = {}, action) {
     case actions.SET_MAP_DIMENSIONS: {
       const selectedMapDimensions = action.uids;
       const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
+      const selectedMapDimensionsWarnings = getMapDimensionsWarnings(state.mapDimensions, selectedMapDimensions);
 
-      newState = Object.assign({}, state, { selectedMapDimensions,  choropleth, choroplethLegend });
+      newState = Object.assign({}, state, { selectedMapDimensions, selectedMapDimensionsWarnings, choropleth, choroplethLegend });
       break;
     }
 
@@ -329,7 +331,8 @@ export default function (state = {}, action) {
 
       // get a geoId <-> color dict
       const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
-      newState = Object.assign({}, state, { selectedMapDimensions, choropleth, choroplethLegend });
+      const selectedMapDimensionsWarnings = getMapDimensionsWarnings(state.mapDimensions, selectedMapDimensions);
+      newState = Object.assign({}, state, { selectedMapDimensions, selectedMapDimensionsWarnings, choropleth, choroplethLegend });
       break;
     }
     case actions.SELECT_CONTEXTUAL_LAYERS: {
