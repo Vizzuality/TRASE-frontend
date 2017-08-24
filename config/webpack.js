@@ -96,6 +96,7 @@ const config = {
       API_STORY_CONTENT: JSON.stringify(process.env.API_STORY_CONTENT),
       API_SOCIAL: JSON.stringify(process.env.API_SOCIAL),
       DATA_FORM_ENDPOINT: JSON.stringify(process.env.DATA_FORM_ENDPOINT),
+      DATA_FORM_ENABLED: process.env.DATA_FORM_ENABLED === 'true',
     })
   ].concat(pagePlugins),
   output: {

@@ -8,11 +8,14 @@ export default class {
     this._setVars();
     this.downloadButton.addEventListener('click', () => {
       this.currentDownloadParams = null;
-      this._showForm();
+      if (DATA_FORM_ENABLED) {
+        this._showForm();
+      } else {
+        this._downloadFile();
+      }
     });
     this.formSubmitButton.addEventListener('click', () => {
       this._sendForm();
-      this._downloadFile();
     });
     this.formVeil.addEventListener('click', () => {
       this._closeForm();
@@ -60,7 +63,11 @@ export default class {
         elem.classList.remove('-disabled');
         elem.addEventListener('click', () => {
           this.currentDownloadParams = { context_id: elem.getAttribute('data-value') };
-          this._showForm();
+          if (DATA_FORM_ENABLED) {
+            this._showForm();
+          } else {
+            this._downloadFile();
+          }
         });
       });
     }
@@ -166,6 +173,10 @@ export default class {
       payload[formEl.id] = formEl.value;
     }
 
+    if (!this.downloaded) {
+      this._downloadFile();
+    }
+
     if (payload.email === '') {
       this._setFormStatus(true);
       return;
@@ -188,6 +199,7 @@ export default class {
   }
 
   _setFormStatus(downloaded) {
+    this.downloaded = downloaded;
     this.formMissing.classList.toggle('is-hidden', !downloaded);
     this.form.classList.toggle('-downloaded', downloaded);
   }

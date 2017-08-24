@@ -51,6 +51,7 @@ The project's main configuration values can be set using [environment variables]
 * API_STORY_CONTENT: URL of the deep dive stories API
 * API_SOCIAL: URL of the tweets API
 * GOOGLE_ANALYTICS_KEY: API key for Google Analytics
+* DATA_FORM_ENABLED: enable contact form in Data page 
 * DATA_FORM_ENDPOINT: end point to send form values in Data page
 
 If you are using the included development server, you can set those variables in the `.env` file (use the included `
