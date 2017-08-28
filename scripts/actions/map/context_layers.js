@@ -29,7 +29,7 @@ export default [{
   layergroupid: 'p2cs-sei@a4ef9d04@d20c83739a16ede69cfee2f0da917c12:1476798795723'
 }, {
   name: 'silos',
-  human_name: 'silos',
+  human_name: 'Silos',
   forceZoom: 6,
   rasterURL: undefined,
   legend: '<div class="cartodb-legend choropleth"><ul class="bullets"><li><div class="bullet" style="background:#5CA2D1"><span>0</span></div><div class="bullet" style="background:#3E7BB6"></div><div class="bullet" style="background:#2167AB"></div><div class="bullet" style="background:#0F3B82"></div><div class="bullet" style="background:#081B47"><span>> 30 TONS</span></div>Silos</li></ul></div>',
