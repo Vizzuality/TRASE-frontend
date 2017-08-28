@@ -40,6 +40,8 @@ export default class {
     this.form = document.querySelector('.js-form');
     this.formVeil = document.querySelector('.js-form-veil');
     this.formMissing = document.querySelector('.js-missing');
+    this.formTos = document.querySelector('.js-tos');
+    this.formTosCheck = document.querySelector('#tos_check');
   }
 
   fillContexts(contexts) {
@@ -173,6 +175,21 @@ export default class {
       payload[formEl.id] = formEl.value;
     }
 
+
+
+    if (!this.formTosCheck.checked) {
+      this.formTos.classList.add('-highlighted');
+      return;
+    }
+
+
+    if (payload.country_alt !== '') {
+      payload.country = payload.country_alt;
+    }
+    delete payload.country_alt;
+    delete payload.tos_check;
+    payload.date = new Date().toString();
+
     if (!this.downloaded) {
       this._downloadFile();
     }
@@ -181,11 +198,6 @@ export default class {
       this._setFormStatus(true);
       return;
     }
-
-    if (payload.country_alt !== '') {
-      payload.country = payload.country_alt;
-    }
-    delete payload.country_alt;
 
     const body = new FormData();
     Object.keys(payload).forEach(key => { body.append(key, payload[key]); });

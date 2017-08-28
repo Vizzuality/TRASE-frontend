@@ -8,9 +8,14 @@
 
   .form-submit-download { display: block; }
   .form-submit-submit { display: none; }
+
   .tos {
     display: block;
     margin-top: 30px;
+
+    &.-highlighted {
+      color: $medium-pink;
+    }
   }
 
   &.-downloaded {
@@ -55,7 +60,7 @@
     }
   }
 
-  select, input {
+  select, input:not([type='checkbox']) {
     width: 100%;
     height: 40px;
     transform: translateY(4px);
@@ -74,4 +79,8 @@
     font-size: $font-size-x-regular;
   }
 
+  input[type='checkbox'] {
+    appearance: checkbox;
+    -webkit-appearance: checkbox;
+  }
 }
