@@ -73,7 +73,14 @@ export default function (state = {}, action) {
         biomeFilter = context.filterBy[0].nodes.find(filterBy => filterBy.name === state.selectedBiomeFilterName);
       }
 
-      // TODO use current selectedMapContextualLayers, or use the context's default
+      // TODO remove mock
+      context.selectedMapContextualLayers = ['landcover', 'indigenous_areas', 'brazil_protected'];
+
+      // use current selectedMapContextualLayers, or use the context's default
+      let selectedMapContextualLayers = context.selectedMapContextualLayers;
+      if (state.selectedMapContextualLayers !== undefined && state.selectedMapContextualLayers !== null && state.selectedMapContextualLayers.length) {
+        selectedMapContextualLayers = state.selectedMapContextualLayers;
+      }
 
       // force state updates on the component
       const selectedYears = (state.selectedYears) ? Object.assign([], state.selectedYears) : [context.defaultYear, context.defaultYear];
@@ -86,6 +93,7 @@ export default function (state = {}, action) {
         selectedRecolorBy: recolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: resizeBy,
         selectedBiomeFilter: biomeFilter || { value: 'none' },
+        selectedMapContextualLayers,
         mapView
       });
       break;
@@ -104,6 +112,7 @@ export default function (state = {}, action) {
         selectedRecolorBy: defaultRecolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: defaultResizeBy,
         selectedBiomeFilter: defaultFilterBy,
+        selectedMapContextualLayers: context.selectedMapContextualLayers || undefined,
         detailedView: false,
         recolorGroups: [],
         mapView: context.map,

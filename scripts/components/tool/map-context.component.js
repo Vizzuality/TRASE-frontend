@@ -23,7 +23,7 @@ export default class {
     if (this.switchers === undefined) {
       return;
     }
-    if (selectedMapContextualLayers !== undefined && selectedMapContextualLayers.length) {
+    if (selectedMapContextualLayers !== undefined && selectedMapContextualLayers !== null && selectedMapContextualLayers.length) {
       this._setActiveContextualLayers(selectedMapContextualLayers);
     }
   }
