@@ -1,12 +1,17 @@
 import formatValue from 'utils/formatValue';
 import NodeTitleTemplate from 'ejs!templates/tool/nodeTitle.ejs';
 import 'styles/components/tool/nodesTitles.scss';
+import 'styles/components/tool/nodes-clear.scss';
 import Tooltip from 'components/shared/info-tooltip.component';
 
 export default class {
   onCreated() {
     this.el = document.querySelector('.js-nodes-titles');
+    this.container = this.el.querySelector('.js-nodes-titles-container');
+    this.clear = this.el.querySelector('.js-nodes-titles-clear');
     this.tooltip = new Tooltip('.js-tool-tooltip');
+
+    this.clear.addEventListener('click', this.callbacks.onClearClick);
   }
 
   selectNodes(data) {
@@ -35,6 +40,8 @@ export default class {
   }
 
   _update(isSelect, nodesData, recolorGroups = null, currentQuant) {
+    this.clear.classList.toggle('is-hidden', !isSelect);
+
     const templateData = {
       nodes: nodesData.map(node => {
         let renderedQuant;
@@ -67,7 +74,7 @@ export default class {
       recolorGroups: recolorGroups
     };
 
-    this.el.innerHTML = NodeTitleTemplate(templateData);
+    this.container.innerHTML = NodeTitleTemplate(templateData);
 
     const nodeTitles = Array.prototype.slice.call(document.querySelectorAll('.js-node-title.-link'), 0);
     nodeTitles.forEach((nodeTitle) => {

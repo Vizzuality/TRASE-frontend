@@ -1,4 +1,4 @@
-import { selectNode, navigateToProfile } from 'actions/tool.actions';
+import { selectNode, navigateToProfile, resetState } from 'actions/tool.actions';
 import connect from 'connect';
 import NodesTitles from 'components/tool/nodesTitles.component.js';
 
@@ -27,7 +27,8 @@ const mapMethodsToState = (state) => ({
 
 const mapViewCallbacksToActions = () => ({
   onCloseNodeClicked: (id) => selectNode(id),
-  onProfileLinkClicked: (id) => navigateToProfile(id)
+  onProfileLinkClicked: (id) => navigateToProfile(id),
+  onClearClick: () => resetState()
 });
 
 export default connect(NodesTitles, mapMethodsToState, mapViewCallbacksToActions);
