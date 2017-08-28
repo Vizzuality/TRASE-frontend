@@ -146,33 +146,40 @@
     }
   }
 
-  .c-custom-dataset-submit-button {
+  .download-button {
     position: absolute;
     right: 0;
     bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 40px;
-    border-radius: 4px;
-    background-color: $medium-pink;
-    font-weight: bold;
-    line-height: 0.77;
-    letter-spacing: normal;
-    text-align: center;
-    color: $white;
-    cursor: pointer;
+  }
 
-    &.-disabled {
-      pointer-events: none;
-      background-color: $charcoal-grey-faded;
-      cursor: not-allowed;
-    }
-    svg {
-      position: relative;
-      margin-right: 9px;
-      top: -2px;
-    }
+}
+
+.download-button {
+  font-family: $font-family-1;
+  font-size: $font-size-x-regular;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  background-color: $medium-pink;
+  font-weight: bold;
+  line-height: .77;
+  letter-spacing: normal;
+  text-align: center;
+  color: $white;
+  cursor: pointer;
+
+  &.-disabled {
+    pointer-events: none;
+    background-color: $charcoal-grey-faded;
+    cursor: not-allowed;
+  }
+
+  svg {
+    position: relative;
+    margin-right: 9px;
+    top: -2px;
   }
 }

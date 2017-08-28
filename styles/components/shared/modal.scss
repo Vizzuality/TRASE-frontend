@@ -5,7 +5,7 @@
   top: 50%;
   left: 50%;
   width: 90%;
-  max-width: 640px;
+  max-width: 690px;
 
   transform: translate(-50%, -50%);
 
@@ -52,10 +52,20 @@
     &.-big {
       font-size: $font-size-xx-regular;
     }
+
+    &.-white {
+      background-color: $white;
+      box-shadow: 0 10px 20px 0 rgba(52, 68, 76, .2);
+      color: $charcoal-grey;
+    }
+
+    &.-big-margin {
+      padding: 60px 80px;
+    }
   }
 }
 
-.modal-container {
+.-hidden-on-mobile {
   display: none;
   @media screen and (min-width: $breakpoint-tablet) {
     display: block;
