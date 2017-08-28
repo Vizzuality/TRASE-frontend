@@ -1,5 +1,6 @@
 ### 3.0.0
 - Add new "Clear selection" button at the bottom of the sankey
+- Add support for disabling map layers per year
 
 ### 2.5.1
 - site: temporarily disable homepage video
