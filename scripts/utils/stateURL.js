@@ -33,7 +33,8 @@ const URL_STATE_PROPS = [
   'selectedMapDimensions',
   'isMapVisible',
   'mapView',
-  'expandedMapSidebarGroupsIds'
+  'expandedMapSidebarGroupsIds',
+  'selectedMapContextualLayers'
 ];
 
 const URL_PARAMS_PROPS = [

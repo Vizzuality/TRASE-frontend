@@ -3,7 +3,15 @@ import { selectContextualLayers } from 'actions/tool.actions';
 import mapContext from 'components/tool/map-context.component';
 
 const mapMethodsToState = (state) => ({
-  buildLayers: state.tool.mapContextualLayers,
+  buildLayers: {
+    _comparedValue: (state) => state.tool.mapContextualLayers,
+    _returnedValue: (state) => {
+      return {
+        layers: state.tool.mapContextualLayers,
+        selectedMapContextualLayers: state.tool.selectedMapContextualLayers
+      };
+    }
+  },
   selectContextualLayers: state.tool.selectedMapContextualLayers,
   toggle: state.tool.selectedContext
 });

@@ -73,6 +73,8 @@ export default function (state = {}, action) {
         biomeFilter = context.filterBy[0].nodes.find(filterBy => filterBy.name === state.selectedBiomeFilterName);
       }
 
+      // TODO use current selectedMapContextualLayers, or use the context's default
+
       // force state updates on the component
       const selectedYears = (state.selectedYears) ? Object.assign([], state.selectedYears) : [context.defaultYear, context.defaultYear];
       const mapView = (state.mapView) ? Object.assign({}, state.mapView) : context.map;
@@ -335,8 +337,9 @@ export default function (state = {}, action) {
     case actions.SELECT_CONTEXTUAL_LAYERS: {
       const mapContextualLayersDict = _.keyBy(state.mapContextualLayers, 'name');
       const selectedMapContextualLayersData = action.contextualLayers.map(layerSlug => {
-        return _.cloneDeep(mapContextualLayersDict[layerSlug]);
+        return Object.assign({}, mapContextualLayersDict[layerSlug]);
       });
+
       newState = Object.assign({}, state, {
         selectedMapContextualLayers: action.contextualLayers, selectedMapContextualLayersData
       });

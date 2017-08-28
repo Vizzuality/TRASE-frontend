@@ -342,7 +342,7 @@ export function loadMapVectorData() {
 }
 
 export function loadMapContextLayers() {
-  return dispatch => {
+  return (dispatch, getState) => {
     const namedMapsURLs = mapContextualLayers.map(layer => {
       if (layer.rasterURL) {
         return null;
@@ -356,6 +356,15 @@ export function loadMapContextLayers() {
       dispatch({
         type: actions.GET_CONTEXT_LAYERS, mapContextualLayers
       });
+
+      const contextualLayers = getState().tool.selectedMapContextualLayers;
+
+      if (contextualLayers !== undefined && contextualLayers.length) {
+        dispatch({
+          type: actions.SELECT_CONTEXTUAL_LAYERS,
+          contextualLayers
+        });
+      }
     });
 
   };
