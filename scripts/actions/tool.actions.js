@@ -194,14 +194,6 @@ export function loadNodes() {
         nodesJSON: JSON.parse(rawPayload[0]), mapDimensionsMetaJSON: JSON.parse(rawPayload[1])
       };
 
-      // TODO remove: this is a mock, waiting for API to implement
-      payload.mapDimensionsMetaJSON.dimensions.forEach(dimension => {
-        dimension.years = [2015];
-        // when yearsAggregation is set to null, no aggregation over years is allowed, ie this should be explained to the user
-        // dimension.yearsAggregation = 'SUM';
-        dimension.yearsAggregation = null;
-      });
-
       const currentYearBoundaries = getState().tool.selectedYears;
       const allSelectedYears = [];
       for (var i = currentYearBoundaries[0]; i <= currentYearBoundaries[1]; i++) {
@@ -212,7 +204,7 @@ export function loadNodes() {
         if (dimension.yearsAggregation === null && allSelectedYears.length > 1) {
           dimension.disabledYearRangeReason = YEARS_DISABLED_NO_AGGR.replace('$layer', dimension.name);
         } else {
-          const allYearsCovered = allSelectedYears.every(year => dimension.years.indexOf(year) > -1);
+          const allYearsCovered = dimension.years === null || allSelectedYears.every(year => dimension.years.indexOf(year) > -1);
           if (!allYearsCovered) {
             dimension.disabledYearRangeReason = YEARS_DISABLED_UNAVAILABLE.replace('$layer', dimension.name);
           }
@@ -226,7 +218,7 @@ export function loadNodes() {
       const allAvailableMapDimensionsUids = payload.mapDimensionsMetaJSON.dimensions.map(dimension => getNodeMetaUid(dimension.type, dimension.layerAttributeId));
       const currentMapDimensionsSet = _.compact(currentMapDimensions);
 
-      // are all currenttly selected map dimensions available ?
+      // are all currently selected map dimensions available ?
       if (currentMapDimensions !== undefined && (_.difference(currentMapDimensionsSet, allAvailableMapDimensionsUids)).length === 0) {
         dispatch(setMapDimensions(currentMapDimensions.concat([])));
       } else {
