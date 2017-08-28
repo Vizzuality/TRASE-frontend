@@ -74,7 +74,7 @@ export default function (state = {}, action) {
       }
 
       // TODO remove mock
-      context.selectedMapContextualLayers = ['landcover', 'indigenous_areas', 'brazil_protected'];
+      context.selectedMapContextualLayers = ['landcover'];
 
       // use current selectedMapContextualLayers, or use the context's default
       let selectedMapContextualLayers = context.selectedMapContextualLayers;
