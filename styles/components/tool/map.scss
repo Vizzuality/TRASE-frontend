@@ -175,6 +175,11 @@
       &.-disabled {
         cursor: not-allowed;
       }
+
+      &.-linked {
+        stroke: cyan !important;
+        fill-opacity: 0 !important;
+      }
     }
 
     &.-high-zoom path {
