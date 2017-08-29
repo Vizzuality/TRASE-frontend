@@ -144,7 +144,6 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
   document.querySelector('.js-area').innerHTML = info.area !== null ? formatValue(info.area, 'area') : '-';
-  document.querySelector('.js-agriculture-land').innerHTML = info.agriculture_land !== null ? formatValue(info.agriculture_land, 'percentage') : '-';
   document.querySelector('.js-soy-land').innerHTML = info.soy_land !== null ? formatValue(info.soy_land, 'percentage') : '-';
   document.querySelector('.js-soy-production').innerHTML = info.soy_production !== null ? formatValue(info.soy_production, 'tons'): '-';
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);

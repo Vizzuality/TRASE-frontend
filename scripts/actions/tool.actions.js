@@ -1,7 +1,7 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
 import _ from 'lodash';
-import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL, CONTEXT_WITHOUT_MAP_IDS } from 'constants';
+import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL, CONTEXT_WITHOUT_MAP_IDS, YEARS_DISABLED_NO_AGGR, YEARS_DISABLED_UNAVAILABLE } from 'constants';
 import {
   getURLFromParams,
   GET_ALL_NODES,
@@ -194,6 +194,23 @@ export function loadNodes() {
         nodesJSON: JSON.parse(rawPayload[0]), mapDimensionsMetaJSON: JSON.parse(rawPayload[1])
       };
 
+      const currentYearBoundaries = getState().tool.selectedYears;
+      const allSelectedYears = [];
+      for (var i = currentYearBoundaries[0]; i <= currentYearBoundaries[1]; i++) {
+        allSelectedYears.push(i);
+      }
+
+      payload.mapDimensionsMetaJSON.dimensions.forEach(dimension => {
+        if (dimension.yearsAggregation === null && allSelectedYears.length > 1) {
+          dimension.disabledYearRangeReason = YEARS_DISABLED_NO_AGGR.replace('$layer', dimension.name);
+        } else {
+          const allYearsCovered = dimension.years === null || allSelectedYears.every(year => dimension.years.indexOf(year) > -1);
+          if (!allYearsCovered) {
+            dimension.disabledYearRangeReason = YEARS_DISABLED_UNAVAILABLE.replace('$layer', dimension.name);
+          }
+        }
+      });
+
       dispatch({
         type: actions.GET_NODES, payload
       });
@@ -201,7 +218,7 @@ export function loadNodes() {
       const allAvailableMapDimensionsUids = payload.mapDimensionsMetaJSON.dimensions.map(dimension => getNodeMetaUid(dimension.type, dimension.layerAttributeId));
       const currentMapDimensionsSet = _.compact(currentMapDimensions);
 
-      // are all currenttly selected map dimensions available ?
+      // are all currently selected map dimensions available ?
       if (currentMapDimensions !== undefined && (_.difference(currentMapDimensionsSet, allAvailableMapDimensionsUids)).length === 0) {
         dispatch(setMapDimensions(currentMapDimensions.concat([])));
       } else {

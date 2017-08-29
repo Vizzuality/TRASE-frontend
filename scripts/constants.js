@@ -108,6 +108,9 @@ export const LINE_LABEL_HEIGHT = 12;
 // map
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';
 export const CARTO_NAMED_MAPS_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/named/';
+export const YEARS_DISABLED_NO_AGGR = 'The selected map layer ($layer) can\'t be displayed over multiple years. Please modify year selection to a single year.';
+export const YEARS_DISABLED_UNAVAILABLE = 'The selected map layer ($layer) does not contain data for the whole year selection. Please change year selection.';
+
 export const MAP_PANES = {
   basemap: 'basemap',
   contextBelow: 'contextBelow',
@@ -128,6 +131,7 @@ export const MAP_PANES_Z = {
 };
 export const BASEMAPS = {
   default: {
+    id: 'default',
     title: 'Default',
     url: '//api.mapbox.com/styles/v1/trasebase/cizi55y2r00122rl65a97ppz1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     labelsUrl: '//api.mapbox.com/styles/v1/traselabels/cizi59ohm00122spaghssyqsd/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2VsYWJlbHMiLCJhIjoiY2l6aTU4bm9sMDAyczMzazdwNWJ1MmFmbSJ9.zcNOZLokWun7cDwbArtV6g',
@@ -135,18 +139,21 @@ export const BASEMAPS = {
     thumbnail: 'images/maps/thumb-basemap-default.png'
   },
   satellite: {
+    id: 'satellite',
     title: 'Satellite',
     url: '//api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>, <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>, <a href="https://www.digitalglobe.com/" target="_blank">DigitalGlobe</a>',
     thumbnail: 'images/maps/thumb-basemap-satellite.jpeg'
   },
   topo: {
+    id: 'topography',
     title: 'Topography',
     url: '//{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
     attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy;<a href="http://opentopomap.org">opentopomap.org</a>',
     thumbnail: 'images/maps/thumb-basemap-topo.png'
   },
   streets: {
+    id: 'osm',
     title: 'Streets (OSM)',
     url: '//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
     attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',

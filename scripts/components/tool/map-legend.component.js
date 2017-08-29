@@ -15,6 +15,8 @@ export default class {
     this.mapControlScale = document.querySelector('.leaflet-control-scale');
     this.mapControlZoom = document.querySelector('.leaflet-control-zoom');
     this.mapControlSwitcher = document.querySelector('.js-basemap-switcher');
+    this.warningsContainer = document.querySelector('.js-map-warnings-container');
+    this.warnings = document.querySelector('.js-map-warnings');
 
     const zoom = document.querySelector('.leaflet-control-zoom');
     const scale = document.querySelector('.leaflet-control-scale');
@@ -51,8 +53,9 @@ export default class {
     bucket.classList.toggle('-highlighted', true);
   }
 
-  _setVars() {
-    this.el = document.querySelector('.js-map-legend');
+  selectMapDimensions(selectedMapDimensionsWarnings) {
+    this.warningsContainer.classList.toggle('-visible', selectedMapDimensionsWarnings.length);
+    this.warnings.innerHTML = selectedMapDimensionsWarnings.join('<br>');
   }
 
   _setupChoro(choroplethLegend) {

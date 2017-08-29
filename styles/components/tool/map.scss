@@ -272,3 +272,25 @@
     }
   }
 }
+
+.c-map-warnings {
+  position: absolute;
+  z-index: $z-leaflet-above-panes;
+  width: 100%;
+  background: $charcoal-grey-faded;
+  color: $white;
+  padding: 10px;
+  font-family: $font-family-2;
+  font-size: $font-size-regular;
+  top: -50px;
+  transition: top .3s;
+
+
+  svg {
+    font-size: $font-size-xx-regular;
+  }
+
+  &.-visible {
+    top: 0;
+  }
+}

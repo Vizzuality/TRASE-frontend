@@ -61,6 +61,12 @@
 
         <div class="js-map-container c-map is-absolute">
           <div id="js-map" class="c-map-leaflet">
+            <div class="js-map-warnings-container c-map-warnings">
+              <svg class="icon">
+                <use xlink:href="#icon-warning"></use>
+              </svg>
+              <span class="js-map-warnings"></span>
+            </div>
             <div class="btn-map -basemap js-basemap-switcher">
               <svg class="icon icon-layers"><use xlink:href="#icon-layers"></use></svg>
             </div>
@@ -120,7 +126,17 @@
         </div>
 
         <div class="c-titlebar">
-          <div class="c-nodes-titles js-nodes-titles"></div>
+          <div class="c-nodes-titles js-nodes-titles">
+            <div class="nodes-titles-container js-nodes-titles-container"></div>
+            <div class="c-nodes-clear js-nodes-titles-clear is-hidden">
+              <div class="button icon-button">
+                <svg class="icon"><use xlink:href="#icon-close"></use></svg>
+              </div>
+              <div class="button text-button js-text-button">
+                clear selection
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
