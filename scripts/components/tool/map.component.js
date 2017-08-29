@@ -191,11 +191,6 @@ export default class {
       this.map.setZoom(forceZoom);
     }
 
-    // disable main choropleth layer when there are context layers
-    // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
-    // this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-hidden', hideMain);
-
     this._updateAttribution();
   }
 

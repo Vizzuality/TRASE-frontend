@@ -151,19 +151,6 @@
     opacity: 1;
     pointer-events: auto;
 
-    &.-dimmed, &.-hidden {
-      opacity: .8;
-      pointer-events: none;
-
-      path {
-        pointer-events: none;
-      }
-    }
-
-    &.-hidden {
-      opacity: 0;
-    }
-
     path {
       fill: $gray;
       fill-opacity: 1;
