@@ -89,6 +89,7 @@ export const TOOL_DEFAULT_STATE = {
     detailedView: false,
     selectedNodesData: [],
     selectedMapContextualLayers: [],
+    selectedMapDimensions: [null, null],
     isMapVisible: false,
     expandedMapSidebarGroupsIds: []
   }
