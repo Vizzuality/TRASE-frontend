@@ -6,6 +6,7 @@ import { BASEMAPS, CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/tool/map.scss';
 import 'style/components/tool/map/map-legend.scss';
+import 'style/components/tool/map/map-choropleth.scss';
 
 export default class {
   constructor() {
