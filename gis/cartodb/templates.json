@@ -7,6 +7,25 @@
   },
   {
     "version": "0.0.1",
+    "name": "brazil_biomes",
+    "human_name": "Brazil biomes",
+    "legend":"",
+    "layergroup": {
+      "version": "1.0.1",
+      "layers": [
+        {
+          "type": "cartodb",
+          "options": {
+            "sql": "SELECT * FROM brazil_biomes",
+            "cartocss": "#brazil_biomes {  polygon-opacity: 0;  line-color: #aaaaaa;  line-width: 14;  line-opacity: .2;}#brazil_biomes::above {  polygon-opacity: 0;  line-color: #000000;  line-width: 1.5;  line-opacity: 1;}#brazil_biomes::labels {  text-name: [cd_legenda];  text-face-name: 'DejaVu Sans Book';  text-size: 10;  text-label-position-tolerance: 0;  text-fill: #000;  text-halo-fill: #cccccc;  text-halo-radius: 1.5;  text-dy: 0;  text-allow-overlap: true;  text-placement: interior;  text-placement-type: dummy;}",
+            "cartocss_version": "2.3.0"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "version": "0.0.1",
     "name": "water_scarcity",
     "human_name": "Water scarcity",
     "legend":"<div class='cartodb-legend choropleth'> <ul><li class=\" min\" >Less</li><li class=\" graph count_441\" ><div class=\" colors\" ><div class=\" quartile\"  style=\" background-color:#4575b4\" ></div><div class=\" quartile\"  style=\" background-color:#91bfdb\" ></div><div class=\" quartile\"  style=\" background-color:#e0f3f8\" ></div><div class=\" quartile\"  style=\" background-color:#ffffbf\" ></div><div class=\" quartile\"  style=\" background-color:#fee090\" ></div><div class=\" quartile\"  style=\" background-color:#fc8d59\" ></div><div class=\" quartile\"  style=\" background-color:#d73027\" ></div></div></li><li class=\" max\" >More</li></ul></div>",
