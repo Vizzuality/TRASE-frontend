@@ -34,7 +34,8 @@ const URL_STATE_PROPS = [
   'isMapVisible',
   'mapView',
   'expandedMapSidebarGroupsIds',
-  'selectedMapContextualLayers'
+  'selectedMapContextualLayers',
+  'selectedMapBasemap'
 ];
 
 const URL_PARAMS_PROPS = [

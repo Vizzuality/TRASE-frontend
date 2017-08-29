@@ -74,13 +74,16 @@ export default function (state = {}, action) {
         biomeFilter = context.filterBy[0].nodes.find(filterBy => filterBy.name === state.selectedBiomeFilterName);
       }
 
-      // TODO remove mock
-      context.selectedMapContextualLayers = ['landcover'];
-
       // use current selectedMapContextualLayers, or use the context's default
-      let selectedMapContextualLayers = context.defaultContextLayers;
+      let selectedMapContextualLayers = context.defaultContextLayers || undefined;
       if (state.selectedMapContextualLayers !== undefined && state.selectedMapContextualLayers !== null && state.selectedMapContextualLayers.length) {
         selectedMapContextualLayers = state.selectedMapContextualLayers;
+      }
+
+      context.defaultBasemap = 'topo';
+      let selectedMapBasemap = context.defaultBasemap || 'default';
+      if (state.selectedMapBasemap !== undefined && state.selectedMapBasemap !== null) {
+        selectedMapBasemap = state.selectedMapBasemap;
       }
 
       // force state updates on the component
@@ -95,6 +98,7 @@ export default function (state = {}, action) {
         selectedResizeBy: resizeBy,
         selectedBiomeFilter: biomeFilter || { value: 'none' },
         selectedMapContextualLayers,
+        selectedMapBasemap,
         mapView
       });
       break;
@@ -114,6 +118,7 @@ export default function (state = {}, action) {
         selectedResizeBy: defaultResizeBy,
         selectedBiomeFilter: defaultFilterBy,
         selectedMapContextualLayers: context.defaultContextLayers || undefined,
+        selectedMapBasemap: context.defaultBasemap || 'default',
         detailedView: false,
         recolorGroups: [],
         mapView: context.map,
