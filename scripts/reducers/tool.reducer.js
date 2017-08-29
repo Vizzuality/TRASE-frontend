@@ -77,7 +77,7 @@ export default function (state = {}, action) {
       context.selectedMapContextualLayers = ['landcover'];
 
       // use current selectedMapContextualLayers, or use the context's default
-      let selectedMapContextualLayers = context.selectedMapContextualLayers;
+      let selectedMapContextualLayers = context.defaultContextLayers;
       if (state.selectedMapContextualLayers !== undefined && state.selectedMapContextualLayers !== null && state.selectedMapContextualLayers.length) {
         selectedMapContextualLayers = state.selectedMapContextualLayers;
       }
@@ -112,7 +112,7 @@ export default function (state = {}, action) {
         selectedRecolorBy: defaultRecolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: defaultResizeBy,
         selectedBiomeFilter: defaultFilterBy,
-        selectedMapContextualLayers: context.selectedMapContextualLayers || undefined,
+        selectedMapContextualLayers: context.defaultContextLayers || undefined,
         detailedView: false,
         recolorGroups: [],
         mapView: context.map,
