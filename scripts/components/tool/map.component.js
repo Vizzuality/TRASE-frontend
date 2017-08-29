@@ -109,8 +109,6 @@ export default class {
     }
   }
 
-
-
   selectPolygons(payload) {
     this._outlinePolygons(payload);
     if (this.vectorOutline !== undefined && payload.selectedGeoIds.length) {
@@ -180,12 +178,9 @@ export default class {
     let forceZoom = 0;
     // let hideMain = false;
     selectedMapContextualLayersData.forEach((layerData, i) => {
-      if (layerData.rasterURL) {
-        // hideMain = true;
-        this._createRasterLayer(layerData);
-      } else {
-        this._createCartoLayer(layerData, i);
-      }
+      const contextLayer = (layerData.rasterURL) ? this._createRasterLayer(layerData) : this._createCartoLayer(layerData, i);
+      this.contextLayers.push(contextLayer);
+      this.map.addLayer(contextLayer);
 
       if (_.isNumber(layerData.forceZoom)) {
         forceZoom = Math.max(layerData.forceZoom, forceZoom);
@@ -219,8 +214,7 @@ export default class {
       maxZoom: 11,
       bounds
     });
-    this.contextLayers.push(layer);
-    this.map.addLayer(layer);
+    return layer;
   }
 
   _createCartoLayer(layerData /*, i */  ) {
@@ -229,10 +223,6 @@ export default class {
     const layer = new L.tileLayer(layerUrl, {
       pane: MAP_PANES.context
     });
-
-    this.contextLayers.push(layer);
-    this.map.addLayer(layer);
-
     // TODO enable again and make it work
     // if (i === 0) {
     //   const utfGridUrl = `${baseUrl}.grid.json?callback={cb}`;
@@ -243,6 +233,7 @@ export default class {
     //     resolution: 2
     //   });
     // }
+    return layer;
   }
 
   _getPolygonTypeLayer(geoJSON) {
