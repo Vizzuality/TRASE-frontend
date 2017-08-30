@@ -44,10 +44,11 @@
     .leaflet-control-scale {
       display: flex;
       left: 0;
+      bottom: -80px;
       justify-content: flex-end;
       width: 320px;
       margin: 0;
-      padding: 5px 10px 4px 10px;
+      padding: 5px 10px 4px;
       background: $charcoal-grey-faded;
       transform: translateY(28px);
       transition: transform .3s;

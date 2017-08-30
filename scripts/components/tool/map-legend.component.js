@@ -75,7 +75,6 @@ export default class {
     } else {
       this._hideLegend();
     }
-
   }
 
   _showLegend() {
