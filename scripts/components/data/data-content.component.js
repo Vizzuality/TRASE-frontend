@@ -188,15 +188,14 @@ export default class {
       this._downloadFile();
     }
 
-    if (payload.email === '') {
+    // pretty please can I haz your data
+    if (_.values(payload).filter(v => v!== '').length === 1) {
       this._setFormStatus(true);
       return;
     }
 
     const body = new FormData();
     Object.keys(payload).forEach(key => { body.append(key, payload[key]); });
-
-    console.log(body)
 
     fetch(DATA_FORM_ENDPOINT, {
       method: 'POST',
