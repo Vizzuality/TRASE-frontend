@@ -76,7 +76,7 @@ export default function (state = {}, action) {
 
       // use current selectedMapContextualLayers, or use the context's default
       let selectedMapContextualLayers = context.defaultContextLayers || undefined;
-      if (state.selectedMapContextualLayers !== undefined && state.selectedMapContextualLayers !== null && state.selectedMapContextualLayers.length) {
+      if (state.selectedMapContextualLayers !== undefined && state.selectedMapContextualLayers !== null) {
         selectedMapContextualLayers = state.selectedMapContextualLayers;
       }
 

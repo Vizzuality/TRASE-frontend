@@ -69,8 +69,7 @@ export default class {
   }
 
   _toggleLegend(choroplethLegend, selectedMapContextualLayersData) {
-    if (choroplethLegend !== null || selectedMapContextualLayersData.length)
-    {
+    if (choroplethLegend === null && (selectedMapContextualLayersData === undefined || !selectedMapContextualLayersData.length)) {
       this._showLegend();
     } else {
       this._hideLegend();
