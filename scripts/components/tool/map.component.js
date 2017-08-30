@@ -291,6 +291,8 @@ export default class {
       return;
     }
 
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
+
     const linkedPolygons = [];
     this.currentPolygonTypeLayer.eachLayer(layer => {
       const isLinked = linkedGeoIds.indexOf(layer.feature.properties.geoid) > -1;
