@@ -175,17 +175,11 @@ export default class {
       payload[formEl.id] = formEl.value;
     }
 
-
-
     if (!this.formTosCheck.checked) {
       this.formTos.classList.add('-highlighted');
       return;
     }
 
-
-    if (payload.country_alt !== '') {
-      payload.country = payload.country_alt;
-    }
     delete payload.country_alt;
     delete payload.tos_check;
     payload.date = new Date().toString();
@@ -201,6 +195,8 @@ export default class {
 
     const body = new FormData();
     Object.keys(payload).forEach(key => { body.append(key, payload[key]); });
+
+    console.log(body)
 
     fetch(DATA_FORM_ENDPOINT, {
       method: 'POST',

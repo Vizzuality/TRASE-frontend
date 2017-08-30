@@ -3,20 +3,13 @@
 .c-download-form {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-end;
   font-family: $font-family-1;
   font-size: $font-size-x-regular;
 
   .form-submit-download { display: block; }
   .form-submit-submit { display: none; }
 
-  .tos {
-    display: block;
-    margin-top: 30px;
-
-    &.-highlighted {
-      color: $medium-pink;
-    }
-  }
 
   &.-downloaded {
     .form-submit-download { display: none; }
@@ -25,20 +18,20 @@
   }
 
   .description {
+    font-family: $font-family-2;
     flex: 2 0 100%;
-    text-transform: uppercase;
-    font-weight: bold;
   }
 
   .missing {
     color: $medium-pink;
     font-weight: bold;
+    font-family: $font-family-2;
+    margin-top: 10px;
   }
 
   label {
     flex: 1 0 50%;
-    padding: 15px 20px 0 0;
-    font-weight: bold;
+    padding: 26px 20px 0 0;
   }
 
   .submit {
@@ -62,7 +55,7 @@
 
   select, input:not([type='checkbox']) {
     width: 100%;
-    height: 40px;
+    height: 36px;
     transform: translateY(4px);
     -webkit-appearance: none;
     background: $white;
@@ -77,6 +70,16 @@
     line-height: normal;
     font-family: inherit;
     font-size: $font-size-x-regular;
+  }
+
+  .tos {
+    display: block;
+    margin-top: 30px;
+    font-weight: bold;
+
+    &.-highlighted {
+      color: $medium-pink;
+    }
   }
 
   input[type='checkbox'] {
