@@ -24,14 +24,14 @@ export default class {
     zoom.addEventListener('mouseleave', () => { scale.classList.toggle('-visible', false); });
   }
 
-  updateChoroplethLegend(choroplethLegend) {
+  updateChoroplethLegend({ choroplethLegend, selectedMapContextualLayersData }) {
+    this._toggleLegend(choroplethLegend, selectedMapContextualLayersData);
     this._setupChoro(choroplethLegend);
-
     this._updateMapControlsPosition();
   }
 
   updateContextLegend({ choroplethLegend, selectedMapContextualLayersData }) {
-    this._toggleLegend(choroplethLegend);
+    this._toggleLegend(choroplethLegend, selectedMapContextualLayersData);
     this._renderContext(selectedMapContextualLayersData);
     this._updateMapControlsPosition();
   }
@@ -63,15 +63,13 @@ export default class {
       this._cleanChoro();
     }
 
-    this._toggleLegend(choroplethLegend);
-
     if (choroplethLegend !== null) {
       this._renderChoro(choroplethLegend);
     }
   }
 
-  _toggleLegend(choroplethLegend) {
-    if (choroplethLegend !== null)
+  _toggleLegend(choroplethLegend, selectedMapContextualLayersData) {
+    if (choroplethLegend !== null || selectedMapContextualLayersData.length)
     {
       this._showLegend();
     } else {
