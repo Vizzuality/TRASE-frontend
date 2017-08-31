@@ -23,37 +23,64 @@
           <div class="c-modal -below-nav">
             <div class="content -white -big-margin">
               <form class="js-form c-download-form">
-                <p class="description">Please provide the following info before downloading the data</p>
-                <p class="missing js-missing is-hidden">We'd love to hear about how you use the data and how we could improve it. Please fill in your email below and click on 'submit':</p>
+                <p class="description">Thank you for your interest in downloading data from Trase! To help us better understand how the data is currently being used and to improve the platform, we would appreciate if you could tell us a bit about yourself and your work.</p>
+                <p class="missing js-missing is-hidden">We'd love to hear about how you use the data and how we could improve it. Please fill in details below and click on 'submit':</p>
                 <label for="name">
-                  Name
-                  <input type="text" placeholder="name" id="name">
+                  Name:
+                  <input type="text" placeholder="type name" id="name">
                 </label>
-                <label for="email">
-                  Email
-                  <input type="email" placeholder="email" id="email">
-                </label>
+
                 <label for="country">
-                  Country
-                  <input type="text" placeholder="type country..." id="country" list="countriesList">
+                  Country:
+                  <input type="text" placeholder="select or type country..." id="country" list="countriesList">
                   <datalist id="countriesList">
-                    <select id="country_alt">
-                      <%= htmlWebpackPlugin.options.autocomplete_countries %>
-                    </select>
+                    <%= htmlWebpackPlugin.options.autocomplete_countries %>
                   </datalist>
                 </label>
-                <label for="area_of_interest">
-                  Main area of interest
-                  <div class="select">
-                    <select id="area_of_interest" name="area_of_interest">
-                      <option value="">Select interest</option>
-                      <option>a</option>
-                      <option>b</option>
-                      <option>c</option>
-                    </select>
-                  </div>
+
+                <label for="organisation">
+                  Organisation name:
+                  <input type="text" placeholder="type organisation name" id="organisation">
                 </label>
-                <p class="tos">By clicking "download data" below I agree to the <a target="_blank" href="http://trase.earth/terms-of-use.html">Terms of use</a>.</p>
+
+                <label for="organisationType">
+                  Select or type the option that best describes your organisation:
+                  <input type="text" placeholder="select or type..." id="organisationType" list="organisationTypeList">
+                  <datalist id="organisationTypeList">
+                    <option>Company</option>
+                    <option>Financial institution</option>
+                    <option>Government agency</option>
+                    <option>Media</option>
+                    <option>Research organisation</option>
+                  </datalist>
+                </label>
+
+                <label for="dataUse">
+                  How will you use the data?
+                  <input type="text" placeholder="select or type..." id="dataUse" list="dataUseList">
+                  <datalist id="dataUseList">
+                    <option>Decision support</option>
+                    <option>Media and outreach</option>
+                    <option>Research</option>
+                  </datalist>
+                </label>
+
+                <label for="comments">
+                  Please tell us more about your work and if you are interested in helping improve Trase:
+                  <input type="text" placeholder="type comments" id="comments">
+                </label>
+
+                <label for="email">
+                  If you would like to sign up for the Trase quarterly newsletter, please provide your email address:
+                  <input type="email" placeholder="type email" id="email">
+                </label>
+
+                <p class="tos js-tos">
+                  <label for="tos_check">
+                    <input type="checkbox" id="tos_check">
+                    * I agree to the <a target="_blank" href="http://trase.earth/terms-of-use.html">Terms of use</a> (required field).
+                  </label>
+                </p>
                 <label class="submit">
                   <div class="download-button js-form-submit">
                     <div class="form-submit-download">
