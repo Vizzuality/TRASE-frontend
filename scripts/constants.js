@@ -88,9 +88,8 @@ export const TOOL_DEFAULT_STATE = {
     areNodesExpanded: false,
     detailedView: false,
     selectedNodesData: [],
-    selectedMapDimensions: undefined,
-    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
-    selectedMapBasemap: 'default',
+    selectedMapContextualLayers: null,
+    selectedMapDimensions: [null, null],
     isMapVisible: false,
     expandedMapSidebarGroupsIds: []
   }
@@ -113,23 +112,22 @@ export const YEARS_DISABLED_UNAVAILABLE = 'The selected map layer ($layer) does 
 
 export const MAP_PANES = {
   basemap: 'basemap',
+  contextBelow: 'contextBelow',
   vectorMain: 'vectorMain',
-  vectorLinked: 'vectorLinked',
   vectorOutline: 'vectorOutline',
   context: 'context',
   basemapLabels: 'basemapLabels'
 };
 export const MAP_PANES_Z = {
   [MAP_PANES.basemap]: 200,
+  [MAP_PANES.contextBelow]: 400,
   [MAP_PANES.vectorMain]: 410,
-  [MAP_PANES.vectorLinked]: 411,
   [MAP_PANES.vectorOutline]: 412,
   [MAP_PANES.context]: 420,
   [MAP_PANES.basemapLabels]: 490
 };
 export const BASEMAPS = {
   default: {
-    id: 'default',
     title: 'Default',
     url: '//api.mapbox.com/styles/v1/trasebase/cizi55y2r00122rl65a97ppz1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     labelsUrl: '//api.mapbox.com/styles/v1/traselabels/cizi59ohm00122spaghssyqsd/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2VsYWJlbHMiLCJhIjoiY2l6aTU4bm9sMDAyczMzazdwNWJ1MmFmbSJ9.zcNOZLokWun7cDwbArtV6g',
@@ -137,21 +135,18 @@ export const BASEMAPS = {
     thumbnail: 'images/maps/thumb-basemap-default.png'
   },
   satellite: {
-    id: 'satellite',
     title: 'Satellite',
     url: '//api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>, <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>, <a href="https://www.digitalglobe.com/" target="_blank">DigitalGlobe</a>',
     thumbnail: 'images/maps/thumb-basemap-satellite.jpeg'
   },
   topo: {
-    id: 'topography',
     title: 'Topography',
     url: '//{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
     attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy;<a href="http://opentopomap.org">opentopomap.org</a>',
     thumbnail: 'images/maps/thumb-basemap-topo.png'
   },
   streets: {
-    id: 'osm',
     title: 'Streets (OSM)',
     url: '//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
     attribution: '&copy;<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',

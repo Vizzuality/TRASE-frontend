@@ -53,6 +53,7 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "@turf/bbox": "^4.6.0",
     "awesomplete": "^1.1.1",
     "body-parser": "^1.15.2",
     "classnames": "^2.2.5",

@@ -74,6 +74,17 @@ export default function (state = {}, action) {
         biomeFilter = context.filterBy[0].nodes.find(filterBy => filterBy.name === state.selectedBiomeFilterName);
       }
 
+      // use current selectedMapContextualLayers, or use the context's default
+      let selectedMapContextualLayers = context.defaultContextLayers || undefined;
+      if (state.selectedMapContextualLayers !== undefined && state.selectedMapContextualLayers !== null) {
+        selectedMapContextualLayers = state.selectedMapContextualLayers;
+      }
+
+      let selectedMapBasemap = context.defaultBasemap || 'default';
+      if (state.selectedMapBasemap !== undefined && state.selectedMapBasemap !== null) {
+        selectedMapBasemap = state.selectedMapBasemap;
+      }
+
       // force state updates on the component
       const selectedYears = (state.selectedYears) ? Object.assign([], state.selectedYears) : [context.defaultYear, context.defaultYear];
       const mapView = (state.mapView) ? Object.assign({}, state.mapView) : context.map;
@@ -85,6 +96,8 @@ export default function (state = {}, action) {
         selectedRecolorBy: recolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: resizeBy,
         selectedBiomeFilter: biomeFilter || { value: 'none' },
+        selectedMapContextualLayers,
+        selectedMapBasemap,
         mapView
       });
       break;
@@ -103,6 +116,8 @@ export default function (state = {}, action) {
         selectedRecolorBy: defaultRecolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: defaultResizeBy,
         selectedBiomeFilter: defaultFilterBy,
+        selectedMapContextualLayers: context.defaultContextLayers || undefined,
+        selectedMapBasemap: context.defaultBasemap || 'default',
         detailedView: false,
         recolorGroups: [],
         mapView: context.map,
@@ -338,8 +353,9 @@ export default function (state = {}, action) {
     case actions.SELECT_CONTEXTUAL_LAYERS: {
       const mapContextualLayersDict = _.keyBy(state.mapContextualLayers, 'name');
       const selectedMapContextualLayersData = action.contextualLayers.map(layerSlug => {
-        return _.cloneDeep(mapContextualLayersDict[layerSlug]);
+        return Object.assign({}, mapContextualLayersDict[layerSlug]);
       });
+
       newState = Object.assign({}, state, {
         selectedMapContextualLayers: action.contextualLayers, selectedMapContextualLayersData
       });

@@ -8,18 +8,23 @@ export default class {
     this.items = document.querySelector('.js-map-context-items');
   }
 
-  buildLayers(layers) {
+  buildLayers({ layers, selectedMapContextualLayers }) {
     this.items.innerHTML = ContextLayersTemplate({ layers });
     this.switchers = Array.prototype.slice.call(this.items.querySelectorAll('.c-switcher'), 0);
 
     this.switchers.forEach(switcher => {
       switcher.addEventListener('click', (e) => this._onToggleSwitcher(e));
     });
+
+    this.selectContextualLayers(selectedMapContextualLayers);
   }
 
-  selectContextualLayers(layers) {
-    if (layers.length) {
-      this._setActiveContextualLayers(layers);
+  selectContextualLayers(selectedMapContextualLayers) {
+    if (this.switchers === undefined) {
+      return;
+    }
+    if (selectedMapContextualLayers !== undefined && selectedMapContextualLayers !== null && selectedMapContextualLayers.length) {
+      this._setActiveContextualLayers(selectedMapContextualLayers);
     }
   }
 
@@ -27,8 +32,8 @@ export default class {
     this.el.classList.toggle('is-hidden', context.countryName !== 'BRAZIL');
   }
 
-  _setActiveContextualLayers(layers) {
-    layers.forEach((layerSlug) => {
+  _setActiveContextualLayers(selectedMapContextualLayers) {
+    selectedMapContextualLayers.forEach((layerSlug) => {
       this.switchers.forEach((switcher) => {
         if (switcher.getAttribute('data-layer-slug') !== layerSlug) return;
         switcher.closest('.js-map-context-item').classList.add('-selected');
