@@ -2,6 +2,8 @@
 - Add new "Clear selection" button at the bottom of the sankey
 - Add support for disabling map layers per year
 - Add brazilian biomes context layer
+- Add configurable default basemaps and context layers per context
+- Add data portal data collection form
 
 ### 2.5.1
 - site: temporarily disable homepage video
