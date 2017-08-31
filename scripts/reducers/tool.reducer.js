@@ -80,8 +80,6 @@ export default function (state = {}, action) {
         selectedMapContextualLayers = state.selectedMapContextualLayers;
       }
 
-      // TODO mock
-      context.defaultBasemap = 'satellite';
       let selectedMapBasemap = context.defaultBasemap || 'default';
       if (state.selectedMapBasemap !== undefined && state.selectedMapBasemap !== null) {
         selectedMapBasemap = state.selectedMapBasemap;

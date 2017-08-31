@@ -223,9 +223,7 @@ export function loadNodes() {
         dispatch(setMapDimensions(currentMapDimensions.concat([])));
       } else {
         // use default map dimensions
-        // const defaultMapDimensions = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
-        // TODO mock
-        const defaultMapDimensions = undefined;
+        const defaultMapDimensions = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
         if (defaultMapDimensions !== undefined) {
           const uids = defaultMapDimensions.map(selectedDimension => getNodeMetaUid(selectedDimension.type, selectedDimension.layerAttributeId));
           if (uids[0] === undefined) uids[0] = null;
