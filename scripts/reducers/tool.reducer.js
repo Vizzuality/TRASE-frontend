@@ -16,7 +16,7 @@ import getChoropleth from './helpers/getChoropleth';
 import getNodesAtColumns from './helpers/getNodesAtColumns';
 import getNodesColoredBySelection from './helpers/getNodesColoredBySelection';
 import getRecolorGroups from './helpers/getRecolorGroups';
-import getMapDimensionsWarnings from './helpers/getMapDimensionsWarnings';
+import { getMapDimensionsWarnings } from './helpers/getMapDimensionsWarnings';
 
 export default function (state = {}, action) {
   let newState;
