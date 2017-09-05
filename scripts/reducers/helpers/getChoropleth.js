@@ -8,7 +8,7 @@ const _shortenTitle = (title) => {
   return [title.slice(0, 34), title.slice(-12)].join('(…)');
 };
 
-export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensions) {
+export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensions, forceEmpty) {
   const uids = _.compact(selectedMapDimensionsUids);
 
   if (!uids.length) {
@@ -37,6 +37,10 @@ export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensi
     titles: selectedMapDimensions.map(d => _shortenTitle(d.name)),
     bucket: selectedMapDimensions.map(d => (isBivariate) ? d.bucket3.slice(0) : d.bucket5.slice(0)),
   };
+
+  if (forceEmpty === true) {
+    return { choropleth, choroplethLegend };
+  }
 
   geoNodesIds.forEach(nodeId => {
     const node = geoNodes[nodeId];

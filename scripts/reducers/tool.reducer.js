@@ -320,7 +320,12 @@ export default function (state = {}, action) {
 
     case actions.SET_MAP_DIMENSIONS: {
       const selectedMapDimensions = action.uids;
-      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
+
+      // TODO Remove that when server correctly implements map dimensions meta/choropleth
+      // ie it shouldn't return choropleth values in get_nodes over multiple years if metadata says data is unavailable
+      const forceEmptyChoropleth = (state.selectedYears[1] - state.selectedYears[0]) > 0;
+
+      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions, forceEmptyChoropleth);
       const selectedMapDimensionsWarnings = getMapDimensionsWarnings(state.mapDimensions, selectedMapDimensions);
 
       newState = Object.assign({}, state, { selectedMapDimensions, selectedMapDimensionsWarnings, choropleth, choroplethLegend });
@@ -344,8 +349,11 @@ export default function (state = {}, action) {
         selectedMapDimensions[uidIndex] = null;
       }
 
-      // get a geoId <-> color dict
-      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
+      // TODO Remove that when server correctly implements map dimensions meta/choropleth
+      // ie it shouldn't return choropleth values in get_nodes over multiple years if metadata says data is unavailable
+      const forceEmptyChoropleth = (state.selectedYears[1] - state.selectedYears[0]) > 0;
+
+      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions, forceEmptyChoropleth);
       const selectedMapDimensionsWarnings = getMapDimensionsWarnings(state.mapDimensions, selectedMapDimensions);
       newState = Object.assign({}, state, { selectedMapDimensions, selectedMapDimensionsWarnings, choropleth, choroplethLegend });
       break;

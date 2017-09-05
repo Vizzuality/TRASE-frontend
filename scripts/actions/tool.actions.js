@@ -202,7 +202,7 @@ export function loadNodes() {
       }
 
       payload.mapDimensionsMetaJSON.dimensions.forEach(dimension => {
-        if ((dimension.aggregateMethod === undefined || dimension.aggregateMethod === null) && allSelectedYears.length > 1) {
+        if (/*(dimension.aggregateMethod === undefined || dimension.aggregateMethod === null) &&*/ allSelectedYears.length > 1) {
           dimension.disabledYearRangeReason = YEARS_DISABLED_NO_AGGR;
           dimension.disabledYearRangeReasonText = getSingleMapDimensionWarning(dimension.disabledYearRangeReason);
         } else {
