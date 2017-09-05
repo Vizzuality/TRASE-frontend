@@ -1,7 +1,15 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
 import _ from 'lodash';
-import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL, CONTEXT_WITHOUT_MAP_IDS, YEARS_DISABLED_NO_AGGR, YEARS_DISABLED_UNAVAILABLE } from 'constants';
+import { NUM_NODES_SUMMARY,
+  NUM_NODES_DETAILED,
+  NUM_NODES_EXPANDED,
+  CARTO_NAMED_MAPS_BASE_URL,
+  CONTEXT_WITHOUT_MAP_IDS,
+  YEARS_DISABLED_NO_AGGR,
+  YEARS_DISABLED_UNAVAILABLE,
+  CONTEXT_WITH_CONTEXT_LAYERS_IDS
+} from 'constants';
 import {
   getURLFromParams,
   GET_ALL_NODES,
@@ -169,6 +177,9 @@ export function setContext(contextId, isInitialContextSet = false) {
         dispatch(loadNodes());
         dispatch(loadMapVectorData());
         dispatch(loadMapContextLayers());
+      } else {
+        dispatch(resetContextLayers());
+        dispatch(resetMapDimensions());
       }
     });
   };
@@ -358,6 +369,19 @@ export function loadMapVectorData() {
   };
 }
 
+export function resetContextLayers() {
+  return (dispatch) => {
+    dispatch({
+      type: actions.GET_CONTEXT_LAYERS,
+      mapContextualLayers: []
+    });
+    dispatch({
+      type: actions.SELECT_CONTEXTUAL_LAYERS,
+      contextualLayers: []
+    });
+  };
+}
+
 export function loadMapContextLayers() {
   return (dispatch, getState) => {
     const namedMapsURLs = mapContextualLayers.map(layer => {
@@ -366,6 +390,12 @@ export function loadMapContextLayers() {
       }
       return `${CARTO_NAMED_MAPS_BASE_URL}${layer.name}/jsonp?callback=cb`;
     }).filter(url => url !== null);
+
+    // TODO add context layers data on the API side (on get_map_base_data)
+    if (CONTEXT_WITH_CONTEXT_LAYERS_IDS.indexOf(getState().tool.selectedContext.id) === -1) {
+      dispatch(resetContextLayers());
+      return;
+    }
 
     Promise.all(namedMapsURLs.map(url => fetch(url).then(resp => resp.text()))).then(() => {
       // we actually don't care about layergroupids because we already have them pregenerated
@@ -595,6 +625,12 @@ export function setMapDimensions(uids) {
       uids
     });
     dispatch(updateNodes(getState().tool.selectedNodesIds));
+  };
+}
+
+export function resetMapDimensions() {
+  return {
+    type: actions.RESET_MAP_DIMENSIONS
   };
 }
 

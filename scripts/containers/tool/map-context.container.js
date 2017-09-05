@@ -12,8 +12,7 @@ const mapMethodsToState = (state) => ({
       };
     }
   },
-  selectContextualLayers: state.tool.selectedMapContextualLayers,
-  toggle: state.tool.selectedContext
+  selectContextualLayers: state.tool.selectedMapContextualLayers
 });
 
 const mapViewCallbacksToActions = () => ({

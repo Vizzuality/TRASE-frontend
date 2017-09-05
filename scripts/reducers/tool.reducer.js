@@ -190,6 +190,11 @@ export default function (state = {}, action) {
       break;
     }
 
+    case actions.RESET_MAP_DIMENSIONS: {
+      newState = Object.assign({}, state, { mapDimensions: [], mapDimensionsGroups: [], selectedMapDimensions: [null, null], choroplethLegend: null });
+      break;
+    }
+
     case actions.GET_LINKS: {
       const rawLinks = action.jsonPayload.data;
       const linksMeta = action.jsonPayload.include;

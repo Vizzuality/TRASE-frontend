@@ -28,10 +28,6 @@ export default class {
     }
   }
 
-  toggle(context) {
-    this.el.classList.toggle('is-hidden', context.countryName !== 'BRAZIL');
-  }
-
   _setActiveContextualLayers(selectedMapContextualLayers) {
     selectedMapContextualLayers.forEach((layerSlug) => {
       this.switchers.forEach((switcher) => {
