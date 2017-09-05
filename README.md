@@ -51,15 +51,14 @@ The project's main configuration values can be set using [environment variables]
 * API_STORY_CONTENT: URL of the deep dive stories API
 * API_SOCIAL: URL of the tweets API
 * GOOGLE_ANALYTICS_KEY: API key for Google Analytics
-* DATA_FORM_ENABLED: enable contact form in Data page 
+* DATA_FORM_ENABLED: enable contact form in Data page
 * DATA_FORM_ENDPOINT: end point to send form values in Data page
 
-If you are using the included development server, you can set those variables in the `.env` file (use the included `
-.env.sample` as an example)
+If you are using the included development server, you can set those variables in the `.env` file (use the included `.env.sample` as an example)
 
 ## Development set up
-- Check out the code from [github](github.com/Vizzuality/TRASE-frontend)
 
+- Check out the code from [github](github.com/Vizzuality/TRASE-frontend)
 - Install dependencies:
 ```
 npm i
@@ -108,6 +107,21 @@ This will use the layers configuration stored in `./gis/cartodb/templates.json`
 
 Run `npm run build`, it will create a production-ready version of the project in `/dist`.
 
+
+## Deployment
+
+Depending on the environment where you want to deploy, you need to have a `.env.staging` or a `.env.production` file set up.
+
+Then run
+```
+npm run deploy:staging
+```
+or
+```
+npm run deploy:production
+```
+
+This will build using appropriate env file and upload to server usinc scp.
 
 ## LICENSE
 
