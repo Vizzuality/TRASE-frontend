@@ -54,8 +54,10 @@ export default class {
   }
 
   selectMapDimensions(selectedMapDimensionsWarnings) {
-    this.warningsContainer.classList.toggle('-visible', selectedMapDimensionsWarnings.length);
-    this.warnings.innerHTML = selectedMapDimensionsWarnings.join('<br>');
+    this.warningsContainer.classList.toggle('-visible', selectedMapDimensionsWarnings !== null);
+    if (selectedMapDimensionsWarnings !== null) {
+      this.warnings.innerHTML = selectedMapDimensionsWarnings;
+    }
   }
 
   _setupChoro(choroplethLegend) {

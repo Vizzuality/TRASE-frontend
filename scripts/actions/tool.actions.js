@@ -27,6 +27,7 @@ import getNodesSelectionAction from './helpers/getNodesSelectionAction';
 import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible';
 import setGeoJSONMeta from './helpers/setGeoJSONMeta';
 import getNodeMetaUid from 'reducers/helpers/getNodeMetaUid';
+import { getSingleMapDimensionWarning } from 'reducers/helpers/getMapDimensionsWarnings';
 import getProfileLink from 'utils/getProfileLink';
 
 export function resetState(refilter = true) {
@@ -212,12 +213,14 @@ export function loadNodes() {
       }
 
       payload.mapDimensionsMetaJSON.dimensions.forEach(dimension => {
-        if (dimension.yearsAggregation === null && allSelectedYears.length > 1) {
-          dimension.disabledYearRangeReason = YEARS_DISABLED_NO_AGGR.replace('$layer', dimension.name);
+        if (/*(dimension.aggregateMethod === undefined || dimension.aggregateMethod === null) &&*/ allSelectedYears.length > 1) {
+          dimension.disabledYearRangeReason = YEARS_DISABLED_NO_AGGR;
+          dimension.disabledYearRangeReasonText = getSingleMapDimensionWarning(dimension.disabledYearRangeReason);
         } else {
           const allYearsCovered = dimension.years === null || allSelectedYears.every(year => dimension.years.indexOf(year) > -1);
           if (!allYearsCovered) {
-            dimension.disabledYearRangeReason = YEARS_DISABLED_UNAVAILABLE.replace('$layer', dimension.name);
+            dimension.disabledYearRangeReason = YEARS_DISABLED_UNAVAILABLE;
+            dimension.disabledYearRangeReasonText = getSingleMapDimensionWarning(dimension.disabledYearRangeReason);
           }
         }
       });

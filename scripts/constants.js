@@ -107,8 +107,18 @@ export const LINE_LABEL_HEIGHT = 12;
 // map
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';
 export const CARTO_NAMED_MAPS_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/named/';
-export const YEARS_DISABLED_NO_AGGR = 'The selected map layer ($layer) can\'t be displayed over multiple years. Please modify year selection to a single year.';
-export const YEARS_DISABLED_UNAVAILABLE = 'The selected map layer ($layer) does not contain data for the whole year selection. Please change year selection.';
+export const YEARS_DISABLED_WARNINGS = {
+  NO_AGGR_REASON: 'can\'t be displayed over multiple years.',
+  NO_AGGR_INSTRUCTION: 'Please modify year selection to a single year.',
+  UNAVAILABLE_REASON: 'can\'t be displayed for the selected years.',
+  UNAVAILABLE_INSTRUCTION: 'Please change year selection.',
+  THIS_LAYER: 'This layer',
+  THAT_LAYER: 'The selected map layer ($layer)',
+  THOSE_LAYERS: 'The selected map layers ($layer0 and $layer1)'
+};
+
+export const YEARS_DISABLED_NO_AGGR = 'NO_AGGR';
+export const YEARS_DISABLED_UNAVAILABLE = 'UNAVAILABLE';
 
 export const MAP_PANES = {
   basemap: 'basemap',
