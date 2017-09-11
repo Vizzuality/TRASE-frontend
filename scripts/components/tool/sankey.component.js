@@ -96,7 +96,7 @@ export default class {
     this.sankeyColumns = this.svg.selectAll('.sankey-column');
     this.linksContainer = this.svg.select('.sankey-links');
 
-    this.linkTooltip = new Tooltip('.js-tool-tooltip');
+    this.linkTooltip = new Tooltip('.js-sankey-tooltip');
 
     this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
 

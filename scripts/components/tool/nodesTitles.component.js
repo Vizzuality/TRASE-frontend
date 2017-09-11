@@ -9,7 +9,7 @@ export default class {
     this.el = document.querySelector('.js-nodes-titles');
     this.container = this.el.querySelector('.js-nodes-titles-container');
     this.clear = this.el.querySelector('.js-nodes-titles-clear');
-    this.tooltip = new Tooltip('.js-tool-tooltip');
+    this.tooltip = new Tooltip('.js-node-tooltip');
 
     this.clear.addEventListener('click', this.callbacks.onClearClick);
   }
