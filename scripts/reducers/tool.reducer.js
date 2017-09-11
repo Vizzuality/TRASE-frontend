@@ -217,6 +217,11 @@ export default function (state = {}, action) {
       break;
     }
 
+    case actions.SHOW_LINKS_ERROR: {
+      newState = Object.assign({}, state, { links: null });
+      break;
+    }
+
     case actions.GET_LINKED_GEOIDS: {
       const linkedGeoIds = (action.payload.length) ? action.payload.map(node => node.geo_id) : [];
       newState = Object.assign({}, state, { linkedGeoIds });

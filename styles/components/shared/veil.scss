@@ -12,4 +12,8 @@
   &.-below-nav {
     z-index: $z-veil-below-nav;
   }
+
+  &.-with-menu {
+    top: $nav-height;
+  }
 }

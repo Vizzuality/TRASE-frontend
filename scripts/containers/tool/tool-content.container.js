@@ -5,7 +5,8 @@ const mapMethodsToState = (state) => ({
   toggleMapVisibility: state.tool.isMapVisible,
   toggleMapLayersVisibility: state.app.isMapLayerVisible,
   showLoaderAtInitialLoad: state.tool.initialDataLoading,
-  showLoader: state.tool.linksLoading
+  showLoader: state.tool.linksLoading,
+  toggleError: state.tool.links
 });
 
 export default connect(ToolContent, mapMethodsToState);

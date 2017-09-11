@@ -27,6 +27,9 @@ export default class {
   }
 
   showLoadedLinks(linksPayload) {
+    if (linksPayload.links === null || !linksPayload.links.length) {
+      return;
+    }
     this.scrollContainer.classList.toggle('-detailed', linksPayload.detailedView);
 
     if (linksPayload.detailedView === false) {

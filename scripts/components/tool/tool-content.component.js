@@ -9,6 +9,7 @@ export default class {
     this.el = document.querySelector('.js-tool-content');
     this.map = this.el.querySelector('.js-map-container');
     this.veil = this.el.querySelector('.js-sankey-veil');
+    this.sankeyError = document.querySelector('.js-sankey-error');
   }
 
   showLoaderAtInitialLoad(loading) {
@@ -31,5 +32,9 @@ export default class {
 
   toggleMapLayersVisibility(isVisible) {
     this.el.classList.toggle('-open', isVisible);
+  }
+
+  toggleError(links) {
+    this.sankeyError.classList.toggle('is-hidden', links !== null && links.length);
   }
 }
