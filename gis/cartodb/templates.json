@@ -85,27 +85,6 @@
   },
   {
     "version": "0.0.1",
-    "name": "silos",
-    "human_name": "silos",
-    "legend":"<div class='cartodb-legend choropleth'><ul><li class=\"bullet bullet-icon\" style=\"background-image:url(http://com.cartodb.users-assets.production.s3.amazonaws.com/simpleicon/building22.svg)\"></li><li class=\"min\">0</li><li class=\"graph count_441\"><div class=\"colors\"><div class=\"quartile\" style=\"background-color: #5CA2D1\"></div><div class=\"quartile\" style=\"background-color:#3E7BB6\"></div><div class=\"quartile\" style=\"background-color:#2167AB\"></div><div class=\"quartile\" style=\"background-color:#0F3B82\"></div><div class=\"quartile\" style=\"background-color:#081B47\"></div></div></li><li class=\"max\"> > 30 tons </li> </ul> </div>",
-    "forceZoom": 6,
-    "layergroup": {
-      "version": "1.0.1",
-      "layers": [
-        {
-          "type": "cartodb",
-          "options": {
-            "sql": "SELECT * FROM silos",
-            "cartocss": "#silos[zoom>5]{   marker-fill-opacity: 0.8;   marker-line-color: #FFF;   marker-line-width: 1;   marker-line-opacity: 1;   marker-width: 10;   marker-file: url(http://com.cartodb.users-assets.production.s3.amazonaws.com/simpleicon/building22.svg);   marker-fill: transparent;   marker-allow-overlap: false; } #silos [ cap_t >= 0][zoom>5] {    marker-fill: #5CA2D1; } #silos [ cap_t >= 1499.5][zoom>5] {    marker-fill: #3E7BB6; }  #silos [ cap_t >= 3168.5][zoom>5] {    marker-fill: #2167AB; } #silos [ cap_t >= 16580.5][zoom>5] {    marker-fill: #0F3B82; } #silos [ cap_t >= 31470][zoom>5] {    marker-fill: #081B47; }",
-            "cartocss_version": "2.3.0",
-            "interactivity":["cartodb_id","cap_t","company","type","uf"]
-          }
-        }
-      ]
-    }
-  },
-  {
-    "version": "0.0.1",
     "human_name": "Deforestation polygons",
     "name": "brazil_defor_alerts",
     "legend":"<div class='cartodb-legend custom'><ul><li><div class= \"bullet\" style= \"background:#850200\"></div>Deforestation</li></ul></div>",
