@@ -13,7 +13,8 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       type: column.name,
       columnGroup: column.group,
       isDefault: column.isDefault,
-      isGeo: column.isGeo,
+      // TODO hack because isGeo is not properly set to true on the Logistics Hub column, https://basecamp.com/1756858/projects/12498794/todos/323538638
+      isGeo: column.isGeo || column.name === 'LOGISTICS HUB',
       name: node.name,
       profileType: node.profileType,
       geoId: node.geoId
