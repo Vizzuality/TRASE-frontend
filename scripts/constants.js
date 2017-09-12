@@ -21,7 +21,7 @@ export const NUM_DECIMALS = {
   'forest code deficit': 1,
   'number of environmental embargos (2015)': 0,
   '% of soy under zero deforestation commitments': 1,
-  'human development index': 0,
+  'human development index': 3,
   'gdp per capita': 0,
   '% gdp from agriculture': 3,
   'smallholder dominance': 3,
