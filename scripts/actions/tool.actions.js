@@ -339,7 +339,8 @@ export function loadLinks() {
 
 export function loadMapVectorData() {
   return (dispatch, getState) => {
-    const geoColumns = getState().tool.columns.filter(column => column.isGeo === true);
+    // TODO hack because isGeo is not properly set to true on the Logistics Hub column, https://basecamp.com/1756858/projects/12498794/todos/323538638
+    const geoColumns = getState().tool.columns.filter(column => column.isGeo === true || column.name === 'LOGISTICS HUB');
     const geometriesPromises = [];
     const mapVectorData = {};
 
