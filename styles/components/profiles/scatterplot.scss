@@ -3,6 +3,7 @@
 .c-scatterplot {
   padding: 53px 0 63px 0;
 
+
   .title {
     margin-bottom: 46px;
   }
@@ -10,6 +11,12 @@
   path {
     stroke: none;
     fill: none;
+  }
+
+  .y-axis {
+    font-family: $font-family-1;
+    font-size: $font-size-x-regular;
+    color: rgba($charcoal-grey, .6);
   }
 
   .axis {

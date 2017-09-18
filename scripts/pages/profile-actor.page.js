@@ -96,6 +96,9 @@ const _initSource = (selectedSource, data) => {
 };
 
 const _build = (data, nodeId) => {
+  const verb = (data.column_name === 'EXPORTER') ? 'exported' : 'imported';
+  const verbGerund = (data.column_name === 'EXPORTER') ? 'exporting' : 'importing';
+
   lineSettings = {
     margin: { top: 10, right: 100, bottom: 30, left: 94 },
     height: 244,
@@ -125,21 +128,22 @@ const _build = (data, nodeId) => {
   };
 
   if (data.top_sources.municipality.lines.length) {
-    _setTopSourceSwitcher(data);
+    _setTopSourceSwitcher(data, verb);
 
     choroLegend(null, '.js-source-legend', {
-      title: ['Soy exported in 2015', '(tonnes)'],
+      title: [`Soy ${verb} in 2015`, '(tonnes)'],
       bucket: [[data.top_sources.buckets[0], ...data.top_sources.buckets]]
     });
 
     _initSource('municipality', data);
   }
 
+
   if (data.top_countries.lines.length) {
-    document.querySelector('.js-top-map-title').innerHTML = `Top destination countries of ${formatApostrophe(_.capitalize(data.node_name))} soy`;
+    document.querySelector('.js-top-map-title').textContent = `Top destination countries of Soy ${verb} by ${_.capitalize(data.node_name)}`;
 
     choroLegend(null, '.js-destination-legend', {
-      title: ['Soy exported in 2015', '(tonnes)'],
+      title: [`Soy ${verb} in 2015`, '(tonnes)'],
       bucket: [[data.top_countries.buckets[0], ...data.top_countries.buckets]]
     });
 
@@ -199,10 +203,12 @@ const _build = (data, nodeId) => {
   }
 
   if (data.sustainability.length) {
+    const tabsTitle = `Sustainability indicators of ${formatApostrophe(data.node_name)} top sourcing regions in 2015`;
+
     new MultiTable({
       el: document.querySelector('.js-sustainability-table'),
       data: data.sustainability,
-      tabsTitle: `Sustainability of ${formatApostrophe(data.node_name)} top source regions in 2015:`,
+      tabsTitle,
       type: 't_head_actors',
       target: (item) => { return (item.name === 'Municipalities') ? 'place' : null; }
     });
@@ -212,6 +218,7 @@ const _build = (data, nodeId) => {
     data: data.companies_exporting.companies,
     xDimension: data.companies_exporting.dimensions_x,
     node: { id: nodeId, name: data.node_name },
+    verbGerund,
     showTooltipCallback: (company, indicator, x, y) => {
       tooltip.show(x, y,
         company.name,
@@ -267,8 +274,9 @@ const _showErrorMessage = () => {
   el.querySelector('.js-error-message').classList.remove('is-hidden');
 };
 
-const _setTopSourceSwitcher = (data) => {
+const _setTopSourceSwitcher = (data, verb) => {
   const template = TopSourceTemplate({
+    verb,
     nodeName: formatApostrophe(_.capitalize(data.node_name)),
     switchers: Object.keys(data.top_sources).filter(key => !(ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST.includes(key)))
   });

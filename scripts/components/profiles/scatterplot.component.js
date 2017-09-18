@@ -18,9 +18,11 @@ export default class {
   constructor(className, settings) {
     this.el = document.querySelector(className);
     this.switcherEl = document.querySelector('.js-scatterplot-switcher');
+    this.titleEl = document.querySelector('.js-scatterplot-title');
     this.data = settings.data;
     this.xDimension = settings.xDimension;
     this.node = settings.node;
+    this.verbGerund = settings.verbGerund;
     this.showTooltipCallback = settings.showTooltipCallback;
     this.hideTooltipCallback = settings.hideTooltipCallback;
 
@@ -29,6 +31,7 @@ export default class {
   }
 
   _render() {
+    this.titleEl.textContent = `Comparing companies ${this.verbGerund} Soy from Brazil`;
     const margin = { top: 20, right: 13, bottom: 30, left: 29 };
     this.width = this.el.clientWidth - margin.left - margin.right;
     this.height = 377 - margin.top - margin.bottom;
