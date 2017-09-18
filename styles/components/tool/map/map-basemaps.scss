@@ -29,4 +29,9 @@
       z-index: $z-below-thumb;
     }
   }
+
+  .-disabled {
+    pointer-events: none;
+    opacity: .5;
+  }
 }

@@ -52,7 +52,7 @@ export default class {
     this.map.setView([mapView.latitude, mapView.longitude], mapView.zoom);
   }
 
-  loadBasemap(basemapId) {
+  setBasemap(basemapId) {
     if (this.basemap) {
       this.map.removeLayer(this.basemap);
     }

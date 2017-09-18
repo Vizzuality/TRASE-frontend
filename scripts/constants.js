@@ -165,6 +165,8 @@ export const BASEMAPS = {
   },
 };
 
+export const DEFAULT_BASEMAP_FOR_CHOROPLETH = 'default';
+
 // GA
 export const GA_ACTION_WHITELIST = [
   {

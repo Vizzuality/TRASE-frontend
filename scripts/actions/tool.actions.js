@@ -199,7 +199,7 @@ export function loadNodes() {
 
     const getNodesURL = getURLFromParams(GET_NODES, params);
     const getMapDimensionsMetadataURL = getURLFromParams(GET_MAP_BASE_DATA, params);
-    const currentMapDimensions = getState().tool.selectedMapDimensions;
+    const selectedMapDimensions = getState().tool.selectedMapDimensions;
 
     Promise.all([getNodesURL, getMapDimensionsMetadataURL].map(url => fetch(url).then(resp => resp.text()))).then(rawPayload => {
       const payload = {
@@ -233,11 +233,11 @@ export function loadNodes() {
       });
 
       const allAvailableMapDimensionsUids = payload.mapDimensionsMetaJSON.dimensions.map(dimension => getNodeMetaUid(dimension.type, dimension.layerAttributeId));
-      const currentMapDimensionsSet = _.compact(currentMapDimensions);
+      const selectedMapDimensionsSet = _.compact(selectedMapDimensions);
 
       // are all currently selected map dimensions available ?
-      if (currentMapDimensions !== undefined && (_.difference(currentMapDimensionsSet, allAvailableMapDimensionsUids)).length === 0) {
-        dispatch(setMapDimensions(currentMapDimensions.concat([])));
+      if (selectedMapDimensions !== undefined && (_.difference(selectedMapDimensionsSet, allAvailableMapDimensionsUids)).length === 0) {
+        dispatch(setMapDimensions(selectedMapDimensions.concat([])));
       } else {
         // use default map dimensions
         const defaultMapDimensions = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);

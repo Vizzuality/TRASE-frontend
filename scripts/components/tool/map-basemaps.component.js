@@ -16,7 +16,8 @@ export default class {
     });
   }
 
-  selectBasemap(basemapId) {
+  selectBasemap({ basemapId, disabled }) {
+    this.el.classList.toggle('-disabled', disabled);
     this._setActiveBasemap(basemapId);
   }
 

@@ -3,6 +3,7 @@ import { toggleMap, toggleMapLayerMenu } from 'actions/app.actions';
 import { selectNodeFromGeoId, highlightNodeFromGeoId, saveMapView } from 'actions/tool.actions';
 import connect from 'connect';
 import Map from 'components/tool/map.component.js';
+import getBasemap from '../helpers/getBasemap';
 
 const mapMethodsToState = (state) => ({
   setMapView: state.tool.mapView,
@@ -56,9 +57,12 @@ const mapMethodsToState = (state) => ({
     }
   },
   loadContextLayers: state.tool.selectedMapContextualLayersData,
-  loadBasemap: state.tool.selectedMapBasemap,
   showLinkedGeoIds: state.tool.linkedGeoIds,
-  invalidate: state.tool.isMapVisible
+  invalidate: state.tool.isMapVisible,
+  setBasemap: {
+    _comparedValue: (state) => getBasemap(state.tool),
+    _returnedValue: (state) => getBasemap(state.tool)
+  }
 });
 
 const mapViewCallbacksToActions = () => ({
