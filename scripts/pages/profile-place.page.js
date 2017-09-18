@@ -68,7 +68,7 @@ const _build = data => {
       data.trajectory_deforestation,
       data.trajectory_deforestation.included_years,
       {
-        margin: { top: 30, right: 40, bottom: 30, left: 99 },
+        margin: { top: 0, right: 40, bottom: 30, left: 99 },
         height: 425,
         ticks: {
           yTicks: 7,
@@ -113,7 +113,7 @@ const _build = data => {
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers.countries,
-      title: `Top consumers of ${formatApostrophe(_.capitalize(data.municipality_name))} soy`,
+      title: `Top importer countries of ${formatApostrophe(_.capitalize(data.municipality_name))} soy`,
       unit: '%'
     });
 
