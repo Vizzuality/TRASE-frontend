@@ -17,7 +17,7 @@
           "type": "cartodb",
           "options": {
             "sql": "SELECT * FROM brazil_biomes",
-            "cartocss": "#brazil_biomes {  polygon-opacity: 0;  line-color: #aaaaaa;  line-width: 14;  line-opacity: .2;}#brazil_biomes::above {  polygon-opacity: 0;  line-color: #000000;  line-width: 1.5;  line-opacity: 1;}#brazil_biomes::labels {  text-name: [cd_legenda];  text-face-name: 'DejaVu Sans Book';  text-size: 10;  text-label-position-tolerance: 0;  text-fill: #000;  text-halo-fill: #cccccc;  text-halo-radius: 1.5;  text-dy: 0;  text-allow-overlap: true;  text-placement: interior;  text-placement-type: dummy;}",
+            "cartocss": "#brazil_biomes{  polygon-opacity: 0;  line-color: #000000;  line-width: 1;  line-opacity: 1;}#brazil_biomes[zoom>3]::labels {  text-name: [cd_legenda];  text-face-name: 'Open Sans Regular';  text-size: 15;  text-fill: #FFFFFF;  text-allow-overlap: true;  text-placement: interior;  text-halo-fill: black;  text-halo-radius: 1;  text-character-spacing: 3;  [cd_legenda='MATA ATLANTICA'] {    text-horizontal-alignment: left;    text-dx: 85;   }  [cd_legenda='PANTANAL'] {    text-horizontal-alignment: right;    text-dx: -60;  }  [zoom=4] {    text-size: 13;  }}",
             "cartocss_version": "2.3.0"
           }
         }

@@ -11,7 +11,7 @@
       fill-opacity: 1;
       stroke: $charcoal-grey-toned-down;
       stroke-width: .35px;
-      stroke-opacity: 1;
+      stroke-opacity: .5;
       pointer-events: auto;
 
       &.-disabled {
@@ -33,13 +33,13 @@
 
     &.-noDimensions {
       path.-linked {
-        fill-opacity: 0;
+        fill: $manilla;
       }
     }
 
     &.-linkedActivated {
       path:not(.-linked) {
-        fill: $charcoal-grey-toned-down;
+        fill: transparent;
       }
     }
 
