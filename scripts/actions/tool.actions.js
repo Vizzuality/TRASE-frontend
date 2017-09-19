@@ -339,7 +339,8 @@ export function loadLinks() {
 
 export function loadMapVectorData() {
   return (dispatch, getState) => {
-    const geoColumns = getState().tool.columns.filter(column => column.isGeo === true);
+    // FIXME Hardcoded isGeo on PORT 1 column 
+    const geoColumns = getState().tool.columns.filter(column => column.isGeo === true || column.id === 15);
     const geometriesPromises = [];
     const mapVectorData = {};
 

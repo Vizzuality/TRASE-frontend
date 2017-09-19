@@ -59,6 +59,14 @@
         stroke: $white;
       }
     }
+
+    &.-pointData {
+      path {
+        stroke-width: 1px;
+        stroke-opacity: 1;
+        fill: $white;
+      }
+    }
   }
 
   .leaflet-vectorOutline-pane {

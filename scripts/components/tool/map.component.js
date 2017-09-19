@@ -239,10 +239,17 @@ export default class {
   }
 
   _getPolygonTypeLayer(geoJSON) {
+    this._setVectorPaneModifier('-pointData', geoJSON.features.length && geoJSON.features[0].geometry.type === 'Point');
     var topoLayer = new L.GeoJSON(geoJSON, {
       pane: MAP_PANES.vectorMain,
       style: {
         smoothFactor: 0.9
+      },
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+          pane: MAP_PANES.vectorMain,
+          radius: 4
+        });
       }
     });
 
