@@ -30,7 +30,7 @@ export default class {
     this.map.on('dragend zoomend', () => this.callbacks.onMoveEnd(this.map.getCenter(), this.map.getZoom()));
     this.map.on('zoomend', () => {
       const z = this.map.getZoom();
-      this._setVectorPaneModifier('-high-zoom', z >= 6);
+      this._setPaneModifier('-high-zoom', z >= 6);
     });
 
     Object.keys(MAP_PANES).forEach(paneKey => {
@@ -48,8 +48,8 @@ export default class {
     this.attributionSource = document.querySelector('.leaflet-control-attribution');
   }
 
-  _setVectorPaneModifier(modifier, value) {
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle(modifier, value);
+  _setPaneModifier(modifier, value, pane = MAP_PANES.vectorMain) {
+    this.map.getPane(pane).classList.toggle(modifier, value);
   }
 
   setMapView(mapView) {
@@ -69,7 +69,7 @@ export default class {
     this.basemap = L.tileLayer(basemapOptions.url, basemapOptions);
     this.map.addLayer(this.basemap);
 
-    this._setVectorPaneModifier('-darkBasemap', basemapOptions.dark === true);
+    this._setPaneModifier('-darkBasemap', basemapOptions.dark === true);
 
     if (basemapOptions.labelsUrl !== undefined) {
       basemapOptions.pane = MAP_PANES.basemapLabels;
@@ -88,7 +88,7 @@ export default class {
       if (polygonType.useGeometryFromColumnId === undefined) {
         this.polygonTypesLayers[polygonTypeId] = this._getPolygonTypeLayer(
           polygonType.geoJSON,
-          `map-polygon-${polygonType.name.toLowerCase()}`
+          polygonType.isPoint
         );
       }
     });
@@ -118,8 +118,13 @@ export default class {
 
   selectPolygons(payload) {
     this._outlinePolygons(payload);
-    if (this.vectorOutline !== undefined && payload.selectedGeoIds.length) {
-      this.map.fitBounds(this.vectorOutline.getBounds());
+    if (this.vectorOutline !== undefined && payload.selectedGeoIds.length && this.currentPolygonTypeLayer) {
+      if (!this.currentPolygonTypeLayer.isPoint) {
+        this.map.fitBounds(this.vectorOutline.getBounds());
+      } else {
+        const singlePoint = this.vectorOutline.getBounds().getCenter();
+        this.map.setView(singlePoint);
+      }
     }
   }
   highlightPolygon(payload) { this._outlinePolygons(payload); }
@@ -149,12 +154,21 @@ export default class {
     }
 
     if (selectedFeatures.length > 0) {
-      this.vectorOutline = L.geoJSON(selectedFeatures, { pane: MAP_PANES.vectorOutline });
+      this.vectorOutline = L.geoJSON(selectedFeatures, {
+        pane: MAP_PANES.vectorOutline,
+        pointToLayer: function (feature, latlng) {
+          return L.circleMarker(latlng, {
+            pane: MAP_PANES.vectorOutline,
+            radius: 6
+          });
+        }
+      });
       this.vectorOutline.setStyle(feature => {
         return {
           className: (feature.properties.geoid === highlightedGeoId) ? '-highlighted' : '-selected'
         };
       });
+
       this.map.addLayer(this.vectorOutline);
     }
   }
@@ -238,20 +252,23 @@ export default class {
     return layer;
   }
 
-  _getPolygonTypeLayer(geoJSON) {
-    this._setVectorPaneModifier('-pointData', geoJSON.features.length && geoJSON.features[0].geometry.type === 'Point');
+  _getPolygonTypeLayer(geoJSON, isPoint) {
+    this._setPaneModifier('-pointData', isPoint);
+    this._setPaneModifier('-pointData', isPoint, MAP_PANES.vectorOutline);
     var topoLayer = new L.GeoJSON(geoJSON, {
       pane: MAP_PANES.vectorMain,
       style: {
         smoothFactor: 0.9
       },
-      pointToLayer: function (feature, latlng) {
+      pointToLayer: (feature, latlng) => {
         return L.circleMarker(latlng, {
           pane: MAP_PANES.vectorMain,
-          radius: 4
+          radius: 6
         });
       }
     });
+
+    topoLayer.isPoint = isPoint;
 
     topoLayer.eachLayer(layer => {
       this.polygonFeaturesDict[layer.feature.properties.geoid] = layer;
@@ -278,7 +295,7 @@ export default class {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
-    this._setVectorPaneModifier('-noDimensions', choroplethLegend === null);
+    this._setPaneModifier('-noDimensions', choroplethLegend === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
       this.showLinkedGeoIds(linkedGeoIds);
@@ -304,7 +321,7 @@ export default class {
       return;
     }
 
-    this._setVectorPaneModifier('-linkedActivated', linkedGeoIds.length);
+    this._setPaneModifier('-linkedActivated', linkedGeoIds.length);
 
     const linkedPolygons = [];
     this.currentPolygonTypeLayer.eachLayer(layer => {

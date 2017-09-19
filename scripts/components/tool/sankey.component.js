@@ -260,7 +260,6 @@ export default class {
   }
 
   _onNodeOver(selection, nodeId, isAggregated) {
-    // selection.classed('-highlighted', true);
     this.callbacks.onNodeHighlighted(nodeId, isAggregated);
   }
 

@@ -86,5 +86,13 @@
         stroke-width: 2.5px;
       }
     }
+
+    &.-pointData {
+      path {
+        &.-highlighted {
+          stroke: $charcoal-grey;
+        }
+      }
+    }
   }
 }

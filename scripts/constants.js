@@ -70,8 +70,10 @@ export const PROFILE_CHOROPLETH_CLASSES = ['ch-red-0', 'ch-red-1', 'ch-red-2', '
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
 export const SANKEY_TRANSITION_TIME = 1000;
 
+// TODO Things that are hardcoded and shouldn't
 export const CONTEXT_WITHOUT_MAP_IDS = [3, 4, 5, 6];
 export const CONTEXT_WITH_CONTEXT_LAYERS_IDS = [1];
+export const COLUMN_IDS_THAT_ARE_ACTUALLY_GEO = [15, 4]; // indo ports, brazil logistics hybs
 
 export const APP_DEFAULT_STATE = {
   app: {

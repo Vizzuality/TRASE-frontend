@@ -8,7 +8,8 @@ import { NUM_NODES_SUMMARY,
   CONTEXT_WITHOUT_MAP_IDS,
   YEARS_DISABLED_NO_AGGR,
   YEARS_DISABLED_UNAVAILABLE,
-  CONTEXT_WITH_CONTEXT_LAYERS_IDS
+  CONTEXT_WITH_CONTEXT_LAYERS_IDS,
+  COLUMN_IDS_THAT_ARE_ACTUALLY_GEO
 } from 'constants';
 import {
   getURLFromParams,
@@ -339,8 +340,8 @@ export function loadLinks() {
 
 export function loadMapVectorData() {
   return (dispatch, getState) => {
-    // FIXME Hardcoded isGeo on PORT 1 column 
-    const geoColumns = getState().tool.columns.filter(column => column.isGeo === true || column.id === 15);
+    // FIXME Hardcoded isGeo on PORT 1 column
+    const geoColumns = getState().tool.columns.filter(column => column.id !== 5 && (column.isGeo === true || COLUMN_IDS_THAT_ARE_ACTUALLY_GEO.indexOf(column.id) > -1));
     const geometriesPromises = [];
     const mapVectorData = {};
 
@@ -373,6 +374,9 @@ export function loadMapVectorData() {
     });
 
     Promise.all(geometriesPromises).then(() => {
+      Object.keys(mapVectorData).forEach(id => {
+        mapVectorData[id].isPoint = mapVectorData[id].geoJSON && mapVectorData[id].geoJSON.features.length && mapVectorData[id].geoJSON.features[0].geometry.type === 'Point';
+      });
       dispatch({
         type: actions.GET_MAP_VECTOR_DATA, mapVectorData
       });
