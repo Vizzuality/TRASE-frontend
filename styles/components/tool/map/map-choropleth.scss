@@ -10,7 +10,7 @@
       fill: transparent;
       fill-opacity: 1;
       stroke: $charcoal-grey-toned-down;
-      stroke-width: .35px;
+      stroke-width: .3px;
       stroke-opacity: .5;
       pointer-events: auto;
 
@@ -19,7 +19,8 @@
       }
 
       &.-linked {
-        stroke-width: .5px;
+        stroke-width: .8px;
+        stroke: $charcoal-grey;
       }
 
       &.ch-zero { fill: $ch-zero; };
@@ -39,17 +40,18 @@
 
     &.-linkedActivated {
       path:not(.-linked) {
-        fill: transparent;
+        fill: $ch-default;
       }
     }
 
     &.-high-zoom {
       path {
-        stroke-width: .45px;
+        stroke-width: .5px;
       }
 
       path.-linked {
-        stroke-width: .6px;
+        stroke-width: 2px;
+        stroke: $charcoal-grey;
       }
     }
   }
