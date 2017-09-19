@@ -30,7 +30,7 @@ export default class {
     this.map.on('dragend zoomend', () => this.callbacks.onMoveEnd(this.map.getCenter(), this.map.getZoom()));
     this.map.on('zoomend', () => {
       const z = this.map.getZoom();
-      this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-high-zoom', z >= 6);
+      this._setVectorPaneModifier('-high-zoom', z >= 6);
     });
 
     Object.keys(MAP_PANES).forEach(paneKey => {
@@ -46,6 +46,10 @@ export default class {
 
     this.attribution = document.querySelector('.js-map-attribution');
     this.attributionSource = document.querySelector('.leaflet-control-attribution');
+  }
+
+  _setVectorPaneModifier(modifier, value) {
+    this.map.getPane(MAP_PANES.vectorMain).classList.toggle(modifier, value);
   }
 
   setMapView(mapView) {
@@ -64,6 +68,8 @@ export default class {
     basemapOptions.pane = MAP_PANES.basemap;
     this.basemap = L.tileLayer(basemapOptions.url, basemapOptions);
     this.map.addLayer(this.basemap);
+
+    this._setVectorPaneModifier('-darkBasemap', basemapOptions.dark === true);
 
     if (basemapOptions.labelsUrl !== undefined) {
       basemapOptions.pane = MAP_PANES.basemapLabels;
@@ -265,7 +271,7 @@ export default class {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', choroplethLegend === null);
+    this._setVectorPaneModifier('-noDimensions', choroplethLegend === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
       this.showLinkedGeoIds(linkedGeoIds);
@@ -291,7 +297,7 @@ export default class {
       return;
     }
 
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
+    this._setVectorPaneModifier('-linkedActivated', linkedGeoIds.length);
 
     const linkedPolygons = [];
     this.currentPolygonTypeLayer.eachLayer(layer => {

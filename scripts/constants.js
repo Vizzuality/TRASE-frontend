@@ -149,7 +149,8 @@ export const BASEMAPS = {
     title: 'Satellite',
     url: '//api.mapbox.com/styles/v1/trasebase/cj7qa1j0n5g5r2ro8wsazfxnw/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>, <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>, <a href="https://www.digitalglobe.com/" target="_blank">DigitalGlobe</a>',
-    thumbnail: 'images/maps/thumb-basemap-satellite.jpeg'
+    thumbnail: 'images/maps/thumb-basemap-satellite.jpeg',
+    dark: true
   },
   topo: {
     title: 'Topography',
