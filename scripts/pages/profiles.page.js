@@ -21,7 +21,7 @@ const _setSearch = () => {
 
   const allNodesURL = getURLFromParams(GET_ALL_NODES);
 
-  fetch(allNodesURL)
+  fetch(`${allNodesURL}&context_id=1`)
     .then(response => response.json())
     .then((result) => {
 
