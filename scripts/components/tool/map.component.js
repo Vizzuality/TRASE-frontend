@@ -332,7 +332,7 @@ export default class {
       }
     });
 
-    if (forcedMapView !== null) {
+    if (forcedMapView !== null && forcedMapView !== undefined) {
       this.setMapView(forcedMapView);
     } else if (linkedPolygons.length) {
       const bbox = turf_bbox({ 'type': 'FeatureCollection', 'features': linkedPolygons });
