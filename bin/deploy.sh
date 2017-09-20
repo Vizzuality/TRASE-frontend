@@ -14,7 +14,7 @@ if test "$ENV_TYPE" = "production"
 then
   SERVER_URL='trase.earth'
 else
-  SERVER_URL='staging.trase.earth'
+  SERVER_URL="${ENV_TYPE}.trase.earth"
 fi
 
 echo "DEPLOYING:  $ENV_TYPE ($SERVER_URL)"

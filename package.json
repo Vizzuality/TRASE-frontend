@@ -14,6 +14,7 @@
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q 'styles/**/*.scss'",
     "postinstall": "npm run build",
     "deploy:staging": "./bin/deploy.sh staging",
+    "deploy:demo": "./bin/deploy.sh demo",
     "deploy:production": "./bin/deploy.sh production"
   },
   "repository": {
