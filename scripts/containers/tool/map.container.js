@@ -57,7 +57,15 @@ const mapMethodsToState = (state) => ({
     }
   },
   loadContextLayers: state.tool.selectedMapContextualLayersData,
-  showLinkedGeoIds: state.tool.linkedGeoIds,
+  showLinkedGeoIds: {
+    _comparedValue: (state) => state.tool.linkedGeoIds,
+    _returnedValue: (state) => {
+      return {
+        linkedGeoIds: state.tool.linkedGeoIds,
+        forcedMapView: (!state.tool.selectedNodesIds.length) ? state.tool.selectedContext.map : null
+      };
+    }
+  },
   invalidate: state.tool.isMapVisible,
   setBasemap: {
     _comparedValue: (state) => getBasemap(state.tool),
