@@ -111,8 +111,8 @@ export default class {
     if (payload.choropleth) {
       this._setChoropleth(payload.choropleth);
     }
-    if (payload.linkedGeoIds) {
-      this.showLinkedGeoIds(payload.linkedGeoIds);
+    if (payload.linkedGeoIds && payload.linkedGeoIds.length) {
+      this.showLinkedGeoIds({ linkedGeoIds: payload.linkedGeoIds });
     }
   }
 
@@ -298,7 +298,7 @@ export default class {
     this._setPaneModifier('-noDimensions', choroplethLegend === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
-      this.showLinkedGeoIds(linkedGeoIds);
+      this.showLinkedGeoIds({ linkedGeoIds });
     }
   }
 
@@ -316,7 +316,7 @@ export default class {
 
   }
 
-  showLinkedGeoIds(linkedGeoIds) {
+  showLinkedGeoIds({ linkedGeoIds, forcedMapView }) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
@@ -332,7 +332,9 @@ export default class {
       }
     });
 
-    if (linkedPolygons.length) {
+    if (forcedMapView !== null) {
+      this.setMapView(forcedMapView);
+    } else if (linkedPolygons.length) {
       const bbox = turf_bbox({ 'type': 'FeatureCollection', 'features': linkedPolygons });
       this.map.fitBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]], { padding: [0, 0] });
     }
