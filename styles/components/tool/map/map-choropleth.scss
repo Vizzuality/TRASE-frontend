@@ -19,7 +19,7 @@
       }
 
       &.-linked {
-        stroke-width: .8px;
+        stroke-width: 1.2px;
         stroke: $charcoal-grey;
       }
 
@@ -35,6 +35,7 @@
     &.-noDimensions {
       path.-linked {
         fill: $manilla;
+        fill-opacity: .7;
       }
     }
 
@@ -47,16 +48,21 @@
     &.-high-zoom {
       path {
         stroke-width: .5px;
-      }
 
-      path.-linked {
-        stroke-width: 2px;
+        &.-linked {
+          stroke-width: 2px;
+        }
       }
     }
 
     &.-darkBasemap {
       path {
         stroke: $white;
+      }
+      &.-linkedActivated {
+        path:not(.-linked) {
+          fill: transparent;
+        }
       }
     }
 
