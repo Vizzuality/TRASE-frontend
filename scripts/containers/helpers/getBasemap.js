@@ -1,8 +1,7 @@
 import { DEFAULT_BASEMAP_FOR_CHOROPLETH } from 'constants';
 
 const useDefaultBasemap = (state) => {
-  if ((state.linkedGeoIds && state.linkedGeoIds.length) ||
-      (state.selectedMapDimensions && state.selectedMapDimensions.length && state.selectedMapDimensions.filter(d => d !== null).length > 0)) {
+  if ((state.selectedMapDimensions && state.selectedMapDimensions.length && state.selectedMapDimensions.filter(d => d !== null).length > 0)) {
     return true;
   }
   return false;
