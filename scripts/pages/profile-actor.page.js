@@ -277,7 +277,7 @@ const _showErrorMessage = () => {
 const _setTopSourceSwitcher = (data, verb) => {
   const template = TopSourceTemplate({
     verb,
-    nodeName: formatApostrophe(_.capitalize(data.node_name)),
+    nodeName: _.capitalize(data.node_name),
     switchers: Object.keys(data.top_sources).filter(key => !(ACTORS_TOP_SOURCES_SWITCHERS_BLACKLIST.includes(key)))
   });
   document.querySelector('.js-top-municipalities-title').innerHTML = template;
