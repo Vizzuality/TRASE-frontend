@@ -16,7 +16,8 @@ const mapMethodsToState = (state) => ({
         selectedNodesGeoIds: state.tool.selectedNodesGeoIds,
         recolorByNodeIds: state.tool.recolorByNodeIds,
         choropleth: state.tool.choropleth,
-        linkedGeoIds: state.tool.linkedGeoIds
+        linkedGeoIds: state.tool.linkedGeoIds,
+        defaultMapView: state.tool.selectedContext.map
       };
     }
   },
@@ -52,7 +53,8 @@ const mapMethodsToState = (state) => ({
       return {
         choropleth: state.tool.choropleth,
         linkedGeoIds: state.tool.linkedGeoIds,
-        choroplethLegend: state.tool.choroplethLegend
+        choroplethLegend: state.tool.choroplethLegend,
+        defaultMapView: state.tool.selectedContext.map
       };
     }
   },
@@ -62,7 +64,8 @@ const mapMethodsToState = (state) => ({
     _returnedValue: (state) => {
       return {
         linkedGeoIds: state.tool.linkedGeoIds,
-        forcedMapView: (!state.tool.selectedNodesIds.length) ? state.tool.selectedContext.map : null
+        defaultMapView: state.tool.selectedContext.map,
+        forceDefaultMapView: !state.tool.selectedNodesIds.length
       };
     }
   },

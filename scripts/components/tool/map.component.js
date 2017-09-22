@@ -112,7 +112,7 @@ export default class {
       this._setChoropleth(payload.choropleth);
     }
     if (payload.linkedGeoIds && payload.linkedGeoIds.length) {
-      this.showLinkedGeoIds({ linkedGeoIds: payload.linkedGeoIds });
+      this.showLinkedGeoIds({ linkedGeoIds: payload.linkedGeoIds, defaultMapView: payload.defaultMapView });
     }
   }
 
@@ -291,14 +291,14 @@ export default class {
   }
 
 
-  setChoropleth({ choropleth, linkedGeoIds, choroplethLegend }) {
+  setChoropleth({ choropleth, linkedGeoIds, choroplethLegend, defaultMapView }) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
     this._setPaneModifier('-noDimensions', choroplethLegend === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
-      this.showLinkedGeoIds({ linkedGeoIds });
+      this.showLinkedGeoIds({ linkedGeoIds, defaultMapView });
     }
   }
 
@@ -316,7 +316,7 @@ export default class {
 
   }
 
-  showLinkedGeoIds({ linkedGeoIds, forcedMapView }) {
+  showLinkedGeoIds({ linkedGeoIds, defaultMapView, forceDefaultMapView }) {
     if (!this.currentPolygonTypeLayer) {
       return;
     }
@@ -332,11 +332,15 @@ export default class {
       }
     });
 
-    if (forcedMapView !== null && forcedMapView !== undefined) {
-      this.setMapView(forcedMapView);
+    if (forceDefaultMapView === true) {
+      this.setMapView(defaultMapView);
     } else if (linkedPolygons.length) {
       const bbox = turf_bbox({ 'type': 'FeatureCollection', 'features': linkedPolygons });
-      this.map.fitBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]], { padding: [0, 0] });
+      // we use L's _getBoundsCenterZoom internal method + setView as fitBounds does not support a minZoom option
+      const bounds = L.latLngBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]]);
+      const boundsCenterZoom = this.map._getBoundsCenterZoom(bounds);
+      boundsCenterZoom.zoom = Math.max(boundsCenterZoom.zoom, defaultMapView.zoom);
+      this.map.setView(boundsCenterZoom.center, boundsCenterZoom.zoom);
     }
   }
 
