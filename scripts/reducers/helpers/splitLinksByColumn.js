@@ -1,5 +1,5 @@
 // break down links into simple src - target binomes
-export default function(rawLinks, nodesDict) {
+export default function(rawLinks, nodesDict, selectedRecolorBy) {
   const links = [];
   rawLinks.forEach(link => {
     var path = link.path;
@@ -14,6 +14,12 @@ export default function(rawLinks, nodesDict) {
         recolorBy = link.qual.replace(/\s/gi, '-').toLowerCase();
       } else if (link.ind !== undefined && link.ind !== null) {
         recolorBy = link.ind;
+
+        // TODO API used to return a rounded value, forming links groups automatically
+        // This is a hack to force grouping of similiar-bucket links
+        if (selectedRecolorBy && selectedRecolorBy.legendType === 'percentual') {
+          recolorBy = Math.floor(link.ind / selectedRecolorBy.divisor) * selectedRecolorBy.divisor;
+        }
       }
 
       links.push({

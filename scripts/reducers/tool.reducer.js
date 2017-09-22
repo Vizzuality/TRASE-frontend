@@ -208,7 +208,7 @@ export default function (state = {}, action) {
 
       const visibleColumns = getVisibleColumns(state.columns, state.selectedColumnsIds);
 
-      const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict);
+      const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict, state.selectedRecolorBy);
       const links = mergeLinks(unmergedLinks);
 
       newState = Object.assign({}, state, {

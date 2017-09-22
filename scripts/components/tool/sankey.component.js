@@ -149,7 +149,7 @@ export default class {
       }
       let recolorBy = link.recolorBy;
       if (selectedRecolorBy.divisor) {
-        recolorBy = Math.round(link.recolorBy / selectedRecolorBy.divisor);
+        recolorBy = Math.floor(link.recolorBy / selectedRecolorBy.divisor);
       }
 
       classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${recolorBy}`;
@@ -293,15 +293,18 @@ export default class {
       return _.capitalize(link.recolorBy);
     }
 
+    if (this.currentSelectedRecolorBy.legendType === 'percentual') {
+      // percentual values are always a range, not the raw value. The value coming from the model is already floored to the start of the bucket (splitLinksByColumn)
+      const nextValue = link.recolorBy + this.currentSelectedRecolorBy.divisor;
+      return `${link.recolorBy}–${nextValue}%`;
+    }
+
     let intervalCount = this.currentSelectedRecolorBy.intervalCount;
     if (this.currentSelectedRecolorBy.divisor) {
       intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount;
     }
-    if (this.currentSelectedRecolorBy.legendType !== 'percentual') {
-      return `${link.recolorBy}/${intervalCount-1}`;
-    }
+    return `${link.recolorBy}/${intervalCount-1}`;
 
-    return `${Math.round(link.recolorBy)}%`;
   }
 
   _onColumnOut() {
