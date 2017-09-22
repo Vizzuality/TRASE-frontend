@@ -224,6 +224,10 @@ export default function (state = {}, action) {
 
     case actions.GET_LINKED_GEOIDS: {
       const linkedGeoIds = (action.payload.length) ? action.payload.map(node => node.geo_id) : [];
+      if (_.isEqual(linkedGeoIds, state.linkedGeoIds)) {
+        newState = state;
+        break;
+      }
       newState = Object.assign({}, state, { linkedGeoIds });
       break;
     }

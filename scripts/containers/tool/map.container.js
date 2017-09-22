@@ -34,7 +34,9 @@ const mapMethodsToState = (state) => ({
     _comparedValue: (state) => state.tool.selectedNodesGeoIds,
     _returnedValue: (state) => {
       return {
-        selectedGeoIds: state.tool.selectedNodesGeoIds
+        selectedGeoIds: state.tool.selectedNodesGeoIds,
+        defaultMapView: state.tool.selectedContext.map,
+        forceDefaultMapView: !state.tool.selectedNodesIds.length
       };
     }
   },

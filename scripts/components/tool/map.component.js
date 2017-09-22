@@ -115,9 +115,12 @@ export default class {
     }
   }
 
-  selectPolygons({ selectedGeoIds, highlightedGeoId }) {
+  selectPolygons({ selectedGeoIds, highlightedGeoId, forceDefaultMapView, defaultMapView }) {
     this._outlinePolygons({ selectedGeoIds, highlightedGeoId });
-    if (this.vectorOutline !== undefined && selectedGeoIds.length && this.currentPolygonTypeLayer) {
+
+    if (forceDefaultMapView === true) {
+      this.setMapView(defaultMapView);
+    } else if (this.vectorOutline !== undefined && selectedGeoIds.length && this.currentPolygonTypeLayer) {
       if (!this.currentPolygonTypeLayer.isPoint) {
         this.map.fitBounds(this.vectorOutline.getBounds());
       } else {
