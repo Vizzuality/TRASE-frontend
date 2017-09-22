@@ -78,8 +78,7 @@ export default class {
     }
   }
 
-  showLoadedMap(payload) {
-    const mapVectorData = payload.mapVectorData;
+  showLoadedMap({ mapVectorData, currentPolygonType, selectedNodesGeoIds, choropleth, linkedGeoIds, defaultMapView }) {
     this.polygonTypesLayers = {};
 
     // create geometry layers for all polygonTypes that have their own geometry
@@ -101,24 +100,24 @@ export default class {
       }
     });
 
-    this.selectPolygonType({ selectedColumnsIds: payload.currentPolygonType });
-    if (payload.selectedNodesGeoIds) {
-      this.selectPolygons({ selectedGeoIds: payload.selectedNodesGeoIds });
+    this.selectPolygonType({ selectedColumnsIds: currentPolygonType });
+    if (selectedNodesGeoIds) {
+      this.selectPolygons({ selectedGeoIds: selectedNodesGeoIds });
     }
 
     // under normal circumstances, choropleth (depends on loadNodes) and linkedGeoIds (depends on loadLinks)
     // are not available yet, but this is just a fail-safe for race conditions
-    if (payload.choropleth) {
-      this._setChoropleth(payload.choropleth);
+    if (choropleth) {
+      this._setChoropleth(choropleth);
     }
-    if (payload.linkedGeoIds && payload.linkedGeoIds.length) {
-      this.showLinkedGeoIds({ linkedGeoIds: payload.linkedGeoIds, defaultMapView: payload.defaultMapView });
+    if (linkedGeoIds && linkedGeoIds.length) {
+      this.showLinkedGeoIds({ linkedGeoIds, defaultMapView: defaultMapView });
     }
   }
 
-  selectPolygons(payload) {
-    this._outlinePolygons(payload);
-    if (this.vectorOutline !== undefined && payload.selectedGeoIds.length && this.currentPolygonTypeLayer) {
+  selectPolygons({ selectedGeoIds, highlightedGeoId }) {
+    this._outlinePolygons({ selectedGeoIds, highlightedGeoId });
+    if (this.vectorOutline !== undefined && selectedGeoIds.length && this.currentPolygonTypeLayer) {
       if (!this.currentPolygonTypeLayer.isPoint) {
         this.map.fitBounds(this.vectorOutline.getBounds());
       } else {
@@ -127,7 +126,7 @@ export default class {
       }
     }
   }
-  highlightPolygon(payload) { this._outlinePolygons(payload); }
+  highlightPolygon({ selectedGeoIds, highlightedGeoId }) { this._outlinePolygons({ selectedGeoIds, highlightedGeoId }); }
 
   _outlinePolygons({ selectedGeoIds, highlightedGeoId }) {
     if (!this.currentPolygonTypeLayer || !selectedGeoIds) {
