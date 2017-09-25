@@ -80,7 +80,7 @@ export default function (state = {}, action) {
         selectedMapContextualLayers = state.selectedMapContextualLayers;
       }
 
-      let selectedMapBasemap = context.defaultBasemap || 'default';
+      let selectedMapBasemap = context.defaultBasemap || 'satellite';
       if (state.selectedMapBasemap !== undefined && state.selectedMapBasemap !== null) {
         selectedMapBasemap = state.selectedMapBasemap;
       }
@@ -117,7 +117,7 @@ export default function (state = {}, action) {
         selectedResizeBy: defaultResizeBy,
         selectedBiomeFilter: defaultFilterBy,
         selectedMapContextualLayers: context.defaultContextLayers || undefined,
-        selectedMapBasemap: context.defaultBasemap || 'default',
+        selectedMapBasemap: context.defaultBasemap || 'satellite',
         detailedView: false,
         recolorGroups: [],
         mapView: context.map,
