@@ -42,6 +42,8 @@ export default function (state = {}, action) {
       break;
     }
     case actions.LOAD_CONTEXTS: {
+      // TODO temp hack for https://basecamp.com/1756858/projects/12498794/todos/325275726, should be on API
+      action.payload.find(c => c.countryId === 4).map.zoom = 3;
       newState = Object.assign({}, state, { contexts: action.payload });
       break;
     }
