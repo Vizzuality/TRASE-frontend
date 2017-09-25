@@ -63,6 +63,20 @@ const _build = data => {
   });
 
   if (data.trajectory_deforestation && data.trajectory_deforestation.lines.length) {
+
+    // Manually trim time series to 2010 - 2015 as asked here https://basecamp.com/1756858/projects/12498794/todos/324404665
+    data.trajectory_deforestation.included_years = data.trajectory_deforestation.included_years.filter(year => {
+      const include = year >= 2010;
+      if (!include) {
+        data.trajectory_deforestation.lines.forEach(line => {
+          if (line.values !== undefined && line.values !== null) {
+            line.values.shift();
+          }
+        });
+      }
+      return include;
+    });
+
     new Line(
       '.js-line',
       data.trajectory_deforestation,
