@@ -317,7 +317,7 @@ export default class {
     if (this.currentSelectedRecolorBy.divisor) {
       intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount;
     }
-    return `${link.recolorBy}/${intervalCount-1}`;
+    return `${link.recolorBy}/${intervalCount}`;
 
   }
 
