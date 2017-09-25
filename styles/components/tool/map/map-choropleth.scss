@@ -4,15 +4,14 @@
 
   .leaflet-vectorMain-pane {
     opacity: 1;
-    pointer-events: auto;
 
     path {
+      pointer-events: auto;
       fill: transparent;
       fill-opacity: 1;
       stroke: $charcoal-grey-toned-down;
       stroke-width: .3px;
       stroke-opacity: .5;
-      pointer-events: auto;
 
       &.-disabled {
         cursor: not-allowed;

@@ -277,15 +277,16 @@ export default class {
       const that = this;
       layer.on({
         mouseover: function(event) {
+          if (event.target.disabled) return;
           that.callbacks.onPolygonHighlighted(this.feature.properties.geoid, { pageX: event.originalEvent.pageX, pageY: event.originalEvent.pageY });
         },
         mouseout: function() {
+          if (event.target.disabled) return;
           that.callbacks.onPolygonHighlighted();
         },
         click: function() {
-          if (this.feature.properties.hasFlows === true) {
-            that.callbacks.onPolygonClicked(this.feature.properties.geoid);
-          }
+          if (event.target.disabled) return;
+          that.callbacks.onPolygonClicked(this.feature.properties.geoid);
         }
       });
     });
@@ -308,8 +309,10 @@ export default class {
     this.currentPolygonTypeLayer.eachLayer(layer => {
       const choroItem = choropleth[layer.feature.properties.geoid];
       const classNames = [];
+      layer.disabled = false;
       if (!layer.feature.properties.hasFlows) {
         classNames.push('-disabled');
+        layer.disabled = true;
       }
       classNames.push((choroItem) ? choroItem : 'ch-default');
       layer._path.setAttribute('class', classNames.join(' '));
