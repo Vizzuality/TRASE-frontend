@@ -226,7 +226,7 @@ const _build = (data, nodeId) => {
           {
             title: 'Trade volume',
             value: formatValue(company.y, 'Trade volume'),
-            unit: 't'
+            unit: 'kilotons'
           },
           {
             title: indicator.name,
