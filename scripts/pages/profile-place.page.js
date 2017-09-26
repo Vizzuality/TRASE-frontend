@@ -161,14 +161,18 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
   document.querySelector('.js-area').innerHTML = info.area !== null ? formatValue(info.area, 'area') : '-';
-  document.querySelector('.js-soy-land').innerHTML = info.soy_area !== null ? formatValue(info.soy_area, 'area') : '-';
+  document.querySelector('.js-soy-land').innerHTML = (info.soy_area !== null && info.soy_area !== 'NaN') ? formatValue(info.soy_area, 'area') : '-';
   document.querySelector('.js-soy-production').innerHTML = info.soy_production !== null ? formatValue(info.soy_production, 'tons'): '-';
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
   document.querySelector('.js-line-title').innerHTML = info.municipality ? `Deforestation trajectory of ${info.municipality}` : '-';
-  document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? info.municipality : '-';
   document.querySelector('.js-link-button-municipality').textContent = formatApostrophe(_.capitalize(info.municipality)) + ' PROFILE';
+
+  if (info.soy_production === 0) {
+    info.summary = `${info.municipality} did not produce any soy in 2015`;
+  }
+  document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
 
 };
 
