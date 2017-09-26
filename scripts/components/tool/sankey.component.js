@@ -137,18 +137,20 @@ export default class {
           .reduce((acc, val) => acc.y < val.y ? acc : val);
 
         this.currentExpandButtonY = Math.max(0, selectedColumnFirstNode.y - 12);
+        this.expandButtonIsVisible = true;
         this._repositionExpandButtonScroll();
         this.expandButton.style.left = `${selectedColumnFirstNode.x - 12}px`;
         return;
       }
     }
+    this.expandButtonIsVisible = false;
     this.expandButton.classList.remove('-visible');
   }
 
   _repositionExpandButtonScroll() {
     const y = this.currentExpandButtonY  - this.scrollContainer.scrollTop;
     this.expandButton.style.top = `${y}px`;
-    this.expandButton.classList.toggle('-visible', y > -10);
+    this.expandButton.classList.toggle('-visible', y > -10 && this.expandButtonIsVisible === true);
   }
 
   _getLinkColor(link, selectedRecolorBy) {
