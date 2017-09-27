@@ -98,6 +98,8 @@ const _build = data => {
   }
 
   if (data.top_traders.actors.length) {
+    document.querySelector('.js-traders').classList.toggle('is-hidden', false);
+
     new Chord(
       '.js-chord-traders',
       data.top_traders.matrix,
@@ -112,11 +114,11 @@ const _build = data => {
       title: `Top traders of soy in ${data.municipality_name}`,
       unit: '%'
     });
-
-    document.querySelector('.js-traders').classList.toggle('is-hidden', false);
   }
 
   if (data.top_consumers.countries.length) {
+    document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
+    
     new Chord(
       '.js-chord-consumers',
       data.top_consumers.matrix,
@@ -130,8 +132,6 @@ const _build = data => {
       title: `Top importer countries of ${formatApostrophe(_.capitalize(data.municipality_name))} soy`,
       unit: '%'
     });
-
-    document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
   }
 
   if (data.indicators.length) {
