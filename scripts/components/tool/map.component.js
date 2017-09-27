@@ -295,10 +295,10 @@ export default class {
 
 
   setChoropleth({ choropleth, linkedGeoIds, choroplethLegend, defaultMapView }) {
+    this._setPaneModifier('-noDimensions', choroplethLegend === null);
     if (!this.currentPolygonTypeLayer) {
       return;
     }
-    this._setPaneModifier('-noDimensions', choroplethLegend === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
       this.showLinkedGeoIds({ linkedGeoIds, defaultMapView });
