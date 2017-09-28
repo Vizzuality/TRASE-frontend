@@ -32,7 +32,7 @@ export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensi
 
   const colors = (isBivariate) ? CHOROPLETH_CLASSES.bidimensional : CHOROPLETH_CLASSES[selectedMapDimension.colorScale || 'red'];
 
-  const geoNodes = _.filter(nodesDictWithMeta, node => node.geoId !== undefined && node.geoId !== null);
+  const geoNodes = _.filter(nodesDictWithMeta, node => node.geoId !== undefined && node.geoId !== null && node.isGeo);
   const geoNodesIds = Object.keys(geoNodes);
   const choropleth = {};
 
