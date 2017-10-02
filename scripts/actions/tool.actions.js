@@ -213,9 +213,6 @@ export function loadNodes() {
         allSelectedYears.push(i);
       }
 
-      // TODO temp hack while this gets fixed in the DB, see https://basecamp.com/1756858/projects/12498794/todos/323538726
-      payload.mapDimensionsMetaJSON.dimensions = payload.mapDimensionsMetaJSON.dimensions.filter(d => d.name !== 'Land based CO2 emissions');
-
       payload.mapDimensionsMetaJSON.dimensions.forEach(dimension => {
         if (/*(dimension.aggregateMethod === undefined || dimension.aggregateMethod === null) &&*/ allSelectedYears.length > 1) {
           dimension.disabledYearRangeReason = YEARS_DISABLED_NO_AGGR;
