@@ -47,7 +47,7 @@
       > .logo-list {
 
         &:not(:first-of-type) {
-          margin: 8px 0 0;
+          margin: 16px 0 0;
         }
 
         > .logo-item {
@@ -90,6 +90,14 @@
 
           > .logo-item {
 
+            &.wwf-logo > a > img {
+              width: 50px;
+            }
+
+            &.gef-logo > a > img {
+              width: 57px;
+            }
+
             &.eustars-logo > a > img {
               width: 80px;
             }
@@ -118,7 +126,7 @@
               display: inline-block;
 
               &:not(:first-child) {
-                margin: 0 0 0 16px;
+                margin: 0 0 0 45px;
               }
             }
           }
