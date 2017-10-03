@@ -46,6 +46,10 @@ const _onSelect = function(value) {
 };
 
 const _initSource = (selectedSource, data) => {
+  if (data.top_sources === undefined) {
+    return;
+  }
+
   const sourceLines = Object.assign({}, data.top_sources[selectedSource]);
 
   sourceLines.lines = sourceLines.lines.slice(0, 5);
@@ -127,7 +131,7 @@ const _build = (data, nodeId) => {
     }
   };
 
-  if (data.top_sources.municipality.lines.length) {
+  if (data.top_sources && data.top_sources.municipality.lines.length) {
     _setTopSourceSwitcher(data, verb);
 
     choroLegend(null, '.js-source-legend', {
@@ -139,7 +143,7 @@ const _build = (data, nodeId) => {
   }
 
 
-  if (data.top_countries.lines.length) {
+  if (data.top_countries && data.top_countries.lines.length) {
     document.querySelector('.js-top-map-title').textContent = `Top destination countries of Soy ${verb} by ${_.capitalize(data.node_name)}`;
 
     choroLegend(null, '.js-destination-legend', {
@@ -202,7 +206,7 @@ const _build = (data, nodeId) => {
     });
   }
 
-  if (data.sustainability.length) {
+  if (data.sustainability && data.sustainability.length) {
     const tabsTitle = `Sustainability indicators of ${formatApostrophe(data.node_name)} top sourcing regions in 2015`;
 
     new MultiTable({
@@ -214,32 +218,36 @@ const _build = (data, nodeId) => {
     });
   }
 
-  new Scatterplot('.js-companies-exporting', {
-    data: data.companies_exporting.companies,
-    xDimension: data.companies_exporting.dimensions_x,
-    node: { id: nodeId, name: data.node_name },
-    verbGerund,
-    showTooltipCallback: (company, indicator, x, y) => {
-      tooltip.show(x, y,
-        company.name,
-        [
-          {
-            title: 'Trade volume',
-            value: formatValue(company.y, 'Trade volume'),
-            unit: 'kilotons'
-          },
-          {
-            title: indicator.name,
-            value: formatValue(company.x, indicator.name),
-            unit: indicator.unit
-          }
-        ]
-      );
-    },
-    hideTooltipCallback: () => {
-      tooltip.hide();
-    }
-  });
+  if (data.companies_sourcing) {
+    document.querySelector('.js-companies-exporting-y-axis').innerHTML = `${data.companies_sourcing.dimension_y.name} (${data.companies_sourcing.dimension_y.unit})`;
+
+    new Scatterplot('.js-companies-exporting', {
+      data: data.companies_sourcing.companies,
+      xDimension: data.companies_sourcing.dimensions_x,
+      node: { id: nodeId, name: data.node_name },
+      verbGerund,
+      showTooltipCallback: (company, indicator, x, y) => {
+        tooltip.show(x, y,
+          company.name,
+          [
+            {
+              title: data.companies_sourcing.dimension_y.name,
+              value: formatValue(company.y, data.companies_sourcing.dimension_y.name),
+              unit: data.companies_sourcing.dimension_y.unit
+            },
+            {
+              title: indicator.name,
+              value: formatValue(company.x, indicator.name),
+              unit: indicator.unit
+            }
+          ]
+        );
+      },
+      hideTooltipCallback: () => {
+        tooltip.hide();
+      }
+    });
+  }
 };
 
 const _setInfo = (info, nodeId) => {
