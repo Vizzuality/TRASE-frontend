@@ -78,7 +78,6 @@ export default class {
       items
     });
     this._setSelectorEvents(this.selectorCountries);
-    this._setSelectorEvents(this.selectorYears);
     this._setSelectorEvents(this.selectorOutputType);
     this._setSelectorEvents(this.selectorFormatting);
     this._setSelectorEvents(this.selectorFile);
