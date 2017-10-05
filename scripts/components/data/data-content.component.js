@@ -20,6 +20,7 @@ export default class {
     this.formVeil.addEventListener('click', () => {
       this._closeForm();
     });
+    this.onClickEventHandler = this._onToggleRadio.bind(this);
   }
 
   _setVars() {
@@ -236,7 +237,8 @@ export default class {
   _setSelectorEvents(selector) {
     const radios = Array.prototype.slice.call(selector.querySelectorAll('.c-radio-btn'), 0);
     radios.forEach((radio) => {
-      radio.addEventListener('click', (e) => this._onToggleRadio(e));
+      radio.removeEventListener('click', this.onClickEventHandler);
+      radio.addEventListener('click', this.onClickEventHandler);
     });
   }
 
@@ -264,11 +266,13 @@ export default class {
     switch (group) {
       case 'countries':
         this._cleanRadios(this.selectorCountries);
+        this._cleanAllSelectorRadios();
         this._updateCommoditiesSelector(value);
         this._lockDownloadButton();
         break;
       case 'commodities':
         this._cleanRadios(this.selectorCommodities);
+        this._cleanAllSelectorRadios();
         this.callbacks.onContextSelected(value);
         this._updateYearsSelector(value);
         if (isEnabled) {
@@ -350,6 +354,14 @@ export default class {
     selectedRadio.classList.toggle('-enabled');
     container.classList.toggle('-selected');
     this._checkDependentSelectors();
+  }
+
+  _cleanAllSelectorRadios() {
+    const radios = Array.prototype.slice.call(document.querySelectorAll('.c-radio-btn[value="all"]'), 0);
+    radios.forEach((radio) => {
+      radio.classList.remove('-enabled');
+      radio.closest('li').classList.remove('-selected');
+    });
   }
 
   _cleanRadios(selector) {
