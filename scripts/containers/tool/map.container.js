@@ -67,6 +67,7 @@ const mapMethodsToState = (state) => ({
       return {
         linkedGeoIds: state.tool.linkedGeoIds,
         defaultMapView: state.tool.selectedContext.map,
+        // get back to context default map view if no nodes are selected
         forceDefaultMapView: !state.tool.selectedNodesIds.length
       };
     }

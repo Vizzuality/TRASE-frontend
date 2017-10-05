@@ -277,15 +277,13 @@ export default class {
       const that = this;
       layer.on({
         mouseover: function(event) {
-          if (event.target.disabled) return;
           that.callbacks.onPolygonHighlighted(this.feature.properties.geoid, { pageX: event.originalEvent.pageX, pageY: event.originalEvent.pageY });
         },
         mouseout: function() {
-          if (event.target.disabled) return;
           that.callbacks.onPolygonHighlighted();
         },
         click: function() {
-          if (event.target.disabled) return;
+          if (event.target.disabled || (event.target.classList && event.target.classList.contains('-disabled'))) return;
           that.callbacks.onPolygonClicked(this.feature.properties.geoid);
         }
       });
