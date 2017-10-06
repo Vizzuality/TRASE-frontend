@@ -151,6 +151,7 @@ export default function (state = {}, action) {
         }
       });
 
+      // TODO the API should have the info on which file to load (if any) per column
       const municipalitiesColumn = columns.find(column => column.name === 'MUNICIPALITY');
       const logisticsHubColumn = columns.find(column => column.name === 'LOGISTICS HUB');
       if (logisticsHubColumn && municipalitiesColumn) {
