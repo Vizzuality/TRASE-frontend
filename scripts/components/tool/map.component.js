@@ -282,7 +282,7 @@ export default class {
         mouseout: function() {
           that.callbacks.onPolygonHighlighted();
         },
-        click: function() {
+        click: function(event) {
           if (event.target.disabled || (event.target.classList && event.target.classList.contains('-disabled'))) return;
           that.callbacks.onPolygonClicked(this.feature.properties.geoid);
         }

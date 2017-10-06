@@ -8,8 +8,7 @@ import { NUM_NODES_SUMMARY,
   CONTEXT_WITHOUT_MAP_IDS,
   YEARS_DISABLED_NO_AGGR,
   YEARS_DISABLED_UNAVAILABLE,
-  CONTEXT_WITH_CONTEXT_LAYERS_IDS,
-  COLUMN_IDS_THAT_ARE_ACTUALLY_GEO
+  CONTEXT_WITH_CONTEXT_LAYERS_IDS
 } from 'constants';
 import {
   getURLFromParams,
@@ -337,8 +336,7 @@ export function loadLinks() {
 
 export function loadMapVectorData() {
   return (dispatch, getState) => {
-    // FIXME Hardcoded isGeo on PORT 1 column
-    const geoColumns = getState().tool.columns.filter(column => column.id !== 5 && (column.isGeo === true || COLUMN_IDS_THAT_ARE_ACTUALLY_GEO.indexOf(column.id) > -1));
+    const geoColumns = getState().tool.columns.filter(column => column.isGeo === true);
     const geometriesPromises = [];
     const mapVectorData = {};
 
