@@ -40,7 +40,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
     >
       <div class='dropdown-item-title'>
         {recolorBy.label}
-        {recolorBy.name && recolorBy.description &&
+        {recolorBy.description &&
           <Tooltip position='bottom right' text={recolorBy.description} />
         }
       </div>

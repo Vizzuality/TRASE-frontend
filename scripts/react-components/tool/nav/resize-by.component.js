@@ -20,7 +20,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
           onClick={() => onSelected(resizeBy.name)}
           >
           {resizeBy.label.toLowerCase()}
-          {resizeBy.name && resizeBy.description &&
+          {resizeBy.description &&
             <Tooltip position='bottom right' text={resizeBy.description} />
           }
         </li>);
