@@ -354,6 +354,35 @@ export default class {
     selectedRadio.classList.toggle('-enabled');
     container.classList.toggle('-selected');
     this._checkDependentSelectors();
+
+    // Handle logic post status change on the clicked selector
+    switch (group) {
+      case 'year': {
+        this._updateSelectAll(this.selectorYears);
+        break;
+      }
+      case 'companies': {
+        this._updateSelectAll(this.selectorCompanies);
+        break;
+      }
+      case 'consumption-countries': {
+        this._updateSelectAll(this.selectorConsumptionCountries);
+        break;
+      }
+      case 'indicators': {
+        this._updateSelectAll(this.selectorIndicators);
+        break;
+      }
+    }
+  }
+
+  _updateSelectAll(selector) {
+    const allSelector = selector.querySelector('[value="all"]');
+    if (Array.prototype.slice.call(selector.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn:not(.-enabled)'), 0).length !== 0) {
+      allSelector.classList.remove('-enabled');
+    } else {
+      allSelector.classList.add('-enabled');
+    }
   }
 
   _cleanAllSelectorRadios() {
