@@ -15,7 +15,7 @@ export default function (rawNodes, columns /*, nodesMeta*/) {
       isDefault: column.isDefault,
       isGeo: column.isGeo,
       name: node.name,
-      profileType: node.profileType,
+      profileType: column.profileType,
       geoId: node.geoId
     };
 
