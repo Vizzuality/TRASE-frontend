@@ -40,8 +40,8 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
     >
       <div class='dropdown-item-title'>
         {recolorBy.label}
-        {recolorBy.name && tooltips.sankey.nav.colorBy[recolorBy.name] &&
-          <Tooltip position='bottom right' text={tooltips.sankey.nav.colorBy[recolorBy.name]} />
+        {recolorBy.name && recolorBy.description &&
+          <Tooltip position='bottom right' text={recolorBy.description} />
         }
       </div>
       <div class='dropdown-item-legend-container'>
@@ -63,7 +63,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
   // Render all the dropdown items
   const recolorByElements = [];
   if (currentDropdown === 'recolor-by') {
-    [{ label: 'Node selection', name: 'none' }]
+    [{ label: 'Node selection', name: 'none', description: tooltips.sankey.nav.colorBy['none'] || '' }]
       .concat(recolorBysData)
       .forEach((recolorBy, index, currentRecolorBys) => {
         if (index > 0 && currentRecolorBys[index - 1].groupNumber !== recolorBy.groupNumber) {

@@ -20,8 +20,8 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedResiz
           onClick={() => onSelected(resizeBy.name)}
           >
           {resizeBy.label.toLowerCase()}
-          {resizeBy.name && tooltips.sankey.nav.resizeBy[resizeBy.name] &&
-            <Tooltip position='bottom right' text={tooltips.sankey.nav.resizeBy[resizeBy.name]} />
+          {resizeBy.name && resizeBy.description &&
+            <Tooltip position='bottom right' text={resizeBy.description} />
           }
         </li>);
       });
