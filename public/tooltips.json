@@ -2,7 +2,7 @@
   "sankey" : {
     "nav" : {
       "context": {
-        "main": "A commodity is comprised of a grouping of traded products as identified by the international Harmonized Commodity Description and Coding System. The volumes of each of these traded products is converted into equivalents of the raw commodity (for example soy cake and soy oil into soybean equivalents) using standardized conversion factors. See https://trase.earth/data-methods.html for more details"
+        "main": "A commodity is comprised of a grouping of traded products as identified by the international Harmonized Commodity Description and Coding System (HS). The volumes of each of these traded products is converted into equivalents of the raw commodity (for example soy cake and soy oil into soybean equivalents using standardised conversion factors. See https://trase.earth/data.methods.html for more details."
       },
       "resizeBy": {
         "main": "Scale the thickness of flows connecting production regions to countries of consumption based either on tonnes of physical commodity, or embedded indicators of conditions in production regions (e.g. area of land in production, associated deforestation etc)."
@@ -12,7 +12,7 @@
         "none": "Select different elements (e.g. companies, countries) in the supply chain map and colour the trade flows associated with those elements differently."
       },
       "view": {
-        "main": "Change the supply chain view from a summary of the whole supply chain that fits within a single display or a complete view with the total map of supply chain flows connecting the production regions of a commodity of interest to traders and countries of import. Selections made within the complete view has slower response times due the volume of data being processed. "
+        "main": "Change the supply chain view from a summary of the supply chain that fits within a single display to a complete view of all supply chain flows connecting the production regions of a commodity of interest to traders and countries of import. Selections made within the complete view have slower response times due to the volume of data being processed."
       }
     }
   }
