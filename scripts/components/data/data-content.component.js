@@ -65,7 +65,7 @@ export default class {
       this.bulkDownloadsSection.querySelectorAll('.c-bulk-downloads__item').forEach(elem => {
         elem.classList.remove('-disabled');
         elem.addEventListener('click', () => {
-          this.currentDownloadParams = { context_id: elem.getAttribute('data-value') };
+          this.currentDownloadParams = { context_id: elem.getAttribute('data-value'), pivot: 1 };
           if (DATA_FORM_ENABLED) {
             this._showForm();
           } else {
@@ -156,6 +156,7 @@ export default class {
     }
     params[outputType] = 1;
 
+    console.log(params);
     return params;
   }
 
