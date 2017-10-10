@@ -207,7 +207,7 @@ const _build = (data, nodeId) => {
   }
 
   if (data.sustainability && data.sustainability.length) {
-    const tabsTitle = `Sustainability indicators of ${formatApostrophe(data.node_name)} top sourcing regions in 2015`;
+    const tabsTitle = `Deforestation risk associated with ${formatApostrophe(data.node_name)} top sourcing regions in 2015:`;
 
     new MultiTable({
       el: document.querySelector('.js-sustainability-table'),
