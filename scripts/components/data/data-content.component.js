@@ -156,7 +156,6 @@ export default class {
     }
     params[outputType] = 1;
 
-    console.log(params);
     return params;
   }
 
