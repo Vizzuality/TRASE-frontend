@@ -5,6 +5,7 @@ import Nav from 'components/shared/nav.component.js';
 import DataReducer from 'reducers/data.reducer';
 import { loadContext } from 'actions/data.actions';
 import { DATA_DEFAULT_STATE } from 'constants';
+import analyticsMiddleware from 'analytics/data.analytics.middleware';
 
 import 'styles/data.scss';
 import 'styles/components/shared/veil.scss';
@@ -20,7 +21,7 @@ const start = (initialState) => {
     }),
     initialState,
     composeEnhancers(
-      applyMiddleware(thunk)
+      applyMiddleware(analyticsMiddleware, thunk)
     )
   );
 

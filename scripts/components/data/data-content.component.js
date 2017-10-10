@@ -8,6 +8,7 @@ export default class {
     this._setVars();
     this.downloadButton.addEventListener('click', () => {
       this.currentDownloadParams = null;
+      this.currentDownloadType = 'custom';
       if (DATA_FORM_ENABLED) {
         this._showForm();
       } else {
@@ -66,6 +67,7 @@ export default class {
         elem.classList.remove('-disabled');
         elem.addEventListener('click', () => {
           this.currentDownloadParams = { context_id: elem.getAttribute('data-value'), pivot: 1 };
+          this.currentDownloadType = 'bulk';
           if (DATA_FORM_ENABLED) {
             this._showForm();
           } else {
@@ -160,6 +162,7 @@ export default class {
   }
 
   _showForm() {
+    this.callbacks.onDataDownloadFormLoaded();
     this._setFormStatus(false);
     this.formContainer.classList.remove('is-hidden');
   }
@@ -230,6 +233,8 @@ export default class {
         downloadURL = getURLFromParams(GET_CSV_DATA_DOWNLOAD_FILE, params);
         break;
     }
+
+    this.callbacks.onDownloadTriggered(Object.assign({ file, type: this.currentDownloadType }, params));
 
     window.open(downloadURL);
   }
