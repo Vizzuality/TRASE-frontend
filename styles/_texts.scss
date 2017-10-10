@@ -101,3 +101,10 @@ sub {
   font-size: $font-size-x-regular;
   color: rgba($charcoal-grey, .6);
 }
+
+.content-link {
+  color: $charcoal-grey;
+  text-decoration: underline solid;
+  -webkit-text-decoration-color: $medium-pink;
+  text-decoration-color: $medium-pink;
+}

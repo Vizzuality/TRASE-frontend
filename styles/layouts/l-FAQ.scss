@@ -31,13 +31,6 @@
       max-width: $content-max-width;
       margin: 0 0 0 $anchor-list-max-width;
 
-      a {
-        color: $charcoal-grey;
-        text-decoration: underline solid;
-        -webkit-text-decoration-color: $medium-pink;
-        text-decoration-color: $medium-pink;
-      }
-
       h2.-anchor::before {
         content:"";
         display:block;
