@@ -2,6 +2,7 @@ import SelectorItemsTemplate from 'ejs!templates/data/selector-items.ejs';
 import BulkDownloadTemplate from 'ejs!templates/data/bulk-download.ejs';
 import { getURLFromParams, GET_CSV_DATA_DOWNLOAD_FILE, GET_JSON_DATA_DOWNLOAD_FILE } from 'utils/getURLFromParams';
 import _ from 'lodash';
+import { POST_SUBSCRIBE_NEWSLETTER } from '../../utils/getURLFromParams';
 
 export default class {
   onCreated() {
@@ -197,12 +198,21 @@ export default class {
       return;
     }
 
-    const body = new FormData();
-    Object.keys(payload).forEach(key => { body.append(key, payload[key]); });
+    const dataSubmitBody = new FormData();
+    Object.keys(payload).forEach(key => { dataSubmitBody.append(key, payload[key]); });
 
     fetch(DATA_FORM_ENDPOINT, {
       method: 'POST',
-      body
+      body: dataSubmitBody
+    });
+
+
+    const newsletterSubscribeBody = new FormData();
+    newsletterSubscribeBody.append('email', payload.email);
+
+    fetch(getURLFromParams(POST_SUBSCRIBE_NEWSLETTER), {
+      method: 'POST',
+      body: newsletterSubscribeBody
     });
 
     this._closeForm();
