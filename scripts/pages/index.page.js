@@ -7,6 +7,7 @@ import TweetsTemplate from 'ejs!templates/homepage/tweets.ejs';
 import 'styles/homepage.scss';
 import 'node_modules/plyr/src/scss/plyr.scss';
 import 'styles/components/homepage/plyr.scss';
+import { getURLFromParams, POST_SUBSCRIBE_NEWSLETTER } from '../utils/getURLFromParams';
 
 const state = {
   activeIndex: 0,
@@ -105,6 +106,38 @@ const scrollIntro = () => {
   }
 };
 
+const newsletterSubscribe = (e) => {
+  e.preventDefault();
+  const form = document.querySelector('.c-newsletter-form');
+
+  if (form.checkValidity() === false) {
+    return;
+  }
+
+  const emailAddress = form.querySelector('[name=email]').value;
+
+  const body = new FormData();
+  body.append('email', emailAddress);
+
+  const url = getURLFromParams(POST_SUBSCRIBE_NEWSLETTER);
+
+  fetch(url, {
+    method: 'POST',
+    body
+  })
+    .then(response => response.json())
+    .then((data) => {
+      const label = form.querySelector('.newsletter-label');
+
+      label.classList.add('-pink');
+      if ('error' in data) {
+        label.innerHTML = `Error: ${data.error}`;
+      } else if ('email' in data) {
+        label.innerHTML = 'Subscription successful';
+      }
+    });
+};
+
 const init = () => {
   const bounds = document.querySelector('.js-trigger-menu-bg').getBoundingClientRect();
   const pageOffset = getPageOffset(bounds);
@@ -136,6 +169,7 @@ const init = () => {
   // });
 
   window.addEventListener('scroll', scrollIntro);
+  document.querySelector('.js-form-subscribe').addEventListener('click', newsletterSubscribe);
 };
 
 init();

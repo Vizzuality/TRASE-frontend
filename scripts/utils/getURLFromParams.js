@@ -12,6 +12,7 @@ export const GET_INDICATORS = 'GET_INDICATORS';
 export const GET_JSON_DATA_DOWNLOAD_FILE = 'GET_JSON_DATA_DOWNLOAD_FILE';
 export const GET_CSV_DATA_DOWNLOAD_FILE = 'GET_CSV_DATA_DOWNLOAD_FILE';
 export const GET_DISCLAIMER = 'GET_DISCLAIMER';
+export const POST_SUBSCRIBE_NEWSLETTER = 'POST_SUBSCRIBE_NEWSLETTER';
 
 const API_ENDPOINTS = {
   [GET_DISCLAIMER]: { api: 'local', endpoint: 'disclaimer.json' },
@@ -28,6 +29,7 @@ const API_ENDPOINTS = {
   [GET_INDICATORS]: { api: 2, endpoint: '/indicators' },
   [GET_CSV_DATA_DOWNLOAD_FILE]: { api: 2, endpoint: '/download.csv' },
   [GET_JSON_DATA_DOWNLOAD_FILE]: { api: 2, endpoint: '/download.json' },
+  [POST_SUBSCRIBE_NEWSLETTER]: { api: 2, endpoint: '/newsletter_subscriptions' },
 };
 
 function getURLForV2(endpoint, params = {}) {
