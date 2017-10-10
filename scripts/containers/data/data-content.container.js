@@ -1,6 +1,7 @@
 import connect from 'connect';
 import { loadContextNodes } from 'actions/data.actions';
 import dataContent from 'components/data/data-content.component';
+import { trackDownload, trackDataDownloadFormLoaded } from 'analytics/analytics.actions';
 
 const mapMethodsToState = (state) => ({
   fillContexts: state.data.contexts,
@@ -11,6 +12,8 @@ const mapMethodsToState = (state) => ({
 
 const mapViewCallbacksToActions = () => ({
   onContextSelected: contextId => loadContextNodes(contextId),
+  onDownloadTriggered: params => trackDownload(params),
+  onDataDownloadFormLoaded: () => trackDataDownloadFormLoaded()
 });
 
 export default connect(dataContent, mapMethodsToState, mapViewCallbacksToActions);

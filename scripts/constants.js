@@ -1,5 +1,3 @@
-import actions from 'actions';
-
 export const NUM_DECIMALS = {
   // resize by
   'trade volume': 0,
@@ -169,48 +167,3 @@ export const BASEMAPS = {
 };
 
 export const DEFAULT_BASEMAP_FOR_CHOROPLETH = 'default';
-
-// GA
-export const GA_ACTION_WHITELIST = [
-  {
-    type: actions.UPDATE_NODE_SELECTION,
-    getPayload: action => action.data.map(d => d.name).join(',')
-  },
-  {
-    type: actions.SELECT_BIOME_FILTER,
-    getPayload: action => action.biomeFilter
-  },
-  {
-    type: actions.SELECT_YEARS,
-    getPayload: action => action.years.join(',')
-  },
-  {
-    type: actions.SELECT_RECOLOR_BY,
-    getPayload: action => action.value
-  },
-  {
-    type: actions.SELECT_RESIZE_BY,
-    getPayload: action => action.quant
-  },
-  {
-    type: actions.SELECT_VIEW,
-    getPayload: action => (action.detailedView) ? 'detailed' : 'overview'
-  },
-  {
-    type: actions.SELECT_COLUMN,
-    getPayload: (action, state) => {
-      return state.columns.find(col => col.id === action.columnId).name;
-    }
-  },
-  {
-    type: actions.TOGGLE_MAP
-  },
-  {
-    type: actions.TOGGLE_MAP_LAYERS_MENU
-  },
-  {
-    type: actions.SELECT_CONTEXTUAL_LAYERS,
-    getPayload: action => action.contextualLayers.join(', ')
-  }
-
-];

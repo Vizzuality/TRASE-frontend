@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import actions from 'actions';
 import { encodeStateToURL } from 'utils/stateURL';
-import { GA_ACTION_WHITELIST } from 'constants';
 import getNodesDict from './helpers/getNodesDict';
 import getVisibleNodes from './helpers/getVisibleNodes';
 import splitVisibleNodesByColumn from './helpers/splitVisibleNodesByColumn';
@@ -442,19 +441,6 @@ export default function (state = {}, action) {
 
   if (updateURLState) {
     encodeStateToURL(newState);
-  }
-
-  if (typeof ga !== 'undefined') {
-    const gaAction = GA_ACTION_WHITELIST.find(whitelistAction => action.type === whitelistAction.type);
-    if (gaAction) {
-      const gaEvent = {
-        hitType: 'event', eventCategory: 'Sankey', eventAction: gaAction.type
-      };
-      if (gaAction.getPayload) {
-        gaEvent.eventLabel = gaAction.getPayload(action, state);
-      }
-      ga('send', gaEvent);
-    }
   }
 
   return newState;

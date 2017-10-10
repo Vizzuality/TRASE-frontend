@@ -108,6 +108,7 @@ const config = {
     root: process.cwd(),
     alias: {
       actions: 'scripts/actions',
+      analytics: 'scripts/analytics',
       reducers: 'scripts/reducers',
       templates: 'scripts/templates',
       style: 'styles',
