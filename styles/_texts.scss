@@ -39,12 +39,20 @@ a {
     font-size: $font-size-x-big;
   }
 
+  &.-medium-small {
+    font-size: $font-size-medium;
+  }
+
   &.-small {
     font-size: $font-size-x-regular;
   }
 
   &.-pink {
     color: $medium-pink;
+  }
+
+  &.-grey {
+    color: $charcoal-grey;
   }
 
   &.-mono-font {
