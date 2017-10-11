@@ -3,6 +3,7 @@ import { toggleMap, toggleMapLayerMenu } from 'actions/app.actions';
 import { selectNodeFromGeoId, highlightNodeFromGeoId, saveMapView } from 'actions/tool.actions';
 import connect from 'connect';
 import Map from 'components/tool/map.component.js';
+import getBasemap from '../helpers/getBasemap';
 
 const mapMethodsToState = (state) => ({
   setMapView: state.tool.mapView,
@@ -15,7 +16,8 @@ const mapMethodsToState = (state) => ({
         selectedNodesGeoIds: state.tool.selectedNodesGeoIds,
         recolorByNodeIds: state.tool.recolorByNodeIds,
         choropleth: state.tool.choropleth,
-        linkedGeoIds: state.tool.linkedGeoIds
+        linkedGeoIds: state.tool.linkedGeoIds,
+        defaultMapView: state.tool.selectedContext.map
       };
     }
   },
@@ -32,7 +34,9 @@ const mapMethodsToState = (state) => ({
     _comparedValue: (state) => state.tool.selectedNodesGeoIds,
     _returnedValue: (state) => {
       return {
-        selectedGeoIds: state.tool.selectedNodesGeoIds
+        selectedGeoIds: state.tool.selectedNodesGeoIds,
+        defaultMapView: state.tool.selectedContext.map,
+        forceDefaultMapView: !state.tool.selectedNodesIds.length
       };
     }
   },
@@ -51,14 +55,28 @@ const mapMethodsToState = (state) => ({
       return {
         choropleth: state.tool.choropleth,
         linkedGeoIds: state.tool.linkedGeoIds,
-        choroplethLegend: state.tool.choroplethLegend
+        choroplethLegend: state.tool.choroplethLegend,
+        defaultMapView: state.tool.selectedContext.map
       };
     }
   },
   loadContextLayers: state.tool.selectedMapContextualLayersData,
-  loadBasemap: state.tool.selectedMapBasemap,
-  showLinkedGeoIds: state.tool.linkedGeoIds,
-  invalidate: state.tool.isMapVisible
+  showLinkedGeoIds: {
+    _comparedValue: (state) => state.tool.linkedGeoIds,
+    _returnedValue: (state) => {
+      return {
+        linkedGeoIds: state.tool.linkedGeoIds,
+        defaultMapView: state.tool.selectedContext.map,
+        // get back to context default map view if no nodes are selected
+        forceDefaultMapView: !state.tool.selectedNodesIds.length
+      };
+    }
+  },
+  invalidate: state.tool.isMapVisible,
+  setBasemap: {
+    _comparedValue: (state) => getBasemap(state.tool),
+    _returnedValue: (state) => getBasemap(state.tool)
+  }
 });
 
 const mapViewCallbacksToActions = () => ({

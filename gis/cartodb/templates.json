@@ -7,6 +7,25 @@
   },
   {
     "version": "0.0.1",
+    "name": "brazil_biomes",
+    "human_name": "Brazil biomes",
+    "legend":"",
+    "layergroup": {
+      "version": "1.0.1",
+      "layers": [
+        {
+          "type": "cartodb",
+          "options": {
+            "sql": "SELECT * FROM brazil_biomes",
+            "cartocss": "#brazil_biomes{  polygon-opacity: 0;  line-color: #000000;  line-width: 1;  line-opacity: 1;}#brazil_biomes[zoom>3]::labels {  text-name: [cd_legenda];  text-face-name: 'Open Sans Regular';  text-size: 15;  text-fill: #FFFFFF;  text-allow-overlap: true;  text-placement: interior;  text-halo-fill: black;  text-halo-radius: 1;  text-character-spacing: 3;  [cd_legenda='MATA ATLANTICA'] {    text-horizontal-alignment: left;    text-dx: 85;   }  [cd_legenda='PANTANAL'] {    text-horizontal-alignment: right;    text-dx: -60;  }  [zoom=4] {    text-size: 13;  }}",
+            "cartocss_version": "2.3.0"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "version": "0.0.1",
     "name": "water_scarcity",
     "human_name": "Water scarcity",
     "legend":"<div class='cartodb-legend choropleth'> <ul><li class=\" min\" >Less</li><li class=\" graph count_441\" ><div class=\" colors\" ><div class=\" quartile\"  style=\" background-color:#4575b4\" ></div><div class=\" quartile\"  style=\" background-color:#91bfdb\" ></div><div class=\" quartile\"  style=\" background-color:#e0f3f8\" ></div><div class=\" quartile\"  style=\" background-color:#ffffbf\" ></div><div class=\" quartile\"  style=\" background-color:#fee090\" ></div><div class=\" quartile\"  style=\" background-color:#fc8d59\" ></div><div class=\" quartile\"  style=\" background-color:#d73027\" ></div></div></li><li class=\" max\" >More</li></ul></div>",
@@ -59,27 +78,6 @@
             "cartocss": "#brazil_protected{   polygon-opacity: 0.5;   polygon-fill:#B4D84F;   line-color: #B4D84F;   line-width: 1;   line-opacity: 1;}",
             "cartocss_version": "2.3.0",
             "interactivity":["cartodb_id", "type"]
-          }
-        }
-      ]
-    }
-  },
-  {
-    "version": "0.0.1",
-    "name": "silos",
-    "human_name": "silos",
-    "legend":"<div class='cartodb-legend choropleth'><ul><li class=\"bullet bullet-icon\" style=\"background-image:url(http://com.cartodb.users-assets.production.s3.amazonaws.com/simpleicon/building22.svg)\"></li><li class=\"min\">0</li><li class=\"graph count_441\"><div class=\"colors\"><div class=\"quartile\" style=\"background-color: #5CA2D1\"></div><div class=\"quartile\" style=\"background-color:#3E7BB6\"></div><div class=\"quartile\" style=\"background-color:#2167AB\"></div><div class=\"quartile\" style=\"background-color:#0F3B82\"></div><div class=\"quartile\" style=\"background-color:#081B47\"></div></div></li><li class=\"max\"> > 30 tons </li> </ul> </div>",
-    "forceZoom": 6,
-    "layergroup": {
-      "version": "1.0.1",
-      "layers": [
-        {
-          "type": "cartodb",
-          "options": {
-            "sql": "SELECT * FROM silos",
-            "cartocss": "#silos[zoom>5]{   marker-fill-opacity: 0.8;   marker-line-color: #FFF;   marker-line-width: 1;   marker-line-opacity: 1;   marker-width: 10;   marker-file: url(http://com.cartodb.users-assets.production.s3.amazonaws.com/simpleicon/building22.svg);   marker-fill: transparent;   marker-allow-overlap: false; } #silos [ cap_t >= 0][zoom>5] {    marker-fill: #5CA2D1; } #silos [ cap_t >= 1499.5][zoom>5] {    marker-fill: #3E7BB6; }  #silos [ cap_t >= 3168.5][zoom>5] {    marker-fill: #2167AB; } #silos [ cap_t >= 16580.5][zoom>5] {    marker-fill: #0F3B82; } #silos [ cap_t >= 31470][zoom>5] {    marker-fill: #081B47; }",
-            "cartocss_version": "2.3.0",
-            "interactivity":["cartodb_id","cap_t","company","type","uf"]
           }
         }
       ]

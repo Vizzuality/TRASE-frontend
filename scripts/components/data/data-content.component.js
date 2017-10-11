@@ -2,11 +2,27 @@ import SelectorItemsTemplate from 'ejs!templates/data/selector-items.ejs';
 import BulkDownloadTemplate from 'ejs!templates/data/bulk-download.ejs';
 import { getURLFromParams, GET_CSV_DATA_DOWNLOAD_FILE, GET_JSON_DATA_DOWNLOAD_FILE } from 'utils/getURLFromParams';
 import _ from 'lodash';
+import { POST_SUBSCRIBE_NEWSLETTER } from '../../utils/getURLFromParams';
 
 export default class {
   onCreated() {
     this._setVars();
-    this.downloadButton.addEventListener('click', () => this._downloadFile());
+    this.downloadButton.addEventListener('click', () => {
+      this.currentDownloadParams = null;
+      this.currentDownloadType = 'custom';
+      if (DATA_FORM_ENABLED) {
+        this._showForm();
+      } else {
+        this._downloadFile();
+      }
+    });
+    this.formSubmitButton.addEventListener('click', () => {
+      this._sendForm();
+    });
+    this.formVeil.addEventListener('click', () => {
+      this._closeForm();
+    });
+    this.onClickEventHandler = this._onToggleRadio.bind(this);
   }
 
   _setVars() {
@@ -22,6 +38,13 @@ export default class {
     this.selectorFormatting = this.el.querySelector('.js-custom-dataset-selector-formatting');
     this.selectorFile = this.el.querySelector('.js-custom-dataset-selector-file');
     this.bulkDownloadsSection = document.querySelector('.c-bulk-downloads');
+    this.formContainer = document.querySelector('.js-form-container');
+    this.formSubmitButton = document.querySelector('.js-form-submit');
+    this.form = document.querySelector('.js-form');
+    this.formVeil = document.querySelector('.js-form-veil');
+    this.formMissing = document.querySelector('.js-missing');
+    this.formTos = document.querySelector('.js-tos');
+    this.formTosCheck = document.querySelector('#tos_check');
   }
 
   fillContexts(contexts) {
@@ -43,7 +66,15 @@ export default class {
     if (DATA_DOWNLOAD_ENABLED) {
       this.bulkDownloadsSection.querySelectorAll('.c-bulk-downloads__item').forEach(elem => {
         elem.classList.remove('-disabled');
-        elem.addEventListener('click', () => this._downloadFile({ context_id: elem.getAttribute('data-value') }));
+        elem.addEventListener('click', () => {
+          this.currentDownloadParams = { context_id: elem.getAttribute('data-value'), pivot: 1 };
+          this.currentDownloadType = 'bulk';
+          if (DATA_FORM_ENABLED) {
+            this._showForm();
+          } else {
+            this._downloadFile();
+          }
+        });
       });
     }
 
@@ -51,7 +82,6 @@ export default class {
       items
     });
     this._setSelectorEvents(this.selectorCountries);
-    this._setSelectorEvents(this.selectorYears);
     this._setSelectorEvents(this.selectorOutputType);
     this._setSelectorEvents(this.selectorFormatting);
     this._setSelectorEvents(this.selectorFile);
@@ -132,8 +162,70 @@ export default class {
     return params;
   }
 
-  _downloadFile(params = null) {
-    params = params || this._getDownloadURLParams();
+  _showForm() {
+    this.callbacks.onDataDownloadFormLoaded();
+    this._setFormStatus(false);
+    this.formContainer.classList.remove('is-hidden');
+  }
+
+  _closeForm() {
+    this.formContainer.classList.add('is-hidden');
+  }
+
+  _sendForm() {
+    const payload = {};
+    for (var i = 0; i < this.form.length; i++) {
+      const formEl = this.form.elements[i];
+      payload[formEl.id] = formEl.value;
+    }
+
+    if (!this.formTosCheck.checked) {
+      this.formTos.classList.add('-highlighted');
+      return;
+    }
+
+    delete payload.country_alt;
+    delete payload.tos_check;
+    payload.date = new Date().toString();
+
+    if (!this.downloaded) {
+      this._downloadFile();
+    }
+
+    // pretty please can I haz your data
+    if (_.values(payload).filter(v => v!== '').length === 1) {
+      this._setFormStatus(true);
+      return;
+    }
+
+    const dataSubmitBody = new FormData();
+    Object.keys(payload).forEach(key => { dataSubmitBody.append(key, payload[key]); });
+
+    fetch(DATA_FORM_ENDPOINT, {
+      method: 'POST',
+      body: dataSubmitBody
+    });
+
+
+    const newsletterSubscribeBody = new FormData();
+    newsletterSubscribeBody.append('email', payload.email);
+
+    fetch(getURLFromParams(POST_SUBSCRIBE_NEWSLETTER), {
+      method: 'POST',
+      body: newsletterSubscribeBody
+    });
+
+    this._closeForm();
+  }
+
+  _setFormStatus(downloaded) {
+    this.downloaded = downloaded;
+    this.formMissing.classList.toggle('is-hidden', !downloaded);
+    this.form.classList.toggle('-downloaded', downloaded);
+  }
+
+  _downloadFile() {
+    const params = this.currentDownloadParams || this._getDownloadURLParams();
 
     if (!params.context_id) {
       return;
@@ -152,13 +244,16 @@ export default class {
         break;
     }
 
+    this.callbacks.onDownloadTriggered(Object.assign({ file, type: this.currentDownloadType }, params));
+
     window.open(downloadURL);
   }
 
   _setSelectorEvents(selector) {
     const radios = Array.prototype.slice.call(selector.querySelectorAll('.c-radio-btn'), 0);
     radios.forEach((radio) => {
-      radio.addEventListener('click', (e) => this._onToggleRadio(e));
+      radio.removeEventListener('click', this.onClickEventHandler);
+      radio.addEventListener('click', this.onClickEventHandler);
     });
   }
 
@@ -186,11 +281,13 @@ export default class {
     switch (group) {
       case 'countries':
         this._cleanRadios(this.selectorCountries);
+        this._cleanAllSelectorRadios();
         this._updateCommoditiesSelector(value);
         this._lockDownloadButton();
         break;
       case 'commodities':
         this._cleanRadios(this.selectorCommodities);
+        this._cleanAllSelectorRadios();
         this.callbacks.onContextSelected(value);
         this._updateYearsSelector(value);
         if (isEnabled) {
@@ -272,6 +369,43 @@ export default class {
     selectedRadio.classList.toggle('-enabled');
     container.classList.toggle('-selected');
     this._checkDependentSelectors();
+
+    // Handle logic post status change on the clicked selector
+    switch (group) {
+      case 'year': {
+        this._updateSelectAll(this.selectorYears);
+        break;
+      }
+      case 'companies': {
+        this._updateSelectAll(this.selectorCompanies);
+        break;
+      }
+      case 'consumption-countries': {
+        this._updateSelectAll(this.selectorConsumptionCountries);
+        break;
+      }
+      case 'indicators': {
+        this._updateSelectAll(this.selectorIndicators);
+        break;
+      }
+    }
+  }
+
+  _updateSelectAll(selector) {
+    const allSelector = selector.querySelector('[value="all"]');
+    if (Array.prototype.slice.call(selector.querySelector('.js-custom-dataset-selector-values').querySelectorAll('.c-radio-btn:not(.-enabled)'), 0).length !== 0) {
+      allSelector.classList.remove('-enabled');
+    } else {
+      allSelector.classList.add('-enabled');
+    }
+  }
+
+  _cleanAllSelectorRadios() {
+    const radios = Array.prototype.slice.call(document.querySelectorAll('.c-radio-btn[value="all"]'), 0);
+    radios.forEach((radio) => {
+      radio.classList.remove('-enabled');
+      radio.closest('li').classList.remove('-selected');
+    });
   }
 
   _cleanRadios(selector) {

@@ -8,7 +8,7 @@ const _shortenTitle = (title) => {
   return [title.slice(0, 34), title.slice(-12)].join('(…)');
 };
 
-export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensions) {
+export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensions, forceEmpty) {
   const uids = _.compact(selectedMapDimensionsUids);
 
   if (!uids.length) {
@@ -25,9 +25,14 @@ export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensi
   const isBivariate = selectedMapDimensions.length === 2;
   const isEmpty = selectedMapDimensions.length === 0;
 
+  // Hack for invalid API value
+  if (selectedMapDimension.colorScale === 'greenblue') {
+    selectedMapDimension.colorScale = 'greenred';
+  }
+
   const colors = (isBivariate) ? CHOROPLETH_CLASSES.bidimensional : CHOROPLETH_CLASSES[selectedMapDimension.colorScale || 'red'];
 
-  const geoNodes = _.filter(nodesDictWithMeta, node => node.geoId !== undefined && node.geoId !== null);
+  const geoNodes = _.filter(nodesDictWithMeta, node => node.geoId !== undefined && node.geoId !== null && node.isGeo);
   const geoNodesIds = Object.keys(geoNodes);
   const choropleth = {};
 
@@ -37,6 +42,10 @@ export default function(selectedMapDimensionsUids, nodesDictWithMeta, mapDimensi
     titles: selectedMapDimensions.map(d => _shortenTitle(d.name)),
     bucket: selectedMapDimensions.map(d => (isBivariate) ? d.bucket3.slice(0) : d.bucket5.slice(0)),
   };
+
+  if (forceEmpty === true) {
+    return { choropleth, choroplethLegend };
+  }
 
   geoNodesIds.forEach(nodeId => {
     const node = geoNodes[nodeId];

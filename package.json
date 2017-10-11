@@ -12,7 +12,10 @@
     "eslint": "npm run lint-js",
     "lint-js": "eslint -c .eslintrc.js --ext .jsx,.js scripts",
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q 'styles/**/*.scss'",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "deploy:staging": "./bin/deploy.sh staging",
+    "deploy:demo": "./bin/deploy.sh demo",
+    "deploy:production": "./bin/deploy.sh production"
   },
   "repository": {
     "type": "git",
@@ -53,6 +56,7 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
+    "@turf/bbox": "^4.6.0",
     "awesomplete": "^1.1.1",
     "body-parser": "^1.15.2",
     "classnames": "^2.2.5",

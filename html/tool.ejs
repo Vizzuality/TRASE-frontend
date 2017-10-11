@@ -5,15 +5,16 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  <div class="js-tool-tooltip c-info-tooltip"></div>
+  <div class="js-node-tooltip c-info-tooltip"></div>
+  <div class="js-sankey-tooltip c-info-tooltip"></div>
   <div class="loading-wrapper">
     <%= htmlWebpackPlugin.options.icons %>
     <div class="l-flows">
 
       <%= htmlWebpackPlugin.options.search %>
-      <%= htmlWebpackPlugin.options.nav_flow %>
+      <%= htmlWebpackPlugin.options.navtool %>
 
-      <div class="modal-container">
+      <div class="-hidden-on-mobile">
         <div class="veil js-veil"></div>
         <div class="c-modal js-modal"></div>
       </div>
@@ -27,7 +28,17 @@
         </div>
       </div>
 
+      <div class="js-sankey-error is-hidden">
+        <div class="veil -with-menu -below-nav"></div>
+        <div class="c-modal -below-nav">
+          <div class="content">
+            Data is not available for the selected year(s) and "resize by" indicator. Please change year or "resize by" indicator selection.
+          </div>
+        </div>
+      </div>
+
       <div class="js-tool-content flow-content">
+
         <div class="js-tool-loading tool-loading">
           <div class="veil"></div>
           <div class="c-spinner"></div>
@@ -61,6 +72,12 @@
 
         <div class="js-map-container c-map is-absolute">
           <div id="js-map" class="c-map-leaflet">
+            <div class="js-map-warnings-container c-map-warnings">
+              <svg class="icon">
+                <use xlink:href="#icon-warning"></use>
+              </svg>
+              <span class="js-map-warnings"></span>
+            </div>
             <div class="btn-map -basemap js-basemap-switcher">
               <svg class="icon icon-layers"><use xlink:href="#icon-layers"></use></svg>
             </div>
@@ -120,7 +137,17 @@
         </div>
 
         <div class="c-titlebar">
-          <div class="c-nodes-titles js-nodes-titles"></div>
+          <div class="c-nodes-titles js-nodes-titles">
+            <div class="nodes-titles-container js-nodes-titles-container"></div>
+            <div class="c-nodes-clear js-nodes-titles-clear is-hidden">
+              <div class="button icon-button">
+                <svg class="icon"><use xlink:href="#icon-close"></use></svg>
+              </div>
+              <div class="button text-button js-text-button">
+                clear selection
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>

@@ -62,13 +62,27 @@ const _build = data => {
     getPolygonClassName: d => (d.properties.geoid === data.municipality_geo_id) ? '-isCurrent' : ''
   });
 
-  if (data.trajectory_deforestation.lines.length) {
+  if (data.trajectory_deforestation && data.trajectory_deforestation.lines.length) {
+
+    // Manually trim time series to 2010 - 2015 as asked here https://basecamp.com/1756858/projects/12498794/todos/324404665
+    data.trajectory_deforestation.included_years = data.trajectory_deforestation.included_years.filter(year => {
+      const include = year >= 2010;
+      if (!include) {
+        data.trajectory_deforestation.lines.forEach(line => {
+          if (line.values !== undefined && line.values !== null) {
+            line.values.shift();
+          }
+        });
+      }
+      return include;
+    });
+
     new Line(
       '.js-line',
       data.trajectory_deforestation,
       data.trajectory_deforestation.included_years,
       {
-        margin: { top: 30, right: 40, bottom: 30, left: 99 },
+        margin: { top: 0, right: 40, bottom: 30, left: 99 },
         height: 425,
         ticks: {
           yTicks: 7,
@@ -78,9 +92,14 @@ const _build = data => {
         }
       }
     );
+  } else {
+    const elem = document.querySelector('.js-line-title');
+    elem.parentNode.parentNode.parentNode.removeChild(elem.parentNode.parentNode);
   }
 
   if (data.top_traders.actors.length) {
+    document.querySelector('.js-traders').classList.toggle('is-hidden', false);
+
     new Chord(
       '.js-chord-traders',
       data.top_traders.matrix,
@@ -95,11 +114,11 @@ const _build = data => {
       title: `Top traders of soy in ${data.municipality_name}`,
       unit: '%'
     });
-
-    document.querySelector('.js-traders').classList.toggle('is-hidden', false);
   }
 
   if (data.top_consumers.countries.length) {
+    document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
+    
     new Chord(
       '.js-chord-consumers',
       data.top_consumers.matrix,
@@ -110,11 +129,9 @@ const _build = data => {
     new Top({
       el: document.querySelector('.js-top-consumer'),
       data: data.top_consumers.countries,
-      title: `Top consumers of ${formatApostrophe(_.capitalize(data.municipality_name))} soy`,
+      title: `Top importer countries of ${formatApostrophe(_.capitalize(data.municipality_name))} soy`,
       unit: '%'
     });
-
-    document.querySelector('.js-consumers').classList.toggle('is-hidden', false);
   }
 
   if (data.indicators.length) {
@@ -144,14 +161,18 @@ const _setInfo = (info, nodeId) => {
   document.querySelector('.js-legend').innerHTML = info.type || '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? _.capitalize(info.municipality) : '-';
   document.querySelector('.js-area').innerHTML = info.area !== null ? formatValue(info.area, 'area') : '-';
-  document.querySelector('.js-soy-land').innerHTML = info.soy_land !== null ? formatValue(info.soy_land, 'percentage') : '-';
+  document.querySelector('.js-soy-land').innerHTML = (info.soy_area !== null && info.soy_area !== 'NaN') ? formatValue(info.soy_area, 'area') : '-';
   document.querySelector('.js-soy-production').innerHTML = info.soy_production !== null ? formatValue(info.soy_production, 'tons'): '-';
   document.querySelector('.js-link-map').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]&isMapVisible=true`);
   document.querySelector('.js-link-supply-chain').setAttribute('href', `./flows.html?selectedNodesIds=[${nodeId}]`);
   document.querySelector('.js-line-title').innerHTML = info.municipality ? `Deforestation trajectory of ${info.municipality}` : '-';
-  document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
   document.querySelector('.js-municipality').innerHTML = info.municipality ? info.municipality : '-';
   document.querySelector('.js-link-button-municipality').textContent = formatApostrophe(_.capitalize(info.municipality)) + ' PROFILE';
+
+  if (info.soy_production === 0) {
+    info.summary = `${info.municipality} did not produce any soy in 2015`;
+  }
+  document.querySelector('.js-summary-text').innerHTML = info.summary ? info.summary : '-';
 
 };
 
@@ -203,7 +224,7 @@ const _init = () => {
         biome: data.biome_name,
         country: data.country_name,
         municipality: data.municipality_name,
-        soy_land: data.soy_farmland,
+        soy_area: data.soy_area,
         soy_production: data.soy_production,
         state: data.state_name,
         type: data.column_name,

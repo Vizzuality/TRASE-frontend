@@ -13,11 +13,16 @@
               <% } %>
           </div>
           <div class="actions">
+            <% if (dimension.disabledYearRangeReasonText !== undefined) {  %>
+              <svg class="icon icon-layer-info js-tooltip" data-tooltip-text="<%= dimension.disabledYearRangeReasonText %>">
+                <use xlink:href="#icon-warning"></use>
+              </svg>
+            <% } %>
             <% if (dimension.description) {  %>
               <svg class="icon icon-layer-info js-tooltip" data-tooltip-text="<%= dimension.description %>">
                 <use xlink:href="#icon-layer-info"></use>
               </svg>
-              <% } %>
+            <% } %>
             <div class="radio-btn"></div>
           </div>
         </li>

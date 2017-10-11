@@ -1,5 +1,3 @@
-import actions from 'actions';
-
 export const NUM_DECIMALS = {
   // resize by
   'trade volume': 0,
@@ -21,7 +19,7 @@ export const NUM_DECIMALS = {
   'forest code deficit': 1,
   'number of environmental embargos (2015)': 0,
   '% of soy under zero deforestation commitments': 1,
-  'human development index': 0,
+  'human development index': 3,
   'gdp per capita': 0,
   '% gdp from agriculture': 3,
   'smallholder dominance': 3,
@@ -70,7 +68,9 @@ export const PROFILE_CHOROPLETH_CLASSES = ['ch-red-0', 'ch-red-1', 'ch-red-2', '
 export const NODE_SELECTION_LINKS_NUM_COLORS = 10;
 export const SANKEY_TRANSITION_TIME = 1000;
 
+// TODO Things that are hardcoded and shouldn't
 export const CONTEXT_WITHOUT_MAP_IDS = [3, 4, 5, 6];
+export const CONTEXT_WITH_CONTEXT_LAYERS_IDS = [1];
 
 export const APP_DEFAULT_STATE = {
   app: {
@@ -88,9 +88,7 @@ export const TOOL_DEFAULT_STATE = {
     areNodesExpanded: false,
     detailedView: false,
     selectedNodesData: [],
-    selectedMapDimensions: undefined,
-    selectedContextualLayers: ['soy_infrastructure', 'land_conflicts'],
-    selectedMapBasemap: 'default',
+    selectedMapContextualLayers: null,
     isMapVisible: false,
     expandedMapSidebarGroupsIds: []
   }
@@ -108,35 +106,51 @@ export const LINE_LABEL_HEIGHT = 12;
 // map
 export const CARTO_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/';
 export const CARTO_NAMED_MAPS_BASE_URL = 'https://p2cs-sei.carto.com/api/v1/map/named/';
+export const YEARS_DISABLED_WARNINGS = {
+  NO_AGGR_REASON: 'can\'t be displayed over multiple years.',
+  NO_AGGR_INSTRUCTION: 'Please modify year selection to a single year.',
+  UNAVAILABLE_REASON: 'can\'t be displayed for the selected years.',
+  UNAVAILABLE_INSTRUCTION: 'Please change year selection.',
+  THIS_LAYER: 'This layer',
+  THAT_LAYER: 'The selected map layer ($layer)',
+  THOSE_LAYERS: 'The selected map layers ($layer0 and $layer1)'
+};
+
+export const YEARS_DISABLED_NO_AGGR = 'NO_AGGR';
+export const YEARS_DISABLED_UNAVAILABLE = 'UNAVAILABLE';
+
 export const MAP_PANES = {
   basemap: 'basemap',
+  contextBelow: 'contextBelow',
   vectorMain: 'vectorMain',
-  vectorLinked: 'vectorLinked',
   vectorOutline: 'vectorOutline',
   context: 'context',
   basemapLabels: 'basemapLabels'
 };
 export const MAP_PANES_Z = {
   [MAP_PANES.basemap]: 200,
+  [MAP_PANES.contextBelow]: 400,
   [MAP_PANES.vectorMain]: 410,
-  [MAP_PANES.vectorLinked]: 411,
   [MAP_PANES.vectorOutline]: 412,
   [MAP_PANES.context]: 420,
   [MAP_PANES.basemapLabels]: 490
 };
+
 export const BASEMAPS = {
   default: {
     title: 'Default',
-    url: '//api.mapbox.com/styles/v1/trasebase/cizi55y2r00122rl65a97ppz1/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
-    labelsUrl: '//api.mapbox.com/styles/v1/traselabels/cizi59ohm00122spaghssyqsd/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2VsYWJlbHMiLCJhIjoiY2l6aTU4bm9sMDAyczMzazdwNWJ1MmFmbSJ9.zcNOZLokWun7cDwbArtV6g',
+    url: 'https://api.mapbox.com/styles/v1/trasebase/cizi55y2r00122rl65a97ppz1/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
+    labelsUrl: 'https://api.mapbox.com/styles/v1/trasebase/cj8086t6u7ias2sjs820bkw7w/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     attribution: '<span>&copy;</span> <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <span>&copy;</span> <a href="https://www.mapbox.com/about/maps/">Mapbox</a>',
     thumbnail: 'images/maps/thumb-basemap-default.png'
   },
   satellite: {
     title: 'Satellite',
-    url: '//api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
+    url: 'https://api.mapbox.com/styles/v1/trasebase/cj808lpze6d6o2st3yim6eedl/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
+    labelsUrl: 'https://api.mapbox.com/styles/v1/trasebase/cj82xc9xaa0fo2qnts9h16f3c/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoidHJhc2ViYXNlIiwiYSI6ImNpemk1NWdhOTAwMmYyeGw5dXRncHpvZGEifQ.fQ6F9DSqmhLXZs-nKiYvzA',
     attribution: '<a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>, <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>, <a href="https://www.digitalglobe.com/" target="_blank">DigitalGlobe</a>',
-    thumbnail: 'images/maps/thumb-basemap-satellite.jpeg'
+    thumbnail: 'images/maps/thumb-basemap-satellite.jpeg',
+    dark: true
   },
   topo: {
     title: 'Topography',
@@ -152,47 +166,4 @@ export const BASEMAPS = {
   },
 };
 
-// GA
-export const GA_ACTION_WHITELIST = [
-  {
-    type: actions.UPDATE_NODE_SELECTION,
-    getPayload: action => action.data.map(d => d.name).join(',')
-  },
-  {
-    type: actions.SELECT_BIOME_FILTER,
-    getPayload: action => action.biomeFilter
-  },
-  {
-    type: actions.SELECT_YEARS,
-    getPayload: action => action.years.join(',')
-  },
-  {
-    type: actions.SELECT_RECOLOR_BY,
-    getPayload: action => action.value
-  },
-  {
-    type: actions.SELECT_RESIZE_BY,
-    getPayload: action => action.quant
-  },
-  {
-    type: actions.SELECT_VIEW,
-    getPayload: action => (action.detailedView) ? 'detailed' : 'overview'
-  },
-  {
-    type: actions.SELECT_COLUMN,
-    getPayload: (action, state) => {
-      return state.columns.find(col => col.id === action.columnId).name;
-    }
-  },
-  {
-    type: actions.TOGGLE_MAP
-  },
-  {
-    type: actions.TOGGLE_MAP_LAYERS_MENU
-  },
-  {
-    type: actions.SELECT_CONTEXTUAL_LAYERS,
-    getPayload: action => action.contextualLayers.join(', ')
-  }
-
-];
+export const DEFAULT_BASEMAP_FOR_CHOROPLETH = 'default';

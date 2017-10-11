@@ -143,13 +143,14 @@
 
       <section class="newsletter">
         <div class="newsletter-content row align-middle">
-          <form class="column small-6">
+          <form class="column small-6 js-form c-newsletter-form">
             <label for="newsletter-email" class="newsletter-label">
               Sign up here to receive news updates about TRASE
             </label>
             <div class="newsletter-input-container">
-              <input type="email" name="email" placeholder="email address" id="newsletter-email" class="newsletter-email">
-              <button type="submit" class="c-button -charcoal -bold">Subscribe</button>
+              <input type="email" name="email" placeholder="email address" id="newsletter-email" required
+                     class="newsletter-email">
+              <button class="js-form-subscribe c-button -charcoal -bold ">Subscribe</button>
             </div>
           </form>
         </div>

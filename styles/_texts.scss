@@ -39,12 +39,20 @@ a {
     font-size: $font-size-x-big;
   }
 
+  &.-medium-small {
+    font-size: $font-size-medium;
+  }
+
   &.-small {
     font-size: $font-size-x-regular;
   }
 
   &.-pink {
     color: $medium-pink;
+  }
+
+  &.-grey {
+    color: $charcoal-grey;
   }
 
   &.-mono-font {
@@ -86,4 +94,15 @@ sup {
 
 sub {
   bottom: -.25em;
+}
+
+.y-axis {
+  font-family: $font-family-1;
+  font-size: $font-size-x-regular;
+  color: rgba($charcoal-grey, .6);
+}
+
+.content-link {
+  color: $charcoal-grey;
+  font-weight: $font-weight-bold;
 }

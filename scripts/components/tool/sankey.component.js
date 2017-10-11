@@ -27,10 +27,14 @@ export default class {
   }
 
   showLoadedLinks(linksPayload) {
+    if (linksPayload.links === null || !linksPayload.links.length) {
+      return;
+    }
     this.scrollContainer.classList.toggle('-detailed', linksPayload.detailedView);
 
     if (linksPayload.detailedView === false) {
       this.svg.style('height', '100%');
+      this.scrollContainer.removeEventListener('scroll', this._onScrollBound);
     }
 
     this.layout.setViewportSize(linksPayload.sankeySize);
@@ -40,6 +44,7 @@ export default class {
 
     if (linksPayload.detailedView === true) {
       this.svg.style('height', this.layout.getMaxHeight() + 'px');
+      this.scrollContainer.addEventListener('scroll', this._onScrollBound);
     }
 
     if (relayout === false) {
@@ -49,6 +54,10 @@ export default class {
     this._render(linksPayload.selectedRecolorBy, linksPayload.currentQuant);
 
     this.selectNodes(linksPayload);
+  }
+
+  _onScroll() {
+    this._repositionExpandButtonScroll();
   }
 
   selectNodes({ selectedNodesIds, shouldRepositionExpandButton }) {
@@ -93,7 +102,7 @@ export default class {
     this.sankeyColumns = this.svg.selectAll('.sankey-column');
     this.linksContainer = this.svg.select('.sankey-links');
 
-    this.linkTooltip = new Tooltip('.js-tool-tooltip');
+    this.linkTooltip = new Tooltip('.js-sankey-tooltip');
 
     this.sankeyColumns.on('mouseleave', () => { this._onColumnOut(); } );
 
@@ -104,6 +113,8 @@ export default class {
     this.expandActionButton.addEventListener('click', this._onExpandClick.bind(this));
     this.clearButton = document.querySelector('.js-clear');
     this.clearButton.addEventListener('click', this.callbacks.onClearClick);
+
+    this._onScrollBound = this._onScroll.bind(this);
   }
 
   _onExpandClick() {
@@ -125,13 +136,21 @@ export default class {
           .data()
           .reduce((acc, val) => acc.y < val.y ? acc : val);
 
-        const y = Math.max(0, selectedColumnFirstNode.y - 12);
-        this.expandButton.style.top = `${y}px`;
+        this.currentExpandButtonY = Math.max(0, selectedColumnFirstNode.y - 12);
+        this.expandButtonIsVisible = true;
+        this._repositionExpandButtonScroll();
         this.expandButton.style.left = `${selectedColumnFirstNode.x - 12}px`;
         return;
       }
     }
+    this.expandButtonIsVisible = false;
     this.expandButton.classList.remove('-visible');
+  }
+
+  _repositionExpandButtonScroll() {
+    const y = this.currentExpandButtonY  - this.scrollContainer.scrollTop;
+    this.expandButton.style.top = `${y}px`;
+    this.expandButton.classList.toggle('-visible', y > -10 && this.expandButtonIsVisible === true);
   }
 
   _getLinkColor(link, selectedRecolorBy) {
@@ -146,7 +165,7 @@ export default class {
       }
       let recolorBy = link.recolorBy;
       if (selectedRecolorBy.divisor) {
-        recolorBy = Math.round(link.recolorBy / selectedRecolorBy.divisor);
+        recolorBy = Math.floor(link.recolorBy / selectedRecolorBy.divisor);
       }
 
       classPath = `${classPath} -recolorby-${_.toLower(selectedRecolorBy.legendType)}-${_.toLower(selectedRecolorBy.legendColorTheme)}-${recolorBy}`;
@@ -257,7 +276,6 @@ export default class {
   }
 
   _onNodeOver(selection, nodeId, isAggregated) {
-    // selection.classed('-highlighted', true);
     this.callbacks.onNodeHighlighted(nodeId, isAggregated);
   }
 
@@ -291,15 +309,18 @@ export default class {
       return _.capitalize(link.recolorBy);
     }
 
+    if (this.currentSelectedRecolorBy.legendType === 'percentual') {
+      // percentual values are always a range, not the raw value. The value coming from the model is already floored to the start of the bucket (splitLinksByColumn)
+      const nextValue = link.recolorBy + this.currentSelectedRecolorBy.divisor;
+      return `${link.recolorBy}–${nextValue}%`;
+    }
+
     let intervalCount = this.currentSelectedRecolorBy.intervalCount;
     if (this.currentSelectedRecolorBy.divisor) {
       intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount;
     }
-    if (this.currentSelectedRecolorBy.legendType !== 'percentual') {
-      return `${link.recolorBy}/${intervalCount-1}`;
-    }
+    return `${link.recolorBy}/${intervalCount}`;
 
-    return `${Math.round(link.recolorBy)}%`;
   }
 
   _onColumnOut() {

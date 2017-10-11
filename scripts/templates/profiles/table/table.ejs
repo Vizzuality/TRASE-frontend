@@ -12,7 +12,10 @@
       <% for(var i = 0; i < data['rows'][0]['values'].length; i++){%>
         <tr class="table-row">
           <td class="cell-name">
-            <span class="node-name"><%= data['included_columns'][i]['name'] %></span>
+            <span class="node-name">
+              <%= data['included_columns'][i]['name'] %><% if(data['included_columns'][i]['year'])
+            { %> (<%= data['included_columns'][i]['year'] %>)<% } %>
+              </span>
           </td>
           <% for(var j = 0; j < data['rows'].length; j++) { %>
             <td class="cell-score _text-align-right">

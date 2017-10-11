@@ -17,7 +17,7 @@ const Nav = ({ tooltips, selectedContext }) => {
   return (
     <nav>
       <div class='left-side'>
-        <div class='nav-item'>
+        <div class='nav-item -no-offset'>
           <div class='offset-container js-logo'>
             <a class='trase-logo' href='/'>
               <img src='images/logos/logo-trase-small-beta.svg' alt='TRASE' />

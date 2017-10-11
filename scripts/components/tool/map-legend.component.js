@@ -15,6 +15,8 @@ export default class {
     this.mapControlScale = document.querySelector('.leaflet-control-scale');
     this.mapControlZoom = document.querySelector('.leaflet-control-zoom');
     this.mapControlSwitcher = document.querySelector('.js-basemap-switcher');
+    this.warningsContainer = document.querySelector('.js-map-warnings-container');
+    this.warnings = document.querySelector('.js-map-warnings');
 
     const zoom = document.querySelector('.leaflet-control-zoom');
     const scale = document.querySelector('.leaflet-control-scale');
@@ -22,14 +24,14 @@ export default class {
     zoom.addEventListener('mouseleave', () => { scale.classList.toggle('-visible', false); });
   }
 
-  updateChoroplethLegend(choroplethLegend) {
+  updateChoroplethLegend({ choroplethLegend, selectedMapContextualLayersData }) {
+    this._toggleLegend(choroplethLegend, selectedMapContextualLayersData);
     this._setupChoro(choroplethLegend);
-
     this._updateMapControlsPosition();
   }
 
   updateContextLegend({ choroplethLegend, selectedMapContextualLayersData }) {
-    this._toggleLegend(choroplethLegend);
+    this._toggleLegend(choroplethLegend, selectedMapContextualLayersData);
     this._renderContext(selectedMapContextualLayersData);
     this._updateMapControlsPosition();
   }
@@ -51,8 +53,11 @@ export default class {
     bucket.classList.toggle('-highlighted', true);
   }
 
-  _setVars() {
-    this.el = document.querySelector('.js-map-legend');
+  selectMapDimensions(selectedMapDimensionsWarnings) {
+    this.warningsContainer.classList.toggle('-visible', selectedMapDimensionsWarnings !== null);
+    if (selectedMapDimensionsWarnings !== null) {
+      this.warnings.innerHTML = selectedMapDimensionsWarnings;
+    }
   }
 
   _setupChoro(choroplethLegend) {
@@ -60,21 +65,17 @@ export default class {
       this._cleanChoro();
     }
 
-    this._toggleLegend(choroplethLegend);
-
     if (choroplethLegend !== null) {
       this._renderChoro(choroplethLegend);
     }
   }
 
-  _toggleLegend(choroplethLegend) {
-    if (choroplethLegend !== null)
-    {
-      this._showLegend();
-    } else {
+  _toggleLegend(choroplethLegend, selectedMapContextualLayersData) {
+    if (choroplethLegend === null && (selectedMapContextualLayersData === undefined || !selectedMapContextualLayersData.length)) {
       this._hideLegend();
+    } else {
+      this._showLegend();
     }
-
   }
 
   _showLegend() {

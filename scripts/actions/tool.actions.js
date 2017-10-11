@@ -1,7 +1,15 @@
 import actions from 'actions';
 import * as topojson from 'topojson';
 import _ from 'lodash';
-import { NUM_NODES_SUMMARY, NUM_NODES_DETAILED, NUM_NODES_EXPANDED, CARTO_NAMED_MAPS_BASE_URL, CONTEXT_WITHOUT_MAP_IDS } from 'constants';
+import { NUM_NODES_SUMMARY,
+  NUM_NODES_DETAILED,
+  NUM_NODES_EXPANDED,
+  CARTO_NAMED_MAPS_BASE_URL,
+  CONTEXT_WITHOUT_MAP_IDS,
+  YEARS_DISABLED_NO_AGGR,
+  YEARS_DISABLED_UNAVAILABLE,
+  CONTEXT_WITH_CONTEXT_LAYERS_IDS
+} from 'constants';
 import {
   getURLFromParams,
   GET_ALL_NODES,
@@ -19,6 +27,7 @@ import getNodesSelectionAction from './helpers/getNodesSelectionAction';
 import getSelectedNodesStillVisible from './helpers/getSelectedNodesStillVisible';
 import setGeoJSONMeta from './helpers/setGeoJSONMeta';
 import getNodeMetaUid from 'reducers/helpers/getNodeMetaUid';
+import { getSingleMapDimensionWarning } from 'reducers/helpers/getMapDimensionsWarnings';
 import getProfileLink from 'utils/getProfileLink';
 
 export function resetState(refilter = true) {
@@ -169,6 +178,9 @@ export function setContext(contextId, isInitialContextSet = false) {
         dispatch(loadNodes());
         dispatch(loadMapVectorData());
         dispatch(loadMapContextLayers());
+      } else {
+        dispatch(resetContextLayers());
+        dispatch(resetMapDimensions());
       }
     });
   };
@@ -187,23 +199,42 @@ export function loadNodes() {
 
     const getNodesURL = getURLFromParams(GET_NODES, params);
     const getMapDimensionsMetadataURL = getURLFromParams(GET_MAP_BASE_DATA, params);
-    const currentMapDimensions = getState().tool.selectedMapDimensions;
+    const selectedMapDimensions = getState().tool.selectedMapDimensions;
 
     Promise.all([getNodesURL, getMapDimensionsMetadataURL].map(url => fetch(url).then(resp => resp.text()))).then(rawPayload => {
       const payload = {
         nodesJSON: JSON.parse(rawPayload[0]), mapDimensionsMetaJSON: JSON.parse(rawPayload[1])
       };
 
+      const currentYearBoundaries = getState().tool.selectedYears;
+      const allSelectedYears = [];
+      for (var i = currentYearBoundaries[0]; i <= currentYearBoundaries[1]; i++) {
+        allSelectedYears.push(i);
+      }
+
+      payload.mapDimensionsMetaJSON.dimensions.forEach(dimension => {
+        if (/*(dimension.aggregateMethod === undefined || dimension.aggregateMethod === null) &&*/ allSelectedYears.length > 1) {
+          dimension.disabledYearRangeReason = YEARS_DISABLED_NO_AGGR;
+          dimension.disabledYearRangeReasonText = getSingleMapDimensionWarning(dimension.disabledYearRangeReason);
+        } else {
+          const allYearsCovered = dimension.years === null || allSelectedYears.every(year => dimension.years.indexOf(year) > -1);
+          if (!allYearsCovered) {
+            dimension.disabledYearRangeReason = YEARS_DISABLED_UNAVAILABLE;
+            dimension.disabledYearRangeReasonText = getSingleMapDimensionWarning(dimension.disabledYearRangeReason);
+          }
+        }
+      });
+
       dispatch({
         type: actions.GET_NODES, payload
       });
 
       const allAvailableMapDimensionsUids = payload.mapDimensionsMetaJSON.dimensions.map(dimension => getNodeMetaUid(dimension.type, dimension.layerAttributeId));
-      const currentMapDimensionsSet = _.compact(currentMapDimensions);
+      const selectedMapDimensionsSet = _.compact(selectedMapDimensions);
 
-      // are all currenttly selected map dimensions available ?
-      if (currentMapDimensions !== undefined && (_.difference(currentMapDimensionsSet, allAvailableMapDimensionsUids)).length === 0) {
-        dispatch(setMapDimensions(currentMapDimensions.concat([])));
+      // are all currently selected map dimensions available ?
+      if (selectedMapDimensions !== undefined && (_.difference(selectedMapDimensionsSet, allAvailableMapDimensionsUids)).length === 0) {
+        dispatch(setMapDimensions(selectedMapDimensions.concat([])));
       } else {
         // use default map dimensions
         const defaultMapDimensions = payload.mapDimensionsMetaJSON.dimensions.filter(dimension => dimension.isDefault);
@@ -275,6 +306,10 @@ export function loadLinks() {
         const jsonPayload = JSON.parse(payload);
         if (jsonPayload.data === undefined || !jsonPayload.data.length) {
           console.error('server returned empty flows/link list, with params:', params);
+          dispatch({
+            type: actions.SHOW_LINKS_ERROR
+          });
+          return;
         }
 
         dispatch({
@@ -334,6 +369,9 @@ export function loadMapVectorData() {
     });
 
     Promise.all(geometriesPromises).then(() => {
+      Object.keys(mapVectorData).forEach(id => {
+        mapVectorData[id].isPoint = mapVectorData[id].geoJSON && mapVectorData[id].geoJSON.features.length && mapVectorData[id].geoJSON.features[0].geometry.type === 'Point';
+      });
       dispatch({
         type: actions.GET_MAP_VECTOR_DATA, mapVectorData
       });
@@ -341,8 +379,21 @@ export function loadMapVectorData() {
   };
 }
 
+export function resetContextLayers() {
+  return (dispatch) => {
+    dispatch({
+      type: actions.GET_CONTEXT_LAYERS,
+      mapContextualLayers: []
+    });
+    dispatch({
+      type: actions.SELECT_CONTEXTUAL_LAYERS,
+      contextualLayers: []
+    });
+  };
+}
+
 export function loadMapContextLayers() {
-  return dispatch => {
+  return (dispatch, getState) => {
     const namedMapsURLs = mapContextualLayers.map(layer => {
       if (layer.rasterURL) {
         return null;
@@ -350,12 +401,27 @@ export function loadMapContextLayers() {
       return `${CARTO_NAMED_MAPS_BASE_URL}${layer.name}/jsonp?callback=cb`;
     }).filter(url => url !== null);
 
+    // TODO add context layers data on the API side (on get_map_base_data)
+    if (CONTEXT_WITH_CONTEXT_LAYERS_IDS.indexOf(getState().tool.selectedContext.id) === -1) {
+      dispatch(resetContextLayers());
+      return;
+    }
+
     Promise.all(namedMapsURLs.map(url => fetch(url).then(resp => resp.text()))).then(() => {
       // we actually don't care about layergroupids because we already have them pregenerated
       // this is just about reinstanciating named maps, you know, because CARTO
       dispatch({
         type: actions.GET_CONTEXT_LAYERS, mapContextualLayers
       });
+
+      const contextualLayers = getState().tool.selectedMapContextualLayers;
+
+      if (contextualLayers !== undefined && contextualLayers.length) {
+        dispatch({
+          type: actions.SELECT_CONTEXTUAL_LAYERS,
+          contextualLayers
+        });
+      }
     });
 
   };
@@ -569,6 +635,12 @@ export function setMapDimensions(uids) {
       uids
     });
     dispatch(updateNodes(getState().tool.selectedNodesIds));
+  };
+}
+
+export function resetMapDimensions() {
+  return {
+    type: actions.RESET_MAP_DIMENSIONS
   };
 }
 

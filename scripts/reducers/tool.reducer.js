@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import actions from 'actions';
 import { encodeStateToURL } from 'utils/stateURL';
-import { GA_ACTION_WHITELIST } from 'constants';
 import getNodesDict from './helpers/getNodesDict';
 import getVisibleNodes from './helpers/getVisibleNodes';
 import splitVisibleNodesByColumn from './helpers/splitVisibleNodesByColumn';
@@ -16,6 +15,7 @@ import getChoropleth from './helpers/getChoropleth';
 import getNodesAtColumns from './helpers/getNodesAtColumns';
 import getNodesColoredBySelection from './helpers/getNodesColoredBySelection';
 import getRecolorGroups from './helpers/getRecolorGroups';
+import { getMapDimensionsWarnings } from './helpers/getMapDimensionsWarnings';
 
 export default function (state = {}, action) {
   let newState;
@@ -73,6 +73,17 @@ export default function (state = {}, action) {
         biomeFilter = context.filterBy[0].nodes.find(filterBy => filterBy.name === state.selectedBiomeFilterName);
       }
 
+      // use current selectedMapContextualLayers, or use the context's default
+      let selectedMapContextualLayers = context.defaultContextLayers || undefined;
+      if (state.selectedMapContextualLayers !== undefined && state.selectedMapContextualLayers !== null) {
+        selectedMapContextualLayers = state.selectedMapContextualLayers;
+      }
+
+      let selectedMapBasemap = context.defaultBasemap || 'satellite';
+      if (state.selectedMapBasemap !== undefined && state.selectedMapBasemap !== null) {
+        selectedMapBasemap = state.selectedMapBasemap;
+      }
+
       // force state updates on the component
       const selectedYears = (state.selectedYears) ? Object.assign([], state.selectedYears) : [context.defaultYear, context.defaultYear];
       const mapView = (state.mapView) ? Object.assign({}, state.mapView) : context.map;
@@ -84,6 +95,8 @@ export default function (state = {}, action) {
         selectedRecolorBy: recolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: resizeBy,
         selectedBiomeFilter: biomeFilter || { value: 'none' },
+        selectedMapContextualLayers,
+        selectedMapBasemap,
         mapView
       });
       break;
@@ -102,6 +115,8 @@ export default function (state = {}, action) {
         selectedRecolorBy: defaultRecolorBy || { type: 'none', name: 'none' },
         selectedResizeBy: defaultResizeBy,
         selectedBiomeFilter: defaultFilterBy,
+        selectedMapContextualLayers: context.defaultContextLayers || undefined,
+        selectedMapBasemap: context.defaultBasemap || 'satellite',
         detailedView: false,
         recolorGroups: [],
         mapView: context.map,
@@ -135,6 +150,7 @@ export default function (state = {}, action) {
         }
       });
 
+      // TODO the API should have the info on which file to load (if any) per column
       const municipalitiesColumn = columns.find(column => column.name === 'MUNICIPALITY');
       const logisticsHubColumn = columns.find(column => column.name === 'LOGISTICS HUB');
       if (logisticsHubColumn && municipalitiesColumn) {
@@ -174,6 +190,11 @@ export default function (state = {}, action) {
       break;
     }
 
+    case actions.RESET_MAP_DIMENSIONS: {
+      newState = Object.assign({}, state, { mapDimensions: [], mapDimensionsGroups: [], selectedMapDimensions: [null, null], choroplethLegend: null });
+      break;
+    }
+
     case actions.GET_LINKS: {
       const rawLinks = action.jsonPayload.data;
       const linksMeta = action.jsonPayload.include;
@@ -187,7 +208,7 @@ export default function (state = {}, action) {
 
       const visibleColumns = getVisibleColumns(state.columns, state.selectedColumnsIds);
 
-      const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict);
+      const unmergedLinks = splitLinksByColumn(rawLinks, state.nodesDict, state.selectedRecolorBy);
       const links = mergeLinks(unmergedLinks);
 
       newState = Object.assign({}, state, {
@@ -196,8 +217,17 @@ export default function (state = {}, action) {
       break;
     }
 
+    case actions.SHOW_LINKS_ERROR: {
+      newState = Object.assign({}, state, { links: null });
+      break;
+    }
+
     case actions.GET_LINKED_GEOIDS: {
       const linkedGeoIds = (action.payload.length) ? action.payload.map(node => node.geo_id) : [];
+      if (_.isEqual(linkedGeoIds, state.linkedGeoIds)) {
+        newState = state;
+        break;
+      }
       newState = Object.assign({}, state, { linkedGeoIds });
       break;
     }
@@ -304,9 +334,15 @@ export default function (state = {}, action) {
 
     case actions.SET_MAP_DIMENSIONS: {
       const selectedMapDimensions = action.uids;
-      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
 
-      newState = Object.assign({}, state, { selectedMapDimensions,  choropleth, choroplethLegend });
+      // TODO Remove that when server correctly implements map dimensions meta/choropleth
+      // ie it shouldn't return choropleth values in get_nodes over multiple years if metadata says data is unavailable
+      const forceEmptyChoropleth = (state.selectedYears[1] - state.selectedYears[0]) > 0;
+
+      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions, forceEmptyChoropleth);
+      const selectedMapDimensionsWarnings = getMapDimensionsWarnings(state.mapDimensions, selectedMapDimensions);
+
+      newState = Object.assign({}, state, { selectedMapDimensions, selectedMapDimensionsWarnings, choropleth, choroplethLegend });
       break;
     }
 
@@ -327,16 +363,21 @@ export default function (state = {}, action) {
         selectedMapDimensions[uidIndex] = null;
       }
 
-      // get a geoId <-> color dict
-      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions);
-      newState = Object.assign({}, state, { selectedMapDimensions, choropleth, choroplethLegend });
+      // TODO Remove that when server correctly implements map dimensions meta/choropleth
+      // ie it shouldn't return choropleth values in get_nodes over multiple years if metadata says data is unavailable
+      const forceEmptyChoropleth = (state.selectedYears[1] - state.selectedYears[0]) > 0;
+
+      const { choropleth, choroplethLegend } = getChoropleth(selectedMapDimensions, state.nodesDictWithMeta, state.mapDimensions, forceEmptyChoropleth);
+      const selectedMapDimensionsWarnings = getMapDimensionsWarnings(state.mapDimensions, selectedMapDimensions);
+      newState = Object.assign({}, state, { selectedMapDimensions, selectedMapDimensionsWarnings, choropleth, choroplethLegend });
       break;
     }
     case actions.SELECT_CONTEXTUAL_LAYERS: {
       const mapContextualLayersDict = _.keyBy(state.mapContextualLayers, 'name');
       const selectedMapContextualLayersData = action.contextualLayers.map(layerSlug => {
-        return _.cloneDeep(mapContextualLayersDict[layerSlug]);
+        return Object.assign({}, mapContextualLayersDict[layerSlug]);
       });
+
       newState = Object.assign({}, state, {
         selectedMapContextualLayers: action.contextualLayers, selectedMapContextualLayersData
       });
@@ -400,19 +441,6 @@ export default function (state = {}, action) {
 
   if (updateURLState) {
     encodeStateToURL(newState);
-  }
-
-  if (typeof ga !== 'undefined') {
-    const gaAction = GA_ACTION_WHITELIST.find(whitelistAction => action.type === whitelistAction.type);
-    if (gaAction) {
-      const gaEvent = {
-        hitType: 'event', eventCategory: 'Sankey', eventAction: gaAction.type
-      };
-      if (gaAction.getPayload) {
-        gaEvent.eventLabel = gaAction.getPayload(action, state);
-      }
-      ga('send', gaEvent);
-    }
   }
 
   return newState;

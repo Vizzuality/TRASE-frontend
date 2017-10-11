@@ -29,6 +29,7 @@ import 'styles/components/shared/spinner.scss';
 import 'styles/components/shared/dropdown.scss';
 import 'styles/components/tool/map/map-sidebar.scss';
 import 'styles/layouts/l-tool.scss';
+import analyticsMiddleware from 'analytics/tool.analytics.middleware';
 
 const objParams = getURLParams(window.location.search);
 
@@ -43,7 +44,7 @@ const start = () => {
   var store = createStore(combineReducers({
     app: AppReducer,
     tool: ToolReducer
-  }), initialState, composeEnhancers(applyMiddleware(thunk)));
+  }), initialState, composeEnhancers(applyMiddleware(analyticsMiddleware, thunk)));
 
   new FlowContentContainer(store);
   new SankeyContainer(store);
@@ -112,7 +113,8 @@ if (NODE_ENV_DEV === true) {
   window.addEventListener('keydown', (event) => {
     if (event.key === 'r' && event.ctrlKey) {
       // reload without the hash
-      window.location.href = './flows.html?selectedNodesIds=[1915]';
+      window.location.href = './flows.html';
+      // window.location.href = './flows.html?selectedNodesIds=[1915]';
     }
   });
 }

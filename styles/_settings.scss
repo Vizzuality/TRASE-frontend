@@ -5,7 +5,8 @@ $titlebar-height: 56px;
 $map-width: 320px;
 $layer-map-width: 376px;
 $content-max-width: 1040px;
-$anchor-list-max-width: calc(100% / 3);
+$anchor-list-max-width: calc(100% / 3 - 10%);
+$content-width: calc(100% / 3);
 $max-width-grid: 1280px;
 $nav-padding: 18px;
 $sankey-x-margin: 30px;
@@ -39,7 +40,7 @@ $breakpoint-desktop: 1280px;
 
 
 // Animations
-$ease-in-out-sine:  cubic-bezier(.445, .05, .55, .95);
+$ease-in-out-sine: cubic-bezier(.445, .05, .55, .95);
 
 
 // z-indexes
@@ -54,6 +55,7 @@ $z-search: 91;
 $z-tooltip: 92;
 $z-veil: 100;
 $z-above-veil: 101;
+$z-leaflet-above-panes: 500;
 
 
 // colors

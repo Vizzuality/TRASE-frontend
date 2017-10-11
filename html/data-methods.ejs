@@ -4,293 +4,171 @@
   <%= htmlWebpackPlugin.options.head %>
 </head>
 <body>
-  <div class="loading-wrapper">
-    <%= htmlWebpackPlugin.options.nav %>
-    <div class="l-data-methods">
-      <div class="wrap">
-        <div class="cut -top"></div>
-        <div class="c-anchor-list js-anchor-nav">
-          <ul class="anchor-list">
-            <li class="anchor-item -selected">
-              <a href="#mapping-changes">Mapping of global supply chains in Trase</a>
-            </li>
-            <li class="anchor-item -selected">
-              <a href="#supply-chain-maps">Supply chain maps provided by Trase</a>
-            </li>
-            <li class="anchor-item">
-              <a href="#data">Data</a>
-            </li>
-            <li class="anchor-item">
-              <a href="#data-sources">Trase data sources</a>
-            </li>
-          </ul>
-        </div>
-        <div class="content">
-          <h1 class="title -big -pink">Data and methods</h1>
-          <p class="paragraph">
-            The data and methods used in Trase are being improved constantly as
-            we develop better methodologies and identify new data sources.
-            Trase will continue to improve the quality and accuracy of its data,
-            and is committed to communicating these limitations transparently,
-            including on this website and via reports and peer-reviewed
-            publications.
-          </p>
-
-          <p class="paragraph">
-            The Trase 1.0 beta platform was first launched on 11th November at
-            UNFCCC COP 22 in Marrakech. The information presented here reflects
-            the status for Trase 1.1, released on March 20th at the Tropical
-            Forest Alliance General Assembly in Brasilia. Future updates will
-            follow a comprehensive versioning and documentation system so users
-            can track changes and understand the logic behind them.
-          </p>
-          <h2 id="mapping-changes" class="title -anchor -medium -pink">Mapping of global supply chains in Trase</h2>
-            <p class="paragraph">
-              To map global supply chains of agricultural commodities Trase uses
-              the SEI-PCS approach (Spatially Explicit Information on Production
-              to Consumption Systems) developed by researchers at the Stockholm
-              Environment Institute. Central to the SEI-PCS approach is the use
-              of multiple, independent datasets, all of which are either publically
-              available or available for purchase – it uses no private or
-              confidential information – to triangulate flows of traded commodities
-              between producers and consumers. The Trase 1.1 release is focussed
-              on linking sourcing regions at subnational scales (e.g.
-              municipalities in Brazil and departments in Paraguay) to exporters,
-              importers, and consumer countries engaged in international trade of
-              farming commodities. The subnational resolution depends on the
-              availability and accuracy of the datasets, and can be improved
-              as new data become available.
-            </p>
-            <p class="paragraph">
-              Trase 1.1 includes Brazilian and Paraguayan soy, but the same
-              approaches and methods will be applied to other commodities and
-              countries as Trase expands its coverage. To learn about plans for
-              expansion to other geographies and commodities please read the
-              Trase <a href="http://resources.trase.earth/documents/Trase-vision-for-2020.pdf" class="-bold" target="_blank">strategy to 2020</a>.
-            </p>
-            <p class="paragraph">
-              SEI-PCS brings together multiple datasets from domestic and
-              international sources (see below). The basic structure of the
-              supply chain is defined by per-shipment and/or per day custom
-              declarations and bills of lading compiled from official sources.
-              The information is acquired for specific trade codes (e.g a
-              specific type of soy oil), which together make up the
-              total trade for a given commodities (e.g. soy bean, and raw
-              equivalents of soy beans for derived products). Once the basic
-              structure is in place, we identify the sub-national origin of
-              individual material trade flows by triangulating the
-              information with a wide range of other datasets, including on
-              the logistics of trading companies, production and taxation
-              data. This cross-validation approach is implemented in a logic
-              based decision tree. In the case of Brazilian soy the decision
-              tree includes self-declarations by companies on their supply
-              chain sourcing and logistics, official data on silo and
-              warehouse location and ownership, crushing facilities per
-              company, official production data per municipality, municipal
-              domicile and state of production associated to each export
-              operation, and the National Registry of Legal Entities (CNPJ)
-              identifying the presence of companies in different locations
-              and their economic activities as reported to the Federal
-              Government. Where it is not possible to triangulate municipal
-              origin trade data with these auxiliary datasets, expert
-              knowledge on the geography of individual supply chains and
-              transport networks can sometimes be used to improve the
-              identification of sourcing regions. Where it is not possible
-              to identify sourcing regions with a minimum level of accuracy
-              the region of origin is classified as unknown. These cases are
-              mostly related to import-export trading companies with limited
-              participation in the physical supply chain. The shipments
-              associated to these companies are linked to ports of export or
-              company headquarters, making it impossible to trace back soy
-              origins with our current approach. However even in those cases
-              the state of production is often known (from customs and tax
-              data), as are all the downstream traders, total volumes and
-              country of destination. The SEI-PCS approach is highly
-              flexible and scalable, and in the future we aim to include new
-              datasets on sanitary registries, domestic transportation
-              movements, fiscal notes per sale operation at the producer
-              side and others, helping to provide more confidence to
-              individual supply chains and resolve unknown connections
-              which currently account for about 20% of the total exported
-              volume of Brazilian soy).
-            </p>
-            <p class="paragraph">
-              This SEI-PCS approach, based on thousands of detailed records,
-              allows for obtaining a robust linking of supply chain actors
-              and traded volumes with municipalities where the commodity is
-              first handled (e.g. stored in warehouses or crushed), which we
-              call “logistic hubs” on the platform.
-            </p>
-            <p class="paragraph">
-              In the current 1.1 release Trase includes very little
-              information linking individual farms in municipalities of
-              production with these logistic hubs. To make this linkage we
-              run a highly constrained optimization model that relies on
-              linear programming to allocate flows of commodities from
-              municipalities with known levels of production (based on
-              official production data) to logistic hubs with known levels
-              of “demand” (as determined by our cross-validated supply chain
-              map), based on minimum transportation costs and state-level
-              origin of production data.
-            </p>
-
-            <h2 id="supply-chain-maps" class="title -anchor -medium -pink">Supply chain maps provided by Trase</h2>
-            <p class="paragraph">
-              In both Paraguay and Brazil, the SEI-PCS approach provides with
-              the right amount of exports per company through the right
-              ports and importers, to specific countries of import. The
-              Trase platform offers this information in raw commodity
-              equivalents, transforming the tones exported of e.g. soy cake
-              and soy oil into their equivalents of soybeans needed for
-              their production. It is straightforward to disaggregate
-              current flows into the different sub-products but this
-              capability is not yet implemented. The current release
-              accounts for 100% of the exported volumes (both by sea, land,
-              air or waterways), mapping 100% of the exporters and the
-              countries of import. Although not yet implemented, re-exports
-              based on bilateral trade matrices developed by FAO will be
-              included in a later release based on a mass balance approach.
-            </p>
-
-            <p class="paragraph">
-              In addition to accurately mapping the actors that make up a
-              supply chain and the commodity volumes traded by them, the
-              most relevant advance of SEI-PCS is to link those actors with
-              the places of production, for example at the municipal scale
-              in the case of Brazil. The approach estimates the location
-              with an error that depends on the scale of analysis: for the
-              case of Brazilian soy the error should be minimal at state and
-              biome levels, and dependent only on the data provided by the
-              government and the traders in their official customs and bill
-              of lading contracts; high municipal accuracy at the logistic
-              hub level – storage silos and warehouses – accounting, for
-              example, for 79% of the total volume of Brazilian soy traded
-              in 2015. At the municipal production level the exact volumes
-              are obtained based on a model that assumes an optimization of
-              transportation costs constrained by state of origin of goods.
-              The use of a transportation cost model means that actual
-              volumes may differ from reality in case whether unknown
-              transportation routes are used. This uncertainty will be
-              reduced in future releases by additional mapping of supply
-              chain actors and logistics using additional datasets, as well
-              as mapping back to individual soy producing properties
-              wherever possible. The aspiration of Trase is to work
-              collaboratively with users of the platform, including both
-              companies and governments, to contribute their own data to
-              improve the usability of the platform.
-            </p>
-
-            <h3 class="title -pink">Vital statistics for Brazilian and Paraguayan soy in Trase 1.1</h3>
-            <p class="paragraph">
-              Brazil produces some 30% of the world´s soy, second only to the
-              USA, and is the largest exporter, shipping some 100 million
-              tonnes in 2016 alone, 40 million of which went to China.Trase
-              maps these exports in unprecedented detail, linking over 2000
-              municipalities of soy production to countries of consumption
-              worldwide via more than 79,000 unique supply chain pathways,
-              encompassing 385 exporting companies, dozens of ports and
-              hundreds of importing companies. Currently 21% of the volumes
-              are not identified with a specific municipality of production
-              but only their state of production.  However 100% of total
-              exports are identified including accurate information on total
-              volumes per shipment, FOB value in USD, exporter name and
-              country of import. Currently the importer companies are
-              obtained from the custom declarations of the Brazilian
-              Government, which include foreign companies that trade the soy
-              but are not necessarily the companies that physically handle
-              the commodity in countries of destination. Future releases
-              will include more information on the companies that physically
-              handle imports.
-            </p>
-            <p class="paragraph">
-              Paraguay is the 7th largest soy producer. Trase links soy
-              production in 9 departments to a total of 8.2 million tones of
-              soy exports (2016), encompassing a total of 56 exporters and
-              31 countries of import. The current release of Trase does not
-              include information on importers of Paraguayan soy in
-              countries of destination.
-            </p>
-
-            <p class="paragraph">
-              Trase distils the complexity of international commodity supply
-              chains into extremely accessible data visualizations and
-              summaries, enabling the user to extract individual supply
-              chain flows on countries, companies and municipalities of
-              interest at a few clicks of the mouse. A major innovation of
-              the Trase platform is to link these complex material flows to
-              a wide range of social and economic indicators associated with
-              different sourcing areas. All the information is made
-              available through a data portal on the Trase platform.
-            </p>
-
-
-          <h2 id="data" class="title -anchor -medium -pink">Data</h2>
-          <p class="paragraph">
-            The Trase platform uses several core and auxiliary datasets to
-            provide confidence to the allocation of trade export volumes
-            to sub-national localities.
-          </p>
-          <ul>
-            <li class="paragraph">
-              <span class="-bold">Customs declarations</span> and <span class="-bold">tax records</span>
-               for exports, collected by government institutions
-            </li>
-            <li class="paragraph">
-              <span class="-bold">Bills of Lading</span> - is a legal document issued by a carrier (or his agent) to acknowledge receipt of cargo for shipment. It is a conclusive receipt, evidence of the contract of carriage, ensuring that exporters receive payment and importers receive the merchandise.
-            </li>
-            <li class="paragraph">
-              <span class="-bold">Self-declarations</span> of the traders on their own logistics and sourcing areas, published publically in the internet.
-            </li>
-            <li class="paragraph">
-              <span class="-bold">National Registry of Legal Entities</span> (CNPJ)
-              identifying the presence of companies in different locations
-              and their economic activities as reported to the Federal
-              Government of Brazil
-            </li>
-            <li class="paragraph">
-              <span class="-bold">Production data</span> from the finest available administrative division.
-            </li>
-            <li class="paragraph">
-              <span class="-bold">Silos and warehouses registration records</span> identifying their location and ownership, obtained from public and/or private sector sources.
-            </li>
-            <li class="paragraph">
-              Industrial <span class="-bold">processing facilities</span> (e.g. crushing facilities), records identify their location and ownership, obtained from public and/or private sector sources.
-            </li>
-            <li class="paragraph">
-              Other sources, such as sanitary registries, domestic
-              transportation databases, fiscal notes per sale operation will
-              progressively be explored. Other data sources may be useful
-              for specific country/commodity combinations (slaughterhouse
-              locations and cattle sanitary inspections for beef exports),
-              in an ad-hoc basis.
-            </li>
-          </ul>
-          <p class="paragraph">
-            The data requires a considerable amount of pre-processing,
-            including formatting, consolidation of company names,
-            countries and locations, as well as a transformation of the
-            different sub-commodities to their raw equivalents. When both
-            custom declarations and bills of lading are available, we
-            match them to the extent this is possible, using algorithms
-            that detect per-shipment common patterns in date, volume,
-            commodity descriptor, exporter, port of export, FOB values,
-            volumes in tons and country of destination. This is not only
-            used to obtain a more robust dataset, but also to consolidate
-            information that may be present in one dataset and not the
-            other, thus obtaining a more comprehensive dataset.
-          </p>
-
-          <h2 id="data-sources" class="title -anchor -medium -pink">Trase data sources (release 1.1)</h2>
-          <p class="paragraph">
-            See a <a href="http://resources.trase.earth/documents/Trase-data-sources_release_1_1.pdf" class="-bold" target="_blank">description of all data sources</a> used in the first release of Trase
-          </p>
-        </div>
+<div class="loading-wrapper">
+  <%= htmlWebpackPlugin.options.nav %>
+  <div class="l-data-methods">
+    <div class="wrap">
+      <div class="cut -top"></div>
+      <div class="c-anchor-list js-anchor-nav">
+        <ul class="anchor-list">
+          <li class="anchor-item -selected">
+            <a href="#supply-chain-mapping">Supply chain mapping in Trase</a>
+          </li>
+          <li class="anchor-item -selected">
+            <a href="#SEI-PCS-unique">What makes SEI-PCS unique?</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#data-sources">Data sources</a>
+          </li>
+          <li class="anchor-item">
+            <a href="#commodities-countries">What commodities and countries does Trase cover?</a>
+          </li>
+        </ul>
       </div>
-      <div class="cut -bottom"></div>
-    </div>
-    <%= htmlWebpackPlugin.options.footer %>
-  </div>
+      <div class="content">
+        <h1 class="title -big -pink">Data and methods</h1>
+        <p class="paragraph">
+          The data and methods used in Trase are being improved constantly as we develop better methodologies and
+          identify new data sources. Trase will continue to improve the quality and accuracy of its data, and is
+          committed to communicating these limitations transparently, including on this website and via reports and
+          peer-reviewed publications.
+        </p>
 
-  <%= htmlWebpackPlugin.options.scripts %>
+        <h2 id="supply-chain-mapping" class="title -anchor -medium -pink">Supply chain mapping in Trase</h2>
+        <p class="paragraph">
+          The Trase initiative is an independent, impartial and science-based provider of decision relevant information
+          needed to support a transition to a deforestation-free economy. Trase is at the forefront of a data-driven
+          revolution in supply chain sustainability, drawing on vast sets of production, trade and customs data, for the
+          first time laying bare the flows of globally traded commodities at scales that are directly relevant to
+          decision-making. Its pioneering approach to data analysis and visualization provides full coverage of the
+          export routes and buyers responsible for all production and trade, and the associated sustainability risks, of
+          a given commodity.
+        </p>
+        <p class="paragraph">
+          The supply chain mapping at the core of Trase balances scale and data resolution. It does not yet go down to
+          the level of individual farms or of individual consumer products or retailers. However, Trase is able to map
+          commodity supply chains in their entirety, covering entire countries and farming sectors (e.g. Brazilian soy)
+          at jurisdictional scales that are relevant to local decision-making (e.g. municipalities in Brazil).
+        </p>
+        <p class="paragraph">
+          Trase maps the entire middle section of a supply chain, linking regions of production to countries of import,
+          via the individual companies that export and import a particular traded commodity. This builds on an enhanced
+          form of material flow analysis that was first published by Godar et al. (2015): the Spatially Explicit
+          Information on Production to Consumption Systems (SEI-PCS) approach. Different versions of SEI-PCS have been
+          developed since 2015 and have been used in different Trase releases.
+        </p>
+        <p class="paragraph">
+          More detailed arguments regarding the advantages of the ‘middle-ground’ material-flow supply chain mapping
+          approach can be found in Godar et al. (2016). An example application to the assessment of virtual water flows
+          embedded in Brazilian farming exports can be found in Flach et al. (2016).
+        </p>
+        <p class="paragraph">
+          Before applying SEI-PCS to a specific country and commodity, we publish national-level export data on <a
+                  href="/" class="content-link" target="_blank">trase.earth</a>, linking countries of
+          production to downstream traders and countries of import. This higher-level analysis provides a
+          coarser-grained analysis of material flows and associated sustainability impacts, risks and performance
+          measures at national level, as well as an entry point for more detailed work on poorly studied geographies and
+          sectors.
+        </p>
+        <p class="paragraph">
+          We then apply the SEI-PCS approach to map subnational trade flows, discriminating producer regions down to the
+          lowest level of government administrative unit the data and the complexity of the supply chain allow. Often
+          this is defined by the availability of production data at subnational scales. A third level, linking flows to
+          the actual production farms may be possible but the core focus of Trase is on mapping to sub-national regions
+          of production.
+        </p>
+        <p class="paragraph">
+          If you are interested in more detail please read our manual on the <a
+                  href="http://resources.trase.earth/documents/Trase_supply_chain_mapping_manual.pdf"
+                  class="content-link" target="_blank">supply
+            chain
+            mapping methods</a> (SEI-PCS) that underpin Trase, as well as a <a
+                  href="http://resources.trase.earth/documents/SEI-PCS_2_2_Factsheet.pdf" class="content-link"
+                  target="_blank">factsheet</a> (PDF) on the latest
+          version of
+          the SEI-PCS model for Brazilian soy.
+        </p>
+
+        <h2 id="SEI-PCS-unique" class="title -anchor -medium -pink">What makes SEI-PCS unique?</h2>
+        <p class="paragraph">
+          Three capabilities of SEI-PCS together set it apart from other approaches to supply chain mapping:
+        </p>
+        <ul>
+          <li class="paragraph">
+            It systematically links individual supply chain actors to specific production regions, and the
+            sustainability risks and investment opportunities associated with those regions. In Brazil, SEI-PCS is able
+            to link actors to individual producing municipalities, the country’s smallest administrative unit. The finer
+            the scale of these production regions, the more effectively Trase can differentiate the specific
+            environmental, social and governance conditions associated with production and trade.
+          </li>
+          <li class="paragraph">
+            It names the individual companies that export, ship and import a given traded commodity.
+          </li>
+          <li class="paragraph">
+            It covers all of the exports of a given commodity from a given country of production, ensuring that
+            shifts in the sourcing patterns – and associated social and environmental impacts and risks – of a
+            particular buyer or trader can be tracked and assessed over space and time.
+          </li>
+        </ul>
+        <p class="paragraph">
+          The uniquely broad coverage of the Trase supply chain maps means that users can prioritize the places and
+          actors that warrant the greatest attention and only invest in acquiring further detail, including on the
+          individual producers and consumers that are not mapped by Trase, where it is really needed.
+        </p>
+
+
+        <h2 id="data-sources" class="title -anchor -medium -pink">Data sources</h2>
+        <p class="paragraph">
+          Central to the SEI-PCS approach is the use of multiple independent datasets to “triangulate” flows of traded
+          commodities from regions of production via trading companies to countries of import. Trase uses data that was
+          collected for other purposes, such as customs records and trade contracts, tax registration data, and
+          production data. Trase is one of the first initiatives to make systematic use of per-shipment customs and
+          shipping data for sustainability research. The SEI-PCS approach is highly flexible and can be adapted to
+          include new datasets that can help add further detail and/or provide additional validation for individual
+          material flows.
+        </p>
+        <p class="paragraph">
+          Trase uses no private or confidential information. All data sources are either publicly available (including
+          from government and industry websites as well as repositories) or available for purchase (such as from trade
+          intelligence companies and government repositories). Where we have used purchased data to map supply chains of
+          a specific commodity, such as per-shipment customs declarations or bills of lading, this data is masked
+          alongside multiple other data sources in the SEI-PCS data model and is aggregated in a way that makes it
+          impossible to reverse engineer the raw data.
+        </p>
+        <p class="paragraph">
+          A description of all the data sources currently used in Trase, and their sources, can be found <a
+                  href="http://resources.trase.earth/documents/Trase-data-sources_release_oct_2017.pdf"
+                  class="content-link"
+                  target="_blank">here</a> (PDF).
+        </p>
+
+        <h2 id="commodities-countries" class="title -anchor -medium -pink">What commodities and countries does Trase
+          cover?</h2>
+        <p class="paragraph">
+          Over the next five years Trase aims to cover over 70% of the total traded volume of major forest-risk
+          commodities that originate in the tropics. These include soy, beef, palm oil, timber, pulp and paper, coffee,
+          cocoa and aquaculture products.
+        </p>
+        <p class="paragraph">
+          From 2017, Trase will focus first on expanding to include all South American soy, and initiating new
+          programmes of work on beef in Argentina, Brazil and Paraguay; palm oil in Indonesia and Colombia; and coffee
+          in Colombia. Additional countries and commodities will be added in subsequent years based on capacity and
+          funding opportunities.
+        </p>
+        <p class="paragraph">
+          While the modelling framework and decision logic that underpin SEI-PCS are transferable between different
+          commodities and countries, each version of SEI-PCS is highly tailored to the specific context, requiring
+          detailed knowledge of national production, logistics, taxation and other commodity-country-specific data. To
+          learn about plans for SEI-PCS and Trase expansion to other countries and commodities please <a
+                  href="/#newsletter" class="content-link" target="_blank">sign up</a> for our newsletter.
+        </p>
+      </div>
+    </div>
+    <div class="cut -bottom"></div>
+  </div>
+  <%= htmlWebpackPlugin.options.footer %>
+</div>
+
+<%= htmlWebpackPlugin.options.scripts %>
 </body>
 </html>

@@ -3,7 +3,15 @@ import { toggleMapLayerMenu } from 'actions/app.actions';
 import MapLegend from 'components/tool/map-legend.component';
 
 const mapMethodsToState = (state) => ({
-  updateChoroplethLegend: state.tool.choroplethLegend,
+  updateChoroplethLegend: {
+    _comparedValue: (state) => state.tool.choroplethLegend,
+    _returnedValue: (state) => {
+      return {
+        choroplethLegend: state.tool.choroplethLegend,
+        selectedMapContextualLayersData: state.tool.selectedMapContextualLayersData,
+      };
+    }
+  },
   updateContextLegend: {
     _comparedValue: (state) => state.tool.selectedMapContextualLayersData,
     _returnedValue: (state) => {
@@ -13,7 +21,8 @@ const mapMethodsToState = (state) => ({
       };
     }
   },
-  highlightChoroplethBucket: state.tool.currentHighlightedChoroplethBucket
+  highlightChoroplethBucket: state.tool.currentHighlightedChoroplethBucket,
+  selectMapDimensions: state.tool.selectedMapDimensionsWarnings,
 });
 
 const mapViewCallbacksToActions = () => ({

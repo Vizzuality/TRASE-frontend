@@ -44,10 +44,11 @@
     .leaflet-control-scale {
       display: flex;
       left: 0;
+      bottom: -80px;
       justify-content: flex-end;
       width: 320px;
       margin: 0;
-      padding: 5px 10px 4px 10px;
+      padding: 5px 10px 4px;
       background: $charcoal-grey-faded;
       transform: translateY(28px);
       transition: transform .3s;
@@ -147,100 +148,6 @@
     }
   }
 
-  .leaflet-vectorMain-pane {
-    opacity: 1;
-    pointer-events: auto;
-
-    &.-dimmed, &.-hidden {
-      opacity: .8;
-      pointer-events: none;
-
-      path {
-        pointer-events: none;
-      }
-    }
-
-    &.-hidden {
-      opacity: 0;
-    }
-
-    path {
-      fill: $gray;
-      fill-opacity: 1;
-      stroke: $charcoal-grey-toned-down;
-      stroke-width: .35px;
-      stroke-opacity: 1;
-      pointer-events: auto;
-
-      &.-disabled {
-        cursor: not-allowed;
-      }
-    }
-
-    &.-high-zoom path {
-      stroke: $charcoal-grey;
-      stroke-width: .45px;
-    }
-  }
-
-  .leaflet-vectorLinked-pane {
-
-    path {
-      fill: $white;
-      fill-opacity: 1;
-      stroke: $charcoal-grey-toned-down;
-      stroke-width: .45px;
-
-      &.ch-no-meta { fill: $white; };
-      &.ch-no-meta-layer { fill: $white; };
-      &.ch-default { fill: $white; };
-    }
-
-    &.-high-zoom path {
-      stroke: $charcoal-grey;
-      stroke-width: .6px;
-    }
-
-    &.-noDimensions path {
-      fill: $recolorgroup-2;
-    }
-  }
-
-  .leaflet-vectorMain-pane:not(.-linkedActivated) path, .leaflet-vectorLinked-pane path {
-    &.ch-zero { fill: $ch-zero; };
-
-    @each $item, $color in $choropleth-colors {
-      &.#{$item} {
-        fill: $color;
-      }
-    }
-  }
-
-  .leaflet-vectorMain-pane:not(.-linkedActivated) path {
-    &.ch-no-meta { fill: $ch-no-meta; };
-    &.ch-no-meta-layer { fill: $ch-no-meta-layer; };
-    &.ch-default { fill: $ch-default; };
-  }
-
-  .leaflet-vectorOutline-pane {
-    pointer-events: none;
-
-    path {
-      fill: none;
-      stroke-opacity: 1;
-
-      &.-highlighted {
-        stroke-width: 3px;
-        stroke: $white;
-      }
-
-      &.-selected {
-        stroke: $charcoal-grey;
-        stroke-width: 2.5px;
-      }
-    }
-  }
-
   // map modifiers
   &.-moved {
     transform: translate(100%, 0);
@@ -270,5 +177,27 @@
         transform: translateY(2px);
       }
     }
+  }
+}
+
+.c-map-warnings {
+  position: absolute;
+  z-index: $z-leaflet-above-panes;
+  width: 100%;
+  background: $charcoal-grey-faded;
+  color: $white;
+  padding: 10px;
+  font-family: $font-family-2;
+  font-size: $font-size-regular;
+  top: -100px;
+  transition: top .3s;
+
+
+  svg {
+    font-size: $font-size-xx-regular;
+  }
+
+  &.-visible {
+    top: 0;
   }
 }

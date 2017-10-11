@@ -37,25 +37,18 @@
     height: $nav-height;
     font-size: 16px;
     font-weight: bold;
-    letter-spacing: 0.5px;
+    letter-spacing: .5px;
     color: $charcoal-grey;
     cursor: pointer;
 
     &.-has-menu {
-
       &:hover .nav-submenu {
         display: block;
       }
     }
 
-    &:first-child {
-      .nav-link {
-        padding-left: 0;
-      }
-
-      .nav-submenu-item > .nav-link {
-        padding-left: 16px;
-      }
+    &:first-child:not(.-no-offset) {
+      margin-left: -16px;
     }
 
     &:last-child {
@@ -73,11 +66,6 @@
         background-color: $medium-pink;
         z-index: $z-base;
       }
-
-      &:first-child > .nav-link::before {
-        left: 0;
-        width: calc(100% - 16px);
-      }
     }
 
     &.-logo {
@@ -94,8 +82,7 @@
           }
 
           &.-gcp {
-            width: 61px;
-            height: 28px;
+            width: 160px;
           }
         }
       }

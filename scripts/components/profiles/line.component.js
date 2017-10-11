@@ -62,6 +62,7 @@ export default class {
         if (a.values[last] < b.values[last]) return -1;
         return 0;
       })
+      .filter(lineData => lineData.values.filter(v => v !== null).length)
       .forEach((lineData, i) => {
         const lineValuesWithFormat = prepareData(xValues, lineData);
         const line = d3_line()
@@ -161,31 +162,19 @@ export default class {
     let yTickFormat = null,
       xTickFormat = null;
     if (ticks.yTickFormatType === 'top-location') {
-      yTickFormat = (value, i) => {
-        if (i === 6 && data.unit !== undefined) {
-          return `${abbreviateNumber(value, 3)} ${data.unit}`;
-        }
-        return abbreviateNumber(value, 3);
-      };
+      yTickFormat = (value) => abbreviateNumber(value, 3);
 
       xTickFormat = (value) => {
         const format = d3_timeFormat('%Y');
         return format(value);
       };
     } else {
-      yTickFormat = (value, i) => {
+      yTickFormat = (value) => {
         const format = d3_format('0');
-
-        if (i === 6 && data.unit !== undefined) {
-          return `${format(value)}${data.unit}`;
-        }
         return format(value);
       };
-      xTickFormat = (value, i) => {
-        let format = d3_timeFormat('%y');
-        if (i === 0) {
-          format = d3_timeFormat('%Y');
-        }
+      xTickFormat = (value) => {
+        const format = d3_timeFormat('%Y');
         return format(value);
       };
     }

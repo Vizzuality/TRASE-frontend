@@ -2,10 +2,19 @@ import connect from 'connect';
 import { selectMapBasemap } from 'actions/tool.actions';
 import { BASEMAPS } from 'constants';
 import mapBasemaps from 'components/tool/map-basemaps.component';
+import getBasemap, { useDefaultBasemap } from '../helpers/getBasemap';
 
-const mapMethodsToState = (state) => ({
+const mapMethodsToState = () => ({
   buildBasemaps: BASEMAPS,
-  selectBasemap: state.tool.selectedMapBasemap,
+  selectBasemap: {
+    _comparedValue: (state) => getBasemap(state.tool),
+    _returnedValue: (state) => {
+      return {
+        basemapId: getBasemap(state.tool),
+        disabled: useDefaultBasemap(state.tool)
+      };
+    }
+  }
 });
 
 const mapViewCallbacksToActions = () => ({

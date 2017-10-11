@@ -1,10 +1,12 @@
 import L from 'leaflet';
 import _ from 'lodash';
-import 'leaflet.utfgrid';
-import { BASEMAPS, CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z, SANKEY_TRANSITION_TIME } from 'constants';
+// import 'leaflet.utfgrid';
+import turf_bbox from '@turf/bbox';
+import { BASEMAPS, CARTO_BASE_URL, MAP_PANES, MAP_PANES_Z } from 'constants';
 import 'leaflet/dist/leaflet.css';
 import 'style/components/tool/map.scss';
 import 'style/components/tool/map/map-legend.scss';
+import 'style/components/tool/map/map-choropleth.scss';
 
 export default class {
   constructor() {
@@ -28,8 +30,7 @@ export default class {
     this.map.on('dragend zoomend', () => this.callbacks.onMoveEnd(this.map.getCenter(), this.map.getZoom()));
     this.map.on('zoomend', () => {
       const z = this.map.getZoom();
-      this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-high-zoom', z >= 6);
-      this.map.getPane(MAP_PANES.vectorLinked).classList.toggle('-high-zoom', z >= 6);
+      this._setPaneModifier('-high-zoom', z >= 6);
     });
 
     Object.keys(MAP_PANES).forEach(paneKey => {
@@ -47,11 +48,15 @@ export default class {
     this.attributionSource = document.querySelector('.leaflet-control-attribution');
   }
 
+  _setPaneModifier(modifier, value, pane = MAP_PANES.vectorMain) {
+    this.map.getPane(pane).classList.toggle(modifier, value);
+  }
+
   setMapView(mapView) {
     this.map.setView([mapView.latitude, mapView.longitude], mapView.zoom);
   }
 
-  loadBasemap(basemapId) {
+  setBasemap(basemapId) {
     if (this.basemap) {
       this.map.removeLayer(this.basemap);
     }
@@ -64,6 +69,8 @@ export default class {
     this.basemap = L.tileLayer(basemapOptions.url, basemapOptions);
     this.map.addLayer(this.basemap);
 
+    this._setPaneModifier('-darkBasemap', basemapOptions.dark === true);
+
     if (basemapOptions.labelsUrl !== undefined) {
       basemapOptions.pane = MAP_PANES.basemapLabels;
       this.basemapLabels = L.tileLayer(basemapOptions.labelsUrl, basemapOptions);
@@ -71,8 +78,7 @@ export default class {
     }
   }
 
-  showLoadedMap(payload) {
-    const mapVectorData = payload.mapVectorData;
+  showLoadedMap({ mapVectorData, currentPolygonType, selectedNodesGeoIds, choropleth, linkedGeoIds, defaultMapView }) {
     this.polygonTypesLayers = {};
 
     // create geometry layers for all polygonTypes that have their own geometry
@@ -81,7 +87,7 @@ export default class {
       if (polygonType.useGeometryFromColumnId === undefined) {
         this.polygonTypesLayers[polygonTypeId] = this._getPolygonTypeLayer(
           polygonType.geoJSON,
-          `map-polygon-${polygonType.name.toLowerCase()}`
+          polygonType.isPoint
         );
       }
     });
@@ -94,77 +100,36 @@ export default class {
       }
     });
 
-    this.selectPolygonType({ selectedColumnsIds: payload.currentPolygonType });
-    if (payload.selectedNodesGeoIds) {
-      this.selectPolygons({ selectedGeoIds: payload.selectedNodesGeoIds });
+    this.selectPolygonType({ selectedColumnsIds: currentPolygonType });
+    if (selectedNodesGeoIds) {
+      this.selectPolygons({ selectedGeoIds: selectedNodesGeoIds });
     }
 
     // under normal circumstances, choropleth (depends on loadNodes) and linkedGeoIds (depends on loadLinks)
     // are not available yet, but this is just a fail-safe for race conditions
-    if (payload.choropleth) {
-      this._setChoropleth(payload.choropleth);
+    if (choropleth) {
+      this._setChoropleth(choropleth);
     }
-    if (payload.linkedGeoIds) {
-      this.showLinkedGeoIds(payload.linkedGeoIds);
+    if (linkedGeoIds && linkedGeoIds.length) {
+      this.showLinkedGeoIds({ linkedGeoIds, defaultMapView: defaultMapView });
     }
   }
 
+  selectPolygons({ selectedGeoIds, highlightedGeoId, forceDefaultMapView, defaultMapView }) {
+    this._outlinePolygons({ selectedGeoIds, highlightedGeoId });
 
-  showLinkedGeoIds(linkedGeoIds) {
-    // remove choropleth from main layer
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-linkedActivated', linkedGeoIds.length);
-
-    window.clearTimeout(this.showLinkedFeaturesTimeout);
-
-    if (!linkedGeoIds.length) {
-      if (this.vectorLinked) {
-        this.map.removeLayer(this.vectorLinked);
-      }
-      return;
-    }
-
-    if (!this.currentPolygonTypeLayer) {
-      return;
-    }
-    const linkedFeaturesClassNames = {};
-
-    const linkedFeatures = linkedGeoIds.map(geoId => {
-      const originalPolygon = this.polygonFeaturesDict[geoId];
-      if (originalPolygon !== undefined) {
-        // copy class names (ie choropleth from vectorMain's original polygon)
-        linkedFeaturesClassNames[geoId] = originalPolygon._path.getAttribute('class');
-        return originalPolygon.feature;
+    if (forceDefaultMapView === true) {
+      this.setMapView(defaultMapView);
+    } else if (this.vectorOutline !== undefined && selectedGeoIds.length && this.currentPolygonTypeLayer) {
+      if (!this.currentPolygonTypeLayer.isPoint) {
+        this.map.fitBounds(this.vectorOutline.getBounds());
       } else {
-        // this can potentially happen when geoId doesn't not match polygon type currently visible
-        return null;
+        const singlePoint = this.vectorOutline.getBounds().getCenter();
+        this.map.setView(singlePoint);
       }
-    });
-
-    _.pull(linkedFeatures, null);
-
-
-    this.showLinkedFeaturesTimeout = window.setTimeout(() => {
-      if (this.vectorLinked) {
-        this.map.removeLayer(this.vectorLinked);
-      }
-      if (linkedFeatures.length > 0) {
-        this.vectorLinked = L.geoJSON(linkedFeatures, { pane: MAP_PANES.vectorLinked });
-        this.map.addLayer(this.vectorLinked);
-        this.vectorLinked.eachLayer(layer => {
-          layer._path.setAttribute('class', linkedFeaturesClassNames[layer.feature.properties.geoid]);
-        });
-        this.map.fitBounds(this.vectorLinked.getBounds());
-      }
-    }, SANKEY_TRANSITION_TIME * 1.1);
-  }
-
-  selectPolygons(payload) {
-    this._outlinePolygons(payload);
-    if (this.vectorOutline !== undefined && payload.selectedGeoIds.length) {
-      this.map.fitBounds(this.vectorOutline.getBounds());
     }
   }
-  highlightPolygon(payload) { this._outlinePolygons(payload); }
+  highlightPolygon({ selectedGeoIds, highlightedGeoId }) { this._outlinePolygons({ selectedGeoIds, highlightedGeoId }); }
 
   _outlinePolygons({ selectedGeoIds, highlightedGeoId }) {
     if (!this.currentPolygonTypeLayer || !selectedGeoIds) {
@@ -191,12 +156,21 @@ export default class {
     }
 
     if (selectedFeatures.length > 0) {
-      this.vectorOutline = L.geoJSON(selectedFeatures, { pane: MAP_PANES.vectorOutline });
+      this.vectorOutline = L.geoJSON(selectedFeatures, {
+        pane: MAP_PANES.vectorOutline,
+        pointToLayer: function (feature, latlng) {
+          return L.circleMarker(latlng, {
+            pane: MAP_PANES.vectorOutline,
+            radius: 6
+          });
+        }
+      });
       this.vectorOutline.setStyle(feature => {
         return {
           className: (feature.properties.geoid === highlightedGeoId) ? '-highlighted' : '-selected'
         };
       });
+
       this.map.addLayer(this.vectorOutline);
     }
   }
@@ -225,14 +199,11 @@ export default class {
     });
 
     let forceZoom = 0;
-    let hideMain = false;
+    // let hideMain = false;
     selectedMapContextualLayersData.forEach((layerData, i) => {
-      if (layerData.rasterURL) {
-        hideMain = true;
-        this._createRasterLayer(layerData);
-      } else {
-        this._createCartoLayer(layerData, i);
-      }
+      const contextLayer = (layerData.rasterURL) ? this._createRasterLayer(layerData) : this._createCartoLayer(layerData, i);
+      this.contextLayers.push(contextLayer);
+      this.map.addLayer(contextLayer);
 
       if (_.isNumber(layerData.forceZoom)) {
         forceZoom = Math.max(layerData.forceZoom, forceZoom);
@@ -242,11 +213,6 @@ export default class {
     if (forceZoom && this.map.getZoom() < forceZoom) {
       this.map.setZoom(forceZoom);
     }
-
-    // disable main choropleth layer when there are context layers
-    // we don't use addLayer/removeLayer because this causes a costly redrawing of the polygons
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-dimmed', selectedMapContextualLayersData.length > 0);
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-hidden', hideMain);
 
     this._updateAttribution();
   }
@@ -260,14 +226,13 @@ export default class {
     const bounds = L.latLngBounds(southWest, northEast);
 
     const layer = L.tileLayer(url, {
-      pane: MAP_PANES.context,
+      pane: MAP_PANES.contextBelow,
       tms: true,
       // TODO add those params in layer configuration
       maxZoom: 11,
       bounds
     });
-    this.contextLayers.push(layer);
-    this.map.addLayer(layer);
+    return layer;
   }
 
   _createCartoLayer(layerData /*, i */  ) {
@@ -276,10 +241,6 @@ export default class {
     const layer = new L.tileLayer(layerUrl, {
       pane: MAP_PANES.context
     });
-
-    this.contextLayers.push(layer);
-    this.map.addLayer(layer);
-
     // TODO enable again and make it work
     // if (i === 0) {
     //   const utfGridUrl = `${baseUrl}.grid.json?callback={cb}`;
@@ -290,15 +251,26 @@ export default class {
     //     resolution: 2
     //   });
     // }
+    return layer;
   }
 
-  _getPolygonTypeLayer(geoJSON) {
+  _getPolygonTypeLayer(geoJSON, isPoint) {
+    this._setPaneModifier('-pointData', isPoint);
+    this._setPaneModifier('-pointData', isPoint, MAP_PANES.vectorOutline);
     var topoLayer = new L.GeoJSON(geoJSON, {
       pane: MAP_PANES.vectorMain,
       style: {
         smoothFactor: 0.9
+      },
+      pointToLayer: (feature, latlng) => {
+        return L.circleMarker(latlng, {
+          pane: MAP_PANES.vectorMain,
+          radius: 6
+        });
       }
     });
+
+    topoLayer.isPoint = isPoint;
 
     topoLayer.eachLayer(layer => {
       this.polygonFeaturesDict[layer.feature.properties.geoid] = layer;
@@ -310,10 +282,9 @@ export default class {
         mouseout: function() {
           that.callbacks.onPolygonHighlighted();
         },
-        click: function() {
-          if (this.feature.properties.hasFlows === true) {
-            that.callbacks.onPolygonClicked(this.feature.properties.geoid);
-          }
+        click: function(event) {
+          if (event.target.disabled || (event.target.classList && event.target.classList.contains('-disabled'))) return;
+          that.callbacks.onPolygonClicked(this.feature.properties.geoid);
         }
       });
     });
@@ -321,15 +292,14 @@ export default class {
   }
 
 
-  setChoropleth({ choropleth, linkedGeoIds, choroplethLegend }) {
+  setChoropleth({ choropleth, linkedGeoIds, choroplethLegend, defaultMapView }) {
+    this._setPaneModifier('-noDimensions', choroplethLegend === null);
     if (!this.currentPolygonTypeLayer) {
       return;
     }
-    this.map.getPane(MAP_PANES.vectorMain).classList.toggle('-noDimensions', choroplethLegend === null);
-    this.map.getPane(MAP_PANES.vectorLinked).classList.toggle('-noDimensions', choroplethLegend === null);
     this._setChoropleth(choropleth);
     if (linkedGeoIds && linkedGeoIds.length) {
-      this.showLinkedGeoIds(linkedGeoIds);
+      this.showLinkedGeoIds({ linkedGeoIds, defaultMapView });
     }
   }
 
@@ -337,14 +307,44 @@ export default class {
     this.currentPolygonTypeLayer.eachLayer(layer => {
       const choroItem = choropleth[layer.feature.properties.geoid];
       const classNames = [];
+      layer.disabled = false;
       if (!layer.feature.properties.hasFlows) {
         classNames.push('-disabled');
+        layer.disabled = true;
       }
       classNames.push((choroItem) ? choroItem : 'ch-default');
       layer._path.setAttribute('class', classNames.join(' '));
       layer._path.setAttribute('geoid', layer.feature.properties.geoid);
     });
 
+  }
+
+  showLinkedGeoIds({ linkedGeoIds, defaultMapView, forceDefaultMapView }) {
+    if (!this.currentPolygonTypeLayer) {
+      return;
+    }
+
+    this._setPaneModifier('-linkedActivated', linkedGeoIds.length);
+
+    const linkedPolygons = [];
+    this.currentPolygonTypeLayer.eachLayer(layer => {
+      const isLinked = linkedGeoIds.indexOf(layer.feature.properties.geoid) > -1;
+      layer._path.classList.toggle('-linked', isLinked);
+      if (isLinked) {
+        linkedPolygons.push(layer.feature);
+      }
+    });
+
+    if (forceDefaultMapView === true) {
+      this.setMapView(defaultMapView);
+    } else if (linkedPolygons.length) {
+      const bbox = turf_bbox({ 'type': 'FeatureCollection', 'features': linkedPolygons });
+      // we use L's _getBoundsCenterZoom internal method + setView as fitBounds does not support a minZoom option
+      const bounds = L.latLngBounds([[bbox[1], bbox[0]], [bbox[3], bbox[2]]]);
+      const boundsCenterZoom = this.map._getBoundsCenterZoom(bounds);
+      boundsCenterZoom.zoom = Math.max(boundsCenterZoom.zoom, defaultMapView.zoom);
+      this.map.setView(boundsCenterZoom.center, boundsCenterZoom.zoom);
+    }
   }
 
   _updateAttribution() {
