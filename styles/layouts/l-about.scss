@@ -23,7 +23,7 @@
 
     > .content {
       max-width: $content-max-width;
-      margin: 0 0 0 $anchor-list-max-width;
+      margin: 0 0 0 $anchor-list-max-width + 10px;
 
       h2.-anchor::before {
         content:"";
