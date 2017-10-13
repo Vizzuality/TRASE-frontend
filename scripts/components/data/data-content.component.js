@@ -1,6 +1,6 @@
 import SelectorItemsTemplate from 'ejs!templates/data/selector-items.ejs';
 import BulkDownloadTemplate from 'ejs!templates/data/bulk-download.ejs';
-import { getURLFromParams, GET_CSV_DATA_DOWNLOAD_FILE, GET_JSON_DATA_DOWNLOAD_FILE } from 'utils/getURLFromParams';
+import { GET_CSV_DATA_DOWNLOAD_FILE, GET_JSON_DATA_DOWNLOAD_FILE, getURLFromParams } from 'utils/getURLFromParams';
 import _ from 'lodash';
 import { POST_SUBSCRIBE_NEWSLETTER } from '../../utils/getURLFromParams';
 
@@ -93,7 +93,10 @@ export default class {
       name: exporter.name.toLowerCase(),
       group: 'companies',
       noSelfCancel: false
-    }));
+    }))
+      .sort((a, b) => {
+        return a.name >= b.name;
+      });
     this.selectorCompanies.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
     });
@@ -106,7 +109,10 @@ export default class {
       name: country.name.toLowerCase(),
       group: 'consumption-countries',
       noSelfCancel: false
-    }));
+    }))
+      .sort((a, b) => {
+        return a.name >= b.name;
+      });
     this.selectorConsumptionCountries.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
     });
@@ -119,7 +125,10 @@ export default class {
       name: `${indicator.frontendName}${indicator.unit !== null ? `(${indicator.unit})` : ''}`,
       group: 'indicators',
       noSelfCancel: false
-    }));
+    }))
+      .sort((a, b) => {
+        return a.name >= b.name;
+      });
     this.selectorIndicators.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
     });

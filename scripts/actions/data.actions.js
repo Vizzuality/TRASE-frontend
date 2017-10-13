@@ -31,8 +31,9 @@ export function loadContextNodes(contextId) {
         indicators: JSON.parse(rawPayload[1]).indicators
       };
 
-      const exporters = payload.nodes.filter(node => node.type === 'EXPORTER');
-      const consumptionCountries = payload.nodes.filter(node => node.type === 'COUNTRY');
+      const flowNodes = payload.nodes.filter(node => node.hasFlows === true);
+      const exporters = flowNodes.filter(node => node.type === 'EXPORTER');
+      const consumptionCountries = flowNodes.filter(node => node.type === 'COUNTRY');
       const indicators = payload.indicators;
 
       dispatch({
