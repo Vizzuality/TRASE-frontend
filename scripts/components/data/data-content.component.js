@@ -95,7 +95,7 @@ export default class {
       noSelfCancel: false
     }))
       .sort((a, b) => {
-        return a.name >= b.name;
+        return a.name.localeCompare(b.name);
       });
     this.selectorCompanies.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
@@ -111,7 +111,7 @@ export default class {
       noSelfCancel: false
     }))
       .sort((a, b) => {
-        return a.name >= b.name;
+        return a.name.localeCompare(b.name);
       });
     this.selectorConsumptionCountries.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
@@ -127,7 +127,7 @@ export default class {
       noSelfCancel: false
     }))
       .sort((a, b) => {
-        return a.name >= b.name;
+        return a.name.localeCompare(b.name);
       });
     this.selectorIndicators.querySelector('.js-custom-dataset-selector-values').innerHTML = SelectorItemsTemplate({
       items
