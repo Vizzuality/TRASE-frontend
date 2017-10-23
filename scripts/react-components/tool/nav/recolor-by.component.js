@@ -18,7 +18,7 @@ export default ({ tooltips, onToggle, onSelected, currentDropdown, selectedRecol
   const recolorBysData = recolorBys.map(recolorBy => {
     const legendItems = (recolorBy.nodes.length > 0) ? recolorBy.nodes : [...Array(recolorBy.intervalCount).keys()];
     const legendItemsData = legendItems.map(legendItem => {
-      const id = (_.isNumber(legendItem)) ? legendItem : legendItem.toLowerCase();
+      const id = (_.isNumber(legendItem)) ? legendItem + parseInt(recolorBy.minValue) : legendItem.toLowerCase();
       const classNames = `-recolorby-${recolorBy.legendType.toLowerCase()}-${recolorBy.legendColorTheme.toLowerCase()}-${id}`.replace(/ /g, '-');
       if (recolorBy.name === selectedRecolorBy.name) {
         currentLegendItemsClasses.push(classNames);

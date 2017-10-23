@@ -315,11 +315,7 @@ export default class {
       return `${link.recolorBy}–${nextValue}%`;
     }
 
-    let intervalCount = this.currentSelectedRecolorBy.intervalCount;
-    if (this.currentSelectedRecolorBy.divisor) {
-      intervalCount = this.currentSelectedRecolorBy.divisor * this.currentSelectedRecolorBy.intervalCount;
-    }
-    return `${link.recolorBy}/${intervalCount}`;
+    return `${link.recolorBy}/${this.currentSelectedRecolorBy.maxValue}`;
 
   }
 

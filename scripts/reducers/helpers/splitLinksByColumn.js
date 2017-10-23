@@ -16,7 +16,7 @@ export default function(rawLinks, nodesDict, selectedRecolorBy) {
         recolorBy = link.ind;
 
         // TODO API used to return a rounded value, forming links groups automatically
-        // This is a hack to force grouping of similiar-bucket links
+        // This is a hack to force grouping of similar-bucket links
         if (selectedRecolorBy && selectedRecolorBy.legendType === 'percentual') {
           recolorBy = Math.floor(link.ind / selectedRecolorBy.divisor) * selectedRecolorBy.divisor;
         }
