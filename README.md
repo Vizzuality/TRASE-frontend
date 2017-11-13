@@ -1,3 +1,5 @@
+# ⚠️ This repo is not in active use anymore. TRASE Frontend code has been merged with the <a href="https://github.com/Vizzuality/trase-api">API repo</a> ⚠️
+
 # TRASE
 
 ![TRASE](trase-screenshot.png)
