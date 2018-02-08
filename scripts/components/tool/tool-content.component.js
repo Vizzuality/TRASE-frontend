@@ -1,9 +1,9 @@
 export default class {
 
   onCreated() {
-    this._setVars();
-
     this.onSankeyReset = this._resetSankey.bind(this);
+
+    this._setVars();
   }
 
   _setVars() {
