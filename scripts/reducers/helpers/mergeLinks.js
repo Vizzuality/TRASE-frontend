@@ -4,6 +4,10 @@ import _ from 'lodash';
 export default function(links, userecolorGroups) {
   const mergedLinks = [];
   const dict = {};
+  
+  if (typeof links === 'undefined') {
+    return [];
+  }
 
   for (var i = 0; i < links.length; i++) {
     var link = links[i];
