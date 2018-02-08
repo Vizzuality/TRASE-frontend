@@ -44,6 +44,65 @@ export function resetState(refilter = true) {
     dispatch(loadLinks());
   };
 }
+
+// Resets sankey's params that may lead to no flows being returned from the API
+export function resetSankey() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const context = state.tool.contexts.find(context => context.id === state.tool.selectedContextId);
+    const defaultColumns = state.tool.columns.filter(column => column.isDefault);
+    const defaultResizeBy = context && context.resizeBy.find(resizeBy => resizeBy.isDefault);
+    const defaultRecolorBy = context && context.recolorBy.find(recolorBy => recolorBy.isDefault);
+
+    dispatch({
+      type: actions.SELECT_YEARS,
+      years: [context.defaultYear, context.defaultYear]
+    });
+
+    defaultColumns.forEach(defaultColumn => {
+      dispatch({
+        type: actions.SELECT_COLUMN,
+        columnIndex: defaultColumn.group,
+        columnId: defaultColumn.id
+      });
+    });
+
+    if (state.tool.areNodesExpanded === true) {
+      dispatch({
+        type: actions.TOGGLE_NODES_EXPAND
+      });
+    }
+
+    dispatch({
+      type: actions.SELECT_VIEW, detailedView: false, forcedOverview: true
+    });
+
+
+    if (defaultRecolorBy) {
+      dispatch({
+        type: actions.SELECT_RECOLOR_BY, name: defaultRecolorBy[0].name
+      });
+    } else {
+      dispatch({
+        type: actions.SELECT_RECOLOR_BY, value: 'none', value_type: 'none'
+      });
+    }
+
+    dispatch({
+      type: actions.SELECT_RESIZE_BY, resizeBy: defaultResizeBy.name
+    });
+
+    dispatch({
+      type: actions.RESET_SELECTION
+    });
+    dispatch({
+      type: actions.FILTER_LINKS_BY_NODES
+    });
+
+    dispatch(loadLinks());
+  };
+}
+
 export function selectContext(context) {
   return dispatch => {
     dispatch(setContext(context));

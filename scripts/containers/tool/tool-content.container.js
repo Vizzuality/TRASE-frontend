@@ -1,5 +1,6 @@
 import connect from 'connect';
 import ToolContent from 'components/tool/tool-content.component';
+import { resetSankey } from '../../actions/tool.actions';
 
 const mapMethodsToState = (state) => ({
   toggleMapVisibility: state.tool.isMapVisible,
@@ -14,4 +15,8 @@ const mapMethodsToState = (state) => ({
   }
 });
 
-export default connect(ToolContent, mapMethodsToState);
+const mapViewCallbacksToActions = () => ({
+  resetSankey: () => resetSankey()
+});
+
+export default connect(ToolContent, mapMethodsToState, mapViewCallbacksToActions);
