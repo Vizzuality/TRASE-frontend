@@ -1,8 +1,9 @@
-
 export default class {
 
   onCreated() {
     this._setVars();
+
+    this.onSankeyReset = this._resetSankey.bind(this);
   }
 
   _setVars() {
@@ -10,10 +11,17 @@ export default class {
     this.map = this.el.querySelector('.js-map-container');
     this.veil = this.el.querySelector('.js-sankey-veil');
     this.sankeyError = document.querySelector('.js-sankey-error');
+    this.sankeyResetButton = document.querySelector('.js-sankey-reset');
+
+    this.sankeyResetButton.addEventListener('click', this.onSankeyReset);
   }
 
   showLoaderAtInitialLoad(loading) {
     this._toggleLoading(loading);
+  }
+
+  _resetSankey() {
+    this.callbacks.resetSankey();
   }
 
   showLoader(loading) {
